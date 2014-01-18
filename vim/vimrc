@@ -224,7 +224,6 @@ augroup filetype_python
 
     autocmd FileType python setlocal foldlevel=0
     autocmd FileType python noremap <buffer> <F7> :call RunAutoFormat()<CR><CR>
-    autocmd FileType python noremap <buffer> <leader>t :call RunAutoFormat()<CR><CR>
     autocmd FileType python noremap <buffer> <leader>pr :w<CR> :!python ./%<CR>
 augroup END
 " }}}
@@ -250,7 +249,6 @@ augroup filetype_html
    "autocmd BufRead,BufWritePre * if &filetype == 'html' | call RunAutoIndent() | endif
 
     "autocmd FileType html noremap <buffer> <F7> :call RunAutoIndent()<CR>
-    "autocmd FileType html noremap <buffer> <leader>t :call RunAutoIndent()<CR>
 
     autocmd FileType html iabbrev <buffer> nbsp &nbsp;
 augroup END
@@ -274,7 +272,6 @@ augroup filetype_c
     autocmd FileType c setlocal foldlevel=1
     autocmd FileType c noremap <buffer> <F12> :silent !ctags -R --sort=1 --c++-kinds=+pl --fields=+isS --extra=+q --excmd=number -I__wur .<CR><CR>
     autocmd FileType c noremap <buffer> <F7> :call RunAutoFormat()<CR><CR>
-    autocmd FileType c noremap <buffer> <leader>t :call RunAutoFormat()<CR><CR>
 augroup END
 " }}}
 " javascript {{{
@@ -353,6 +350,11 @@ endfunction
 " }}}
 " }}}
 " Plugin settings {{{
+" Tabularize {{{
+nnoremap <leader>ta> :Tabularize /=><CR>
+nnoremap <leader>ta= :Tabularize /=<CR>
+nnoremap <leader>ta, :Tabularize /,<CR>
+" }}}
 " ctrlp {{{
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_custom_ignore = 'virtualenv'
