@@ -1,0 +1,483 @@
+" vimrc by Davs
+" Vundle {{{
+colorscheme desert
+
+filetype off
+
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+Bundle 'rhysd/clever-f.vim'
+Bundle 'kien/ctrlp.vim'
+Bundle 'Raimondi/delimitMate'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'godlygeek/tabular'
+Bundle 'Chiel92/vim-autoformat'
+Bundle 'tpope/vim-surround'
+
+" new
+Bundle 'airblade/vim-rooter'
+Bundle 'scrooloose/syntastic'
+
+filetype indent on
+filetype plugin on
+syntax on
+
+" }}}
+" Basic settings {{{
+set nocp
+set encoding=utf-8
+set history=999                " history size
+set lazyredraw                 " don't redraw when executing macros (good performance option)
+set hidden                     " hide buffers instead of closing them
+set modelines=4                " gives 4 lines for modelines (vim meta at the beginning/end of files)
+set backspace=indent,eol,start " allow backspace in insert mode
+set autochdir                  " auto change directory when opening a file
+set errorformat=%f:%l:%m
+" set cursorline
+set autowrite
+set nobackup
+set noswapfile
+set scrolloff=2
+set pastetoggle=<F2>
+set mouse=a
+set mousehide
+set number
+set showbreak=↪
+set splitbelow
+set splitright
+" }}}
+" cmdline {{{
+set cmdheight=1             "command line size
+set showcmd                 "show last command
+set wildmenu                "cmdline completition
+" }}}
+" Leader {{{
+let mapleader = ","
+let maplocalleader = "\\"
+" }}}
+" Search {{{
+set showmatch
+set nohlsearch
+set incsearch
+
+set colorcolumn=81
+
+set ignorecase
+"set smartcase
+
+nmap <silent> <leader>/ :set hlsearch!<CR>
+
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+vnoremap <C-R> "hy:%s/<C-r>h//g<left><left>
+" }}}
+" Indents {{{
+set autoindent
+set copyindent
+
+vnoremap > >gv
+vnoremap < <gv
+" }}}
+" Tabs {{{
+set shiftwidth   =4             "number of spaces for indenting
+set tabstop      =4             "number of spaces for tabs
+set softtabstop  =4             "number of spaces for tabs while editing
+set expandtab                   "autoinsert spaces instead of tabs
+" }}}
+" Gui {{{
+" ruler {{{
+set ruler
+set rulerformat  =%l,%v
+" }}}
+set guifont=Liberation\ Mono\ 11
+set guioptions-=T           "remove the menu
+set guitablabel=%t          "show only filename in tabs
+
+set t_Co=256
+if has('gui_running')
+    colorscheme desert
+    set cursorline
+else
+    colorscheme desert256
+    set nocursorline
+endif
+
+set title
+set noerrorbells
+set showmode
+" }}}
+" Basic maps {{{
+nnoremap <CR> :
+nnoremap ; :
+noremap <leader>w :w<CR>
+
+noremap <leader>r :e<CR>
+
+"disable ex-mode
+nnoremap Q <NOP>
+
+"move to matching brace pair
+nnoremap <tab> %
+
+"CTRL-J joins lines
+"nnoremap <c-j> :normal! J<CR>
+
+"split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+
+"toggle ';' at the end of the line
+nnoremap <leader>; :call ToggleSemicolonEndLine()<CR>
+
+"close window/split with CTRL-Q
+nnoremap <c-Q> :wincmd q<CR>
+
+inoremap <c-f> <c-x><c-f>
+
+nnoremap <localleader>pr :e /home/davs/workspace/projects<CR>
+nnoremap <localleader>pc :call ChangeToCurrentLine()<CR>
+
+nnoremap ds<space> F<space>xf<space>x
+
+nnoremap <leader>p; <esc>:%s/;l$/;/g<CR>:%s/l$/;/gc<CR>
+" }}}
+" Movement maps {{{
+nnoremap H ^
+nnoremap L g_
+"nnoremap K :normal! H<CR>
+"nnoremap J :normal! L<CR>
+
+vnoremap H ^
+vnoremap L g_
+"vnoremap K :normal! H<CR>
+"vnoremap J :normal! L<CR>
+
+"j/k move in wrapped lines too
+nnoremap j gj
+nnoremap k gk
+
+vnoremap j gj
+vnoremap k gk
+
+onoremap ii :<c-u>call SelectIndent()<CR>
+nnoremap <leader>vii :<c-u>call SelectIndent()<CR>
+vnoremap ii :<c-u>call SelectIndent()<CR>
+
+" }}}
+" Row/column highlight {{{
+noremap <F3> :set cursorline!<CR>
+noremap <F4> :set cursorcolumn!<CR>
+
+noremap <F5> :set colorcolumn=81<CR>
+noremap <F6> :set colorcolumn=0<CR>
+
+highlight ColorColumn guibg=#666666
+" }}}
+" Tabs {{{
+noremap <c-t> :tabnew<CR>
+" }}}
+" working dir {{{
+"noremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+" }}}
+" Filetype {{{
+" EveryFile {{{
+augroup all_file_type
+    autocmd!
+    autocmd BufRead * :silent !echo "vim" > /dev/null
+augroup END
+" }}}
+" Perl {{{
+augroup filetype_perl
+    autocmd!
+    autocmd BufRead,BufNewFile *.pm  setfiletype perl
+    autocmd BufRead,BufNewFile *.pl  setfiletype perl
+    autocmd BufRead,BufNewFile *.t   setfiletype perl
+
+    autocmd BufNewFile *.pl 0r ~/.vim/skeleton.perl
+    autocmd BufNewFile *.pm 0r ~/.vim/skeleton.package.perl
+    autocmd BufNewFile *.t 0r ~/.vim/skeleton.test.perl
+    
+    autocmd BufWritePre * if &filetype=='perl' | %s/\s\+$//e | endif
+
+    autocmd BufRead,BufNewFile *.pm  setlocal filetype=perl
+    autocmd BufRead,BufNewFile *.pl  setlocal filetype=perl
+    autocmd BufRead,BufNewFile *.t   setlocal filetype=perl
+
+    autocmd FileType perl setlocal foldlevel=1
+    autocmd FileType perl setlocal foldnestmax=2
+    autocmd FileType perl let perl_include_pod = 1
+    autocmd FileType perl let perl_extended_vars = 1
+    autocmd FileType perl let perl_fold = 1
+    autocmd FileType perl let perl_fold_blocks = 1
+
+    autocmd FileType perl noremap <buffer> <F7> :call RunPerlTidy()<CR>
+    autocmd FileType perl noremap <buffer> <leader>t :call RunPerlTidy()<CR>
+    autocmd FileType perl noremap <buffer> <leader>+x :!chmod u+x %<CR><CR>
+
+    autocmd FileType perl nnoremap <buffer> <leader>pt :call RunPerlTidy()<CR>
+    autocmd FileType perl vnoremap <silent> <buffer> <leader>pt :!perltidy<CR>
+
+    autocmd FileType perl noremap <buffer> <leader>sc :call SyntaxCheck()<CR>
+    autocmd FileType perl noremap <buffer> <leader>sr :SyntasticReset<CR>
+
+    autocmd FileType perl iabbrev <silent> <buffer> datadump use Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say Dumper ;
+
+    "autocmd FileType perl noremap <buffer> <leader>rt :!~davs/workspace/bin/prove_notify %:p:h %:p &<CR><CR>
+    autocmd FileType perl noremap <buffer> <leader>rt :w<cr>:silent !~davs/workspace/bin/prove_notify % &<CR>
+augroup END
+" }}}
+" Python {{{
+augroup filetype_python
+    autocmd!
+    autocmd BufRead,BufNewFile *.py setfiletype python
+
+    autocmd FileType python setlocal foldlevel=0
+    autocmd FileType python noremap <buffer> <F7> :call RunAutoFormat()<CR><CR>
+    autocmd FileType python noremap <buffer> <leader>t :call RunAutoFormat()<CR><CR>
+    autocmd FileType python noremap <buffer> <leader>pr :w<CR> :!python ./%<CR>
+augroup END
+" }}}
+" HTML {{{
+augroup filetype_html
+    autocmd!
+    autocmd BufRead,BufNewFile *.tt  setfiletype html
+
+    autocmd BufRead,BufNewFile *.tt setlocal foldmethod=marker
+
+    autocmd FileType html setlocal foldlevel=99
+    autocmd FileType html setlocal shiftwidth=2
+    autocmd FileType html setlocal tabstop=2
+    autocmd FileType html setlocal softtabstop=2
+    autocmd FileType html setlocal expandtab
+
+    autocmd FileType html highlight link htmlLink text
+    autocmd FileType html syn region htmlLink start="<a\>\_[^>]*\<href\>" end="</a>"me=e-4 keepend contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLinkText,javaScript,@htmlPreproc
+    autocmd FileType html syn match htmlLinkText contained contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLinkText,javaScript,@htmlPreproc "^\s*\zs.\{-}\ze\s*$"
+    autocmd FileType html syn match htmlLinkText contained contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLinkText,javaScript,@htmlPreproc "\S.\{-}\ze\s*$"
+    autocmd FileType html highlight def link htmlLinkText Underlined
+
+   "autocmd BufRead,BufWritePre * if &filetype == 'html' | call RunAutoIndent() | endif
+
+    autocmd FileType html noremap <buffer> <F7> :call RunAutoIndent()<CR>
+    autocmd FileType html noremap <buffer> <leader>t :call RunAutoIndent()<CR>
+
+    autocmd FileType html iabbrev <buffer> nbsp &nbsp;
+augroup END
+" }}}
+" vim {{{
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+
+    "autocmd BufWritePre * if &filetype=='vim' | %s/\s\+$//e | endif
+
+    autocmd FileType vim noremap <buffer> <leader>sv  :source $MYVIMRC<CR>:edit<CR>
+augroup END
+" }}}
+" c {{{
+augroup filetype_c
+    autocmd!
+    autocmd BufRead,BufNewFile *.c setfiletype c
+    autocmd BufRead,BufNewFile *.h setfiletype c
+
+    autocmd FileType c setlocal foldlevel=1
+    autocmd FileType c noremap <buffer> <F12> :silent !ctags -R --sort=1 --c++-kinds=+pl --fields=+isS --extra=+q --excmd=number -I__wur .<CR><CR>
+    autocmd FileType c noremap <buffer> <F7> :call RunAutoFormat()<CR><CR>
+    autocmd FileType c noremap <buffer> <leader>t :call RunAutoFormat()<CR><CR>
+augroup END
+" }}}
+" javascript {{{
+augroup filetype_js
+    autocmd!
+    autocmd BufRead,BufNewFile *.js setfiletype javascript
+
+    autocmd BufWritePre * if &filetype=='javascript' | %s/\s\+$//e | endif
+
+    autocmd BufRead,BufNewFile *.js setlocal foldmethod=marker
+augroup END
+" }}}
+" CursorLine {{{ 
+augroup CursorLine
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+augroup END
+" }}}
+" }}}
+" vimrc {{{
+noremap <leader>ev :tabnew $MYVIMRC<CR>
+noremap <leader>sv :source $MYVIMRC<CR>
+noremap <leader>so :execute getline(".")<CR>
+" }}}
+" Diff {{{
+highlight! link DiffText MatchParen
+
+noremap <leader>du :diffupdate<CR>
+noremap <leader>dg :diffget
+noremap <leader>dp :diffput
+noremap <leader>do :diffoff<CR>
+noremap <leader>dt :diffthis<CR>
+" }}}
+" Folding {{{
+set foldmethod   =indent
+set foldlevel    =20 "open folds by default
+
+noremap <space> za
+noremap zJ zczj
+noremap zK zczk
+" }}}
+" Disable arrow keys {{{
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
+" }}}
+" Functions {{{
+" RunPerlTidy {{{
+function! RunPerlTidy()
+    let cursor_pos = getpos('.')
+    normal! H
+    let window_pos = getpos('.')
+    call setpos('.', cursor_pos)
+    execute "normal! :%!perltidy\r\r"
+    call setpos('.', window_pos)
+    normal! zt
+    call setpos('.',cursor_pos)
+endfunction
+" }}}
+" RunAutoFormat {{{
+function! RunAutoFormat()
+    let cursor_pos = getpos('.')
+    normal! H
+    let window_pos = getpos('.')
+    call setpos('.', cursor_pos)
+    execute "normal! :Autoformat\r\r"
+    call setpos('.', window_pos)
+    normal! zt
+    call setpos('.',cursor_pos)
+endfunction
+" }}}
+" RunAutoIndent {{{
+function! RunAutoIndent()
+    let cursor_pos = getpos('.')
+    normal! H
+    let window_pos = getpos('.')
+    call setpos('.', cursor_pos)
+    execute "normal! gg=G"
+    call setpos('.', window_pos)
+    normal! zt
+    call setpos('.',cursor_pos)
+endfunction
+" }}}
+" ToggleSemicolonEndLine {{{
+function! ToggleSemicolonEndLine()
+    let ncol = col('.')
+    execute "normal! g_"
+    let char = getline(".")[ col(".") - 1 ]
+    if( char == ';' )
+        execute "normal! x"
+    else
+        execute "normal! A;"
+    endif
+    call cursor( line('.') ,ncol)
+endfunction
+" }}}
+" ToggleLastStatus {{{
+function! ToggleLastStatus()
+    if( &l:laststatus == 1 )
+        let &l:laststatus = 2
+    else
+        let &l:laststatus = 1
+    endif
+endfunction
+" }}}
+" SelectIndent {{{
+function! SelectIndent ()
+    let temp_var=indent(line("."))
+    while indent(line(".")-1) >= temp_var
+        execute "normal! k"
+    endwhile
+    execute "normal! V"
+    while indent(line(".")+1) >= temp_var
+        execute "normal! j"
+    endwhile
+endfunction
+" }}}
+" ChangeToCurrentLine {{{
+function! ChangeToCurrentLine()
+    let row = getline(".")
+    echom row
+    execute ":cd ".row
+    execute ":e ".row
+endfunction
+" }}}
+" RunOneTest {{{
+function! RunOneTest(path)
+    let l:pathstr = matchstr(a:path,'*/t/')
+    echo l:pathstr
+endfunction
+" }}}
+" SyntaxCheck {{{
+function! SyntaxCheck()
+    execute ":Rooter"
+    let g:syntastic_perl_lib_path = [ './t/lib', './lib' ]
+    execute ":SyntasticCheck"
+endfunction
+" }}}
+" }}}
+" Plugin settings {{{
+" vim-autoformat {{{
+noremap <F7> :Autoformat<CR><CR>
+noremap <leader>t :Autoformat<CR><CR>
+noremap <leader>gg gg=G
+
+let g:formatprg_c            = "astyle"
+let g:formatprg_args_c       = "-A3t4SNDjk1W3p"
+let g:formatprg_py           = "autopep8"
+let g:formatprg_args_py      = "-i -j 4 -a"
+" }}}
+" vim-snipmate {{{
+let g:snips_author = "David Kovacs"
+let g:snips_email = "kovdavid@gmail.com"
+let g:snips_github = "https://github.com/DavsX"
+" }}}
+" ctrlp {{{
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_custom_ignore = 'virtualenv'
+
+nnoremap <leader>, :CtrlP<CR>
+" }}}
+" clang_complete {{{
+let g:clang_auto_select      = 1                " auto select first, but don't insert
+let g:clang_complete_auto    = 1                " auto complete after -> . ::
+let g:clang_complete_copen   = 1                " open quickfix on error
+let g:clang_hl_errors        = 1                " hightlight errors, warning
+let g:clang_snippets         = 1                " complete on function args, templates etc.
+let g:clang_snippets_engine  = 'clang_complete' " snippet engine
+let g:clang_close_preview    = 1                " auto close preview window after complete
+let g:clang_use_library      = 1                " use libclang directly
+let g:clang_complete_patters = 1                " complete code patterns, loops etc.
+" }}}
+" Clever-f {{{
+let g:clever_f_across_no_line = 0
+" }}}
+" Rooter {{{
+let g:rooter_patterns = [ '.git/', 'lib/' ]
+let g:rooter_manual_only = 0
+let g:rooter_change_directory_for_non_project_files = 1
+" }}}
+" Syntastic {{{
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_mode_map = { 'mode': 'passive' }
+let g:syntastic_enable_signs = 1
+let g:syntastic_error_symbol = '★'
+let g:syntastic_style_error_symbol = '>'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_style_warning_symbol = '>'
+" }}}
+" }}}

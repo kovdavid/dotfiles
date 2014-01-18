@@ -1,0 +1,34 @@
+[alias]
+    st   = -c color.status=false status
+    ci   = commit
+    br   = branch
+    co   = checkout
+    me   = merge --no-ff
+    ms   = merge --squash
+    di   = diff
+    din  = diff --name-status
+    dic  = diff --cached
+    lo   = log --oneline --reverse
+    lg   = log --oneline --graph --all
+    ld   = log --oneline --reverse HEAD ^develop --no-merges
+    re   = rebase -i
+    mt   = mergetool
+    root = !pwd
+[user]
+	name = Davs
+	email = david.kovacs@isper.sk
+[core]
+	editor = /usr/bin/vim
+	pager = cat
+	trustctime = false
+[diff]
+	external = git-meld
+[merge]
+    external = git-meld
+[mergetool "git-meld"]
+    cmd = /home/davs/bin/git-meld
+	trustExitCode = 1
+[color]
+	ui = auto
+[grep]
+	lineNumber = true
