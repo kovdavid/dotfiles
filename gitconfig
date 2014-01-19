@@ -16,7 +16,7 @@
     root = !pwd
 [user]
 	name = Davs
-	email = david.kovacs@isper.sk
+	email = kovdavid@gmail.com
 [core]
 	editor = /usr/bin/vim
 	pager = cat
@@ -24,10 +24,7 @@
 [diff]
 	external = git-meld
 [merge]
-    external = git-meld
-[mergetool "git-meld"]
-    cmd = /home/davs/bin/git-meld
-	trustExitCode = 1
+    external = meld
 [color]
 	ui = auto
 [grep]

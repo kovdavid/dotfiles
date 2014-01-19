@@ -10,6 +10,7 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec terminal
 bindsym $mod+g exec gvim
+bindsym $mod+i exec google-chrome
 bindsym $mod+t exec thunar
 bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym XF86AudioLowerVolume exec amixer -q set  Master 5%- unmute
