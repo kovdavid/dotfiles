@@ -1,3 +1,5 @@
 vim-pathogen/
 vim/bundle/**
 .netrwhist
+vim-pathogen.tar.xz
+vim/bundle/vundle/.netrwhist

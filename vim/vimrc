@@ -36,11 +36,10 @@ set modelines=4                " gives 4 lines for modelines (vim meta at the be
 set backspace=indent,eol,start " allow backspace in insert mode
 set autochdir                  " auto change directory when opening a file
 set errorformat=%f:%l:%m
-" set cursorline
 set autowrite
 set nobackup
 set noswapfile
-set scrolloff=2
+set scrolloff=3                " when moving vertically set 3 lines to the cursor
 set pastetoggle=<F2>
 set mouse=a
 set mousehide
@@ -63,8 +62,6 @@ set showmatch
 set nohlsearch
 set incsearch
 
-set colorcolumn=81
-
 set ignorecase
 "set smartcase
 
@@ -86,13 +83,26 @@ set tabstop      =4             "number of spaces for tabs
 set softtabstop  =4             "number of spaces for tabs while editing
 set expandtab                   "autoinsert spaces instead of tabs
 " }}}
+" Statusline {{{
+set statusline=
+set statusline +=%1*\ %n\ %*            "buffer number
+set statusline +=%5*%{&ff}%*            "file format
+set statusline +=%3*%y%*                "file type
+set statusline +=%4*\ %<%F%*            "full path
+set statusline +=%2*%m%*                "modified flag
+set statusline +=%1*%=%5l%*             "current line
+set statusline +=%2*/%L%*               "total lines
+set statusline +=%1*%4v\ %*             "virtual column number
+set statusline +=%2*0x%04B\ %*          "character under cursor
+" }}}
 " Gui {{{
 " ruler {{{
 set ruler
-set rulerformat  =%l,%v
+set rulerformat=%m\ [%l/%L\ %v]
 " }}}
 set guifont=Liberation\ Mono\ 11
-set guioptions-=T           "remove the menu
+set guioptions-=T           "remove the toolbar
+set guioptions-=m           "remove the menubar
 set guitablabel=%t          "show only filename in tabs
 
 set t_Co=256
@@ -168,11 +178,6 @@ vnoremap ii :<c-u>call SelectIndent()<CR>
 " Row/column highlight {{{
 noremap <F3> :set cursorline!<CR>
 noremap <F4> :set cursorcolumn!<CR>
-
-noremap <F5> :set colorcolumn=81<CR>
-noremap <F6> :set colorcolumn=0<CR>
-
-highlight ColorColumn guibg=#666666
 " }}}
 " Tabs {{{
 noremap <c-t> :tabnew<CR>
@@ -181,7 +186,9 @@ noremap <c-t> :tabnew<CR>
 " EveryFile {{{
 augroup all_file_type
     autocmd!
-    autocmd BufRead,BufEnter * :silent !echo "vim" > /dev/null
+    "autocmd BufRead,BufEnter * :silent !echo "vim" > /dev/null
+    autocmd BufRead,BufEnter * setlocal cmdheight=2
+    autocmd BufRead,BufEnter * setlocal cmdheight=1
 augroup END
 " }}}
 " Perl {{{
@@ -346,6 +353,39 @@ function! SyntaxCheck()
     execute ":Rooter"
     let g:syntastic_perl_lib_path = [ './t/lib', './lib' ]
     execute ":SyntasticCheck"
+endfunction
+" }}}
+" ToggleColorColumn {{{
+set colorcolumn=80
+let g:colorcolumn_set = 1
+highlight ColorColumn guibg=#666666
+
+noremap <F5> :call ToggleColorColumn()<CR>
+
+function! ToggleColorColumn()
+    if g:colorcolumn_set == 1
+        set colorcolumn=0
+        let g:colorcolumn_set = 0
+    else
+        set colorcolumn=80
+        let g:colorcolumn_set = 1
+    endif
+endfunction
+" }}}
+" ToggleLastStatus {{{
+set laststatus=1
+let g:laststatus_value = 1
+
+noremap <F6> :call ToggleLastStatus()<CR>
+
+function! ToggleLastStatus()
+    if g:laststatus_value == 1
+        set laststatus=2
+        let g:laststatus_value = 2
+    else
+        set laststatus=1
+        let g:laststatus_value = 1
+    endif
 endfunction
 " }}}
 " }}}
