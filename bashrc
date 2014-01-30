@@ -35,6 +35,7 @@ export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 export XZ_OPT=-9
 export GZIP=-9
 
+alias grep='grep --exclude-dir=.git'
 alias cp="cp -i"
 alias cpr="cp -i -r"
 alias iptraf="iptraf -u"
@@ -86,7 +87,8 @@ if [ ! -f /home/davs/.last_backup ] ; then
     read -n 1 -p "Would you like to run a backup? <y/n>"
     if [ "$REPLY" = "y" ] ; then
         echo ""
-        /home/davs/bin/backup_hdd
         echo "`date +%Y-%m-%d`" > /home/davs/.last_backup
+        /home/davs/bin/backup_hdd
+        echo "DONE"
     fi
 fi

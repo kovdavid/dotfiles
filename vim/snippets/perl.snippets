@@ -1,0 +1,154 @@
+# #!/usr/bin/perl
+snippet #!
+	#!/usr/bin/env perl
+
+# Hash Pointer
+snippet .
+	 =>
+# Function
+snippet sub
+	sub ${1:function_name} {
+		my (${0}) = @_;
+	}
+# Method
+snippet subs
+	sub ${1:function_name} {
+		my ($self${0}) = @_;
+	}
+# Conditional
+snippet if
+	if (${1}) {
+		${0}
+	}
+# Conditional if..else
+snippet ife
+	if (${1}) {
+		${2}
+	}
+	else {
+		${0}
+	}
+# Conditional if..elsif..else
+snippet ifee
+	if (${1}) {
+		${2}
+	}
+	elsif (${3}) {
+		${4:# elsif...}
+	}
+	else {
+		${0}
+	}
+snippet eif
+	elsif (${1}) {
+		${0}
+	}
+# Conditional One-line
+snippet xif
+	${1:expression} if ${2:condition};
+# Unless conditional
+snippet unless
+	unless (${1}) {
+		${0}
+	}
+# Unless conditional One-line
+snippet xunless
+	${1:expression} unless ${2:condition};
+# Try/Except
+snippet eval
+	local $@;
+	eval {
+		${1:# do something risky...}
+	};
+	if (my $e = $@) {
+		${0:# handle failure...}
+	}
+# While Loop
+snippet wh
+	while (${1}) {
+		${0}
+	}
+# While Loop One-line
+snippet xwh
+	${1:expression} while ${2:condition};
+# Foreach Loop
+snippet for
+	for my $${1:x} (@${2:array}) {
+		${0}
+	}
+# Package
+snippet package
+	package ${1:`substitute(vim_snippets#Filename('', 'Page Title'), '^.', '\u&', '')`};
+
+	${0}
+
+	1;
+
+	__END__
+# Package syntax perl >= 5.14
+snippet packagev514
+	package ${1:`substitute(vim_snippets#Filename('', 'Page Title'), '^.', '\u&', '')`} ${2:0.99};
+
+	${0}
+
+	1;
+
+	__END__
+# Read File
+snippet slurp
+	my $${1:var} = do { local $/; open my $file, '<', "${2:file}"; <$file> };
+	${0}
+# Anonymous subroutine
+snippet asub
+	sub {
+		${0}
+	}
+
+# Begin block
+snippet begin
+	BEGIN {
+		${0}
+	}
+
+# Data::Dumper
+snippet ddump
+	use Data::Dumper
+	local $Data::Dumper::Maxdepth = 2;
+	sa $Dumper \${0};
+
+# complex regex
+snippet qrx
+	qr/
+	     ${0:regex}
+	/xms
+
+#simpler regex
+snippet qr/
+	qr/${0:regex}/x
+
+# hash slice
+snippet hslice
+	@{ ${1:hash}  }{ ${0:array} }
+
+
+# map
+snippet map
+	map {  ${0: body }    }  ${1: @array } ;
+
+# Moo has
+snippet has
+	has ${1:attribute} => (
+		is	    => '${2:ro|rw}',
+		isa 	=> sub { ${3:sub} },
+		default => sub {
+			${4:defaultvalue}
+		},
+		${0:# other attributes}
+	);
+
+# Test::Routine-style test
+snippet subtest
+	subtest '${1:test_name}' => sub {
+		${0}
+	};
+

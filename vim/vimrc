@@ -17,6 +17,12 @@ Bundle 'godlygeek/tabular'
 Bundle 'Chiel92/vim-autoformat'
 Bundle 'tpope/vim-surround'
 
+" snipMate
+Bundle 'tomtom/tlib_vim'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'garbas/vim-snipmate'
+"Bundle 'honza/vim-snippets'
+
 " new
 Bundle 'airblade/vim-rooter'
 Bundle 'scrooloose/syntastic'
@@ -103,15 +109,18 @@ set rulerformat=%m\ [%l/%L\ %v]
 set guifont=Liberation\ Mono\ 11
 set guioptions-=T           "remove the toolbar
 set guioptions-=m           "remove the menubar
+set guioptions-=l           "remove scrollbar
+set guioptions-=r           "remove scrollbar
+set guioptions-=b           "remove scrollbar
 set guitablabel=%t          "show only filename in tabs
 
 set t_Co=256
 if has('gui_running')
-    colorscheme desert
-    set cursorline
+colorscheme desert
+set cursorline
 else
-    colorscheme desert256
-    set nocursorline
+colorscheme desert256
+set nocursorline
 endif
 
 set title
@@ -187,8 +196,8 @@ noremap <c-t> :tabnew<CR>
 augroup all_file_type
     autocmd!
     "autocmd BufRead,BufEnter * :silent !echo "vim" > /dev/null
-    autocmd BufRead,BufEnter * setlocal cmdheight=2
-    autocmd BufRead,BufEnter * setlocal cmdheight=1
+    "autocmd BufRead,BufEnter * setlocal cmdheight=2
+    "autocmd BufRead,BufEnter * setlocal cmdheight=1
 augroup END
 " }}}
 " Perl {{{
@@ -201,8 +210,10 @@ augroup filetype_perl
     autocmd BufNewFile *.pl 0r ~/.vim/skeleton.perl
     autocmd BufNewFile *.pm 0r ~/.vim/skeleton.package.perl
     autocmd BufNewFile *.t 0r ~/.vim/skeleton.test.perl
-    
+
     autocmd BufWritePre * if &filetype=='perl' | %s/\s\+$//e | endif
+
+    autocmd BufWritePre,FileType perl execute ":Rooter"
 
     autocmd BufRead,BufNewFile *.pm  setlocal filetype=perl
     autocmd BufRead,BufNewFile *.pl  setlocal filetype=perl
@@ -215,23 +226,31 @@ augroup filetype_perl
     autocmd FileType perl let perl_fold = 1
     autocmd FileType perl let perl_fold_blocks = 1
 
+    autocmd FileType perl let g:syntastic_perl_lib_path = [ './t/lib', './lib' ]
+
     autocmd FileType perl nnoremap <buffer> <leader>pt :call RunPerlTidy()<CR>
     autocmd FileType perl vnoremap <silent> <buffer> <leader>pt :!perltidy<CR>
 
     autocmd FileType perl noremap <buffer> <leader>sc :call SyntaxCheck()<CR>
-    autocmd FileType perl noremap <buffer> <leader>sr :SyntasticReset<CR>
 
-    autocmd FileType perl iabbrev <silent> <buffer> datadump use Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say Dumper ;
+    autocmd FileType perl noremap <buffer> <leader>dd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say Dumper ;<LEFT>
+    autocmd FileType perl noremap <buffer> <leader>my <ESC>a<CR>    my ($self) = @_;<CR><ESC>O
+    "autocmd FileType perl iabbrev <silent> <buffer> datadump use Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say Dumper ;
+    "autocmd FileType perl iabbrev <silent> <buffer> datadump use Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say Dumper ;
+
 augroup END
 " }}}
 " Python {{{
 augroup filetype_python
     autocmd!
+
+    Bundle 'davidhalter/jedi-vim'
+    Bundle 'vim-scripts/Python-Syntax-Folding'
+
+    autocmd BufNewFile *.py 0r ~/.vim/skeleton.python
     autocmd BufRead,BufNewFile *.py setfiletype python
 
-    autocmd FileType python setlocal foldlevel=0
-    autocmd FileType python noremap <buffer> <F7> :call RunAutoFormat()<CR><CR>
-    autocmd FileType python noremap <buffer> <leader>pr :w<CR> :!python ./%<CR>
+    autocmd FileType python setlocal foldlevel=1
 augroup END
 " }}}
 " HTML {{{
@@ -253,7 +272,7 @@ augroup filetype_html
     autocmd FileType html syn match htmlLinkText contained contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLinkText,javaScript,@htmlPreproc "\S.\{-}\ze\s*$"
     autocmd FileType html highlight def link htmlLinkText Underlined
 
-   "autocmd BufRead,BufWritePre * if &filetype == 'html' | call RunAutoIndent() | endif
+    "autocmd BufRead,BufWritePre * if &filetype == 'html' | call RunAutoIndent() | endif
 
     "autocmd FileType html noremap <buffer> <F7> :call RunAutoIndent()<CR>
 
@@ -264,6 +283,7 @@ augroup END
 augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType vim setlocal foldlevel=0
 
     "autocmd BufWritePre * if &filetype=='vim' | %s/\s\+$//e | endif
 
@@ -277,8 +297,8 @@ augroup filetype_c
     autocmd BufRead,BufNewFile *.h setfiletype c
 
     autocmd FileType c setlocal foldlevel=1
-    autocmd FileType c noremap <buffer> <F12> :silent !ctags -R --sort=1 --c++-kinds=+pl --fields=+isS --extra=+q --excmd=number -I__wur .<CR><CR>
-    autocmd FileType c noremap <buffer> <F7> :call RunAutoFormat()<CR><CR>
+    "autocmd FileType c noremap <buffer> <F12> :silent !ctags -R --sort=1 --c++-kinds=+pl --fields=+isS --extra=+q --excmd=number -I__wur .<CR><CR>
+    "autocmd FileType c noremap <buffer> <F7> :call RunAutoFormat()<CR><CR>
 augroup END
 " }}}
 " javascript {{{
@@ -330,14 +350,14 @@ noremap <Right> <nop>
 " Functions {{{
 " SelectIndent {{{
 function! SelectIndent ()
-    let temp_var=indent(line("."))
-    while indent(line(".")-1) >= temp_var
-        execute "normal! k"
-    endwhile
-    execute "normal! V"
-    while indent(line(".")+1) >= temp_var
-        execute "normal! j"
-    endwhile
+let temp_var=indent(line("."))
+while indent(line(".")-1) >= temp_var
+    execute "normal! k"
+endwhile
+execute "normal! V"
+while indent(line(".")+1) >= temp_var
+    execute "normal! j"
+endwhile
 endfunction
 " }}}
 " ChangeToCurrentLine {{{
@@ -350,26 +370,26 @@ endfunction
 " }}}
 " SyntaxCheck {{{
 function! SyntaxCheck()
+    execute ":SyntasticReset"
     execute ":Rooter"
-    let g:syntastic_perl_lib_path = [ './t/lib', './lib' ]
     execute ":SyntasticCheck"
 endfunction
 " }}}
 " ToggleColorColumn {{{
-set colorcolumn=80
+set colorcolumn=100
 let g:colorcolumn_set = 1
 highlight ColorColumn guibg=#666666
 
 noremap <F5> :call ToggleColorColumn()<CR>
 
 function! ToggleColorColumn()
-    if g:colorcolumn_set == 1
-        set colorcolumn=0
-        let g:colorcolumn_set = 0
-    else
-        set colorcolumn=80
-        let g:colorcolumn_set = 1
-    endif
+if g:colorcolumn_set == 1
+    set colorcolumn=0
+    let g:colorcolumn_set = 0
+else
+    set colorcolumn=100
+    let g:colorcolumn_set = 1
+endif
 endfunction
 " }}}
 " ToggleLastStatus {{{
@@ -379,19 +399,23 @@ let g:laststatus_value = 1
 noremap <F6> :call ToggleLastStatus()<CR>
 
 function! ToggleLastStatus()
-    if g:laststatus_value == 1
-        set laststatus=2
-        let g:laststatus_value = 2
-    else
-        set laststatus=1
-        let g:laststatus_value = 1
-    endif
+if g:laststatus_value == 1
+    set laststatus=2
+    let g:laststatus_value = 2
+else
+    set laststatus=1
+    let g:laststatus_value = 1
+endif
 endfunction
 " }}}
 " }}}
 " Plugin settings {{{
 " Tabularize {{{
-nnoremap <leader>ta> :Tabularize /=><CR>
+vnoremap <leader>tah :Tabularize /=><CR>
+vnoremap <leader>ta= :Tabularize /=<CR>
+vnoremap <leader>ta, :Tabularize /,<CR>
+
+nnoremap <leader>tah :Tabularize /=><CR>
 nnoremap <leader>ta= :Tabularize /=<CR>
 nnoremap <leader>ta, :Tabularize /,<CR>
 " }}}
@@ -410,12 +434,14 @@ let g:rooter_manual_only = 0
 let g:rooter_change_directory_for_non_project_files = 1
 " }}}
 " Syntastic {{{
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_mode_map = { 'mode': 'active' }
-let g:syntastic_enable_signs = 1
-let g:syntastic_error_symbol = '★'
-let g:syntastic_style_error_symbol = '>'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_style_warning_symbol = '>'
+let g:syntastic_enable_highlighting=1
+let g:syntastic_mode_map={ 'mode': 'active' }
+let g:syntastic_enable_signs= 1
+let g:syntastic_python_checkers=['pylint','pyflakes','pep8']
+let g:syntastic_python_pylint_args="--disable=C0111"
+let g:syntastic_perl_checkers= ['perl']
+" }}}
+" vim-jedi {{{
+
 " }}}
 " }}}
