@@ -6,7 +6,8 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
-/usr/bin/setterm -blank 0 -powersave off -powerdown 0
+#/usr/bin/setterm -powerdown 60
+#/usr/bin/setterm -blank 60 
 /usr/bin/xset s off
 
 #rm -rf /tmp/ssh-??????????

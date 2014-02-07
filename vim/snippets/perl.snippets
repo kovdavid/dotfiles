@@ -5,14 +5,20 @@ snippet #!
 # Hash Pointer
 snippet .
 	 =>
+#Test::Class snippet
+snippet subt
+	sub ${1} : Test(no_plan) {
+		my ($test) = @_;
+		${0}
+	}
 # Function
 snippet sub
-	sub ${1:function_name} {
+	sub ${1} {
 		my (${0}) = @_;
 	}
 # Method
 snippet subs
-	sub ${1:function_name} {
+	sub ${1} {
 		my ($self${0}) = @_;
 	}
 # Conditional
@@ -45,7 +51,7 @@ snippet eif
 	}
 # Conditional One-line
 snippet xif
-	${1:expression} if ${2:condition};
+	${1} if ${2};
 # Unless conditional
 snippet unless
 	unless (${1}) {
@@ -53,15 +59,15 @@ snippet unless
 	}
 # Unless conditional One-line
 snippet xunless
-	${1:expression} unless ${2:condition};
+	${1} unless ${2};
 # Try/Except
 snippet eval
 	local $@;
 	eval {
-		${1:# do something risky...}
+		${1}
 	};
 	if (my $e = $@) {
-		${0:# handle failure...}
+		${0}
 	}
 # While Loop
 snippet wh
@@ -70,30 +76,12 @@ snippet wh
 	}
 # While Loop One-line
 snippet xwh
-	${1:expression} while ${2:condition};
+	${1} while ${2};
 # Foreach Loop
 snippet for
-	for my $${1:x} (@${2:array}) {
+	for my $${1} (@${2}) {
 		${0}
 	}
-# Package
-snippet package
-	package ${1:`substitute(vim_snippets#Filename('', 'Page Title'), '^.', '\u&', '')`};
-
-	${0}
-
-	1;
-
-	__END__
-# Package syntax perl >= 5.14
-snippet packagev514
-	package ${1:`substitute(vim_snippets#Filename('', 'Page Title'), '^.', '\u&', '')`} ${2:0.99};
-
-	${0}
-
-	1;
-
-	__END__
 # Read File
 snippet slurp
 	my $${1:var} = do { local $/; open my $file, '<', "${2:file}"; <$file> };
@@ -125,30 +113,23 @@ snippet qrx
 #simpler regex
 snippet qr/
 	qr/${0:regex}/x
-
-# hash slice
-snippet hslice
-	@{ ${1:hash}  }{ ${0:array} }
-
-
 # map
 snippet map
-	map {  ${0: body }    }  ${1: @array } ;
+	map { ${0} } ${1} ;
 
 # Moo has
 snippet has
-	has ${1:attribute} => (
-		is	    => '${2:ro|rw}',
-		isa 	=> sub { ${3:sub} },
-		default => sub {
-			${4:defaultvalue}
-		},
-		${0:# other attributes}
+	has ${1} => (
+		is       => '${2}',
+		required => ${3},
+		isa      => sub { ${4} },
+		default  => sub { ${5} },
+		builder  => sub { ${6} },
+		${0}
 	);
 
 # Test::Routine-style test
 snippet subtest
-	subtest '${1:test_name}' => sub {
+	subtest '${1}' => sub {
 		${0}
 	};
-

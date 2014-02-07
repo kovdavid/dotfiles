@@ -9,6 +9,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec terminal
+bindsym $mod+x exec terminal
 bindsym $mod+g exec gvim
 bindsym $mod+i exec google-chrome
 bindsym $mod+t exec thunar
@@ -191,7 +192,7 @@ for_window [class="(?i)galculator"] floating enable
 for_window [class="(?i)xterm"] floating enable; fullscreen
 #for_window [name="(?i)Minecraft Launcher 1.2.7"] floating enable
 #for_window [name="(?i)Minecraft 1.6.4"] floating enable
-for_window [title="(?i)umlet"] floating enable
+#for_window [title="(?i)umlet"] floating enable
 for_window [class="(?i)google-chrome"] border none
 for_window [title="File Operation Progress"] floating enable; focus mode_toggle
 
