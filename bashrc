@@ -7,6 +7,7 @@ if [ -e /etc/profile ] ; then
 fi
 
 if [ -e ~/dotfiles/git-completion.bash ] ; then
+    export GIT_PS1_SHOWDIRTYSTATE="yes"
     source ~/dotfiles/git-completion.bash
 fi
 
