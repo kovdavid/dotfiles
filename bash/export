@@ -1,0 +1,19 @@
+export TERM=xterm-256color
+
+export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
+
+export PERL_LOCAL_LIB_ROOT="$PERL_LOCAL_LIB_ROOT:/opt/perlbrew"
+export PERL_MB_OPT="--install_base /opt/perlbrew"
+export PERL_MM_OPT="INSTALL_BASE=/opt/perlbrew"
+export PERL5LIB="/opt/perlbrew/lib/perl5:$PERL5LIB"
+
+export JAVA_HOME="/usr/lib64/java/bin"
+export PATH="$JAVA_HOME:$PATH"
+export LD_LIBRARY_PATH="/usr/lib64/java/jre/lib/amd64"
+
+export PATH="/opt/perlbrew/bin:/home/davs/bin:$PATH"
+
+export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+
+export XZ_OPT=-9
+export GZIP=-9

@@ -52,6 +52,7 @@ set pastetoggle=<F2>
 set mouse=a
 set mousehide
 set number
+"set relativenumber
 set showbreak=↪
 set splitbelow
 set splitright
@@ -220,6 +221,8 @@ augroup all_file_type
     "autocmd BufRead,BufEnter * :silent !echo "vim" > /dev/null
     "autocmd BufRead,BufEnter * setlocal cmdheight=2
     "autocmd BufRead,BufEnter * setlocal cmdheight=1
+    autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber nonumber
+    autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber number
 augroup END
 " }}}
 " Perl {{{
@@ -250,11 +253,14 @@ augroup filetype_perl
     autocmd FileType perl let perl_fold_blocks = 1
 
     autocmd FileType perl let g:syntastic_perl_lib_path = [ './t/lib', './lib' ]
-
     autocmd FileType perl noremap <buffer> <leader>sc :call SyntaxCheck()<CR>
 
     autocmd FileType perl noremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say Dumper ;<LEFT>
 
+    autocmd FileType perl nnoremap <budder> <leader>rf :PerlTestFile<CR>
+    autocmd FileType perl nnoremap <budder> <leader>rt :PerlTestFile<CR>
+    autocmd FileType perl nnoremap <budder> <leader>rs :PerlTestSub<CR>
+    autocmd FileType perl nnoremap <budder> <leader>ra :ProveTestAll<CR>
 augroup END
 " }}}
 " Python {{{
@@ -268,6 +274,24 @@ augroup filetype_python
     autocmd BufRead,BufNewFile *.py setfiletype python
 
     autocmd FileType python setlocal foldlevel=1
+augroup END
+" }}}
+" Ruby {{{
+augroup filetype_ruby
+    autocmd!
+
+    Bundle 'vim-ruby/vim-ruby'
+
+    autocmd BufRead,BufNewFile *.rb setfiletype ruby
+
+    autocmd FileType ruby set shiftwidth=2
+    autocmd FileType ruby set tabstop=2
+    autocmd FileType ruby set softtabstop=2
+    autocmd FileType ruby set expandtab
+
+    autocmd FileType ruby inoremap <buffer> <C-J> <ESC>oend<ESC>O
+    autocmd FileType ruby nnoremap <buffer> <C-J> oend<ESC>O
+    autocmd FileType ruby nnoremap <buffer> <leader>r :!ruby %<CR>
 augroup END
 " }}}
 " HTML {{{
@@ -305,7 +329,7 @@ augroup filetype_vim
     "autocmd BufWritePre * if &filetype=='vim' | %s/\s\+$//e | endif
 
 
-    autocmd FileType vim noremap <buffer> <leader>ss  :source %<CR>
+    autocmd FileType vim noremap <buffer> <leader>ss  :w<CR>:source %<CR>:e <CR>
 augroup END
 " }}}
 " c {{{
@@ -370,27 +394,27 @@ noremap <Right> <nop>
 function! SelectIndent ()
 let temp_var=indent(line("."))
 while indent(line(".")-1) >= temp_var
-    execute "normal! k"
+execute "normal! k"
 endwhile
 execute "normal! V"
 while indent(line(".")+1) >= temp_var
-    execute "normal! j"
+execute "normal! j"
 endwhile
 endfunction
 " }}}
 " ChangeToCurrentLine {{{
 function! ChangeToCurrentLine()
-    let row = getline(".")
-    echom row
-    execute ":cd ".row
-    execute ":e ".row
+let row = getline(".")
+echom row
+execute ":cd ".row
+execute ":e ".row
 endfunction
 " }}}
 " SyntaxCheck {{{
 function! SyntaxCheck()
-    execute ":SyntasticReset"
-    execute ":Rooter"
-    execute ":SyntasticCheck"
+execute ":SyntasticReset"
+execute ":Rooter"
+execute ":SyntasticCheck"
 endfunction
 " }}}
 " ToggleColorColumn {{{
@@ -402,11 +426,11 @@ noremap <F5> :call ToggleColorColumn()<CR>
 
 function! ToggleColorColumn()
 if g:colorcolumn_set == 1
-    set colorcolumn=0
-    let g:colorcolumn_set = 0
+set colorcolumn=0
+let g:colorcolumn_set = 0
 else
-    set colorcolumn=100
-    let g:colorcolumn_set = 1
+set colorcolumn=100
+let g:colorcolumn_set = 1
 endif
 endfunction
 " }}}
@@ -418,11 +442,11 @@ noremap <F6> :call ToggleLastStatus()<CR>
 
 function! ToggleLastStatus()
 if g:laststatus_value == 1
-    set laststatus=2
-    let g:laststatus_value = 2
+set laststatus=2
+let g:laststatus_value = 2
 else
-    set laststatus=1
-    let g:laststatus_value = 1
+set laststatus=1
+let g:laststatus_value = 1
 endif
 endfunction
 " }}}
@@ -463,16 +487,12 @@ let g:syntastic_perl_checkers= ['perl']
 
 " }}}
 " test_class_runner {{{
-nnoremap <leader>rf :PerlTestFile<CR>
-nnoremap <leader>rt :PerlTestFile<CR>
-nnoremap <leader>rs :PerlTestSub<CR>
-nnoremap <leader>ra :ProveTestAll<CR>
-
 let $TEST_PRETTY_COLOR_NAME  = 'bright_green'
 let $TAP_ELAPSED_FORMAT  = '%t1 elapsed'
 let g:test_class_path_folder = 'tests'
 let g:test_class_path_prefix = 'Test'
-let g:test_class_perl_args   = '-MTest::Pretty -Ilib -It/lib -It/tests'
+"let g:test_class_perl_args   = '-MTest::Pretty -Ilib -It/lib -It/tests'
+let g:test_class_perl_args   = '-Ilib -It/lib -It/tests'
 let g:test_class_prove_args  = '-Ilib -It/lib -It/tests -j9 --timer'
 " }}}
 " }}}

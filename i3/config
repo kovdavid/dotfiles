@@ -9,6 +9,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec terminal
+bindsym $mod+Tab exec ~/bin/jump_to_other_monitor.py
 bindsym $mod+x exec terminal
 bindsym $mod+g exec gvim
 bindsym $mod+i exec google-chrome
@@ -199,6 +200,7 @@ for_window [title="File Operation Progress"] floating enable; focus mode_toggle
 exec /home/davs/bin/mon2
 exec /home/davs/.xsessionrc
 exec sudo nm-applet &
-exec numlockx &
-exec (sleep 2 && nitrogen --restore ) &
+#exec rm -rf /tmp/dmenu_run
+#exec numlockx &
+exec (sleep 1 && nitrogen --restore ) &
 #exec volumeicon &
