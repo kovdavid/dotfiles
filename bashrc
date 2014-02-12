@@ -26,6 +26,11 @@ if [ -e /home/davs/dotfiles/bash/alias ] ; then
     source /home/davs/dotfiles/bash/alias
 fi
 
+#django
+if [ -e /home/davs/dotfiles/django_bash_completion ] ; then
+    source /home/davs/dotfiles/django_bash_completion
+fi
+
 #perl
 if [ -e /opt/perlbrew/etc/bashrc ] ; then
     export PERLBREW_HOME=/opt/perlbrew/.perlbrew

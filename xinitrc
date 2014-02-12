@@ -33,8 +33,10 @@ if [ -r $HOME/.profile ]; then
     source $HOME/.profile
 fi
 
+export I3_SPLIT_ORIENTATION='horizontal'
+
 if [ -z "$DESKTOP_SESSION" -a -x /usr/bin/ck-launch-session ]; then
-  exec ck-launch-session dbus-launch --exit-with-session /usr/bin/i3
+  exec ck-launch-session dbus-launch --exit-with-session /usr/bin/i3 --shmlog-size=26214400
 else
-  exec /usr/bin/i3
+  exec /usr/bin/i3 --shmlog-size=26214400 
 fi

@@ -214,6 +214,10 @@ noremap <c-t> :tabnew<CR>
 nnoremap <c-n> :tabprev<CR>
 nnoremap <c-m> :tabnext<CR>
 " }}}
+" Buffers {{{
+nnoremap <c-j> :bp<CR>
+nnoremap <c-k> :bn<CR>
+" }}}
 " Filetype {{{
 " EveryFile {{{
 augroup all_file_type
@@ -223,6 +227,16 @@ augroup all_file_type
     "autocmd BufRead,BufEnter * setlocal cmdheight=1
     autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber nonumber
     autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber number
+augroup END
+" }}}
+" QuickFix {{{
+augroup quickfix
+    autocmd!
+    autocmd FileType qf nnoremap <buffer> <c-m> <CR><C-W><C-P>
+    autocmd FileType qf nnoremap <buffer> <CR> <CR><C-W><C-P>
+    autocmd FileType qf nnoremap <buffer> q :cclose<CR>
+    autocmd FileType qf nnoremap <buffer> <ESC> :cclose<CR>
+    autocmd FileType qf nnoremap <buffer> <c-j> <CR><ESC>:cclose<CR>
 augroup END
 " }}}
 " Perl {{{
@@ -252,15 +266,21 @@ augroup filetype_perl
     autocmd FileType perl let perl_fold = 1
     autocmd FileType perl let perl_fold_blocks = 1
 
+    autocmd FileType perl setlocal iskeyword+=:
+    autocmd FileType perl setlocal iskeyword+=/
+
     autocmd FileType perl let g:syntastic_perl_lib_path = [ './t/lib', './lib' ]
     autocmd FileType perl noremap <buffer> <leader>sc :call SyntaxCheck()<CR>
 
     autocmd FileType perl noremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say Dumper ;<LEFT>
 
-    autocmd FileType perl nnoremap <budder> <leader>rf :PerlTestFile<CR>
-    autocmd FileType perl nnoremap <budder> <leader>rt :PerlTestFile<CR>
-    autocmd FileType perl nnoremap <budder> <leader>rs :PerlTestSub<CR>
-    autocmd FileType perl nnoremap <budder> <leader>ra :ProveTestAll<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>gs :call PerlSubGrep()<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>gl :call PerlSubGrepLike()<CR>
+
+    autocmd FileType perl nnoremap <buffer> <leader>rf :PerlTestFile<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>rt :PerlTestFile<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>rs :PerlTestSub<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ra :ProveTestAll<CR>
 augroup END
 " }}}
 " Python {{{
@@ -270,10 +290,19 @@ augroup filetype_python
     Bundle 'davidhalter/jedi-vim'
     Bundle 'vim-scripts/Python-Syntax-Folding'
 
+    autocmd BufWritePre * if &filetype=='python' | %s/\s\+$//e | endif
+    autocmd BufRead,BufWritePre,FileType python execute ":Rooter"
+
     autocmd BufNewFile *.py 0r ~/.vim/skeleton.python
     autocmd BufRead,BufNewFile *.py setfiletype python
 
     autocmd FileType python setlocal foldlevel=1
+    autocmd FileType python let python_hightlight_all=1
+
+    autocmd FileType python setlocal iskeyword+=.
+    autocmd FileType python setlocal wildignore+=*.pyc
+
+    autocmd FileType python nnoremap <buffer> <F7> :call AutoPep8()<CR>
 augroup END
 " }}}
 " Ruby {{{
@@ -390,31 +419,19 @@ noremap <Left> <nop>
 noremap <Right> <nop>
 " }}}
 " Functions {{{
-" SelectIndent {{{
-function! SelectIndent ()
-let temp_var=indent(line("."))
-while indent(line(".")-1) >= temp_var
-execute "normal! k"
-endwhile
-execute "normal! V"
-while indent(line(".")+1) >= temp_var
-execute "normal! j"
-endwhile
-endfunction
-" }}}
 " ChangeToCurrentLine {{{
 function! ChangeToCurrentLine()
-let row = getline(".")
-echom row
-execute ":cd ".row
-execute ":e ".row
+    let row = getline(".")
+    echom row
+    execute ":cd ".row
+    execute ":e ".row
 endfunction
 " }}}
 " SyntaxCheck {{{
 function! SyntaxCheck()
-execute ":SyntasticReset"
-execute ":Rooter"
-execute ":SyntasticCheck"
+    execute ":SyntasticReset"
+    execute ":Rooter"
+    execute ":SyntasticCheck"
 endfunction
 " }}}
 " ToggleColorColumn {{{
@@ -425,13 +442,13 @@ highlight ColorColumn guibg=#666666
 noremap <F5> :call ToggleColorColumn()<CR>
 
 function! ToggleColorColumn()
-if g:colorcolumn_set == 1
-set colorcolumn=0
-let g:colorcolumn_set = 0
-else
-set colorcolumn=100
-let g:colorcolumn_set = 1
-endif
+    if g:colorcolumn_set == 1
+        set colorcolumn=0
+        let g:colorcolumn_set = 0
+    else
+        set colorcolumn=100
+        let g:colorcolumn_set = 1
+    endif
 endfunction
 " }}}
 " ToggleLastStatus {{{
@@ -441,13 +458,36 @@ let g:laststatus_value = 1
 noremap <F6> :call ToggleLastStatus()<CR>
 
 function! ToggleLastStatus()
-if g:laststatus_value == 1
-set laststatus=2
-let g:laststatus_value = 2
-else
-set laststatus=1
-let g:laststatus_value = 1
-endif
+    if g:laststatus_value == 1
+        set laststatus=2
+        let g:laststatus_value = 2
+    else
+        set laststatus=1
+        let g:laststatus_value = 1
+    endif
+endfunction
+" }}}
+" AutoPep8 {{{
+function! AutoPep8()
+    let l:winview = winsaveview()
+    write
+    execute ":0r !autopep8 %"
+    execute ":normal! jVGd"
+    call winrestview(l:winview)
+endfunction
+" }}}
+" PerlSubGrep {{{
+function! PerlSubGrep()
+    let l:word = expand("<cword>")
+    execute 'vimgrep /^\s*\<sub '. l:word .'\>/j **/*.pm'
+    copen
+endfunction
+" }}}
+" PerlSubGrepLike {{{
+function! PerlSubGrepLike()
+    let l:word = expand("<cword>")
+    execute 'vimgrep /^\s*sub '. l:word .'/j **/*.pm'
+    copen
 endfunction
 " }}}
 " }}}
@@ -463,7 +503,10 @@ nnoremap <leader>a, :Tabularize /,<CR>
 " }}}
 " ctrlp {{{
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_custom_ignore = 'virtualenv'
+let g:ctrlp_custom_ignore = {
+    \ 'dir': '\v(\.git|virtualenv)',
+    \ 'file': '\v\.pyc$',
+    \ }
 
 nnoremap <leader>, :CtrlP<CR>
 " }}}
@@ -471,7 +514,7 @@ nnoremap <leader>, :CtrlP<CR>
 let g:clever_f_across_no_line = 0
 " }}}
 " Rooter {{{
-let g:rooter_patterns = [ '.git/', '.vimproject', 't/' ]
+let g:rooter_patterns = [ '.git/', '.vimproject' ]
 let g:rooter_manual_only = 0
 let g:rooter_change_directory_for_non_project_files = 0
 " }}}
@@ -491,8 +534,7 @@ let $TEST_PRETTY_COLOR_NAME  = 'bright_green'
 let $TAP_ELAPSED_FORMAT  = '%t1 elapsed'
 let g:test_class_path_folder = 'tests'
 let g:test_class_path_prefix = 'Test'
-"let g:test_class_perl_args   = '-MTest::Pretty -Ilib -It/lib -It/tests'
-let g:test_class_perl_args   = '-Ilib -It/lib -It/tests'
+let g:test_class_perl_args   = '-MTest::Pretty -Ilib -It/lib -It/tests'
 let g:test_class_prove_args  = '-Ilib -It/lib -It/tests -j9 --timer'
 " }}}
 " }}}

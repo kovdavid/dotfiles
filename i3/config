@@ -8,8 +8,9 @@ font pango:Liberation Mono 12px
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminal
 bindsym $mod+Tab exec ~/bin/jump_to_other_monitor.py
+bindsym $mod+Shift+Tab exec ~/bin/move_to_other_monitor.py
+bindsym $mod+Return exec ~/bin/cycle_windows.py
 bindsym $mod+x exec terminal
 bindsym $mod+g exec gvim
 bindsym $mod+i exec google-chrome
@@ -18,6 +19,7 @@ bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym XF86AudioLowerVolume exec amixer -q set  Master 5%- unmute
 bindsym XF86AudioRaiseVolume exec amixer -q set  Master 5%+ unmute
 bindsym $mod+d exec dmenu_run
+
 
 bindcode 148 exec calculator
 
@@ -30,8 +32,8 @@ bindsym $mod+b border toggle
 floating_maximum_size 1366 x 768
 
 # scratchpad
-bindsym $mod+m move scratchpad
-bindsym $mod+o scratchpad show
+bindsym $mod+Shift+m move scratchpad
+bindsym $mod+m scratchpad show
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -44,19 +46,16 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+h split v
-
-# split in vertical orientation
-bindsym $mod+v split h
+# toggle split orientation
+bindsym $mod+s exec ~/bin/toggle_split_orientation.py
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, default)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout default
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout default
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
