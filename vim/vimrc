@@ -62,6 +62,7 @@ set pastetoggle=<F2>
 "set mouse=a
 set mousehide
 set number
+set relativenumber
 set showbreak=₪
 set splitbelow
 set splitright
@@ -215,8 +216,8 @@ nnoremap <leader>k :bn<CR>
 " EveryFile {{{
 augroup all_file_type
     autocmd!
-    autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber nonumber
-    autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber number
+    autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber
+    autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber
 augroup END
 " }}}
 " QuickFix {{{
