@@ -294,8 +294,8 @@ augroup filetype_python
 
     autocmd FileType python nnoremap <buffer> <leader>f8 :call Flake8()<CR>
 
-    autocmd FileType python nnoremap <buffer> <leader>rf :silent make % \| redraw!<CR>
-    autocmd FileType python nnoremap <buffer> <leader>ra :silent make \| redraw!<CR>
+    autocmd FileType python nnoremap <buffer> <leader>rf :call RunPythonTest('file')<CR>
+    autocmd FileType python nnoremap <buffer> <leader>ra :call RunPythonTest('')<CR>
 augroup END
 " }}}
 " HTML {{{
@@ -412,6 +412,29 @@ function! PerlSubGrepLike()
     let l:word = expand("<cword>")
     execute 'lvimgrep /^\s*sub '. l:word .'/j **/*.pm'
     lopen
+endfunction
+" }}}
+" RunPythonTest {{{
+function! RunPythonTest(mode)
+    silent w
+
+    if a:mode == 'file'
+        silent make %
+    else
+        silent make
+    endif
+
+    redraw!
+
+    hi GreenBar term=reverse ctermfg=yellow ctermbg=green guifg=yellow guibg=green
+
+    if getqflist() == []
+        echohl GreenBar
+        echon repeat(" ", &columns - 30)
+        echohl None
+    else
+        cc
+    endif
 endfunction
 " }}}
 " }}}
