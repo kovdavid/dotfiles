@@ -69,6 +69,7 @@ set splitright
 set switchbuf=useopen,usetab,newtab
 
 "gary
+set noesckeys
 set timeout timeoutlen=1000 ttimeoutlen=1000
 let g:sh_noisk=1
 " }}}
