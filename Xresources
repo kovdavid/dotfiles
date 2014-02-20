@@ -1,0 +1,24 @@
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.dpi: 96
+Xft.rgba: rgb
+
+
+xterm*termName: xterm-256color
+XTerm*locale: true
+XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
+
+
+!Alt key
+XTerm*metaSendsEscape: true 
+
+Xterm*saveLines: 4096
+
+XTerm*faceName: Liberation Mono
+XTerm*faceSize: 11
+XTerm*Background: #333333
+XTerm*Foreground: #ffffff
+

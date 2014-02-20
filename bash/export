@@ -17,3 +17,5 @@ export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 
 export XZ_OPT=-9
 export GZIP=-9
+
+export EDITOR=vim
