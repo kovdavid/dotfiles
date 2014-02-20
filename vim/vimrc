@@ -31,7 +31,7 @@ Bundle 'vim-scripts/Python-Syntax-Folding'
 "Bundle 'vim-scripts/python.vim--Vasiliev'
 
 " Perl
-Bundle 'DavsX/test_class_runner'
+"Bundle 'DavsX/test_class_runner'
 
 " new
 "Bundle 'scrooloose/syntastic'
@@ -62,11 +62,11 @@ set pastetoggle=<F2>
 "set mouse=a
 set mousehide
 set number
-set showbreak=↪
+set showbreak=₪
 set splitbelow
 set splitright
 
-set switchbuf=useopen,usetab,split
+set switchbuf=useopen,usetab,newtab
 
 "gary
 set timeout timeoutlen=1000 ttimeoutlen=1000
@@ -257,8 +257,8 @@ augroup filetype_perl
     autocmd FileType perl let perl_fold = 1
     autocmd FileType perl let perl_fold_blocks = 1
 
-    "autocmd FileType perl let g:syntastic_perl_lib_path = [ './t/lib', './lib' ]
-    "autocmd FileType perl noremap <buffer> <leader>sc :call SyntaxCheck()<CR>
+    autocmd FileType perl setlocal errorformat=%f:%l:%m
+    autocmd FileType perl setlocal makeprg=~/bin/efm_perl.pl
 
     autocmd FileType perl noremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say Dumper ;<LEFT>
 
@@ -266,10 +266,9 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>gl :call PerlSubGrepLike()<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>rr :!perl %<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>rf :PerlTestFile<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>rt :PerlTestFile<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>rs :PerlTestSub<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>ra :ProveTestAll<CR>
+
+    autocmd FileType perl nnoremap <buffer> <leader>rf :call RunTest('file')<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ra :call RunTest('')<CR>
 augroup END
 " }}}
 " Python {{{
@@ -294,8 +293,8 @@ augroup filetype_python
 
     autocmd FileType python nnoremap <buffer> <leader>f8 :call Flake8()<CR>
 
-    autocmd FileType python nnoremap <buffer> <leader>rf :call RunPythonTest('file')<CR>
-    autocmd FileType python nnoremap <buffer> <leader>ra :call RunPythonTest('')<CR>
+    autocmd FileType python nnoremap <buffer> <leader>rf :call RunTest('file')<CR>
+    autocmd FileType python nnoremap <buffer> <leader>ra :call RunTest('')<CR>
 augroup END
 " }}}
 " HTML {{{
@@ -360,13 +359,6 @@ function! ChangeToCurrentLine()
     execute ":e ".row
 endfunction
 " }}}
-" SyntaxCheck {{{
-function! SyntaxCheck()
-    execute ":SyntasticReset"
-    execute ":Rooter"
-    execute ":SyntasticCheck"
-endfunction
-" }}}
 " ToggleColorColumn {{{
 set colorcolumn=0
 let g:colorcolumn_set = 0
@@ -415,7 +407,7 @@ function! PerlSubGrepLike()
 endfunction
 " }}}
 " RunPythonTest {{{
-function! RunPythonTest(mode)
+function! RunTest(mode)
     silent w
 
     if a:mode == 'file'
@@ -465,14 +457,6 @@ let g:rooter_patterns = [ '.git/', '.vimproject' ]
 let g:rooter_manual_only = 0
 let g:rooter_change_directory_for_non_project_files = 0
 " }}}
-" Syntastic {{{
-let g:syntastic_enable_highlighting=1
-let g:syntastic_mode_map={ 'mode': 'passive' }
-let g:syntastic_enable_signs= 1
-let g:syntastic_python_checkers=['pylint','pyflakes','pep8']
-let g:syntastic_python_pylint_args="--disable=C0111"
-let g:syntastic_perl_checkers= ['perl']
-" }}}
 " vim-jedi {{{
 let g:jedi#goto_assignments_command = ""
 let g:jedi#goto_definitions_command = ""
@@ -481,16 +465,5 @@ let g:jedi#usages_command = "<leader>gs"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = ""
 let g:jedi#show_call_signatures = "1"
-" }}}
-" test_class_runner {{{
-let $TEST_PRETTY_COLOR_NAME  = 'bright_green'
-let $TAP_ELAPSED_FORMAT  = '%t1 elapsed'
-let g:test_class_path_folder = 'tests'
-let g:test_class_path_prefix = 'Test'
-let g:test_class_perl_args   = '-MTest::Pretty -Ilib -It/lib -It/tests'
-let g:test_class_prove_args  = '-Ilib -It/lib -It/tests -j9 --timer'
-" }}}
-" vim-makegreen {{{
-"let g:makegreen_stay_on_file = 1
 " }}}
 " }}}
