@@ -68,6 +68,9 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindcode $mod+d focus child
 
+# move to center
+bindsym $mod+equal move absolute position center
+
 workspace 1 output LVDS1
 workspace 2 output LVDS1
 workspace 3 output LVDS1
