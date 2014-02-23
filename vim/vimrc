@@ -38,6 +38,7 @@ Bundle 'vim-scripts/Python-Syntax-Folding'
 "Bundle 'terryma/vim-expand-region'
 "Bundle 'gcmt/wildfire.vim'
 "Bundle 'reinh/vim-makegreen'
+"Bundle 'nathanaelkane/vim-indent-guides'
 
 filetype indent on
 filetype plugin on
@@ -52,18 +53,16 @@ set lazyredraw                 " don't redraw when executing macros (good perfor
 set hidden                     " hide buffers instead of closing them
 set modelines=4                " gives 4 lines for modelines (vim meta at the beginning/end of files)
 set backspace=indent,eol,start " allow backspace in insert mode
-set autochdir                  " auto change directory when opening a file
+"set autochdir                  " auto change directory when opening a file
 set errorformat=%f:%l:%m
 set autowrite
 set nobackup
 set noswapfile
 set scrolloff=3                " when moving vertically set 3 lines to the cursor
 set pastetoggle=<F2>
-"set mouse=a
 set mousehide
 set number
 set relativenumber
-set showbreak=₪
 set splitbelow
 set splitright
 
@@ -72,7 +71,7 @@ set switchbuf=useopen,usetab,newtab
 "gary
 set noesckeys
 set timeout timeoutlen=1000 ttimeoutlen=1000
-let g:sh_noisk=1
+"let g:sh_noisk=1
 " }}}
 " cmdline {{{
 set cmdheight=1             "command line size
@@ -90,8 +89,6 @@ set incsearch
 
 set ignorecase
 "set smartcase
-
-"nmap <silent> <leader>/ :set hlsearch!<CR>
 
 " very magic mode for regexes
 nnoremap <leader>/ /\v
@@ -278,13 +275,13 @@ augroup filetype_python
     autocmd!
 
     autocmd BufWritePre * if &filetype=='python' | %s/\s\+$//e | endif
-    autocmd BufRead,BufWritePre,FileType python execute ":Rooter"
+    autocmd BufEnter,BufRead,BufWritePre,FileReadPost,FileType python execute ":Rooter"
 
     autocmd BufNewFile *.py 0r ~/.vim/skeleton.python
     autocmd BufRead,BufNewFile *.py setfiletype python
 
     "autocmd FileType python setlocal compiler=nose
-    autocmd FileType python setlocal errorformat=%f:%l:\ fail:\ %m,%f:%l:\ error:\ %m
+    autocmd FileType python setlocal errorformat=%f:%l:\ fail:\ %m,%f:%l:\ error:\ %m,%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m,%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
     autocmd FileType python setlocal makeprg=nosetests\ --with-machineout
     
     autocmd FileType python setlocal foldlevelstart=20
@@ -293,12 +290,15 @@ augroup filetype_python
     "autocmd FileType python setlocal iskeyword+=.
     autocmd FileType python setlocal wildignore+=*.pyc
 
-    autocmd FileType python nnoremap <buffer> <leader>f8 :call Flake8()<CR>
+    autocmd FileType python nnoremap <buffer> <leader>pf :call Flake8()<CR>
+    autocmd FileType python nnoremap <buffer> <leader>pp :call Pep8()<CR>
 
     autocmd FileType python nnoremap <buffer> <leader>rr :!python %<CR>
 
-    autocmd FileType python nnoremap <buffer> <leader>rf :call RunTest('file')<CR>
-    autocmd FileType python nnoremap <buffer> <leader>ra :call RunTest('')<CR>
+    autocmd FileType python nnoremap <buffer> <leader>ra :call RunPythonTest('all')<CR>
+    autocmd FileType python nnoremap <buffer> <leader>rf :call RunPythonTest('file')<CR>
+    autocmd FileType python nnoremap <buffer> <leader>rc :call RunPythonTest('class')<CR>
+    autocmd FileType python nnoremap <buffer> <leader>rm :call RunPythonTest('method')<CR>
 augroup END
 " }}}
 " HTML {{{
@@ -411,13 +411,100 @@ function! PerlSubGrepLike()
 endfunction
 " }}}
 " RunPythonTest {{{
-function! RunTest(mode)
-    silent w
+function! RunPythonTest(mode)
+    let l:path = expand('%')
+
+    let l:result = 0
 
     if a:mode == 'file'
-        silent make %
+        let l:result = RunTest(l:path)
+    elseif a:mode == 'class'
+        let l:class = GetPythonClassName()
+        let l:result = RunTest(l:path . ":" . l:class)
+    elseif a:mode == 'method'
+        let l:class = GetPythonClassName()
+        let l:method = GetPythonMethodName()
+        let l:result = RunTest(l:path .":". l:class .".". l:method)
     else
-        silent make
+        let l:result = RunTest('')
+    endif
+
+    if l:result == 0
+        let l:line = getqflist()[0]['text']
+
+        let l:list = matchlist(l:line, '\vFile "([^"]*)", line (\d+)')
+        if !empty(l:list)
+            let l:file = l:list[1]
+            let l:line_no = l:list[2]
+
+            if l:file =~# getcwd()
+                if l:file == expand('%:p')
+                    execute "normal! ".l:line_no."G"
+                else
+                    execute "badd +".l:line_no." ".l:file
+                    execute "vert sbuffer " . l:file
+                    execute "normal! ".l:line_no."G"
+                endif
+            endif
+            copen
+            wincmd k
+        else
+            let l:bufname = fnamemodify(buffer_name(getqflist()[0]['bufnr']), ':p')
+            if l:bufname =~# getcwd()
+                cc!
+            else
+                copen
+            endif
+        endif
+    endif
+endfunction
+" }}}
+" GetPythonMethodName {{{
+function! GetPythonMethodName()
+    let l:line_no = search('\v^\s*def ','bcnW')
+
+    if l:line_no > 0
+        let l:line = getline(l:line_no)
+        let l:list = matchlist(l:line, '\v^\s*def ([0-9a-zA-Z_]+)')
+
+        if !empty(l:list)
+            let l:method = l:list[1]
+            return l:method
+        else
+            throw "Method name did not match"
+        endif
+    else
+        throw "No method found"
+    endif
+endfunction
+" }}}
+" GetPythonClassName {{{
+function! GetPythonClassName()
+    let l:line_no = search('\v^\s*class ','bcnW')
+
+    if l:line_no > 0
+        let l:line = getline(l:line_no)
+        let l:list = matchlist(l:line, '\v^\s*class ([0-9a-zA-Z_]+)')
+
+        if !empty(l:list)
+            let l:class = l:list[1]
+            return l:class
+        else
+            throw "Class name did not match"
+        endif
+    else
+        throw "No class found"
+    endif
+endfunction
+" }}}
+" RunTest {{{
+function! RunTest(args)
+    silent w
+
+    if a:args == ''
+        silent make!
+    else
+        execute ":silent make! " . a:args
     endif
 
     redraw!
@@ -428,9 +515,18 @@ function! RunTest(mode)
         echohl GreenBar
         echon repeat(" ", &columns - 30)
         echohl None
-    else
-        cc
+        return 1
     endif
+    return 0
+endfunction
+" }}}
+" Pep8 {{{
+function! Pep8()
+    let l:winview = winsaveview()
+    write
+    execute ":0r !autopep8 %"
+    execute ":normal! jVGd"
+    call winrestview(l:winview)
 endfunction
 " }}}
 " }}}
