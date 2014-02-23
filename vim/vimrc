@@ -544,7 +544,7 @@ nnoremap <leader>a, :Tabularize /,<CR>
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_custom_ignore = {
     \ 'dir': '\v(\.git|virtualenv)',
-    \ 'file': '\v\.pyc$',
+    \ 'file': '\v(__init__\.py|\.pyc)$',
     \ }
 
 nnoremap <leader>, :CtrlP<CR>
