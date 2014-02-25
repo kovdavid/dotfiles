@@ -69,9 +69,18 @@ set nojoinspaces
 
 set switchbuf=useopen,usetab,newtab
 
-"gary
-set noesckeys
+
+" fast exiting insert mode; the removes the 1sec delay when not in GUI
 set timeout timeoutlen=1000 ttimeoutlen=1000
+if !has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+endif
+
 "let g:sh_noisk=1
 " }}}
 " cmdline {{{
@@ -106,7 +115,7 @@ vnoremap < <gv
 " }}}
 " Tabs {{{
 set shiftwidth   =4             "number of spaces for indenting
-set tabstop      =4             "number of spaces for tabs
+set tabstop      =8             "number of spaces for tabs
 set softtabstop  =4             "number of spaces for tabs while editing
 set expandtab                   "autoinsert spaces instead of tabs
 " }}}
@@ -266,8 +275,8 @@ augroup filetype_perl
 
     autocmd FileType perl nnoremap <buffer> <leader>rr :!perl %<CR>
 
-    autocmd FileType perl nnoremap <buffer> <leader>rf :call RunTest('file')<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>ra :call RunTest('')<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>rf :call RunPerlTest('file')<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ra :call RunPerlTest('')<CR>
 augroup END
 " }}}
 " Python {{{
@@ -427,6 +436,55 @@ function! RunPythonTest(mode)
         let l:result = RunTest(l:path .":". l:class .".". l:method)
     else
         let l:result = RunTest('')
+    endif
+
+    if l:result == 0
+        let l:line = getqflist()[0]['text']
+
+        let l:list = matchlist(l:line, '\vFile "([^"]*)", line (\d+)')
+        if !empty(l:list)
+            let l:file = l:list[1]
+            let l:line_no = l:list[2]
+
+            if l:file =~# getcwd()
+                if l:file == expand('%:p')
+                    execute "normal! ".l:line_no."G"
+                else
+                    execute "badd +".l:line_no." ".l:file
+                    execute "vert sbuffer " . l:file
+                    execute "normal! ".l:line_no."G"
+                endif
+            endif
+            copen
+            wincmd k
+        else
+            let l:bufname = fnamemodify(buffer_name(getqflist()[0]['bufnr']), ':p')
+            if l:bufname =~# getcwd()
+                cc!
+            else
+                copen
+            endif
+        endif
+    endif
+endfunction
+" }}}
+" RunPerlTest {{{
+function! RunPerlTest(mode)
+    let l:path = expand('%')
+
+    let l:result = 0
+
+    if a:mode == 'file'
+        let l:result = RunTest(l:path)
+    "elseif a:mode == 'class'
+        "let l:class = GetPythonClassName()
+        "let l:result = RunTest(l:path . ":" . l:class)
+    "elseif a:mode == 'method'
+        "let l:class = GetPythonClassName()
+        "let l:method = GetPythonMethodName()
+        "let l:result = RunTest(l:path .":". l:class .".". l:method)
+    else
+        let l:result = RunTest('t/')
     endif
 
     if l:result == 0
