@@ -81,7 +81,7 @@ if !has('gui_running')
     augroup END
 endif
 
-"let g:sh_noisk=1
+let g:sh_noisk=1
 " }}}
 " cmdline {{{
 set cmdheight=1             "command line size
@@ -94,8 +94,10 @@ let maplocalleader = "\\"
 " }}}
 " Search {{{
 set showmatch
-set nohlsearch
+set hlsearch
 set incsearch
+
+nnoremap <leader>. :nohl<CR>
 
 set ignorecase
 "set smartcase
@@ -155,6 +157,7 @@ else
 endif
 
 hi CursorLine cterm=NONE ctermbg=239
+hi Search cterm=underline
 
 set title
 set noerrorbells
