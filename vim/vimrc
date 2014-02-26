@@ -12,7 +12,7 @@ Bundle 'gmarik/vundle'
 Bundle 'rhysd/clever-f.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Raimondi/delimitMate'
-Bundle 'scrooloose/nerdcommenter'
+"Bundle 'scrooloose/nerdcommenter'
 Bundle 'godlygeek/tabular'
 Bundle 'tpope/vim-surround'
 Bundle 'airblade/vim-rooter'
@@ -21,24 +21,14 @@ Bundle 'airblade/vim-rooter'
 Bundle 'tomtom/tlib_vim'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'garbas/vim-snipmate'
-"Bundle 'honza/vim-snippets'
 
 " Python
 Bundle 'davidhalter/jedi-vim'
 Bundle 'nvie/vim-flake8'
 Bundle 'vim-scripts/Python-Syntax-Folding'
-"Bundle 'fs111/pydoc.vim'
-"Bundle 'vim-scripts/python.vim--Vasiliev'
 
 " Perl
 "Bundle 'DavsX/test_class_runner'
-
-" new
-"Bundle 'scrooloose/syntastic'
-"Bundle 'terryma/vim-expand-region'
-"Bundle 'gcmt/wildfire.vim'
-"Bundle 'reinh/vim-makegreen'
-"Bundle 'nathanaelkane/vim-indent-guides'
 
 filetype indent on
 filetype plugin on
@@ -271,7 +261,13 @@ augroup filetype_perl
     autocmd FileType perl setlocal errorformat=%f:%l:%m
     autocmd FileType perl setlocal makeprg=~/bin/efm_perl.pl
 
-    autocmd FileType perl noremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say Dumper ;<LEFT>
+    autocmd FileType perl nnoremap <buffer> <leader>cc :call Comment('# ')<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>cu :call UnComment('# ')<CR>
+
+    autocmd FileType perl vnoremap <buffer> <leader>cc :call Comment('# ')<CR>
+    autocmd FileType perl vnoremap <buffer> <leader>cu :call UnComment('# ')<CR>
+
+    autocmd FileType perl nnoremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say Dumper ;<LEFT>
 
     autocmd FileType perl nnoremap <buffer> <leader>gs :call PerlSubGrep()<CR>
     autocmd FileType perl nnoremap <buffer> <leader>gl :call PerlSubGrepLike()<CR>
@@ -301,6 +297,12 @@ augroup filetype_python
 
     "autocmd FileType python setlocal iskeyword+=.
     autocmd FileType python setlocal wildignore+=*.pyc
+
+    autocmd FileType python nnoremap <buffer> <leader>cc :call Comment('# ')<CR>
+    autocmd FileType python nnoremap <buffer> <leader>cu :call UnComment('# ')<CR>
+
+    autocmd FileType python vnoremap <buffer> <leader>cc :call Comment('# ')<CR>
+    autocmd FileType python vnoremap <buffer> <leader>cu :call UnComment('# ')<CR>
 
     autocmd FileType python nnoremap <buffer> <leader>pf :call Flake8()<CR>
     autocmd FileType python nnoremap <buffer> <leader>pp :call Pep8()<CR>
@@ -588,6 +590,26 @@ function! Pep8()
     execute ":0r !autopep8 %"
     execute ":normal! jVGd"
     call winrestview(l:winview)
+endfunction
+" }}}
+" Comment {{{
+function! Comment(mark)
+    let l:hlsearch = &hlsearch
+    set nohlsearch
+    if getline('.') !~ '\v^\s*$'
+        execute ':silent! s/\v^\s*/&'.a:mark.'/'
+    endif
+    let &hlsearch = l:hlsearch
+endfunction
+" }}}
+" UnComment {{{
+function! UnComment(mark)
+    let l:hlsearch = &hlsearch
+    set nohlsearch
+    if getline('.') !~ '\v^\s*$'
+        execute ':silent! s/\v^(\s*)'.a:mark.'/\1/'
+    endif
+    let &hlsearch = l:hlsearch
 endfunction
 " }}}
 " }}}

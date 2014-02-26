@@ -5,9 +5,14 @@
     co   = checkout
     me   = merge --no-ff
     ms   = merge --squash
+    dt   = difftool
+    dtc  = difftool --cached
+    dtn  = difftool --name-only
+    dts  = difftool --stat
     di   = diff
-    din  = diff --name-status
+    din  = diff --name-only
     dic  = diff --cached
+    dis  = diff --stat
     lo   = log --oneline --reverse
     lg   = log --oneline --graph --all
     ld   = log --oneline --reverse HEAD ^develop --no-merges
@@ -24,9 +29,12 @@
 	trustctime = false
 [diff]
 	external = git-meld
+	tool = vimdiff
 [merge]
-    external = meld
+        external = meld
 [color]
 	ui = auto
 [grep]
 	lineNumber = true
+[difftool]
+	prompt = false
