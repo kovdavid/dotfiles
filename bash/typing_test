@@ -1,0 +1,9 @@
+if [ ! -f /home/davs/.last_typing_test ] ; then
+    echo ""
+    read -n 1 -p "Would you like to run a typing_test? <y/n>"
+    if [ "$REPLY" = "y" ] ; then
+        echo ""
+        echo "`date +%Y-%m-%d`" > /home/davs/.last_typing_test
+        /home/davs/workspace/typing_exercise.pl
+    fi
+fi

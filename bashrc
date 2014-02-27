@@ -46,3 +46,7 @@ fi
 if [ -e /home/davs/dotfiles/bash/backup ] ; then
     source /home/davs/dotfiles/bash/backup
 fi
+
+if [ -e /home/davs/dotfiles/bash/typing_test ] ; then
+    source /home/davs/dotfiles/bash/typing_test
+fi
