@@ -28,7 +28,7 @@ Bundle 'nvie/vim-flake8'
 Bundle 'vim-scripts/Python-Syntax-Folding'
 
 " Perl
-"Bundle 'DavsX/test_class_runner'
+Bundle 'DavsX/test_class_runner'
 
 filetype indent on
 filetype plugin on
@@ -237,9 +237,9 @@ augroup filetype_perl
     autocmd BufRead,BufNewFile *.pl  setfiletype perl
     autocmd BufRead,BufNewFile *.t   setfiletype perl
 
-    autocmd BufNewFile *.pl 0r ~/.vim/skeleton.perl
-    autocmd BufNewFile *.pm 0r ~/.vim/skeleton.package.perl
-    autocmd BufNewFile *.t 0r ~/.vim/skeleton.test.perl
+    autocmd BufNewFile *.pl 0r ~/.vim/skeleton/perl.script
+    autocmd BufNewFile *.pm 0r ~/.vim/skeleton/perl.package
+    autocmd BufNewFile *.t 0r ~/.vim/skeleton/perl.test
 
     autocmd BufWritePre * if &filetype=='perl' | %s/\s\+$//e | endif
 
@@ -259,7 +259,8 @@ augroup filetype_perl
     autocmd FileType perl let perl_fold_blocks = 1
 
     autocmd FileType perl setlocal errorformat=%f:%l:%m
-    autocmd FileType perl setlocal makeprg=~/bin/efm_perl.pl
+    "autocmd FileType perl setlocal makeprg=~/bin/efm_perl.pl
+    autocmd FileType perl setlocal makeprg=prove
 
     autocmd FileType perl nnoremap <buffer> <leader>cc :call Comment('# ')<CR>
     autocmd FileType perl nnoremap <buffer> <leader>cu :call UnComment('# ')<CR>
@@ -274,8 +275,13 @@ augroup filetype_perl
 
     autocmd FileType perl nnoremap <buffer> <leader>rr :!perl %<CR>
 
-    autocmd FileType perl nnoremap <buffer> <leader>rf :call RunPerlTest('file')<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>ra :call RunPerlTest('')<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>rf :PerlTestFile<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>rt :PerlTestFile<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>rs :PerlTestSub<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ra :ProveTestAll<CR>
+
+    " autocmd FileType perl nnoremap <buffer> <leader>rf :call RunPerlTest('file')<CR>
+    " autocmd FileType perl nnoremap <buffer> <leader>ra :call RunPerlTest('')<CR>
 augroup END
 " }}}
 " Python {{{
@@ -285,7 +291,7 @@ augroup filetype_python
     autocmd BufWritePre * if &filetype=='python' | %s/\s\+$//e | endif
     autocmd BufEnter,BufRead,BufWritePre,FileReadPost,FileType python execute ":Rooter"
 
-    autocmd BufNewFile *.py 0r ~/.vim/skeleton.python
+    autocmd BufNewFile *.py 0r ~/.vim/skeleton/python.script
     autocmd BufRead,BufNewFile *.py setfiletype python
 
     "autocmd FileType python setlocal compiler=nose
@@ -347,6 +353,12 @@ augroup filetype_vim
 
     "autocmd BufWritePre * if &filetype=='vim' | %s/\s\+$//e | endif
     autocmd FileType vim noremap <buffer> <leader>ss  :w<CR>:source %<CR>:e <CR>
+
+    autocmd FileType vim nnoremap <buffer> <leader>cc :call Comment('" ')<CR>
+    autocmd FileType vim nnoremap <buffer> <leader>cu :call UnComment('" ')<CR>
+
+    autocmd FileType vim vnoremap <buffer> <leader>cc :call Comment('" ')<CR>
+    autocmd FileType vim vnoremap <buffer> <leader>cu :call UnComment('" ')<CR>
 augroup END
 " }}}
 " CursorLine {{{ 
@@ -654,5 +666,13 @@ let g:jedi#popup_on_dot             = 0
 let g:snips_author = "David Kovacs [DavsX]"
 let g:snips_email = "kovdavid@gmail.com"
 let g:snips_github = "http://github.com/DavsX"
+" }}}
+" test_class_runner {{{
+let $TEST_PRETTY_COLOR_NAME  = 'bright_green'
+let $TAP_ELAPSED_FORMAT  = '%t1 elapsed'
+let g:test_class_path_folder = 'tests'
+let g:test_class_path_prefix = 'Test'
+let g:test_class_perl_args   = '-MTest::Pretty -Ilib -It/lib -It/tests'
+let g:test_class_prove_args  = '-Ilib -It/lib -It/tests -j9 --timer'
 " }}}
 " }}}
