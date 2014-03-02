@@ -3,7 +3,7 @@ alias cal="cal -m"
 alias clr="clear"
 alias cp="cp -i"
 alias cpr="cp -i -r"
-alias df="df-h"
+alias df="df -h"
 alias dus="du -shc .??* * | sort -h"
 alias grep='grep --exclude-dir=.git'
 alias ipcalc="ipcalc -n"

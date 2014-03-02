@@ -58,6 +58,9 @@ set splitright
 set nojoinspaces
 
 set switchbuf=useopen,usetab,newtab
+set winwidth=84
+
+set complete-=i
 
 
 " fast exiting insert mode; the removes the 1sec delay when not in GUI
