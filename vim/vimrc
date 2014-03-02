@@ -189,6 +189,9 @@ nnoremap L g_
 vnoremap H ^
 vnoremap L g_
 
+onoremap H ^
+onoremap L g_
+
 " j/k move in wrapped lines too
 nnoremap j gj
 nnoremap k gk
