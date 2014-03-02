@@ -12,7 +12,6 @@ bindsym $mod+Tab exec ~/bin/jump_to_other_monitor.py
 bindsym $mod+Shift+Tab exec ~/bin/move_to_other_monitor.py
 bindsym $mod+Return exec ~/bin/cycle_windows.py
 bindsym $mod+x exec xterm
-bindsym $mod+g exec gvim
 bindsym $mod+i exec google-chrome
 bindsym $mod+t exec thunar
 bindsym XF86AudioMute exec amixer -q set Master toggle
@@ -53,8 +52,8 @@ bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, default)
 #bindsym $mod+s layout stacking
-#bindsym $mod+w layout tabbed
-#bindsym $mod+e layout default
+bindsym $mod+v layout tabbed
+bindsym $mod+g layout default
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle

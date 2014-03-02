@@ -364,6 +364,17 @@ augroup filetype_vim
     autocmd FileType vim vnoremap <buffer> <leader>cu :call UnComment('" ')<CR>
 augroup END
 " }}}
+" sh {{{
+augroup filetype_sh
+    autocmd!
+
+    autocmd FileType sh nnoremap <buffer> <leader>cc :call Comment('# ')<CR>
+    autocmd FileType sh nnoremap <buffer> <leader>cu :call UnComment('# ')<CR>
+
+    autocmd FileType sh vnoremap <buffer> <leader>cc :call Comment('# ')<CR>
+    autocmd FileType sh vnoremap <buffer> <leader>cu :call UnComment('# ')<CR>
+augroup END
+" }}}
 " CursorLine {{{ 
 augroup CursorLine
     autocmd!
@@ -630,13 +641,17 @@ endfunction
 " }}}
 " Plugin settings {{{
 " Tabularize {{{
-vnoremap <leader>ah :Tabularize /=><CR>
-vnoremap <leader>a= :Tabularize /=<CR>
-vnoremap <leader>a, :Tabularize /,<CR>
+vnoremap <leader>ah :Tabularize /^.\{-}\ze=>/l0l0<CR>
+vnoremap <leader>a= :Tabularize /^.\{-}\ze=/l0l0<CR>
+vnoremap <leader>a, :Tabularize /^.\{-}\ze,/l0l0<CR>
+vnoremap <leader>aa :Tabularize /
+vnoremap <leader>af :Tabularize /^.\{-}\ze/l0l0<left><left><left><left><left>
 
-nnoremap <leader>ah :Tabularize /=><CR>
-nnoremap <leader>a= :Tabularize /=<CR>
-nnoremap <leader>a, :Tabularize /,<CR>
+nnoremap <leader>ah :Tabularize /^.\{-}\ze=>/l0l0<CR>
+nnoremap <leader>a= :Tabularize /^.\{-}\ze=/l0l0<CR>
+nnoremap <leader>a, :Tabularize /^.\{-}\ze,/l0l0<CR>
+nnoremap <leader>aa :Tabularize /
+nnoremap <leader>af :Tabularize /^.\{-}\ze/l0l0<left><left><left><left><left>
 " }}}
 " ctrlp {{{
 set runtimepath^=~/.vim/bundle/ctrlp.vim
