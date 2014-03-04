@@ -18,6 +18,7 @@
     ld   = log --oneline --reverse HEAD ^develop --no-merges
     lm   = log --oneline --reverse HEAD ^master --no-merges
     re   = rebase -i
+    rec  = rebase --continue
     mt   = mergetool
     root = !pwd
 [user]
