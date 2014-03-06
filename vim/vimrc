@@ -62,7 +62,7 @@ set splitright
 set nojoinspaces
 
 set switchbuf=useopen,usetab,newtab
-set winwidth=84
+set winwidth=83
 
 set complete-=i
 
@@ -263,6 +263,7 @@ augroup filetype_perl
     autocmd BufRead,BufNewFile *.pl  setlocal filetype=perl
     autocmd BufRead,BufNewFile *.t   setlocal filetype=perl
 
+    autocmd FileType perl setlocal nowrap
     autocmd FileType perl setlocal complete-=i
     "autocmd FileType perl setlocal foldlevel=1
     autocmd FileType perl setlocal foldlevelstart=20
@@ -444,9 +445,9 @@ function! ChangeToCurrentLine()
 endfunction
 " }}}
 " ToggleColorColumn {{{
-set colorcolumn=0
-let g:colorcolumn_set = 0
-highlight ColorColumn guibg=#666666
+set colorcolumn=80
+let g:colorcolumn_set = 1
+highlight ColorColumn guibg=#333333 ctermbg=8
 
 noremap <leader>tcc :call ToggleColorColumn()<CR>
 
@@ -455,7 +456,7 @@ function! ToggleColorColumn()
         set colorcolumn=0
         let g:colorcolumn_set = 0
     else
-        set colorcolumn=100
+        set colorcolumn=80
         let g:colorcolumn_set = 1
     endif
 endfunction
