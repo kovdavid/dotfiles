@@ -1,0 +1,4 @@
+#echo "starting ssh-agent"
+#rm -rf /tmp/ssh-??????????
+#killall ssh-agent
+#eval $(ssh-agent -s)
