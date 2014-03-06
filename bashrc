@@ -38,9 +38,9 @@ if [ -e /opt/perlbrew/etc/bashrc ] ; then
 fi
 
 #ruby
-if [ -e /home/davs/.rvm/scripts/rvm ] ; then
-    source /home/davs/.rvm/scripts/rvm
-    export PATH=$PATH:$HOME/.rvm/bin
+if [ -e /opt/ruby/rvm/scripts/rvm ] ; then
+    source /opt/ruby/rvm/scripts/rvm
+    export PATH=$PATH:/opt/ruby/rvm/scripts/rvm
 fi
 
 if [ -e /home/davs/dotfiles/bash/backup ] ; then
