@@ -15,17 +15,3 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 [ -f $sysmodmap ] && /usr/bin/xmodmap $sysmodmap
 [ -f $userresources ] && /usr/bin/xrdb -merge $userresources
 [ -f $usermodmap ] && /usr/bin/xmodmap $usermodmap
-
-# Create default user directory & populate it if not already existent
-if [ ! -d $HOME/.config/openbox ]; then
-  mkdir -p $HOME/.config/openbox
-  cat /etc/xdg/openbox/menu.xml > $HOME/.config/openbox/menu.xml
-  cat /etc/xdg/openbox/rc.xml > $HOME/.config/openbox/rc.xml
-fi
-
-if [ -z "$DESKTOP_SESSION" -a -x /usr/bin/ck-launch-session ]; then
-  exec ck-launch-session dbus-launch --exit-with-session openbox
-else
-  exec openbox
-fi
-
