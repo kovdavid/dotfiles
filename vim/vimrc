@@ -30,6 +30,10 @@ Bundle 'vim-scripts/Python-Syntax-Folding'
 " Perl
 Bundle 'DavsX/test_class_runner'
 
+" Ruby
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-endwise'
+
 filetype indent on
 filetype plugin on
 syntax on
@@ -387,6 +391,35 @@ augroup CursorLine
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
     autocmd WinLeave * setlocal nocursorline
+augroup END
+" }}}
+" ruby {{{
+augroup filetype_ruby
+    autocmd!
+
+    autocmd BufRead,BufNewFile *.rb setfiletype ruby
+
+    autocmd BufWritePre * if &filetype=='ruby' | %s/\s\+$//e | endif
+
+    autocmd BufRead,BufWritePre,FileType ruby execute ":Rooter"
+
+    autocmd FileType ruby,eruby let ruby_fold = 1
+    autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
+    autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+
+    autocmd FileType ruby setlocal shiftwidth=2
+    autocmd FileType ruby setlocal softtabstop=2
+    autocmd FileType ruby setlocal expandtab
+
+    autocmd FileType ruby inoremap <buffer> <C-J> <ESC>oend<ESC>O
+    autocmd FileType ruby nnoremap <buffer> <C-J> oend<ESC>O
+    autocmd FileType ruby nnoremap <buffer> <leader>rr :!ruby %<CR>
+
+    autocmd FileType ruby nnoremap <buffer> <leader>cc :call Comment('# ')<CR>
+    autocmd FileType ruby nnoremap <buffer> <leader>cu :call UnComment('# ')<CR>
+
+    autocmd FileType ruby vnoremap <buffer> <leader>cc :call Comment('# ')<CR>
+    autocmd FileType ruby vnoremap <buffer> <leader>cu :call UnComment('# ')<CR>
 augroup END
 " }}}
 " }}}
