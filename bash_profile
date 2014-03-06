@@ -5,6 +5,11 @@ if [ -e /etc/profile ] ; then
     source /etc/profile
 fi
 
+#ssh
+if [ -e ~/dotfiles/ssh-agent ] ; then
+    source ~/dotfiles/ssh-agent
+fi
+
 #git
 if [ -e ~/dotfiles/git-completion.bash ] ; then
     export GIT_PS1_SHOWDIRTYSTATE="yes"
@@ -17,10 +22,12 @@ if [ -e ~/dotfiles/git-prompt.sh ] ; then
     export PS1="[\u@\h:\w]\e[32m\$(__git_ps1)\e[0m\n\\$ "
 fi
 
+#env
 if [ -e /home/davs/dotfiles/bash/export ] ; then
     source /home/davs/dotfiles/bash/export
 fi
 
+#alias
 if [ -e /home/davs/dotfiles/bash/alias ] ; then
     source /home/davs/dotfiles/bash/alias
 fi
@@ -32,7 +39,7 @@ if [ -e /opt/perlbrew/etc/bashrc ] ; then
 fi
 
 #ruby
-if [ -e /home/davs/.rvm/scripts/rvm ] ; then
-    source /home/davs/.rvm/scripts/rvm
-    export PATH=$PATH:$HOME/.rvm/bin
+if [ -e /opt/ruby/rvm/scripts/rvm ] ; then
+    source /opt/ruby/rvm/scripts/rvm
+    export PATH=$PATH:/opt/ruby/rvm/scripts/rvm
 fi
