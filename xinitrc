@@ -10,10 +10,6 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 /usr/bin/setterm -blank 60 
 /usr/bin/xset s off
 
-#rm -rf /tmp/ssh-??????????
-#killall ssh-agent
-#eval `ssh-agent -s`
-
 # merge in defaults and keymaps
 [ -f $sysresources ] && /usr/bin/xrdb -merge $sysresources
 [ -f $sysmodmap ] && /usr/bin/xmodmap $sysmodmap
