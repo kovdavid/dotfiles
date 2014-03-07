@@ -115,6 +115,9 @@ set copyindent
 
 vnoremap > >gv
 vnoremap < <gv
+
+nnoremap > >>
+nnoremap < <<
 " }}}
 " Tabs {{{
 set shiftwidth   =4             "number of spaces for indenting
@@ -181,6 +184,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 nnoremap <C-W>m <C-W>_<C-W><BAR>
+nnoremap <C-W><C-M> <C-W><C-W><C-W>_<C-W><BAR>
 
 inoremap <c-f> <c-x><c-f>
 
