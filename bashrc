@@ -6,6 +6,11 @@ if [ -e /etc/profile ] ; then
     source /etc/profile
 fi
 
+#heroku
+if [ -d /usr/local/heroku/bin ] ; then
+    export PATH=$PATH:/usr/local/heroku/bin
+fi
+
 #git
 if [ -e ~/dotfiles/git-completion.bash ] ; then
     export GIT_PS1_SHOWDIRTYSTATE="yes"

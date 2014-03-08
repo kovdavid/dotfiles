@@ -5,6 +5,11 @@ if [ -e /etc/profile ] ; then
     source /etc/profile
 fi
 
+#heroku
+if [ -d /usr/local/heroku/bin ] ; then
+    export PATH=$PATH:/usr/local/heroku/bin
+fi
+
 #ssh
 if [ -e ~/dotfiles/ssh-agent ] ; then
     source ~/dotfiles/ssh-agent
