@@ -31,8 +31,8 @@ Bundle 'vim-scripts/Python-Syntax-Folding'
 Bundle 'DavsX/test_class_runner'
 
 " Ruby
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-endwise'
+" Bundle 'vim-ruby/vim-ruby'
+" Bundle 'tpope/vim-endwise'
 
 filetype indent on
 filetype plugin on
@@ -416,8 +416,6 @@ augroup filetype_ruby
     autocmd FileType ruby setlocal softtabstop=2
     autocmd FileType ruby setlocal expandtab
 
-    autocmd FileType ruby inoremap <buffer> <C-J> <ESC>oend<ESC>O
-    autocmd FileType ruby nnoremap <buffer> <C-J> oend<ESC>O
     autocmd FileType ruby nnoremap <buffer> <leader>rr :!ruby %<CR>
 
     autocmd FileType ruby nnoremap <buffer> <leader>cc :call Comment('# ')<CR>
@@ -685,14 +683,19 @@ endfunction
 " }}}
 " CloseHiddenbuffers {{{
 function! CloseHiddenBuffers()
-    let l:i = 0
-    let l:n = bufnr('$')
-    while l:i < l:n
-        let l:i = l:i + 1
-        if bufloaded(l:i) && bufwinnr(l:i) < 0
-            execute 'bd ' . l:i
+    let visible_buffers = {}
+
+    for tab in range(1, tabpagenr('$'))
+        for buffer in tabpagebuflist(tab)
+            let visible_buffers[buffer] = 1
+        endfor
+    endfor
+
+    for buffer in range(1, bufnr('$'))
+        if bufloaded(buffer) && !has_key(visible_buffers, buffer)
+            execute 'bd ' . buffer
         endif
-    endwhile
+    endfor
 endfunction
 " }}}
 " }}}
