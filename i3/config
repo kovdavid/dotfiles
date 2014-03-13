@@ -11,6 +11,7 @@ floating_modifier $mod
 bindsym $mod+Tab exec ~/bin/jump_to_other_monitor.py
 bindsym $mod+Shift+Tab exec ~/bin/move_to_other_monitor.py
 bindsym $mod+Return exec ~/bin/cycle_windows.py
+bindsym $mod+equal exec ~/bin/move_window_to_center.py
 bindsym $mod+x exec terminal
 bindsym $mod+i exec google-chrome
 bindsym $mod+t exec thunar
@@ -26,8 +27,6 @@ bindsym $mod+Shift+Q kill
 
 # border toggle
 bindsym $mod+b border toggle
-
-floating_maximum_size 1366 x 768
 
 # scratchpad
 bindsym $mod+Shift+m move scratchpad
@@ -66,9 +65,6 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindcode $mod+d focus child
-
-# move to center
-bindsym $mod+equal move absolute position center
 
 workspace 1 output LVDS1
 workspace 2 output LVDS1
