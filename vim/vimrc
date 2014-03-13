@@ -31,8 +31,8 @@ Bundle 'vim-scripts/Python-Syntax-Folding'
 Bundle 'DavsX/test_class_runner'
 
 " Ruby
-" Bundle 'vim-ruby/vim-ruby'
-" Bundle 'tpope/vim-endwise'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-endwise'
 
 filetype indent on
 filetype plugin on
@@ -317,8 +317,10 @@ augroup filetype_python
     autocmd FileType python setlocal errorformat=%f:%l:\ fail:\ %m,%f:%l:\ error:\ %m,%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m,%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
     autocmd FileType python setlocal makeprg=nosetests\ --with-machineout
     
-    autocmd FileType python setlocal foldlevelstart=20
     autocmd FileType python let python_hightlight_all=1
+    autocmd FileType python setlocal foldlevelstart=20
+    autocmd FileType perl setlocal nowrap
+    autocmd FileType perl setlocal complete-=i
 
     "autocmd FileType python setlocal iskeyword+=.
     autocmd FileType python setlocal wildignore+=*.pyc
@@ -682,6 +684,7 @@ function! UnComment(mark)
 endfunction
 " }}}
 " CloseHiddenbuffers {{{
+nnoremap <leader>cl :call CloseHiddenBuffers()<CR>
 function! CloseHiddenBuffers()
     let visible_buffers = {}
 
@@ -696,6 +699,15 @@ function! CloseHiddenBuffers()
             execute 'bd ' . buffer
         endif
     endfor
+endfunction
+" }}}
+" DeleteFile {{{
+function! DeleteFile()
+    let l:path = expand('%:p')
+    let l:confirm = input('Delete '.l:path.'? [YES]: ')
+    if l:confirm ==# 'YES'
+        call delete(l:path) | bdelete!
+    endif
 endfunction
 " }}}
 " }}}
