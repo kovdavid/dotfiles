@@ -6,10 +6,6 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
-/usr/bin/setterm -powerdown 60
-/usr/bin/setterm -blank 60 
-/usr/bin/xset s off
-
 # merge in defaults and keymaps
 [ -f $sysresources ] && /usr/bin/xrdb -merge $sysresources
 [ -f $sysmodmap ] && /usr/bin/xmodmap $sysmodmap
