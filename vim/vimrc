@@ -414,9 +414,9 @@ augroup filetype_ruby
     autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
     autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
-    autocmd FileType ruby setlocal shiftwidth=2
-    autocmd FileType ruby setlocal softtabstop=2
-    autocmd FileType ruby setlocal expandtab
+    autocmd FileType ruby,eruby setlocal shiftwidth=2
+    autocmd FileType ruby,eruby setlocal softtabstop=2
+    autocmd FileType ruby,eruby setlocal expandtab
 
     autocmd FileType ruby nnoremap <buffer> <leader>rr :!ruby %<CR>
 
