@@ -48,10 +48,15 @@ if [ -e /opt/ruby/rvm/scripts/rvm ] ; then
     export PATH=$PATH:/opt/ruby/rvm/scripts/rvm
 fi
 
+#rails
+# if [ -e /home/davs/dotfiles/rails_bash_completion ] ; then
+    # source /home/davs/dotfiles/rails_bash_completion
+# fi
+
 if [ -e /home/davs/dotfiles/bash/backup ] ; then
     source /home/davs/dotfiles/bash/backup
 fi
 
-if [ -e /home/davs/dotfiles/bash/typing_test ] ; then
-    source /home/davs/dotfiles/bash/typing_test
-fi
+# if [ -e /home/davs/dotfiles/bash/typing_test ] ; then
+    # source /home/davs/dotfiles/bash/typing_test
+# fi
