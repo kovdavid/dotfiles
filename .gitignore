@@ -3,3 +3,4 @@ vim/bundle/**
 .netrwhist
 vim-pathogen.tar.xz
 vim/bundle/vundle/.netrwhist
+fontconfig/

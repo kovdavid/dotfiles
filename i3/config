@@ -192,10 +192,9 @@ for_window [class="(?i)galculator"] floating enable
 for_window [class="(?i)google-chrome"] border none
 for_window [title="File Operation Progress"] floating enable; focus mode_toggle
 
-exec /home/davs/bin/mon2
+exec /home/davs/bin/mon &
 exec /home/davs/.xsessionrc
 exec sudo nm-applet &
-#exec rm -rf /tmp/dmenu_run
-#exec numlockx &
+exec numlockx &
 exec (sleep 1 && nitrogen --restore ) &
-#exec volumeicon &
+exec google-chrome
