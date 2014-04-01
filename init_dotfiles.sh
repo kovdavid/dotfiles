@@ -45,3 +45,6 @@ if [ "$REPLY" = "y" ] ; then
 
     echo "DONE"
 fi
+
+unset -f remove_and_link_dotfile
+unset -f remove_and_link_to_tmp
