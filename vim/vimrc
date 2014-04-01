@@ -12,7 +12,6 @@ Bundle 'gmarik/vundle'
 Bundle 'rhysd/clever-f.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Raimondi/delimitMate'
-"Bundle 'scrooloose/nerdcommenter'
 Bundle 'godlygeek/tabular'
 Bundle 'tpope/vim-surround'
 Bundle 'airblade/vim-rooter'
@@ -30,9 +29,10 @@ Bundle 'vim-scripts/Python-Syntax-Folding'
 " Perl
 Bundle 'DavsX/test_class_runner'
 
+"Bundle 'scrooloose/nerdcommenter'
 " Ruby
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-endwise'
+" Bundle 'vim-ruby/vim-ruby'
+" Bundle 'tpope/vim-endwise'
 
 filetype indent on
 filetype plugin on
@@ -276,6 +276,8 @@ augroup filetype_perl
     autocmd FileType perl let perl_extended_vars = 1
     autocmd FileType perl let perl_fold = 1
     autocmd FileType perl let perl_fold_blocks = 1
+    
+    autocmd FileType perl setlocal iskeyword-=:
 
     autocmd FileType perl setlocal errorformat=%f:%l:%m
     "autocmd FileType perl setlocal makeprg=~/bin/efm_perl.pl
@@ -287,7 +289,7 @@ augroup filetype_perl
     autocmd FileType perl vnoremap <buffer> <leader>cc :call Comment('# ')<CR>
     autocmd FileType perl vnoremap <buffer> <leader>cu :call UnComment('# ')<CR>
 
-    autocmd FileType perl nnoremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say Dumper ;<LEFT>
+    autocmd FileType perl nnoremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper ;<LEFT>
 
     autocmd FileType perl nnoremap <buffer> <leader>gs :call PerlSubGrep()<CR>
     autocmd FileType perl nnoremap <buffer> <leader>gl :call PerlSubGrepLike()<CR>
