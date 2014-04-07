@@ -291,6 +291,7 @@ augroup filetype_perl
 
     autocmd FileType perl nnoremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper ;<LEFT>
 
+    autocmd FileType perl nnoremap <buffer> <leader>gu :call PerlGrepUsage()<CR>
     autocmd FileType perl nnoremap <buffer> <leader>gs :call PerlSubGrep()<CR>
     autocmd FileType perl nnoremap <buffer> <leader>gl :call PerlSubGrepLike()<CR>
 
@@ -486,14 +487,21 @@ endfunction
 " PerlSubGrep {{{
 function! PerlSubGrep()
     let l:word = expand("<cword>")
-    execute 'lvimgrep /^\s*\<sub '. l:word .'\>/j **/*.pm'
+    execute 'lvimgrep /^\s*\<sub '. l:word .'\>/j **/*.pm **/*.pl'
+    lopen
+endfunction
+" }}}
+" PerlGrepUsage {{{
+function! PerlGrepUsage()
+    let l:word = expand("<cword>")
+    execute 'lvimgrep /\<'. l:word .'\>/j **/*.pm **/*.pl'
     lopen
 endfunction
 " }}}
 " PerlSubGrepLike {{{
 function! PerlSubGrepLike()
     let l:word = expand("<cword>")
-    execute 'lvimgrep /^\s*sub '. l:word .'/j **/*.pm'
+    execute 'lvimgrep /^\s*sub '. l:word .'/j **/*.pm **/*.pl'
     lopen
 endfunction
 " }}}
