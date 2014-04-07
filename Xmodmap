@@ -1,7 +1,6 @@
 keycode 66 = Escape
 remove mod5 = Mode_switch
 clear Lock
-keycode 107 = Menu Sys_Req Print Sys_Req
 keycode 108 = BackSpace
 keycode 26 = e E EuroSign EuroSign
 keycode 94 = underscore EuroSign
