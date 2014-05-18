@@ -6,6 +6,7 @@ alias cpr="cp -i -r"
 alias df="df -h"
 alias dus="du -shc .??* * | sort -h"
 alias grep='grep --exclude-dir=.git'
+alias fprove='forkprove -Mlib::require::all=t/lib,lib'
 alias ipcalc="ipcalc -n"
 alias iptraf="iptraf -u"
 alias la="ls -lha"
