@@ -121,11 +121,9 @@ snippet map
 snippet has
 	has ${1} => (
 		is       => '${2}',
-		required => ${3},
-		isa      => sub { ${4} },
-		default  => sub { ${5} },
-		builder  => sub { ${6} },
-		${0}
+		required => 1,
+		lazy	 => 1,
+		builder  => '${6}', ${0}
 	);
 
 # Test::Routine-style test
