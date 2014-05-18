@@ -1,4 +1,4 @@
-export PS1="[\u@\h:\w]\n\\$ "
+export PS1='[\u@\h:\w]\n$([ \j -gt 0 ] && echo "\j ")\\$ '
 set -o vi
 /usr/games/fortune
 
@@ -20,7 +20,7 @@ fi
 #git
 if [ -e ~/dotfiles/git-prompt.sh ] ; then
     source ~/dotfiles/git-prompt.sh
-    export PS1="[\u@\h:\w]\e[32m\$(__git_ps1)\e[0m\n\\$ "
+    export PS1='[\u@\h:\w]\e[32m$(__git_ps1)\e[0m\n$([ \j -gt 0 ] && echo "\j ")\\$ '
 fi
 
 if [ -e /home/davs/dotfiles/bash/export ] ; then
