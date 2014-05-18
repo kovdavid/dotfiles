@@ -290,6 +290,7 @@ augroup filetype_perl
     autocmd FileType perl vnoremap <buffer> <leader>cu :call UnComment('# ')<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper ;<LEFT>
+    autocmd FileType perl nnoremap <buffer> <leader>sort <ESC>vapk:sort<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>gu :call PerlGrepUsage()<CR>
     autocmd FileType perl nnoremap <buffer> <leader>gs :call PerlSubGrep()<CR>
@@ -770,9 +771,8 @@ let g:snips_github = "http://github.com/DavsX"
 " test_class_runner {{{
 let $TEST_PRETTY_COLOR_NAME  = 'bright_green'
 let $TAP_ELAPSED_FORMAT  = '%t1 elapsed'
-let g:test_class_path_folder = 'tests'
-let g:test_class_path_prefix = 'Test'
-let g:test_class_perl_args   = '-MTest::Pretty -Ilib -It/lib -It/tests'
-let g:test_class_prove_args  = '-Ilib -It/lib -It/tests -j9 --timer'
+let g:perl_test_args_perl   = '-MTest::Pretty -It/lib -Ilib'
+let g:perl_test_args_prove  = '-It/lib -Ilib -j9 --timer'
+let g:perl_test_all_command = 'fprove'
 " }}}
 " }}}
