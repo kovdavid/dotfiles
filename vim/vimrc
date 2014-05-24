@@ -22,9 +22,9 @@ Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'garbas/vim-snipmate'
 
 " Python
-Bundle 'davidhalter/jedi-vim'
-Bundle 'nvie/vim-flake8'
-Bundle 'vim-scripts/Python-Syntax-Folding'
+" Bundle 'davidhalter/jedi-vim'
+" Bundle 'nvie/vim-flake8'
+" Bundle 'vim-scripts/Python-Syntax-Folding'
 
 " Perl
 Bundle 'DavsX/test_class_runner'
