@@ -2,7 +2,7 @@ set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:Liberation Mono 12px
+font pango:Liberation Mono 13px
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -12,6 +12,7 @@ bindsym $mod+Tab exec ~/bin/jump_to_other_monitor.py
 bindsym $mod+Shift+Tab exec ~/bin/move_to_other_monitor.py
 bindsym $mod+Return exec ~/bin/cycle_windows.py
 bindsym $mod+equal exec ~/bin/move_window_to_center.py
+
 bindsym $mod+x exec terminal
 bindsym $mod+i exec google-chrome
 bindsym $mod+t exec thunar
@@ -20,7 +21,7 @@ bindsym XF86AudioLowerVolume exec amixer -q set  Master 5%- unmute
 bindsym XF86AudioRaiseVolume exec amixer -q set  Master 5%+ unmute
 bindsym $mod+d exec dmenu_run
 
-bindcode 148 exec calculator
+bindcode 148 exec calc
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -76,17 +77,17 @@ workspace 7 output LVDS1
 workspace 8 output LVDS1
 workspace 9 output LVDS1
 workspace 10 output LVDS1
-workspace 11 output HDMI1
-workspace 12 output HDMI1
-workspace 13 output HDMI1
-workspace 14 output HDMI1
-workspace 15 output HDMI1
-workspace 16 output HDMI1
-workspace 17 output HDMI1
-workspace 18 output HDMI1
-workspace 19 output HDMI1
-workspace 20 output HDMI1
-workspace 21 output HDMI1
+workspace 11 output DP1
+workspace 12 output DP1
+workspace 13 output DP1
+workspace 14 output DP1
+workspace 15 output DP1
+workspace 16 output DP1
+workspace 17 output DP1
+workspace 18 output DP1
+workspace 19 output DP1
+workspace 20 output DP1
+workspace 21 output DP1
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -196,6 +197,7 @@ for_window [title="File Operation Progress"] floating enable; focus mode_toggle
 exec /home/davs/bin/mon left &
 exec /home/davs/.xsessionrc
 exec sudo nm-applet &
+exec udiskie --tray &
 exec numlockx &
 exec (sleep 1 && nitrogen --restore ) &
 exec google-chrome
