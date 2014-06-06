@@ -127,9 +127,7 @@ set expandtab                   "autoinsert spaces instead of tabs
 " Statusline {{{
 set statusline=
 set statusline +=%1*\ %n\ %*            "buffer number
-set statusline +=%5*%{&ff}%*            "file format
-set statusline +=%3*%y%*                "file type
-set statusline +=%4*\ %<%F%*            "full path
+set statusline +=%4*\ %<%-.40F%*        "full path
 set statusline +=%2*%m%*                "modified flag
 set statusline +=%1*%=%5l%*             "current line
 set statusline +=%2*/%L%*               "total lines
@@ -286,11 +284,12 @@ augroup filetype_perl
     autocmd FileType perl let perl_extended_vars = 1
     autocmd FileType perl let perl_fold = 1
     autocmd FileType perl let perl_fold_blocks = 1
+
+    autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
     
     autocmd FileType perl setlocal iskeyword-=:
 
     autocmd FileType perl setlocal errorformat=%f:%l:%m
-    "autocmd FileType perl setlocal makeprg=~/bin/efm_perl.pl
     autocmd FileType perl setlocal makeprg=prove
 
     autocmd FileType perl nnoremap <buffer> <leader>cc :call Comment('# ')<CR>
@@ -312,9 +311,6 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>ta :PerlTestAll<CR>
     autocmd FileType perl nnoremap <buffer> <leader>tc :PerlTestCreate<CR>
     autocmd FileType perl nnoremap <buffer> <leader>to :PerlTestDirOpen<CR>
-
-    " autocmd FileType perl nnoremap <buffer> <leader>rf :call RunPerlTest('file')<CR>
-    " autocmd FileType perl nnoremap <buffer> <leader>ra :call RunPerlTest('')<CR>
 augroup END
 " }}}
 " Python {{{
