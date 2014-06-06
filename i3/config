@@ -16,12 +16,14 @@ bindsym $mod+equal exec ~/bin/move_window_to_center.py
 bindsym $mod+x exec terminal
 bindsym $mod+i exec google-chrome
 bindsym $mod+t exec thunar
+bindsym $mod+z exec thunderbird
 bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym XF86AudioLowerVolume exec amixer -q set  Master 5%- unmute
 bindsym XF86AudioRaiseVolume exec amixer -q set  Master 5%+ unmute
 bindsym $mod+d exec dmenu_run
 
 bindcode 148 exec calc
+bindcode 156 exec gvim
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -197,7 +199,7 @@ for_window [title="File Operation Progress"] floating enable; focus mode_toggle
 exec /home/davs/bin/mon left &
 exec /home/davs/.xsessionrc
 exec sudo nm-applet &
-exec udiskie --tray &
+# exec udiskie --tray &
 exec numlockx &
 exec (sleep 1 && nitrogen --restore ) &
 exec google-chrome
