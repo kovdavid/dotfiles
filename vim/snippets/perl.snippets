@@ -99,10 +99,11 @@ snippet begin
 	}
 
 # Data::Dumper
-snippet ddump
+snippet dump
 	use Data::Dumper
+	local $Data::Dumper::Sortkeys = 1;
 	local $Data::Dumper::Maxdepth = 2;
-	say $Dumper \${0};
+	say STDERR Dumper ${0};
 
 # complex regex
 snippet qrx
