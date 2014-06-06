@@ -70,7 +70,6 @@ set complete-=i
 set formatoptions=l
 set lbr
 
-
 " fast exiting insert mode; the removes the 1sec delay when not in GUI
 set timeout timeoutlen=1000 ttimeoutlen=1000
 if !has('gui_running')
@@ -158,6 +157,17 @@ if has('gui_running')
     colorscheme desert
 else
     colorscheme desert256
+endif
+
+" Horizontal split fill chars
+set fillchars+=stlnc:-
+set fillchars+=stl:-
+set fillchars+=vert:\|
+
+if has('gui_running')
+    hi VertSplit guifg=fg guibg=bg
+else
+    hi VertSplit ctermfg=bg ctermbg=fg
 endif
 
 hi CursorLine cterm=NONE ctermbg=239
@@ -289,7 +299,7 @@ augroup filetype_perl
     autocmd FileType perl vnoremap <buffer> <leader>cc :call Comment('# ')<CR>
     autocmd FileType perl vnoremap <buffer> <leader>cu :call UnComment('# ')<CR>
 
-    autocmd FileType perl nnoremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper ;<LEFT>
+    autocmd FileType perl nnoremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper ;<LEFT>
     autocmd FileType perl nnoremap <buffer> <leader>sort <ESC>vapk:sort<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>gu :call PerlGrepUsage()<CR>
@@ -298,10 +308,10 @@ augroup filetype_perl
 
     autocmd FileType perl nnoremap <buffer> <leader>rr :!perl %<CR>
 
-    autocmd FileType perl nnoremap <buffer> <leader>rf :PerlTestFile<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>rt :PerlTestFile<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>rs :PerlTestSub<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>ra :ProveTestAll<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>tf :PerlTestFile<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ta :PerlTestAll<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>tc :PerlTestCreate<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>to :PerlTestDirOpen<CR>
 
     " autocmd FileType perl nnoremap <buffer> <leader>rf :call RunPerlTest('file')<CR>
     " autocmd FileType perl nnoremap <buffer> <leader>ra :call RunPerlTest('')<CR>
