@@ -30,6 +30,8 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_dotfile xinitrc
     remove_and_link_dotfile xprofile
     remove_and_link_dotfile xsessionrc
+    remove_and_link_dotfile gtkrc-2.0
+    remove_and_link_dotfile gtkrc-2.0.mine
 
     remove_and_link_to_tmp thumbnails
     remove_and_link_to_tmp pip
