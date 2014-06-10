@@ -7,27 +7,26 @@ font pango:Liberation Mono 13px
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
 bindsym $mod+Tab exec ~/bin/jump_to_other_monitor.py
 bindsym $mod+Shift+Tab exec ~/bin/move_to_other_monitor.py
 bindsym $mod+Return exec ~/bin/cycle_windows.py
 bindsym $mod+equal exec ~/bin/move_window_to_center.py
 
-bindsym $mod+x exec terminal
+bindsym $mod+x exec xterm
 bindsym $mod+i exec google-chrome
 bindsym $mod+t exec thunar
 bindsym $mod+z exec thunderbird
+bindsym $mod+d exec dmenu_run
+bindcode 148 exec calc
+bindcode 156 exec gvim
+
 bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym XF86AudioLowerVolume exec amixer -q set  Master 5%- unmute
 bindsym XF86AudioRaiseVolume exec amixer -q set  Master 5%+ unmute
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym XF86ScreenSaver exec xlock
 
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-
-bindsym $mod+d exec dmenu_run
-
-bindcode 148 exec calc
-bindcode 156 exec gvim
 
 # kill focused window
 bindsym $mod+Shift+Q kill
