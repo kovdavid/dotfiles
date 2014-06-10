@@ -15,6 +15,7 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'godlygeek/tabular'
 Bundle 'tpope/vim-surround'
 Bundle 'airblade/vim-rooter'
+Bundle 'scrooloose/nerdtree'
 
 " snipMate
 Bundle 'tomtom/tlib_vim'
@@ -299,7 +300,7 @@ augroup filetype_perl
     autocmd FileType perl vnoremap <buffer> <leader>cu :call UnComment('# ')<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper ;<LEFT>
-    autocmd FileType perl nnoremap <buffer> <leader>sort <ESC>vapk:sort<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>so <ESC>vapk:sort<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>gu :call PerlGrepUsage()<CR>
     autocmd FileType perl nnoremap <buffer> <leader>gs :call PerlSubGrep()<CR>
@@ -780,5 +781,8 @@ let $TAP_ELAPSED_FORMAT  = '%t1 elapsed'
 let g:perl_test_args_perl   = '-MTest::Pretty -It/lib -Ilib'
 let g:perl_test_args_prove  = '-It/lib -Ilib -j9 --timer'
 let g:perl_test_all_command = 'fprove'
+" }}}
+" NERDTree {{{
+nnoremap <F5> :NERDTreeToggle<CR>
 " }}}
 " }}}
