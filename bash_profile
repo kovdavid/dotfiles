@@ -11,9 +11,9 @@ if [ -d /usr/local/heroku/bin ] ; then
 fi
 
 #ssh
-#if [ -e ~/dotfiles/ssh-agent ] ; then
-#    source ~/dotfiles/ssh-agent
-#fi
+if [ -e ~/dotfiles/ssh-agent ] ; then
+    source ~/dotfiles/ssh-agent
+fi
 
 #git
 if [ -e ~/dotfiles/git-completion.bash ] ; then
