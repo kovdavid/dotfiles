@@ -30,6 +30,7 @@ Bundle 'vim-scripts/Python-Syntax-Folding'
 
 " Perl
 Bundle 'DavsX/test_class_runner'
+Bundle 'DavsX/vim_time_since_last_commit'
 
 "Bundle 'scrooloose/nerdcommenter'
 " Ruby
@@ -181,6 +182,7 @@ set showmode
 " Basic maps {{{
 nnoremap ; :
 noremap <leader>w :w<CR>
+nnoremap q <C-W><C-C>
 
 "disable ex-mode
 nnoremap Q <NOP>
@@ -271,6 +273,8 @@ augroup filetype_perl
     autocmd BufNewFile *.t 0r ~/.vim/skeleton/perl.test
 
     autocmd BufWritePre * if &filetype=='perl' | %s/\s\+$//e | endif
+
+    autocmd BufWritePost * if &filetype=='perl' | call Check_time_since_last_commit() | endif
 
     autocmd BufRead,BufWritePre,FileType perl execute ":Rooter"
 
@@ -786,5 +790,8 @@ let g:perl_test_all_command = 'fprove'
 " }}}
 " NERDTree {{{
 nnoremap <F5> :NERDTreeToggle<CR>
+" }}}
+" Fugitive {{{
+nnoremap gst :Gstatus<CR>5j
 " }}}
 " }}}
