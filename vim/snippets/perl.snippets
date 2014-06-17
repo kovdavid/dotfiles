@@ -102,6 +102,7 @@ snippet begin
 snippet dump
 	use Data::Dumper
 	local $Data::Dumper::Sortkeys = 1;
+	local $Data::Dumper::Freezer  = '_dumper_hook';
 	local $Data::Dumper::Maxdepth = 2;
 	say STDERR Dumper ${0};
 
