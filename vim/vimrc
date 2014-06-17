@@ -183,6 +183,8 @@ set showmode
 nnoremap ; :
 noremap <leader>w :w<CR>
 nnoremap q <C-W><C-C>
+nnoremap wq :wq<CR>
+nnoremap qa :qa<CR>
 
 "disable ex-mode
 nnoremap Q <NOP>
@@ -790,6 +792,7 @@ let g:perl_test_all_command = 'fprove'
 " }}}
 " NERDTree {{{
 nnoremap <F5> :NERDTreeToggle<CR>
+nnoremap <S-F5> :NERDTreeFind<CR>
 " }}}
 " Fugitive {{{
 nnoremap gst :Gstatus<CR>5j
