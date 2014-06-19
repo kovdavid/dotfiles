@@ -11,16 +11,6 @@ XTerm*faceSize: 12
 XTerm*Background: #333333
 XTerm*Foreground: #ffffff
 
-
-!XTerm*underLine: on
-XTerm*colorMode: on
-XTerm*colorBD: lightyellow
-!XTerm*colorBDMode: off
-XTerm*colorUL: yellow
-XTerm*colorULMode: on
-XTerm*dynamicColors: off
-XTerm*highlightSelection: true
-
 !———————————————————-
 ! Colorscheme based on the gvim colorscheme desert
 !———————————————————-
@@ -57,11 +47,3 @@ XTerm*color5: #ce5d5a
 
 !(6 is for function color in python)
 XTerm*color6: #87ff87
-
-!set the font, and fond size
-! this also uses a antialias/scalable font
-xterm*faceName: Andale Mono
-xterm*faceSize: 12
-
-!set the window geometry
-XTerm*geometry: 110×40
