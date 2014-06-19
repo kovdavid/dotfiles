@@ -58,11 +58,13 @@ set noswapfile
 set scrolloff=3                " when moving vertically set 3 lines to the cursor
 set pastetoggle=<F2>
 set mousehide
+set mouse=niv
 set number
 set relativenumber
 set splitbelow
 set splitright
 set nojoinspaces
+set clipboard=unnamedplus
 
 set switchbuf=useopen,usetab,newtab
 set winwidth=83
@@ -188,9 +190,8 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 " Basic maps {{{
 nnoremap ; :
 noremap <leader>w :w<CR>
-nnoremap q <C-W><C-C>
-nnoremap wq :wq<CR>
-nnoremap qa :qa<CR>
+" nnoremap q <C-W><C-C>
+nnoremap qw <C-W><C-C>
 
 "disable ex-mode
 nnoremap Q <NOP>
