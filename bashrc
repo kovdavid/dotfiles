@@ -23,7 +23,7 @@ fi
 
 if [ -e /home/davs/dotfiles/bash/git ] ; then
     source /home/davs/dotfiles/bash/git
-    export PS1='[\u@\h:\w]\e[32m$(parse_git_branch)\e[0m\n$([ \j -gt 0 ] && echo "\j ")\\$ '
+    export PS1='[\u@\h:\w]\e[36m$(parse_git_branch)\e[0m\n$([ \j -gt 0 ] && echo "\j ")\\$ '
 fi
 
 if [ -e /home/davs/dotfiles/bash/export ] ; then
