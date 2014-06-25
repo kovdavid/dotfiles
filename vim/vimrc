@@ -28,6 +28,11 @@ Bundle 'davidhalter/jedi-vim'
 Bundle 'nvie/vim-flake8'
 Bundle 'vim-scripts/Python-Syntax-Folding'
 
+" JS
+Bundle 'mklabs/vim-backbone'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'pangloss/vim-javascript'
+
 " Perl
 Bundle 'DavsX/test_class_runner'
 Bundle 'DavsX/vim_time_since_last_commit'
@@ -417,6 +422,22 @@ augroup filetype_sh
 
     autocmd FileType sh vnoremap <buffer> <leader>cc :call Comment('# ')<CR>
     autocmd FileType sh vnoremap <buffer> <leader>cu :call UnComment('# ')<CR>
+augroup END
+" }}}
+" javascript {{{
+augroup filetype_js
+    autocmd!
+
+    autocmd FileType javascript nnoremap <buffer> <leader>cc :call Comment('\/\/ ')<CR>
+    autocmd FileType javascript nnoremap <buffer> <leader>cu :call UnComment('\/\/ ')<CR>
+
+    autocmd FileType javascript vnoremap <buffer> <leader>cc :call Comment('\/\/ ')<CR>
+    autocmd FileType javascript vnoremap <buffer> <leader>cu :call UnComment('\/\/ ')<CR>
+
+    autocmd FileType javascript setlocal shiftwidth=2
+    autocmd FileType javascript setlocal softtabstop=2
+    autocmd FileType javascript setlocal expandtab
+    " autocmd FileType javascript setlocal omnifunc=syntaxcomplete#Complete
 augroup END
 " }}}
 " CursorLine {{{ 

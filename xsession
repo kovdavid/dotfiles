@@ -1,9 +1,10 @@
 #!/bin/sh
 # $Xorg: xinitrc.cpp,v 1.3 2000/08/17 19:54:30 cpqbld Exp $
 
-# rm -rf /tmp/ssh-??????????
-# killall ssh-agent
-# eval `ssh-agent -s`
+
+# if [ -e ~/dotfiles/ssh-agent ] ; then
+#    source ~/dotfiles/ssh-agent
+# fi
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
