@@ -5,8 +5,9 @@ alias cp="cp -i"
 alias cpr="cp -i -r"
 alias df="df -h"
 alias dus="du -shc .??* * | sort -h"
-alias grep='grep --exclude-dir=.git'
 alias fprove='forkprove -Mlib::require::all=t/lib,lib'
+alias grep='grep --exclude-dir=.git'
+alias gst='git status'
 alias ipcalc="ipcalc -n"
 alias iptraf="iptraf -u"
 alias la="ls -lha"
@@ -19,10 +20,10 @@ alias pl="perl"
 alias py="python"
 alias reload="source ~/.bashrc"
 alias rm="rm -i"
+alias sshx="ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/tmp/this_is_not_existing_i_hope/known_hosts"
 alias up="cd \`git root\`"
 alias upt="cd \`git root\` && cd t"
 alias vi="vim-term"
 alias vim="vim-term"
 alias vp="touch .vimproject"
 alias w0="wget -O /dev/null"
-alias sshx="ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/tmp/this_is_not_existing_i_hope/known_hosts"
