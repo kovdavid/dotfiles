@@ -19,6 +19,7 @@ Xterm*saveLines: 4096
 
 XTerm*faceName: Liberation Mono
 XTerm*faceSize: 12
-XTerm*Background: #333333
+!XTerm*Background: #333333
+XTerm*Background: #3f3f3f
 XTerm*Foreground: #ffffff
 
