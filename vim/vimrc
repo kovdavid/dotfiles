@@ -7,35 +7,38 @@ filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'rhysd/clever-f.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'Raimondi/delimitMate'
-Bundle 'godlygeek/tabular'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-rooter'
-Bundle 'scrooloose/nerdtree'
+Plugin 'rhysd/clever-f.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'godlygeek/tabular'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-rooter'
+Plugin 'scrooloose/nerdtree'
+" Plugin 'Yggdroot/indentLine'
+" Plugin 'gregsexton/MatchTag'
+Plugin 'jnurmine/Zenburn'
 
 " snipMate
-Bundle 'tomtom/tlib_vim'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'garbas/vim-snipmate'
+Plugin 'tomtom/tlib_vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'garbas/vim-snipmate'
 
 " Python
-Bundle 'davidhalter/jedi-vim'
-Bundle 'nvie/vim-flake8'
-Bundle 'vim-scripts/Python-Syntax-Folding'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'nvie/vim-flake8'
+Plugin 'vim-scripts/Python-Syntax-Folding'
 
 " JS
-Bundle 'mklabs/vim-backbone'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'pangloss/vim-javascript'
+" Plugin 'mklabs/vim-backbone'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
 
 " Perl
-Bundle 'DavsX/test_class_runner'
-Bundle 'DavsX/vim_time_since_last_commit'
+Plugin 'DavsX/test_class_runner'
+Plugin 'DavsX/vim_time_since_last_commit'
 
 "Bundle 'scrooloose/nerdcommenter'
 " Ruby
@@ -163,10 +166,12 @@ set guitablabel=%t          "show only filename in tabs
 
 set t_Co=256
 if has('gui_running')
-    colorscheme desert
+    " colorscheme desert
 else
-    colorscheme desert256
+    " colorscheme desert256
 endif
+
+colorscheme zenburn
 
 " Horizontal split fill chars
 set fillchars+=stlnc:-
@@ -379,6 +384,8 @@ augroup filetype_html
     autocmd BufRead,BufNewFile *.tt  setfiletype html
 
     autocmd BufRead,BufNewFile *.tt setlocal foldmethod=marker
+
+    autocmd BufWritePre * if &filetype=='html' | %s/\s\+$//e | endif
 
     autocmd FileType html setlocal foldlevel=99
     autocmd FileType html setlocal shiftwidth=2
@@ -824,5 +831,6 @@ nnoremap <S-F5> :NERDTreeFind<CR>
 " }}}
 " Fugitive {{{
 nnoremap gst :Gstatus<CR>5j
+nnoremap gd :Gvdiff<CR>
 " }}}
 " }}}
