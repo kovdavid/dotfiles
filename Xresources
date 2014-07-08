@@ -6,20 +6,44 @@ Xft.antialias: 1
 Xft.dpi: 96
 Xft.rgba: rgb
 
+XTerm*faceName: Liberation Mono
+XTerm*faceSize: 12
+!XTerm*Background: #333333
+XTerm*Foreground: #ffffff
+XTerm*Background: #3f3f3f
 
 xterm*termName: xterm-256color
 XTerm*locale: true
 XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
-
 
 !Alt key
 XTerm*metaSendsEscape: true 
 
 Xterm*saveLines: 4096
 
-XTerm*faceName: Liberation Mono
-XTerm*faceSize: 12
-!XTerm*Background: #333333
-XTerm*Background: #3f3f3f
-XTerm*Foreground: #ffffff
+!Zenburn
 
+!black
+xterm*color0:         #353535
+xterm*color8:         #666666
+!red
+xterm*color1:         #AE4747
+xterm*color9:         #EE6363
+!green
+xterm*color2:         #556B2F
+xterm*color10:        #9ACD32
+!brown/yellow
+xterm*color3:         #DAA520
+xterm*color11:        #FFC125
+!blue
+xterm*color4:         #6F99B4
+xterm*color12:        #7C96B0
+!magenta
+xterm*color5:         #8B7B8B
+xterm*color13:        #D8BFD8
+!cyan
+xterm*color6:         #A7A15E
+xterm*color14:        #F0E68C
+!white
+xterm*color7:         #DDDDDD
+xterm*color15:        #FFFFFF
