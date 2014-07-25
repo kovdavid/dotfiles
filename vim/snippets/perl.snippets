@@ -103,7 +103,9 @@ snippet dump
 	use Data::Dumper;
 	local $Data::Dumper::Sortkeys = 1;
 	local $Data::Dumper::Maxdepth = 2;
-	say STDERR Dumper ${0};
+	say STDERR "\n\n\n";
+	say STDERR Dumper(${0});
+	say STDERR "\n\n\n";
 
 # complex regex
 snippet qrx
