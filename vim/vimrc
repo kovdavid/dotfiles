@@ -142,10 +142,9 @@ set statusline +=%1*%4v\ %*             "virtual column number
 set statusline +=%2*0x%04B\ %*          "character under cursor
 " }}}
 " Gui {{{
-" ruler {{{
 set ruler
 set rulerformat=%m\ [%l/%L\ %v]
-" }}}
+
 set guifont=Liberation\ Mono\ 11
 
 set guioptions=
@@ -195,6 +194,7 @@ nnoremap ; :
 noremap <leader>w :w<CR>
 " nnoremap q <C-W><C-C>
 nnoremap qw <C-W><C-C>
+nnoremap <c-_> <C-W><C-W>
 
 "disable ex-mode
 nnoremap Q <NOP>
@@ -330,6 +330,7 @@ augroup filetype_perl
 
     autocmd FileType perl nnoremap <buffer> <leader>tf :PerlTestFile<CR>
     autocmd FileType perl nnoremap <buffer> <leader>ta :PerlTestAll<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>td :PerlTestDir<CR>
     autocmd FileType perl nnoremap <buffer> <leader>tc :PerlTestCreate<CR>
     autocmd FileType perl nnoremap <buffer> <leader>to :PerlTestDirOpen<CR>
 augroup END
@@ -536,7 +537,7 @@ endfunction
 function! NewPerlModule()
     0r ~/.vim/skeleton/perl.package
     let l:path = expand('%:f')
-    let l:path = substitute(l:path, '^.*lib/', '', '')
+    let l:path = substitute(l:path, '^.*/\(lib\|t\)/', '', '')
     let l:path = substitute(l:path, '.pm$', '', '')
     let l:module_name = substitute(l:path, '/', '::', 'g')
     execute "normal! ggwi".l:module_name
