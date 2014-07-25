@@ -17,8 +17,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-rooter'
 Plugin 'scrooloose/nerdtree'
-" Plugin 'Yggdroot/indentLine'
-" Plugin 'gregsexton/MatchTag'
 Plugin 'jnurmine/Zenburn'
 
 " snipMate
@@ -39,11 +37,6 @@ Plugin 'pangloss/vim-javascript'
 " Perl
 Plugin 'DavsX/test_class_runner'
 Plugin 'DavsX/vim_time_since_last_commit'
-
-"Bundle 'scrooloose/nerdcommenter'
-" Ruby
-" Bundle 'vim-ruby/vim-ruby'
-" Bundle 'tpope/vim-endwise'
 
 filetype indent on
 filetype plugin on
@@ -288,8 +281,9 @@ augroup filetype_perl
     autocmd BufRead,BufNewFile *.t   setfiletype perl
 
     autocmd BufNewFile *.pl 0r ~/.vim/skeleton/perl.script
-    autocmd BufNewFile *.pm 0r ~/.vim/skeleton/perl.package
     autocmd BufNewFile *.t 0r ~/.vim/skeleton/perl.test
+
+    autocmd BufRead,BufNewFile *.pm if line('$') == 1 && getline('.') == '' | call NewPerlModule() | endif
 
     autocmd BufWritePre * if &filetype=='perl' | %s/\s\+$//e | endif
 
@@ -312,6 +306,7 @@ augroup filetype_perl
     autocmd FileType perl let perl_fold_blocks = 1
 
     autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
+    autocmd FileType perl hi Statement ctermfg=14
     
     autocmd FileType perl setlocal iskeyword-=:
 
@@ -435,6 +430,8 @@ augroup END
 augroup filetype_js
     autocmd!
 
+    autocmd BufWritePre * if &filetype=='javascript' | %s/\s\+$//e | endif
+
     autocmd FileType javascript nnoremap <buffer> <leader>cc :call Comment('\/\/ ')<CR>
     autocmd FileType javascript nnoremap <buffer> <leader>cu :call UnComment('\/\/ ')<CR>
 
@@ -533,6 +530,16 @@ function! ToggleLastStatus()
         set laststatus=1
         let g:laststatus_value = 1
     endif
+endfunction
+" }}}
+" NewPerlModule {{{
+function! NewPerlModule()
+    0r ~/.vim/skeleton/perl.package
+    let l:path = expand('%:f')
+    let l:path = substitute(l:path, '^.*lib/', '', '')
+    let l:path = substitute(l:path, '.pm$', '', '')
+    let l:module_name = substitute(l:path, '/', '::', 'g')
+    execute "normal! ggwi".l:module_name
 endfunction
 " }}}
 " PerlSubGrep {{{
