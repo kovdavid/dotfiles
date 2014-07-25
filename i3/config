@@ -18,7 +18,7 @@ bindsym $mod+t exec thunar
 bindsym $mod+z exec thunderbird
 bindsym $mod+d exec dmenu_run
 bindcode 148 exec calc
-bindcode 156 exec gvim
+bindcode 156 exec xterm
 
 bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym XF86AudioLowerVolume exec amixer -q set  Master 5%- unmute
