@@ -100,13 +100,21 @@ snippet begin
 
 # Data::Dumper
 snippet dump
+	use v5.18;
 	use Data::Dumper;
 	local $Data::Dumper::Sortkeys = 1;
 	local $Data::Dumper::Maxdepth = 2;
 	say STDERR "\n\n\n";
 	say STDERR Dumper(${0});
 	say STDERR "\n\n\n";
-
+# Awesome
+snippet awesome
+	say STDERR "\n\nDavs is AWESOME\n\n";
+# Carp::Always
+snippet carpa
+	use Carp::Always;
+snippet carpad
+	use Carp::Always::Dump;
 # complex regex
 snippet qrx
 	qr/

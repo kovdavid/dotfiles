@@ -193,8 +193,10 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 nnoremap ; :
 noremap <leader>w :w<CR>
 " nnoremap q <C-W><C-C>
-nnoremap qw <C-W><C-C>
-nnoremap <c-_> <C-W><C-W>
+nnoremap qt <C-W><C-C>
+nnoremap qw <C-W><C-W>
+nnoremap qe :tabprev<CR>
+nnoremap qr :tabnext<CR>
 
 "disable ex-mode
 nnoremap Q <NOP>
@@ -247,8 +249,8 @@ noremap <F4> :set cursorcolumn!<CR>
 " }}}
 " Tabs {{{
 noremap <c-t> :tabnew<CR>
-nnoremap <leader>n :tabprev<CR>
-nnoremap <leader>m :tabnext<CR>
+" nnoremap <leader>n :tabprev<CR>
+" nnoremap <leader>m :tabnext<CR>
 " }}}
 " Buffers {{{
 nnoremap <leader>j :bp<CR>
