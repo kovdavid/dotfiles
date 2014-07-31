@@ -200,6 +200,7 @@ nnoremap qr :tabnext<CR>
 
 "disable ex-mode
 nnoremap Q <NOP>
+nnoremap qq <NOP>
 
 "move to matching brace pair
 nnoremap <tab> %
@@ -385,6 +386,8 @@ augroup filetype_html
 
     autocmd BufWritePre * if &filetype=='html' | %s/\s\+$//e | endif
 
+    autocmd BufRead,BufWritePre,FileType html execute ":Rooter"
+
     autocmd FileType html setlocal foldlevel=99
     autocmd FileType html setlocal shiftwidth=2
     autocmd FileType html setlocal tabstop=2
@@ -434,6 +437,7 @@ augroup filetype_js
     autocmd!
 
     autocmd BufWritePre * if &filetype=='javascript' | %s/\s\+$//e | endif
+    autocmd BufRead,BufWritePre,FileType javascript execute ":Rooter"
 
     autocmd FileType javascript nnoremap <buffer> <leader>cc :call Comment('\/\/ ')<CR>
     autocmd FileType javascript nnoremap <buffer> <leader>cu :call UnComment('\/\/ ')<CR>
@@ -444,6 +448,9 @@ augroup filetype_js
     autocmd FileType javascript setlocal shiftwidth=2
     autocmd FileType javascript setlocal softtabstop=2
     autocmd FileType javascript setlocal expandtab
+    autocmd FileType javascript setlocal foldmethod=indent
+    autocmd FileType javascript setlocal foldlevelstart=20
+    autocmd FileType javascript let javaScript_fold=1
     " autocmd FileType javascript setlocal omnifunc=syntaxcomplete#Complete
 augroup END
 " }}}
