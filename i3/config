@@ -192,9 +192,6 @@ bar {
 for_window [class="(?i)xfce4-notifyd"] floating enable; border none; focus mode_toggle
 for_window [class="(?i)vlc"] floating enable
 for_window [class="(?i)galculator"] floating enable
-#for_window [name="(?i)Minecraft Launcher 1.2.7"] floating enable
-#for_window [name="(?i)Minecraft 1.6.4"] floating enable
-#for_window [title="(?i)umlet"] floating enable
 for_window [class="(?i)google-chrome"] border none
 for_window [class="Firefox"] border none
 for_window [title="File Operation Progress"] floating enable; focus mode_toggle
@@ -202,7 +199,6 @@ for_window [title="File Operation Progress"] floating enable; focus mode_toggle
 exec /home/davs/bin/mon left &
 exec /home/davs/.xsessionrc
 exec sudo nm-applet &
-# exec udiskie --tray &
 exec numlockx &
 exec (sleep 1 && nitrogen --restore ) &
 exec google-chrome
