@@ -35,8 +35,11 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 
 " Perl
-Plugin 'DavsX/test_class_runner'
+Plugin 'DavsX/perl_test_runner'
 Plugin 'DavsX/vim_time_since_last_commit'
+
+" HTML
+Plugin 'rstacruz/sparkup'
 
 filetype indent on
 filetype plugin on
@@ -66,6 +69,7 @@ set splitbelow
 set splitright
 set nojoinspaces
 set clipboard=unnamedplus
+set iskeyword-=:
 
 set switchbuf=useopen,usetab,newtab
 set winwidth=83
@@ -134,6 +138,7 @@ set expandtab                   "autoinsert spaces instead of tabs
 " Statusline {{{
 set statusline=
 set statusline +=%1*\ %n\ %*            "buffer number
+set statusline +=%{fugitive#statusline()} "git branch"
 set statusline +=%4*\ %<%-.40F%*        "full path
 set statusline +=%2*%m%*                "modified flag
 set statusline +=%1*%=%5l%*             "current line
@@ -309,9 +314,10 @@ augroup filetype_perl
     autocmd FileType perl let perl_fold_blocks = 1
 
     autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
+    autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<txn_subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
     autocmd FileType perl hi Statement ctermfg=14
     
-    autocmd FileType perl setlocal iskeyword-=:
+    " autocmd FileType perl setlocal iskeyword-=:
 
     autocmd FileType perl setlocal errorformat=%f:%l:%m
     autocmd FileType perl setlocal makeprg=prove
@@ -545,7 +551,7 @@ endfunction
 " NewPerlModule {{{
 function! NewPerlModule()
     0r ~/.vim/skeleton/perl.package
-    let l:path = expand('%:f')
+    let l:path = expand('%:p')
     let l:path = substitute(l:path, '^.*/\(lib\|t\)/', '', '')
     let l:path = substitute(l:path, '.pm$', '', '')
     let l:module_name = substitute(l:path, '/', '::', 'g')
