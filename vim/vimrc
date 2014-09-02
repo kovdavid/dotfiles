@@ -317,7 +317,7 @@ augroup filetype_perl
     autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<txn_subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
     autocmd FileType perl hi Statement ctermfg=14
     
-    " autocmd FileType perl setlocal iskeyword-=:
+    autocmd FileType perl setlocal iskeyword-=:
 
     autocmd FileType perl setlocal errorformat=%f:%l:%m
     autocmd FileType perl setlocal makeprg=prove
