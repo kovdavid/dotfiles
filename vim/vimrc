@@ -205,7 +205,6 @@ nnoremap qr :tabnext<CR>
 
 "disable ex-mode
 nnoremap Q <NOP>
-nnoremap qq <NOP>
 
 "move to matching brace pair
 nnoremap <tab> %
@@ -450,6 +449,7 @@ augroup filetype_js
 
     autocmd FileType javascript vnoremap <buffer> <leader>cc :call Comment('\/\/ ')<CR>
     autocmd FileType javascript vnoremap <buffer> <leader>cu :call UnComment('\/\/ ')<CR>
+    autocmd FileType javascript setlocal iskeyword-=:
 
     autocmd FileType javascript setlocal shiftwidth=2
     autocmd FileType javascript setlocal softtabstop=2
