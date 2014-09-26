@@ -29,6 +29,9 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'vim-scripts/Python-Syntax-Folding'
 
+" Ruby
+Plugin 'tpope/vim-endwise'
+
 " JS
 " Plugin 'mklabs/vim-backbone'
 Plugin 'jelera/vim-javascript-syntax'
@@ -354,8 +357,8 @@ augroup filetype_python
     autocmd BufRead,BufNewFile *.py setfiletype python
 
     "autocmd FileType python setlocal compiler=nose
-    autocmd FileType python setlocal errorformat=%f:%l:\ fail:\ %m,%f:%l:\ error:\ %m,%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m,%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-    autocmd FileType python setlocal makeprg=nosetests\ --with-machineout
+    "autocmd FileType python setlocal errorformat=%f:%l:\ fail:\ %m,%f:%l:\ error:\ %m,%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m,%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+    "autocmd FileType python setlocal makeprg=nosetests\ --with-machineout
     
     autocmd FileType python let python_hightlight_all=1
     autocmd FileType python setlocal foldlevelstart=20
@@ -376,10 +379,10 @@ augroup filetype_python
 
     autocmd FileType python nnoremap <buffer> <leader>rr :!python %<CR>
 
-    autocmd FileType python nnoremap <buffer> <leader>ra :call RunPythonTest('all')<CR>
-    autocmd FileType python nnoremap <buffer> <leader>rf :call RunPythonTest('file')<CR>
-    autocmd FileType python nnoremap <buffer> <leader>rc :call RunPythonTest('class')<CR>
-    autocmd FileType python nnoremap <buffer> <leader>rm :call RunPythonTest('method')<CR>
+    autocmd FileType python nnoremap <buffer> <leader>ta :call RunPythonTest('all')<CR>
+    autocmd FileType python nnoremap <buffer> <leader>tf :call RunPythonTest('file')<CR>
+    autocmd FileType python nnoremap <buffer> <leader>tc :call RunPythonTest('class')<CR>
+    autocmd FileType python nnoremap <buffer> <leader>tm :call RunPythonTest('method')<CR>
 augroup END
 " }}}
 " HTML {{{
@@ -520,7 +523,7 @@ set colorcolumn=80
 let g:colorcolumn_set = 1
 highlight ColorColumn guibg=#333333 ctermbg=8
 
-noremap <leader>tcc :call ToggleColorColumn()<CR>
+" noremap <leader>tcc :call ToggleColorColumn()<CR>
 
 function! ToggleColorColumn()
     if g:colorcolumn_set == 1
@@ -581,51 +584,73 @@ endfunction
 " }}}
 " RunPythonTest {{{
 function! RunPythonTest(mode)
-    let l:path = expand('%')
+    write
 
-    let l:result = 0
+    let l:file   = expand('%:r')
+    let l:file = substitute(l:file,'/','.','g')
+
+    let l:params = 'discover'
 
     if a:mode == 'file'
-        let l:result = RunTest(l:path)
+        let l:params = l:file
     elseif a:mode == 'class'
-        let l:class = GetPythonClassName()
-        let l:result = RunTest(l:path . ":" . l:class)
+        let l:class  = GetPythonClassName()
+        let l:params = l:file.".".l:class
     elseif a:mode == 'method'
-        let l:class = GetPythonClassName()
+        let l:class  = GetPythonClassName()
         let l:method = GetPythonMethodName()
-        let l:result = RunTest(l:path .":". l:class .".". l:method)
-    else
-        let l:result = RunTest('')
+        let l:params = l:file.".".l:class.".".l:method
     endif
 
-    if l:result == 0
-        let l:line = getqflist()[0]['text']
+    silent !clear
+    execute ":!python -m unittest ".l:params
+endfunction
+" }}}
+" GetPythonMethodName {{{
+function! GetPythonMethodName()
+    let l:line_no = search('\v^\s*def ','bcnW')
 
-        let l:list = matchlist(l:line, '\vFile "([^"]*)", line (\d+)')
+    if l:line_no > 0
+        let l:line = getline(l:line_no)
+        let l:list = matchlist(l:line, '\v^\s*def ([0-9a-zA-Z_]+)')
+
         if !empty(l:list)
-            let l:file = l:list[1]
-            let l:line_no = l:list[2]
-
-            if l:file =~# getcwd()
-                if l:file == expand('%:p')
-                    execute "normal! ".l:line_no."G"
-                else
-                    execute "badd +".l:line_no." ".l:file
-                    execute "vert sbuffer " . l:file
-                    execute "normal! ".l:line_no."G"
-                endif
-            endif
-            copen
-            wincmd k
+            let l:method = l:list[1]
+            return l:method
         else
-            let l:bufname = fnamemodify(buffer_name(getqflist()[0]['bufnr']), ':p')
-            if l:bufname =~# getcwd()
-                cc!
-            else
-                copen
-            endif
+            throw "Method name did not match"
         endif
+    else
+        throw "No method found"
     endif
+endfunction
+" }}}
+" GetPythonClassName {{{
+function! GetPythonClassName()
+    let l:line_no = search('\v^\s*class ','bcnW')
+
+    if l:line_no > 0
+        let l:line = getline(l:line_no)
+        let l:list = matchlist(l:line, '\v^\s*class ([0-9a-zA-Z_]+)')
+
+        if !empty(l:list)
+            let l:class = l:list[1]
+            return l:class
+        else
+            throw "Class name did not match"
+        endif
+    else
+        throw "No class found"
+    endif
+endfunction
+" }}}
+" Pep8 {{{
+function! Pep8()
+    let l:winview = winsaveview()
+    write
+    execute ":0r !autopep8 %"
+    execute ":normal! jVGd"
+    call winrestview(l:winview)
 endfunction
 " }}}
 " RunPerlTest {{{
@@ -675,76 +700,6 @@ function! RunPerlTest(mode)
             endif
         endif
     endif
-endfunction
-" }}}
-" GetPythonMethodName {{{
-function! GetPythonMethodName()
-    let l:line_no = search('\v^\s*def ','bcnW')
-
-    if l:line_no > 0
-        let l:line = getline(l:line_no)
-        let l:list = matchlist(l:line, '\v^\s*def ([0-9a-zA-Z_]+)')
-
-        if !empty(l:list)
-            let l:method = l:list[1]
-            return l:method
-        else
-            throw "Method name did not match"
-        endif
-    else
-        throw "No method found"
-    endif
-endfunction
-" }}}
-" GetPythonClassName {{{
-function! GetPythonClassName()
-    let l:line_no = search('\v^\s*class ','bcnW')
-
-    if l:line_no > 0
-        let l:line = getline(l:line_no)
-        let l:list = matchlist(l:line, '\v^\s*class ([0-9a-zA-Z_]+)')
-
-        if !empty(l:list)
-            let l:class = l:list[1]
-            return l:class
-        else
-            throw "Class name did not match"
-        endif
-    else
-        throw "No class found"
-    endif
-endfunction
-" }}}
-" RunTest {{{
-function! RunTest(args)
-    silent w
-
-    if a:args == ''
-        silent make!
-    else
-        execute ":silent make! " . a:args
-    endif
-
-    redraw!
-
-    hi GreenBar term=reverse ctermfg=yellow ctermbg=green guifg=yellow guibg=green
-
-    if getqflist() == []
-        echohl GreenBar
-        echon repeat(" ", &columns - 30)
-        echohl None
-        return 1
-    endif
-    return 0
-endfunction
-" }}}
-" Pep8 {{{
-function! Pep8()
-    let l:winview = winsaveview()
-    write
-    execute ":0r !autopep8 %"
-    execute ":normal! jVGd"
-    call winrestview(l:winview)
 endfunction
 " }}}
 " Comment {{{

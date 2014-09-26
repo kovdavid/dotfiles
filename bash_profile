@@ -43,7 +43,14 @@ if [ -e /opt/perlbrew/etc/bashrc ] ; then
 fi
 
 #ruby
-if [ -e /opt/ruby/rvm/scripts/rvm ] ; then
-    source /opt/ruby/rvm/scripts/rvm
-    export PATH=$PATH:/opt/ruby/rvm/scripts/rvm
+if [ -e /home/davs/.rvm/scripts/rvm ] ; then
+    source /home/davs/.rvm/scripts/rvm
+    export PATH=$PATH:/home/davs/.rvm/scripts/rvm
 fi
+
+#gems
+if [ -d ~/.gem/ruby/2.1.0/bin ] ; then
+    export PATH=$PATH:~/.gem/ruby/2.1.0/bin
+fi
+
+export PATH=/opt/python/bin:$PATH

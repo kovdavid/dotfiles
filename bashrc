@@ -39,3 +39,12 @@ if [ -e /opt/perlbrew/etc/bashrc ] ; then
     export PERLBREW_HOME=/opt/perlbrew/.perlbrew
     source /opt/perlbrew/etc/bashrc
 fi
+
+#ruby
+if [ -e /home/davs/.rvm/scripts/rvm ] ; then
+    source /home/davs/.rvm/scripts/rvm
+    export PATH=$PATH:/home/davs/.rvm/scripts/rvm
+fi
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/opt/python/bin:$PATH" # Python3 venv

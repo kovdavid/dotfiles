@@ -1,50 +1,50 @@
-Xft.autohint: 0
-Xft.lcdfilter: lcddefault
-Xft.hintstyle: hintslight
-Xft.hinting: 1
-Xft.antialias: 1
-Xft.dpi: 96
-Xft.rgba: rgb
-
-XTerm*faceName: Liberation Mono
-XTerm*faceSize: 12
-!XTerm*Background: #333333
-XTerm*Background: #3f3f3f
-XTerm*Foreground: #ffffff
-
-!———————————————————-
-! Colorscheme based on the gvim colorscheme desert
-!———————————————————-
-XTerm*background: #313031
-XTerm*foreground: White
-
-!colors
-!(unknown)
-XTerm*color0: #000000
-XTerm*color7: #bebebe
-XTerm*color8: #666666
-XTerm*color9: #cf6171
-XTerm*color10: #c5f779
-XTerm*color11: #fff796
-XTerm*color12: #4186be
-XTerm*color13: #cf9ebe
-XTerm*color14: #71bebe
-XTerm*color15: #ffffff
-
-!(1 is an option color in .Xdefaults)
-XTerm*color1: #ffa2a5
-
-!(2 is a resource color in .Xdefaults)
-XTerm*color2: #bdb66b
-
-!(3 is for def/return color in python)
-XTerm*color3: #f7e78c
-
-!(4 is for comments color in python)
-XTerm*color4: #84cfef
-
-!(5 is for import/from color in python)
-XTerm*color5: #ce5d5a
-
-!(6 is for function color in python)
-XTerm*color6: #87ff87
+!Xft.autohint: 0
+!Xft.lcdfilter: lcddefault
+!Xft.hintstyle: hintslight
+!Xft.hinting: 1
+!Xft.antialias: 1
+!Xft.dpi: 96
+!Xft.rgba: rgb
+!
+!XTerm*faceName: Liberation Mono
+!XTerm*faceSize: 12
+!!XTerm*Background: #333333
+!XTerm*Background: #3f3f3f
+!XTerm*Foreground: #ffffff
+!
+!!———————————————————-
+!! Colorscheme based on the gvim colorscheme desert
+!!———————————————————-
+!XTerm*background: #313031
+!XTerm*foreground: White
+!
+!!colors
+!!(unknown)
+!XTerm*color0: #000000
+!XTerm*color7: #bebebe
+!XTerm*color8: #666666
+!XTerm*color9: #cf6171
+!XTerm*color10: #c5f779
+!XTerm*color11: #fff796
+!XTerm*color12: #4186be
+!XTerm*color13: #cf9ebe
+!XTerm*color14: #71bebe
+!XTerm*color15: #ffffff
+!
+!!(1 is an option color in .Xdefaults)
+!XTerm*color1: #ffa2a5
+!
+!!(2 is a resource color in .Xdefaults)
+!XTerm*color2: #bdb66b
+!
+!!(3 is for def/return color in python)
+!XTerm*color3: #f7e78c
+!
+!!(4 is for comments color in python)
+!XTerm*color4: #84cfef
+!
+!!(5 is for import/from color in python)
+!XTerm*color5: #ce5d5a
+!
+!!(6 is for function color in python)
+!XTerm*color6: #87ff87
