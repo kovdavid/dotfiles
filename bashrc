@@ -47,4 +47,3 @@ if [ -e /home/davs/.rvm/scripts/rvm ] ; then
 fi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PATH="/opt/python/bin:$PATH" # Python3 venv
