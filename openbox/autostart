@@ -1,7 +1,0 @@
-/home/davs/workspace/bin/mon2
-nitrogen --restore  &
-tint2 &
-nm-applet &
-numlockx &
-/home/davs/.xsessionrc &
-workrave &
