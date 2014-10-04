@@ -6,8 +6,8 @@ Xft.antialias: 1
 Xft.dpi: 96
 Xft.rgba: rgb
 
-XTerm*faceName: Liberation Mono
-XTerm*faceSize: 12
+XTerm*faceName: DejaVu Sans Mono
+XTerm*faceSize: 11
 !XTerm*Background: #333333
 XTerm*Foreground: #ffffff
 XTerm*Background: #3f3f3f

@@ -153,7 +153,7 @@ set statusline +=%2*0x%04B\ %*          "character under cursor
 set ruler
 set rulerformat=%m\ [%l/%L\ %v]
 
-set guifont=Liberation\ Mono\ 11
+set guifont=DejaVu\ Sans\ Mono\ 11
 
 set guioptions=
 set guioptions+=a "autoselect
