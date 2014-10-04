@@ -362,8 +362,8 @@ augroup filetype_python
     
     autocmd FileType python let python_hightlight_all=1
     autocmd FileType python setlocal foldlevelstart=20
-    autocmd FileType perl setlocal nowrap
-    autocmd FileType perl setlocal complete-=i
+    autocmd FileType python setlocal nowrap
+    autocmd FileType python setlocal complete-=i
 
     "autocmd FileType python setlocal iskeyword+=.
     autocmd FileType python setlocal wildignore+=*.pyc
@@ -769,7 +769,7 @@ nnoremap <leader>af :Tabularize /^.\{-}\ze/l0l0<left><left><left><left><left>
 " ctrlp {{{
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_custom_ignore = {
-    \ 'dir': '\v(\.git|virtualenv)',
+    \ 'dir': '\v(\.git|venv)',
     \ 'file': '\v(__init__\.py|\.pyc)$',
     \ }
 
