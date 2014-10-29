@@ -188,7 +188,7 @@ bar {
         tray_output LVDS1
 }
 
-for_window [class="(?i)xfce4-notifyd"] floating enable; border none; focus mode_toggle
+for_window [class="(?i)xfce4-notifyd"] floating enable; focus mode_toggle
 for_window [class="(?i)galculator"] floating enable
 for_window [class="(?i)google-chrome"] border none
 for_window [class="Firefox"] border none
