@@ -25,8 +25,8 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'garbas/vim-snipmate'
 
 " Python
-Plugin 'davidhalter/jedi-vim'
-Plugin 'nvie/vim-flake8'
+" Plugin 'davidhalter/jedi-vim'
+" Plugin 'nvie/vim-flake8'
 Plugin 'vim-scripts/Python-Syntax-Folding'
 
 " Ruby
@@ -34,8 +34,8 @@ Plugin 'tpope/vim-endwise'
 
 " JS
 " Plugin 'mklabs/vim-backbone'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'pangloss/vim-javascript'
+" Plugin 'jelera/vim-javascript-syntax'
+" Plugin 'pangloss/vim-javascript'
 
 " Perl
 Plugin 'DavsX/perl_test_runner'
@@ -75,7 +75,7 @@ set clipboard=unnamedplus
 set iskeyword-=:
 
 set switchbuf=useopen,usetab,newtab
-set winwidth=83
+set winwidth=100
 
 set complete-=i
 
@@ -377,7 +377,7 @@ augroup filetype_python
     autocmd FileType python nnoremap <buffer> <leader>pf :call Flake8()<CR>
     autocmd FileType python nnoremap <buffer> <leader>pp :call Pep8()<CR>
 
-    autocmd FileType python nnoremap <buffer> <leader>rr :!python %<CR>
+    autocmd FileType python nnoremap <buffer> <leader>rr :!python2 %<CR>
 
     autocmd FileType python nnoremap <buffer> <leader>ta :call RunPythonTest('all')<CR>
     autocmd FileType python nnoremap <buffer> <leader>tf :call RunPythonTest('file')<CR>
@@ -770,7 +770,7 @@ nnoremap <leader>af :Tabularize /^.\{-}\ze/l0l0<left><left><left><left><left>
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_custom_ignore = {
     \ 'dir': '\v(\.git|venv)',
-    \ 'file': '\v(__init__\.py|\.pyc)$',
+    \ 'file': '\v(__init2__\.py|\.pyc)$',
     \ }
 
 nnoremap <leader>, :CtrlP<CR>
