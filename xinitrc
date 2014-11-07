@@ -27,6 +27,9 @@ fi
 if [ -r $HOME/.profile ]; then
     source $HOME/.profile
 fi
+if [ -r $HOME/.xsessionrc ]; then
+    source /home/davs/.xsessionrc
+fi
 
 export I3_SPLIT_ORIENTATION='horizontal'
 
