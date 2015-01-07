@@ -273,6 +273,7 @@ augroup all_file_type
     autocmd!
     autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber
     autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber
+    autocmd BufWritePre * %s/\s\+$//e
 augroup END
 " }}}
 " QuickFix {{{
@@ -464,6 +465,7 @@ augroup filetype_ruby
 
     autocmd FileType ruby nnoremap <buffer> <leader>rr :!ruby %<CR>
     autocmd FileType ruby nnoremap <buffer> <leader>tf :call RunCurrentSpecFile()<CR>
+    autocmd FileType ruby nnoremap <buffer> <leader>ts :call RunNearestSpec()<CR>
     autocmd FileType ruby nnoremap <buffer> <leader>tl :call RunLastSpec()<CR>
     autocmd FileType ruby nnoremap <buffer> <leader>ta :call RunAllSpecs()<CR>
 augroup END
@@ -790,5 +792,8 @@ let NERDTreeChDirMode=0
 " Fugitive {{{
 nnoremap gst :Gstatus<CR>5j
 nnoremap gd :Gvdiff<CR>
+" }}}
+" vim-rspec {{{
+let g:rspec_command = "!clear && rspec -c {spec}"
 " }}}
 " }}}
