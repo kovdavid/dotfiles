@@ -196,8 +196,8 @@ for_window [class="Firefox"] border none
 for_window [title="File Operation Progress"] floating enable; focus mode_toggle
 
 exec /home/davs/bin/mon left &
-exec /home/davs/.xsessionrc
 exec sudo nm-applet &
 exec numlockx &
+exec /home/davs/bin/init_trackpoint &
 exec (sleep 1 && nitrogen --restore ) &
 exec google-chrome
