@@ -15,17 +15,12 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_dotfile Xdefaults
     remove_and_link_dotfile Xmodmap
     remove_and_link_dotfile Xresources
-    remove_and_link_dotfile astylerc
     remove_and_link_dotfile bash_profile
     remove_and_link_dotfile bashrc
     remove_and_link_dotfile fontconfig
-    remove_and_link_dotfile fonts.conf.d
     remove_and_link_dotfile gitconfig
     remove_and_link_dotfile i3
     remove_and_link_dotfile i3status.conf
-    remove_and_link_dotfile perlcriticrc
-    remove_and_link_dotfile perltidyrc
-    remove_and_link_dotfile profile
     remove_and_link_dotfile vim
     remove_and_link_dotfile xinitrc
     remove_and_link_dotfile xprofile
