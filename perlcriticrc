@@ -1,7 +1,0 @@
-severity = 3
-
-[TestingAndDebugging::ProhibitNoStrict]
-allow = refs
-
-[TestingAndDebugging::ProhibitNoWarnings]
-allow = redefine
