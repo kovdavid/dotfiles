@@ -422,13 +422,13 @@ augroup filetype_ruby
     autocmd FileType ruby nnoremap <buffer> <leader>ta :call RunAllSpecs()<CR>
 augroup END
 " }}}
-" clojure {{{
+" Clojure {{{
 augroup filetype_clojure
     autocmd!
 
     autocmd BufRead,BufWritePre,FileType clojure execute ":Rooter"
 
-    autocmd FileType clojure nnoremap <buffer> <leader>rr :!lein run %<CR>
+    autocmd FileType clojure nnoremap <buffer> <leader>rr :call RunClojure()<CR>
 augroup END
 " }}}
 " }}}
@@ -527,6 +527,15 @@ function! CloseHiddenBuffers()
     execute "NERDTree | NERDTreeToggle"
 endfunction
 " }}}
+" RunClojure {{{
+function! RunClojure()
+    if exists("g:fireplace_nrepl_sessions")
+        execute ":Eval (-main)"
+    else
+        execute ":!lein run"
+    endif
+endfunction
+" }}}
 " DeleteFile {{{
 function! DeleteFile()
     let l:path = expand('%:p')
@@ -589,5 +598,8 @@ let NERDTreeChDirMode=0
 " Fugitive {{{
 nnoremap gst :Gstatus<CR>5j
 nnoremap gd :Gvdiff<CR>
+" }}}
+" vim-sexp {{{
+let g:sexp_enable_insert_mode_mappings=0
 " }}}
 " }}}
