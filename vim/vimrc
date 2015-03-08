@@ -24,7 +24,7 @@ Plugin 'jnurmine/Zenburn'
 Plugin 'guns/vim-sexp'
 Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 Plugin 'tpope/vim-fireplace'
-"Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'kien/rainbow_parentheses.vim'
 
 " snipMate
 Plugin 'tomtom/tlib_vim'
@@ -425,10 +425,16 @@ augroup END
 " Clojure {{{
 augroup filetype_clojure
     autocmd!
-
     autocmd BufRead,BufWritePre,FileType clojure execute ":Rooter"
 
+    autocmd Syntax clojure syn match clojureRoundParen "("
+    autocmd Syntax clojure syn match clojureRoundParen ")"
+    autocmd Syntax clojure RainbowParenthesesActivate
+    autocmd Syntax clojure RainbowParenthesesLoadRound
+    autocmd Syntax clojure highlight clojureRoundParen cterm=bold
+
     autocmd FileType clojure nnoremap <buffer> <leader>rr :call RunClojure()<CR>
+    autocmd FileType clojure nnoremap <buffer> <leader>re :Require \| Eval (-main)<CR>
 augroup END
 " }}}
 " }}}
@@ -601,5 +607,6 @@ nnoremap gd :Gvdiff<CR>
 " }}}
 " vim-sexp {{{
 let g:sexp_enable_insert_mode_mappings=0
+let g:sexp_insert_after_wrap=0
 " }}}
 " }}}
