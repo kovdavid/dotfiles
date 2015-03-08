@@ -15,9 +15,9 @@ if [ -d /usr/local/heroku/bin ] ; then
 fi
 
 #git
-if [ -e ~/dotfiles/git-completion.bash ] ; then
+if [ -e /home/davs/dotfiles/git-completion.bash ] ; then
     export GIT_PS1_SHOWDIRTYSTATE="yes"
-    source ~/dotfiles/git-completion.bash
+    source /home/davs/dotfiles/git-completion.bash
 fi
 
 if [ -e /home/davs/dotfiles/bash/git ] ; then
@@ -51,6 +51,6 @@ if [ -e /home/davs/.rvm/bin ] ; then
 fi
 
 #gems
-if [ -d ~/.gem/ruby/2.1.0/bin ] ; then
-    export PATH=$PATH:~/.gem/ruby/2.1.0/bin
+if [ -d /home/davs/.gem/ruby/2.1.0/bin ] ; then
+    export PATH=$PATH:/home/davs/.gem/ruby/2.1.0/bin
 fi
