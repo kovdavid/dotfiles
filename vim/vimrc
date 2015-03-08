@@ -4,7 +4,7 @@ colorscheme desert
 
 filetype off
 
-set rtp+=~/.vim/bundle/vundle
+set rtp+=/home/davs/.vim/bundle/vundle
 call vundle#rc()
 
 Plugin 'gmarik/vundle'
@@ -20,6 +20,12 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jnurmine/Zenburn'
 
+" Clojure
+Plugin 'guns/vim-sexp'
+Plugin 'tpope/vim-sexp-mappings-for-regular-people'
+Plugin 'tpope/vim-fireplace'
+"Plugin 'kien/rainbow_parentheses.vim'
+
 " snipMate
 Plugin 'tomtom/tlib_vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -28,12 +34,12 @@ Plugin 'garbas/vim-snipmate'
 " Python
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'nvie/vim-flake8'
-Plugin 'vim-scripts/Python-Syntax-Folding'
+" Plugin 'vim-scripts/Python-Syntax-Folding'
 
 " Ruby
-Plugin 'tpope/vim-endwise'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'Keithbsmiley/rspec.vim'
+" Plugin 'tpope/vim-endwise'
+" Plugin 'thoughtbot/vim-rspec'
+" Plugin 'Keithbsmiley/rspec.vim'
 
 " JS
 " Plugin 'mklabs/vim-backbone'
@@ -45,12 +51,11 @@ Plugin 'DavsX/vim_test_runner'
 Plugin 'DavsX/vim_time_since_last_commit'
 
 " HTML
-Plugin 'rstacruz/sparkup'
+" Plugin 'rstacruz/sparkup'
 
 filetype indent on
 filetype plugin on
 syntax on
-
 " }}}
 " Basic settings {{{
 set nocp
@@ -60,13 +65,11 @@ set lazyredraw                 " don't redraw when executing macros (good perfor
 set hidden                     " hide buffers instead of closing them
 set modelines=4                " gives 4 lines for modelines (vim meta at the beginning/end of files)
 set backspace=indent,eol,start " allow backspace in insert mode
-"set autochdir                  " auto change directory when opening a file
 set errorformat=%f:%l:%m
 set autowrite
 set nobackup
 set noswapfile
 set scrolloff=3                " when moving vertically set 3 lines to the cursor
-set pastetoggle=<F2>
 set mousehide
 set mouse=niv
 set number
@@ -82,7 +85,7 @@ set winwidth=81
 
 set complete-=i
 
-" " Word wrap not in the middle of the word
+" Word wrap not in the middle of the word
 set formatoptions=l
 set lbr
 
@@ -106,7 +109,7 @@ set wildmenu                "cmdline completition
 " }}}
 " Leader {{{
 let mapleader = ","
-let maplocalleader = "\\"
+let maplocalleader = "/"
 " }}}
 " Search {{{
 set showmatch
@@ -116,14 +119,12 @@ set incsearch
 nnoremap <leader>. :nohl<CR>
 
 set ignorecase
-"set smartcase
 
 " very magic mode for regexes
 nnoremap <leader>/ /\v
 
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 nnoremap <leader>rw viw"hy:s/<C-r>h//g<left><left>
-" vnoremap <C-R> "hy:%s/<C-r>h//g<left><left>
 " }}}
 " Indents {{{
 set autoindent
@@ -137,7 +138,7 @@ nnoremap < <<
 " }}}
 " Tabs {{{
 set shiftwidth   =4             "number of spaces for indenting
-set tabstop      =8             "number of spaces for tabs
+set tabstop      =4             "number of spaces for tabs
 set softtabstop  =4             "number of spaces for tabs while editing
 set expandtab                   "autoinsert spaces instead of tabs
 " }}}
@@ -168,12 +169,6 @@ set guioptions+=t "tearoff menu items
 set guitablabel=%t          "show only filename in tabs
 
 set t_Co=256
-if has('gui_running')
-    " colorscheme desert
-else
-    " colorscheme desert256
-endif
-
 colorscheme zenburn
 
 " Horizontal split fill chars
@@ -203,11 +198,15 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 " Basic maps {{{
 nnoremap ; :
 noremap <leader>w :w<CR>
-" nnoremap q <C-W><C-C>
 nnoremap qt <C-W><C-C>
 nnoremap qw <C-W><C-W>
 nnoremap qe :tabprev<CR>
 nnoremap qr :tabnext<CR>
+
+" maximize current split
+nnoremap qa <C-W>_<C-W><BAR>
+" move to next split and maximize it
+nnoremap qs <C-W><C-W><C-W>_<C-W><BAR>
 
 "disable ex-mode
 nnoremap Q <NOP>
@@ -221,13 +220,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-nnoremap <C-W>m <C-W>_<C-W><BAR>
-nnoremap <C-W><C-M> <C-W><C-W><C-W>_<C-W><BAR>
-
 inoremap <c-f> <c-x><c-f>
-
-nnoremap <localleader>pr :e /home/davs/workspace/projects<CR>
-nnoremap <localleader>pc :call ChangeToCurrentLine()<CR>
 
 nnoremap ds<space> F<space>xf<space>x
 " }}}
@@ -260,32 +253,28 @@ noremap <F4> :set cursorcolumn!<CR>
 " }}}
 " Tabs {{{
 noremap <c-t> :tabnew<CR>
-" nnoremap <leader>n :tabprev<CR>
-" nnoremap <leader>m :tabnext<CR>
-" }}}
-" Buffers {{{
-nnoremap <leader>j :bp<CR>
-nnoremap <leader>k :bn<CR>
 " }}}
 " Filetype {{{
 " EveryFile {{{
 augroup all_file_type
     autocmd!
-    autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber
-    autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber
+    if v:version < 703
+        autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber
+        autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber
+    endif
     autocmd BufWritePre * %s/\s\+$//e
 augroup END
 " }}}
 " QuickFix {{{
-augroup quickfix
-    autocmd!
-    autocmd FileType qf nnoremap <buffer> <c-m> <CR>
-    autocmd FileType qf nnoremap <buffer> <CR> <CR>
-    autocmd FileType qf nnoremap <buffer> o <CR><C-W><C-P>
-    autocmd FileType qf nnoremap <buffer> q :lclose<CR>:cclose<CR>
-    autocmd FileType qf nnoremap <buffer> <ESC> :lclose<CR>cclose<CR>
-    autocmd FileType qf nnoremap <buffer> <c-J> <CR><ESC>:lclose<CR>:cclose<CR>
-augroup END
+"augroup quickfix
+    "autocmd!
+    "autocmd FileType qf nnoremap <buffer> <c-m> <CR>
+    "autocmd FileType qf nnoremap <buffer> <CR> <CR>
+    "autocmd FileType qf nnoremap <buffer> o <CR><C-W><C-P>
+    "autocmd FileType qf nnoremap <buffer> q :lclose<CR>:cclose<CR>
+    "autocmd FileType qf nnoremap <buffer> <ESC> :lclose<CR>cclose<CR>
+    "autocmd FileType qf nnoremap <buffer> <c-J> <CR><ESC>:lclose<CR>:cclose<CR>
+"augroup END
 " }}}
 " Perl {{{
 augroup filetype_perl
@@ -294,12 +283,10 @@ augroup filetype_perl
     autocmd BufRead,BufNewFile *.pl  setfiletype perl
     autocmd BufRead,BufNewFile *.t   setfiletype perl
 
-    autocmd BufNewFile *.pl 0r ~/.vim/skeleton/perl.script
-    autocmd BufNewFile *.t 0r ~/.vim/skeleton/perl.test
+    autocmd BufNewFile *.pl 0r /home/davs/.vim/skeleton/perl.script
+    autocmd BufNewFile *.t 0r /home/davs/.vim/skeleton/perl.test
 
     autocmd BufRead,BufNewFile *.pm if line('$') == 1 && getline('.') == '' | call NewPerlModule() | endif
-
-    autocmd BufWritePre * if &filetype=='perl' | %s/\s\+$//e | endif
 
     autocmd BufWritePost * if &filetype=='perl' | call Check_time_since_last_commit() | endif
 
@@ -310,7 +297,6 @@ augroup filetype_perl
     autocmd BufRead,BufNewFile *.t   setlocal filetype=perl
 
     autocmd FileType perl setlocal nowrap
-    autocmd FileType perl setlocal complete-=i
     "autocmd FileType perl setlocal foldlevel=1
     autocmd FileType perl setlocal foldlevelstart=20
     autocmd FileType perl setlocal foldnestmax=2
@@ -322,18 +308,11 @@ augroup filetype_perl
     autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
     autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<txn_subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
     autocmd FileType perl hi Statement ctermfg=14
-    
-    autocmd FileType perl setlocal iskeyword-=:
 
-    autocmd FileType perl setlocal errorformat=%f:%l:%m
     autocmd FileType perl setlocal makeprg=prove
 
-    autocmd FileType perl nnoremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper ;<LEFT>
+    autocmd FileType perl nnoremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper();<LEFT><LEFT>
     autocmd FileType perl nnoremap <buffer> <leader>so <ESC>vapk:sort<CR>
-
-    autocmd FileType perl nnoremap <buffer> <leader>gu :call PerlGrepUsage()<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>gs :call PerlSubGrep()<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>gl :call PerlSubGrepLike()<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>rr :!perl %<CR>
 
@@ -348,22 +327,14 @@ augroup END
 augroup filetype_python
     autocmd!
 
-    autocmd BufWritePre * if &filetype=='python' | %s/\s\+$//e | endif
     autocmd BufEnter,BufRead,BufWritePre,FileReadPost,FileType python execute ":Rooter"
 
-    autocmd BufNewFile *.py 0r ~/.vim/skeleton/python.script
-    autocmd BufRead,BufNewFile *.py setfiletype python
+    autocmd BufNewFile *.py 0r /home/davs/.vim/skeleton/python.script
 
-    "autocmd FileType python setlocal compiler=nose
-    "autocmd FileType python setlocal errorformat=%f:%l:\ fail:\ %m,%f:%l:\ error:\ %m,%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m,%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-    "autocmd FileType python setlocal makeprg=nosetests\ --with-machineout
-    
     autocmd FileType python let python_hightlight_all=1
     autocmd FileType python setlocal foldlevelstart=20
     autocmd FileType python setlocal nowrap
-    autocmd FileType python setlocal complete-=i
 
-    "autocmd FileType python setlocal iskeyword+=.
     autocmd FileType python setlocal wildignore+=*.pyc
 
     autocmd FileType python nnoremap <buffer> <leader>pf :call Flake8()<CR>
@@ -380,11 +351,8 @@ augroup END
 " HTML {{{
 augroup filetype_html
     autocmd!
-    autocmd BufRead,BufNewFile *.tt  setfiletype html
-
+    autocmd BufRead,BufNewFile *.tt setfiletype html
     autocmd BufRead,BufNewFile *.tt setlocal foldmethod=marker
-
-    autocmd BufWritePre * if &filetype=='html' | %s/\s\+$//e | endif
 
     autocmd BufRead,BufWritePre,FileType html execute ":Rooter"
 
@@ -400,8 +368,6 @@ augroup filetype_html
     autocmd FileType html syn match htmlLinkText contained contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLinkText,javaScript,@htmlPreproc "\S.\{-}\ze\s*$"
     autocmd FileType html highlight def link htmlLinkText Underlined
 
-    "autocmd BufRead,BufWritePre * if &filetype == 'html' | call RunAutoIndent() | endif
-
     autocmd FileType html iabbrev <buffer> nbsp &nbsp;
 augroup END
 " }}}
@@ -411,7 +377,6 @@ augroup filetype_vim
     autocmd FileType vim setlocal foldmethod=marker
     autocmd FileType vim setlocal foldlevel=0
 
-    "autocmd BufWritePre * if &filetype=='vim' | %s/\s\+$//e | endif
     autocmd FileType vim noremap <buffer> <leader>ss  :w<CR>:source %<CR>:e <CR>
 augroup END
 " }}}
@@ -419,15 +384,7 @@ augroup END
 augroup filetype_js
     autocmd!
 
-    autocmd BufWritePre * if &filetype=='javascript' | %s/\s\+$//e | endif
     autocmd BufRead,BufWritePre,FileType javascript execute ":Rooter"
-
-    autocmd FileType javascript nnoremap <buffer> <leader>cc :call Comment('\/\/ ')<CR>
-    autocmd FileType javascript nnoremap <buffer> <leader>cu :call UnComment('\/\/ ')<CR>
-
-    autocmd FileType javascript vnoremap <buffer> <leader>cc :call Comment('\/\/ ')<CR>
-    autocmd FileType javascript vnoremap <buffer> <leader>cu :call UnComment('\/\/ ')<CR>
-    autocmd FileType javascript setlocal iskeyword-=:
 
     autocmd FileType javascript setlocal shiftwidth=2
     autocmd FileType javascript setlocal softtabstop=2
@@ -435,10 +392,9 @@ augroup filetype_js
     autocmd FileType javascript setlocal foldmethod=indent
     autocmd FileType javascript setlocal foldlevelstart=20
     autocmd FileType javascript let javaScript_fold=1
-    " autocmd FileType javascript setlocal omnifunc=syntaxcomplete#Complete
 augroup END
 " }}}
-" CursorLine {{{ 
+" CursorLine {{{
 augroup CursorLine
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
@@ -449,14 +405,10 @@ augroup END
 augroup filetype_ruby
     autocmd!
 
-    autocmd BufRead,BufNewFile *.rb setfiletype ruby
-
-    autocmd BufWritePre * if &filetype=='ruby' | %s/\s\+$//e | endif
-
     autocmd BufRead,BufWritePre,FileType ruby execute ":Rooter"
 
     autocmd FileType ruby,eruby let ruby_fold = 1
-    autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
+    autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
     autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
     autocmd FileType ruby,eruby setlocal shiftwidth=2
@@ -470,9 +422,13 @@ augroup filetype_ruby
     autocmd FileType ruby nnoremap <buffer> <leader>ta :call RunAllSpecs()<CR>
 augroup END
 " }}}
-" rspec {{{
-augroup filetype_rspec
+" clojure {{{
+augroup filetype_clojure
     autocmd!
+
+    autocmd BufRead,BufWritePre,FileType clojure execute ":Rooter"
+
+    autocmd FileType clojure nnoremap <buffer> <leader>rr :!lein run %<CR>
 augroup END
 " }}}
 " }}}
@@ -482,153 +438,24 @@ noremap <leader>ss :source $MYVIMRC<CR>
 noremap <leader>sl :execute getline(".")<CR>
 " }}}
 " Folding {{{
-set foldmethod   =indent
-set foldlevel    =20 "open folds by default
+set foldmethod=indent
+set foldlevel =20 "open folds by default
 
 noremap <space> za
 " }}}
 " Functions {{{
-" ChangeToCurrentLine {{{
-function! ChangeToCurrentLine()
-    let row = getline(".")
-    echom row
-    execute ":cd ".row
-    execute ":e ".row
-endfunction
-" }}}
 " ToggleColorColumn {{{
 set colorcolumn=81
-let g:colorcolumn_set = 1
 highlight ColorColumn guibg=#333333 ctermbg=8
-
-" noremap <leader>tcc :call ToggleColorColumn()<CR>
-
-function! ToggleColorColumn()
-    if g:colorcolumn_set == 1
-        set colorcolumn=0
-        let g:colorcolumn_set = 0
-    else
-        set colorcolumn=81
-        let g:colorcolumn_set = 1
-    endif
-endfunction
-" }}}
-" ToggleLastStatus {{{
-"set laststatus=1
-"let g:laststatus_value = 1
-"
-" noremap <leader>tls :call ToggleLastStatus()<CR>
-"
-" function! ToggleLastStatus()
-"     if g:laststatus_value == 1
-"         set laststatus=2
-"         let g:laststatus_value = 2
-"     else
-"         set laststatus=1
-"         let g:laststatus_value = 1
-"     endif
-" endfunction
 " }}}
 " NewPerlModule {{{
 function! NewPerlModule()
-    0r ~/.vim/skeleton/perl.package
+    0r /home/davs/.vim/skeleton/perl.package
     let l:path = expand('%:p')
     let l:path = substitute(l:path, '^.*/\(lib\|t\)/', '', '')
     let l:path = substitute(l:path, '.pm$', '', '')
     let l:module_name = substitute(l:path, '/', '::', 'g')
     execute "normal! ggwi".l:module_name
-endfunction
-" }}}
-" PerlSubGrep {{{
-function! PerlSubGrep()
-    let l:word = expand("<cword>")
-    execute 'lvimgrep /^\s*\<sub '. l:word .'\>/j **/*.pm **/*.pl'
-    lopen
-endfunction
-" }}}
-" PerlGrepUsage {{{
-function! PerlGrepUsage()
-    let l:word = expand("<cword>")
-    execute 'lvimgrep /\<'. l:word .'\>/j **/*.pm **/*.pl'
-    lopen
-endfunction
-" }}}
-" PerlSubGrepLike {{{
-function! PerlSubGrepLike()
-    let l:word = expand("<cword>")
-    execute 'lvimgrep /^\s*sub '. l:word .'/j **/*.pm **/*.pl'
-    lopen
-endfunction
-" }}}
-" RunPythonTest {{{
-function! RunPythonTest(mode)
-    write
-
-    let l:file   = expand('%:r')
-    let l:file = substitute(l:file,'/','.','g')
-
-    let l:params = 'discover'
-
-    if a:mode == 'file'
-        let l:params = l:file
-    elseif a:mode == 'class'
-        let l:class  = GetPythonClassName()
-        let l:params = l:file.".".l:class
-    elseif a:mode == 'method'
-        let l:class  = GetPythonClassName()
-        let l:method = GetPythonMethodName()
-        let l:params = l:file.".".l:class.".".l:method
-    endif
-
-    silent !clear
-    execute ":!python -m unittest ".l:params
-endfunction
-" }}}
-" GetPythonMethodName {{{
-function! GetPythonMethodName()
-    let l:line_no = search('\v^\s*def ','bcnW')
-
-    if l:line_no > 0
-        let l:line = getline(l:line_no)
-        let l:list = matchlist(l:line, '\v^\s*def ([0-9a-zA-Z_]+)')
-
-        if !empty(l:list)
-            let l:method = l:list[1]
-            return l:method
-        else
-            throw "Method name did not match"
-        endif
-    else
-        throw "No method found"
-    endif
-endfunction
-" }}}
-" GetPythonClassName {{{
-function! GetPythonClassName()
-    let l:line_no = search('\v^\s*class ','bcnW')
-
-    if l:line_no > 0
-        let l:line = getline(l:line_no)
-        let l:list = matchlist(l:line, '\v^\s*class ([0-9a-zA-Z_]+)')
-
-        if !empty(l:list)
-            let l:class = l:list[1]
-            return l:class
-        else
-            throw "Class name did not match"
-        endif
-    else
-        throw "No class found"
-    endif
-endfunction
-" }}}
-" Pep8 {{{
-function! Pep8()
-    let l:winview = winsaveview()
-    write
-    execute ":0r !autopep8 %"
-    execute ":normal! jVGd"
-    call winrestview(l:winview)
 endfunction
 " }}}
 " RunPerlTest {{{
@@ -680,26 +507,6 @@ function! RunPerlTest(mode)
     endif
 endfunction
 " }}}
-" Comment {{{
-function! Comment(mark)
-    let l:hlsearch = &hlsearch
-    set nohlsearch
-    if getline('.') !~ '\v^\s*$'
-        execute ':silent! s/\v^\s*/&'.a:mark.'/'
-    endif
-    let &hlsearch = l:hlsearch
-endfunction
-" }}}
-" UnComment {{{
-function! UnComment(mark)
-    let l:hlsearch = &hlsearch
-    set nohlsearch
-    if getline('.') !~ '\v^\s*$'
-        execute ':silent! s/\v^(\s*)'.a:mark.'/\1/'
-    endif
-    let &hlsearch = l:hlsearch
-endfunction
-" }}}
 " CloseHiddenbuffers {{{
 nnoremap <leader>cl :call CloseHiddenBuffers()<CR>
 function! CloseHiddenBuffers()
@@ -745,7 +552,7 @@ nnoremap <leader>aa :Tabularize /
 nnoremap <leader>af :Tabularize /^.\{-}\ze/l0l0<left><left><left><left><left>
 " }}}
 " ctrlp {{{
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+set runtimepath^=/home/davs/.vim/bundle/ctrlp.vim
 let g:ctrlp_custom_ignore = {
     \ 'dir': '\v(\.git|venv)',
     \ 'file': '\v(__init2__\.py|\.pyc)$',
