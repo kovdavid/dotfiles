@@ -5,10 +5,10 @@ font pango:DejaVu Sans Mono 13px
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-bindsym $mod+Tab exec ~/bin/jump_to_other_monitor.py
-bindsym $mod+Shift+Tab exec ~/bin/move_to_other_monitor.py
-bindsym $mod+Return exec ~/bin/cycle_windows.py
-bindsym $mod+equal exec ~/bin/move_window_to_center.py
+bindsym $mod+Tab exec /home/davs/bin/jump_to_other_monitor.py
+bindsym $mod+Shift+Tab exec /home/davs/bin/move_to_other_monitor.py
+bindsym $mod+Return exec /home/davs/bin/cycle_windows.py
+bindsym $mod+equal exec /home/davs/bin/move_window_to_center.py
 
 bindsym $mod+x exec xterm
 bindsym $mod+i exec google-chrome
@@ -49,7 +49,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # toggle split orientation
-bindsym $mod+s exec ~/bin/toggle_split_orientation.py
+bindsym $mod+s exec /home/davs/bin/toggle_split_orientation.py
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -185,7 +185,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         font pango:DejaVu Sans Mono 12px
-        status_command i3status -c ~/.i3/i3status
+        status_command i3status -c /home/davs/.i3/i3status
         tray_output LVDS1
 }
 
