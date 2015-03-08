@@ -3,6 +3,6 @@ if [ -e /home/davs/dotfiles/bash/common ] ; then
 fi
 
 #ssh
-if [ -e ~/dotfiles/ssh-agent ] ; then
-    source ~/dotfiles/ssh-agent
+if [ -e /home/davs/dotfiles/ssh-agent ] ; then
+    source /home/davs/dotfiles/ssh-agent
 fi
