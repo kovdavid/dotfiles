@@ -1,17 +1,18 @@
 #!/bin/sh
 
 function remove_and_link_dotfile {
-    $(rm -rf ~/.$1)
-    $(ln -s ~/dotfiles/$1 ~/.$1)
+    $(rm -rf /home/davs/.$1)
+    $(ln -s /home/davs/dotfiles/$1 /home/davs/.$1)
 }
 
 function remove_and_link_to_tmp {
-    $(rm -rf ~/.$1)
-    $(ln -s /tmp ~/.$1)
+    $(rm -rf /home/davs/.$1)
+    $(ln -s /tmp /home/davs/.$1)
 }
 
 read -n 1 -p "Would you like to reinitalize dotfiles? <y/n>"
 if [ "$REPLY" = "y" ] ; then
+    echo "Linking dotfiles"
     remove_and_link_dotfile Xdefaults
     remove_and_link_dotfile Xmodmap
     remove_and_link_dotfile Xresources
@@ -28,6 +29,7 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_dotfile gtkrc-2.0
     remove_and_link_dotfile gtkrc-2.0.mine
 
+    echo "Linking to /tmp"
     remove_and_link_to_tmp thumbnails
     remove_and_link_to_tmp pip
     remove_and_link_to_tmp macromedia
@@ -37,8 +39,9 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_to_tmp bundler
     remove_and_link_to_tmp adobe
 
-    rm -rf ~/.vimrc
-    ln -s ~/.vim/vimrc ~/.vimrc
+    echo "Linking VIM"
+    rm -rf /home/davs/.vimrc
+    ln -s /home/davs/.vim/vimrc /home/davs/.vimrc
 
     echo "DONE"
 fi
