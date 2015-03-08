@@ -109,7 +109,7 @@ set wildmenu                "cmdline completition
 " }}}
 " Leader {{{
 let mapleader = ","
-let maplocalleader = "/"
+let maplocalleader = "\\"
 " }}}
 " Search {{{
 set showmatch
@@ -568,16 +568,6 @@ let g:rooter_patterns = [ '.git/', '.vimproject' ]
 let g:rooter_manual_only = 0
 let g:rooter_change_directory_for_non_project_files = 0
 " }}}
-" vim-jedi {{{
-let g:jedi#goto_assignments_command = ""
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command    = "K"
-let g:jedi#usages_command           = "<leader>gs"
-let g:jedi#completions_command      = "<C-Space>"
-let g:jedi#rename_command           = ""
-let g:jedi#show_call_signatures     = "1"
-let g:jedi#popup_on_dot             = 0
-" }}}
 " snippets {{{
 let g:snips_author = "David Kovacs [DavsX]"
 let g:snips_email = "kovdavid@gmail.com"
@@ -599,8 +589,5 @@ let NERDTreeChDirMode=0
 " Fugitive {{{
 nnoremap gst :Gstatus<CR>5j
 nnoremap gd :Gvdiff<CR>
-" }}}
-" vim-rspec {{{
-let g:rspec_command = "!clear && rspec -c {spec}"
 " }}}
 " }}}
