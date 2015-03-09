@@ -554,17 +554,17 @@ endfunction
 " }}}
 " Plugin settings {{{
 " Tabularize {{{
-vnoremap <leader>ah :Tabularize /^.\{-}\ze=>/l0l0<CR>
-vnoremap <leader>a= :Tabularize /^.\{-}\ze=/l0l0<CR>
-vnoremap <leader>a, :Tabularize /^.\{-}\ze,/l0l0<CR>
+vnoremap <leader>ah :Tabularize /^.\{-}\zs=>/l1l1<CR>
+vnoremap <leader>a= :Tabularize /^.\{-}\zs=/l1l1<CR>
+vnoremap <leader>a, :Tabularize /^.\{-}\zs,/l1l1<CR>
 vnoremap <leader>aa :Tabularize /
-vnoremap <leader>af :Tabularize /^.\{-}\ze/l0l0<left><left><left><left><left>
+vnoremap <leader>af :Tabularize /^.\{-}\zs/l1l1<left><left><left><left><left>
 
-nnoremap <leader>ah :Tabularize /^.\{-}\ze=>/l0l0<CR>
-nnoremap <leader>a= :Tabularize /^.\{-}\ze=/l0l0<CR>
-nnoremap <leader>a, :Tabularize /^.\{-}\ze,/l0l0<CR>
+nnoremap <leader>ah :Tabularize /^.\{-}\zs=>/l1l1<CR>
+nnoremap <leader>a= :Tabularize /^.\{-}\zs=/l1l1<CR>
+nnoremap <leader>a, :Tabularize /^.\{-}\zs,/l1l1<CR>
 nnoremap <leader>aa :Tabularize /
-nnoremap <leader>af :Tabularize /^.\{-}\ze/l0l0<left><left><left><left><left>
+nnoremap <leader>af :Tabularize /^.\{-}\zs/l1l1<left><left><left><left><left>
 " }}}
 " ctrlp {{{
 set runtimepath^=/home/davs/.vim/bundle/ctrlp.vim
@@ -608,5 +608,14 @@ nnoremap gd :Gvdiff<CR>
 " vim-sexp {{{
 let g:sexp_enable_insert_mode_mappings=0
 let g:sexp_insert_after_wrap=0
+" }}}
+" rainbow_parentheses {{{
+let g:rbpt_colorpairs = [
+    \ [9, 9],
+    \ [13, 13],
+    \ [2, 2],
+    \ [11, 11],
+    \ [15, 15],
+    \ ]
 " }}}
 " }}}
