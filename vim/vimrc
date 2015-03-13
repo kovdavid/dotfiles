@@ -555,19 +555,21 @@ endfunction
 " Plugin settings {{{
 " Tabularize {{{
 vnoremap <leader>ah :Tabularize /^.\{-}\zs=>/l1l1<CR>
-vnoremap <leader>a= :Tabularize /^.\{-}\zs=/l1l1<CR>
+vnoremap <leader>a= :Tabularize /^.\{-}\zs=\(>\)\@!/l1l1<CR>
 vnoremap <leader>a, :Tabularize /^.\{-}\zs,/l1l1<CR>
 vnoremap <leader>aa :Tabularize /
 vnoremap <leader>af :Tabularize /^.\{-}\zs/l1l1<left><left><left><left><left>
 
 nnoremap <leader>ah :Tabularize /^.\{-}\zs=>/l1l1<CR>
-nnoremap <leader>a= :Tabularize /^.\{-}\zs=/l1l1<CR>
+nnoremap <leader>a= :Tabularize /^.\{-}\zs=\(>\)\@!/l1l1<CR>
 nnoremap <leader>a, :Tabularize /^.\{-}\zs,/l1l1<CR>
 nnoremap <leader>aa :Tabularize /
 nnoremap <leader>af :Tabularize /^.\{-}\zs/l1l1<left><left><left><left><left>
 " }}}
 " ctrlp {{{
 set runtimepath^=/home/davs/.vim/bundle/ctrlp.vim
+let g:ctrlp_regexp = 0
+let g:ctrlp_by_filename = 1
 let g:ctrlp_custom_ignore = {
     \ 'dir': '\v(\.git|venv)',
     \ 'file': '\v(__init2__\.py|\.pyc)$',
