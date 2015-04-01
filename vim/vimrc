@@ -433,8 +433,8 @@ augroup filetype_clojure
     autocmd Syntax clojure RainbowParenthesesLoadRound
     autocmd Syntax clojure highlight clojureRoundParen cterm=bold
 
-    autocmd FileType clojure nnoremap <buffer> <leader>rr :call RunClojure()<CR>
-    autocmd FileType clojure nnoremap <buffer> <leader>re :Require \| Eval (-main)<CR>
+    autocmd FileType clojure nnoremap <buffer> <leader>rr :call RunClojure(0)<CR>
+    autocmd FileType clojure nnoremap <buffer> <leader>re :call RunClojure(1)<CR>
 augroup END
 " }}}
 " }}}
@@ -534,9 +534,16 @@ function! CloseHiddenBuffers()
 endfunction
 " }}}
 " RunClojure {{{
-function! RunClojure()
+function! RunClojure(reload)
+    "autocmd FileType clojure nnoremap <buffer> <leader>re :Eval (remove-ns (ns-name *ns*)) \| Require \| Eval (-main)<CR>
     if exists("g:fireplace_nrepl_sessions")
-        execute ":Eval (-main)"
+        if a:reload
+            execute ":Eval (clojure.core/remove-ns (clojure.core/ns-name clojure.core/*ns*))"
+            execute ":Require"
+            execute ":Eval (-main)"
+        else
+            execute ":Eval (-main)"
+        endif
     else
         execute ":!lein run"
     endif
@@ -569,7 +576,7 @@ nnoremap <leader>af :Tabularize /^.\{-}\zs/l1l1<left><left><left><left><left>
 " ctrlp {{{
 set runtimepath^=/home/davs/.vim/bundle/ctrlp.vim
 let g:ctrlp_regexp = 0
-let g:ctrlp_by_filename = 1
+let g:ctrlp_by_filename = 0
 let g:ctrlp_custom_ignore = {
     \ 'dir': '\v(\.git|venv)',
     \ 'file': '\v(__init2__\.py|\.pyc)$',
