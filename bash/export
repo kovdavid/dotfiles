@@ -11,6 +11,9 @@ export JAVA_HOME="/usr/lib/jvm/default"
 export PATH="$JAVA_HOME:$PATH"
 export LD_LIBRARY_PATH="/usr/lib64/java/jre/lib/amd64"
 
+export GOPATH="/home/davs/workspace/go"
+export GOROOT="/opt/go"
+
 export PATH="/opt/perlbrew/bin:/home/davs/bin:$PATH"
 
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
@@ -19,3 +22,5 @@ export XZ_OPT=-9
 export GZIP=-9
 
 export EDITOR=vim
+
+export HISTCONTROL=ignoreboth
