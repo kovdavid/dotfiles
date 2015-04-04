@@ -26,6 +26,9 @@ Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 Plugin 'tpope/vim-fireplace'
 Plugin 'kien/rainbow_parentheses.vim'
 
+" golang
+Plugin 'fatih/vim-go.git'
+
 " snipMate
 Plugin 'tomtom/tlib_vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -435,6 +438,14 @@ augroup filetype_clojure
 
     autocmd FileType clojure nnoremap <buffer> <leader>rr :call RunClojure(0)<CR>
     autocmd FileType clojure nnoremap <buffer> <leader>re :call RunClojure(1)<CR>
+augroup END
+" }}}
+" golang {{{
+augroup filetype_golang
+    autocmd!
+
+    autocmd FileType go nnoremap <buffer> <leader>rr :!go run %<CR>
+    autocmd FileType go let g:go_fmt_command="goimport"
 augroup END
 " }}}
 " }}}
