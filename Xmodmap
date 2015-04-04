@@ -3,3 +3,4 @@ remove mod5 = Mode_switch
 clear Lock
 keycode 26 = e E EuroSign EuroSign
 keycode 94 = underscore EuroSign
+keycode 108 = BackSpace
