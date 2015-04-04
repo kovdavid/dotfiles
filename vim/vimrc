@@ -444,8 +444,12 @@ augroup END
 augroup filetype_golang
     autocmd!
 
-    autocmd FileType go nnoremap <buffer> <leader>rr :!go run %<CR>
-    autocmd FileType go let g:go_fmt_command="goimport"
+    autocmd FileType go nmap <buffer> <leader>rr <Plug>(go-run)
+    autocmd FileType go nmap <buffer> <leader>rb <Plug>(go-build)
+    autocmd FileType go nmap <buffer> <leader>rt <Plug>(go-test)
+    autocmd FileType go nmap <buffer> <leader>gi <Plug>(go-info)
+    autocmd FileType go nmap <buffer> <leader>gd <Plug>(go-doc)
+    autocmd FileType go nmap <buffer> <leader>gb <Plug>(go-doc-browser)
 augroup END
 " }}}
 " }}}
@@ -637,5 +641,8 @@ let g:rbpt_colorpairs = [
     \ [11, 11],
     \ [15, 15],
     \ ]
+" }}}
+" vim-go {{{
+let g:go_fmt_command="goimports"
 " }}}
 " }}}
