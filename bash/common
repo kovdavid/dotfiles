@@ -50,6 +50,19 @@ if [ -e /home/davs/.rvm/bin ] ; then
     export PATH=$PATH:/home/davs/.rvm/bin
 fi
 
+#gvm
+if [ -f /opt/go/gvm/scripts/gvm ] ; then
+    source /opt/go/gvm/scripts/gvm
+fi
+
+#go
+if [ -d /opt/go/bin ] ; then
+    export PATH=$PATH:/opt/go/bin
+fi
+if [ -d /home/davs/workspace/go/bin ] ; then
+    export PATH=$PATH:/home/davs/workspace/go/bin
+fi
+
 #gems
 if [ -d /home/davs/.gem/ruby/2.1.0/bin ] ; then
     export PATH=$PATH:/home/davs/.gem/ruby/2.1.0/bin
