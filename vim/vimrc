@@ -19,6 +19,7 @@ Plugin 'airblade/vim-rooter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jnurmine/Zenburn'
+Plugin 'ervandew/supertab'
 
 " Clojure
 Plugin 'guns/vim-sexp'
@@ -444,12 +445,12 @@ augroup END
 augroup filetype_golang
     autocmd!
 
-    autocmd FileType go nmap <buffer> <leader>rr <Plug>(go-run)
-    autocmd FileType go nmap <buffer> <leader>rb <Plug>(go-build)
-    autocmd FileType go nmap <buffer> <leader>rt <Plug>(go-test)
+    autocmd FileType go nmap <buffer> <leader>gr <Plug>(go-run)
+    autocmd FileType go nmap <buffer> <leader>gt <Plug>(go-test)
+    autocmd FileType go nmap <buffer> <leader>gb <Plug>(go-build)
     autocmd FileType go nmap <buffer> <leader>gi <Plug>(go-info)
     autocmd FileType go nmap <buffer> <leader>gd <Plug>(go-doc)
-    autocmd FileType go nmap <buffer> <leader>gb <Plug>(go-doc-browser)
+    autocmd FileType go nmap <buffer> <leader>gl :GoLint<CR>
 augroup END
 " }}}
 " }}}
@@ -644,5 +645,9 @@ let g:rbpt_colorpairs = [
 " }}}
 " vim-go {{{
 let g:go_fmt_command="goimports"
+" }}}
+" supertab {{{
+let g:SuperTabDefaultCompletionType="<c-x><c-o>"
+let g:SuperTabClosePreviewOnPopupClose=1
 " }}}
 " }}}
