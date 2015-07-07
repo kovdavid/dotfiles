@@ -14,6 +14,11 @@ if [ -d /usr/local/heroku/bin ] ; then
     export PATH=$PATH:/usr/local/heroku/bin
 fi
 
+#elixir
+if [ -e /home/davs/dotfiles/mix-completion.bash ] ; then
+    source /home/davs/dotfiles/mix-completion.bash
+fi
+
 #git
 if [ -e /home/davs/dotfiles/git-completion.bash ] ; then
     export GIT_PS1_SHOWDIRTYSTATE="yes"
@@ -66,4 +71,9 @@ fi
 #gems
 if [ -d /home/davs/.gem/ruby/2.1.0/bin ] ; then
     export PATH=$PATH:/home/davs/.gem/ruby/2.1.0/bin
+fi
+
+#nike
+if [ -f /home/davs/dotfiles/bash/nike ] ; then
+    source /home/davs/dotfiles/bash/nike
 fi
