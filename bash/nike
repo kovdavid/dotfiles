@@ -4,8 +4,3 @@ unalias grep
 alias vim="/home/davs/vim/bin/vim"
 alias grep="/bin/grep"
 alias vim-term="/home/davs/vim/bin/vim"
-
-#nike
-if [ -f /home/davs/dotfiles/bash/proxy ] ; then
-    source /home/davs/dotfiles/bash/proxy
-fi

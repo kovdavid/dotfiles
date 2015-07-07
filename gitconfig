@@ -40,3 +40,5 @@
 	lineNumber = true
 [difftool]
 	prompt = false
+[http]
+[https]
