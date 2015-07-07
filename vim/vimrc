@@ -21,11 +21,16 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'jnurmine/Zenburn'
 Plugin 'ervandew/supertab'
 
+" Elixir
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'tpope/vim-endwise'
+
 " Clojure
 Plugin 'guns/vim-sexp'
-Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 Plugin 'tpope/vim-fireplace'
+Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'dgrnbrg/vim-redl'
 
 " golang
 Plugin 'fatih/vim-go.git'
@@ -206,6 +211,11 @@ nnoremap qt <C-W><C-C>
 nnoremap qw <C-W><C-W>
 nnoremap qe :tabprev<CR>
 nnoremap qr :tabnext<CR>
+
+if has('nvim')
+    tnoremap <a-q> <c-\><c-n>
+    tnoremap <a-w> <c-\><c-n><c-w><c-w>
+endif
 
 " maximize current split
 nnoremap qa <C-W>_<C-W><BAR>
@@ -437,8 +447,31 @@ augroup filetype_clojure
     autocmd Syntax clojure RainbowParenthesesLoadRound
     autocmd Syntax clojure highlight clojureRoundParen cterm=bold
 
+    autocmd FileType clojure let b:delimitMate_quotes = '"'
+
     autocmd FileType clojure nnoremap <buffer> <leader>rr :call RunClojure(0)<CR>
     autocmd FileType clojure nnoremap <buffer> <leader>re :call RunClojure(1)<CR>
+
+    autocmd FileType clojure nmap <leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
+    autocmd FileType clojure nmap <leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)``
+    autocmd FileType clojure nmap <leader>e <Plug>FireplacePrint<Plug>(sexp_inner_element)``
+
+    autocmd FileType clojure nnoremap ( ?[[({]<CR>:nohl<CR>
+    autocmd FileType clojure nnoremap ) /[[({]<CR>:nohl<CR>
+augroup END
+" }}}
+" Elixir {{{
+augroup filetype_elixir
+    autocmd!
+    autocmd BufRead,BufWritePre,FileType elixir execute ":Rooter"
+
+    autocmd BufRead,BufNewFile *.ex  if line('$') == 1 && getline('.') == '' | call NewElixirModule() | endif
+    autocmd BufRead,BufNewFile *.exs if line('$') == 1 && getline('.') == '' | call NewElixirModule() | endif
+
+    autocmd FileType elixir nnoremap <buffer> <leader>rr :!elixir %<CR>
+    autocmd FileType elixir nnoremap <buffer> <leader>rm :!mix<CR>
+    autocmd FileType elixir nnoremap <buffer> <leader>tf :!mix test<CR>
+    autocmd FileType elixir nnoremap <buffer> <leader>tl :execute ":!mix test ".expand('%').":".line('.')<CR>
 augroup END
 " }}}
 " golang {{{
@@ -472,12 +505,34 @@ highlight ColorColumn guibg=#333333 ctermbg=8
 " }}}
 " NewPerlModule {{{
 function! NewPerlModule()
-    0r /home/davs/.vim/skeleton/perl.package
+    0r ~/.vim/skeleton/perl.package
     let l:path = expand('%:p')
     let l:path = substitute(l:path, '^.*/\(lib\|t\)/', '', '')
     let l:path = substitute(l:path, '.pm$', '', '')
     let l:module_name = substitute(l:path, '/', '::', 'g')
     execute "normal! ggwi".l:module_name
+endfunction
+" }}}
+" NexElixirModule {{{
+function! NewElixirModule()
+    " get the part between lib/ and .ex
+    let l:path = substitute(expand('%:p'), '^.*/\(lib\|test\)/\(.*\).exs\?$', '\2', 'g')
+
+    " insert defmodule and capitalize the first letter of the module name
+    execute "normal! gg0idefmodule ".l:path." do\nend\<ESC>gg0W~"
+
+    " delete _, capitalize next letter
+    if getline(".") =~# '_'
+        :s/\v_(.)/\u\1/g
+    endif
+
+    " replace / with ., capitalize next letter
+    if getline(".") =~# '/'
+        :s/\v\/(.)/.\u\1/g
+    endif
+
+    execute "normal! o"
+    startinsert
 endfunction
 " }}}
 " RunPerlTest {{{
@@ -556,7 +611,6 @@ function! RunClojure(reload)
         if a:reload
             execute ":Eval (clojure.core/remove-ns (clojure.core/ns-name clojure.core/*ns*))"
             execute ":Require"
-            execute ":Eval (-main)"
         else
             execute ":Eval (-main)"
         endif
@@ -594,7 +648,7 @@ set runtimepath^=/home/davs/.vim/bundle/ctrlp.vim
 let g:ctrlp_regexp = 0
 let g:ctrlp_by_filename = 0
 let g:ctrlp_custom_ignore = {
-    \ 'dir': '\v(\.git|venv)',
+    \ 'dir': '\v(\.git|venv|deps|_build)',
     \ 'file': '\v(__init2__\.py|\.pyc)$',
     \ }
 
@@ -632,7 +686,11 @@ nnoremap gd :Gvdiff<CR>
 " }}}
 " vim-sexp {{{
 let g:sexp_enable_insert_mode_mappings=0
-let g:sexp_insert_after_wrap=0
+let g:sexp_insert_after_wrap=1
+let g:sexp_mappings = {
+    \ 'sexp_move_to_prev_bracket': 'g9',
+    \ 'sexp_move_to_next_bracket': 'g0',
+    \ }
 " }}}
 " rainbow_parentheses {{{
 let g:rbpt_colorpairs = [
