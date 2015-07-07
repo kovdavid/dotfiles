@@ -4,3 +4,4 @@ vim/bundle/**
 vim-pathogen.tar.xz
 vim/bundle/vundle/.netrwhist
 fontconfig/
+bash/proxy
