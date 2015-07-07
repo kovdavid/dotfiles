@@ -74,10 +74,13 @@ if [ -d /home/davs/.gem/ruby/2.1.0/bin ] ; then
 fi
 
 #nike
-if [ -f /home/davs/dotfiles/nike ] ; then
+if [ -f /home/davs/dotfiles/nike_remote ] ; then
     if [ -f /home/davs/dotfiles/bash/nike ] ; then
         source /home/davs/dotfiles/bash/nike
     fi
+fi
+
+if [ -f /home/davs/dotfiles/nike ] ; then
     if [ -f /home/davs/dotfiles/bash/proxy ] ; then
         source /home/davs/dotfiles/bash/proxy
     fi
