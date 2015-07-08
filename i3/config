@@ -198,7 +198,7 @@ for_window [class="(?i)google-chrome"] border none
 for_window [class="Firefox"] border none
 for_window [title="File Operation Progress"] floating enable; focus mode_toggle
 
-exec /home/davs/bin/mon left &
+exec /home/davs/bin/mon right &
 exec sudo nm-applet &
 exec numlockx &
 exec /home/davs/bin/init_trackpoint &

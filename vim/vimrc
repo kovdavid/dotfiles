@@ -215,6 +215,8 @@ nnoremap qr :tabnext<CR>
 if has('nvim')
     tnoremap <a-q> <c-\><c-n>
     tnoremap <a-w> <c-\><c-n><c-w><c-w>
+    nnoremap <a-q> <c-\><c-n>
+    nnoremap <a-w> <c-\><c-n><c-w><c-w>
 endif
 
 " maximize current split
