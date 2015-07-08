@@ -1,6 +1,7 @@
 unalias vim
 unalias grep
+unalias dus
 
 alias vim="/home/davs/vim/bin/vim"
 alias grep="/bin/grep"
-alias vim-term="/home/davs/vim/bin/vim"
+alias dus="du -shcBM .??* * | sort -g"
