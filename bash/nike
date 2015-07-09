@@ -5,3 +5,5 @@ unalias dus
 alias vim="/home/davs/vim/bin/vim"
 alias grep="/bin/grep"
 alias dus="du -shcBM .??* * | sort -g"
+
+export LS_COLORS=''
