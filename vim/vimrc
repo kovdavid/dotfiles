@@ -217,6 +217,8 @@ if has('nvim')
     tnoremap <a-w> <c-\><c-n><c-w><c-w>
     nnoremap <a-q> <c-\><c-n>
     nnoremap <a-w> <c-\><c-n><c-w><c-w>
+
+    nnoremap <leader>ri <c-w><c-w>i<UP><c-\><c-n>:sleep 10m<CR>i<CR><c-\><c-n><c-w><c-w>
 endif
 
 " maximize current split
@@ -469,6 +471,10 @@ augroup filetype_elixir
 
     autocmd BufRead,BufNewFile *.ex  if line('$') == 1 && getline('.') == '' | call NewElixirModule() | endif
     autocmd BufRead,BufNewFile *.exs if line('$') == 1 && getline('.') == '' | call NewElixirModule() | endif
+
+    if has('nvim')
+        autocmd FileType elixir nnoremap <leader>ri <c-w><c-w>i<UP><c-\><c-n>:sleep 10m<CR>i<CR><c-\><c-n><c-w><c-w>
+    endif
 
     autocmd FileType elixir nnoremap <buffer> <leader>rr :!elixir %<CR>
     autocmd FileType elixir nnoremap <buffer> <leader>rm :!mix<CR>
