@@ -5,6 +5,7 @@ unalias dus
 alias vim="/home/davs/vim/bin/vim"
 alias grep="/bin/grep"
 alias dus="du -shcBM .??* * | sort -g"
-alias tmux="/home/davs/tmux/bin/tmux"
+alias screen="/home/davs/screen/bin/screen"
 
+export SCREENDIR="/home/davs/screen/run"
 export LS_COLORS=''
