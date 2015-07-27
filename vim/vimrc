@@ -90,7 +90,7 @@ set clipboard=unnamedplus
 set iskeyword-=:
 
 set switchbuf=useopen,usetab,newtab
-set winwidth=81
+set winwidth=100
 
 set complete-=i
 
