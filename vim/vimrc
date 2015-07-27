@@ -458,7 +458,7 @@ noremap <space> za
 " }}}
 " Functions {{{
 " ToggleColorColumn {{{
-set colorcolumn=81
+set colorcolumn=100
 highlight ColorColumn guibg=#333333 ctermbg=8
 " }}}
 " NewPerlModule {{{
