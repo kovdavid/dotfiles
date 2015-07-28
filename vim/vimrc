@@ -90,7 +90,7 @@ set clipboard=unnamedplus
 set iskeyword-=:
 
 set switchbuf=useopen,usetab,newtab
-set winwidth=81
+set winwidth=100
 
 set complete-=i
 
@@ -283,16 +283,25 @@ augroup all_file_type
     autocmd BufWritePre * %s/\s\+$//e
 augroup END
 " }}}
-" QuickFix {{{
-"augroup quickfix
-    "autocmd!
-    "autocmd FileType qf nnoremap <buffer> <c-m> <CR>
-    "autocmd FileType qf nnoremap <buffer> <CR> <CR>
-    "autocmd FileType qf nnoremap <buffer> o <CR><C-W><C-P>
-    "autocmd FileType qf nnoremap <buffer> q :lclose<CR>:cclose<CR>
-    "autocmd FileType qf nnoremap <buffer> <ESC> :lclose<CR>cclose<CR>
-    "autocmd FileType qf nnoremap <buffer> <c-J> <CR><ESC>:lclose<CR>:cclose<CR>
-"augroup END
+" Elixir {{{
+augroup filetype_elixir
+    autocmd!
+    autocmd BufRead,BufWritePre,FileType elixir execute ":Rooter"
+
+    autocmd BufRead,BufNewFile *.ex  if line('$') == 1 && getline('.') == '' | call NewElixirModule() | endif
+    autocmd BufRead,BufNewFile *.exs if line('$') == 1 && getline('.') == '' | call NewElixirModule() | endif
+
+    if has('nvim')
+        autocmd FileType elixir nnoremap <leader>ri <c-w><c-w>i<UP><c-\><c-n>:sleep 10m<CR>i<CR><c-\><c-n><c-w><c-w>
+    endif
+
+	autocmd FileType elixir nnoremap <buffer> <leader>ei :call ElixirIOinspect()<CR>
+
+    autocmd FileType elixir nnoremap <buffer> <leader>rr :!elixir %<CR>
+    autocmd FileType elixir nnoremap <buffer> <leader>rm :!mix<CR>
+    autocmd FileType elixir nnoremap <buffer> <leader>tf :!mix test<CR>
+    autocmd FileType elixir nnoremap <buffer> <leader>tl :execute ":!mix test ".expand('%').":".line('.')<CR>
+augroup END
 " }}}
 " Perl {{{
 augroup filetype_perl
@@ -339,31 +348,6 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>td :PerlTestDir<CR>
     autocmd FileType perl nnoremap <buffer> <leader>tc :PerlTestCreate<CR>
     autocmd FileType perl nnoremap <buffer> <leader>to :PerlTestDirOpen<CR>
-augroup END
-" }}}
-" Python {{{
-augroup filetype_python
-    autocmd!
-
-    autocmd BufEnter,BufRead,BufWritePre,FileReadPost,FileType python execute ":Rooter"
-
-    autocmd BufNewFile *.py 0r /home/davs/.vim/skeleton/python.script
-
-    autocmd FileType python let python_hightlight_all=1
-    autocmd FileType python setlocal foldlevelstart=20
-    autocmd FileType python setlocal nowrap
-
-    autocmd FileType python setlocal wildignore+=*.pyc
-
-    autocmd FileType python nnoremap <buffer> <leader>pf :call Flake8()<CR>
-    autocmd FileType python nnoremap <buffer> <leader>pp :call Pep8()<CR>
-
-    autocmd FileType python nnoremap <buffer> <leader>rr :!python2 %<CR>
-
-    autocmd FileType python nnoremap <buffer> <leader>ta :call RunPythonTest('all')<CR>
-    autocmd FileType python nnoremap <buffer> <leader>tf :call RunPythonTest('file')<CR>
-    autocmd FileType python nnoremap <buffer> <leader>tc :call RunPythonTest('class')<CR>
-    autocmd FileType python nnoremap <buffer> <leader>tm :call RunPythonTest('method')<CR>
 augroup END
 " }}}
 " HTML {{{
@@ -434,10 +418,6 @@ augroup filetype_ruby
     autocmd FileType ruby,eruby setlocal expandtab
 
     autocmd FileType ruby nnoremap <buffer> <leader>rr :!ruby %<CR>
-    autocmd FileType ruby nnoremap <buffer> <leader>tf :call RunCurrentSpecFile()<CR>
-    autocmd FileType ruby nnoremap <buffer> <leader>ts :call RunNearestSpec()<CR>
-    autocmd FileType ruby nnoremap <buffer> <leader>tl :call RunLastSpec()<CR>
-    autocmd FileType ruby nnoremap <buffer> <leader>ta :call RunAllSpecs()<CR>
 augroup END
 " }}}
 " Clojure {{{
@@ -464,36 +444,6 @@ augroup filetype_clojure
     autocmd FileType clojure nnoremap ) /[[({]<CR>:nohl<CR>
 augroup END
 " }}}
-" Elixir {{{
-augroup filetype_elixir
-    autocmd!
-    autocmd BufRead,BufWritePre,FileType elixir execute ":Rooter"
-
-    autocmd BufRead,BufNewFile *.ex  if line('$') == 1 && getline('.') == '' | call NewElixirModule() | endif
-    autocmd BufRead,BufNewFile *.exs if line('$') == 1 && getline('.') == '' | call NewElixirModule() | endif
-
-    if has('nvim')
-        autocmd FileType elixir nnoremap <leader>ri <c-w><c-w>i<UP><c-\><c-n>:sleep 10m<CR>i<CR><c-\><c-n><c-w><c-w>
-    endif
-
-    autocmd FileType elixir nnoremap <buffer> <leader>rr :!elixir %<CR>
-    autocmd FileType elixir nnoremap <buffer> <leader>rm :!mix<CR>
-    autocmd FileType elixir nnoremap <buffer> <leader>tf :!mix test<CR>
-    autocmd FileType elixir nnoremap <buffer> <leader>tl :execute ":!mix test ".expand('%').":".line('.')<CR>
-augroup END
-" }}}
-" golang {{{
-augroup filetype_golang
-    autocmd!
-
-    autocmd FileType go nmap <buffer> <leader>gr <Plug>(go-run)
-    autocmd FileType go nmap <buffer> <leader>gt <Plug>(go-test)
-    autocmd FileType go nmap <buffer> <leader>gb <Plug>(go-build)
-    autocmd FileType go nmap <buffer> <leader>gi <Plug>(go-info)
-    autocmd FileType go nmap <buffer> <leader>gd <Plug>(go-doc)
-    autocmd FileType go nmap <buffer> <leader>gl :GoLint<CR>
-augroup END
-" }}}
 " }}}
 " vimrc {{{
 noremap <leader>se :tabnew $MYVIMRC<CR>
@@ -508,7 +458,7 @@ noremap <space> za
 " }}}
 " Functions {{{
 " ToggleColorColumn {{{
-set colorcolumn=81
+set colorcolumn=100
 highlight ColorColumn guibg=#333333 ctermbg=8
 " }}}
 " NewPerlModule {{{
@@ -541,6 +491,16 @@ function! NewElixirModule()
 
     execute "normal! o"
     startinsert
+endfunction
+" }}}
+" ElixirIOinspect {{{
+function! ElixirIOinspect()
+    " get the part between lib/ and .ex
+	if getline(".") =~# '\v\s*IO\.inspect'
+		execute "normal! ^dW"
+	else
+		execute "normal! ^iIO.inspect "
+	endif
 endfunction
 " }}}
 " RunPerlTest {{{
