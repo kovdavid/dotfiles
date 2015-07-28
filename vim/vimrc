@@ -19,21 +19,21 @@ Plugin 'airblade/vim-rooter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jnurmine/Zenburn'
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 
 " Elixir
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'tpope/vim-endwise'
 
 " Clojure
-Plugin 'guns/vim-sexp'
-Plugin 'tpope/vim-fireplace'
-Plugin 'tpope/vim-sexp-mappings-for-regular-people'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'dgrnbrg/vim-redl'
+"Plugin 'guns/vim-sexp'
+"Plugin 'tpope/vim-fireplace'
+"Plugin 'tpope/vim-sexp-mappings-for-regular-people'
+"Plugin 'kien/rainbow_parentheses.vim'
+"Plugin 'dgrnbrg/vim-redl'
 
 " golang
-Plugin 'fatih/vim-go.git'
+"Plugin 'fatih/vim-go.git'
 
 " snipMate
 Plugin 'tomtom/tlib_vim'
