@@ -20,6 +20,7 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_dotfile bashrc
     remove_and_link_dotfile fontconfig
     remove_and_link_dotfile gitconfig
+    remove_and_link_dotfile screenrc
     remove_and_link_dotfile i3
     remove_and_link_dotfile i3status.conf
     remove_and_link_dotfile vim
