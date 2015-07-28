@@ -1,5 +1,8 @@
 bindkey -k F1 prev
 bindkey -k F2 next
+bindkey -k k9 focus
+
+termcapinfo xterm* ti@:te@
 
 hardstatus alwayslastline
 hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W}%c %{g}]'
