@@ -85,3 +85,8 @@ if [ -f /home/davs/dotfiles/nike ] ; then
         source /home/davs/dotfiles/bash/proxy
     fi
 fi
+
+#tmux
+if [ -f /home/davs/dotfiles/tmux-completion.bash ] ; then
+    source /home/davs/dotfiles/tmux-completion.bash
+fi
