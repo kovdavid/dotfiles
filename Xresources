@@ -11,13 +11,14 @@ XTerm*faceSize: 11
 !XTerm*Background: #333333
 XTerm*Foreground: #ffffff
 XTerm*Background: #3A3A3A
+XTerm*allowWindowOps: true
 
 xterm*termName: xterm-256color
 XTerm*locale: true
 XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
 
 !Alt key
-XTerm*metaSendsEscape: true 
+XTerm*metaSendsEscape: true
 
 Xterm*saveLines: 4096
 
