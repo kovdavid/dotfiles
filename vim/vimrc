@@ -651,6 +651,7 @@ let NERDTreeChDirMode=0
 " Fugitive {{{
 nnoremap gst :Gstatus<CR>5j
 nnoremap gd :Gvdiff<CR>
+nnoremap gci :Gwrite <BAR> Gcommit<CR>O
 " }}}
 " vim-sexp {{{
 let g:sexp_enable_insert_mode_mappings=0
