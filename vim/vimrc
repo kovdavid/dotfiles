@@ -57,7 +57,7 @@ Plugin 'garbas/vim-snipmate'
 
 " Perl
 Plugin 'DavsX/vim_test_runner'
-Plugin 'DavsX/vim_time_since_last_commit'
+"Plugin 'DavsX/vim_time_since_last_commit'
 
 " HTML
 " Plugin 'rstacruz/sparkup'
@@ -315,7 +315,7 @@ augroup filetype_perl
 
     autocmd BufRead,BufNewFile *.pm if line('$') == 1 && getline('.') == '' | call NewPerlModule() | endif
 
-    autocmd BufWritePost * if &filetype=='perl' | call Check_time_since_last_commit() | endif
+    "autocmd BufWritePost * if &filetype=='perl' | call Check_time_since_last_commit() | endif
 
     autocmd BufRead,BufWritePre,FileType perl execute ":Rooter"
 
