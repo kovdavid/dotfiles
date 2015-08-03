@@ -284,8 +284,8 @@ augroup all_file_type
     endif
     autocmd BufWritePre * %s/\s\+$//e
 
-    autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal nowrap | setlocal winwidth=20 | endif
-    autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal wrap | setlocal winwidth=100 | endif
+    autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal winwidth=20 | endif
+    autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=100 | endif
 augroup END
 " }}}
 " Elixir {{{
