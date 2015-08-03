@@ -205,6 +205,7 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 
 set nocursorbind
 set noscrollbind
+nnoremap db :windo set scrollbind!<CR>
 " }}}
 " Basic maps {{{
 nnoremap ; :
@@ -284,7 +285,7 @@ augroup all_file_type
     endif
     autocmd BufWritePre * %s/\s\+$//e
 
-    autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal winwidth=20 | endif
+    autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal wrap | setlocal nocursorbind | setlocal noscrollbind | setlocal winwidth=20 | endif
     autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=100 | endif
 augroup END
 " }}}
@@ -462,7 +463,7 @@ set foldlevel =20 "open folds by default
 noremap <space> za
 " }}}
 " Functions {{{
-" ToggleColorColumn {{{
+" ColorColumn {{{
 set colorcolumn=100
 highlight ColorColumn guibg=#333333 ctermbg=8
 " }}}
@@ -657,6 +658,7 @@ let NERDTreeChDirMode=0
 nnoremap gst :Gstatus<CR>5j
 nnoremap gd :Gvdiff<CR>
 nnoremap gci :let @f=expand("%:t:r")<CR>:Gwrite <BAR> Gcommit<CR>O<C-R>f:<space>
+nnoremap gca :Gwrite <BAR> Gcommit --amend<CR>ggA
 " }}}
 " vim-sexp {{{
 let g:sexp_enable_insert_mode_mappings=0
