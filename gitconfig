@@ -33,12 +33,15 @@
 	external = git-meld
 	tool = vimdiff
 [merge]
-        external = meld
+    external = meld
+	tool = fugitive
 [color]
 	ui = auto
 [grep]
 	lineNumber = true
 [difftool]
 	prompt = false
-[http]
-[https]
+[mergetool]
+	prompt = false
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gvdiff\" \"$MERGED\"
