@@ -90,7 +90,6 @@ set clipboard=unnamedplus
 set iskeyword-=:
 
 set switchbuf=useopen,usetab,newtab
-set winwidth=100
 
 set complete-=i
 
@@ -203,6 +202,9 @@ highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+
+set nocursorbind
+set noscrollbind
 " }}}
 " Basic maps {{{
 nnoremap ; :
@@ -281,6 +283,9 @@ augroup all_file_type
         autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber
     endif
     autocmd BufWritePre * %s/\s\+$//e
+
+    autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal nowrap | setlocal winwidth=20 | endif
+    autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal wrap | setlocal winwidth=100 | endif
 augroup END
 " }}}
 " Elixir {{{
