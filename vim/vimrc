@@ -148,7 +148,11 @@ nnoremap < <<
 set shiftwidth   =4             "number of spaces for indenting
 set tabstop      =4             "number of spaces for tabs
 set softtabstop  =4             "number of spaces for tabs while editing
-set expandtab                   "autoinsert spaces instead of tabs
+if filereadable("/home/davs/.nike")
+    set noexpandtab
+else
+    set expandtab
+endif
 " }}}
 " Statusline {{{
 set statusline=
