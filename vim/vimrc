@@ -72,7 +72,6 @@ set encoding=utf-8
 set history=999                " history size
 set lazyredraw                 " don't redraw when executing macros (good performance option)
 set hidden                     " hide buffers instead of closing them
-set modelines=4                " gives 4 lines for modelines (vim meta at the beginning/end of files)
 set backspace=indent,eol,start " allow backspace in insert mode
 set errorformat=%f:%l:%m
 set autowrite
@@ -148,9 +147,14 @@ nnoremap < <<
 set shiftwidth   =4             "number of spaces for indenting
 set tabstop      =4             "number of spaces for tabs
 set softtabstop  =4             "number of spaces for tabs while editing
+" }}}
+" NIKE {{{
 if filereadable("/home/davs/.nike")
+    set modelines=0
     set noexpandtab
 else
+	" gives 4 lines for modelines (vim meta at the beginning/end of files)
+	set modelines=4
     set expandtab
 endif
 " }}}
