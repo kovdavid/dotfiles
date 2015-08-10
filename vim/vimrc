@@ -206,6 +206,7 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 set nocursorbind
 set noscrollbind
 nnoremap db :windo set scrollbind!<CR>
+nnoremap du :windo diffupdate<CR>
 " }}}
 " Basic maps {{{
 nnoremap ; :
@@ -285,7 +286,7 @@ augroup all_file_type
     endif
     autocmd BufWritePre * %s/\s\+$//e
 
-    autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal wrap | setlocal nocursorbind | setlocal noscrollbind | setlocal winwidth=20 | endif
+    autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal wrap | setlocal nocursorbind | endif
     autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=100 | endif
 augroup END
 " }}}
@@ -331,21 +332,21 @@ augroup filetype_perl
 
     autocmd FileType perl setlocal nowrap
     "autocmd FileType perl setlocal foldlevel=1
-    autocmd FileType perl setlocal foldlevelstart=20
-    autocmd FileType perl setlocal foldnestmax=2
-    autocmd FileType perl let perl_include_pod = 1
-    autocmd FileType perl let perl_extended_vars = 1
-    autocmd FileType perl let perl_fold = 1
-    autocmd FileType perl let perl_fold_blocks = 1
+    "autocmd FileType perl setlocal foldlevelstart=20
+    "autocmd FileType perl setlocal foldnestmax=2
+    "autocmd FileType perl let perl_include_pod = 1
+    "autocmd FileType perl let perl_extended_vars = 1
+    "autocmd FileType perl let perl_fold = 1
+    "autocmd FileType perl let perl_fold_blocks = 1
 
     autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
     autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<txn_subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
     autocmd FileType perl hi Statement ctermfg=14
 
-    autocmd FileType perl setlocal makeprg=prove
-
     autocmd FileType perl nnoremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper();<LEFT><LEFT>
     autocmd FileType perl nnoremap <buffer> <leader>so <ESC>vapk:sort<CR>
+
+    autocmd FileType perl nnoremap <buffer> gu :!grep -rP '(::<BAR>\->)<c-r>=expand("<cword>")<CR>'<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>rr :!perl %<CR>
 
