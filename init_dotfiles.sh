@@ -48,6 +48,12 @@ if [ "$REPLY" = "y" ] ; then
     rm -rf /home/davs/.vimrc
     ln -s /home/davs/.vim/vimrc /home/davs/.vimrc
 
+    echo "Linking NVIM"
+    rm -rf /home/davs/.nvimrc
+    rm -rf /home/davs/.nvim
+    ln -s /home/davs/.vim/vimrc /home/davs/.nvimrc
+    ln -s /home/davs/.vim /home/davs/.nvim
+
     echo "DONE"
 fi
 
