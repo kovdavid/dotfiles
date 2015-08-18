@@ -696,4 +696,9 @@ let g:go_fmt_command="goimports"
 let g:SuperTabDefaultCompletionType="<c-x><c-o>"
 let g:SuperTabClosePreviewOnPopupClose=1
 " }}}
+" NERDCommenter {{{
+let g:NERDCustomDelimiters = {
+            \ 'elixir': { 'left': '#' }
+            \}
+" }}}
 " }}}
