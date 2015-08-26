@@ -36,9 +36,9 @@ Plugin 'tpope/vim-endwise'
 "Plugin 'fatih/vim-go.git'
 
 " snipMate
-Plugin 'tomtom/tlib_vim'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'garbas/vim-snipmate'
+"Plugin 'tomtom/tlib_vim'
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'garbas/vim-snipmate'
 
 " Python
 " Plugin 'davidhalter/jedi-vim'
@@ -354,7 +354,7 @@ augroup filetype_perl
     autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<txn_subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
     autocmd FileType perl hi Statement ctermfg=14
 
-    autocmd FileType perl nnoremap <buffer> <leader>idd <ESC>ause Data::Dumper;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper();<LEFT><LEFT>
+    autocmd FileType perl nnoremap <buffer> <leader>dd <ESC>ause v5.10;<CR>use Data::Dumper;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper();<LEFT><LEFT>
     autocmd FileType perl nnoremap <buffer> <leader>so <ESC>vapk:sort<CR>
 
     autocmd FileType perl nnoremap <buffer> gu :!grep -rP '(::<BAR>\->)<c-r>=expand("<cword>")<CR>'<CR>
