@@ -1,6 +1,6 @@
 #dccn1
-new -s dccn1 -n bash1 "ssh dccn1 -t 'cd /usr/nikesoft; bash'"
-splitw -v -p 50 -t 1 "ssh dccn1 -t 'cd /usr/nikesoft; bash'"
-splitw -h -p 50 -t 1 "ssh dccn1 -t 'cd /usr/nikesoft; bash'"
-splitw -h -p 50 -t 2 "ssh dccn1 -t 'cd /usr/nikesoft; bash'"
+new -s dccn1 -n bash1 "ssh dccn1 -t 'cd /usr/nikesoft; bash'; exec $SHELL"
+splitw -v -p 50 -t 1 "ssh dccn1 -t 'cd /usr/nikesoft; bash'; exec $SHELL"
+splitw -h -p 50 -t 1 "ssh dccn1 -t 'cd /usr/nikesoft; bash'; exec $SHELL"
+splitw -h -p 50 -t 2 "ssh dccn1 -t 'cd /usr/nikesoft; bash'; exec $SHELL"
 select-layout tiled
