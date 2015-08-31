@@ -1,6 +1,8 @@
 #vtccn1
 new -s vtccn1 -n bash1 "ssh vtccn1 -t 'cd /usr/nikesoft; bash'; exec $SHELL"
-splitw -v -p 50 -t 1 "ssh vtccn1 -t 'cd /usr/nikesoft; bash'; exec $SHELL"
-splitw -h -p 50 -t 1 "ssh vtccn1 -t 'cd /usr/nikesoft; bash'; exec $SHELL"
-splitw -h -p 50 -t 2 "ssh vtccn1 -t 'cd /usr/nikesoft; bash'; exec $SHELL"
+set-option -t vtccn1 default-command "ssh vtccn1 -t 'cd /usr/nikesoft; bash'; exec $SHELL"
+
+splitw -v -p 50 -t 1
+splitw -h -p 50 -t 1
+splitw -h -p 50 -t 2
 select-layout tiled
