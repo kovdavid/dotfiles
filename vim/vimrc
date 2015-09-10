@@ -631,6 +631,7 @@ nnoremap <leader>af :Tabularize /^.\{-}\zs/l1l1<left><left><left><left><left>
 " }}}
 " ctrlp {{{
 set runtimepath^=/home/davs/.vim/bundle/ctrlp.vim
+let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_regexp = 0
 let g:ctrlp_by_filename = 0
 let g:ctrlp_custom_ignore = {
