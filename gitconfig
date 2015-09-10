@@ -27,7 +27,7 @@
 	name = Davs
 	email = kovdavid@gmail.com
 [core]
-	editor = /usr/bin/vim
+	editor = vim
 	pager = cat
 	trustctime = false
 [diff]
