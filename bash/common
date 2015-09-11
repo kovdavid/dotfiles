@@ -2,7 +2,7 @@ export PS1='[\u@\h:\w]\n$([ \j -gt 0 ] && echo "\j ")\\$ '
 set -o vi
 
 #free Ctrl-S and Ctrl-Q in terminal
-stty -ixon
+[[ $- == *i* ]] && stty -ixon
 
 if [ `pwd` = "/home/davs" ] ; then
     cd
