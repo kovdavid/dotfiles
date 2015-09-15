@@ -11,6 +11,7 @@ alias grep='grep --exclude-dir=.git'
 alias gst='git status'
 alias ipcalc="ipcalc -n"
 alias iptraf="iptraf -u"
+alias irc="TERM=screen-256color irssi"
 alias la="ls -lha"
 alias less="less -R"
 alias ll="ls -lh"
