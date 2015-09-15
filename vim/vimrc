@@ -1,74 +1,38 @@
 " vimrc by Davs
-" Vundle {{{
+" vim-plug {{{
 colorscheme desert
 
-filetype off
-
-set rtp+=/home/davs/.vim/bundle/vundle
-call vundle#rc()
-
-Plugin 'gmarik/vundle'
-
-Plugin 'rhysd/clever-f.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-rooter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'jnurmine/Zenburn'
-"Plugin 'ervandew/supertab'
-
-" Elixir
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'tpope/vim-endwise'
-
-" Clojure
-"Plugin 'guns/vim-sexp'
-"Plugin 'tpope/vim-fireplace'
-"Plugin 'tpope/vim-sexp-mappings-for-regular-people'
-"Plugin 'kien/rainbow_parentheses.vim'
-"Plugin 'dgrnbrg/vim-redl'
-
-" golang
-"Plugin 'fatih/vim-go.git'
-
-" snipMate
-"Plugin 'tomtom/tlib_vim'
-"Plugin 'MarcWeber/vim-addon-mw-utils'
-"Plugin 'garbas/vim-snipmate'
-
-" Python
-" Plugin 'davidhalter/jedi-vim'
-" Plugin 'nvie/vim-flake8'
-" Plugin 'vim-scripts/Python-Syntax-Folding'
-
-" Ruby
-" Plugin 'tpope/vim-endwise'
-" Plugin 'thoughtbot/vim-rspec'
-" Plugin 'Keithbsmiley/rspec.vim'
-
-" JS
-" Plugin 'mklabs/vim-backbone'
-" Plugin 'jelera/vim-javascript-syntax'
-" Plugin 'pangloss/vim-javascript'
-
-" Perl
-Plugin 'DavsX/vim_test_runner'
-"Plugin 'DavsX/vim_time_since_last_commit'
-
-" HTML
-" Plugin 'rstacruz/sparkup'
-
-filetype indent on
-filetype plugin on
-syntax on
+call plug#begin()
+Plug 'rhysd/clever-f.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-rooter'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'jnurmine/Zenburn'
+Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
+Plug 'tpope/vim-endwise'
+"Plug 'awetzel/vim-elixir', { 'branch': 'nvim-rplugin' }
+Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
+Plug 'guns/vim-sexp', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
+Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
+Plug 'dgrnbrg/vim-redl', { 'for': 'clojure' }
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+Plug 'nvie/vim-flake8', { 'for': 'python' }
+Plug 'vim-scripts/Python-Syntax-Folding', { 'for': 'python' }
+call plug#end()
 " }}}
 " Basic settings {{{
-set nocp
-set encoding=utf-8
+if !has('nvim')
+    set nocp
+    set encoding=utf-8
+endif
 set history=999                " history size
 set lazyredraw                 " don't redraw when executing macros (good performance option)
 set hidden                     " hide buffers instead of closing them
@@ -499,6 +463,11 @@ endfunction
 function! NewElixirModule()
     " get the part between lib/ and .ex
     let l:path = substitute(expand('%:p'), '^.*/\(lib\|test\)/\(.*\).exs\?$', '\2', 'g')
+
+    " not inside 'lib' nor 'test'
+    if l:path == expand('%:p')
+        let l:path = 'my_module'
+    endif
 
     " insert defmodule and capitalize the first letter of the module name
     execute "normal! gg0idefmodule ".l:path." do\nend\<ESC>gg0W~"
