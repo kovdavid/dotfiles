@@ -15,17 +15,10 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'jnurmine/Zenburn'
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 Plug 'tpope/vim-endwise'
-"Plug 'awetzel/vim-elixir', { 'branch': 'nvim-rplugin' }
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
-Plug 'guns/vim-sexp', { 'for': 'clojure' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
-Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
-Plug 'dgrnbrg/vim-redl', { 'for': 'clojure' }
-Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-Plug 'nvie/vim-flake8', { 'for': 'python' }
-Plug 'vim-scripts/Python-Syntax-Folding', { 'for': 'python' }
+Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 call plug#end()
 " }}}
 " Basic settings {{{
@@ -108,9 +101,10 @@ nnoremap > >>
 nnoremap < <<
 " }}}
 " Tabs {{{
-set shiftwidth   =4             "number of spaces for indenting
-set tabstop      =4             "number of spaces for tabs
-set softtabstop  =4             "number of spaces for tabs while editing
+set shiftwidth=4  " number of spaces for indenting
+set tabstop=8     " number of spaces for tabs
+set softtabstop=4 " number of spaces for tabs while editing
+set shiftround
 " }}}
 " NIKE {{{
 if filereadable("/home/davs/.nike")
@@ -281,6 +275,14 @@ augroup filetype_elixir
     autocmd FileType elixir nnoremap <buffer> <leader>rm :!mix<CR>
     autocmd FileType elixir nnoremap <buffer> <leader>tf :!mix test<CR>
     autocmd FileType elixir nnoremap <buffer> <leader>tl :execute ":!mix test ".expand('%').":".line('.')<CR>
+augroup END
+" }}}
+" Haskell {{{
+augroup filetype_haskell
+    autocmd!
+    autocmd BufRead,BufWritePre,FileType haskell execute ":Rooter"
+
+    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 augroup END
 " }}}
 " Perl {{{
