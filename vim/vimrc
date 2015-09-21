@@ -321,10 +321,11 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>dd <ESC>ause v5.10;<CR>use Data::Dumper;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper();<LEFT><LEFT>
     autocmd FileType perl nnoremap <buffer> <leader>so <ESC>vapk:sort<CR>
 
-    autocmd FileType perl nnoremap <buffer> gu :!grep -rP '(::<BAR>\->)<c-r>=expand("<cword>")<CR>'<CR>
+    autocmd FileType perl nnoremap <buffer> gu :!grep -rP '(::<BAR>\->)<c-r>=expand("<cword>")<CR>' bin/ lib/ etc/<CR>
 
-    autocmd FileType perl nnoremap <buffer> <leader>rr :!perl %<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>rr :!perl -Ilib %<CR>
 
+    autocmd FileType perl nnoremap <buffer> <leader>ts :!perl -Ilib -c %<CR>
     autocmd FileType perl nnoremap <buffer> <leader>tf :PerlTestFile<CR>
     autocmd FileType perl nnoremap <buffer> <leader>ta :PerlTestAll<CR>
     autocmd FileType perl nnoremap <buffer> <leader>td :PerlTestDir<CR>
