@@ -4,17 +4,13 @@ set -o vi
 #free Ctrl-S and Ctrl-Q in terminal
 [[ $- == *i* ]] && stty -ixon
 
-if [ `pwd` = "/home/davs" ] ; then
-    cd
-fi
-
 if [ -e /etc/profile ] ; then
     source /etc/profile
 fi
 
-#heroku
-if [ -d /usr/local/heroku/bin ] ; then
-    export PATH=$PATH:/usr/local/heroku/bin
+#cabal
+if [ -d /home/davs/.cabal/bin ] ; then
+    export PATH=$PATH:/home/davs/.cabal/bin
 fi
 
 #elixir
