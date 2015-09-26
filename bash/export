@@ -5,7 +5,7 @@ export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 export PERL_LOCAL_LIB_ROOT="$PERL_LOCAL_LIB_ROOT:/opt/perlbrew"
 export PERL_MB_OPT="--install_base /opt/perlbrew"
 export PERL_MM_OPT="INSTALL_BASE=/opt/perlbrew"
-export PERL5LIB="/opt/perlbrew/lib/perl5:$PERL5LIB"
+#export PERL5LIB="/opt/perlbrew/lib/perl5:$PERL5LIB"
 
 export JAVA_HOME="/usr/lib/jvm/default"
 export PATH="$JAVA_HOME:$PATH"
