@@ -641,7 +641,7 @@ let g:perl_test_all_command = 'fprove'
 " }}}
 " NERDTree {{{
 nnoremap <F5> :NERDTreeToggle<CR>
-nnoremap <S-F5> :NERDTreeFind<CR>
+nnoremap <F17> :NERDTreeFind<CR>
 let NERDTreeIgnore = ['\.pyc$']
 let NERDTreeChDirMode=0
 " }}}
