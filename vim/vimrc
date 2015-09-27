@@ -111,8 +111,8 @@ if filereadable("/home/davs/.nike")
     set modelines=0
     set noexpandtab
 else
-	" gives 4 lines for modelines (vim meta at the beginning/end of files)
-	set modelines=4
+    " gives 4 lines for modelines (vim meta at the beginning/end of files)
+    set modelines=4
     set expandtab
 endif
 " }}}
@@ -268,8 +268,6 @@ augroup filetype_elixir
     if has('nvim')
         autocmd FileType elixir nnoremap <leader>ri <c-w><c-w>i<UP><c-\><c-n>:sleep 10m<CR>i<CR><c-\><c-n><c-w><c-w>
     endif
-
-	autocmd FileType elixir nnoremap <buffer> <leader>ei :call ElixirIOinspect()<CR>
 
     autocmd FileType elixir nnoremap <buffer> <leader>rr :!elixir %<CR>
     autocmd FileType elixir nnoremap <buffer> <leader>rm :!mix<CR>
@@ -487,16 +485,6 @@ function! NewElixirModule()
 
     execute "normal! o"
     startinsert
-endfunction
-" }}}
-" ElixirIOinspect {{{
-function! ElixirIOinspect()
-    " get the part between lib/ and .ex
-	if getline(".") =~# '\v\s*IO\.inspect'
-		execute "normal! ^dW"
-	else
-		execute "normal! ^iIO.inspect "
-	endif
 endfunction
 " }}}
 " RunPerlTest {{{
