@@ -270,12 +270,10 @@ augroup filetype_elixir
 		autocmd FileType elixir nnoremap <leader>ri <c-w><c-w>i<UP><c-\><c-n>:sleep 10m<CR>i<CR><c-\><c-n><c-w><c-w>
 	endif
 
-	autocmd FileType elixir nnoremap <buffer> <leader>ei :call ElixirIOinspect()<CR>
-
-	autocmd FileType elixir nnoremap <buffer> <leader>rr :!elixir %<CR>
-	autocmd FileType elixir nnoremap <buffer> <leader>rm :!mix<CR>
-	autocmd FileType elixir nnoremap <buffer> <leader>tf :!mix test<CR>
-	autocmd FileType elixir nnoremap <buffer> <leader>tl :execute ":!mix test ".expand('%').":".line('.')<CR>
+    autocmd FileType elixir nnoremap <buffer> <leader>rr :!elixir %<CR>
+    autocmd FileType elixir nnoremap <buffer> <leader>rm :!mix<CR>
+    autocmd FileType elixir nnoremap <buffer> <leader>tf :!mix test<CR>
+    autocmd FileType elixir nnoremap <buffer> <leader>tl :execute ":!mix test ".expand('%').":".line('.')<CR>
 augroup END
 " }}}
 " Haskell {{{
@@ -490,16 +488,6 @@ function! NewElixirModule()
 	startinsert
 endfunction
 " }}}
-" ElixirIOinspect {{{
-function! ElixirIOinspect()
-	" get the part between lib/ and .ex
-	if getline(".") =~# '\v\s*IO\.inspect'
-		execute "normal! ^dW"
-	else
-		execute "normal! ^iIO.inspect "
-	endif
-endfunction
-" }}}
 " RunPerlTest {{{
 function! RunPerlTest(mode)
 	let l:path = expand('%')
@@ -642,7 +630,7 @@ let g:perl_test_all_command = 'fprove'
 " }}}
 " NERDTree {{{
 nnoremap <F5> :NERDTreeToggle<CR>
-nnoremap <S-F5> :NERDTreeFind<CR>
+nnoremap <F17> :NERDTreeFind<CR>
 let NERDTreeIgnore = ['\.pyc$']
 let NERDTreeChDirMode=0
 " }}}
