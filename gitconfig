@@ -30,6 +30,7 @@
 	editor = vim
 	pager = cat
 	trustctime = false
+	excludesfile = ~/.git_global_ignore
 [diff]
 	external = git-meld
 	tool = vimdiff
