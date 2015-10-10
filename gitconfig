@@ -24,26 +24,26 @@
     mt   = mergetool
     root = !pwd
 [user]
-	name = Davs
-	email = kovdavid@gmail.com
+    name = Davs
+    email = kovdavid@gmail.com
 [core]
-	editor = vim
-	pager = cat
-	trustctime = false
-	excludesfile = ~/.git_global_ignore
+    editor = vim
+    pager = cat
+    trustctime = false
+    excludesfile = ~/.git_global_ignore
 [diff]
-	external = git-meld
-	tool = vimdiff
+    external = git-meld
+    tool = vimdiff
 [merge]
     external = meld
-	tool = fugitive
+    tool = fugitive
 [color]
-	ui = auto
+    ui = auto
 [grep]
-	lineNumber = true
+    lineNumber = true
 [difftool]
-	prompt = false
+    prompt = false
 [mergetool]
-	prompt = false
+    prompt = false
 [mergetool "fugitive"]
-	cmd = vim -f -c \"Gvdiff\" \"$MERGED\"
+    cmd = vim -f -c \"Gvdiff\" \"$MERGED\"
