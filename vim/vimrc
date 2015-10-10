@@ -235,7 +235,7 @@ nnoremap gt :normal! H<CR>
 nnoremap gb :normal! L<CR>
 nnoremap gm :normal! M<CR>
 
-nnoremap <c-[> :po<CR>
+nnoremap <c-\> :po<CR>
 " }}}
 " Row/column highlight {{{
 noremap <F2> :set number!<CR>:set relativenumber!<CR>
