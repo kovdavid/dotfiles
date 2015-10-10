@@ -667,7 +667,10 @@ let g:SuperTabClosePreviewOnPopupClose=1
 " }}}
 " NERDCommenter {{{
 let g:NERDCustomDelimiters = {
-            \ 'elixir': { 'left': '#' }
+            \ 'elixir': { 'left': '#' },
+            \ 'haskell': { 'left': '--' }
             \}
+let g:NERDRemoveExtraSpaces = 1
+let g:NERDSpaceDelims = 1
 " }}}
 " }}}
