@@ -309,18 +309,7 @@ augroup filetype_perl
 
     autocmd FileType perl setlocal iskeyword-=:
 
-<<<<<<< HEAD
     autocmd FileType perl setlocal nowrap
-=======
-    autocmd FileType perl setlocal nowrap
-    "autocmd FileType perl setlocal foldlevel=1
-    "autocmd FileType perl setlocal foldlevelstart=20
-    "autocmd FileType perl setlocal foldnestmax=2
-    "autocmd FileType perl let perl_include_pod = 1
-    "autocmd FileType perl let perl_extended_vars = 1
-    "autocmd FileType perl let perl_fold = 1
-    "autocmd FileType perl let perl_fold_blocks = 1
->>>>>>> e628bf94ae000a798a9ec6f8bb05f1832c904192
 
     autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
     autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<txn_subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
