@@ -67,9 +67,9 @@ endif
 let g:sh_noisk=1
 " }}}
 " cmdline {{{
-set cmdheight=1             "command line size
-set showcmd                 "show last command
-set wildmenu                "cmdline completition
+set cmdheight=1 "command line size
+set showcmd     "show last command
+set wildmenu    "cmdline completition
 " }}}
 " Leader {{{
 let mapleader = ","
@@ -102,7 +102,6 @@ nnoremap < <<
 " }}}
 " Tabs {{{
 set shiftwidth=4  " number of spaces for indenting
-set tabstop=8     " number of spaces for tabs
 set softtabstop=4 " number of spaces for tabs while editing
 set shiftround
 " }}}
@@ -110,9 +109,11 @@ set shiftround
 if filereadable("/home/davs/.nike")
     set modelines=0
     set noexpandtab
+    set tabstop=4     " number of spaces for tabs
 else
     " gives 4 lines for modelines (vim meta at the beginning/end of files)
     set modelines=4
+    set tabstop=8     " number of spaces for tabs
     set expandtab
 endif
 " }}}
@@ -308,7 +309,18 @@ augroup filetype_perl
 
     autocmd FileType perl setlocal iskeyword-=:
 
+<<<<<<< HEAD
     autocmd FileType perl setlocal nowrap
+=======
+    autocmd FileType perl setlocal nowrap
+    "autocmd FileType perl setlocal foldlevel=1
+    "autocmd FileType perl setlocal foldlevelstart=20
+    "autocmd FileType perl setlocal foldnestmax=2
+    "autocmd FileType perl let perl_include_pod = 1
+    "autocmd FileType perl let perl_extended_vars = 1
+    "autocmd FileType perl let perl_fold = 1
+    "autocmd FileType perl let perl_fold_blocks = 1
+>>>>>>> e628bf94ae000a798a9ec6f8bb05f1832c904192
 
     autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
     autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<txn_subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
@@ -491,10 +503,10 @@ function! RunPerlTest(mode)
 
     if a:mode == 'file'
         let l:result = RunTest(l:path)
-    "elseif a:mode == 'class'
+        "elseif a:mode == 'class'
         "let l:class = GetPythonClassName()
         "let l:result = RunTest(l:path . ":" . l:class)
-    "elseif a:mode == 'method'
+        "elseif a:mode == 'method'
         "let l:class = GetPythonClassName()
         "let l:method = GetPythonMethodName()
         "let l:result = RunTest(l:path .":". l:class .".". l:method)
@@ -597,9 +609,9 @@ let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_regexp = 0
 let g:ctrlp_by_filename = 0
 let g:ctrlp_custom_ignore = {
-    \ 'dir': '\v(\.git|venv|deps|_build)',
-    \ 'file': '\v(__init2__\.py|\.pyc)$',
-    \ }
+            \ 'dir': '\v(\.git|venv|deps|_build)',
+            \ 'file': '\v(__init2__\.py|\.pyc)$',
+            \ }
 
 nnoremap <leader>, :CtrlP<CR>
 " }}}
@@ -639,18 +651,18 @@ nnoremap gca :Gwrite <BAR> Gcommit --amend<CR>ggA
 let g:sexp_enable_insert_mode_mappings=0
 let g:sexp_insert_after_wrap=1
 let g:sexp_mappings = {
-    \ 'sexp_move_to_prev_bracket': 'g9',
-    \ 'sexp_move_to_next_bracket': 'g0',
-    \ }
+            \ 'sexp_move_to_prev_bracket': 'g9',
+            \ 'sexp_move_to_next_bracket': 'g0',
+            \ }
 " }}}
 " rainbow_parentheses {{{
 let g:rbpt_colorpairs = [
-    \ [9, 9],
-    \ [13, 13],
-    \ [2, 2],
-    \ [11, 11],
-    \ [15, 15],
-    \ ]
+            \ [9, 9],
+            \ [13, 13],
+            \ [2, 2],
+            \ [11, 11],
+            \ [15, 15],
+            \ ]
 " }}}
 " vim-go {{{
 let g:go_fmt_command="goimports"

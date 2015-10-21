@@ -27,6 +27,7 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_dotfile xinitrc
     remove_and_link_dotfile tmux.conf
     remove_and_link_dotfile tmux.conf.dccn1
+    remove_and_link_dotfile tmux.conf.dccn2
     remove_and_link_dotfile tmux.conf.qaccn4
     remove_and_link_dotfile tmux.conf.vtccn1
     remove_and_link_dotfile xprofile
