@@ -47,3 +47,7 @@
     prompt = false
 [mergetool "fugitive"]
     cmd = vim -f -c \"Gvdiff\" \"$MERGED\"
+[push]
+	default = current
+[pull]
+	default = current
