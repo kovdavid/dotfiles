@@ -13,11 +13,16 @@ Plug 'airblade/vim-rooter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jnurmine/Zenburn'
-Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 Plug 'tpope/vim-endwise'
+
+Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
+
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
-Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
-Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
+
+Plug 'eagletmt/ghcmod-vim'
+Plug 'eagletmt/neco-ghc'
+Plug 'Shougo/deoplete.nvim'
+
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 call plug#end()
 " }}}
@@ -287,8 +292,11 @@ augroup filetype_haskell
     autocmd!
     autocmd BufRead,BufWritePre,FileType haskell execute ":Rooter"
 
+    let g:haskellmode_completion_ghc = 0
+
     autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-    autocmd FileType haskell nnoremap <buffer> <leader>ts :GhcModCheckAndLintAsync<CR>
+    autocmd FileType haskell noremap <buffer> <leader>ts :GhcModCheckAndLintAsync<CR>
+    autocmd FileType haskell noremap <buffer> <leader>rr :!runhaskell %<CR>
 augroup END
 " }}}
 " Perl {{{
@@ -672,5 +680,10 @@ let g:NERDCustomDelimiters = {
             \}
 let g:NERDRemoveExtraSpaces = 1
 let g:NERDSpaceDelims = 1
+" }}}
+" deoplete {{{
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources = {}
+let g:deoplete#sources.haskell = ['buffer', 'omni']
 " }}}
 " }}}

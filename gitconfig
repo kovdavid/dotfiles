@@ -48,6 +48,6 @@
 [mergetool "fugitive"]
     cmd = vim -f -c \"Gvdiff\" \"$MERGED\"
 [push]
-	default = current
+    default = current
 [pull]
-	default = current
+    default = current
