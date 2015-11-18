@@ -212,6 +212,8 @@ nnoremap <C-H> <C-W><C-H>
 inoremap <c-f> <c-x><c-f>
 
 nnoremap ds<space> F<space>xf<space>x
+
+nnoremap <leader>tw :%s/\s\+$//e<CR>
 " }}}
 " Movement maps {{{
 " H beginning of line; L end of line
@@ -254,7 +256,9 @@ augroup all_file_type
         autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber
         autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber
     endif
-    autocmd BufWritePre * %s/\s\+$//e
+	if !filereadable("/home/davs/.nike")
+		autocmd BufWritePre * %s/\s\+$//e
+	endif
 
     autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal wrap | setlocal nocursorbind | endif
     autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=100 | endif
@@ -322,12 +326,13 @@ augroup filetype_perl
 
     autocmd FileType perl nnoremap <buffer> <leader>rr :!perl -Ilib %<CR>
 
-    autocmd FileType perl nnoremap <buffer> <leader>ts :!perl -Ilib -c %<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>tf :PerlTestFile<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>ta :PerlTestAll<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>td :PerlTestDir<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>tc :PerlTestCreate<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>to :PerlTestDirOpen<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ts  :!perl -Ilib -c %<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>tf  :PerlTestFile<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>tpf :PerlProveTestFile<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ta  :PerlTestAll<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>td  :PerlTestDir<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>tc  :PerlTestCreate<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>to  :PerlTestDirOpen<CR>
 augroup END
 " }}}
 " HTML {{{
