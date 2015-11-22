@@ -33,6 +33,7 @@ if !has('nvim')
 endif
 set history=999                " history size
 set lazyredraw                 " don't redraw when executing macros (good performance option)
+set ttyfast
 set hidden                     " hide buffers instead of closing them
 set backspace=indent,eol,start " allow backspace in insert mode
 set errorformat=%f:%l:%m
