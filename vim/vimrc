@@ -19,9 +19,9 @@ Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 
-Plug 'eagletmt/ghcmod-vim'
-Plug 'eagletmt/neco-ghc'
-Plug 'Shougo/deoplete.nvim'
+Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
+Plug 'Shougo/deoplete.nvim', { 'for': 'haskell' }
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 call plug#end()
@@ -33,6 +33,7 @@ if !has('nvim')
 endif
 set history=999                " history size
 set lazyredraw                 " don't redraw when executing macros (good performance option)
+set ttyfast
 set hidden                     " hide buffers instead of closing them
 set backspace=indent,eol,start " allow backspace in insert mode
 set errorformat=%f:%l:%m
