@@ -1,8 +1,0 @@
-#dccn1
-new -s dccn2 -n bash1 "ssh dccn2 -t 'cd /usr/nikesoft; bash'; exec $SHELL"
-set-option -t dccn2 default-command "ssh dccn2 -t 'cd /usr/nikesoft; bash'; exec $SHELL"
-
-splitw -v -p 50 -t 1
-splitw -h -p 50 -t 1
-splitw -h -p 50 -t 2
-select-layout tiled
