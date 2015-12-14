@@ -1,4 +1,8 @@
-export TERM=xterm-256color
+if [ -n "$TMUX" ] ; then
+	export TERM=screen-256color
+else
+	export TERM=xterm-256color
+fi
 
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 

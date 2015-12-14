@@ -1,8 +1,0 @@
-#qaccn4
-new -s qaccn4 -n bash1 "ssh qaccn4 -t 'cd /usr/nikesoft; bash'; exec $SHELL"
-set-option -t qaccn4 default-command "ssh qaccn4 -t 'cd /usr/nikesoft; bash'; exec $SHELL"
-
-splitw -v -p 50 -t 1
-splitw -h -p 50 -t 1
-splitw -h -p 50 -t 2
-select-layout tiled
