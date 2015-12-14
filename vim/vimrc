@@ -4,7 +4,7 @@ colorscheme desert
 
 call plug#begin()
 Plug 'rhysd/clever-f.vim'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
