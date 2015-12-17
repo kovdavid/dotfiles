@@ -4,7 +4,7 @@ colorscheme desert
 
 call plug#begin()
 Plug 'rhysd/clever-f.vim'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
@@ -267,9 +267,9 @@ augroup all_file_type
         autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber
         autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber
     endif
-	if !filereadable("/home/davs/.nike")
-		autocmd BufWritePre * %s/\s\+$//e
-	endif
+    if !filereadable("/home/davs/.nike")
+        autocmd BufWritePre * %s/\s\+$//e
+    endif
 
     autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal wrap | setlocal nocursorbind | endif
     autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=100 | endif
@@ -351,11 +351,11 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>tc  :PerlTestCreate<CR>
     autocmd FileType perl nnoremap <buffer> <leader>to  :PerlTestDirOpen<CR>
 
-	" autocmd FileType perl nnoremap <buffer> <leader>ps viw"hyouse v5.10; say "<C-r>h: $<C-r>h";<ESC>
-	" autocmd FileType perl nnoremap <buffer> <leader>pd viw"hyouse v5.10; use Data::Dumper; say "<C-r>h: ".Dumper($<C-r>h);<ESC>
-	autocmd FileType perl nnoremap <buffer> <leader>ps 0f$lviw"hyouse v5.10; say "<C-r>h: $<C-r>h";<ESC>
-	autocmd FileType perl nnoremap <buffer> <leader>pd 0f$lviw"hyouse v5.10; use Data::Dumper; local $Data::Dumper::Sortkeys = 1; local $Data::Dumper::Maxdepth = 2;<CR>say "<C-r>h: ".Dumper($<C-r>h);<ESC>
-	autocmd FileType perl vnoremap <buffer> <leader>pd :call PerlDumpVariables()<CR>
+    " autocmd FileType perl nnoremap <buffer> <leader>ps viw"hyouse v5.10; say "<C-r>h: $<C-r>h";<ESC>
+    " autocmd FileType perl nnoremap <buffer> <leader>pd viw"hyouse v5.10; use Data::Dumper; say "<C-r>h: ".Dumper($<C-r>h);<ESC>
+    autocmd FileType perl nnoremap <buffer> <leader>ps 0f$lviw"hyouse v5.10; say "<C-r>h: $<C-r>h";<ESC>
+    autocmd FileType perl nnoremap <buffer> <leader>pd 0f$lviw"hyouse v5.10; use Data::Dumper; local $Data::Dumper::Sortkeys = 1; local $Data::Dumper::Maxdepth = 2;<CR>say "<C-r>h: ".Dumper($<C-r>h);<ESC>
+    autocmd FileType perl vnoremap <buffer> <leader>pd :call PerlDumpVariables()<CR>
 augroup END
 " }}}
 " HTML {{{
@@ -607,31 +607,31 @@ endfunction
 " }}}
 " PerlDumpVariables {{{
 function! PerlDumpVariables() range
-	let l:variable_filter = {}
-	let l:variable_order = []
-	
-	for line_number in range(a:firstline, a:lastline)
-		let l:line = getline(line_number)
-		if l:line =~# '\v^\s*#'
-			continue
-		endif
+    let l:variable_filter = {}
+    let l:variable_order = []
 
-		let l:variable_name = matchstr(l:line, '\v^\s*(my )?\$\zs([^ =]+)')
-		if l:variable_name !=? ''
-			if !has_key(l:variable_filter, l:variable_name)
-				let l:variable_filter[l:variable_name] = 1
-				let l:variable_order += [l:variable_name]
-			endif
-		endif
-	endfor
+    for line_number in range(a:firstline, a:lastline)
+        let l:line = getline(line_number)
+        if l:line =~# '\v^\s*#'
+            continue
+        endif
 
-	execute "normal! ".a:lastline."G"
+        let l:variable_name = matchstr(l:line, '\v^\s*(my )?\$\zs([^ =]+)')
+        if l:variable_name !=? ''
+            if !has_key(l:variable_filter, l:variable_name)
+                let l:variable_filter[l:variable_name] = 1
+                let l:variable_order += [l:variable_name]
+            endif
+        endif
+    endfor
 
-	execute "normal! o\<ESC>ouse Data::Dumper; local $Data::Dumper::Sortkeys = 1; local $Data::Dumper::Maxdepth = 2;"
-	for variable in l:variable_order
-		execute "normal! oprint '".variable.": '.Dumper($".variable.");"
-	endfor
-	execute "normal! o"
+    execute "normal! ".a:lastline."G"
+
+    execute "normal! o\<ESC>ouse Data::Dumper; local $Data::Dumper::Sortkeys = 1; local $Data::Dumper::Maxdepth = 2;"
+    for variable in l:variable_order
+        execute "normal! oprint '".variable.": '.Dumper($".variable.");"
+    endfor
+    execute "normal! o"
 endfunction
 " }}}
 " }}}
@@ -683,15 +683,15 @@ let g:perl_test_all_command = 'fprove'
 " }}}
 " NERDTree {{{
 function! NERDTreeFindToggle()
-	if &filetype=='nerdtree'
-		execute 'NERDTreeClose'
-	else
-		if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
-			execute 'NERDTreeClose'
-		else
-			execute 'NERDTreeFind'
-		endif
-	endif
+    if &filetype=='nerdtree'
+        execute 'NERDTreeClose'
+    else
+        if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+            execute 'NERDTreeClose'
+        else
+            execute 'NERDTreeFind'
+        endif
+    endif
 endfunction
 nnoremap <F5> :call NERDTreeFindToggle()<CR>
 
