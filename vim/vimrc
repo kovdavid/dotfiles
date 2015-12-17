@@ -110,6 +110,10 @@ nnoremap < <<
 set shiftwidth=4  " number of spaces for indenting
 set softtabstop=4 " number of spaces for tabs while editing
 set shiftround
+
+set list
+" set listchars=tab:▸\ ,eol:¬
+set listchars=tab:▸\ ,trail:·
 " }}}
 " NIKE {{{
 if filereadable("/home/davs/.nike")
@@ -250,6 +254,7 @@ nnoremap <c-\> :po<CR>
 noremap <F2> :set number!<CR>:set relativenumber!<CR>
 noremap <F3> :set cursorline!<CR>
 noremap <F4> :set cursorcolumn!<CR>
+noremap <F6> :set list!<CR>
 " }}}
 " Tabs {{{
 noremap <c-t> :tabnew<CR>
@@ -268,6 +273,9 @@ augroup all_file_type
 
     autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal wrap | setlocal nocursorbind | endif
     autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=100 | endif
+
+    autocmd Syntax * highlight SpecialKey ctermfg=240 gui=bold guifg=#5b605e
+    autocmd Syntax * highlight NonText ctermfg=240 gui=bold guifg=#5b605e
 augroup END
 " }}}
 " Elixir {{{
