@@ -19,6 +19,7 @@ Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 
+"hdevtools, neomake
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'Shougo/deoplete.nvim', { 'for': 'haskell' }
@@ -300,6 +301,10 @@ augroup END
 augroup filetype_haskell
     autocmd!
     autocmd BufRead,BufWritePre,FileType haskell execute ":Rooter"
+
+    autocmd FileType haskell setlocal shiftwidth=2
+    autocmd FileType haskell setlocal softtabstop=2
+    autocmd FileType haskell setlocal expandtab
 
     let g:haskellmode_completion_ghc = 0
 
