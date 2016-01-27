@@ -14,7 +14,7 @@
     dic  = diff --cached
     dis  = diff --stat
     lc   = log -1 --format=%cd
-    lo   = log --oneline --reverse
+    lo   = log --oneline --reverse -100
     lod  = log --pretty=format:"%h %ad %s" --date=short
     lg   = log --oneline --graph --all
     ld   = log --oneline --reverse HEAD ^develop --no-merges
