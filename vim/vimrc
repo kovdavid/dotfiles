@@ -678,8 +678,8 @@ let g:snips_github = "http://github.com/DavsX"
 let $TEST_PRETTY_COLOR_NAME  = 'bright_green'
 let $TAP_ELAPSED_FORMAT  = '%t1 elapsed'
 let g:perl_test_args_perl   = '-MTest::Pretty -It/lib -Ilib'
-let g:perl_test_args_prove  = '-It/lib -Ilib -j9 --timer'
-let g:perl_test_all_command = 'fprove'
+let g:perl_test_args_prove  = '-It/lib -Ilib -r -j9 --timer'
+let g:perl_test_all_command = 'prove'
 " }}}
 " NERDTree {{{
 function! NERDTreeFindToggle()
