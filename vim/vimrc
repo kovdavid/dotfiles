@@ -467,6 +467,12 @@ augroup filetype_clojure
     autocmd FileType clojure nnoremap ) /[[({]<CR>:nohl<CR>
 augroup END
 " }}}
+" sh {{{
+augroup sh
+    autocmd!
+    autocmd FileType sh nnoremap <buffer> <leader>rr :!bash %<CR>
+augroup END
+" }}}
 " C {{{
 augroup gcc
     autocmd!
