@@ -13,6 +13,7 @@ order += "cpu_temperature 0"
 order += "cpu_usage"
 order += "load"
 order += "volume master"
+order += "volume PCM"
 order += "time"
 
 wireless wlp3s0 {
@@ -46,12 +47,12 @@ disk "/mnt/data" {
 }
 
 battery 0 {
-    format = "⚡ %status %percentage %remaining"
+    format = "🔌  %status %percentage %remaining"
     path = "/sys/class/power_supply/BAT%d/uevent"
 }
 
 cpu_temperature 0 {
-    format = "⌘ %degrees°C"
+    format = "🌡 %degrees°C"
     #path = "/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input"
     #path = "/sys/devices/platform/coretemp.0/temp1_input"
     path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
@@ -62,8 +63,15 @@ cpu_usage {
 }
 
 volume master {
-    format = "☊ %volume"
+    format = "🔉  %volume"
     device = "default"
     mixer = "Master"
+    mixer_idx = 0
+}
+
+volume PCM {
+    format = "☊ %volume"
+    device = "default"
+    mixer = "PCM"
     mixer_idx = 0
 }
