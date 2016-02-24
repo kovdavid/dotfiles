@@ -203,6 +203,11 @@ if has('nvim')
     nnoremap <leader>ri <c-w><c-w>i<UP><c-\><c-n>:sleep 10m<CR>i<CR><c-\><c-n><c-w><c-w>
 endif
 
+vnoremap <leader>jf :!python -m json.tool<CR>
+vnoremap <leader>xf :!xmllint --format -<CR>
+vnoremap <c-f> "sy/<C-R>s<CR>
+
+
 " maximize current split
 nnoremap qa <C-W>_<C-W><BAR>
 " move to next split and maximize it
