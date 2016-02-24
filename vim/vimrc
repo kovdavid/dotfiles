@@ -20,9 +20,12 @@ Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 
 "hdevtools, neomake
-Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
-Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
-Plug 'Shougo/deoplete.nvim', { 'for': 'haskell' }
+Plug 'eagletmt/ghcmod-vim',      { 'for': 'haskell' }
+Plug 'eagletmt/neco-ghc',        { 'for': 'haskell' }
+Plug 'Shougo/deoplete.nvim',     { 'for': 'haskell' }
+Plug 'benekastah/neomake',       { 'for': 'haskell' }
+Plug 'ervandew/supertab',        { 'for': 'haskell' }
+" Plug 'scrooloose/syntastic',     { 'for': 'haskell' }
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 call plug#end()
@@ -307,15 +310,22 @@ augroup filetype_haskell
     autocmd!
     autocmd BufRead,BufWritePre,FileType haskell execute ":Rooter"
 
+    autocmd BufWritePost * if &filetype=='haskell' | execute ":Neomake" | endif
+
     autocmd FileType haskell setlocal shiftwidth=2
     autocmd FileType haskell setlocal softtabstop=2
     autocmd FileType haskell setlocal expandtab
 
-    let g:haskellmode_completion_ghc = 0
+    autocmd FileType haskell let g:haskellmode_completion_ghc = 1
 
     autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-    autocmd FileType haskell noremap <buffer> <leader>ts :GhcModCheckAndLintAsync<CR>
+
     autocmd FileType haskell noremap <buffer> <leader>rr :!runhaskell %<CR>
+    autocmd FileType haskell noremap <buffer> <leader>ts :GhcModCheckAndLintAsync<CR>
+    autocmd FileType haskell noremap <buffer> <leader>tw :GhcModTypeInsert<CR>
+    autocmd FileType haskell noremap <buffer> <leader>tc :GhcModSplitFunCase<CR>
+    autocmd FileType haskell noremap <buffer> <leader>tq :GhcModType<CR>
+    autocmd FileType haskell noremap <buffer> <leader>te :GhcModTypeClear<CR>
 augroup END
 " }}}
 " Perl {{{
@@ -743,6 +753,14 @@ let g:go_fmt_command="goimports"
 " supertab {{{
 let g:SuperTabDefaultCompletionType="<c-x><c-o>"
 let g:SuperTabClosePreviewOnPopupClose=1
+
+if has("gui_running")
+    imap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+else " no gui
+    if has("unix")
+        inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+    endif
+endif
 " }}}
 " NERDCommenter {{{
 let g:NERDCustomDelimiters = {
@@ -756,5 +774,8 @@ let g:NERDSpaceDelims = 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources = {}
 let g:deoplete#sources.haskell = ['buffer', 'omni']
+" }}}
+" neomake {{{
+let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
 " }}}
 " }}}
