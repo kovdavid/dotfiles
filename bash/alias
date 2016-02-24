@@ -7,11 +7,11 @@ alias df="df -h"
 alias dus="du -shc .??* * | sort -h"
 alias fprove='forkprove -Mlib::require::all=t/lib,lib'
 alias g="git"
+alias gb='git branch'
+alias gci='git commit'
+alias gco='git checkout'
 alias grep='grep --exclude-dir=.git'
 alias gst='git status'
-alias ipcalc="ipcalc -n"
-alias iptraf="iptraf -u"
-alias irc="TERM=screen-256color irssi"
 alias la="ls -lha"
 alias less="less -R"
 alias ll="ls -lh"
@@ -33,4 +33,3 @@ alias venv="if [ -e venv ]; then source venv/bin/activate; else source /opt/pyth
 alias vim="nvim"
 alias vp="touch .vimproject"
 alias w0="wget -O /dev/null"
-alias godavs="cd /home/davs/workspace/go/src/github.com/DavsX/"
