@@ -1,0 +1,13 @@
+#!/bin/bash
+
+curr=$(amixer get PCM | grep "Front Left" | grep -oP "[0-9]+%")
+
+if [ $curr = "100%" ] ; then
+    amixer -q set PCM 90%
+    amixer -q set Speaker 91%
+    amixer -q set Headphone 91%
+else
+    amixer -q set PCM 100%
+    amixer -q set Speaker 100%
+    amixer -q set Headphone 100%
+fi
