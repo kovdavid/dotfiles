@@ -18,18 +18,18 @@ if [ "$REPLY" = "y" ] ; then
         mkdir /home/davs/bin
     fi
 
-	for script in $(ls /home/davs/dotfiles/bin); do
-		if [ -f "/home/davs/bin/$script" ] ; then
-			read -n 1 -p "/home/davs/bin/$script already exists. Delete file? <y/n>"
-			echo ""
-			if [ "$REPLY" = "y" ] ; then
-				rm -rf "/home/davs/bin/$script"
-				ln -s "/home/davs/dotfiles/bin/$script" "/home/davs/bin/$script"
-			fi
-		else
-			ln -s "/home/davs/dotfiles/bin/$script" "/home/davs/bin/$script"
-		fi
-	done
+    for script in $(ls /home/davs/dotfiles/bin); do
+        if [ -f "/home/davs/bin/$script" ] ; then
+            read -n 1 -p "/home/davs/bin/$script already exists. Delete file? <y/n>"
+            echo ""
+            if [ "$REPLY" = "y" ] ; then
+                rm -rf "/home/davs/bin/$script"
+                ln -s "/home/davs/dotfiles/bin/$script" "/home/davs/bin/$script"
+            fi
+        else
+            ln -s "/home/davs/dotfiles/bin/$script" "/home/davs/bin/$script"
+        fi
+    done
 
     echo "Linking dotfiles"
     remove_and_link_dotfile Xdefaults
