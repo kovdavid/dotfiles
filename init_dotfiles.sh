@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function remove_and_link_dotfile {
     $(rm -rf /home/davs/.$1)
@@ -11,7 +11,26 @@ function remove_and_link_to_tmp {
 }
 
 read -n 1 -p "Would you like to reinitalize dotfiles? <y/n>"
+echo ""
 if [ "$REPLY" = "y" ] ; then
+    echo "Linking scripts"
+    if [ ! -d /home/davs/bin ] ; then
+        mkdir /home/davs/bin
+    fi
+
+	for script in $(ls /home/davs/dotfiles/bin); do
+		if [ -f "/home/davs/bin/$script" ] ; then
+			read -n 1 -p "/home/davs/bin/$script already exists. Delete file? <y/n>"
+			echo ""
+			if [ "$REPLY" = "y" ] ; then
+				rm -rf "/home/davs/bin/$script"
+				ln -s "/home/davs/dotfiles/bin/$script" "/home/davs/bin/$script"
+			fi
+		else
+			ln -s "/home/davs/dotfiles/bin/$script" "/home/davs/bin/$script"
+		fi
+	done
+
     echo "Linking dotfiles"
     remove_and_link_dotfile Xdefaults
     remove_and_link_dotfile Xmodmap
@@ -57,8 +76,8 @@ if [ "$REPLY" = "y" ] ; then
     ln -s /home/davs/.vim /home/davs/.nvim
 
     mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+    rm -rf $XDG_CONFIG_HOME/nvim
     ln -s ~/.vim $XDG_CONFIG_HOME/nvim
-    ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
 
     echo "DONE"
 fi

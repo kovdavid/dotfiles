@@ -1,0 +1,30 @@
+#!/bin/bash
+
+SESSION_NAME=''
+SSH_HOST=''
+CD_DIR=''
+
+read -p "Session name: " SESSION_NAME
+
+read -p "SSH host: " SSH_HOST
+if [ -z "$SESSION_NAME" ] ; then
+    SESSION_NAME=$SSH_HOST
+fi
+
+read -p "Default directory: " -e CD_DIR
+
+TMUX_CMD=""
+if [ -n "$SSH_HOST" ] ; then
+    TMUX_CMD="ssh $SSH_HOST -t 'cd $CD_DIR; exec bash'; exec \$SHELL"
+else
+    TMUX_CMD="cd $CD_DIR; bash"
+fi
+
+if [ -n "$SESSION_NAME" ] ; then
+    $(tmux new-session -d -s $SESSION_NAME -n bash "$TMUX_CMD")
+else
+    SESSION_NAME=$(tmux new-session -P -d "$TMUX_CMD" | cut -d":" -f1)
+fi
+
+$(tmux set-option -t $SESSION_NAME default-command "$TMUX_CMD")
+$(tmux switch-client -t $SESSION_NAME)
