@@ -1,0 +1,14 @@
+#!/bin/bash
+
+PANE_ID=$(tmux display-message -t{last} -p '#{pane_id}')
+CURRENT_PANE_TITLE=$(tmux show-options -qv @${PANE_ID}_title)
+
+PANE_TITLE=$CURRENT_PANE_TITLE
+
+echo "Editing pane title $PANE_ID"
+
+read -p "Title: " -e -i "$PANE_TITLE" PANE_TITLE
+
+if [ -n "$PANE_TITLE" ] && [ "$PANE_TITLE" != "$CURRENT_PANE_TITLE" ] ; then
+	$(tmux set-option @${PANE_ID}_title "$PANE_TITLE")
+fi
