@@ -1,0 +1,7 @@
+#!/bin/bash
+
+xrandr --output DP1 --rotate left
+
+sleep 3
+nitrogen --restore
+xmodmap ~/.Xmodmap
