@@ -776,6 +776,15 @@ let g:deoplete#sources = {}
 let g:deoplete#sources.haskell = ['buffer', 'omni']
 " }}}
 " neomake {{{
-let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
+" let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
+let g:neomake_haskell_enabled_makers = ['ghcmod']
+let g:neomake_error_sign = {
+    \ 'text': '✖',
+    \ 'texthl': 'ErrorMsg',
+    \ }
+let g:neomake_warning_sign = {
+    \ 'text': '☢',
+    \ 'texthl': 'WarningMsg',
+    \ }
 " }}}
 " }}}
