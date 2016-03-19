@@ -1,0 +1,17 @@
+if [ -f ~/dotfiles/nike_remote ] ; then
+	unalias vim
+	unalias grep
+	unalias dus
+
+	if [ -f ~/vim/bin/vim ] ; then
+		alias vim="~/vim/bin/vim"
+	fi
+	alias grep="/bin/grep"
+	alias dus="du -shcBM .??* * | sort -g"
+
+	export LS_COLORS=''
+fi
+
+if [ -f ~/dotfiles/bash/nike_alias ] ; then
+	source ~/dotfiles/bash/nike_alias
+fi
