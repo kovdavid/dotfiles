@@ -1,6 +1,6 @@
 #!/bin/bash
 
-xrandr --output DP1 --rotate normal
+xrandr --output $SECONDARY_MONITOR_OUTPUT --rotate normal
 
 sleep 3
 nitrogen --restore
