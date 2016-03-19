@@ -3,8 +3,6 @@ if [ -e ~/dotfiles/bash/common ] ; then
 fi
 
 #ssh
-if [ ! -f ~/dotfiles/nike ] ; then
-    if [ -e ~/dotfiles/ssh-agent ] ; then
-        source ~/dotfiles/ssh-agent
-    fi
+if [ ! -f ~/dotfiles/nike ] && [ -e ~/dotfiles/ssh-agent ] ; then
+    source ~/dotfiles/ssh-agent
 fi
