@@ -1,10 +1,10 @@
-if [ -e /home/davs/dotfiles/bash/common ] ; then
-    source /home/davs/dotfiles/bash/common
+if [ -e ~/dotfiles/bash/common ] ; then
+    source ~/dotfiles/bash/common
 fi
 
 #ssh
-if [ ! -f /home/davs/dotfiles/nike ] ; then
-    if [ -e /home/davs/dotfiles/ssh-agent ] ; then
-        source /home/davs/dotfiles/ssh-agent
+if [ ! -f ~/dotfiles/nike ] ; then
+    if [ -e ~/dotfiles/ssh-agent ] ; then
+        source ~/dotfiles/ssh-agent
     fi
 fi
