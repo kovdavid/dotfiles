@@ -5,25 +5,32 @@ set -e
 sh ~/.xsessionrc
 xmodmap ~/.Xmodmap
 
-DP_CONNECTED="$(xrandr | grep -A 1 'DP1 connected')"
-if [ "$DP_CONNECTED" ] ; then
+OUTPUT1=$PRIMARY_MONITOR_OUTPUT
+OUTPUT2=$SECONDARY_MONITOR_OUTPUT
+RESOLUTION1=$PRIMARY_MONITOR_RESOLUTION
+RESOLUTION2=$SECONDARY_MONITOR_RESOLUTION
 
-    RESOLUTION=$(echo "$DP_CONNECTED" | sed -n 2p | awk '{print $1}')
-    HEIGHT=$(echo "$RESOLUTION" | awk -F 'x' '{print $2}')
-    DELTA_Y=$(expr $HEIGHT - 900)
+OUTPUT2_CONNECTED=$(xrandr | grep "$OUTPUT2 connected")
+if [ "$OUTPUT2_CONNECTED" ] ; then
+    $(xrandr --output $OUTPUT1 --mode $RESOLUTION1)
 
-    $(xrandr --output LVDS1 --mode 1600x900)
+    WIDTH1=$(echo "$RESOLUTION1" | awk -F 'x' '{print $1}')
+    HEIGHT1=$(echo "$RESOLUTION1" | awk -F 'x' '{print $2}')
+    WIDTH2=$(echo "$RESOLUTION2" | awk -F 'x' '{print $1}')
+    HEIGHT2=$(echo "$RESOLUTION2" | awk -F 'x' '{print $2}')
+
+    DELTA_Y=$(expr $HEIGHT2 - $HEIGHT1)
 
     if [ "$1" = "off" ] ; then
-        $(xrandr --output DP1 --off)
+        $(xrandr --output $OUTPUT2 --off)
     elif [ "$1" = "l" ] || [ "$1" = "left" ] ; then
-        $(xrandr --output DP1 --mode $RESOLUTION)
-        $(xrandr --output LVDS1 --right-of DP1)
-        $(xrandr --output LVDS1 --pos 1920x$DELTA_Y)
+        $(xrandr --output $OUTPUT2 --mode $RESOLUTION2)
+        $(xrandr --output $OUTPUT1 --right-of $OUTPUT2)
+        $(xrandr --output $OUTPUT1 --pos ${WIDTH2}x$DELTA_Y)
     elif [ "$1" = "r" ] || [ "$1" = "right" ] ; then
-        $(xrandr --output DP1 --mode $RESOLUTION)
-        $(xrandr --output DP1 --right-of LVDS1)
-        $(xrandr --output DP1 --pos 1600x-$DELTA_Y)
+        $(xrandr --output $OUTPUT2 --mode $RESOLUTION2)
+        $(xrandr --output $OUTPUT2 --right-of $OUTPUT1)
+        $(xrandr --output $OUTPUT2 --pos ${WIDTH2}x-$DELTA_Y)
     fi
 
     sleep 2
