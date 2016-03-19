@@ -1,33 +1,33 @@
 #!/bin/bash
 
 function remove_and_link_dotfile {
-    $(rm -rf /home/davs/.$1)
-    $(ln -s /home/davs/dotfiles/$1 /home/davs/.$1)
+    $(rm -rf ~/.$1)
+    $(ln -s ~/dotfiles/$1 ~/.$1)
 }
 
 function remove_and_link_to_tmp {
-    $(rm -rf /home/davs/.$1)
-    $(ln -s /tmp /home/davs/.$1)
+    $(rm -rf ~/.$1)
+    $(ln -s /tmp ~/.$1)
 }
 
 read -n 1 -p "Would you like to reinitalize dotfiles? <y/n>"
 echo ""
 if [ "$REPLY" = "y" ] ; then
     echo "Linking scripts"
-    if [ ! -d /home/davs/bin ] ; then
-        mkdir /home/davs/bin
+    if [ ! -d ~/bin ] ; then
+        mkdir ~/bin
     fi
 
-    for script in $(ls /home/davs/dotfiles/bin); do
-        if [ -f "/home/davs/bin/$script" ] ; then
-            read -n 1 -p "/home/davs/bin/$script already exists. Delete file? <y/n>"
+    for script in $(ls ~/dotfiles/bin); do
+        if [ -f ~/bin/$script ] ; then
+            read -n 1 -p "~/bin/$script already exists. Delete file? <y/n>"
             echo ""
             if [ "$REPLY" = "y" ] ; then
-                rm -rf "/home/davs/bin/$script"
-                ln -s "/home/davs/dotfiles/bin/$script" "/home/davs/bin/$script"
+                rm -rf ~/bin/$script
+                ln -s ~/dotfiles/bin/$script ~/bin/$script
             fi
         else
-            ln -s "/home/davs/dotfiles/bin/$script" "/home/davs/bin/$script"
+            ln -s ~/dotfiles/bin/$script ~/bin/$script
         fi
     done
 
@@ -54,6 +54,7 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_dotfile gtkrc-2.0
     remove_and_link_dotfile gtkrc-2.0.mine
     remove_and_link_dotfile git_global_ignore
+    remove_and_link_dotfile perltidyrc
 
     echo "Linking to /tmp"
     remove_and_link_to_tmp thumbnails
@@ -67,22 +68,22 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_to_tmp adobe
 
     echo "IRSSI"
-    if [ ! -d "/home/davs/.irssi" ] ; then
-        mkdir "/home/davs/.irssi"
+    if [ ! -d ~/.irssi ] ; then
+        mkdir ~/.irssi
     fi
-    ln -s /home/davs/dotfiles/irssi_config /home/davs/.irssi/config
+    ln -s ~/dotfiles/irssi_config ~/.irssi/config
 
     echo "Linking VIM"
-    rm -rf /home/davs/.vimrc
-    ln -s /home/davs/.vim/vimrc /home/davs/.vimrc
+    rm -rf ~/.vimrc
+    ln -s ~/.vim/vimrc ~/.vimrc
 
     echo "Linking NVIM"
-    rm -rf /home/davs/.nvimrc
-    rm -rf /home/davs/.nvim
-    ln -s /home/davs/.vim/vimrc /home/davs/.nvimrc
-    ln -s /home/davs/.vim /home/davs/.nvim
+    rm -rf ~/.nvimrc
+    rm -rf ~/.nvim
+    ln -s ~/.vim/vimrc ~/.nvimrc
+    ln -s ~/.vim ~/.nvim
 
-    mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+    mkdir -p ${XDG_CONFIG_HOME:=~/.config}
     rm -rf $XDG_CONFIG_HOME/nvim
     ln -s ~/.vim $XDG_CONFIG_HOME/nvim
 
