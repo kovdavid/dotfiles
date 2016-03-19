@@ -120,7 +120,7 @@ set list
 set listchars=tab:▸\ ,trail:·
 " }}}
 " NIKE {{{
-if filereadable("/home/davs/.nike")
+if filereadable(expand("~") . "/.nike")
     set modelines=0
     set noexpandtab
     set tabstop=4     " number of spaces for tabs
@@ -276,7 +276,7 @@ augroup all_file_type
         autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber
         autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber
     endif
-    if !filereadable("/home/davs/.nike")
+    if !filereadable(expand("~") . "/.nike")
         autocmd BufWritePre * %s/\s\+$//e
     endif
 
@@ -335,8 +335,8 @@ augroup filetype_perl
     autocmd BufRead,BufNewFile *.pl  setfiletype perl
     autocmd BufRead,BufNewFile *.t   setfiletype perl
 
-    autocmd BufNewFile *.pl 0r /home/davs/.vim/skeleton/perl.script
-    autocmd BufNewFile *.t 0r /home/davs/.vim/skeleton/perl.test
+    autocmd BufNewFile *.pl 0r ~/.vim/skeleton/perl.script
+    autocmd BufNewFile *.t 0r ~/.vim/skeleton/perl.test
 
     autocmd BufRead,BufNewFile *.pm if line('$') == 1 && getline('.') == '' | call NewPerlModule() | endif
 
@@ -362,6 +362,9 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> gu :!grep -rP '(::<BAR>\->)<c-r>=expand("<cword>")<CR>' bin/ lib/ etc/<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>rr :!perl -Ilib %<CR>
+
+    vnoremap <leader>pt :!perltidy<CR>
+    nnoremap <leader>pt :%!perltidy<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>ts  :!perl -Ilib -c %<CR>
     autocmd FileType perl nnoremap <buffer> <leader>tf  :PerlTestFile<CR>
@@ -676,7 +679,7 @@ nnoremap <leader>aa :Tabularize /
 nnoremap <leader>af :Tabularize /^.\{-}\zs/l1l1<left><left><left><left><left>
 " }}}
 " ctrlp {{{
-set runtimepath^=/home/davs/.vim/bundle/ctrlp.vim
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_regexp = 0
 let g:ctrlp_by_filename = 0
