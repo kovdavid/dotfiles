@@ -1,0 +1,211 @@
+#!/bin/bash
+
+if [ $# -eq 1 ] ; then
+    FSCK=0
+    DEVICE=$1
+elif [ $# -eq 2 ] && [ "$1" == "-f" ] ; then
+    FSCK=1
+    DEVICE=$2
+else
+    echo "Usage: `basename $0` [-f] <device>"
+    exit 1
+fi
+
+if [ ! -e /dev/$DEVICE ] ; then
+    echo "/dev/$DEVICE does not exists, partprobing /dev/${DEVICE::-1}"
+    partprobe /dev/${DEVICE::-1}
+    if [ ! -e /dev/$DEVICE ] ; then
+        echo "/dev/$DEVICE does not exist after partprobe"
+        exit 1
+    fi
+fi
+
+CRYPTSETUP=$(which cryptsetup)
+if [ -z "$CRYPTSETUP" ] ; then
+    echo "cryptsetup not found"
+    exit
+fi
+
+$CRYPTSETUP luksOpen /dev/$DEVICE backup --key-file /root/keyfile
+if [ ! -e /dev/mapper/backup ] ; then
+    echo "/dev/mapper/backup does not exist"
+    exit 1
+fi
+echo "/dev/mapper/backup created..."
+
+if [ -d /backup ] ; then
+    echo "WARNING! /backup existed!"
+    rm -rf /backup
+fi
+mkdir /backup
+echo "/backup created..."
+
+if [ ! -d /backup ] ; then
+    echo "/backup does not exist"
+    exit 1
+fi
+
+mount /dev/mapper/backup /backup
+if ! mount | grep /backup > /dev/null ; then
+    echo "/backup not mounted"
+    exit 1
+fi
+echo "/backup mounted..."
+mount | grep "/backup"
+
+if [ ! -d /backup/data ]; then
+    echo "Creating /backup/data"
+    mkdir /backup/data
+fi
+
+if [ ! -d /backup/data ]; then
+    echo "/backup/data does not exist"
+    exit 1
+fi
+
+if [ -e /backup/backup_system ] ; then
+    echo "Backup type: system"
+    read -n 1
+    rsync -aAXvz                              \
+          --delete                            \
+          --exclude /backup                   \
+          --exclude /dev                      \
+          --exclude /home/davs/.cache/        \
+          --exclude /home/davs/.gvfs          \
+          --exclude /home/davs/.mozilla/      \
+          --exclude /home/davs/.thumbnails/   \
+          --exclude /lost+found               \
+          --exclude /media                    \
+          --exclude /mnt                      \
+          --exclude /opt                      \
+          --exclude /proc                     \
+          --exclude /run                      \
+          --exclude /sys                      \
+          --exclude /tmp                      \
+          --exclude /var/cache                \
+          --exclude /usr/backup               \
+      / /backup/data
+elif [ -e /backup/backup_all ] ; then
+    echo "Backup type: all"
+    read -n 1
+    rsync -aAXvz                              \
+          --delete                            \
+          --exclude /backup                   \
+          --exclude /dev                      \
+          --exclude /home/davs/.cache/        \
+          --exclude /home/davs/.gvfs          \
+          --exclude /home/davs/.mozilla/      \
+          --exclude /home/davs/.thumbnails/   \
+          --exclude /lost+found               \
+          --exclude /media                    \
+          --exclude /mnt/data/NO_BACKUP       \
+          --exclude /opt/playonlinux          \
+          --exclude /opt/wine                 \
+          --exclude /proc                     \
+          --exclude /run                      \
+          --exclude /sys                      \
+          --exclude /tmp                      \
+          --exclude /usr/backup               \
+      / /backup/data
+elif [ -e /backup/backup_home ] ; then
+    echo "Backup type: home"
+    read -n 1
+    rsync -aAXvz                              \
+          --delete                            \
+          --exclude .cache                    \
+          --exclude .cpanm                    \
+          --exclude .gvfs                     \
+          --exclude .mozilla                  \
+          --exclude .thumbnails               \
+          --exclude .thunderbird              \
+      /home/davs/ /backup/data
+elif [ -e /backup/backup_8g ] ; then
+    echo "Backup type: 8G"
+    read -n 1
+    rsync -aAXvz                                     \
+          --delete                                   \
+          --exclude /backup                          \
+          --exclude /dev                             \
+          --exclude /home/davs/.cache/               \
+          --exclude /home/davs/.cpanm                \
+          --exclude /home/davs/.gvfs                 \
+          --exclude /home/davs/.mozilla/firefox      \
+          --exclude /home/davs/.thumbnails/          \
+          --exclude /lost+found                      \
+          --exclude /media                           \
+          --exclude /mnt                             \
+          --exclude /opt                             \
+          --exclude /proc                            \
+          --exclude /run                             \
+          --exclude /sys                             \
+          --exclude /tmp                             \
+          --exclude /usr                             \
+          --exclude /var/cache/pacman                \
+      / /backup/data
+elif [ -e /backup/backup_32g ] ; then
+    echo "Backup type: 32G"
+    read -n 1
+    rsync -aAXvz                                \
+          --delete                              \
+          --exclude /backup                     \
+          --exclude /dev                        \
+          --exclude /home/davs/.cache/          \
+          --exclude /home/davs/.cpanm           \
+          --exclude /home/davs/.gvfs            \
+          --exclude /home/davs/.mozilla/firefox \
+          --exclude /home/davs/.thumbnails/     \
+          --exclude /lost+found                 \
+          --exclude /media                      \
+          --exclude /opt                        \
+          --exclude /proc                       \
+          --exclude /run                        \
+          --exclude /sys                        \
+          --exclude /tmp                        \
+          --exclude /var/cache/pacman           \
+          --exclude /mnt/data/Music             \
+          --exclude /mnt/data/NO_BACKUP         \
+          --exclude /mnt/data/Software          \
+          --exclude /mnt/data/Videos            \
+          --exclude /mnt/data/Docs/School       \
+      / /backup/data
+else
+    echo "No backup type detected"
+fi
+echo "rsync has finished..."
+sync
+echo "sync has finished..."
+
+echo "======================="
+echo "`df -h /backup`"
+echo "======================="
+
+umount /backup
+if mount | grep /backup > /dev/null ; then
+    echo "/backup still mounted"
+    exit 1
+fi
+echo "/backup umounted..."
+
+rm -rf /backup
+if [ -d /backup ] ; then
+    echo "/backup still exists"
+    exit 1
+fi
+echo "/backup deleted..."
+
+if [ $FSCK -eq 1 ] ; then
+    echo "Executing FSCK"
+    fsck.ext4 -f /dev/mapper/backup
+    sync
+    echo "sync has finished..."
+fi
+
+$CRYPTSETUP luksClose /dev/mapper/backup
+if [ -e /dev/mapper/backup ] ; then
+    echo "/dev/mapper/backup still exists"
+    exit 1
+fi
+echo "/dev/mapper/backup removed..."
+
+# DEVICE=$(echo "/dev/$1" | sed -e 's/[0-9]$//')
+echo "DONE"

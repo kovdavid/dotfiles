@@ -1,7 +1,7 @@
 if [ -n "$TMUX" ] ; then
-	export TERM=screen-256color
+    export TERM=screen-256color
 else
-	export TERM=xterm-256color
+    export TERM=xterm-256color
 fi
 
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
@@ -15,7 +15,7 @@ export JAVA_HOME="/usr/lib/jvm/default"
 export PATH="$JAVA_HOME:$PATH"
 export LD_LIBRARY_PATH="/usr/lib64/java/jre/lib/amd64"
 
-export PATH="/opt/perlbrew/bin:~/bin:$PATH"
+export PATH="/opt/perlbrew/bin:$HOME/bin:$PATH"
 
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 

@@ -1,0 +1,77 @@
+general {
+    colors = true
+    interval = 2
+}
+
+order += "disk /"
+order += "disk /home"
+order += "disk /mnt/data"
+order += "wireless wlp3s0"
+order += "ethernet enp0s25"
+order += "battery 0"
+order += "cpu_temperature 0"
+order += "cpu_usage"
+order += "load"
+order += "volume master"
+order += "volume PCM"
+order += "time"
+
+wireless wlp3s0 {
+    format_up = "%essid %ip ‣ %quality"
+    format_down = ""
+}
+
+ethernet enp0s25 {
+    format_up = "%ip"
+    format_down = ""
+}
+
+time {
+    format ="📅 %d-%m-%Y %H:%M"
+}
+
+load {
+    format = "☢ %1min"
+}
+
+disk "/" {
+    format = "/ %free"
+}
+
+disk "/home" {
+    format = "/H %free"
+}
+
+disk "/mnt/data" {
+    format = "/M/D %free"
+}
+
+battery 0 {
+    format = "🔌  %status %percentage %remaining"
+    path = "/sys/class/power_supply/BAT%d/uevent"
+}
+
+cpu_temperature 0 {
+    format = "🌡 %degrees°C"
+    #path = "/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input"
+    #path = "/sys/devices/platform/coretemp.0/temp1_input"
+    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
+}
+
+cpu_usage {
+    format = "↺ %usage"
+}
+
+volume master {
+    format = "🔉  %volume"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+}
+
+volume PCM {
+    format = "☊ %volume"
+    device = "default"
+    mixer = "PCM"
+    mixer_idx = 0
+}

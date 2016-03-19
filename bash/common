@@ -13,8 +13,8 @@ if [ -f ~/dotfiles/bash/env_settings ] ; then
 fi
 
 #cabal
-if [ -d ~/.cabal/bin ] ; then
-    export PATH=$PATH:~/.cabal/bin
+if [ -d $HOME/.cabal/bin ] ; then
+    export PATH="$PATH:$HOME/.cabal/bin"
 fi
 
 #elixir
