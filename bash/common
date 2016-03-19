@@ -8,6 +8,10 @@ if [ -e /etc/profile ] ; then
     source /etc/profile
 fi
 
+if [ -f /home/davs/dotfiles/bash/env_settings ] ; then
+    source /home/davs/dotfiles/bash/env_settings
+fi
+
 #cabal
 if [ -d /home/davs/.cabal/bin ] ; then
     export PATH=$PATH:/home/davs/.cabal/bin

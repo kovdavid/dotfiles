@@ -66,6 +66,12 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_to_tmp bundler
     remove_and_link_to_tmp adobe
 
+    echo "IRSSI"
+    if [ ! -d "/home/davs/.irssi" ] ; then
+        mkdir "/home/davs/.irssi"
+    fi
+    ln -s /home/davs/dotfiles/irssi_config /home/davs/.irssi/config
+
     echo "Linking VIM"
     rm -rf /home/davs/.vimrc
     ln -s /home/davs/.vim/vimrc /home/davs/.vimrc
