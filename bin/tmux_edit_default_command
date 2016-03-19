@@ -1,7 +1,6 @@
 #!/bin/bash
 
 SESSIONS_AND_WINDOWS=""
-echo "Select session to edit (0 - exit)"
 
 while read SESSION_DATA; do
 	SESSION_ID=$(echo "$SESSION_DATA" | cut -f1 -d ' ')
