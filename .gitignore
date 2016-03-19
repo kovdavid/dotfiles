@@ -10,3 +10,4 @@ nike_remote
 vim/shada/**
 bash/nike_alias
 bash/env_settings
+vim/.init.vim-rplugin*
