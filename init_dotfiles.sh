@@ -60,6 +60,7 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_to_tmp pip
     remove_and_link_to_tmp macromedia
     remove_and_link_to_tmp cpanm
+    remove_and_link_to_tmp cpan
     remove_and_link_to_tmp codeintel
     remove_and_link_to_tmp cache
     remove_and_link_to_tmp bundler
