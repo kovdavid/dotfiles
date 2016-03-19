@@ -97,6 +97,7 @@ workspace 18 output $secondary_output
 workspace 19 output $secondary_output
 workspace 20 output $secondary_output
 workspace 21 output $secondary_output
+workspace 22 output $secondary_output
 
 # switch to workspace
 bindsym $mod+1 workspace 1
