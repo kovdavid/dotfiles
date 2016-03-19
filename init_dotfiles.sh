@@ -40,8 +40,11 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_dotfile fontconfig
     remove_and_link_dotfile gitconfig
     remove_and_link_dotfile screenrc
-    remove_and_link_dotfile i3
-    remove_and_link_dotfile i3status.conf
+
+    echo "You have to manually link i3/config and i3/status!"
+    # remove_and_link_dotfile i3/config
+    # remove_and_link_dotfile i3/status
+
     remove_and_link_dotfile vim
     remove_and_link_dotfile xinitrc
     remove_and_link_dotfile tmux.conf
