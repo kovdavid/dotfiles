@@ -26,7 +26,12 @@ if [ -z "$CRYPTSETUP" ] ; then
     exit
 fi
 
-$CRYPTSETUP luksOpen /dev/$DEVICE backup --key-file /root/keyfile
+if [ -z "$BACKUP_KEYFILE" ] || [ ! -f "$BACKUP_KEYFILE" ] ; then
+    echo "No backup keyfile found"
+    exit
+fi
+
+$CRYPTSETUP luksOpen /dev/$DEVICE backup --key-file "$BACKUP_KEYFILE"
 if [ ! -e /dev/mapper/backup ] ; then
     echo "/dev/mapper/backup does not exist"
     exit 1
