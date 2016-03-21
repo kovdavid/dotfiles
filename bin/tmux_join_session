@@ -28,5 +28,6 @@ done
 SESSION_NAME=$(tmux display-message -p -t "$SELECTION" -F '#{session_name}')
 DEFAULT_COMMAND=$(tmux show-options -v -t "$SELECTION" default-command)
 
-$(tmux new -t "$SELECTION" -s "${SESSION_NAME}_join")
-$(tmux set-option -t "${SESSION_NAME}_join" default-command "$TMUX_CMD")
+$(tmux new-session -d -t "$SELECTION" -s "G|${SESSION_NAME}")
+$(tmux set-option -t "G|${SESSION_NAME}" default-command "$DEFAULT_COMMAND")
+$(tmux attach-session -t "G|${SESSION_NAME}")
