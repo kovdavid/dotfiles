@@ -20,11 +20,15 @@ if [ "$REPLY" = "y" ] ; then
 
     for script in $(ls ~/dotfiles/bin); do
         if [ -f ~/bin/$script ] ; then
-            read -n 1 -p "~/bin/$script already exists. Delete file? <y/n>"
-            echo ""
-            if [ "$REPLY" = "y" ] ; then
-                rm -rf ~/bin/$script
-                ln -s ~/dotfiles/bin/$script ~/bin/$script
+            if [[ -z $(ls -l ~/bin/$script | grep dotfiles) ]] ; then
+                read -n 1 -p "~/bin/$script already exists. Delete file? <y/n>"
+                echo ""
+                if [ "$REPLY" = "y" ] ; then
+                    rm -rf ~/bin/$script
+                    ln -s ~/dotfiles/bin/$script ~/bin/$script
+                fi
+            else
+                echo "~/bin/$script already symlinked to dotfiles"
             fi
         else
             ln -s ~/dotfiles/bin/$script ~/bin/$script
@@ -48,10 +52,6 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_dotfile vim
     remove_and_link_dotfile xinitrc
     remove_and_link_dotfile tmux.conf
-    remove_and_link_dotfile tmux.conf.dccn1
-    remove_and_link_dotfile tmux.conf.dccn2
-    remove_and_link_dotfile tmux.conf.qaccn4
-    remove_and_link_dotfile tmux.conf.vtccn1
     remove_and_link_dotfile xprofile
     remove_and_link_dotfile xsessionrc
     remove_and_link_dotfile gtkrc-2.0
