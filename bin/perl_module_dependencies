@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if [ $# -eq 1 ] ; then
+    strace -e open perl -c $1 2>&1 | awk -v FS='"' '/nikesoft/ { print $2; }'
+fi
