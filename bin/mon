@@ -11,15 +11,15 @@ RESOLUTION1=$PRIMARY_MONITOR_RESOLUTION
 RESOLUTION2=$SECONDARY_MONITOR_RESOLUTION
 
 OUTPUT2_CONNECTED=$(xrandr | grep "$OUTPUT2 connected")
-if [ "$OUTPUT2_CONNECTED" ] ; then
+if [ -n "$OUTPUT2_CONNECTED" ] ; then
     $(xrandr --output $OUTPUT1 --mode $RESOLUTION1)
 
     WIDTH1=$(echo "$RESOLUTION1" | awk -F 'x' '{print $1}')
-    HEIGHT1=$(echo "$RESOLUTION1" | awk -F 'x' '{print $2}')
+    HEIGTH1=$(echo "$RESOLUTION1" | awk -F 'x' '{print $2}')
     WIDTH2=$(echo "$RESOLUTION2" | awk -F 'x' '{print $1}')
-    HEIGHT2=$(echo "$RESOLUTION2" | awk -F 'x' '{print $2}')
+    HEIGTH2=$(echo "$RESOLUTION2" | awk -F 'x' '{print $2}')
 
-    DELTA_Y=$(expr $HEIGHT2 - $HEIGHT1)
+    DELTA_Y=$(($HEIGTH2 - $HEIGTH1))
 
     if [ "$1" = "off" ] ; then
         $(xrandr --output $OUTPUT2 --off)
