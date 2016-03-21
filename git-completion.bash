@@ -2751,6 +2751,11 @@ _gitk ()
 }
 
 __git_complete g __git_main
+__git_complete ga _git_add
+__git_complete gb _git_branch
+__git_complete gci _git_commit
+__git_complete gco _git_checkout
+__git_complete gst _git_stash
 __git_complete git __git_main
 __git_complete gitk __gitk_main
 

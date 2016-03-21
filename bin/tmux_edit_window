@@ -1,0 +1,34 @@
+#!/bin/bash
+
+CURRENT_WINDOW_ID=$(tmux display-message -p '#{window_id}')
+WINDOW_ID=${1:-$CURRENT_WINDOW_ID}
+WINDOW_NAME=$(tmux list-windows -aF '#{window_id} #{window_name}' | grep $WINDOW_ID | head -n 1 | cut -f1 -d ' ' --complement)
+
+echo "Editing window $WINDOW_ID"
+
+DEFAULT_COMMAND=$(tmux show-options -qv @${WINDOW_ID}_default_command)
+SSH_HOST=$(echo "$DEFAULT_COMMAND" | grep -oP 'ssh \S+' | cut -d" " -f2)
+CD_DIR=$(echo "$DEFAULT_COMMAND" | grep -oP 'cd .*?;' | cut -d" " -f2 | sed -e 's/;$//g')
+NEW_WINDOW_NAME=''
+
+read -p "Window name: " -e -i "$WINDOW_NAME" NEW_WINDOW_NAME
+read -p "SSH host: " -e -i "$SSH_HOST" SSH_HOST
+read -p "Default directory: " -e -i "$CD_DIR" CD_DIR
+
+if [ "$CD_DIR" == "pwd" ] ; then
+    CD_DIR=$(tmux display-message -t{last} -p '#{pane_current_path}')
+fi
+
+TMUX_CMD=""
+if [ -n "$SSH_HOST" ] ; then
+    TMUX_CMD="ssh $SSH_HOST -t 'cd $CD_DIR; exec bash'; exec \$SHELL"
+    $(tmux rename-window -t $WINDOW_ID "$SSH_HOST")
+else
+    TMUX_CMD="cd $CD_DIR; bash"
+fi
+
+if [ -n "$NEW_WINDOW_NAME" ] && [ "$NEW_WINDOW_NAME" != "$WINDOW_NAME" ] ; then
+	$(tmux rename-window -t $WINDOW_ID $NEW_WINDOW_NAME)
+fi
+
+$(tmux set-option @${WINDOW_ID}_default_command "$TMUX_CMD")

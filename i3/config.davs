@@ -1,14 +1,16 @@
 set $mod Mod4
+set $primary_output LVDS1
+set $secondary_output DP1
 
 font pango:DejaVu Sans Mono 13px
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-bindsym $mod+Tab exec /home/davs/bin/jump_to_other_monitor.py
-bindsym $mod+Shift+Tab exec /home/davs/bin/move_to_other_monitor.py
-bindsym $mod+Return exec /home/davs/bin/cycle_windows.py
-bindsym $mod+equal exec /home/davs/bin/move_window_to_center.py
+bindsym $mod+Tab exec ~/bin/jump_to_other_monitor.py
+bindsym $mod+Shift+Tab exec ~/bin/move_to_other_monitor.py
+bindsym $mod+Return exec ~/bin/cycle_windows.py
+bindsym $mod+equal exec ~/bin/move_window_to_center.py
 
 bindsym $mod+x exec xterm
 bindsym $mod+i exec google-chrome
@@ -16,7 +18,7 @@ bindsym $mod+t exec thunar
 # bindsym $mod+z exec thunderbird
 bindsym $mod+d exec dmenu_run
 bindcode 148 exec calc
-bindcode 156 exec exec /home/davs/bin/toggle_amixer_volume
+bindcode 156 exec ~/bin/toggle_amixer_volume
 
 bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym XF86AudioMicMute exec amixer -q set Capture toggle
@@ -49,7 +51,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # toggle split orientation
-bindsym $mod+s exec /home/davs/bin/toggle_split_orientation.py
+bindsym $mod+s exec ~/bin/toggle_split_orientation.py
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -74,27 +76,28 @@ bindsym $mod+a focus parent
 workspace_auto_back_and_forth yes
 bindsym $mod+z workspace back_and_forth
 
-workspace 1 output LVDS1
-workspace 2 output LVDS1
-workspace 3 output LVDS1
-workspace 4 output LVDS1
-workspace 5 output LVDS1
-workspace 6 output LVDS1
-workspace 7 output LVDS1
-workspace 8 output LVDS1
-workspace 9 output LVDS1
-workspace 10 output LVDS1
-workspace 11 output DP1
-workspace 12 output DP1
-workspace 13 output DP1
-workspace 14 output DP1
-workspace 15 output DP1
-workspace 16 output DP1
-workspace 17 output DP1
-workspace 18 output DP1
-workspace 19 output DP1
-workspace 20 output DP1
-workspace 21 output DP1
+workspace 1 output $primary_output
+workspace 2 output $primary_output
+workspace 3 output $primary_output
+workspace 4 output $primary_output
+workspace 5 output $primary_output
+workspace 6 output $primary_output
+workspace 7 output $primary_output
+workspace 8 output $primary_output
+workspace 9 output $primary_output
+workspace 10 output $primary_output
+workspace 11 output $secondary_output
+workspace 12 output $secondary_output
+workspace 13 output $secondary_output
+workspace 14 output $secondary_output
+workspace 15 output $secondary_output
+workspace 16 output $secondary_output
+workspace 17 output $secondary_output
+workspace 18 output $secondary_output
+workspace 19 output $secondary_output
+workspace 20 output $secondary_output
+workspace 21 output $secondary_output
+workspace 22 output $secondary_output
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -188,8 +191,8 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         font pango:DejaVu Sans Mono 12px
-        status_command i3status -c /home/davs/.i3/i3status
-        tray_output LVDS1
+        status_command i3status -c ~/.i3/i3status
+        tray_output $primary_output
 }
 
 for_window [class="(?i)xfce4-notifyd"] floating enable; focus mode_toggle
@@ -198,9 +201,10 @@ for_window [class="(?i)google-chrome"] border none
 for_window [class="Firefox"] border none
 for_window [title="File Operation Progress"] floating enable; focus mode_toggle
 
-exec /home/davs/bin/mon right &
+exec ~/bin/mon right &
 exec sudo nm-applet &
 exec numlockx &
-exec /home/davs/bin/init_trackpoint &
+exec ~/bin/init_trackpoint &
 exec (sleep 1 && nitrogen --restore ) &
+exec redshift-gtk -l geoclue2 -t 6500:3500 -b 1.0:0.7 &
 exec google-chrome

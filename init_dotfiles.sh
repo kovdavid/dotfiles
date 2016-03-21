@@ -1,17 +1,36 @@
-#!/bin/sh
+#!/bin/bash
 
 function remove_and_link_dotfile {
-    $(rm -rf /home/davs/.$1)
-    $(ln -s /home/davs/dotfiles/$1 /home/davs/.$1)
+    $(rm -rf ~/.$1)
+    $(ln -s ~/dotfiles/$1 ~/.$1)
 }
 
 function remove_and_link_to_tmp {
-    $(rm -rf /home/davs/.$1)
-    $(ln -s /tmp /home/davs/.$1)
+    $(rm -rf ~/.$1)
+    $(ln -s /tmp ~/.$1)
 }
 
 read -n 1 -p "Would you like to reinitalize dotfiles? <y/n>"
+echo ""
 if [ "$REPLY" = "y" ] ; then
+    echo "Linking scripts"
+    if [ ! -d ~/bin ] ; then
+        mkdir ~/bin
+    fi
+
+    for script in $(ls ~/dotfiles/bin); do
+        if [ -f ~/bin/$script ] ; then
+            read -n 1 -p "~/bin/$script already exists. Delete file? <y/n>"
+            echo ""
+            if [ "$REPLY" = "y" ] ; then
+                rm -rf ~/bin/$script
+                ln -s ~/dotfiles/bin/$script ~/bin/$script
+            fi
+        else
+            ln -s ~/dotfiles/bin/$script ~/bin/$script
+        fi
+    done
+
     echo "Linking dotfiles"
     remove_and_link_dotfile Xdefaults
     remove_and_link_dotfile Xmodmap
@@ -21,8 +40,11 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_dotfile fontconfig
     remove_and_link_dotfile gitconfig
     remove_and_link_dotfile screenrc
-    remove_and_link_dotfile i3
-    remove_and_link_dotfile i3status.conf
+
+    echo "You have to manually link i3/config and i3/status!"
+    # remove_and_link_dotfile i3/config
+    # remove_and_link_dotfile i3/status
+
     remove_and_link_dotfile vim
     remove_and_link_dotfile xinitrc
     remove_and_link_dotfile tmux.conf
@@ -35,30 +57,38 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_dotfile gtkrc-2.0
     remove_and_link_dotfile gtkrc-2.0.mine
     remove_and_link_dotfile git_global_ignore
+    remove_and_link_dotfile perltidyrc
 
     echo "Linking to /tmp"
     remove_and_link_to_tmp thumbnails
     remove_and_link_to_tmp pip
     remove_and_link_to_tmp macromedia
     remove_and_link_to_tmp cpanm
+    remove_and_link_to_tmp cpan
     remove_and_link_to_tmp codeintel
     remove_and_link_to_tmp cache
     remove_and_link_to_tmp bundler
     remove_and_link_to_tmp adobe
 
+    echo "IRSSI"
+    if [ ! -d ~/.irssi ] ; then
+        mkdir ~/.irssi
+    fi
+    ln -s ~/dotfiles/irssi_config ~/.irssi/config
+
     echo "Linking VIM"
-    rm -rf /home/davs/.vimrc
-    ln -s /home/davs/.vim/vimrc /home/davs/.vimrc
+    rm -rf ~/.vimrc
+    ln -s ~/.vim/vimrc ~/.vimrc
 
     echo "Linking NVIM"
-    rm -rf /home/davs/.nvimrc
-    rm -rf /home/davs/.nvim
-    ln -s /home/davs/.vim/vimrc /home/davs/.nvimrc
-    ln -s /home/davs/.vim /home/davs/.nvim
+    rm -rf ~/.nvimrc
+    rm -rf ~/.nvim
+    ln -s ~/.vim/vimrc ~/.nvimrc
+    ln -s ~/.vim ~/.nvim
 
-    mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+    mkdir -p ${XDG_CONFIG_HOME:=~/.config}
+    rm -rf $XDG_CONFIG_HOME/nvim
     ln -s ~/.vim $XDG_CONFIG_HOME/nvim
-    ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
 
     echo "DONE"
 fi

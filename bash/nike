@@ -1,11 +1,17 @@
-unalias vim
-unalias grep
-unalias dus
+if [ -f ~/dotfiles/nike_remote ] ; then
+    unalias grep
+    unalias dus
 
-alias vim="/home/davs/vim/bin/vim"
-alias grep="/bin/grep"
-alias dus="du -shcBM .??* * | sort -g"
-alias screen="/home/davs/screen/bin/screen"
+    if [ -f ~/vim/bin/vim ] ; then
+        unalias vim
+        alias vim="~/vim/bin/vim"
+    fi
+    alias grep="/bin/grep"
+    alias dus="du -shcBM .??* * | sort -g"
 
-export SCREENDIR="/home/davs/screen/run"
-export LS_COLORS=''
+    export LS_COLORS=''
+fi
+
+if [ -f ~/dotfiles/bash/nike_alias ] ; then
+    source ~/dotfiles/bash/nike_alias
+fi

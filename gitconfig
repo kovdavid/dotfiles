@@ -52,4 +52,4 @@
 [pull]
     default = current
 [commit]
-	template = /home/davs/dotfiles/git_commit_template
+    template = ~/dotfiles/git_commit_template

@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -e
+
+sh ~/.xsessionrc
+xmodmap ~/.Xmodmap
+
+OUTPUT1=$PRIMARY_MONITOR_OUTPUT
+OUTPUT2=$SECONDARY_MONITOR_OUTPUT
+RESOLUTION1=$PRIMARY_MONITOR_RESOLUTION
+RESOLUTION2=$SECONDARY_MONITOR_RESOLUTION
+
+OUTPUT2_CONNECTED=$(xrandr | grep "$OUTPUT2 connected")
+if [ "$OUTPUT2_CONNECTED" ] ; then
+    $(xrandr --output $OUTPUT1 --mode $RESOLUTION1)
+
+    WIDTH1=$(echo "$RESOLUTION1" | awk -F 'x' '{print $1}')
+    HEIGHT1=$(echo "$RESOLUTION1" | awk -F 'x' '{print $2}')
+    WIDTH2=$(echo "$RESOLUTION2" | awk -F 'x' '{print $1}')
+    HEIGHT2=$(echo "$RESOLUTION2" | awk -F 'x' '{print $2}')
+
+    DELTA_Y=$(expr $HEIGHT2 - $HEIGHT1)
+
+    if [ "$1" = "off" ] ; then
+        $(xrandr --output $OUTPUT2 --off)
+    elif [ "$1" = "l" ] || [ "$1" = "left" ] ; then
+        $(xrandr --output $OUTPUT2 --mode $RESOLUTION2)
+        $(xrandr --output $OUTPUT1 --right-of $OUTPUT2)
+        $(xrandr --output $OUTPUT1 --pos ${WIDTH2}x$DELTA_Y)
+    elif [ "$1" = "r" ] || [ "$1" = "right" ] ; then
+        $(xrandr --output $OUTPUT2 --mode $RESOLUTION2)
+        $(xrandr --output $OUTPUT2 --right-of $OUTPUT1)
+        $(xrandr --output $OUTPUT2 --pos ${WIDTH2}x-$DELTA_Y)
+    fi
+
+    sleep 2
+fi
+
+sleep 1
+nitrogen --restore

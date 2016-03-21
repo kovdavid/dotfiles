@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 process"
+    exit
+fi
+
+ps fax | grep "$1"
+
+read -n 1 -p "Kill these processes? <y/n>"
+echo ""
+
+if [ "$REPLY" == "y" ] ; then
+    ps fax | grep "$1" | awk '{ print $1 }' | xargs kill
+fi

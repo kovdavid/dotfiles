@@ -1,0 +1,55 @@
+# perltidy configuration file created Thu Sep 24 15:54:07 2015
+# using: -
+
+# I/O control
+--standard-error-output                 # -se
+--nostandard-output                     # -nst
+
+# --st
+# --se
+# --cti=0
+# --vt=0
+# --vtc=3
+
+# Basic formatting options
+--indent-columns=4                      # -i=4  [=default]
+--maximum-line-length=100               # -l=100
+
+# Code indentation control
+--closing-brace-indentation=0           # -cbi=0  [=default]
+--closing-paren-indentation=0           # -cpi=0  [=default]
+--closing-square-bracket-indentation=0  # -csbi=0  [=default]
+--continuation-indentation=4            # -ci=4
+--nooutdent-labels                      # -nola
+--nooutdent-long-quotes                 # -nolq
+
+--et=4 # tabs?
+
+# Whitespace control
+--block-brace-tightness=1               # -bbt=1
+--brace-tightness=1                     # -bt=1  [=default]
+--paren-tightness=2                     # -pt=2 (DAVS =1)
+--nospace-for-semicolon                 # -nsfs
+--square-bracket-tightness=1            # -sbt=1  [=default]
+--square-bracket-vertical-tightness=0   # -sbvt=0  [=default]
+
+# Comment controls
+--ignore-side-comment-lengths           # -iscl
+--minimum-space-to-comment=2            # -msc=2
+--static-side-comment-prefix="#"        # -sscp="#"
+--static-side-comments                  # -ssc
+
+# Linebreak controls
+--brace-vertical-tightness=0            # -bvt=0  [=default]
+--paren-vertical-tightness=0            # -pvt=0  [=default]
+--stack-closing-hash-brace              # -schb
+--stack-closing-paren                   # -scp
+--stack-closing-square-bracket          # -scsb
+--stack-opening-hash-brace              # -sohb
+--stack-opening-paren                   # -sop
+--stack-opening-square-bracket          # -sosb
+--want-break-before="% + - * / x != == >= <= =~ < > | & **= += *= &= <<= &&= -= /= |= + >>= ||= .= %= ^= x="  
+# -wbb="% + - * / x != == >= <= =~ < > | & **= += *= &= <<= &&= -= /= |= + >>= ||= .= %= ^= x="
+
+# Blank line control
+--noblanks-before-comments              # -nbbc

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+xrandr --output $SECONDARY_MONITOR_OUTPUT --rotate left
+
+sleep 3
+nitrogen --restore
+xmodmap ~/.Xmodmap

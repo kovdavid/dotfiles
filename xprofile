@@ -1,3 +1,5 @@
 #!/bin/sh
 
-/usr/bin/syndaemon -td
+if [ -f /usr/bin/syndaemon ] ; then
+    /usr/bin/syndaemon -td
+fi

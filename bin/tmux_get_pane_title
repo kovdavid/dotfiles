@@ -1,0 +1,9 @@
+#!/bin/bash
+
+PANE_ID=$(tmux display-message -p '#{pane_id}')
+PANE_CUSTOM_TITLE=$(tmux show-option -qv @${PANE_ID}_title)
+PANE_TITLE=$(tmux display-message -p '#{pane_title}')
+
+PANE_TITLE=${PANE_TITLE:0:22}
+
+echo ${PANE_CUSTOM_TITLE:-$PANE_TITLE}

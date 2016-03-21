@@ -8,35 +8,39 @@ if [ -e /etc/profile ] ; then
     source /etc/profile
 fi
 
+if [ -f ~/dotfiles/bash/env_settings ] ; then
+    source ~/dotfiles/bash/env_settings
+fi
+
 #cabal
-if [ -d /home/davs/.cabal/bin ] ; then
-    export PATH=$PATH:/home/davs/.cabal/bin
+if [ -d $HOME/.cabal/bin ] ; then
+    export PATH="$PATH:$HOME/.cabal/bin"
 fi
 
 #elixir
-if [ -e /home/davs/dotfiles/mix-completion.bash ] ; then
-    source /home/davs/dotfiles/mix-completion.bash
+if [ -e ~/dotfiles/mix-completion.bash ] ; then
+    source ~/dotfiles/mix-completion.bash
 fi
 
 #git
-if [ -e /home/davs/dotfiles/git-completion.bash ] ; then
+if [ -e ~/dotfiles/git-completion.bash ] ; then
     export GIT_PS1_SHOWDIRTYSTATE="yes"
-    source /home/davs/dotfiles/git-completion.bash
+    source ~/dotfiles/git-completion.bash
 fi
 
-if [ -e /home/davs/dotfiles/bash/git ] ; then
-    source /home/davs/dotfiles/bash/git
+if [ -e ~/dotfiles/bash/git ] ; then
+    source ~/dotfiles/bash/git
     export PS1='[\u@\h:\w]\e[36m$(parse_git_branch)\e[0m\n$([ \j -gt 0 ] && echo "\j ")\\$ '
 fi
 
 #env
-if [ -e /home/davs/dotfiles/bash/export ] ; then
-    source /home/davs/dotfiles/bash/export
+if [ -e ~/dotfiles/bash/export ] ; then
+    source ~/dotfiles/bash/export
 fi
 
 #alias
-if [ -e /home/davs/dotfiles/bash/alias ] ; then
-    source /home/davs/dotfiles/bash/alias
+if [ -e ~/dotfiles/bash/alias ] ; then
+    source ~/dotfiles/bash/alias
 fi
 
 #perl
@@ -46,16 +50,16 @@ if [ -e /opt/perlbrew/etc/bashrc ] ; then
 fi
 
 #nike
-if [ -f /home/davs/dotfiles/nike ] ; then
-    if [ -f /home/davs/dotfiles/bash/nike ] ; then
-        source /home/davs/dotfiles/bash/nike
+if [ -f ~/dotfiles/nike ] ; then
+    if [ -f ~/dotfiles/bash/nike ] ; then
+        source ~/dotfiles/bash/nike
     fi
-    if [ -f /home/davs/dotfiles/bash/proxy ] ; then
-        source /home/davs/dotfiles/bash/proxy
+    if [ -f ~/dotfiles/bash/proxy ] ; then
+        source ~/dotfiles/bash/proxy
     fi
 fi
 
 #tmux
-if [ -f /home/davs/dotfiles/tmux-completion.bash ] ; then
-    source /home/davs/dotfiles/tmux-completion.bash
+if [ -f ~/dotfiles/tmux-completion.bash ] ; then
+    source ~/dotfiles/tmux-completion.bash
 fi

@@ -1,0 +1,38 @@
+#!/bin/bash
+
+SESSIONS_AND_WINDOWS=""
+
+while read SESSION_DATA; do
+	SESSION_ID=$(echo "$SESSION_DATA" | cut -f1 -d ' ')
+	SESSION_NAME=$(echo "$SESSION_DATA" | cut -f1 -d ' ' --complement)
+	SESSIONS_AND_WINDOWS="$SESSIONS_AND_WINDOWS\n$SESSION_ID $SESSION_NAME"
+
+	while read WINDOW_DATA; do
+		WINDOW_ID=$(echo "$WINDOW_DATA" | cut -f1 -d ' ')
+		WINDOW_NAME=$(echo "$WINDOW_DATA" | cut -f1 -d ' ' --complement)
+		SESSIONS_AND_WINDOWS="$SESSIONS_AND_WINDOWS\n    $WINDOW_ID $WINDOW_NAME"
+	done <<< "$(tmux list-windows -t $SESSION_ID -F '#{window_id} #{window_name}')"
+done <<< "$(tmux list-sessions -F '#{session_id} #{session_name}')"
+
+echo -e "$SESSIONS_AND_WINDOWS"
+
+SELECTION=""
+while true; do
+	echo -n "Choose session/window to edit (0 - exit): "
+	read SELECTION
+
+	if [ "$SELECTION" == "0" ] ; then
+		exit
+	fi
+
+	echo -e "$SESSIONS_AND_WINDOWS" | grep -qP "^\s*\\$SELECTION"
+	if [ $? -eq 0 ] ; then
+		break
+	fi
+done
+
+if [[ ${SELECTION:0:1} == "$" ]] ; then
+	tmux_edit_session $SELECTION
+elif [[ ${SELECTION:0:1} == "@" ]] ; then
+	tmux_edit_window $SELECTION
+fi

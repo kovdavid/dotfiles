@@ -1,0 +1,32 @@
+#!/bin/bash
+
+SESSIONS=""
+
+while read SESSION_DATA; do
+	SESSION_ID=$(echo "$SESSION_DATA" | cut -f1 -d ' ')
+	SESSION_NAME=$(echo "$SESSION_DATA" | cut -f1 -d ' ' --complement)
+	SESSIONS="$SESSIONS\n$SESSION_ID $SESSION_NAME"
+done <<< "$(tmux list-sessions -F '#{session_id} #{session_name}')"
+
+echo -e "$SESSIONS"
+
+SELECTION=""
+while true; do
+	echo -n "Choose session to edit (0 - exit): "
+	read SELECTION
+
+	if [ "$SELECTION" == "0" ] ; then
+		exit
+	fi
+
+	echo -e "$SESSIONS" | grep -qP "^\s*\\$SELECTION"
+	if [ $? -eq 0 ] ; then
+		break
+	fi
+done
+
+SESSION_NAME=$(tmux display-message -p -t "$SELECTION" -F '#{session_name}')
+DEFAULT_COMMAND=$(tmux show-options -v -t "$SELECTION" default-command)
+
+$(tmux new -t "$SELECTION" -s "${SESSION_NAME}_join")
+$(tmux set-option -t "${SESSION_NAME}_join" default-command "$TMUX_CMD")
