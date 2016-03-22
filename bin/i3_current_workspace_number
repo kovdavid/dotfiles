@@ -1,0 +1,4 @@
+#!/bin/bash
+# i3-msg -t get_workspaces | perl -MJSON -e 'my $json=<>; my $data=decode_json($json); use Data::Dumper; print Dumper($data)' &> /tmp/i3_workspaces
+
+i3-msg -t get_workspaces | perl -MJSON -e 'my $json=<>; my $data=decode_json($json); my $focused = [grep { $_->{focused} } @{ $data }]->[0]; print "$focused->{num}\n";'

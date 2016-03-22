@@ -1,0 +1,9 @@
+#!/bin/bash
+
+WORKSPACE_NUMBER=$(i3_current_workspace_number)
+
+if [ -n "$WORKSPACE_NUMBER" ] && [ "$WORKSPACE_NUMBER" -gt 0 ] ; then
+    i3-input -F 'rename workspace to "'$WORKSPACE_NUMBER': %s"' -P 'New name: '$WORKSPACE_NUMBER': '
+else
+    i3-input -F 'rename workspace to "%s"' -P 'New name: '
+fi
