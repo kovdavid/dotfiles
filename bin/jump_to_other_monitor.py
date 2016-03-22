@@ -32,7 +32,7 @@ def jump_to_other_monitor():
 
     if other_workspace:
         workspace_num = str(other_workspace['num'])
-        i3.workspace(workspace_num)
+        i3.msg(0, 'workspace number %s' % workspace_num)
 
 if __name__ == '__main__':
     jump_to_other_monitor()
