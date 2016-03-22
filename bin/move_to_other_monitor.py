@@ -32,7 +32,7 @@ def move_to_other_monitor():
 
     if other_workspace:
         workspace_num = str(other_workspace['num'])
-        i3.msg(0, 'move window to workspace %s' % workspace_num)
+        i3.msg(0, 'move window to workspace number %s' % workspace_num)
 
 if __name__ == '__main__':
     move_to_other_monitor()
