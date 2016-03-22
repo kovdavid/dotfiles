@@ -4,14 +4,14 @@ general {
 }
 
 order += "disk /"
-order += "ethernet eth1"
+order += "ethernet enp0s25"
 order += "cpu_temperature 0"
 order += "cpu_usage"
 order += "load"
 order += "volume master"
 order += "time"
 
-ethernet eth1 {
+ethernet enp0s25 {
     format_up = "%ip"
     format_down = ""
 }
