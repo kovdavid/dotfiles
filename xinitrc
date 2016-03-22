@@ -14,6 +14,7 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 [ -f $sysmodmap ] && /usr/bin/xmodmap $sysmodmap
 [ -f $userresources ] && /usr/bin/xrdb -merge $userresources
 [ -f $usermodmap ] && /usr/bin/xmodmap $usermodmap
+[ -f ~/dotfiles/bash/env_settings ] && source ~/dotfiles/bash/env_settings
 
 /usr/bin/xmodmap -e 'keycode 66 = Escape'
 /usr/bin/xmodmap -e 'clear Lock'
