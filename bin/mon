@@ -1,7 +1,6 @@
 #!/bin/bash
 
-set -e
-
+source ~/.bash_profile
 sh ~/.xsessionrc
 xmodmap ~/.Xmodmap
 
@@ -32,9 +31,9 @@ if [ -n "$OUTPUT2_CONNECTED" ] ; then
         $(xrandr --output $OUTPUT2 --right-of $OUTPUT1)
         $(xrandr --output $OUTPUT2 --pos ${WIDTH2}x-$DELTA_Y)
     fi
-
-    sleep 2
 fi
 
-sleep 1
-nitrogen --restore
+if [ $(which nitrogen) ] ; then
+    sleep 2
+    nitrogen --restore
+fi
