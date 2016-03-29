@@ -26,6 +26,8 @@ if [ -z "$CRYPTSETUP" ] ; then
     exit
 fi
 
+BACKUP_KEYFILE=${BACKUP_KEYFILE:-/root/keyfile}
+
 if [ -z "$BACKUP_KEYFILE" ] || [ ! -f "$BACKUP_KEYFILE" ] ; then
     echo "No backup keyfile found"
     exit
