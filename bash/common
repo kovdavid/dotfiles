@@ -8,6 +8,10 @@ if [ -e /etc/profile ] ; then
     source /etc/profile
 fi
 
+if [ -f ~/dotfiles/dircolors ] ; then
+    eval "$(dircolors ~/dotfiles/dircolors)" > /dev/null
+fi
+
 if [ -f ~/dotfiles/bash/env_settings ] ; then
     source ~/dotfiles/bash/env_settings
 fi
