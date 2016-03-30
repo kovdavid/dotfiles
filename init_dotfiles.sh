@@ -44,6 +44,7 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_dotfile fontconfig
     remove_and_link_dotfile gitconfig
     remove_and_link_dotfile screenrc
+    remove_and_link_dotfile dircolors
 
     echo "You have to manually link i3/config and i3/status!"
     # remove_and_link_dotfile i3/config
