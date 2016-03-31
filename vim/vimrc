@@ -286,7 +286,7 @@ augroup all_file_type
     autocmd Syntax * highlight SpecialKey ctermfg=240 gui=bold guifg=#5b605e
     autocmd Syntax * highlight NonText ctermfg=240 gui=bold guifg=#5b605e
 
-	autocmd BufEnter * let &titlestring = hostname().":".expand("%:p")
+	autocmd BufEnter * let &titlestring = $USER."@".hostname().":".expand("%:p")
 augroup END
 " }}}
 " Elixir {{{
