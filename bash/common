@@ -21,6 +21,10 @@ if [ -d $HOME/.cabal/bin ] ; then
     export PATH="$PATH:$HOME/.cabal/bin"
 fi
 
+if [ -d $HOME/.local/bin ] ; then
+    export PATH="$PATH:$HOME/.local/bin"
+fi
+
 #elixir
 if [ -e ~/dotfiles/mix-completion.bash ] ; then
     source ~/dotfiles/mix-completion.bash
