@@ -14,6 +14,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jnurmine/Zenburn'
 Plug 'tpope/vim-endwise'
+Plug 'takac/vim-hardtime'
 
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 
@@ -91,6 +92,7 @@ set hlsearch
 set incsearch
 
 nnoremap <leader>. :nohl<CR>
+nnoremap <leader>> :set hlsearch<CR>viw"hy:let @/="<C-r>h"<CR>
 
 set ignorecase
 
@@ -311,6 +313,8 @@ augroup END
 augroup filetype_haskell
     autocmd!
     autocmd BufRead,BufWritePre,FileType haskell execute ":Rooter"
+
+    autocmd BufNewFile *.hs 0r ~/.vim/skeleton/haskell.module
 
     autocmd BufWritePost * if &filetype=='haskell' | execute ":Neomake" | endif
 
@@ -792,5 +796,9 @@ let g:neomake_warning_sign = {
     \ 'text': '☢',
     \ 'texthl': 'WarningMsg',
     \ }
+" }}}
+" hardtime {{{
+let g:hardtime_maxcount = 2
+let g:hardtime_allow_different_key = 1
 " }}}
 " }}}
