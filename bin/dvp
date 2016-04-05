@@ -1,0 +1,4 @@
+#!/bin/bash
+
+setxkbmap dvp
+xmodmap ~/.Xmodmap

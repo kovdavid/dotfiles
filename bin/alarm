@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sleep $1
+notify-send -t 0 "$2"
