@@ -1,4 +1,5 @@
 general {
+    output_format = "i3bar"
     colors = true
     interval = 2
 }
@@ -27,7 +28,7 @@ ethernet enp0s25 {
 }
 
 time {
-    format ="📅 %d-%m-%Y %H:%M"
+    format ="📅 [%U] %d-%m-%Y %H:%M"
 }
 
 load {

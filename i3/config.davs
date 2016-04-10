@@ -52,7 +52,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # toggle split orientation
-bindsym $mod+s exec ~/bin/toggle_split_orientation.py
+bindsym $mod+s exec ~/bin/i3_toggle_split_orientation.sh
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -192,7 +192,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         font pango:DejaVu Sans Mono 12px
-        status_command i3status -c ~/.i3/i3status
+        status_command i3_custom_status.sh
         tray_output $primary_output
 }
 
