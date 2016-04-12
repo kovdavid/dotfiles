@@ -3,3 +3,4 @@ misc/
 tags
 Makefile.old
 nytprof*
+.nike_deploy
