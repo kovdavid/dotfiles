@@ -1,4 +1,8 @@
 alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
 alias cal="cal -m"
 alias clr="clear"
 alias cp="cp -i"
