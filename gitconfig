@@ -32,10 +32,8 @@
     trustctime = false
     excludesfile = ~/.git_global_ignore
 [diff]
-    external = git-meld
     tool = vimdiff
 [merge]
-    external = meld
     tool = fugitive
 [color]
     ui = auto
