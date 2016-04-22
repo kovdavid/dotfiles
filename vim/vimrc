@@ -14,7 +14,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jnurmine/Zenburn'
 Plug 'tpope/vim-endwise'
-Plug 'takac/vim-hardtime'
 
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 
@@ -796,9 +795,5 @@ let g:neomake_warning_sign = {
     \ 'text': '☢',
     \ 'texthl': 'WarningMsg',
     \ }
-" }}}
-" hardtime {{{
-let g:hardtime_maxcount = 2
-let g:hardtime_allow_different_key = 1
 " }}}
 " }}}

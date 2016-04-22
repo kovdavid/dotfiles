@@ -1,0 +1,17 @@
+#!/bin/bash
+
+while read SESSION_DATA; do
+	SESSION_ID=$(echo "$SESSION_DATA" | cut -f1 -d ' ')
+	SESSION_NAME=$(echo "$SESSION_DATA" | cut -f1 -d ' ' --complement)
+	SESSION_DEFAULT_COMMAND=$(tmux show-options -v -t $SESSION_ID default-command)
+
+	echo "SESSION: $SESSION_ID $SESSION_NAME ||> $SESSION_DEFAULT_COMMAND"
+
+	while read WINDOW_DATA; do
+		WINDOW_ID=$(echo "$WINDOW_DATA" | cut -f1 -d ' ')
+		WINDOW_NAME=$(echo "$WINDOW_DATA" | cut -f1 -d ' ' --complement)
+		WINDOW_OPTION=$(tmux show-option -qv -t$SESSION_ID @${WINDOW_ID}_default_command)
+
+		echo -e "\tWINDOW $WINDOW_ID $WINDOW_NAME ||> $WINDOW_OPTION"
+	done <<< "$(tmux list-windows -t $SESSION_ID -F '#{window_id} #{window_name}')"
+done <<< "$(tmux list-sessions -F '#{session_id} #{session_name}')"
