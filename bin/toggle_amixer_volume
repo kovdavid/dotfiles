@@ -11,3 +11,5 @@ else
     amixer -q set Speaker 100%
     amixer -q set Headphone 100%
 fi
+
+killall -USR1 i3status
