@@ -313,7 +313,7 @@ augroup filetype_haskell
     autocmd!
     autocmd BufRead,BufWritePre,FileType haskell execute ":Rooter"
 
-    autocmd BufNewFile *.hs 0r ~/.vim/skeleton/haskell.module
+    autocmd BufRead,BufNewFile *.hs if line('$') == 1 && getline('.') == '' | call NewHaskellModule() | endif
 
     autocmd BufWritePost * if &filetype=='haskell' | execute ":Neomake" | endif
 
@@ -544,6 +544,33 @@ function! NewElixirModule()
     endif
 
     execute "normal! o"
+    startinsert
+endfunction
+" }}}
+" NexHaskellModule {{{
+function! NewHaskellModule()
+    " get the part between lib/ and .ex
+    let l:path = substitute(expand('%:p'), '^.*/\(src\|t\)/\(.*\).hs$', '\2', 'g')
+
+    " not inside 'lib' nor 'test'
+    if l:path == expand('%:p')
+        let l:path = 'main'
+    endif
+
+    " insert defmodule and capitalize the first letter of the module name
+    execute "normal! gg0imodule ".l:path." where\n\nmain :: IO ()\nmain = return ()\<ESC>gg0WvgU"
+
+    " delete _, capitalize next letter
+    if getline(".") =~# '_'
+        :s/\v_(.)/\u\1/g
+    endif
+
+    " replace / with ., capitalize next letter
+    if getline(".") =~# '/'
+        :s/\v\/(.)/.\u\1/g
+    endif
+
+    execute "normal! j"
     startinsert
 endfunction
 " }}}
