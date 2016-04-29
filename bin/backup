@@ -168,6 +168,7 @@ elif [ -e /backup/backup_32g ] ; then
           --exclude /run                        \
           --exclude /sys                        \
           --exclude /tmp                        \
+          --exclude /usr                        \
           --exclude /var/cache/pacman           \
           --exclude /mnt/data/Music             \
           --exclude /mnt/data/NO_BACKUP         \
