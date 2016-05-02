@@ -26,6 +26,7 @@ Plug 'Shougo/deoplete.nvim',      { 'for': 'haskell' }
 Plug 'benekastah/neomake',        { 'for': 'haskell' }
 Plug 'ervandew/supertab',         { 'for': 'haskell' }
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'bitc/vim-hdevtools',        { 'for': 'haskell' }
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 call plug#end()
@@ -325,8 +326,11 @@ augroup filetype_haskell
 
     autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
+    autocmd FileType haskell noremap <buffer> <leader>. :HdevtoolsClear<CR>:nohl<CR>
+    autocmd FileType haskell noremap <buffer> <leader>ht :HdevtoolsType<CR>
+    autocmd FileType haskell noremap <buffer> <leader>hi :HdevtoolsInfo<CR>
+
     autocmd FileType haskell noremap <buffer> <leader>rr :!runhaskell %<CR>
-    autocmd FileType haskell noremap <buffer> <leader>ts :GhcModCheckAndLintAsync<CR>
     autocmd FileType haskell noremap <buffer> <leader>tw :GhcModTypeInsert<CR>
     autocmd FileType haskell noremap <buffer> <leader>tc :GhcModSplitFunCase<CR>
     autocmd FileType haskell noremap <buffer> <leader>tq :GhcModType<CR>
@@ -812,8 +816,8 @@ let g:deoplete#sources = {}
 let g:deoplete#sources.haskell = ['buffer', 'omni']
 " }}}
 " neomake {{{
-" let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
-let g:neomake_haskell_enabled_makers = ['ghcmod']
+" let g:neomake_haskell_enabled_makers = ['ghcmod']
+let g:neomake_haskell_enabled_makers = ['hdevtools']
 let g:neomake_error_sign = {
     \ 'text': '✖',
     \ 'texthl': 'ErrorMsg',
