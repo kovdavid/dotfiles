@@ -18,11 +18,11 @@ fi
 
 #cabal
 if [ -d $HOME/.cabal/bin ] ; then
-    export PATH="$PATH:$HOME/.cabal/bin"
+    export PATH="$HOME/.cabal/bin:$PATH"
 fi
 
 if [ -d $HOME/.local/bin ] ; then
-    export PATH="$PATH:$HOME/.local/bin"
+    export PATH="$HOME/.local/bin:$PATH"
 fi
 
 #elixir
