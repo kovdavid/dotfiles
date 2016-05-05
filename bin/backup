@@ -106,8 +106,8 @@ elif [ -e /backup/backup_all ] ; then
           --exclude /lost+found               \
           --exclude /media                    \
           --exclude /mnt/data/NO_BACKUP       \
-          --exclude /opt/playonlinux          \
-          --exclude /opt/wine                 \
+          --exclude /opt                      \
+          --include /opt/minecraft            \
           --exclude /proc                     \
           --exclude /run                      \
           --exclude /sys                      \
