@@ -282,7 +282,7 @@ augroup all_file_type
         autocmd BufWritePre * %s/\s\+$//e
     endif
 
-    autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal wrap | setlocal nocursorbind | endif
+    autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal winwidth=1 | setlocal wrap | setlocal nocursorbind | endif
     autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=100 | endif
 
     autocmd Syntax * highlight SpecialKey ctermfg=240 gui=bold guifg=#5b605e
