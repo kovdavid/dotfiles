@@ -20,11 +20,11 @@ Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 
 "haskell
 Plug 'eagletmt/ghcmod-vim',       { 'for': 'haskell' }
-Plug 'eagletmt/neco-ghc',         { 'for': 'haskell' }
-Plug 'Shougo/deoplete.nvim',      { 'for': 'haskell' }
+" Plug 'eagletmt/neco-ghc',         { 'for': 'haskell' }
+" Plug 'Shougo/deoplete.nvim',      { 'for': 'haskell' }
 Plug 'benekastah/neomake',        { 'for': 'haskell' }
-Plug 'ervandew/supertab',         { 'for': 'haskell' }
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+" Plug 'ervandew/supertab',         { 'for': 'haskell' }
+" Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'bitc/vim-hdevtools',        { 'for': 'haskell' }
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -732,7 +732,7 @@ nnoremap <leader>, :CtrlP<CR>
 let g:clever_f_across_no_line = 0
 " }}}
 " Rooter {{{
-let g:rooter_patterns = [ '.git/', '.vimproject' ]
+let g:rooter_patterns = [ '.vimproject', '.git/' ]
 let g:rooter_manual_only = 0
 let g:rooter_change_directory_for_non_project_files = 0
 " }}}
@@ -827,5 +827,8 @@ let g:neomake_warning_sign = {
             \ 'text': '☢',
             \ 'texthl': 'WarningMsg',
             \ }
+" }}}
+" ghc-mod {{{
+let g:ghcmod_ghc_options = ['-isrc']
 " }}}
 " }}}
