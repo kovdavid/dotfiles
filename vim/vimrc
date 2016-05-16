@@ -383,6 +383,8 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>tc  :PerlTestCreate<CR>
     autocmd FileType perl nnoremap <buffer> <leader>to  :PerlTestDirOpen<CR>
 
+    autocmd FileType perl nnoremap gci :call CommitPerlFiles()<CR>
+
     " autocmd FileType perl nnoremap <buffer> <leader>ps viw"hyouse v5.10; say "<C-r>h: $<C-r>h";<ESC>
     " autocmd FileType perl nnoremap <buffer> <leader>pd viw"hyouse v5.10; use Data::Dumper; say "<C-r>h: ".Dumper($<C-r>h);<ESC>
     autocmd FileType perl nnoremap <buffer> <leader>ps 0f$lviw"hyouse v5.10; say "<C-r>h: $<C-r>h";<ESC>
@@ -699,6 +701,19 @@ function! PerlDumpVariables() range
         execute "normal! oprint '".variable.": '.Dumper($".variable.");"
     endfor
     execute "normal! o"
+endfunction
+" }}}
+" CommitPerlFiles {{{
+function! CommitPerlFiles()
+    let l:path = expand("%")
+    if l:path =~# '\v^(bin|lib|t)\/.+(pl|pm|t)?$'
+        let l:path = substitute(l:path, '\v(bin|lib|t)/', '', '')
+        let l:path = substitute(l:path, '\v\.(pl|pm|t)$', '', '')
+        let l:path = substitute(l:path, '\/', '::', 'g')
+        execute "normal! :Gwrite \<BAR> Gcommit\<CR>O".l:path.": i"
+    else
+        execute "normal! :let @f=expand('%:t:r')\<CR>:Gwrite \<BAR> Gcommit\<CR>O\<C-R>f:<space>"
+    endif
 endfunction
 " }}}
 " }}}
