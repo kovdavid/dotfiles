@@ -13,6 +13,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jnurmine/Zenburn'
 Plug 'tpope/vim-endwise'
+Plug 'junkblocker/git-time-lapse'
 
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 
@@ -47,8 +48,12 @@ set noswapfile
 set scrolloff=3                " when moving vertically set 3 lines to the cursor
 set mousehide
 set mouse=niv
-set number
-set relativenumber
+if v:version > 703
+    set number
+    set relativenumber
+else
+    set number
+endif
 set splitbelow
 set splitright
 set nojoinspaces
@@ -98,7 +103,7 @@ set ignorecase
 " very magic mode for regexes
 nnoremap <leader>/ /\v
 
-vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+vnoremap <C-r> :call ReplaceSelection()<CR>
 nnoremap <leader>rw viw"hy:s/<C-r>h//g<left><left>
 " }}}
 " Indents {{{
@@ -273,7 +278,7 @@ noremap <c-t> :tabnew<CR>
 " EveryFile {{{
 augroup all_file_type
     autocmd!
-    if v:version < 703
+    if v:version > 703
         autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber
         autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber
     endif
@@ -710,9 +715,29 @@ function! CommitPerlFiles()
         let l:path = substitute(l:path, '\v(bin|lib|t)/', '', '')
         let l:path = substitute(l:path, '\v\.(pl|pm|t)$', '', '')
         let l:path = substitute(l:path, '\/', '::', 'g')
-        execute "normal! :Gwrite \<BAR> Gcommit\<CR>O".l:path.": i"
+        execute "normal! :Gwrite \<BAR> Gcommit\<CR>O".l:path.": "
     else
-        execute "normal! :let @f=expand('%:t:r')\<CR>:Gwrite \<BAR> Gcommit\<CR>O\<C-R>f:<space>"
+        execute "normal! :let @f=expand('%:t:r')\<CR>:Gwrite \<BAR> Gcommit\<CR>O\<C-R>f:\<space>"
+    endif
+    startinsert!
+endfunction
+" }}}
+" ReplaceSelection {{{
+function! ReplaceSelection() range
+    let l:line_no = line("'>") - line("'<") + 1
+    if l:line_no == 1
+        try
+            let a_save = @a
+            normal! gv"ay
+            let l:escaped = escape(@a, '\/')
+            let l:escaped = substitute(l:escaped, "\r", '', '')
+            let l:escaped = substitute(l:escaped, "\n", '', '')
+            call feedkeys(":\<c-u>%s/\\V".l:escaped."//gc\<LEFT>\<LEFT>\<LEFT>", 'n')
+        finally
+            let @a = a_save
+        endtry
+    else
+        echo "More than 1 line selected!"
     endif
 endfunction
 " }}}

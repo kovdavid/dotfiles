@@ -15,3 +15,6 @@ fi
 if [ -f ~/dotfiles/bash/nike_alias ] ; then
     source ~/dotfiles/bash/nike_alias
 fi
+
+alias grepew="grep -iP 'error|warn' "
+alias zgrepew="zgrep -iP 'error|warn' "

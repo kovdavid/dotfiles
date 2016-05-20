@@ -1,0 +1,32 @@
+#!/bin/bash
+
+WINDOW_NAME=''
+SSH_HOST=''
+CD_DIR=''
+
+read -p "Window name: " WINDOW_NAME
+
+read -p "SSH host: " SSH_HOST
+if [ -z "$WINDOW_NAME" ] ; then
+    WINDOW_NAME=$SSH_HOST
+fi
+
+read -p "Default directory: " -e CD_DIR
+
+TMUX_CMD=""
+if [ -n "$SSH_HOST" ] ; then
+    TMUX_CMD="ssh $SSH_HOST -t 'cd $CD_DIR; exec bash'; exec \$SHELL"
+else
+    TMUX_CMD="cd $CD_DIR; bash"
+fi
+
+if [ -n "$WINDOW_NAME" ] ; then
+    $(tmux new-window -d -n $WINDOW_NAME "$TMUX_CMD")
+else
+    WINDOW_NAME=$(tmux new-window -P -d "$TMUX_CMD" | cut -d":" -f2)
+fi
+
+# $(tmux set-option -t $WINDOW_NAME default-command "$TMUX_CMD")
+WINDOW_ID=$(tmux display-message -t $WINDOW_NAME -p '#{window_id}')
+$(tmux set-option @${WINDOW_ID}_default_command "$TMUX_CMD")
+$(tmux select-window -t $WINDOW_NAME)
