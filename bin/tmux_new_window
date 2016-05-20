@@ -26,5 +26,7 @@ else
     WINDOW_NAME=$(tmux new-window -P -d "$TMUX_CMD" | cut -d":" -f2)
 fi
 
-$(tmux set-option -t $WINDOW_NAME default-command "$TMUX_CMD")
+# $(tmux set-option -t $WINDOW_NAME default-command "$TMUX_CMD")
+WINDOW_ID=$(tmux display-message -t $WINDOW_NAME -p '#{window_id}')
+$(tmux set-option @${WINDOW_ID}_default_command "$TMUX_CMD")
 $(tmux select-window -t $WINDOW_NAME)
