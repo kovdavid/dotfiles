@@ -13,6 +13,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jnurmine/Zenburn'
 Plug 'tpope/vim-endwise'
+Plug 'junkblocker/git-time-lapse'
 
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 
@@ -47,8 +48,12 @@ set noswapfile
 set scrolloff=3                " when moving vertically set 3 lines to the cursor
 set mousehide
 set mouse=niv
-set number
-set relativenumber
+if v:version > 703
+    set number
+    set relativenumber
+else
+    set number
+endif
 set splitbelow
 set splitright
 set nojoinspaces
@@ -273,7 +278,7 @@ noremap <c-t> :tabnew<CR>
 " EveryFile {{{
 augroup all_file_type
     autocmd!
-    if v:version < 703
+    if v:version > 703
         autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber
         autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber
     endif
