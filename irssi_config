@@ -200,10 +200,10 @@ chatnets = {
   perl = { type = "IRC"; };
 };
 channels = (
-  #{ name = "#dancer"; chatnet = "perl"; autojoin = "yes"; },
-  #{ name = "#perl-help"; chatnet = "perl"; autojoin = "yes"; },
+  { name = "#dancer"; chatnet = "perl"; autojoin = "yes"; },
+  { name = "#perl-help"; chatnet = "perl"; autojoin = "yes"; },
   { name = "#vim"; chatnet = "fn"; autojoin = "yes"; },
-  #{ name = "#elixir-lang"; chatnet = "fn"; autojoin = "yes"; },
+  { name = "#elixir-lang"; chatnet = "fn"; autojoin = "yes"; },
   { name = "#haskell-beginners"; chatnet = "fn"; autojoin = "yes"; },
 );
 logs = { };
