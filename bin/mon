@@ -21,27 +21,29 @@ if [ -n "$OUTPUT2_CONNECTED" ] ; then
 
     DELTA_Y=$(($HEIGTH2 - $HEIGTH1))
 
-    if [ "$1" = "off" ] ; then
+    if [ "$1" == "off" ] ; then
         echo "Turning off $OUTPUT2"
         $(xrandr --output $OUTPUT2 --off)
-    elif [ "$1" = "l" ] || [ "$1" = "left" ] ; then
+    else
         echo "Setting $OUTPUT2 to $RESOLUTION2"
         $(xrandr --output $OUTPUT2 --mode $RESOLUTION2)
 
-        echo "Setting $OUTPUT1 right of $OUTPUT2"
-        $(xrandr --output $OUTPUT1 --right-of $OUTPUT2)
+        if [ "$1" == "l" ] || [ "$1" == "left" ] ; then
+            echo "Setting $OUTPUT2 left of $OUTPUT1"
+            $(xrandr --output $OUTPUT2 --left-of $OUTPUT2)
 
-        echo "Setting $OUTPUT1 pos ${WIDTH1}x$DELTA_Y)"
-        $(xrandr --output $OUTPUT1 --pos ${WIDTH1}x$DELTA_Y)
-    elif [ "$1" = "r" ] || [ "$1" = "right" ] ; then
-        echo "Setting $OUTPUT2 to $RESOLUTION2"
-        $(xrandr --output $OUTPUT2 --mode $RESOLUTION2)
+            echo "Setting $OUTPUT1 pos ${WIDTH1}x$DELTA_Y)"
+            $(xrandr --output $OUTPUT1 --pos ${WIDTH1}x$DELTA_Y)
+        elif [ "$1" == "r" ] || [ "$1" == "right" ] ; then
+            echo "Setting $OUTPUT2 right of $OUTPUT1"
+            $(xrandr --output $OUTPUT2 --right-of $OUTPUT1)
 
-        echo "Setting $OUTPUT2 right of $OUTPUT1"
-        $(xrandr --output $OUTPUT2 --right-of $OUTPUT1)
-
-        echo "Setting $OUTPUT2 pos ${WIDTH1}x$DELTA_Y"
-        $(xrandr --output $OUTPUT2 --pos ${WIDTH1}x-$DELTA_Y)
+            echo "Setting $OUTPUT2 pos ${WIDTH1}x$DELTA_Y"
+            $(xrandr --output $OUTPUT2 --pos ${WIDTH1}x-$DELTA_Y)
+        elif [ "$1" == "t" ] || [ "$1" == "top" ] ; then
+            echo "Setting $OUTPUT2 above $OUTPUT1"
+            $(xrandr --output $OUTPUT2 --above $OUTPUT2)
+        fi
     fi
 fi
 
