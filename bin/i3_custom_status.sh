@@ -9,5 +9,7 @@ do
     else
         I3_ORIENTATION_STATUS="_"
     fi
-    echo "${line/[/[{\"full_text\":\"I3Split: $I3_ORIENTATION_STATUS\"\},}" || exit 1
+    TODO_COUNT=0
+	[[ -f ~/TODO ]] && TODO_COUNT=$(cat ~/TODO | wc -l)
+    echo "${line/[/[{\"full_text\":\"TODO: $TODO_COUNT | I3Split: $I3_ORIENTATION_STATUS\"\},}" || exit 1
 done
