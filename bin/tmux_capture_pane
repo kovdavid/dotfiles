@@ -1,0 +1,7 @@
+#!/bin/bash
+
+unset S
+read -p "S(0): " S
+[[ -z "$S" ]] && S=0
+
+tmux capture-pane -S $S -p -t {last} | vim - -c "set norelativenumber" -c "set nonumber"
