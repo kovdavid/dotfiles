@@ -88,6 +88,7 @@ if [ -e /backup/backup_system ] ; then
           --exclude /proc                     \
           --exclude /run                      \
           --exclude /sys                      \
+          --exclude /usr                      \
           --exclude /tmp                      \
           --exclude /var/cache                \
           --exclude /usr/backup               \
@@ -110,6 +111,7 @@ elif [ -e /backup/backup_all ] ; then
           --include /opt/minecraft            \
           --exclude /proc                     \
           --exclude /run                      \
+          --exclude /usr                      \
           --exclude /sys                      \
           --exclude /tmp                      \
           --exclude /usr/backup               \
