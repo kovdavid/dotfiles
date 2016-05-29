@@ -9,8 +9,8 @@ Xft.rgba: rgb
 XTerm*faceName: DejaVu Sans Mono
 XTerm*faceSize: 11
 !XTerm*Background: #333333
-XTerm*Foreground: #ffffff
-XTerm*Background: #3A3A3A
+!XTerm*Foreground: #ffffff
+!XTerm*Background: #3A3A3A
 XTerm*allowWindowOps: true
 
 xterm*termName: xterm-256color
@@ -29,31 +29,4 @@ XTerm*metaSendsEscape: true
 
 Xterm*saveLines: 4096
 
-!Zenburn
-
-!black
-xterm*color0:         #353535
-xterm*color8:         #666666
-!red
-!xterm*color1:         #AE4747
-xterm*color1:         #CC9393
-xterm*color9:         #EE6363
-!green
-!xterm*color2:         #556B2F
-xterm*color2:         #7F9F7F
-xterm*color10:        #9ACD32
-!brown/yellow
-xterm*color3:         #DAA520
-xterm*color11:        #FFC125
-!blue
-xterm*color4:         #6F99B4
-xterm*color12:        #7C96B0
-!magenta
-xterm*color5:         #8B7B8B
-xterm*color13:        #D8BFD8
-!cyan
-xterm*color6:         #A7A15E
-xterm*color14:        #F0E68C
-!white
-xterm*color7:         #DDDDDD
-xterm*color15:        #FFFFFF
+#include "/home/davs/.Xresources.colorscheme"

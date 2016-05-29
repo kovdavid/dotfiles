@@ -92,6 +92,8 @@ if [ "$REPLY" = "y" ] ; then
     rm -rf $XDG_CONFIG_HOME/nvim
     ln -s ~/.vim $XDG_CONFIG_HOME/nvim
 
+    ln -s ~/dotfiles/Xresources.zenburn ~/.Xresources.colorscheme
+
     echo "DONE"
 fi
 

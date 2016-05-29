@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm /home/davs/.Xresources.colorscheme
+ln -s /home/davs/dotfiles/Xresources.zenburn /home/davs/.Xresources.colorscheme
+xrdb /home/davs/.Xresources
