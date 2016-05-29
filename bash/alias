@@ -23,6 +23,7 @@ alias gpoh='git push origin HEAD'
 alias gpullh='git rev-parse --abbrev-ref HEAD | xargs git pull origin'
 alias grep='grep --exclude-dir=.git'
 alias gst='git status'
+alias hdevtools='stack exec --no-ghc-package-path hdevtools --'
 alias la="ls -lha"
 alias less="less -R"
 alias ll="ls -lh"
