@@ -12,6 +12,7 @@ Plug 'airblade/vim-rooter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jnurmine/Zenburn'
+Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-endwise'
 Plug 'junkblocker/git-time-lapse'
 
