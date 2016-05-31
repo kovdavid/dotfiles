@@ -5,7 +5,7 @@ general {
 }
 
 order += "disk /"
-order += "ethernet enp0s25"
+order += "ethernet eno1"
 order += "cpu_temperature 0"
 order += "cpu_usage"
 order += "load"
@@ -35,7 +35,7 @@ disk "/home" {
 
 cpu_temperature 0 {
     format = "⌘ %degrees°C"
-    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp2_input"
+    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp2_input"
 }
 
 cpu_usage {

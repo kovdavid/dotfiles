@@ -1,6 +1,6 @@
 set $mod Mod4
 set $primary_output DisplayPort-0
-set $secondary_output VGA-0
+set $secondary_output DisplayPort-1
 
 font pango:DejaVu Sans Mono 13px
 
