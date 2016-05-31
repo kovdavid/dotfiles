@@ -12,7 +12,7 @@ order += "load"
 order += "volume master"
 order += "time"
 
-ethernet enp0s25 {
+ethernet eno1 {
     format_up = "%ip"
     format_down = ""
 }
