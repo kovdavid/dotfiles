@@ -92,6 +92,8 @@ if [ -e /backup/backup_system ] ; then
           --exclude /tmp                      \
           --exclude /var/cache                \
           --exclude /usr/backup               \
+          # --filter=":- .gitignore" \
+          --filter=":- ~/dotfiles/git_global_ignore_backup" \
       / /backup/data
 elif [ -e /backup/backup_all ] ; then
     echo "Backup type: all"
@@ -115,6 +117,8 @@ elif [ -e /backup/backup_all ] ; then
           --exclude /sys                      \
           --exclude /tmp                      \
           --exclude /usr/backup               \
+          # --filter=":- .gitignore" \
+          --filter=":- ~/dotfiles/git_global_ignore_backup" \
       / /backup/data
 elif [ -e /backup/backup_home ] ; then
     echo "Backup type: home"
@@ -127,6 +131,8 @@ elif [ -e /backup/backup_home ] ; then
           --exclude .mozilla                  \
           --exclude .thumbnails               \
           --exclude .thunderbird              \
+          # --filter=":- .gitignore" \
+          --filter=":- ~/dotfiles/git_global_ignore_backup" \
       /home/davs/ /backup/data
 elif [ -e /backup/backup_8g ] ; then
     echo "Backup type: 8G"
@@ -150,6 +156,8 @@ elif [ -e /backup/backup_8g ] ; then
           --exclude /tmp                             \
           --exclude /usr                             \
           --exclude /var/cache/pacman                \
+          # --filter=":- .gitignore" \
+          --filter=":- ~/dotfiles/git_global_ignore_backup" \
       / /backup/data
 elif [ -e /backup/backup_32g ] ; then
     echo "Backup type: 32G"
@@ -177,6 +185,8 @@ elif [ -e /backup/backup_32g ] ; then
           --exclude /mnt/data/Software          \
           --exclude /mnt/data/Videos            \
           --exclude /mnt/data/Docs/School       \
+          # --filter=":- .gitignore" \
+          --filter=":- ~/dotfiles/git_global_ignore_backup" \
       / /backup/data
 else
     echo "No backup type detected"
