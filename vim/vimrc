@@ -15,6 +15,7 @@ Plug 'jnurmine/Zenburn'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-endwise'
 Plug 'junkblocker/git-time-lapse'
+Plug 'airblade/vim-gitgutter'
 
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 
@@ -345,9 +346,9 @@ augroup END
 " Perl {{{
 augroup filetype_perl
     autocmd!
-    autocmd BufReadPre,BufNewFile *.pm  setfiletype perl
-    autocmd BufReadPre,BufNewFile *.pl  setfiletype perl
-    autocmd BufReadPre,BufNewFile *.t   setfiletype perl
+    autocmd BufRead,BufNewFile *.pm  setfiletype perl
+    autocmd BufRead,BufNewFile *.pl  setfiletype perl
+    autocmd BufRead,BufNewFile *.t   setfiletype perl
 
     autocmd BufNewFile *.pl 0r ~/.vim/skeleton/perl.script
     autocmd BufNewFile *.t 0r ~/.vim/skeleton/perl.test
