@@ -508,6 +508,11 @@ augroup gcc
     autocmd FileType c nnoremap <buffer> <leader>rr :!gcc -o <C-R>=expand("%:t:r")<CR> % && ./<C-R>=expand("%:t:r")<CR><CR>
 augroup END
 " }}}
+" XML {{{
+augroup filetype_xml
+    autocmd!
+    autocmd BufRead,BufNewFile *.xml.sample  setfiletype xml
+augroup END
 " }}}
 " vimrc {{{
 noremap <leader>se :tabnew $MYVIMRC<CR>
