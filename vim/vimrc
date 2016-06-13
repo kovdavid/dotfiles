@@ -16,19 +16,19 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-endwise'
 Plug 'junkblocker/git-time-lapse'
 Plug 'airblade/vim-gitgutter'
+Plug 'benmills/vimux'
 
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 
-Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
+" Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 
 "haskell
+Plug 'benekastah/neomake',        { 'for': 'haskell' }
 Plug 'eagletmt/ghcmod-vim',       { 'for': 'haskell' }
+Plug 'bitc/vim-hdevtools',        { 'for': 'haskell' }
+" Plug 'ervandew/supertab',         { 'for': 'haskell' }
 " Plug 'eagletmt/neco-ghc',         { 'for': 'haskell' }
 " Plug 'Shougo/deoplete.nvim',      { 'for': 'haskell' }
-Plug 'benekastah/neomake',        { 'for': 'haskell' }
-" Plug 'ervandew/supertab',         { 'for': 'haskell' }
-" Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'bitc/vim-hdevtools',        { 'for': 'haskell' }
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 call plug#end()
@@ -330,7 +330,8 @@ augroup filetype_haskell
 
     autocmd FileType haskell let g:haskellmode_completion_ghc = 1
 
-    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+    " autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+    " autocmd FileType haskell setlocal omnifunc=intero#omnifunc
 
     autocmd FileType haskell noremap <buffer> <leader>. :HdevtoolsClear<CR>:nohl<CR>
     autocmd FileType haskell noremap <buffer> <leader>ht :HdevtoolsType<CR>
@@ -763,6 +764,7 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_regexp = 0
 let g:ctrlp_by_filename = 0
+let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = {
             \ 'dir': '\v(\.git|venv|deps|_build)',
             \ 'file': '\v(__init2__\.py|\.pyc)$',
@@ -872,5 +874,13 @@ let g:neomake_warning_sign = {
 " }}}
 " ghc-mod {{{
 let g:ghcmod_ghc_options = ['-isrc']
+" }}}
+" vimux {{{
+let g:VimuxUseNearest = 1
+nnoremap <leader>vl :VimuxRunCommand ":l ".expand('%')<CR>
+nnoremap <leader>vv :VimuxRunLastCommand<CR>
+nnoremap <leader>vs :VimuxRunCommand "stack ghci --with-ghc intero"<CR>
+nnoremap <leader>vi vaw"hy<ESC>:call VimuxRunCommand(":info ".@h)<CR> | echo ""
+nnoremap <leader>vt vaw<ESC>:call VimuxRunCommand(":type-at ".expand('%')." ".line("'<")." ".col("'<")." ".line("'>")." ".(col("'>")-1))<CR> | echo ""
 " }}}
 " }}}

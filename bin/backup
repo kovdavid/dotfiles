@@ -1,4 +1,5 @@
 #!/bin/bash
+# --filter=":- .gitignore" \
 
 if [ $# -eq 1 ] ; then
     FSCK=0
@@ -73,111 +74,48 @@ fi
 if [ -e /backup/backup_system ] ; then
     echo "Backup type: system"
     read -n 1
-    rsync -aAXvz                              \
-          --delete                            \
-          --exclude /backup                   \
-          --exclude /dev                      \
-          --exclude /home/davs/.cache/        \
-          --exclude /home/davs/.gvfs          \
-          --exclude /home/davs/.mozilla/      \
-          --exclude /home/davs/.thumbnails/   \
-          --exclude /lost+found               \
-          --exclude /media                    \
-          --exclude /mnt                      \
-          --exclude /opt                      \
-          --exclude /proc                     \
-          --exclude /run                      \
-          --exclude /sys                      \
-          --exclude /usr                      \
-          --exclude /tmp                      \
-          --exclude /var/cache                \
-          --exclude /usr/backup               \
-      / /backup/data
+    rsync --archive --acls --xattrs --verbose --compress --delete \
+          --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
+          --exclude="/backup"                                     \
+          --exclude="/mnt"                                        \
+          / /backup/data
 elif [ -e /backup/backup_all ] ; then
     echo "Backup type: all"
     read -n 1
-    rsync -aAXvz                              \
-          --delete                            \
-          --exclude /backup                   \
-          --exclude /dev                      \
-          --exclude /home/davs/.cache/        \
-          --exclude /home/davs/.gvfs          \
-          --exclude /home/davs/.mozilla/      \
-          --exclude /home/davs/.thumbnails/   \
-          --exclude /lost+found               \
-          --exclude /media                    \
-          --exclude /mnt/data/NO_BACKUP       \
-          --exclude /opt                      \
-          --include /opt/minecraft            \
-          --exclude /proc                     \
-          --exclude /run                      \
-          --exclude /usr                      \
-          --exclude /sys                      \
-          --exclude /tmp                      \
-          --exclude /usr/backup               \
-      / /backup/data
+    rsync --archive --acls --xattrs --verbose --compress --delete \
+          --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
+          --exclude="/backup"                                     \
+          --include="/opt/minecraft/***"                          \
+          / /backup/data
 elif [ -e /backup/backup_home ] ; then
     echo "Backup type: home"
     read -n 1
-    rsync -aAXvz                              \
-          --delete                            \
-          --exclude .cache                    \
-          --exclude .cpanm                    \
-          --exclude .gvfs                     \
-          --exclude .mozilla                  \
-          --exclude .thumbnails               \
-          --exclude .thunderbird              \
-      /home/davs/ /backup/data
+    rsync --archive --acls --xattrs --verbose --compress --delete \
+          --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
+          --exclude="/backup"                                     \
+          --include="/home/"                                      \
+          --include="/home/davs/***"                              \
+          --exclude="*"                                           \
+          / /backup/data
 elif [ -e /backup/backup_8g ] ; then
     echo "Backup type: 8G"
     read -n 1
-    rsync -aAXvz                                     \
-          --delete                                   \
-          --exclude /backup                          \
-          --exclude /dev                             \
-          --exclude /home/davs/.cache/               \
-          --exclude /home/davs/.cpanm                \
-          --exclude /home/davs/.gvfs                 \
-          --exclude /home/davs/.mozilla/firefox      \
-          --exclude /home/davs/.thumbnails/          \
-          --exclude /lost+found                      \
-          --exclude /media                           \
-          --exclude /mnt                             \
-          --exclude /opt                             \
-          --exclude /proc                            \
-          --exclude /run                             \
-          --exclude /sys                             \
-          --exclude /tmp                             \
-          --exclude /usr                             \
-          --exclude /var/cache/pacman                \
-      / /backup/data
+    rsync --archive --acls --xattrs --verbose --compress --delete \
+          --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
+          --exclude="/backup"                                     \
+          --exclude="/mnt"                                        \
+          / /backup/data
 elif [ -e /backup/backup_32g ] ; then
     echo "Backup type: 32G"
     read -n 1
-    rsync -aAXvz                                \
-          --delete                              \
-          --exclude /backup                     \
-          --exclude /dev                        \
-          --exclude /home/davs/.cache/          \
-          --exclude /home/davs/.cpanm           \
-          --exclude /home/davs/.gvfs            \
-          --exclude /home/davs/.mozilla/firefox \
-          --exclude /home/davs/.thumbnails/     \
-          --exclude /lost+found                 \
-          --exclude /media                      \
-          --exclude /opt                        \
-          --exclude /proc                       \
-          --exclude /run                        \
-          --exclude /sys                        \
-          --exclude /tmp                        \
-          --exclude /usr                        \
-          --exclude /var/cache/pacman           \
-          --exclude /mnt/data/Music             \
-          --exclude /mnt/data/NO_BACKUP         \
-          --exclude /mnt/data/Software          \
-          --exclude /mnt/data/Videos            \
-          --exclude /mnt/data/Docs/School       \
-      / /backup/data
+    rsync --archive --acls --xattrs --verbose --compress --delete \
+          --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
+          --exclude="/backup"                                     \
+          --exclude="/mnt/data/Music"                             \
+          --exclude="/mnt/data/Software"                          \
+          --exclude="/mnt/data/Videos"                            \
+          --exclude="/mnt/data/Docs/School"                       \
+          / /backup/data
 else
     echo "No backup type detected"
 fi
