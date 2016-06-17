@@ -6,6 +6,7 @@ general {
 
 order += "disk /"
 order += "wireless wlp2s0"
+order += "wireless wwp0s20u5"
 order += "battery 0"
 order += "cpu_temperature 0"
 order += "cpu_usage"
@@ -15,6 +16,11 @@ order += "time"
 
 wireless wlp2s0 {
     format_up = "%essid %ip ‣ %quality"
+    format_down = ""
+}
+
+wireless wwp0s20u5 {
+    format_up = "WWAN %ip"
     format_down = ""
 }
 
