@@ -208,6 +208,7 @@ exec ~/bin/mon right &
 exec sudo nm-applet &
 exec numlockx &
 exec ~/bin/init_trackpoint &
+exec ~/bin/init_touchpad &
 exec (sleep 1 && nitrogen --restore ) &
 exec redshift-gtk -l geoclue2 -t 6500:3500 -b 1.0:0.7 &
 exec google-chrome

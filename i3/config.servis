@@ -203,9 +203,9 @@ for_window [class="(?i)pidgin"] floating enable
 for_window [class="Firefox"] border none
 for_window [title="File Operation Progress"] floating enable; focus mode_toggle
 
-exec ~/bin/mon right &
-exec numlockx &
 exec sudo nm-applet &
+exec ~/bin/init_trackpoint &
+exec ~/bin/init_touchpad &
 exec (sleep 1 && nitrogen --restore ) &
 exec google-chrome
 exec redshift-gtk -l geoclue2 -t 6500:3500 -b 1.0:0.7 &
