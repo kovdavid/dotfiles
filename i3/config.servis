@@ -8,7 +8,7 @@ font pango:DejaVu Sans Mono 13px
 floating_modifier $mod
 
 bindsym $mod+Tab exec ~/bin/i3_jump_to_next_output
-bindsym $mod+Shift+Tab exec ~/bin/move_to_other_monitor.py
+bindsym $mod+Shift+Tab exec ~/bin/i3_move_to_next_output
 bindsym $mod+Return exec ~/bin/i3_cycle_windows
 
 bindsym $mod+x exec xterm
