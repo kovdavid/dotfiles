@@ -208,3 +208,4 @@ exec numlockx &
 exec sudo nm-applet &
 exec (sleep 1 && nitrogen --restore ) &
 exec google-chrome
+exec redshift-gtk -l geoclue2 -t 6500:3500 -b 1.0:0.7 &
