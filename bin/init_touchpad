@@ -1,9 +1,14 @@
-xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Tap Action" 0, 0, 0, 0, 1, 2, 3
-xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Edge Scrolling" 0, 0, 0
-xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Gestures" 1
-xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Locked Drags" 1
-xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Locked Drags Timeout" 5000
-xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Move Speed" 1, 1.75, 0.04, 0
-xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Two-Finger Pressure" 40
-xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Two-Finger Width" 8
-xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Two-Finger Scrolling" 1, 0
+#!/bin/bash
+
+device=$(xinput | grep -i touchpad | cut -d"=" -f2 | cut -f1)
+if [ -n "$device" ] ; then
+    xinput set-prop $device "Synaptics Tap Action" 0, 0, 0, 0, 1, 2, 3
+    xinput set-prop $device "Synaptics Edge Scrolling" 0, 0, 0
+    xinput set-prop $device "Synaptics Gestures" 1
+    xinput set-prop $device "Synaptics Locked Drags" 1
+    xinput set-prop $device "Synaptics Locked Drags Timeout" 5000
+    xinput set-prop $device "Synaptics Move Speed" 1, 1.75, 0.04, 0
+    xinput set-prop $device "Synaptics Two-Finger Pressure" 40
+    xinput set-prop $device "Synaptics Two-Finger Width" 8
+    xinput set-prop $device "Synaptics Two-Finger Scrolling" 1, 0
+fi
