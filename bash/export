@@ -13,6 +13,7 @@ export LD_LIBRARY_PATH="/usr/lib64/java/jre/lib/amd64"
 export PATH="/opt/perlbrew/bin:$HOME/bin:$JAVA_HOME:$PATH"
 [[ -d $HOME/.cabal/bin ]] && export PATH="$HOME/.cabal/bin:$PATH"
 [[ -d $HOME/.local/bin ]] && export PATH="$HOME/.local/bin:$PATH"
+[[ -d /opt/stack ]] && export STACK_ROOT="/opt/stack/"
 
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 
