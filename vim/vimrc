@@ -272,6 +272,7 @@ noremap <F2> :set number!<CR>:set relativenumber!<CR>
 noremap <F3> :set cursorline!<CR>
 noremap <F4> :set cursorcolumn!<CR>
 noremap <F6> :set list!<CR>
+noremap <f7> :GitGutterToggle<CR>
 " }}}
 " Tabs {{{
 noremap <c-t> :tabnew<CR>
