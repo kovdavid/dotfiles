@@ -889,4 +889,7 @@ nnoremap <leader>vs :VimuxRunCommand "stack ghci --with-ghc intero"<CR>
 nnoremap <leader>vi vaw"hy<ESC>:call VimuxRunCommand(":info ".@h)<CR> | echo ""
 nnoremap <leader>vt vaw<ESC>:call VimuxRunCommand(":type-at ".expand('%')." ".line("'<")." ".col("'<")." ".line("'>")." ".(col("'>")-1))<CR> | echo ""
 " }}}
+" gitgutter {{{
+let g:gitgutter_enabled = 0
+" }}}
 " }}}
