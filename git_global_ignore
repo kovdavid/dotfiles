@@ -5,3 +5,8 @@ Makefile.old
 nytprof*
 .nike_deploy
 *.swp
+
+# Devel::PDB
+.*-conf
+.*-stderr
+.*-stdout
