@@ -8,5 +8,6 @@ nytprof*
 
 # Devel::PDB
 .*-conf
+.*-conf.rc
 .*-stderr
 .*-stdout
