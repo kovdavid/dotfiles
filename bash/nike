@@ -19,3 +19,5 @@ fi
 alias grepew="grep -iP 'error|warn' "
 alias zgrepew="zgrep -iP 'error|warn' "
 alias noproxy="export http_proxy=; export https_proxy=; export ftp_proxy=; export no_proxy=;"
+
+export PDB_use_HOME=1

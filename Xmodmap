@@ -2,4 +2,4 @@ keycode 66 = Escape
 remove mod5 = Mode_switch
 clear Lock
 keycode 94 = underscore EuroSign
-keycode 108 = BackSpace underscore
+keycode 108 = underscore BackSpace
