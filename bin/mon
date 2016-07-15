@@ -43,6 +43,8 @@ if [ -n "$OUTPUT2_CONNECTED" ] ; then
         elif [ "$1" == "t" ] || [ "$1" == "top" ] ; then
             echo "Setting $OUTPUT2 above $OUTPUT1"
             $(xrandr --output $OUTPUT2 --above $OUTPUT2)
+        elif [ "$1" == "dp" ] ; then
+            $(xrandr --output $OUTPUT1 --off)
         fi
     fi
 fi
