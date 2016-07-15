@@ -520,6 +520,7 @@ noremap <leader>se :tabnew $MYVIMRC<CR>
 noremap <leader>ss :source $MYVIMRC<CR>
 noremap <leader>sl :execute getline(".")<CR>
 " }}}
+" }}}
 " Folding {{{
 set foldmethod=indent
 set foldlevel =20 "open folds by default
