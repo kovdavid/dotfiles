@@ -52,6 +52,7 @@ if [ "$REPLY" = "y" ] ; then
     # remove_and_link_dotfile i3/status
 
     remove_and_link_dotfile vim
+    remove_and_link_dotfile emacs.d
     remove_and_link_dotfile xinitrc
     remove_and_link_dotfile tmux.conf
     remove_and_link_dotfile xprofile
