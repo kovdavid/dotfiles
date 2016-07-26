@@ -337,6 +337,7 @@ augroup filetype_haskell
     autocmd FileType haskell noremap <buffer> <leader>. :HdevtoolsClear<CR>:nohl<CR>
     autocmd FileType haskell noremap <buffer> <leader>ht :HdevtoolsType<CR>
     autocmd FileType haskell noremap <buffer> <leader>hi :HdevtoolsInfo<CR>
+    autocmd FileType haskell command! HdevtoolsKill :!killall hdevtools
 
     autocmd FileType haskell noremap <buffer> <leader>rr :!runhaskell %<CR>
     autocmd FileType haskell noremap <buffer> <leader>tw :GhcModTypeInsert<CR>
