@@ -9,6 +9,7 @@ alias cp="cp -i"
 alias cpr="cp -i -r"
 alias df="df -h"
 alias dus="du -shc .??* * | sort -h"
+alias emacs="emacs -nw"
 alias fprove='forkprove -Mlib::require::all=t/lib,lib'
 alias g="git"
 alias ga='git add'
