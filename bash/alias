@@ -18,11 +18,13 @@ alias gdth='git difftool HEAD..'
 alias gdtsh='git diff --stat HEAD..'
 alias gci='git commit'
 alias gco='git checkout'
+alias gfo='git fetch origin'
 alias gpo='git push origin'
 alias gpoh='git push origin HEAD'
 alias gpullh='git rev-parse --abbrev-ref HEAD | xargs git pull origin'
 alias grep='grep --exclude-dir=.git'
 alias gst='git status'
+alias em='emacs --no-window'
 alias hdevtools='stack exec --no-ghc-package-path hdevtools --'
 alias la="ls -lha"
 alias less="less -R"
