@@ -15,7 +15,6 @@ Plug 'jnurmine/Zenburn'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-endwise'
 Plug 'junkblocker/git-time-lapse'
-Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
@@ -26,6 +25,7 @@ Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 Plug 'benekastah/neomake',        { 'for': 'haskell' }
 Plug 'eagletmt/ghcmod-vim',       { 'for': 'haskell' }
 Plug 'bitc/vim-hdevtools',        { 'for': 'haskell' }
+" Plug 'parsonsmatt/vim-hdevtools', { 'for': 'haskell' } << newer version it seems
 " Plug 'ervandew/supertab',         { 'for': 'haskell' }
 " Plug 'eagletmt/neco-ghc',         { 'for': 'haskell' }
 " Plug 'Shougo/deoplete.nvim',      { 'for': 'haskell' }
@@ -335,6 +335,7 @@ augroup filetype_haskell
     " autocmd FileType haskell setlocal omnifunc=intero#omnifunc
 
     autocmd FileType haskell noremap <buffer> <leader>. :HdevtoolsClear<CR>:nohl<CR>
+    autocmd FileType haskell noremap <buffer> <F1> :HdevtoolsType<CR>
     autocmd FileType haskell noremap <buffer> <leader>ht :HdevtoolsType<CR>
     autocmd FileType haskell noremap <buffer> <leader>hi :HdevtoolsInfo<CR>
     autocmd FileType haskell command! HdevtoolsKill :!killall hdevtools
@@ -885,6 +886,7 @@ let g:ghcmod_ghc_options = ['-isrc']
 " }}}
 " vimux {{{
 let g:VimuxUseNearest = 1
+nnoremap <leader>vm :w<CR> \| :VimuxRunCommand ":l ".expand('%')."\nmain"<CR>
 nnoremap <leader>vl :VimuxRunCommand ":l ".expand('%')<CR>
 nnoremap <leader>vv :VimuxRunLastCommand<CR>
 nnoremap <leader>vs :VimuxRunCommand "stack ghci --with-ghc intero"<CR>
