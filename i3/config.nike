@@ -186,6 +186,20 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+set $system_power_mode "(s)hutdown | (r)eboot | (l)ock | (e) exit"
+
+mode $system_power_mode {
+    bindsym s exec "i3-msg 'mode default'; systemctl poweroff"
+    bindsym r exec "i3-msg 'mode default'; systemctl reboot"
+    bindsym l exec "i3-msg 'mode default'; i3lock -c 333333"
+
+    bindsym Escape mode "default"
+    bindsym Enter mode "default"
+    bindsym e mode "default"
+}
+
+bindsym $mod+Shift+Delete mode $system_power_mode
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
