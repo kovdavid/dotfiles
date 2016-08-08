@@ -21,5 +21,8 @@
 (setq tab-width 4)
 (setq tab-stop-list (number-sequence 4 200 4))
 (setq indent-tabs-mode nil)
+(setq tab-always-indent nil)
 
 (color-theme-approximate-on)
+
+(setq scroll-step 1)
