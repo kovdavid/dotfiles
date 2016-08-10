@@ -328,6 +328,8 @@ augroup filetype_haskell
     autocmd FileType haskell setlocal shiftwidth=2
     autocmd FileType haskell setlocal softtabstop=2
     autocmd FileType haskell setlocal expandtab
+    autocmd FileType haskell set formatprg=hindent\ --style\ chris-done
+    autocmd FileType haskell set equalprg=hindent\ --style\ chris-done
 
     autocmd FileType haskell let g:haskellmode_completion_ghc = 1
 
