@@ -187,12 +187,13 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $system_power_mode "(s)hutdown | (r)eboot | (l)ock | (e) exit"
+set $system_power_mode "(s)leep | (h)alt | (r)eboot | (l)ock | (e) exit"
 
 mode $system_power_mode {
-    bindsym s exec "i3-msg 'mode default'; systemctl poweroff"
+    bindsym h exec "i3-msg 'mode default'; systemctl poweroff"
     bindsym r exec "i3-msg 'mode default'; systemctl reboot"
     bindsym l exec "i3-msg 'mode default'; i3lock -c 333333"
+    bindsym s exec "i3lock -c 333333; systemctl suspend"
 
     bindsym Escape mode "default"
     bindsym Enter mode "default"
