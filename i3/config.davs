@@ -193,7 +193,7 @@ mode $system_power_mode {
     bindsym h exec "i3-msg 'mode default'; systemctl poweroff"
     bindsym r exec "i3-msg 'mode default'; systemctl reboot"
     bindsym l exec "i3-msg 'mode default'; i3lock -c 333333"
-    bindsym s exec "i3lock -c 333333; systemctl suspend"
+    bindsym s exec "i3-msg 'mode default'; i3lock -c 333333; systemctl suspend"
 
     bindsym Escape mode "default"
     bindsym Enter mode "default"
