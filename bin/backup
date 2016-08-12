@@ -114,7 +114,7 @@ elif [ -e /backup/backup_32g ] ; then
           --exclude="/mnt/data/Music"                             \
           --exclude="/mnt/data/Software"                          \
           --exclude="/mnt/data/Videos"                            \
-          --exclude="/mnt/data/Docs/School"                       \
+          --exclude="/mnt/data/School"                            \
           / /backup/data
 else
     echo "No backup type detected"

@@ -15,7 +15,6 @@ Plug 'jnurmine/Zenburn'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-endwise'
 Plug 'junkblocker/git-time-lapse'
-Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
@@ -26,6 +25,7 @@ Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 Plug 'benekastah/neomake',        { 'for': 'haskell' }
 Plug 'eagletmt/ghcmod-vim',       { 'for': 'haskell' }
 Plug 'bitc/vim-hdevtools',        { 'for': 'haskell' }
+" Plug 'parsonsmatt/vim-hdevtools', { 'for': 'haskell' } << newer version it seems
 " Plug 'ervandew/supertab',         { 'for': 'haskell' }
 " Plug 'eagletmt/neco-ghc',         { 'for': 'haskell' }
 " Plug 'Shougo/deoplete.nvim',      { 'for': 'haskell' }
@@ -272,6 +272,7 @@ noremap <F2> :set number!<CR>:set relativenumber!<CR>
 noremap <F3> :set cursorline!<CR>
 noremap <F4> :set cursorcolumn!<CR>
 noremap <F6> :set list!<CR>
+noremap <f7> :GitGutterToggle<CR>
 " }}}
 " Tabs {{{
 noremap <c-t> :tabnew<CR>
@@ -327,6 +328,8 @@ augroup filetype_haskell
     autocmd FileType haskell setlocal shiftwidth=2
     autocmd FileType haskell setlocal softtabstop=2
     autocmd FileType haskell setlocal expandtab
+    autocmd FileType haskell set formatprg=hindent\ --style\ chris-done
+    autocmd FileType haskell set equalprg=hindent\ --style\ chris-done
 
     autocmd FileType haskell let g:haskellmode_completion_ghc = 1
 
@@ -334,8 +337,10 @@ augroup filetype_haskell
     " autocmd FileType haskell setlocal omnifunc=intero#omnifunc
 
     autocmd FileType haskell noremap <buffer> <leader>. :HdevtoolsClear<CR>:nohl<CR>
+    autocmd FileType haskell noremap <buffer> <F1> :HdevtoolsType<CR>
     autocmd FileType haskell noremap <buffer> <leader>ht :HdevtoolsType<CR>
     autocmd FileType haskell noremap <buffer> <leader>hi :HdevtoolsInfo<CR>
+    autocmd FileType haskell command! HdevtoolsKill :!killall hdevtools
 
     autocmd FileType haskell noremap <buffer> <leader>rr :!runhaskell %<CR>
     autocmd FileType haskell noremap <buffer> <leader>tw :GhcModTypeInsert<CR>
@@ -518,6 +523,7 @@ augroup END
 noremap <leader>se :tabnew $MYVIMRC<CR>
 noremap <leader>ss :source $MYVIMRC<CR>
 noremap <leader>sl :execute getline(".")<CR>
+" }}}
 " }}}
 " Folding {{{
 set foldmethod=indent
@@ -882,10 +888,15 @@ let g:ghcmod_ghc_options = ['-isrc']
 " }}}
 " vimux {{{
 let g:VimuxUseNearest = 1
+nnoremap <leader>vm :w<CR> \| :VimuxRunCommand ":l ".expand('%')."\nmain"<CR>
 nnoremap <leader>vl :VimuxRunCommand ":l ".expand('%')<CR>
 nnoremap <leader>vv :VimuxRunLastCommand<CR>
 nnoremap <leader>vs :VimuxRunCommand "stack ghci --with-ghc intero"<CR>
 nnoremap <leader>vi vaw"hy<ESC>:call VimuxRunCommand(":info ".@h)<CR> | echo ""
 nnoremap <leader>vt vaw<ESC>:call VimuxRunCommand(":type-at ".expand('%')." ".line("'<")." ".col("'<")." ".line("'>")." ".(col("'>")-1))<CR> | echo ""
+nnoremap <leader>vd vaw<ESC>:call VimuxRunCommand(":loc-at ".expand('%')." ".line("'<")." ".col("'<")." ".line("'>")." ".(col("'>")-1).' "'.expand('<cword>').'"')<CR> | echo ""
+" }}}
+" gitgutter {{{
+let g:gitgutter_enabled = 0
 " }}}
 " }}}

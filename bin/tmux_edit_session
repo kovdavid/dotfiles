@@ -14,6 +14,8 @@ read -p "Session name: " -e -i "$SESSION_NAME" NEW_SESSION_NAME
 read -p "SSH host: " -e -i "$SSH_HOST" SSH_HOST
 read -p "Default directory: " -e -i "$CD_DIR" CD_DIR
 
+[[ "$NEW_SESSION_NAME" == "hs" ]] && NEW_SESSION_NAME="λ"
+
 if [ "$CD_DIR" == "pwd" ] ; then
     CD_DIR=$(tmux display-message -t{last} -p '#{pane_current_path}')
 fi

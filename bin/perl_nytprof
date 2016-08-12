@@ -1,0 +1,3 @@
+#!/bin/bash
+export NYTPROF="sigexit=1"
+perl -d:NYTProf $@

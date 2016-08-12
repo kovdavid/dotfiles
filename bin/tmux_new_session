@@ -11,6 +11,8 @@ if [ -z "$SESSION_NAME" ] ; then
     SESSION_NAME=$SSH_HOST
 fi
 
+[[ "$SESSION_NAME" == "hs" ]] && SESSION_NAME="λ"
+
 read -p "Default directory: " -e CD_DIR
 
 TMUX_CMD=""

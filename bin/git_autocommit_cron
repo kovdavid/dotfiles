@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ $# -eq 0 ] ; then
+    echo "Usage: $0 directory"
+    exit 1
+fi
+
+cd $1
+
+DATE=`date '+%FT%T'`
+
+git add --all .
+git commit -m "$DATE"

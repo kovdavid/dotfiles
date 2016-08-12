@@ -9,6 +9,7 @@ alias cp="cp -i"
 alias cpr="cp -i -r"
 alias df="df -h"
 alias dus="du -shc .??* * | sort -h"
+alias emacs="emacs -nw"
 alias fprove='forkprove -Mlib::require::all=t/lib,lib'
 alias g="git"
 alias ga='git add'
@@ -18,11 +19,13 @@ alias gdth='git difftool HEAD..'
 alias gdtsh='git diff --stat HEAD..'
 alias gci='git commit'
 alias gco='git checkout'
+alias gfo='git fetch origin'
 alias gpo='git push origin'
 alias gpoh='git push origin HEAD'
 alias gpullh='git rev-parse --abbrev-ref HEAD | xargs git pull origin'
 alias grep='grep --exclude-dir=.git'
 alias gst='git status'
+alias em='emacs --no-window'
 alias hdevtools='stack exec --no-ghc-package-path hdevtools --'
 alias la="ls -lha"
 alias less="less -R"
@@ -37,6 +40,7 @@ alias reload="source ~/.bashrc"
 alias rm="rm -i"
 alias sshx="ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/tmp/this_is_not_existing_i_hope/known_hosts"
 alias strace="strace -s 4096"
+alias stackreset="killall hdevtools; stack clean; stack build; hdevtools admin --start-server"
 alias tm="tmux attach-session || tmux new -s candyland"
 alias tree="tree -C"
 alias up="cd \`git root\`"
