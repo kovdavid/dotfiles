@@ -1,5 +1,4 @@
 " vimrc by Davs
-colorscheme desert
 " vim-plug {{{
 call plug#begin()
 Plug 'rhysd/clever-f.vim'
@@ -167,6 +166,9 @@ set guitablabel=%t          "show only filename in tabs
 
 set t_Co=256
 colorscheme zenburn
+if filereadable("/tmp/.Xresources_solarized")
+    colorscheme solarized
+endif
 
 " Horizontal split fill chars
 set fillchars+=stlnc:-
@@ -888,8 +890,8 @@ let g:ghcmod_ghc_options = ['-isrc']
 " }}}
 " vimux {{{
 let g:VimuxUseNearest = 1
-nnoremap <leader>vm :w<CR> \| :VimuxRunCommand ":l ".expand('%')."\nmain"<CR>
-nnoremap <leader>vl :VimuxRunCommand ":l ".expand('%')<CR>
+nnoremap <leader>vm :w<CR>:VimuxRunCommand ":l ".expand('%')."\nmain"<CR>
+nnoremap <leader>vl :w<CR>:VimuxRunCommand ":l ".expand('%')<CR>
 nnoremap <leader>vv :VimuxRunLastCommand<CR>
 nnoremap <leader>vs :VimuxRunCommand "stack ghci --with-ghc intero"<CR>
 nnoremap <leader>vi vaw"hy<ESC>:call VimuxRunCommand(":info ".@h)<CR> | echo ""
