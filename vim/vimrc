@@ -165,9 +165,15 @@ set guioptions+=t "tearoff menu items
 set guitablabel=%t          "show only filename in tabs
 
 set t_Co=256
-colorscheme zenburn
+set colorcolumn=100
 if filereadable("/tmp/.Xresources_solarized")
     colorscheme solarized
+    highlight CursorLine cterm=NONE ctermbg=253
+    highlight ColorColumn guibg=#333333 ctermbg=253
+else
+    colorscheme zenburn
+    highlight CursorLine cterm=NONE ctermbg=239
+    highlight ColorColumn guibg=#333333 ctermbg=8
 endif
 
 " Horizontal split fill chars
@@ -181,7 +187,6 @@ else
     hi VertSplit ctermfg=bg ctermbg=fg
 endif
 
-hi CursorLine cterm=NONE ctermbg=239
 hi Search cterm=underline
 
 set title
@@ -534,10 +539,6 @@ set foldlevel =20 "open folds by default
 noremap <space> za
 " }}}
 " Functions {{{
-" ColorColumn {{{
-set colorcolumn=100
-highlight ColorColumn guibg=#333333 ctermbg=8
-" }}}
 " NewPerlModule {{{
 function! NewPerlModule()
     0r ~/.vim/skeleton/perl.package
