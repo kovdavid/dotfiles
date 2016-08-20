@@ -231,6 +231,9 @@ nnoremap qa <C-W>_<C-W><BAR>
 " move to next split and maximize it
 nnoremap qs <C-W><C-W><C-W>_<C-W><BAR>
 
+" yank line
+nnoremap yu yy
+
 "disable ex-mode
 nnoremap Q <NOP>
 
