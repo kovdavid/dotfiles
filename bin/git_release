@@ -27,8 +27,9 @@ if [ "$CURRENT_BRANCH" != "develop" ] ; then
 	exit 1
 fi
 
-BRANCHES=$(git branch -a | grep release | grep -vP '^remotes/(?!origin)' | sed -e 's#^\s*##g' | sed -e 's#remotes/origin/##g' | sort | uniq)
-CURRENT_RELEASE=$(echo -e "$BRANCHES" | tail -n 1 | sed -e 's#release/rel##g')
+BRANCHES=$(git branch -a | grep release | grep -vP '^remotes/(?!origin)' | sed -e 's#^\s*##g' | sed -e 's#remotes/origin/##g' -e 's#release/rel##g' | sort -V | uniq)
+
+CURRENT_RELEASE=$(echo -e "$BRANCHES" | tail -n 1)
 
 CURRENT_RELEASE=${CURRENT_RELEASE:-"0.0.0"}
 
