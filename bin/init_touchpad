@@ -2,6 +2,8 @@
 
 device=$(xinput | grep -i touchpad | cut -d"=" -f2 | cut -f1)
 if [ -n "$device" ] ; then
+    xinput set-prop $device "Device Enabled" 0
+    xinput set-prop $device "Device Enabled" 1
     xinput set-prop $device "Synaptics Tap Action" 0, 0, 0, 0, 1, 2, 3
     xinput set-prop $device "Synaptics Edge Scrolling" 0, 0, 0
     xinput set-prop $device "Synaptics Gestures" 1
