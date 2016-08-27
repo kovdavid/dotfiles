@@ -1,5 +1,4 @@
 " vimrc by Davs
-colorscheme desert
 " vim-plug {{{
 call plug#begin()
 Plug 'rhysd/clever-f.vim'
@@ -166,7 +165,16 @@ set guioptions+=t "tearoff menu items
 set guitablabel=%t          "show only filename in tabs
 
 set t_Co=256
-colorscheme zenburn
+set colorcolumn=100
+if filereadable("/tmp/.Xresources_solarized")
+    colorscheme solarized
+    highlight CursorLine cterm=NONE ctermbg=253
+    highlight ColorColumn guibg=#333333 ctermbg=253
+else
+    colorscheme zenburn
+    highlight CursorLine cterm=NONE ctermbg=239
+    highlight ColorColumn guibg=#333333 ctermbg=8
+endif
 
 " Horizontal split fill chars
 set fillchars+=stlnc:-
@@ -179,7 +187,6 @@ else
     hi VertSplit ctermfg=bg ctermbg=fg
 endif
 
-hi CursorLine cterm=NONE ctermbg=239
 hi Search cterm=underline
 
 set title
@@ -223,6 +230,9 @@ vnoremap <c-f> "sy/<C-R>s<CR>
 nnoremap qa <C-W>_<C-W><BAR>
 " move to next split and maximize it
 nnoremap qs <C-W><C-W><C-W>_<C-W><BAR>
+
+" yank line
+nnoremap yu yy
 
 "disable ex-mode
 nnoremap Q <NOP>
@@ -328,8 +338,8 @@ augroup filetype_haskell
     autocmd FileType haskell setlocal shiftwidth=2
     autocmd FileType haskell setlocal softtabstop=2
     autocmd FileType haskell setlocal expandtab
-    autocmd FileType haskell set formatprg=hindent\ --style\ chris-done
-    autocmd FileType haskell set equalprg=hindent\ --style\ chris-done
+    autocmd FileType haskell set formatprg=hindent
+    autocmd FileType haskell set equalprg=hindent
 
     autocmd FileType haskell let g:haskellmode_completion_ghc = 1
 
@@ -532,10 +542,6 @@ set foldlevel =20 "open folds by default
 noremap <space> za
 " }}}
 " Functions {{{
-" ColorColumn {{{
-set colorcolumn=100
-highlight ColorColumn guibg=#333333 ctermbg=8
-" }}}
 " NewPerlModule {{{
 function! NewPerlModule()
     0r ~/.vim/skeleton/perl.package
@@ -888,8 +894,8 @@ let g:ghcmod_ghc_options = ['-isrc']
 " }}}
 " vimux {{{
 let g:VimuxUseNearest = 1
-nnoremap <leader>vm :w<CR> \| :VimuxRunCommand ":l ".expand('%')."\nmain"<CR>
-nnoremap <leader>vl :VimuxRunCommand ":l ".expand('%')<CR>
+nnoremap <leader>vm :w<CR>:VimuxRunCommand ":l ".expand('%')."\nmain"<CR>
+nnoremap <leader>vl :w<CR>:VimuxRunCommand ":l ".expand('%')<CR>
 nnoremap <leader>vv :VimuxRunLastCommand<CR>
 nnoremap <leader>vs :VimuxRunCommand "stack ghci --with-ghc intero"<CR>
 nnoremap <leader>vi vaw"hy<ESC>:call VimuxRunCommand(":info ".@h)<CR> | echo ""

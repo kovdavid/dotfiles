@@ -3,3 +3,4 @@
 rm /home/davs/.Xresources.colorscheme
 ln -s /home/davs/dotfiles/Xresources.solarized /home/davs/.Xresources.colorscheme
 xrdb /home/davs/.Xresources
+touch /tmp/.Xresources_solarized

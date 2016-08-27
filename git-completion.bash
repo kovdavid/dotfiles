@@ -2755,14 +2755,9 @@ __git_complete ga _git_add
 __git_complete gb _git_branch
 __git_complete gci _git_commit
 __git_complete gco _git_checkout
+__git_complete gpo _git_push
 __git_complete gst _git_stash
 __git_complete git __git_main
 __git_complete gitk __gitk_main
-
-# The following are necessary only for Cygwin, and only are needed
-# when the user has tab-completed the executable name and consequently
-# included the '.exe' suffix.
-#
-if [ Cygwin = "$(uname -o 2>/dev/null)" ]; then
-__git_complete git.exe __git_main
-fi
+__git_complete gdth __git_complete_revlist_file
+__git_complete gdtsh __git_complete_revlist_file
