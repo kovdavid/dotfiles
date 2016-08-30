@@ -27,7 +27,7 @@ if [ "$CURRENT_BRANCH" != "develop" ] ; then
 	exit 1
 fi
 
-BRANCHES=$(git branch -a | grep release | grep -vP '^remotes/(?!origin)' | sed -e 's#^\s*##g' | sed -e 's#remotes/origin/##g' -e 's#release/rel##g' | sort -V | uniq)
+BRANCHES=$(git branch -a | grep release | sed -e 's#^\s*##g' | grep -vP '^remotes/(?!origin)' | sed -e 's#remotes/origin/##g' -e 's#release/rel##g' | sort -V | uniq)
 
 CURRENT_RELEASE=$(echo -e "$BRANCHES" | tail -n 1)
 
@@ -52,7 +52,6 @@ fi
 NEW_RELEASE="${MAJOR_VER}.${MINOR_VER}.${PATCH_VER}"
 
 echo "CURRENT_RELEASE:$CURRENT_RELEASE"
-# echo "NEW_RELEASE:$NEW_RELEASE"
 
 read -p "Create release 'release/rel$NEW_RELEASE'? <y/n> " RESULT
 [[ "$RESULT" != "y" ]] && { echo "ABORTING"; exit; }
