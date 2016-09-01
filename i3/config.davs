@@ -58,17 +58,12 @@ bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, default)
 #bindsym $mod+s layout stacking
-#bindsym $mod+v layout tabbed
-#bindsym $mod+g layout default
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-#bindsym $mod+a focus parent
 
 # focus the child container
 #bindcode $mod+d focus child
