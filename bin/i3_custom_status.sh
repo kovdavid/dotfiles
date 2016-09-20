@@ -5,9 +5,9 @@ do
     I3_ORIENTATION=$(cat /tmp/.i3_split_orientation);
     I3_ORIENTATION_STATUS=""
     if [ "$I3_ORIENTATION" == "horizontal" ] ; then
-        I3_ORIENTATION_STATUS="H"
+        I3_ORIENTATION_STATUS="I"
     else
-        I3_ORIENTATION_STATUS="_"
+        I3_ORIENTATION_STATUS="—"
     fi
     TODO_COUNT=0
 	[[ -f ~/TODO/TODO ]] && TODO_COUNT=$(cat ~/TODO/TODO | wc -l)
