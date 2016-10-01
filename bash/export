@@ -14,6 +14,9 @@ export PATH="/opt/perlbrew/bin:$HOME/bin:$JAVA_HOME:$PATH"
 [[ -d $HOME/.cabal/bin ]] && export PATH="$HOME/.cabal/bin:$PATH"
 [[ -d $HOME/.local/bin ]] && export PATH="$HOME/.local/bin:$PATH"
 [[ -d /opt/stack ]] && export STACK_ROOT="/opt/stack/"
+[[ -d /opt/rust/rustup ]] && export RUSTUP_HOME="/opt/rust/rustup"
+[[ -d /opt/rust/cargo ]] && export CARGO_HOME="/opt/rust/cargo"
+[[ -d /opt/rust/cargo/bin ]] && export PATH="/opt/rust/cargo/bin:$PATH"
 
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 
