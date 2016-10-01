@@ -586,11 +586,12 @@ function! NewHaskellModule()
 
     " not inside 'lib' nor 'test'
     if l:path == expand('%:p')
-        let l:path = 'main'
+        let l:path = 'Main'
     endif
 
-    " insert defmodule and capitalize the first letter of the module name
-    execute "normal! gg0imodule ".l:path." where\n\nmain :: IO ()\nmain = return ()\<ESC>gg0WvgU"
+    0r ~/.vim/skeleton/haskell.module
+
+    execute "normal! gg/module Main\<CR>WcE".l:path."\<ESC>"
 
     " delete _, capitalize next letter
     if getline(".") =~# '_'
