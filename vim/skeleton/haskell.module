@@ -8,4 +8,4 @@ import Control.Applicative
 
 main :: IO ()
 main = do
-    return ()
+  return ()
