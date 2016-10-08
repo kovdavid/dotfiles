@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ ! -f "./stack.yaml" ] ; then
+    echo "No stack.yaml found"
+    exit
+fi
+
+stack build intero
+stack build hdevtools
+stack build ghcid
+stack build hasktags
+stack exec -- hasktags --ignore-close-implementation --ctags .
