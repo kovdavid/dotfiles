@@ -62,7 +62,7 @@ set clipboard^=unnamedplus,unnamed " add two more registers to clipboard
 set iskeyword-=:
 
 set switchbuf=useopen,usetab,newtab
-
+set tags=./tags;/
 set complete-=i
 
 " Word wrap not in the middle of the word
@@ -331,7 +331,7 @@ augroup filetype_haskell
     autocmd FileType haskell setlocal expandtab
     autocmd FileType haskell setlocal formatprg=hindent
     autocmd FileType haskell setlocal equalprg=hindent
-    autocmd FileType haskell setlocal iskeyword=a-z,A-Z,0-9,_,.,39
+    autocmd FileType haskell setlocal iskeyword=a-z,A-Z,48-57,_,.,39
 
     autocmd FileType haskell let g:haskellmode_completion_ghc = 1
 
@@ -376,7 +376,7 @@ augroup filetype_perl
     autocmd BufRead,BufNewFile *.pl  setlocal filetype=perl
     autocmd BufRead,BufNewFile *.t   setlocal filetype=perl
 
-    autocmd FileType perl setlocal iskeyword-=:
+    autocmd FileType perl setlocal iskeyword+=:
 
     autocmd FileType perl setlocal nowrap
 
