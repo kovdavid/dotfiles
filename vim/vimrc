@@ -877,7 +877,7 @@ nnoremap <leader>vl :w<CR>:VimuxRunCommand ":l ".expand('%')<CR>
 nnoremap <leader>vv :VimuxRunLastCommand<CR>
 nnoremap <leader>vs :VimuxRunCommand "stack ghci --with-ghc intero"<CR>
 nnoremap <leader>vi vaw"hy<ESC>:call VimuxRunCommand(":info ".@h)<CR> | echo ""
-nnoremap <leader>vt vaw<ESC>:call VimuxRunCommand(":type-at ".expand('%')." ".line("'<")." ".col("'<")." ".line("'>")." ".(col("'>")-1))<CR> | echo ""
+nnoremap <leader>vt :call VimuxRunCommand(":type-at ".expand('%')." ".line(".")." ".col(".")." ".line(".")." ".(col(".")))<CR> | echo ""
 nnoremap <leader>vd vaw<ESC>:call VimuxRunCommand(":loc-at ".expand('%')." ".line("'<")." ".col("'<")." ".line("'>")." ".(col("'>")-1).' "'.expand('<cword>').'"')<CR> | echo ""
 " }}}
 " Racer {{{
