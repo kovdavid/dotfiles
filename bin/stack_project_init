@@ -5,6 +5,8 @@ if [ ! -f "./stack.yaml" ] ; then
     exit
 fi
 
+touch .vimproject
+
 echo "Building intero hdevtools ghcid hasktags"
 stack build intero hdevtools ghcid hasktags
 echo "Generating hasktags"
