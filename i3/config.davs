@@ -95,8 +95,8 @@ workspace 21 output $secondary_output
 workspace 22 output $secondary_output
 
 # switch to workspace
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
+bindsym $mod+1 workspace number 1 tmux
+bindsym $mod+2 workspace number 2 www
 bindsym $mod+3 workspace number 3
 bindsym $mod+4 workspace number 4
 bindsym $mod+5 workspace number 5
@@ -120,8 +120,8 @@ bindsym $mod+F11 workspace number 21
 bindsym $mod+F12 workspace number 22
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move container to workspace number 1
-bindsym $mod+Shift+at move container to workspace number 2
+bindsym $mod+Shift+exclam move container to workspace number 1 tmux
+bindsym $mod+Shift+at move container to workspace number 2 www
 bindsym $mod+Shift+numbersign move container to workspace number 3
 bindsym $mod+Shift+dollar move container to workspace number 4
 bindsym $mod+Shift+percent move container to workspace number 5
@@ -221,4 +221,5 @@ exec ~/bin/init_trackpoint &
 exec ~/bin/init_touchpad &
 exec (sleep 1 && nitrogen --restore ) &
 exec redshift-gtk -l geoclue2 -t 6500:3500 -b 1.0:0.7 &
+exec mkfifo /tmp/.smplayer_fifo &
 exec google-chrome

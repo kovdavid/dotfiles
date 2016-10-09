@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ -d ".git" ] ; then
+    echo 'Generating tags using `git ls-files`'
+    git ls-files | sed -e 's@^@'"$PWD/"'@' | ctags --file-scope=no --languages=Perl --langmap=Perl:+.t --extra=q --links=no -L-
+else
+    echo 'Generating tags without `git ls-files`'
+    ctags -f tags \
+        --file-scope=no                  \
+        --recurse --totals               \
+        --exclude=blib --exclude=.svn    \
+        --exclude=.git --exclude='*~'    \
+        --extra=q                        \
+        --languages=Perl --langmap=Perl:+.t
+fi
+ls -l tags

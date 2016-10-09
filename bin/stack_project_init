@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ ! -f "./stack.yaml" ] ; then
+    echo "No stack.yaml found"
+    exit
+fi
+
+echo "Building intero hdevtools ghcid hasktags"
+stack build intero hdevtools ghcid hasktags
+echo "Generating hasktags"
+stack exec -- hasktags --ignore-close-implementation --ctags .
