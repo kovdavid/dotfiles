@@ -354,6 +354,8 @@ augroup END
 " Rust {{{
 augroup filetype_rust
     autocmd!
+
+    autocmd BufWritePost * if &filetype=='rust' | execute ":Neomake" | endif
 augroup END
 " }}}
 " Perl {{{
@@ -884,5 +886,6 @@ nnoremap <leader>vd vaw<ESC>:call VimuxRunCommand(":loc-at ".expand('%')." ".lin
 let g:racer_cmd = "/opt/rust/cargo/bin/racer"
 let g:racer_experimental_completer = 1
 let g:rustfmt_fail_silently = 1
+let g:rustfmt_autosave = 1
 " }}}
 " }}}
