@@ -58,6 +58,14 @@ read -p "Create release 'release/rel$NEW_RELEASE'? <y/n> " RESULT
 
 git checkout -b "release/rel$NEW_RELEASE"
 git push origin HEAD
+
+git checkout master
+git merge --ff-only "release/rel$NEW_RELEASE"
+if [ "$?" != "0" ] ; then
+	echo -e "\e[31m\e[1mError during merge into master\e[0m"
+fi
+git push origin HEAD
+
 git checkout develop
 
 echo "DONE"
