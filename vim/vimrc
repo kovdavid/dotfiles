@@ -14,7 +14,6 @@ Plug 'jnurmine/Zenburn'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-endwise'
 Plug 'junkblocker/git-time-lapse'
-Plug 'benmills/vimux'
 Plug 'benekastah/neomake'
 
 Plug 'rust-lang/rust.vim'
@@ -346,9 +345,14 @@ augroup filetype_haskell
 
     autocmd FileType haskell noremap <buffer> <leader>rr :!runhaskell %<CR>
     autocmd FileType haskell noremap <buffer> <leader>tw :GhcModTypeInsert<CR>
-    autocmd FileType haskell noremap <buffer> <leader>tc :GhcModSplitFunCase<CR>
-    autocmd FileType haskell noremap <buffer> <leader>tq :GhcModType<CR>
-    autocmd FileType haskell noremap <buffer> <leader>te :GhcModTypeClear<CR>
+
+    autocmd FileType haskell noremap <buffer> <leader>vm :w<CR>:call TmuxSendKeys(":l ".expand('%')."\nmain")<CR>
+    autocmd FileType haskell noremap <buffer> <leader>vl :w<CR>:call TmuxSendKeys(":l ".expand('%'))<CR>
+    autocmd FileType haskell noremap <buffer> <leader>vs :w<CR>:call TmuxSendKeys("stack ghci --with-ghc intero")<CR>
+    autocmd Filetype haskell nnoremap <buffer> <leader>vi vaw"hy<ESC>:call TmuxSendKeys(":info ".@h)<CR> | echo ""
+    autocmd Filetype haskell nnoremap <buffer> <leader>vt :call TmuxSendKeys(":type-at ".expand('%')." ".line(".")." ".col(".")." ".line(".")." ".(col(".")))<CR> | echo ""
+    autocmd Filetype haskell nnoremap <buffer> <leader>vd vaw<ESC>:call TmuxSendKeys(":loc-at ".expand('%')." ".line("'<")." ".col("'<")." ".line("'>")." ".(col("'>")-1).' "'.expand('<cword>').'"')<CR> | echo ""
+
 augroup END
 " }}}
 " Rust {{{
@@ -761,6 +765,16 @@ function! ReplaceSelection() range
     endif
 endfunction
 " }}}
+" TmuxSendKeys {{{
+let g:tmux_pane_id = $VIM_TMUX_PANE_ID
+function! TmuxSendKeys(str)
+    if g:tmux_pane_id == ""
+        echo "set g:tmux_pane_id with the id of the TMUX pane or set \$VIM_TMUX_PANE_ID"
+    else
+        call system("tmux send-keys -t".g:tmux_pane_id." \"".a:str."\" Enter")
+    endif
+endfunction
+" }}}
 " }}}
 " Plugin settings {{{
 " Tabularize {{{
@@ -871,16 +885,6 @@ let g:neomake_rust_cargo_maker = {
     \ 'append_file': 0,
     \ 'errorformat': '%Eerror%m,%Z\ %#-->\ %f:%l:%c',
     \ }
-" }}}
-" vimux {{{
-let g:VimuxUseNearest = 1
-nnoremap <leader>vm :w<CR>:VimuxRunCommand ":l ".expand('%')."\nmain"<CR>
-nnoremap <leader>vl :w<CR>:VimuxRunCommand ":l ".expand('%')<CR>
-nnoremap <leader>vv :VimuxRunLastCommand<CR>
-nnoremap <leader>vs :VimuxRunCommand "stack ghci --with-ghc intero"<CR>
-nnoremap <leader>vi vaw"hy<ESC>:call VimuxRunCommand(":info ".@h)<CR> | echo ""
-nnoremap <leader>vt :call VimuxRunCommand(":type-at ".expand('%')." ".line(".")." ".col(".")." ".line(".")." ".(col(".")))<CR> | echo ""
-nnoremap <leader>vd vaw<ESC>:call VimuxRunCommand(":loc-at ".expand('%')." ".line("'<")." ".col("'<")." ".line("'>")." ".(col("'>")-1).' "'.expand('<cword>').'"')<CR> | echo ""
 " }}}
 " Racer {{{
 let g:racer_cmd = "/opt/rust/cargo/bin/racer"
