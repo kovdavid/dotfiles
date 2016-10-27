@@ -12,12 +12,20 @@ else
     exit 1
 fi
 
-if [ ! -e /dev/$DEVICE ] ; then
-    echo "/dev/$DEVICE does not exists, partprobing /dev/${DEVICE::-1}"
-    partprobe /dev/${DEVICE::-1}
-    if [ ! -e /dev/$DEVICE ] ; then
-        echo "/dev/$DEVICE does not exist after partprobe"
+if [[ $DEVICE == /* ]] ; then
+    if [ ! -f $DEVICE ] ; then
+        echo "$DEVICE does not exist"
         exit 1
+    fi
+else
+    DEVICE="/dev/$DEVICE"
+    if [ ! -e $DEVICE ] ; then
+        echo "$DEVICE does not exist, partprobing ${DEVICE::-1}"
+        partprobe ${DEVICE::-1}
+        if [ ! -e $DEVICE ] ; then
+            echo "$DEVICE does not exist after partprobe"
+            exit 1
+        fi
     fi
 fi
 
@@ -34,7 +42,7 @@ if [ -z "$BACKUP_KEYFILE" ] || [ ! -f "$BACKUP_KEYFILE" ] ; then
     exit
 fi
 
-$CRYPTSETUP luksOpen /dev/$DEVICE backup --key-file "$BACKUP_KEYFILE"
+$CRYPTSETUP luksOpen $DEVICE backup --key-file "$BACKUP_KEYFILE"
 if [ ! -e /dev/mapper/backup ] ; then
     echo "/dev/mapper/backup does not exist"
     exit 1
