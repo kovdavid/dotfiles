@@ -362,6 +362,7 @@ augroup filetype_rust
 
     autocmd BufWritePost * if &filetype=='rust' | execute ":Neomake" | endif
     autocmd FileType rust nnoremap <buffer> <leader>ta  :!cargo test<CR>
+    autocmd FileType rust nnoremap <buffer> <leader>rr  :!cargo run<CR>
 augroup END
 " }}}
 " Perl {{{
