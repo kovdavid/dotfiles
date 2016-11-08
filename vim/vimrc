@@ -206,6 +206,7 @@ nnoremap qr :tabnext<CR>
 
 vnoremap <leader>jf :!python -m json.tool<CR>
 vnoremap <leader>xf :!xmllint --format -<CR>
+vnoremap <leader>pf :!perl -e 'use Data::Dumper; my $lines = do { local $/ = undef; <STDIN> }; print Dumper(eval $lines);'<CR>
 vnoremap <c-f> "sy/<C-R>s<CR>
 
 
