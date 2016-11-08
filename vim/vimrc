@@ -1,5 +1,6 @@
 " vimrc by Davs
 " vim-plug {{{
+let g:plug_home = "/opt/vim-plugged"
 call plug#begin()
 Plug 'rhysd/clever-f.vim'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -15,20 +16,12 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-endwise'
 Plug 'junkblocker/git-time-lapse'
 Plug 'benekastah/neomake'
-
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
-
-" Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
-
-"haskell
-Plug 'eagletmt/ghcmod-vim',       { 'for': 'haskell' }
-Plug 'bitc/vim-hdevtools',        { 'for': 'haskell' }
-" Plug 'parsonsmatt/vim-hdevtools', { 'for': 'haskell' } << newer version it seems
-
+Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+Plug 'bitc/vim-hdevtools', { 'for': 'haskell' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'rust-lang/rust.vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer' }
 call plug#end()
 " }}}
 " Basic settings {{{
@@ -344,6 +337,8 @@ augroup filetype_haskell
     autocmd FileType haskell noremap <buffer> <leader>hi :HdevtoolsInfo<CR>
     autocmd FileType haskell command! HdevtoolsKill :!killall hdevtools
 
+    autocmd FileType haskell noremap <buffer> <F12> :!stack exec -- hasktags --ignore-close-implementation --ctags .<CR>
+
     autocmd FileType haskell noremap <buffer> <leader>rr :!runhaskell %<CR>
     autocmd FileType haskell noremap <buffer> <leader>tw :GhcModTypeInsert<CR>
 
@@ -363,6 +358,7 @@ augroup filetype_rust
     autocmd BufWritePost * if &filetype=='rust' | execute ":Neomake" | endif
     autocmd FileType rust nnoremap <buffer> <leader>ta  :!cargo test<CR>
     autocmd FileType rust nnoremap <buffer> <leader>rr  :!cargo run<CR>
+    autocmd FileType rust nnoremap <buffer> <leader>gd  :YcmCompleter GoTo<CR>
 augroup END
 " }}}
 " Perl {{{
@@ -894,5 +890,6 @@ let g:racer_cmd = "/opt/rust/cargo/bin/racer"
 let g:racer_experimental_completer = 1
 let g:rustfmt_fail_silently = 1
 let g:rustfmt_autosave = 1
+let g:ycm_rust_src_path = "/opt/rust/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
 " }}}
 " }}}
