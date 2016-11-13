@@ -5,6 +5,8 @@ else
 fi
 # export TERM=xterm-256color
 
+export MYSQL_PS1="\u@`hostname` [\d]> "
+
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 
 export JAVA_HOME="/usr/lib/jvm/default"
@@ -20,7 +22,7 @@ export PATH="/opt/perlbrew/bin:$HOME/bin:$JAVA_HOME:$PATH"
 [[ -n "$(which rustc)" && -d "$(rustc --print sysroot)/lib/rustlib/src/rust/src" ]] && \
     export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
-export RUST_BACKTRACE=1
+export RUST_BACKTRACE=0
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 
 export XZ_OPT=-9

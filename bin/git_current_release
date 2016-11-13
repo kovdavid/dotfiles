@@ -1,0 +1,11 @@
+#!/bin/bash
+
+REMOTE_ORIGIN=$(git remote 2>/dev/null | grep origin)
+if [ "$REMOTE_ORIGIN" != "origin" ] ; then
+	echo "ERROR: missing remote origin"
+	exit 1
+fi
+
+git fetch origin
+
+git branch -a | grep release | sed -e 's#^\s*##g' | grep -vP '^remotes/(?!origin)' | sed -e 's#remotes/origin/##g' | sort -V | uniq | tail -n 1

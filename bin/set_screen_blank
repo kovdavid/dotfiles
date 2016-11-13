@@ -1,0 +1,6 @@
+#!/bin/bash
+
+TIMEOUT=${1:-1800}
+
+xset s 1800 1800
+xset dpms 1800 1800 1800

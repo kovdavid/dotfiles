@@ -5,7 +5,7 @@ if [ ! -f "./stack.yaml" ] ; then
     exit
 fi
 
-echo "Building intero hdevtools ghcid hasktags"
-stack build intero hdevtools ghcid hasktags
+echo "Building intero hdevtools ghcid hasktags hindent"
+stack build intero hdevtools ghcid hasktags hindent
 echo "Generating hasktags"
 stack exec -- hasktags --ignore-close-implementation --ctags .

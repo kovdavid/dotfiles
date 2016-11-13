@@ -2,6 +2,7 @@
 /lost+found
 /media
 /mnt/data/NO_BACKUP
+/mnt/data/steam
 /opt
 /proc
 /run
@@ -15,6 +16,7 @@
 /home/davs/.cpanm
 /home/davs/.mozilla
 /home/davs/.hoogle
+/home/davs/.ghc-mod
 /home/davs/.thumbnails
 /home/davs/.thunderbird
 /home/davs/.gvfs

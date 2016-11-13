@@ -215,11 +215,11 @@ for_window [class="Nautilus" instance="file_progress"] floating enable
 for_window [window_role="pop-up"] floating enable
 
 exec ~/bin/mon right &
-exec sudo nm-applet &
-exec numlockx &
+exec --no-startup-id sudo nm-applet &
+exec --no-startup-id numlockx &
 exec ~/bin/init_trackpoint &
 exec ~/bin/init_touchpad &
 exec (sleep 1 && nitrogen --restore ) &
-exec redshift-gtk -l geoclue2 -t 6500:3500 -b 1.0:0.7 &
+exec --no-startup-id redshift-gtk -l geoclue2 -t 6500:3500 -b 1.0:0.7 &
 exec mkfifo /tmp/.smplayer_fifo &
 exec google-chrome

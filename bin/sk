@@ -1,4 +1,4 @@
 #!/bin/bash
 
-setxkbmap sk
+setxkbmap sk qwerty
 xmodmap ~/.Xmodmap
