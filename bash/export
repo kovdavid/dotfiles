@@ -19,7 +19,7 @@ export PATH="/opt/perlbrew/bin:$HOME/bin:$JAVA_HOME:$PATH"
 [[ -d /opt/rust/rustup ]] && export RUSTUP_HOME="/opt/rust/rustup"
 [[ -d /opt/rust/cargo ]] && export CARGO_HOME="/opt/rust/cargo"
 [[ -d /opt/rust/cargo/bin ]] && export PATH="/opt/rust/cargo/bin:$PATH"
-[[ -n "$(which rustc)" && -d "$(rustc --print sysroot)/lib/rustlib/src/rust/src" ]] && \
+[[ -n "$(which rustc 2>/dev/null)" && -d "$(rustc --print sysroot)/lib/rustlib/src/rust/src" ]] && \
     export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 export RUST_BACKTRACE=0
