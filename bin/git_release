@@ -37,6 +37,8 @@ MAJOR_VER=${MAJOR_VER:-0}
 MINOR_VER=${MINOR_VER:-0}
 PATCH_VER=${PATCH_VER:-0}
 
+# TODO PATCH_VER - moze treba odrezat vsetko za '-'
+
 if [ "$1" == "major" ] ; then
 	MAJOR_VER=$(($MAJOR_VER+1))
 	MINOR_VER=0
