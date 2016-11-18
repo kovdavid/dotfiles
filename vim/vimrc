@@ -766,7 +766,11 @@ function! ReplaceSelection() range
 endfunction
 " }}}
 " TmuxSendKeys {{{
-let g:tmux_pane_id = $VIM_TMUX_PANE_ID
+
+let g:tmux_pane_id = ""
+if filereadable("/tmp/.vim_tmux_pane_id")
+    let g:tmux_pane_id = readfile("/tmp/.vim_tmux_pane_id")[0]
+endif
 function! TmuxSendKeys(str)
     if g:tmux_pane_id == ""
         echo "set g:tmux_pane_id with the id of the TMUX pane or set \$VIM_TMUX_PANE_ID"
