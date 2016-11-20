@@ -23,23 +23,13 @@ if [ -n "$OUTPUT2_CONNECTED" ] ; then
 
     if [ "$1" == "off" ] ; then
         $(xrandr --output $OUTPUT2 --off)
+    elif [ "$1" == "dp" ] ; then
+        $(xrandr --output $OUTPUT2 --mode $RESOLUTION2)
+        $(xrandr --output $OUTPUT1 --off)
     else
         $(xrandr --output $OUTPUT2 --mode $RESOLUTION2)
-
-        if [ "$1" == "l" ] || [ "$1" == "left" ] ; then
-            $(xrandr --output $OUTPUT2 --left-of $OUTPUT1)
-            $(xrandr --output $OUTPUT1 --pos ${WIDTH1}x$DELTA_Y)
-        elif [ "$1" == "r" ] || [ "$1" == "right" ] ; then
-            $(xrandr --output $OUTPUT2 --right-of $OUTPUT1)
-            $(xrandr --output $OUTPUT2 --pos ${WIDTH1}x-$DELTA_Y)
-        elif [ "$1" == "t" ] || [ "$1" == "top" ] ; then
-            $(xrandr --output $OUTPUT2 --above $OUTPUT2)
-        elif [ "$1" == "dp" ] ; then
-            $(xrandr --output $OUTPUT1 --off)
-        elif [ "$1" == "mouse" ] ; then
-            $(xrandr --output $OUTPUT2 --right-of $OUTPUT1)
-            $(xrandr --output $OUTPUT2 --pos ${WIDTH1}x-$HEIGTH2)
-        fi
+        $(xrandr --output $OUTPUT2 --right-of $OUTPUT1)
+        $(xrandr --output $OUTPUT2 --pos ${WIDTH1}x-$HEIGTH2)
     fi
 fi
 
