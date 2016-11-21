@@ -68,4 +68,6 @@ git push origin HEAD
 
 git checkout develop
 
+echo -e "\e[31m\e[1mUpdate CHANGES\e[0m"
+
 echo "DONE"
