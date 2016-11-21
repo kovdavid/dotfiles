@@ -19,9 +19,12 @@ Plug 'benekastah/neomake'
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'bitc/vim-hdevtools', { 'for': 'haskell' }
+Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'rust-lang/rust.vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'sebastianmarkow/deoplete-rust'
 call plug#end()
 " }}}
 " Basic settings {{{
@@ -327,10 +330,9 @@ augroup filetype_haskell
     " autocmd FileType haskell setlocal iskeyword=a-z,A-Z,48-57,_,.,39
     autocmd FileType haskell setlocal iskeyword=a-z,A-Z,48-57,_,39
 
-    autocmd FileType haskell let g:haskellmode_completion_ghc = 1
+    autocmd FileType haskell let g:haskellmode_completion_ghc = 0
 
-    " autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-    " autocmd FileType haskell setlocal omnifunc=intero#omnifunc
+    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
     autocmd FileType haskell noremap <buffer> <leader>. :HdevtoolsClear<CR>:nohl<CR>
     autocmd FileType haskell noremap <buffer> <F1> :HdevtoolsType<CR>
@@ -359,7 +361,6 @@ augroup filetype_rust
     autocmd BufWritePost * if &filetype=='rust' | execute ":Neomake" | endif
     autocmd FileType rust nnoremap <buffer> <leader>ta  :!cargo test<CR>
     autocmd FileType rust nnoremap <buffer> <leader>rr  :!cargo run<CR>
-    autocmd FileType rust nnoremap <buffer> <leader>gd  :YcmCompleter GoTo<CR>
 augroup END
 " }}}
 " Perl {{{
@@ -895,6 +896,9 @@ let g:racer_cmd = "/opt/rust/cargo/bin/racer"
 let g:racer_experimental_completer = 1
 let g:rustfmt_fail_silently = 1
 let g:rustfmt_autosave = 1
-let g:ycm_rust_src_path = "/opt/rust/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
+let g:deoplete#enable_at_startup=1
+let g:deoplete#sources#rust#racer_binary='/opt/rust/cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path="/opt/rust/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " }}}
 " }}}
