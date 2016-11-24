@@ -1,0 +1,3 @@
+#!/bin/bash
+
+tmux display-message -p '#{pane_id}' > /tmp/.vim_tmux_pane_id

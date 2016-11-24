@@ -37,6 +37,8 @@ MAJOR_VER=${MAJOR_VER:-0}
 MINOR_VER=${MINOR_VER:-0}
 PATCH_VER=${PATCH_VER:-0}
 
+# TODO PATCH_VER - moze treba odrezat vsetko za '-'
+
 if [ "$1" == "major" ] ; then
 	MAJOR_VER=$(($MAJOR_VER+1))
 	MINOR_VER=0
@@ -57,13 +59,15 @@ read -p "Create release 'release/rel$NEW_RELEASE'? <y/n> " RESULT
 git checkout -b "release/rel$NEW_RELEASE"
 git push origin HEAD
 
-# git checkout master
-# git merge --ff-only "release/rel$NEW_RELEASE"
-# if [ "$?" != "0" ] ; then
-	# echo -e "\e[31m\e[1mError during merge into master\e[0m"
-# fi
-# git push origin HEAD
+git checkout master
+git merge --no-ff "release/rel$NEW_RELEASE"
+if [ "$?" != "0" ] ; then
+	echo -e "\e[31m\e[1mError during merge into master\e[0m"
+fi
+git push origin HEAD
 
 git checkout develop
+
+echo -e "\e[31m\e[1mUpdate CHANGES\e[0m"
 
 echo "DONE"

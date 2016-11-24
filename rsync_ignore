@@ -10,6 +10,7 @@
 /tmp
 /usr
 /var/cache
+/var/lib/mysql
 
 # home
 /home/davs/.cache

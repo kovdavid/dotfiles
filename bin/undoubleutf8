@@ -1,0 +1,24 @@
+#!/usr/bin/env perl
+
+use v5.10;
+use strict;
+use warnings;
+use Encode qw[ decode_utf8 encode_utf8 ];
+
+my $in_file = shift or die "Usage: $0 in_file out_file";
+my $out_file = shift or die "Usage: $0 out_file out_file";
+
+if (! -f $in_file) {
+	die "in_file $in_file does not exists";
+}
+if (-f $out_file) {
+	die "out_file $out_file does not exists";
+}
+
+open my $fh, "<:utf8", $in_file or die "open $in_file: $!";
+my $data = do { local $/ = undef; <$fh> };
+close $fh;
+
+open my $fh2, ">", $out_file or die "open $out_file: $!";
+print $fh2 $data;
+close $fh2;
