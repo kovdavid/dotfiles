@@ -1,12 +1,12 @@
 [[ -f /etc/profile ]] && source /etc/profile
 
 set -o vi
+
 if [ -e ~/dotfiles/bash/git ] ; then
     source ~/dotfiles/bash/git
-    export PS1='[\u@\h:\w]\e[36m$(parse_git_branch)\e[0m\n$([ \j -gt 0 ] && echo "\j ")\\$ '
-else
-    export PS1='[\u@\h:\w]\n$([ \j -gt 0 ] && echo "\j ")\\$ '
 fi
+
+export PS1='`EXIT=\$?;[[ \$EXIT -ne 0 ]] && echo "\e[31m\$EXIT\e[0m "`\e[34m`date "+%H:%M"`\e[0m [\u@\h:\w]\e[36m$(parse_git_branch)\e[0m\n$([ \j -gt 0 ] && echo "\j ")\\$ '
 
 shopt -s checkwinsize
 shopt -s histappend
@@ -30,3 +30,23 @@ if [ -f ~/dotfiles/nike ] ; then
     [[ -f ~/dotfiles/bash/nike ]] && source ~/dotfiles/bash/nike
     [[ -f ~/dotfiles/bash/proxy ]] && source ~/dotfiles/bash/proxy
 fi
+
+function parse_git_dirty {
+    [[ $(git status 2> /dev/null | tail -n1) =~  "nothing to commit" ]] || echo " * "
+}
+
+function parse_git_branch {
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \1 $(parse_git_rev)$(parse_git_dirty)/"
+}
+
+function parse_git_rev {
+    git rev-parse --short HEAD 2> /dev/null
+}
+
+function parse_git_since_last_commit {
+    now=`date +%s`;
+    last_commit=$(git log --pretty=format:%at -1 2> /dev/null) || return;
+    seconds_since_last_commit=$((now-last_commit));
+
+    echo "${seconds_since_last_commit}";
+}
