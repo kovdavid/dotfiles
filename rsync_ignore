@@ -23,7 +23,7 @@
 /home/davs/.gvfs
 /home/davs/.local/bin
 
-/home/davs/workspace/rust/***/target
+/home/davs/workspace/rust/*/target
 
 tags
 Makefile.old
