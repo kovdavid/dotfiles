@@ -1,6 +1,6 @@
 " vimrc by Davs
 " vim-plug {{{
-let g:plug_home = "/opt/vim-plugged"
+" let g:plug_home = "/opt/vim-plugged"
 call plug#begin()
 Plug 'rhysd/clever-f.vim'
 Plug 'ctrlpvim/ctrlp.vim'
