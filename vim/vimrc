@@ -268,7 +268,7 @@ nnoremap gm :normal! M<CR>
 nnoremap <c-\> :po<CR>
 " }}}
 " Row/column highlight {{{
-noremap <F2> :set number!<CR>:set relativenumber!<CR>
+noremap <F2> :call ToggleLineNumbers()<CR>
 noremap <F3> :set cursorline!<CR>
 noremap <F4> :set cursorcolumn!<CR>
 noremap <F6> :set list!<CR>
@@ -282,8 +282,8 @@ noremap <c-t> :tabnew<CR>
 augroup all_file_type
     autocmd!
     if v:version > 703
-        autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber
-        autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber
+        autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber | setlocal number
+        autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber | setlocal number
     endif
     if !filereadable(expand("~") . "/.nike")
         autocmd BufWritePre * %s/\s\+$//e
@@ -770,7 +770,6 @@ function! ReplaceSelection() range
 endfunction
 " }}}
 " TmuxSendKeys {{{
-
 let g:tmux_pane_id = ""
 if filereadable("/tmp/.vim_tmux_pane_id")
     let g:tmux_pane_id = readfile("/tmp/.vim_tmux_pane_id")[0]
@@ -780,6 +779,17 @@ function! TmuxSendKeys(str)
         echo "set g:tmux_pane_id with the id of the TMUX pane or set \$VIM_TMUX_PANE_ID"
     else
         call system("tmux send-keys -t".g:tmux_pane_id." \"".a:str."\" Enter")
+    endif
+endfunction
+" }}}
+" ToggleLineNumbers {{{
+function! ToggleLineNumbers()
+    if &number
+        set nonumber
+        set norelativenumber
+    else
+        set number
+        set relativenumber
     endif
 endfunction
 " }}}
