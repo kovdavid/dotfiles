@@ -37,6 +37,7 @@ bindsym $mod+b border toggle
 # scratchpad
 bindsym $mod+Shift+m move scratchpad
 bindsym $mod+m scratchpad show
+bindcode 197 scratchpad show
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
