@@ -25,7 +25,8 @@ Plug 'rust-lang/rust.vim'
 
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'sebastianmarkow/deoplete-rust'
+    Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+    Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
 endif
 
 call plug#end()
@@ -289,8 +290,10 @@ augroup all_file_type
         autocmd BufWritePre * %s/\s\+$//e
     endif
 
+    autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
     autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal winwidth=1 | setlocal wrap | setlocal nocursorbind | endif
-    autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=100 | endif
+    autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=101 | endif
 
     autocmd Syntax * highlight SpecialKey ctermfg=240 gui=bold guifg=#5b605e
     autocmd Syntax * highlight NonText ctermfg=240 gui=bold guifg=#5b605e
@@ -492,6 +495,19 @@ augroup filetype_ruby
     autocmd FileType ruby,eruby setlocal expandtab
 
     autocmd FileType ruby nnoremap <buffer> <leader>rr :!ruby %<CR>
+augroup END
+" }}}
+" python {{{
+augroup filetype_python
+    autocmd!
+
+    autocmd BufRead,BufWritePre,FileType python silent execute ":Rooter"
+
+    autocmd FileType python setlocal shiftwidth=2
+    autocmd FileType python setlocal softtabstop=2
+    autocmd FileType python setlocal expandtab
+
+    autocmd FileType python nnoremap <buffer> <leader>rr :!python %<CR>
 augroup END
 " }}}
 " Clojure {{{
