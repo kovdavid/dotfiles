@@ -1,6 +1,6 @@
 " vimrc by Davs
 " vim-plug {{{
-let g:plug_home = "/opt/vim-plugged"
+" let g:plug_home = "/opt/vim-plugged"
 call plug#begin()
 Plug 'rhysd/clever-f.vim'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -22,9 +22,13 @@ Plug 'bitc/vim-hdevtools', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'rust-lang/rust.vim'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'sebastianmarkow/deoplete-rust'
+
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+    Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
+endif
+
 call plug#end()
 " }}}
 " Basic settings {{{
@@ -265,7 +269,7 @@ nnoremap gm :normal! M<CR>
 nnoremap <c-\> :po<CR>
 " }}}
 " Row/column highlight {{{
-noremap <F2> :set number!<CR>:set relativenumber!<CR>
+noremap <F2> :call ToggleLineNumbers()<CR>
 noremap <F3> :set cursorline!<CR>
 noremap <F4> :set cursorcolumn!<CR>
 noremap <F6> :set list!<CR>
@@ -279,15 +283,17 @@ noremap <c-t> :tabnew<CR>
 augroup all_file_type
     autocmd!
     if v:version > 703
-        autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber
-        autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber
+        autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber | setlocal number
+        autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber | setlocal number
     endif
     if !filereadable(expand("~") . "/.nike")
         autocmd BufWritePre * %s/\s\+$//e
     endif
 
+    autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
     autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal winwidth=1 | setlocal wrap | setlocal nocursorbind | endif
-    autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=100 | endif
+    autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=101 | endif
 
     autocmd Syntax * highlight SpecialKey ctermfg=240 gui=bold guifg=#5b605e
     autocmd Syntax * highlight NonText ctermfg=240 gui=bold guifg=#5b605e
@@ -489,6 +495,19 @@ augroup filetype_ruby
     autocmd FileType ruby,eruby setlocal expandtab
 
     autocmd FileType ruby nnoremap <buffer> <leader>rr :!ruby %<CR>
+augroup END
+" }}}
+" python {{{
+augroup filetype_python
+    autocmd!
+
+    autocmd BufRead,BufWritePre,FileType python silent execute ":Rooter"
+
+    autocmd FileType python setlocal shiftwidth=2
+    autocmd FileType python setlocal softtabstop=2
+    autocmd FileType python setlocal expandtab
+
+    autocmd FileType python nnoremap <buffer> <leader>rr :!python %<CR>
 augroup END
 " }}}
 " Clojure {{{
@@ -767,7 +786,6 @@ function! ReplaceSelection() range
 endfunction
 " }}}
 " TmuxSendKeys {{{
-
 let g:tmux_pane_id = ""
 if filereadable("/tmp/.vim_tmux_pane_id")
     let g:tmux_pane_id = readfile("/tmp/.vim_tmux_pane_id")[0]
@@ -777,6 +795,17 @@ function! TmuxSendKeys(str)
         echo "set g:tmux_pane_id with the id of the TMUX pane or set \$VIM_TMUX_PANE_ID"
     else
         call system("tmux send-keys -t".g:tmux_pane_id." \"".a:str."\" Enter")
+    endif
+endfunction
+" }}}
+" ToggleLineNumbers {{{
+function! ToggleLineNumbers()
+    if &number
+        set nonumber
+        set norelativenumber
+    else
+        set number
+        set relativenumber
     endif
 endfunction
 " }}}
