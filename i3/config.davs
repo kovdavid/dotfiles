@@ -15,8 +15,6 @@ bindsym $mod+x exec xterm
 bindsym $mod+i exec google-chrome
 bindsym $mod+t exec thunar
 bindsym $mod+d exec dmenu_run
-bindcode 148 exec calc
-bindcode 156 exec ~/bin/toggle_amixer_volume
 bindsym $mod+h exec i3_rename_workspace
 
 bindsym XF86AudioMute exec "amixer -q set Master toggle; killall -USR1 i3status"
@@ -27,7 +25,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 bindsym XF86ScreenSaver exec i3lock -c 000000
 bindsym XF86Sleep exec "i3lock -c 000000; systemctl suspend"
-
+bindsym XF86Launch1 exec ~/bin/toggle_amixer_volume
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -187,7 +185,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $system_power_mode "(s)leep | (h)alt | (r)eboot | (l)ock | (e) exit"
+set $system_power_mode "(s)leep | (h)alt | (r)eboot | (l)ock | (c)ancel"
 
 mode $system_power_mode {
     bindsym h exec "i3-msg 'mode default'; systemctl poweroff"
@@ -197,7 +195,7 @@ mode $system_power_mode {
 
     bindsym Escape mode "default"
     bindsym Enter mode "default"
-    bindsym e mode "default"
+    bindsym c mode "default"
 }
 
 bindsym $mod+Shift+Delete mode $system_power_mode
