@@ -1,0 +1,59 @@
+#!/bin/bash
+
+ALARM_FILE="/tmp/.i3_alarm"
+NOW_SEC=$(date '+%s')
+
+if [ $# -eq 0 ] ; then
+	RESULT=""
+	while read TIMESTAMP MESSAGE; do
+		REMAINING_SEC="$(( $TIMESTAMP - $NOW_SEC ))"
+		if [ $REMAINING_SEC -lt 0 ] ; then
+			RESULT=$RESULT"\e[31m\e[1m$MESSAGE\e[0m * "
+		elif [ $REMAINING_SEC -lt 60 ] ; then
+			RESULT=$RESULT"\e[92m$REMAINING_SEC $MESSAGE\e[0m * "
+		else
+			RESULT=$RESULT"$REMAINING_SEC $MESSAGE * "
+		fi
+		echo $TIMESTAMP
+		echo $MESSAGE
+	done <"$ALARM_FILE"
+
+	if [ "$RESULT" != "" ] ; then
+		RESULT="* "$RESULT
+	fi
+	echo -e "$RESULT"
+
+	exit
+fi
+
+ARG_TIME=$1
+shift
+ARG_MSG="$@"
+
+if [ "$ARG_MSG" == "" ] ; then
+	echo "No message given"
+	exit
+fi
+
+if [ "$ARG_TIME" != "" ] ; then
+	# is it a number?
+	if [ "$ARG_TIME" -eq "$ARG_TIME" ] 2>/dev/null ; then
+		ALARM_SEC=$ARG_TIME
+	elif [ "${ARG_TIME: -1}" == "s" ] ; then
+		ALARM_SEC="${ARG_TIME:0:-1}"
+	elif [ "${ARG_TIME: -1}" == "m" ] ; then
+		ALARM_SEC="$(( 60 * ${ARG_TIME:0:-1} ))"
+	elif [ "${ARG_TIME: -1}" == "h" ] ; then
+		ALARM_SEC="$(( 60 * 60 * ${ARG_TIME:0:-1} ))"
+	else
+		echo "Invalid time given"
+		exit
+	fi
+
+	ALARM_TIMESTAMP="$(( $ALARM_SEC + $NOW_SEC ))"
+fi
+
+echo -e "$ALARM_TIMESTAMP\t$ARG_MSG" >> "$ALARM_FILE"
+sort -no "$ALARM_FILE" "$ALARM_FILE"
+
+killall -USR1 i3status
