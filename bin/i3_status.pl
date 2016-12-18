@@ -4,10 +4,10 @@ use v5.10;
 use strict;
 use warnings;
 use utf8;
+
 use JSON::XS qw[ encode_json decode_json ];
 use IO::Poll qw[ POLLIN POLLHUP POLLERR ];
 use IO::Handle;
-use utf8;
 
 $| = 1;
 open my $i3status_fh, '-|', 'i3status -c ~/.i3/i3status'
