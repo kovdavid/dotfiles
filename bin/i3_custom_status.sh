@@ -10,6 +10,6 @@ do
         I3_ORIENTATION_STATUS="—"
     fi
     TODO_COUNT=0
-	[[ -f ~/TODO/TODO ]] && TODO_COUNT=$(cat ~/TODO/TODO | wc -l)
-    echo "${line/[/[{\"full_text\":\"TODO: $TODO_COUNT | I3Split: $I3_ORIENTATION_STATUS\"\},}" || exit 1
+    [[ -f ~/TODO/TODO ]] && TODO_COUNT=$(cat ~/TODO/TODO | wc -l)
+    echo "${line/[/[{\"full_text\":\"TODO: $TODO_COUNT | $I3_ORIENTATION_STATUS \"\},}" || exit 1
 done
