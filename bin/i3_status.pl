@@ -5,6 +5,7 @@ use strict;
 use warnings;
 use JSON::XS qw[ encode_json decode_json ];
 use IO::Handle;
+use utf8;
 
 $| = 1;
 
