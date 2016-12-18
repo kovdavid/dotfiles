@@ -15,6 +15,8 @@ open my $i3status_fh, '-|', 'i3status -c ~/.i3/i3status'
 
 STDIN->blocking(0);
 
+open STDERR, ">>", "/tmp/i3_status_stderr";
+
 my $poll = IO::Poll->new();
 $poll->mask(\*STDIN => POLLIN | POLLHUP | POLLERR);
 $poll->mask($i3status_fh => POLLIN | POLLHUP | POLLERR);
@@ -36,6 +38,9 @@ while (1) {
                 die "sysread error";
             }
 
+            next unless $buffer;
+            next if $buffer =~ m#^\s*$#;
+
             if ($handle == $i3status_fh) {
                 handle_i3status_message($buffer);
             } else {
@@ -52,6 +57,9 @@ sub handle_click {
     if ($first_char eq '[' or $first_char eq ',') {
         $buffer = substr($buffer, 1);
     }
+
+    return unless $buffer;
+    return if $buffer =~ m#^\s*$#;
 
     my $data = decode_json($buffer);
 
@@ -78,6 +86,8 @@ sub handle_click {
     open my $fh_out, ">", "/tmp/.i3_alarm" or return;
     print $fh_out $result_content;
     close $fh_out;
+
+    `killall -USR1 i3status`;
 }
 
 sub handle_i3status_message {
@@ -94,6 +104,9 @@ sub handle_i3status_message {
         $buffer = substr($buffer, 1);
     }
 
+    return unless $buffer;
+    return if $buffer =~ m#^\s*$#;
+
     my $data = decode_json($buffer);
 
     my $i3_split_orientation = get_i3_split_orientation();
@@ -103,7 +116,9 @@ sub handle_i3status_message {
     unshift @{ $data }, { full_text => "TODO: $todo_count" };
     unshift @{ $data }, get_i3_alarms();
 
-    say $prefix . encode_json($data);
+    my $output = $prefix . encode_json($data);
+
+    say $output;
 }
 
 sub get_i3_split_orientation {

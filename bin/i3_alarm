@@ -53,7 +53,7 @@ if [ "$ARG_TIME" != "" ] ; then
 	ALARM_TIMESTAMP="$(( $ALARM_SEC + $NOW_SEC ))"
 fi
 
-echo -e "$ALARM_TIMESTAMP\t$ARG_MSG" >> "$ALARM_FILE"
-sort -no "$ALARM_FILE" "$ALARM_FILE"
+ALARM_CONTENT=$(cat $ALARM_FILE)
+echo -e "$ALARM_TIMESTAMP\t$ARG_MSG\n$ALARM_CONTENT" | sort -n | grep -vP '^$' > $ALARM_FILE
 
 killall -USR1 i3status
