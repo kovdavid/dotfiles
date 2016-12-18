@@ -120,7 +120,7 @@ sub get_i3_split_orientation {
 }
 
 sub get_todo_count {
-    open my $fh, "<", "~/TODO/TODO" or return "0";
+    open my $fh, "<", "/home/davs/TODO/TODO" or return "$!";
     my @lines = <$fh>;
     close $fh;
 
