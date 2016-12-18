@@ -83,6 +83,22 @@ sub handle_click {
         my (undef, $message) = split("\t", $alarms[$instance], 2);
         my $time = time() + 300;
         $alarms[$instance] = "$time\t$message";
+    } elsif ($button == 4) {
+        # Scroll up - +1 min
+        my ($time, $message) = split("\t", $alarms[$instance], 2);
+        if ($time < time()) {
+            $time = time() + 60;
+        } else {
+            $time = $time + 60;
+        }
+        $alarms[$instance] = "$time\t$message";
+    } elsif ($button == 5) {
+        # Scroll down - -1 min
+        my ($time, $message) = split("\t", $alarms[$instance], 2);
+        if ($time > time()) {
+            $time = $time > 60 ? ($time - 60) : 0;
+        }
+        $alarms[$instance] = "$time\t$message";
     }
 
     my $result_content = join("\n", @alarms);

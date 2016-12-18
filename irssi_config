@@ -47,5 +47,6 @@ channels = (
   { name = "#vim"; chatnet = "fn"; autojoin = "yes"; },
   { name = "#haskell-beginners"; chatnet = "fn"; autojoin = "yes"; }
   { name = "#rust-beginners"; chatnet = "mozilla"; autojoin = "yes"; }
+  { name = "#rust"; chatnet = "mozilla"; autojoin = "yes"; }
 );
 logs = { };
