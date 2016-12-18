@@ -61,7 +61,11 @@ sub handle_click {
     return unless $buffer;
     return if $buffer =~ m#^\s*$#;
 
-    my $data = decode_json($buffer);
+    my $data;
+    eval { $data = decode_json($buffer) };
+    if ($@) {
+        die "handle_click: Could not decode json [$buffer] because: $@";
+    }
 
     my $name = $data->{name};
     my $instance = $data->{instance};
@@ -107,7 +111,11 @@ sub handle_i3status_message {
     return unless $buffer;
     return if $buffer =~ m#^\s*$#;
 
-    my $data = decode_json($buffer);
+    my $data;
+    eval { $data = decode_json($buffer) };
+    if ($@) {
+        die "handle_i3status_message: Could not decode json [$buffer] because: $@";
+    }
 
     my $i3_split_orientation = get_i3_split_orientation();
     my $todo_count = get_todo_count();
