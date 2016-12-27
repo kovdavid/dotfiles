@@ -77,6 +77,8 @@ sub handle_click {
     my @alarms = map { chomp $_; $_ } <$fh>;
     close $fh;
 
+    return unless @alarms;
+
     if ($button == 2) {
         # Middle click - remove event
         splice @alarms, $instance, 1;
