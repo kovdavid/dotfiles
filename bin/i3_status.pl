@@ -38,6 +38,8 @@ while (1) {
                 die "sysread error";
             }
 
+            $buffer =~ s/\n//g;
+
             next unless $buffer;
             next if $buffer =~ m#^\s*$#;
 
