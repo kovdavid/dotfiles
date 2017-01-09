@@ -38,6 +38,8 @@ while (1) {
                 die "sysread error";
             }
 
+            $buffer =~ s/\n//g;
+
             next unless $buffer;
             next if $buffer =~ m#^\s*$#;
 
@@ -74,6 +76,8 @@ sub handle_click {
     open my $fh, "<", "/tmp/.i3_alarm" or return;
     my @alarms = map { chomp $_; $_ } <$fh>;
     close $fh;
+
+    return unless @alarms;
 
     if ($button == 2) {
         # Middle click - remove event
