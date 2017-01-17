@@ -24,6 +24,8 @@ else
     TMUX_CMD="cd $CD_DIR; bash"
 fi
 
+[[ "$SESSION_NAME" == "irc" ]] && TMUX_CMD="bash -c irssi"
+
 if [ -n "$SESSION_NAME" ] ; then
     $(tmux new-session -d -s $SESSION_NAME -n bash "$TMUX_CMD")
 else
