@@ -42,11 +42,3 @@ function parse_git_branch {
 function parse_git_rev {
     git rev-parse --short HEAD 2> /dev/null
 }
-
-function parse_git_since_last_commit {
-    now=`date +%s`;
-    last_commit=$(git log --pretty=format:%at -1 2> /dev/null) || return;
-    seconds_since_last_commit=$((now-last_commit));
-
-    echo "${seconds_since_last_commit}";
-}
