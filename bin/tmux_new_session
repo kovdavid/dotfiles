@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "New session"
+
 SESSION_NAME=''
 SSH_HOST=''
 CD_DIR=''

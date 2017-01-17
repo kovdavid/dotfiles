@@ -18,7 +18,7 @@ ethernet eno1 {
 }
 
 time {
-    format ="[%U] %d-%m-%Y %H:%M"
+    format ="[%W] %d-%m-%Y %H:%M"
 }
 
 load {

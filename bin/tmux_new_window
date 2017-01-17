@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "New window"
+
 WINDOW_NAME=''
 SSH_HOST=''
 CD_DIR=''
