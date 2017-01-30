@@ -51,3 +51,5 @@
     default = current
 [commit]
     template = ~/dotfiles/git_commit_template
+[branch]
+    autosetuprebase = always
