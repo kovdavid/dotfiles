@@ -24,7 +24,7 @@
     mt   = mergetool
     root = !pwd
 [user]
-    name = Davs
+    name = Dávid Kovács
     email = kovdavid@gmail.com
 [core]
     editor = vim
