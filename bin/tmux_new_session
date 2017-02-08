@@ -15,7 +15,7 @@ fi
 
 [[ "$SESSION_NAME" == "hs" ]] && SESSION_NAME="λ"
 
-read -p "Default directory: " -e CD_DIR
+read -p "Default directory: " -e CD_DIR -i $NIKE_HOME
 
 TMUX_CMD=""
 if [ -n "$SSH_HOST" ] ; then

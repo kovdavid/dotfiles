@@ -13,7 +13,7 @@ if [ -z "$WINDOW_NAME" ] ; then
     WINDOW_NAME=$SSH_HOST
 fi
 
-read -p "Default directory: " -e CD_DIR
+read -p "Default directory: " -e CD_DIR -i $NIKE_HOME
 
 TMUX_CMD=""
 if [ -n "$SSH_HOST" ] ; then
