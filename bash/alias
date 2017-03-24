@@ -24,7 +24,7 @@ alias gfo='git fetch origin && git rev-parse --abbrev-ref HEAD | xargs -I{} git 
 alias gpo='git push origin'
 alias gpoh='git push origin HEAD'
 alias gpullh='git rev-parse --abbrev-ref HEAD | xargs git pull origin'
-alias grel='git_release'
+alias grel='git fetch origin; git branch -a | grep release | sed -e "s#remotes/[^/]*/##" | sort -V -u'
 alias grep='grep --exclude-dir=.git'
 alias gst='git status'
 alias em='emacs --no-window'
