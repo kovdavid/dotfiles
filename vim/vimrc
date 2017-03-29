@@ -23,6 +23,7 @@ Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'rust-lang/rust.vim'
 
+Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'zchee/deoplete-clang', { 'for': 'c' }
 
 let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
@@ -32,6 +33,7 @@ if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'zchee/deoplete-jedi', { 'for': 'python' }
     Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
+    Plug 'zchee/deoplete-go', { 'do' : 'make', 'for': 'go' }
 endif
 
 call plug#end()
@@ -323,6 +325,31 @@ augroup filetype_elixir
     autocmd FileType elixir nnoremap <buffer> <leader>rm :!mix<CR>
     autocmd FileType elixir nnoremap <buffer> <leader>tf :!mix test<CR>
     autocmd FileType elixir nnoremap <buffer> <leader>tl :execute ":!mix test ".expand('%').":".line('.')<CR>
+augroup END
+" }}}
+" golang {{{
+augroup filetype_golang
+    autocmd!
+    autocmd FileType go setlocal shiftwidth=4
+    autocmd FileType go setlocal tabstop=4
+    autocmd FileType go setlocal softtabstop=4
+
+    autocmd BufNewFile *.go 0r ~/.vim/skeleton/go.script
+
+    autocmd FileType go nnoremap <buffer> <leader>dd o<ESC>ifmt.Printf("%+v\n", )<LEFT>
+
+    autocmd FileType go let g:go_fmt_command = "goimports"
+    autocmd FileType go let g:go_fmt_autosave = 0
+    autocmd FileType go noremap <buffer> <leader>rr :!go run %<CR>
+    autocmd FileType go noremap <buffer> <leader>i :GoInfo<CR>
+    autocmd FileType go noremap <buffer> <leader>ts :GoVet<CR>
+    autocmd FileType go noremap <buffer> <leader>gi :GoImports<CR>
+augroup END
+" }}}
+" lua {{{
+augroup filetype_lua
+    autocmd!
+    autocmd FileType lua noremap <buffer> <leader>rr :!lua %<CR>
 augroup END
 " }}}
 " Haskell {{{
