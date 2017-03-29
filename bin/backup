@@ -128,6 +128,9 @@ elif [ -e /backup/backup_32g ] ; then
 else
     echo "No backup type detected"
 fi
+
+touch /backup/last_run
+
 echo "rsync has finished..."
 sync
 echo "sync has finished..."
