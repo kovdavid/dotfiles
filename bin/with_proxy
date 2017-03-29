@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PROXY=$1
+shift
+
+export http_proxy=$PROXY
+export https_proxy=$PROXY
+export ftp_proxy=$PROXY
+export no_proxy=127.0.0.1,localhost
+
+$@

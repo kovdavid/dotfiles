@@ -7,8 +7,8 @@ general {
 order += "disk /"
 order += "disk /home"
 order += "disk /mnt/data"
-order += "wireless wlp3s0"
-order += "ethernet enp0s25"
+order += "wireless wlan0"
+order += "ethernet eth0"
 order += "battery 0"
 order += "cpu_temperature 0"
 order += "cpu_usage"
@@ -17,12 +17,12 @@ order += "volume master"
 order += "volume PCM"
 order += "time"
 
-wireless wlp3s0 {
+wireless wlan0 {
     format_up = "%essid %ip ‣ %quality"
     format_down = ""
 }
 
-ethernet enp0s25 {
+ethernet eth0 {
     format_up = "%ip"
     format_down = ""
 }

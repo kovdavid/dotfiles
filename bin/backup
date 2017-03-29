@@ -94,6 +94,7 @@ elif [ -e /backup/backup_all ] ; then
           --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
           --exclude="/backup"                                     \
           --include="/opt/minecraft/***"                          \
+          --include="/opt/factorio/***"                           \
           / /backup/data
 elif [ -e /backup/backup_home ] ; then
     echo "Backup type: home"
@@ -127,6 +128,9 @@ elif [ -e /backup/backup_32g ] ; then
 else
     echo "No backup type detected"
 fi
+
+touch /backup/last_run
+
 echo "rsync has finished..."
 sync
 echo "sync has finished..."

@@ -180,13 +180,14 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $system_power_mode "(s)leep | (h)alt | (r)eboot | (l)ock | (c)ancel"
+set $system_power_mode "(s)leep+lock | slee(p) | (h)alt | (r)eboot | (l)ock | (c)ancel"
 
 mode $system_power_mode {
     bindsym h exec "i3-msg 'mode default'; systemctl poweroff"
     bindsym r exec "i3-msg 'mode default'; systemctl reboot"
     bindsym l exec "i3-msg 'mode default'; i3lock -c 333333"
     bindsym s exec "i3-msg 'mode default'; i3lock -c 333333; systemctl suspend"
+    bindsym p exec "i3-msg 'mode default'; systemctl suspend"
 
     bindsym Escape mode "default"
     bindsym Enter mode "default"
@@ -199,7 +200,7 @@ bindsym $mod+Shift+Delete mode $system_power_mode
 # finds out, if available)
 bar {
         font pango:DejaVu Sans Mono 12px
-        status_command i3_custom_status.sh
+        status_command i3_status.pl
         tray_output $primary_output
 }
 

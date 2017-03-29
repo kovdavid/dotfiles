@@ -1,6 +1,6 @@
 set $mod Mod4
-set $primary_output DisplayPort-0
-set $secondary_output DisplayPort-1
+set $primary_output DP-1
+set $secondary_output DP-2
 
 font pango:DejaVu Sans Mono 13px
 
@@ -205,7 +205,7 @@ bindsym $mod+Shift+Delete mode $system_power_mode
 # finds out, if available)
 bar {
         font pango:DejaVu Sans Mono 12px
-        status_command i3_custom_status.sh
+        status_command i3_status.pl
         tray_output $primary_output
 }
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "New session"
+
 SESSION_NAME=''
 SSH_HOST=''
 CD_DIR=''
@@ -13,7 +15,7 @@ fi
 
 [[ "$SESSION_NAME" == "hs" ]] && SESSION_NAME="λ"
 
-read -p "Default directory: " -e CD_DIR
+read -p "Default directory: " -e CD_DIR -i $NIKE_HOME
 
 TMUX_CMD=""
 if [ -n "$SSH_HOST" ] ; then
@@ -21,6 +23,8 @@ if [ -n "$SSH_HOST" ] ; then
 else
     TMUX_CMD="cd $CD_DIR; bash"
 fi
+
+[[ "$SESSION_NAME" == "irc" ]] && TMUX_CMD="bash -c irssi"
 
 if [ -n "$SESSION_NAME" ] ; then
     $(tmux new-session -d -s $SESSION_NAME -n bash "$TMUX_CMD")
