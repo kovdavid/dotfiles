@@ -9,7 +9,11 @@ export MYSQL_PS1="\u@`hostname` [\d]> "
 
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 
-export JAVA_HOME="/usr/lib/jvm/default"
+if [ -d "/usr/lib/jvm/default" ] ; then
+    export JAVA_HOME="/usr/lib/jvm/default"
+elif [ -d "/usr/lib/jvm/java-8-oracle" ] ; then
+    export JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+fi
 export LD_LIBRARY_PATH="/usr/lib64/java/jre/lib/amd64"
 
 export PATH="/opt/perlbrew/bin:$HOME/bin:$JAVA_HOME:$PATH"
