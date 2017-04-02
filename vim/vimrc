@@ -334,6 +334,8 @@ augroup filetype_golang
     autocmd FileType go setlocal tabstop=4
     autocmd FileType go setlocal softtabstop=4
 
+    autocmd BufRead,BufWritePre,FileType go silent execute ":Rooter"
+
     autocmd BufNewFile *.go 0r ~/.vim/skeleton/go.script
 
     autocmd FileType go nnoremap <buffer> <leader>dd o<ESC>ifmt.Printf("%+v\n", )<LEFT>
@@ -344,6 +346,8 @@ augroup filetype_golang
     autocmd FileType go noremap <buffer> <leader>i :GoInfo<CR>
     autocmd FileType go noremap <buffer> <leader>ts :GoVet<CR>
     autocmd FileType go noremap <buffer> <leader>gi :GoImports<CR>
+    autocmd FileType go noremap <buffer> <leader>tf :GoTestFunc<CR>
+    autocmd FileType go noremap <buffer> <leader>ta :GoTest<CR>
 augroup END
 " }}}
 " lua {{{
