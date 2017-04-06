@@ -1,0 +1,18 @@
+#!/bin/sh
+
+inotifywait -m --format "%w %f" --exclude ".git" -e modify -r . | while IFS=" " read DIR FILE
+do
+    EXTENSION=$(echo "$FILE" | cut -f 2 -d '.')
+    if [ "$EXTENSION" == "go" ] ; then
+        echo "$FILE" | grep -qP '_test\.go'
+        if [ $? -eq 0 ] ; then
+            FILE2=$(echo "$FILE" | sed -e 's/_test\.go$/.go/g')
+        else
+            FILE2=$(echo "$FILE" | sed -e 's/\.go$/_test.go/g')
+        fi
+        CMD="go test -v ${DIR}${FILE} ${DIR}${FILE2}"
+        clear
+        echo "Running: $CMD"
+        $CMD
+    fi
+done
