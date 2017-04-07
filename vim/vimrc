@@ -438,7 +438,9 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>dt <ESC>ause v5.10;<CR>use Data::Dumper;<CR>local $Data::Dumper::Terse = 1;<CR>local $Data::Dumper::Indent = 0;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper();<LEFT><LEFT>
     autocmd FileType perl nnoremap <buffer> <leader>so <ESC>vapk:sort<CR>
 
-    autocmd FileType perl nnoremap <buffer> gu :!grep -rP '(::<BAR>\->)<c-r>=expand("<cword>")<CR>' bin/ lib/ etc/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>gu :!grep -rP '(::<BAR>\->)<c-r>=expand("<cword>")<CR>' bin/ lib/ etc/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>gd :!grep -rP 'sub <c-r>=expand("<cword>")<CR>' bin/ lib/ etc/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ga :!grep -rP '<c-r>=expand("<cword>")<CR>' bin/ lib/ etc/ t/<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>rr :!perl -Ilib %<CR>
 
