@@ -35,18 +35,19 @@ chatnets = {
   fn = {
     type = "IRC";
     nick = "davs";
-    autosendcmd = "/^msg NickServ IDENTIFY $IRSSI_IRC_PASSWORD;wait 2000;/window goto nickserv;/wc"
+    autosendcmd = "/^msg NickServ IDENTIFY $IRSSI_IRC_PASSWORD;wait 2000;/window goto nickserv;/wc";
   };
   mozilla = {
     type = "IRC";
     nick = "davs";
-    autosendcmd = "/^msg NickServ IDENTIFY $IRSSI_IRC_PASSWORD;wait 2000;/window goto nickserv;/wc"
+    autosendcmd = "/^msg NickServ IDENTIFY $IRSSI_IRC_PASSWORD;wait 2000;/window goto nickserv;/wc";
   };
 };
 channels = (
+  { name = "#go-nuts"; chatnet = "fn"; autojoin = "yes"; },
   { name = "#vim"; chatnet = "fn"; autojoin = "yes"; },
-  { name = "#haskell-beginners"; chatnet = "fn"; autojoin = "yes"; }
-  { name = "#rust-beginners"; chatnet = "mozilla"; autojoin = "yes"; }
-  { name = "#rust"; chatnet = "mozilla"; autojoin = "yes"; }
+  { name = "#haskell-beginners"; chatnet = "fn"; autojoin = "yes"; },
+  { name = "#rust-beginners"; chatnet = "mozilla"; autojoin = "yes"; },
+  { name = "#rust"; chatnet = "mozilla"; autojoin = "yes"; },
 );
 logs = { };
