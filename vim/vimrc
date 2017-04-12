@@ -24,6 +24,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'rust-lang/rust.vim'
 
 Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'jodosha/vim-godebug', { 'for': 'go' }
 Plug 'zchee/deoplete-clang', { 'for': 'c' }
 
 let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
