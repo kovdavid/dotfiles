@@ -24,6 +24,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'rust-lang/rust.vim'
 
 Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'jodosha/vim-godebug', { 'for': 'go' }
 Plug 'zchee/deoplete-clang', { 'for': 'c' }
 
 let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
@@ -445,9 +446,9 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>dt <ESC>ause v5.10;<CR>use Data::Dumper;<CR>local $Data::Dumper::Terse = 1;<CR>local $Data::Dumper::Indent = 0;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper();<LEFT><LEFT>
     autocmd FileType perl nnoremap <buffer> <leader>so <ESC>vapk:sort<CR>
 
-    autocmd FileType perl nnoremap <buffer> <leader>gu :!grep -rP '(::<BAR>\->)<c-r>=expand("<cword>")<CR>' bin/ lib/ etc/<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>gd :!grep -rP 'sub <c-r>=expand("<cword>")<CR>' bin/ lib/ etc/<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>ga :!grep -rP '<c-r>=expand("<cword>")<CR>' bin/ lib/ etc/ t/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>gu :let @/=expand("<cword>")<CR>:!grep -rP '(::<BAR>\->)<c-r>=expand("<cword>")<CR>' bin/ lib/ etc/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>gd :let @/=expand("<cword>")<CR>:!grep -rP 'sub <c-r>=expand("<cword>")<CR>' bin/ lib/ etc/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ga :let @/=expand("<cword>")<CR>:!grep -rP '<c-r>=expand("<cword>")<CR>' bin/ lib/ etc/ t/<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>rr :!perl -Ilib %<CR>
 

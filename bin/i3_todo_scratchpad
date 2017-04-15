@@ -1,0 +1,47 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use JSON qw[ decode_json ];
+
+my $workspaces = decode_json(`i3-msg -tget_workspaces`);
+my $tree = decode_json(`i3-msg -tget_tree`);
+my $focused_ws_num = [
+    map { $_->{num} }
+    grep { $_->{focused} }
+    @{ $workspaces }
+]->[0];
+
+my $scratchpad_node = get_scratchpad_node($tree);
+
+if (@{ $scratchpad_node->{floating_nodes} }) {
+    use v5.10;
+    use Data::Dumper;
+    local $Data::Dumper::Sortkeys = 1;
+    local $Data::Dumper::Maxdepth = 1;
+    say STDERR Dumper($scratchpad_node->{floating_nodes}->[0]->{nodes}->[0]);
+} else {
+    # create window
+}
+
+sub get_scratchpad_node {
+    my ($node) = @_;
+
+    if ($node->{name} && $node->{name} eq '__i3_scratch') {
+        return $node;
+    }
+
+    my @child_nodes = (
+        @{ $node->{nodes} },
+        @{ $node->{floating_nodes} },
+    );
+
+    for my $child_node (@child_nodes) {
+        my $scratchpad = get_scratchpad_node($child_node);
+        if ($scratchpad) {
+            return $scratchpad;
+        }
+    }
+
+    return;
+}
