@@ -406,6 +406,13 @@ augroup filetype_rust
     autocmd FileType rust nnoremap <buffer> <leader>rr  :!cargo run<CR>
 augroup END
 " }}}
+" OCaml {{{
+augroup filetype_ocaml
+    autocmd!
+
+    autocmd FileType ocaml nnoremap <buffer> <leader>rr :call RunOCaml()<CR>
+augroup END
+" }}}
 " Perl {{{
 augroup filetype_perl
     autocmd!
@@ -846,6 +853,11 @@ function! ToggleLineNumbers()
         set number
         set relativenumber
     endif
+endfunction
+" }}}
+" RunOCaml {{{
+function! RunOCaml()
+    execute "normal! :!ocamlbuild \<C-r>=expand('%:r')\<CR>.native --\<CR>"
 endfunction
 " }}}
 " }}}
