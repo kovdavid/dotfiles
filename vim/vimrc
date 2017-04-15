@@ -408,10 +408,21 @@ augroup filetype_rust
 augroup END
 " }}}
 " OCaml {{{
+let g:opam_share_dir = substitute(system("opam config var share"), '[\r\n]*$', '', '')
+execute "set rtp+=" . g:opam_share_dir . "/merlin/vim"
+execute "set rtp+=" . g:opam_share_dir . "/ocp-indent/vim"
+execute "set rtp+=" . g:opam_share_dir . "/ocp-index/vim"
+
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.ocaml = '[^ ,;\t\[()\]]'
+
 augroup filetype_ocaml
     autocmd!
 
+    autocmd BufRead,BufNewFile *.ml  setfiletype ocaml
+
     autocmd FileType ocaml nnoremap <buffer> <leader>rr :call RunOCaml()<CR>
+    autocmd FileType ocaml nnoremap <buffer> <leader>. :MerlinClearEnclosing<CR>:nohl<CR>
 augroup END
 " }}}
 " Perl {{{
@@ -858,7 +869,7 @@ endfunction
 " }}}
 " RunOCaml {{{
 function! RunOCaml()
-    execute "normal! :!ocamlbuild \<C-r>=expand('%:r')\<CR>.native --\<CR>"
+    execute "normal! :!corebuild \<C-r>=expand('%:r')\<CR>.native --\<CR>"
 endfunction
 " }}}
 " }}}
