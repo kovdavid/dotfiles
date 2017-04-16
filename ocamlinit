@@ -10,4 +10,4 @@ let () =
 #require "core.top";;
 #require "core.syntax";;
 
-open Core.Std
+open Core.Std;;
