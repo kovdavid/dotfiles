@@ -27,8 +27,6 @@ if [ "$REPLY" = "y" ] ; then
                     rm -rf ~/bin/$script
                     ln -s ~/dotfiles/bin/$script ~/bin/$script
                 fi
-            else
-                echo "~/bin/$script already symlinked to dotfiles"
             fi
         else
             ln -s ~/dotfiles/bin/$script ~/bin/$script
@@ -61,6 +59,7 @@ if [ "$REPLY" = "y" ] ; then
     remove_and_link_dotfile gtkrc-2.0.mine
     remove_and_link_dotfile git_global_ignore
     remove_and_link_dotfile perltidyrc
+    remove_and_link_dotfile ocamlinit
 
     echo "Linking to /tmp"
     remove_and_link_to_tmp thumbnails
@@ -77,7 +76,7 @@ if [ "$REPLY" = "y" ] ; then
     if [ ! -d ~/.irssi ] ; then
         mkdir ~/.irssi
     fi
-    ln -s ~/dotfiles/irssi_config ~/.irssi/config
+    ln -s -f ~/dotfiles/irssi_config ~/.irssi/config
 
     echo "Linking VIM"
     rm -rf ~/.vimrc
@@ -93,7 +92,7 @@ if [ "$REPLY" = "y" ] ; then
     rm -rf $XDG_CONFIG_HOME/nvim
     ln -s ~/.vim $XDG_CONFIG_HOME/nvim
 
-    ln -s ~/dotfiles/Xresources.zenburn ~/.Xresources.colorscheme
+    ln -s -f ~/dotfiles/Xresources.zenburn ~/.Xresources.colorscheme
 
     echo "DONE"
 fi

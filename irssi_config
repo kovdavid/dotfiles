@@ -44,6 +44,7 @@ chatnets = {
   };
 };
 channels = (
+  { name = "ocaml"; chatnet = "fn"; autojoin = "yes"; },
   { name = "#go-nuts"; chatnet = "fn"; autojoin = "yes"; },
   { name = "#vim"; chatnet = "fn"; autojoin = "yes"; },
   { name = "#haskell-beginners"; chatnet = "fn"; autojoin = "yes"; },
