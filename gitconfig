@@ -28,7 +28,7 @@
     email = kovdavid@gmail.com
 [core]
     editor = vim
-    pager = cat
+    pager = less -R
     trustctime = false
     excludesfile = ~/.git_global_ignore
     quotepath = false
