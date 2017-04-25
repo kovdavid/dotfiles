@@ -26,6 +26,8 @@
 /home/davs/.local/bin
 
 /home/davs/workspace/rust/*/target
+/home/davs/workspace/go/bin
+/home/davs/workspace/go/pkg
 
 tags
 Makefile.old

@@ -874,7 +874,7 @@ endfunction
 " }}}
 " RunOCaml {{{
 function! RunOCaml()
-    execute "normal! :!corebuild \<C-r>=expand('%:r')\<CR>.native --\<CR>"
+    execute "normal! :!corebuild \<C-r>=expand('%:r')\<CR>.byte --\<CR>"
 endfunction
 " }}}
 " }}}
