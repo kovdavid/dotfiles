@@ -425,6 +425,10 @@ augroup filetype_ocaml
 
     autocmd BufRead,BufNewFile *.ml  setfiletype ocaml
 
+    autocmd FileType ocaml setlocal shiftwidth=2
+    autocmd FileType ocaml setlocal softtabstop=2
+    autocmd FileType ocaml setlocal expandtab
+
     autocmd FileType ocaml nnoremap <buffer> <leader>rr :call RunOCaml()<CR>
     autocmd FileType ocaml nnoremap <buffer> <leader>. :MerlinClearEnclosing<CR>:nohl<CR>
     autocmd FileType ocaml nnoremap <buffer> <leader>ts :MerlinErrorCheck<CR>
