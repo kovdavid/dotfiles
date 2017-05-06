@@ -6,10 +6,9 @@ let () =
 
 #use "topfind";;
 #thread;;
-#camlp4o;;
+(* #camlp4o;; *)
 #require "core.top";;
 #require "core.syntax";;
-#require "core_extended";;
 
 (* Missing fields in a record pattern *)
 #warnings "+9";;

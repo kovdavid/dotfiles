@@ -347,7 +347,7 @@ augroup filetype_golang
     autocmd FileType go let g:go_fmt_autosave = 0
     autocmd FileType go noremap <buffer> <leader>rr :!go run %<CR>
     autocmd FileType go noremap <buffer> <leader>i :GoInfo<CR>
-    autocmd FileType go noremap <buffer> <leader>ts :GoVet<CR>
+    autocmd FileType go noremap <buffer> <leader>ts :GoInstall<CR>
     autocmd FileType go noremap <buffer> <leader>gi :GoImports<CR>
     autocmd FileType go noremap <buffer> <leader>tf :GoTestFunc<CR>
     autocmd FileType go noremap <buffer> <leader>ta :GoTest<CR>
@@ -428,10 +428,12 @@ augroup filetype_ocaml
     autocmd FileType ocaml setlocal shiftwidth=2
     autocmd FileType ocaml setlocal softtabstop=2
     autocmd FileType ocaml setlocal expandtab
+    autocmd FileType ocaml let b:delimitMate_quotes = '"'
 
     autocmd FileType ocaml nnoremap <buffer> <leader>rr :call RunOCaml()<CR>
     autocmd FileType ocaml nnoremap <buffer> <leader>. :MerlinClearEnclosing<CR>:nohl<CR>
     autocmd FileType ocaml nnoremap <buffer> <leader>ts :MerlinErrorCheck<CR>
+    autocmd FileType ocaml nnoremap <buffer> <leader>yt :MerlinYankLatestType<CR>
 augroup END
 " }}}
 " Perl {{{
