@@ -342,6 +342,7 @@ augroup filetype_golang
     autocmd BufNewFile *.go 0r ~/.vim/skeleton/go.script
 
     autocmd FileType go nnoremap <buffer> <leader>dd o<ESC>ifmt.Printf("%+v\n", )<LEFT>
+    autocmd FileType go nnoremap <buffer> <leader>de o<ESC>ireturn fmt.Errorf(": %v", err)<ESC>10hi
 
     autocmd FileType go let g:go_fmt_command = "goimports"
     autocmd FileType go let g:go_fmt_autosave = 0
@@ -411,7 +412,7 @@ augroup END
 " }}}
 " OCaml {{{
 if system("command -v opam") != ""
-    let g:opam_share_dir = substitute(system("opam config var share"), '[\r\n]*$', '', '')
+    let g:opam_share_dir = substitute(system("opam config var share 2>/dev/null"), '[\r\n]*$', '', '')
     execute "set rtp+=" . g:opam_share_dir . "/merlin/vim"
     execute "set rtp+=" . g:opam_share_dir . "/ocp-indent/vim"
     execute "set rtp+=" . g:opam_share_dir . "/ocp-index/vim"
