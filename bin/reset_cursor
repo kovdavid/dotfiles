@@ -1,0 +1,3 @@
+#!/bin/bash
+# Sets cursor to block
+echo -e -n "\x1b[\x32 q"
