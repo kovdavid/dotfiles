@@ -635,7 +635,7 @@ noremap <leader>sl :execute getline(".")<CR>
 " }}}
 " Folding {{{
 set foldmethod=indent
-set foldlevel =20 "open folds by default
+set foldlevel=20 "open folds by default
 
 noremap <space> za
 " }}}
