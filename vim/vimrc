@@ -605,8 +605,8 @@ augroup filetype_clojure
     autocmd FileType clojure nmap <leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)``
     autocmd FileType clojure nmap <leader>e <Plug>FireplacePrint<Plug>(sexp_inner_element)``
 
-    autocmd FileType clojure nnoremap ( ?[[({]<CR>:nohl<CR>
-    autocmd FileType clojure nnoremap ) /[[({]<CR>:nohl<CR>
+    " autocmd FileType clojure nnoremap ( ?[[({]<CR>:nohl<CR>
+    " autocmd FileType clojure nnoremap ) /[[({]<CR>:nohl<CR>
 augroup END
 " }}}
 " sh {{{
@@ -625,6 +625,14 @@ augroup END
 augroup filetype_xml
     autocmd!
     autocmd BufRead,BufNewFile *.xml.sample  setfiletype xml
+augroup END
+" }}}
+" SLS {{{
+augroup filetype_yaml
+    autocmd!
+    autocmd BufRead,BufNewFile *.sls setfiletype yaml
+
+    autocmd BufRead,BufWritePre,FileType yaml silent execute ":Rooter"
 augroup END
 " }}}
 " vimrc {{{
