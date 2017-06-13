@@ -842,9 +842,9 @@ function! CommitPerlFiles()
         let l:path = substitute(l:path, '\v(bin|lib|t)/', '', '')
         let l:path = substitute(l:path, '\v\.(pl|pm|t)$', '', '')
         let l:path = substitute(l:path, '\/', '::', 'g')
-        execute "normal! :Gwrite \<BAR> Gcommit\<CR>O".l:path.": "
+        execute "normal! :Gwrite \<BAR> Gcommit\<CR>O".l:path." - "
     else
-        execute "normal! :let @f=expand('%:t:r')\<CR>:Gwrite \<BAR> Gcommit\<CR>O\<C-R>f:\<space>"
+        execute "normal! :let @f=expand('%:t:r')\<CR>:Gwrite \<BAR> Gcommit\<CR>O\<C-R>f - \<space>"
     endif
     startinsert!
 endfunction
