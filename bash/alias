@@ -50,6 +50,8 @@ alias tree="tree -C"
 alias up="cd \`git root\`"
 alias upt="cd \`git root\` && cd t"
 alias venv3="if [ -e venv ]; then source venv/bin/activate; else source /opt/python3/bin/activate; fi;"
-alias vim="nvim"
+if [ -n "$(which nvim 2>/dev/null)" ] ; then
+	alias vim="nvim"
+fi
 alias vp="touch .vimproject"
 alias w0="wget -O /dev/null"
