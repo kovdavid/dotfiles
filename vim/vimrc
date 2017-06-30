@@ -132,7 +132,6 @@ set softtabstop=4 " number of spaces for tabs while editing
 set shiftround
 
 set list
-" set listchars=tab:▸\ ,eol:¬
 set listchars=tab:▸\ ,trail:·
 " }}}
 " NIKE {{{
@@ -939,9 +938,8 @@ let g:snips_email = "kovdavid@gmail.com"
 let g:snips_github = "http://github.com/DavsX"
 " }}}
 " test_class_runner {{{
-let $TEST_PRETTY_COLOR_NAME  = 'bright_green'
 let $TAP_ELAPSED_FORMAT  = '%t1 elapsed'
-let g:perl_test_args_perl   = '-MTest::Pretty -It/lib -Ilib'
+let g:perl_test_args_perl   = '-It/lib -Ilib'
 let g:perl_test_args_prove  = '-It/lib -Ilib -r -j9 --timer'
 let g:perl_test_all_command = 'prove'
 " }}}
@@ -987,6 +985,10 @@ let g:NERDCustomDelimiters = {
             \}
 let g:NERDRemoveExtraSpaces = 1
 let g:NERDSpaceDelims = 1
+" }}}
+" delimitMate {{{
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
 " }}}
 " neomake {{{
 " let g:neomake_haskell_enabled_makers = ['ghcmod']

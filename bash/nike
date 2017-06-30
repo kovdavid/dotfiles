@@ -3,7 +3,7 @@ if [ -f ~/dotfiles/nike_remote ] ; then
     unalias dus
 
     if [ -f ~/vim/bin/vim ] ; then
-        unalias vim
+        unalias vim 2>/dev/null
         alias vim="~/vim/bin/vim"
     fi
     alias grep="/bin/grep"
