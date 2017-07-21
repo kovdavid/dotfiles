@@ -240,8 +240,9 @@ nnoremap qs <C-W><C-W><C-W>_<C-W><BAR>
 " yank line
 nnoremap yu yy
 
-"disable ex-mode
-nnoremap Q <NOP>
+"disable ex-mode; run macros instead
+nnoremap Q @q
+xnoremap Q :normal @q <CR>
 
 "move to matching brace pair
 nnoremap <tab> %
