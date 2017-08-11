@@ -308,7 +308,7 @@ augroup all_file_type
     endif
 
     " Turn off syntax syncing for large files
-    autocmd BufEnter * if line2byte(line("$") + 1) > 1000000 | syntax sync clear | endif
+    autocmd BufEnter * if line2byte(line("$") + 1) > 1000000 | syntax clear | endif
 
     autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
