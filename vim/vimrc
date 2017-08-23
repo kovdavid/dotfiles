@@ -110,6 +110,7 @@ set incsearch
 
 nnoremap <leader>. :nohl<CR>
 nnoremap <leader>> :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>
+nnoremap <leader>? :let @/ = expand('<cword>')\|set hlsearch<CR>
 " nnoremap <silent> # :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>w?<CR>
 " nnoremap <silent> * :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>
 
