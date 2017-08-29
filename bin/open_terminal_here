@@ -1,4 +1,9 @@
 #!/bin/bash
 
-DIR=$(dirname $1)
+DIR=$1
+
+if [ ! -d "$DIR" ] ; then
+    DIR=$(dirname "$DIR")
+fi
+
 xterm -e "cd \"$DIR\"; bash"
