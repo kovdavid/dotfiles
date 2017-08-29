@@ -1,0 +1,4 @@
+#!/bin/bash
+
+DIR=$(dirname $1)
+xterm -e "cd \"$DIR\"; bash"
