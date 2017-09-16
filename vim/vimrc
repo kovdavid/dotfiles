@@ -992,7 +992,8 @@ endif
 " NERDCommenter {{{
 let g:NERDCustomDelimiters = {
             \ 'elixir': { 'left': '#' },
-            \ 'haskell': { 'left': '--' }
+            \ 'haskell': { 'left': '--' },
+            \ 'arduino': { 'left': '//' }
             \}
 let g:NERDRemoveExtraSpaces = 1
 let g:NERDSpaceDelims = 1
