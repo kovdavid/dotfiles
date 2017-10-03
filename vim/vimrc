@@ -111,8 +111,6 @@ set incsearch
 nnoremap <leader>. :nohl<CR>
 nnoremap <leader>> :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>
 nnoremap <leader>? :let @/ = expand('<cword>')\|set hlsearch<CR>
-" nnoremap <silent> # :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>w?<CR>
-" nnoremap <silent> * :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>
 
 set ignorecase
 
@@ -848,15 +846,24 @@ endfunction
 " CommitPerlFiles {{{
 function! CommitPerlFiles()
     let l:path = expand("%")
+    let l:git_rev = system("git rev-parse --abbrev-ref HEAD 2>/dev/null")
+    let l:task_number = matchstr(l:git_rev, '\v(BAC-\d+)')
+    let l:msg_prefix = ''
+
+    if l:task_number != ''
+        let l:msg_prefix = l:task_number." "
+    endif
+
     if l:path =~# '\v^(bin|lib|t)\/.+(pl|pm|t)?$'
         let l:path = substitute(l:path, '\v(bin|lib|t)/', '', '')
-        let l:path = substitute(l:path, '\v\.(pl|pm|t)$', '', '')
         let l:path = substitute(l:path, '\/', '::', 'g')
-        execute "normal! :Gwrite \<BAR> Gcommit\<CR>O".l:path." - "
+
+        let l:msg_prefix = l:msg_prefix.l:path
+        execute "normal! :Gwrite \<BAR> Gcommit\<CR>O".l:msg_prefix." - "
     else
         execute "normal! :let @f=expand('%:t:r')\<CR>:Gwrite \<BAR> Gcommit\<CR>O\<C-R>f - \<space>"
     endif
-    startinsert!
+
 endfunction
 " }}}
 " ReplaceSelection {{{
