@@ -32,7 +32,6 @@ let g:deoplete#sources#clang#clang_header ="/usr/include/clang/"
 
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'zchee/deoplete-jedi', { 'for': 'python' }
     Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
     Plug 'zchee/deoplete-go', { 'do' : 'make', 'for': 'go' }
 endif
@@ -626,7 +625,14 @@ augroup END
 " C {{{
 augroup gcc
     autocmd!
+    autocmd BufRead,BufWritePre,FileType c silent execute ":Rooter"
     autocmd FileType c nnoremap <buffer> <leader>rr :!gcc -o <C-R>=expand("%:t:r")<CR> % && ./<C-R>=expand("%:t:r")<CR><CR>
+augroup END
+" }}}
+" Arduino {{{
+augroup arduino
+    autocmd!
+    autocmd BufRead,BufWritePre,FileType arduino silent execute ":Rooter"
 augroup END
 " }}}
 " XML {{{
