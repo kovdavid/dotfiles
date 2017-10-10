@@ -1,2 +1,2 @@
 #!/bin/bash
-ctags -f tags -R --extra=q .
+ctags --langmap=c++:+.ino -f tags -R --extra=q .
