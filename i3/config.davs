@@ -19,8 +19,8 @@ bindsym $mod+h exec i3_rename_workspace
 
 bindsym XF86AudioMute exec "amixer -q set Master toggle; killall -USR1 i3status"
 bindsym XF86AudioMicMute exec "amixer -q set Capture toggle; killall -USR1 i3status"
-bindsym XF86AudioLowerVolume exec "amixer -q set  Master 5%- unmute; killall -USR1 i3status"
-bindsym XF86AudioRaiseVolume exec "amixer -q set  Master 5%+ unmute; killall -USR1 i3status"
+bindsym XF86AudioLowerVolume exec ~/bin/volume_lower.sh
+bindsym XF86AudioRaiseVolume exec ~/bin/volume_raise.sh
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 bindsym XF86ScreenSaver exec i3lock -c 000000
