@@ -2,20 +2,27 @@
 
 echo "New session"
 
+SESSION_HISTORY_FILE=~/.tmux_session_history
+[[ ! -f $SESSION_HISTORY_FILE ]] && touch "$SESSION_HISTORY_FILE"
+
 SESSION_NAME=''
 SSH_HOST=''
 CD_DIR=${NIKE_HOME-:''}
 
 read -p "Session name: " SESSION_NAME
 
-read -p "SSH host: " SSH_HOST
+SESSION_HISTORY_ENTRY=$(grep -P "^$SESSION_NAME," "$SESSION_HISTORY_FILE")
+
+IFS=, read _UNUSED SSH_HOST HISTORY_CD_DIR <<< "$SESSION_HISTORY_ENTRY"
+
+[[ -n "$HISTORY_CD_DIR" ]] && CD_DIR=$HISTORY_CD_DIR
+
+read -e -p "SSH host: " -i "$SSH_HOST" SSH_HOST
 if [ -z "$SESSION_NAME" ] ; then
     SESSION_NAME=$SSH_HOST
 fi
 
-[[ "$SESSION_NAME" == "hs" ]] && SESSION_NAME="λ"
-
-read -e -p "Default directory: " -i "$NIKE_HOME" CD_DIR
+read -e -p "Default directory: " -i "$CD_DIR" CD_DIR
 
 TMUX_CMD=""
 if [ -n "$SSH_HOST" ] ; then
@@ -33,6 +40,10 @@ else
     SESSION_NAME=$(tmux new-session -P -d "$TMUX_CMD" | cut -d":" -f1)
 	$(tmux new-session -d -t "$SESSION_NAME" -s "G|${SESSION_NAME}")
 fi
+
+SESSION_HISTORY=$(cat "$SESSION_HISTORY_FILE" | grep -vP "^$SESSION_NAME,")
+echo -e "$SESSION_HISTORY" > "$SESSION_HISTORY_FILE"
+echo -e "$SESSION_NAME,$SSH_HOST,$CD_DIR" >> "$SESSION_HISTORY_FILE"
 
 $(tmux set-option -t $SESSION_NAME default-command "$TMUX_CMD")
 $(tmux set-option -t "G|${SESSION_NAME}" default-command "$TMUX_CMD")
