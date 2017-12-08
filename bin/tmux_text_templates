@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -f ~/.nike ] ; then
+	source ~/.tmux_templates_nike
+else
+	source ~/.tmux_templates
+fi
+
+XTERM_COLS=$(tput cols)
+XTERM_ROWS=$(tput lines)
+
+CHOICE=$(dialog \
+	--clear \
+	--title "Choose template" \
+	--menu "Choose one of the following options:" \
+	$(($XTERM_ROWS-6)) $(($XTERM_COLS-6)) $(($XTERM_COLS)) \
+	"${OPTIONS[@]}" \
+	2>&1 >/dev/tty
+)
+
+TEMPLATE_NAME="TEMPLATE_${CHOICE}"
+tmux send-keys -t {last} "${!TEMPLATE_NAME}"

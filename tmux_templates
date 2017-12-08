@@ -1,0 +1,14 @@
+#!/bin/bash
+
+TEMPLATE_1="
+Test template 1 \
+	text"
+
+TEMPLATE_2="
+Test template 2 \
+	text"
+
+OPTIONS=(
+	1 "test template 1"
+	2 "test template 2"
+)
