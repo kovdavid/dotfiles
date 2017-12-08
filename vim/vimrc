@@ -419,7 +419,11 @@ augroup filetype_rust
 
     autocmd BufWritePost * if &filetype=='rust' | execute ":Neomake" | endif
     autocmd FileType rust nnoremap <buffer> <leader>ta  :!cargo test<CR>
+    autocmd FileType rust nnoremap <buffer> <leader>ts  :!cargo check<CR>
     autocmd FileType rust nnoremap <buffer> <leader>rr  :!cargo run<CR>
+    autocmd FileType rust noremap <buffer> <F12> :silent! exec ":!rusty-tags vi --quiet &" <CR> | redraw!
+
+    autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/,$RUST_SRC_PATH/rusty-tags.vi
 augroup END
 " }}}
 " OCaml {{{
@@ -627,12 +631,14 @@ augroup gcc
     autocmd!
     autocmd BufRead,BufWritePre,FileType c silent execute ":Rooter"
     autocmd FileType c nnoremap <buffer> <leader>rr :!gcc -o <C-R>=expand("%:t:r")<CR> % && ./<C-R>=expand("%:t:r")<CR><CR>
+    autocmd FileType c nnoremap <buffer> <F12> :silent! exec ":!ctags_gen" <CR> | redraw!
 augroup END
 " }}}
 " Arduino {{{
 augroup arduino
     autocmd!
     autocmd BufRead,BufWritePre,FileType arduino silent execute ":Rooter"
+    autocmd FileType arduino nnoremap <buffer> <F12> :silent! exec ":!ctags_gen" <CR> | redraw!
 augroup END
 " }}}
 " XML {{{
