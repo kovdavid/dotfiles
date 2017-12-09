@@ -17,4 +17,4 @@ else
         echo "Wrong orientation $ORIENTATION"
     fi
 fi
-killall -USR1 i3status
+ps fax | grep 'i3status -c' | grep -v grep | cut -d' ' -f1 | xargs kill -USR1
