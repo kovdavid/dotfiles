@@ -28,7 +28,7 @@ else
 fi
 
 if [ -n "$NEW_WINDOW_NAME" ] && [ "$NEW_WINDOW_NAME" != "$WINDOW_NAME" ] ; then
-	$(tmux rename-window -t $WINDOW_ID $NEW_WINDOW_NAME)
+    $(tmux rename-window -t $WINDOW_ID $NEW_WINDOW_NAME)
 fi
 
 $(tmux set-option @${WINDOW_ID}_default_command "$TMUX_CMD")

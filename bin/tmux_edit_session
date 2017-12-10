@@ -28,9 +28,9 @@ else
 fi
 
 if [ -n "$NEW_SESSION_NAME" ] ; then
-	if [ "$NEW_SESSION_NAME" != "$SESSION_NAME" ] ; then
-		$(tmux rename-session -t $SESSION_ID $NEW_SESSION_NAME)
-	fi
+    if [ "$NEW_SESSION_NAME" != "$SESSION_NAME" ] ; then
+        $(tmux rename-session -t $SESSION_ID $NEW_SESSION_NAME)
+    fi
 fi
 
 $(tmux set-option -t $SESSION_ID default-command "$TMUX_CMD")
