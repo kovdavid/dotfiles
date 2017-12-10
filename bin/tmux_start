@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export TMUX_SESSION_FILTER="#{!=:#{=2:session_name},G|}"
+tmux attach-session || tmux new -s candyland
