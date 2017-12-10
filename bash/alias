@@ -47,7 +47,7 @@ alias sshx="ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/tmp/this_is_not
 alias strace="strace -s 4096"
 alias stackreset="killall hdevtools; stack clean; stack build; hdevtools admin --start-server"
 alias tailf="tail -f"
-alias tm="tmux attach-session || tmux new -s candyland"
+alias tm="tmux_start"
 alias tree="tree -C"
 alias up="cd \`git root\`"
 alias upt="cd \`git root\` && cd t"

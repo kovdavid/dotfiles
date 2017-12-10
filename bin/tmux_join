@@ -1,4 +1,3 @@
 #!/bin/bash
-
-export TMUX_SESSION_FILTER="#{==:#{=2:session_name},G|}"
+tmux new-session -d -t "candyland" -s "G|candyland"
 tmux attach-session -t "G|candyland"
