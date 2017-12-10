@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CURR_SESSION_NAME=$(tmux display-message -p "#{session_name}")
+
 echo "New session"
 
 SESSION_HISTORY_FILE=~/.tmux_session_history
@@ -47,4 +49,10 @@ echo -e "$SESSION_NAME,$SSH_HOST,$CD_DIR" >> "$SESSION_HISTORY_FILE"
 
 $(tmux set-option -t $SESSION_NAME default-command "$TMUX_CMD")
 $(tmux set-option -t "G|${SESSION_NAME}" default-command "$TMUX_CMD")
-$(tmux switch-client -t $SESSION_NAME)
+
+if [[ "$CURR_SESSION_NAME" == G\|* ]] ; then
+    $(tmux switch-client -t "G|$SESSION_NAME")
+else
+    $(tmux switch-client -t "$SESSION_NAME")
+fi
+
