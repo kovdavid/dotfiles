@@ -1,2 +1,2 @@
 #!/bin/bash
-tmux attach-session || tmux new -s "candyland"
+tmux attach-session -t "candyland" || tmux new -s "candyland"
