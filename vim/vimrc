@@ -802,21 +802,6 @@ function! CloseHiddenBuffers()
     execute "NERDTree | NERDTreeToggle"
 endfunction
 " }}}
-" RunClojure {{{
-function! RunClojure(reload)
-    "autocmd FileType clojure nnoremap <buffer> <leader>re :Eval (remove-ns (ns-name *ns*)) \| Require \| Eval (-main)<CR>
-    if exists("g:fireplace_nrepl_sessions")
-        if a:reload
-            execute ":Eval (clojure.core/remove-ns (clojure.core/ns-name clojure.core/*ns*))"
-            execute ":Require"
-        else
-            execute ":Eval (-main)"
-        endif
-    else
-        execute ":!lein run"
-    endif
-endfunction
-" }}}
 " DeleteFile {{{
 function! DeleteFile()
     let l:path = expand('%:p')
