@@ -221,5 +221,5 @@ for_window [title="File Operation Progress"] floating enable; focus mode_toggle
 exec ~/bin/mon right &
 exec numlockx &
 exec (sleep 1 && nitrogen --restore ) &
-exec pidgin -f &
+#exec pidgin -f &
 exec google-chrome
