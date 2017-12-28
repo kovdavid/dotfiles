@@ -100,7 +100,8 @@ if [ "$REPLY" = "y" ] ; then
 
     echo "Linking mimeapps.list"
     mkdir -p ~/.local/share/applications
-    ln -s ~/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list
+    ln -f -s ~/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list
+    ln -f -s ~/dotfiles/mimeapps.list ~/.config/mimeapps.list
 
     echo "DONE"
 fi
