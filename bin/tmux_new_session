@@ -9,7 +9,7 @@ SESSION_HISTORY_FILE=~/.tmux_session_history
 
 SESSION_NAME=''
 SSH_HOST=''
-CD_DIR=${NIKE_HOME-:''}
+CD_DIR=''
 
 read -p "Session name: " SESSION_NAME
 

@@ -98,6 +98,10 @@ if [ "$REPLY" = "y" ] ; then
 
     ln -s -f ~/dotfiles/Xresources.zenburn ~/.Xresources.colorscheme
 
+    echo "Linking mimeapps.list"
+    mkdir -p ~/.local/share/applications
+    ln -s ~/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list
+
     echo "DONE"
 fi
 
