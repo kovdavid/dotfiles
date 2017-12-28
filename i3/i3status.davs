@@ -28,11 +28,7 @@ ethernet eth0 {
 }
 
 time {
-    format ="📅 [%U] %d-%m-%Y %H:%M"
-}
-
-load {
-    format = "☢ %1min"
+    format ="[%U] %d-%m-%Y %H:%M"
 }
 
 disk "/" {
@@ -48,30 +44,34 @@ disk "/mnt/data" {
 }
 
 battery 0 {
-    format = "🔌  %status %percentage %remaining"
+    format = "B %status %percentage %remaining"
     path = "/sys/class/power_supply/BAT%d/uevent"
 }
 
 cpu_temperature 0 {
-    format = "🌡 %degrees°C"
+    format = "%degrees°C"
     #path = "/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input"
     #path = "/sys/devices/platform/coretemp.0/temp1_input"
     path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
 }
 
+load {
+    format = "L %1min"
+}
+
 cpu_usage {
-    format = "↺ %usage"
+    format = "U %usage"
 }
 
 volume master {
-    format = "🔉  %volume"
+    format = "☊ %volume"
     device = "default"
     mixer = "Master"
     mixer_idx = 0
 }
 
 volume PCM {
-    format = "☊ %volume"
+    format = "☋ %volume"
     device = "default"
     mixer = "PCM"
     mixer_idx = 0
