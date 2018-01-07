@@ -200,7 +200,7 @@ bindsym $mod+Shift+Delete mode $system_power_mode
 # finds out, if available)
 bar {
         font pango:DejaVu Sans Mono 12px
-        status_command i3_status.pl
+        status_command i3_custom_status.sh
         tray_output $primary_output
 }
 
