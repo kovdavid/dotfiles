@@ -222,5 +222,4 @@ exec --no-startup-id numlockx &
 exec ~/bin/init_trackpoint &
 exec ~/bin/init_touchpad &
 exec (sleep 1 && nitrogen --restore) &
-exec --no-startup-id redshift-gtk &
 exec /usr/bin/sed -i "s/^[^#]/# &/" /home/davs/.ssh/authorized_keys
