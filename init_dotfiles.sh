@@ -103,6 +103,16 @@ if [ "$REPLY" = "y" ] ; then
     ln -f -s ~/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list
     ln -f -s ~/dotfiles/mimeapps.list ~/.config/mimeapps.list
 
+    if [ -x "$(command -v redshift)" ] ; then
+        crontab -l > /tmp/mycron
+        if ! grep -q "redshift_adjust.sh" /tmp/mycron ; then
+            echo "Setting crontab for redshift_adjust"
+            echo "*/10 * * * * ~/dotfiles/bin/redshift_adjust.sh" >> /tmp/mycron
+            crontab /tmp/mycron
+        fi
+        rm /tmp/mycron
+    fi
+
     echo "DONE"
 fi
 
