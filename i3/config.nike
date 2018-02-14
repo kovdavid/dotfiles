@@ -7,12 +7,14 @@ font pango:DejaVu Sans Mono 13px
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+focus_follows_mouse no
+
 bindsym $mod+Tab exec ~/bin/i3_jump_to_next_output
 bindsym $mod+Shift+Tab exec ~/bin/i3_move_to_next_output
 bindsym $mod+Return exec ~/bin/i3_cycle_windows
 
 bindsym $mod+x exec xterm
-bindsym $mod+i exec google-chrome
+bindsym $mod+i exec firefox
 bindsym $mod+t exec thunar
 bindsym $mod+d exec dmenu_run
 bindcode 148 exec calc
@@ -23,9 +25,7 @@ bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 bindsym XF86AudioMicMute exec amixer -q set Capture toggle
 bindsym XF86AudioLowerVolume exec amixer -q set  Master 5%- unmute
 bindsym XF86AudioRaiseVolume exec amixer -q set  Master 5%+ unmute
-bindsym XF86ScreenSaver exec xlock
-bindsym XF86AudioPlay exec i3lock -c 000000
-
+bindsym XF86ScreenSaver exec i3lock -c 000000
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -36,7 +36,6 @@ bindsym $mod+b border toggle
 # scratchpad
 bindsym $mod+Shift+m move scratchpad
 bindsym $mod+m scratchpad show
-bindcode 197 scratchpad show
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -222,4 +221,3 @@ exec ~/bin/mon right &
 exec numlockx &
 exec (sleep 1 && nitrogen --restore ) &
 #exec pidgin -f &
-exec google-chrome

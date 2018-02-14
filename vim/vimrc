@@ -222,6 +222,7 @@ nnoremap qe :tabprev<CR>
 nnoremap qr :tabnext<CR>
 
 vnoremap <leader>jf :!python -m json.tool<CR>
+vnoremap <leader>ujf :!perl -MJSON::XS -e 'my $json = do { local $/; <STDIN> }; print encode_json(decode_json($json))'<CR>
 vnoremap <leader>xf :!xmllint --format -<CR>
 vnoremap <leader>sf :!sqlformat -r -s -<CR>
 vnoremap <leader>pf :!perl -e 'use Data::Dumper; my $lines = do { local $/ = undef; <STDIN> }; print Dumper(eval $lines);'<CR>
