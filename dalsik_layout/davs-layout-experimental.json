@@ -2,10 +2,6 @@
   {
     "name": "Let's Split",
     "author": "DavsX",
-    "background": {
-      "name": "Aluminium brushed",
-      "style": "background-image: url('/bg/metal/aluminum_texture1642.jpg');"
-    },
     "switchMount": "cherry",
     "switchBrand": "gateron",
     "switchType": "KS-3-Red"
