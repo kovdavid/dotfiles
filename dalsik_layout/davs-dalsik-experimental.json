@@ -41,12 +41,12 @@
 
     "L0R3C0":  "KC(LCTRL)",
     "L0R3C1":  "LHT(0x04)",
-    "L0R3C2":  "KC(LGUI)",
-    "L0R3C3":  "KC(LALT)",
-    "L0R3C4":  "LP(0x01)",
+    "L0R3C2":  "KC(LALT)",
+    "L0R3C3":  "KC(LGUI)",
+    "L0R3C4":  "TD(0x00)",
     "L0R3C5":  "D(LSHIFT,SPACE)",
     "L0R3C6":  "KC(BSPACE)",
-    "L0R3C7":  "LP(0x02)",
+    "L0R3C7":  "TD(0x01)",
     "L0R3C8":  "KC(UP)",
     "L0R3C9":  "KC(DOWN)",
     "L0R3C10": "KC(UP)",
@@ -261,6 +261,7 @@
     "L4R3C11": "TRANS"
   },
   "tapdances": {
-      "T0": ["KC(A)", "KC(B)", "KC(C)"]
+      "T0": ["LP(0x01)", "LT(0x01)", "KC(NO)"],
+      "T1": ["LP(0x02)", "LT(0x02)", "KC(NO)"]
   }
 }
