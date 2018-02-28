@@ -48,6 +48,11 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+bindsym $mod+XF86Launch5 workspace prev
+bindsym $mod+XF86Launch6 workspace next
+bindsym $mod+XF86Launch7 move container to workspace prev
+bindsym $mod+XF86Launch8 move container to workspace next
+
 # toggle split orientation
 bindsym $mod+s exec ~/bin/i3_toggle_split_orientation.sh
 
