@@ -31,14 +31,19 @@ if [ -f ~/dotfiles/nike ] ; then
     [[ -f ~/dotfiles/bash/proxy ]] && source ~/dotfiles/bash/proxy
 fi
 
-function parse_git_dirty {
-    [[ $(git status 2> /dev/null | tail -n1) =~  "nothing to commit" ]] || echo " * "
+function parse_git_branch {
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \1 $(parse_git_rev)$(parse_git_dirty)$(parse_git_stash_size)/"
 }
 
-function parse_git_branch {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \1 $(parse_git_rev)$(parse_git_dirty)/"
+function parse_git_dirty {
+    [[ $(git status 2> /dev/null | tail -n1) =~  "nothing to commit" ]] || echo " *"
 }
 
 function parse_git_rev {
     git rev-parse --short HEAD 2> /dev/null
+}
+
+function parse_git_stash_size {
+    SIZE=$(git stash list 2>/dev/null | wc -l)
+    [[ "$SIZE" -gt "0" ]] && echo -e "\033[0;31m >$SIZE<\033[0m"
 }
