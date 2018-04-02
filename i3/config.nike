@@ -56,6 +56,8 @@ bindsym $mod+XF86Launch8 move container to workspace next
 # toggle split orientation
 bindsym $mod+s exec ~/bin/i3_toggle_split_orientation.sh
 
+bindsym --release $mod+Shift+s exec scrot -s -e 'mv $f /data/clean_daily/$f'
+
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 
