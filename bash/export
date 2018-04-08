@@ -35,6 +35,8 @@ fi
 export RUST_BACKTRACE=0
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 
+[[ -n "$(which direnv 2>/dev/null)" ]] && eval "$(direnv hook bash)"
+
 export XZ_OPT=-9
 export GZIP=-9
 

@@ -353,6 +353,7 @@ augroup filetype_golang
     autocmd FileType go let g:go_fmt_autosave = 0
     autocmd FileType go noremap <buffer> <leader>rr :!go run %<CR>
     autocmd FileType go noremap <buffer> <leader>i :GoInfo<CR>
+    autocmd FileType go noremap <buffer> <leader>b :GoBuild<CR>
     autocmd FileType go noremap <buffer> <leader>ts :GoInstall<CR>
     autocmd FileType go noremap <buffer> <leader>gi :GoImports<CR>
     autocmd FileType go noremap <buffer> <leader>tf :GoTestFunc<CR>

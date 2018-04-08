@@ -47,7 +47,7 @@
     "L0R3C5":  "D(LSHIFT,SPACE)",
     "L0R3C6":  "KC(BSPACE)",
     "L0R3C7":  "LP(0x02)",
-    "L0R3C8":  "KC(UP)",
+    "L0R3C8":  "KC(LEFT)",
     "L0R3C9":  "KC(DOWN)",
     "L0R3C10": "KC(UP)",
     "L0R3C11": "KC(RIGHT)",
