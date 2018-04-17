@@ -347,7 +347,7 @@ augroup filetype_golang
     autocmd BufNewFile *.go 0r ~/.vim/skeleton/go.script
 
     autocmd FileType go nnoremap <buffer> <leader>dd o<ESC>ifmt.Printf("%+v\n", )<LEFT>
-    autocmd FileType go nnoremap <buffer> <leader>de o<ESC>ireturn fmt.Errorf(": %v", err)<ESC>10hi
+    autocmd FileType go nnoremap <buffer> <leader>de o<ESC>ifmt.Printf("%+v\n")<CR>os.Exit(1)<ESC>:GoImports<CR>k$i,
 
     autocmd FileType go let g:go_fmt_command = "goimports"
     autocmd FileType go let g:go_fmt_autosave = 0
@@ -358,6 +358,7 @@ augroup filetype_golang
     autocmd FileType go noremap <buffer> <leader>gi :GoImports<CR>
     autocmd FileType go noremap <buffer> <leader>tf :GoTestFunc<CR>
     autocmd FileType go noremap <buffer> <leader>ta :GoTest<CR>
+    autocmd FileType go noremap <buffer> <leader>aa :GoAlternate<CR>
 
     autocmd FileType go noremap <buffer> <leader>ger oif err != nil {<CR>return err<CR>}
     autocmd FileType go noremap <buffer> <leader>gel oif err != nil {<CR>log.Fatal(err)<CR>}
