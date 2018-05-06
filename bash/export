@@ -32,6 +32,8 @@ if [ -d /opt/go ] ; then
     export PATH="$DIR1/bin:$DIR2/bin:$PATH"
 fi
 
+export ERL_AFLAGS="-kernel shell_history enabled"
+
 export RUST_BACKTRACE=0
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 

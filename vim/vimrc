@@ -24,6 +24,9 @@ Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'jodosha/vim-godebug', { 'for': 'go' }
 Plug 'zchee/deoplete-clang'
 
+Plug 'elixir-editors/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+
 let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
 let g:deoplete#sources#clang#clang_header ="/usr/include/clang/"
 
@@ -324,10 +327,6 @@ augroup filetype_elixir
 
     autocmd BufRead,BufNewFile *.ex  if line('$') == 1 && getline('.') == '' | call NewElixirModule() | endif
     autocmd BufRead,BufNewFile *.exs if line('$') == 1 && getline('.') == '' | call NewElixirModule() | endif
-
-    if has('nvim')
-        autocmd FileType elixir nnoremap <leader>ri <c-w><c-w>i<UP><c-\><c-n>:sleep 10m<CR>i<CR><c-\><c-n><c-w><c-w>
-    endif
 
     autocmd FileType elixir nnoremap <buffer> <leader>rr :!elixir %<CR>
     autocmd FileType elixir nnoremap <buffer> <leader>rm :!mix<CR>
