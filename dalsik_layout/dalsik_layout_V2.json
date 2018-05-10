@@ -65,7 +65,7 @@
     "L1R0C10": "KC(RBRACKET)",
     "L1R0C11": "KC(GRAVE)",
 
-    "L1R1C0":  "TRANS",
+    "L1R1C0":  "LP(0x03)",
     "L1R1C1":  "LSHIFT(1)",
     "L1R1C2":  "LSHIFT(2)",
     "L1R1C3":  "LSHIFT(3)",
