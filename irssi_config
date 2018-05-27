@@ -46,6 +46,7 @@ chatnets = {
 channels = (
   { name = "#arduino"; chatnet = "fn"; autojoin = "yes"; },
   { name = "#ocaml"; chatnet = "fn"; autojoin = "yes"; },
+  { name = "#elixir-lang"; chatnet = "fn"; autojoin = "yes"; },
   { name = "#go-nuts"; chatnet = "fn"; autojoin = "yes"; },
   { name = "#vim"; chatnet = "fn"; autojoin = "yes"; },
   { name = "#haskell-beginners"; chatnet = "fn"; autojoin = "yes"; },

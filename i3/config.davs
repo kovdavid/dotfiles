@@ -52,6 +52,8 @@ bindsym $mod+Shift+Right move right
 # toggle split orientation
 bindsym $mod+s exec ~/bin/i3_toggle_split_orientation.sh
 
+bindsym --release $mod+Shift+s exec scrot -s -e 'mv $f /tmp/$f'
+
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 

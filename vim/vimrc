@@ -26,6 +26,7 @@ Plug 'zchee/deoplete-clang'
 
 Plug 'elixir-editors/vim-elixir'
 Plug 'slashmili/alchemist.vim'
+Plug 'mhinz/vim-mix-format'
 
 let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
 let g:deoplete#sources#clang#clang_header ="/usr/include/clang/"
