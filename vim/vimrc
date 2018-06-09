@@ -331,7 +331,8 @@ augroup filetype_elixir
 
     autocmd FileType elixir nnoremap <buffer> <leader>rr :!elixir %<CR>
     autocmd FileType elixir nnoremap <buffer> <leader>rm :!mix<CR>
-    autocmd FileType elixir nnoremap <buffer> <leader>tf :!mix test<CR>
+    autocmd FileType elixir nnoremap <buffer> <leader>ta :!mix test<CR>
+    autocmd FileType elixir nnoremap <buffer> <leader>tf :!mix test --no-start %<CR>
     autocmd FileType elixir nnoremap <buffer> <leader>tl :execute ":!mix test ".expand('%').":".line('.')<CR>
 augroup END
 " }}}
