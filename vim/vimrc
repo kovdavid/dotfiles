@@ -19,6 +19,7 @@ Plug 'benekastah/neomake'
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'rickhowe/diffchar.vim'
 
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'jodosha/vim-godebug', { 'for': 'go' }
