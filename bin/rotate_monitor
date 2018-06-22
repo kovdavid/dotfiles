@@ -1,6 +1,6 @@
 #!/bin/bash
-if [ "$(xrandr | grep eDP1 | grep 'inverted (')" == "" ] ; then
-	xrandr --output eDP1 --rotate inverted
+if [ "$(xrandr | grep eDP-1 | grep 'inverted (')" == "" ] ; then
+	xrandr --output eDP-1 --rotate inverted
 else
-	xrandr --output eDP1 --rotate normal
+	xrandr --output eDP-1 --rotate normal
 fi
