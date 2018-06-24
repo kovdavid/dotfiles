@@ -8,28 +8,22 @@ export MYSQL_PS1="\u@`hostname` [\d]> "
 
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 
-# if [ -d "/usr/lib/jvm/default" ] ; then
-    # export JAVA_HOME="/usr/lib/jvm/default"
-# elif [ -d "/usr/lib/jvm/java-8-oracle" ] ; then
-    # export JAVA_HOME="/usr/lib/jvm/java-8-oracle"
-# fi
-# export LD_LIBRARY_PATH="/usr/lib64/java/jre/lib/amd64"
+if [ -f /opt/perlbrew/etc/bashrc ] ; then
+    export PERLBREW_HOME=/opt/perlbrew/.perlbrew
+    export PATH="/opt/perlbrew/bin:$PATH"
+    source /opt/perlbrew/etc/bashrc
+fi
 
-export PATH="/opt/perlbrew/bin:$HOME/bin:$JAVA_HOME:$PATH"
-[[ -d $HOME/.cabal/bin ]] && export PATH="$HOME/.cabal/bin:$PATH"
-[[ -d $HOME/.local/bin ]] && export PATH="$HOME/.local/bin:$PATH"
-[[ -d /opt/stack ]] && export STACK_ROOT="/opt/stack/"
+export PATH="$HOME/bin:$JAVA_HOME:$PATH"
 [[ -d /opt/rust/rustup ]] && export RUSTUP_HOME="/opt/rust/rustup"
 [[ -d /opt/rust/cargo ]] && export CARGO_HOME="/opt/rust/cargo"
 [[ -d /opt/rust/cargo/bin ]] && export PATH="/opt/rust/cargo/bin:$PATH"
 [[ -n "$(which rustc 2>/dev/null)" && -d "$(rustc --print sysroot)/lib/rustlib/src/rust/src" ]] && \
     export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-[[ -f $HOME/.opam/opam-init/init.sh ]] && . $HOME/.opam/opam-init/init.sh
+
 if [ -d /opt/go ] ; then
-    DIR1="/opt/go"
-    DIR2="$HOME/workspace/go"
-    export GOPATH="$DIR1:$DIR2"
-    export PATH="$DIR1/bin:$DIR2/bin:$PATH"
+    export GOPATH="/opt/go"
+    export PATH="/opt/go/bin:$PATH"
 fi
 
 export ERL_AFLAGS="-kernel shell_history enabled"

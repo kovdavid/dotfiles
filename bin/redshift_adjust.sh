@@ -38,5 +38,4 @@ config=(
     ["24"]="-O 1900 -b 0.7"
 )
 
-redshift -x
-redshift ${config[$HOUR]}
+redshift -P ${config[$HOUR]}

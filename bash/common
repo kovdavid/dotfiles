@@ -21,11 +21,6 @@ shopt -s histappend
 [[ -f ~/dotfiles/bash/alias ]] && source ~/dotfiles/bash/alias
 [[ -f ~/dotfiles/tmux-completion.bash ]] && source ~/dotfiles/tmux-completion.bash
 
-if [ -f /opt/perlbrew/etc/bashrc ] ; then
-    export PERLBREW_HOME=/opt/perlbrew/.perlbrew
-    source /opt/perlbrew/etc/bashrc
-fi
-
 if [ -f ~/dotfiles/nike ] ; then
     [[ -f ~/dotfiles/bash/nike ]] && source ~/dotfiles/bash/nike
     [[ -f ~/dotfiles/bash/proxy ]] && source ~/dotfiles/bash/proxy
