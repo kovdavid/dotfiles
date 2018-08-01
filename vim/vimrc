@@ -93,6 +93,11 @@ if isdirectory($VIM_UNDODIR)
     set undofile
 endif
 
+if isdirectory($VIM_SWAPDIR)
+    set directory=$VIM_SWAPDIR//
+    set swapfile
+endif
+
 let g:sh_noisk=1
 " }}}
 " cmdline {{{
