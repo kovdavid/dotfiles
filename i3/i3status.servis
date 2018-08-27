@@ -41,7 +41,7 @@ disk "/home" {
 }
 
 battery 0 {
-    format = "🔌  %status %percentage %remaining"
+    format = "%status %percentage %remaining"
     path = "/sys/class/power_supply/BAT%d/uevent"
 }
 
