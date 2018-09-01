@@ -29,8 +29,14 @@
 
 /home/davs/workspace/rust/*/target
 /home/davs/workspace/ocaml/*/_build
+/home/davs/workspace/java/*/build
+/home/davs/workspace/java/*/.gradle
+/home/davs/workspace/java/*/*/build
+/home/davs/workspace/java/*/*/.gradle
 /home/davs/workspace/go/bin
 /home/davs/workspace/go/pkg
+
+/mnt/data/java
 
 tags
 Makefile.old
