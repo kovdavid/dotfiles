@@ -4,6 +4,8 @@ else
    export TERM=xterm-256color
 fi
 
+export WINEARCH=win32
+
 export MYSQL_PS1="\u@`hostname` [\d]> "
 
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
