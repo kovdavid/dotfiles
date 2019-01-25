@@ -25,7 +25,7 @@ wireless wwp0s20u5 {
 }
 
 time {
-    format ="[%U] %d-%m-%Y %H:%M"
+    format ="[%V] %d-%m-%Y %H:%M"
 }
 
 load {

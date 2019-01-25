@@ -488,7 +488,7 @@ augroup filetype_perl
     autocmd FileType perl syn region perlSubFold start="^\z(\s*\)\<txn_subtest\>.*[^};]$" end="^\z1};\s*$" transparent fold keepend
     autocmd FileType perl hi Statement ctermfg=14
 
-    autocmd FileType perl nnoremap <buffer> <leader>dd <ESC>ause v5.10;<CR>use Data::Dumper;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper();<LEFT><LEFT>
+    autocmd FileType perl nnoremap <buffer> <leader>dd <ESC>ause v5.10;<CR>use Data::Dumper;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper();<CR>exit;<UP><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT><RIGHT>
     autocmd FileType perl nnoremap <buffer> <leader>dt <ESC>ause v5.10;<CR>use Data::Dumper;<CR>local $Data::Dumper::Terse = 1;<CR>local $Data::Dumper::Indent = 0;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper();<LEFT><LEFT>
     autocmd FileType perl nnoremap <buffer> <leader>so <ESC>vapk:sort<CR>
 

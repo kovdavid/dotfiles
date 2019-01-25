@@ -221,6 +221,7 @@ for_window [class="(?i)galculator"] floating enable
 for_window [class="(?i)google-chrome"] border none
 for_window [class="(?i)chodba3"] floating enable
 for_window [class="(?i)pidgin"] floating enable
+for_window [class="sk.nike.trafox.TrafoApplication"] floating enable
 for_window [class="Firefox"] border none
 for_window [title="File Operation Progress"] floating enable; focus mode_toggle
 

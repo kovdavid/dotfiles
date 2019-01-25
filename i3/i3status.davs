@@ -28,7 +28,7 @@ ethernet eth0 {
 }
 
 time {
-    format ="[%U] %d-%m-%Y %H:%M"
+    format ="[%V] %d-%m-%Y %H:%M"
 }
 
 disk "/" {
