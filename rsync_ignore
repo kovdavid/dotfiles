@@ -19,11 +19,13 @@
 # home
 /home/davs/.cache
 /home/davs/.cpanm
+/home/davs/.config/google-chrome
 /home/davs/.mozilla
 /home/davs/.hoogle
 /home/davs/.ghc-mod
 /home/davs/.thumbnails
 /home/davs/.thunderbird
+/home/davs/.mozilla
 /home/davs/.gvfs
 /home/davs/.local/bin
 
@@ -43,22 +45,4 @@ Makefile.old
 nytprof*
 *.swp
 
-# Haskell
-dist
-dist-*
-cabal-dev
-*.o
-*.hi
-*.chi
-*.chs.h
-*.dyn_o
-*.dyn_hi
-.hpc
-.hsenv
-.cabal-sandbox/
-cabal.sandbox.config
-*.prof
-*.aux
-*.hp
-*.eventlog
-.stack-work/
+.gradle/

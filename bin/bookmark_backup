@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd /home/davs/.mozilla/firefox/*.default/bookmarkbackups
+
+FILE=$(ls -Srt  | tail -n1)
+cp "$FILE" /home/davs/docs/firefox_bookmark_backup.jsonlz4
+
+cd /home/davs/.config/google-chrome/Default
+gzip < Bookmarks > google_chrome_bookmarks.gz
+mv google_chrome_bookmarks.gz /home/davs/docs
