@@ -18,6 +18,7 @@
 
 # home
 /home/davs/.cache
+/home/davs/dotfiles
 /home/davs/.cpanm
 /home/davs/.config/google-chrome
 /home/davs/.mozilla
