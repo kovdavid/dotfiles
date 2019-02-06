@@ -4,6 +4,7 @@ tags
 Makefile.old
 nytprof*
 .nike_deploy
+.exrc
 *.swp
 
 # Devel::PDB

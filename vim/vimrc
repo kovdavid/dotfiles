@@ -69,6 +69,9 @@ set nojoinspaces
 set clipboard^=unnamedplus,unnamed " add two more registers to clipboard
 set iskeyword-=:
 
+set exrc
+set secure
+
 set switchbuf=useopen,usetab,newtab
 set tags=./tags;/
 set complete-=i
@@ -327,21 +330,6 @@ augroup all_file_type
     autocmd BufEnter * let &titlestring = $USER."@".hostname().":".expand("%:p")
 augroup END
 " }}}
-" Elixir {{{
-augroup filetype_elixir
-    autocmd!
-    autocmd BufRead,BufWritePre,FileType elixir silent execute ":Rooter"
-
-    autocmd BufRead,BufNewFile *.ex  if line('$') == 1 && getline('.') == '' | call NewElixirModule() | endif
-    autocmd BufRead,BufNewFile *.exs if line('$') == 1 && getline('.') == '' | call NewElixirModule() | endif
-
-    autocmd FileType elixir nnoremap <buffer> <leader>rr :!elixir %<CR>
-    autocmd FileType elixir nnoremap <buffer> <leader>rm :!mix<CR>
-    autocmd FileType elixir nnoremap <buffer> <leader>ta :!mix test<CR>
-    autocmd FileType elixir nnoremap <buffer> <leader>tf :!mix test --no-start %<CR>
-    autocmd FileType elixir nnoremap <buffer> <leader>tl :execute ":!mix test ".expand('%').":".line('.')<CR>
-augroup END
-" }}}
 " golang {{{
 augroup filetype_golang
     autocmd!
@@ -377,87 +365,6 @@ augroup END
 augroup filetype_lua
     autocmd!
     autocmd FileType lua noremap <buffer> <leader>rr :!lua %<CR>
-augroup END
-" }}}
-" Haskell {{{
-augroup filetype_haskell
-    autocmd!
-    autocmd BufRead,BufWritePre,FileType haskell silent execute ":Rooter"
-
-    autocmd BufRead,BufNewFile *.hs if line('$') == 1 && getline('.') == '' | call NewHaskellModule() | endif
-
-    autocmd BufWritePost * if &filetype=='haskell' | execute ":Neomake" | endif
-
-    autocmd FileType haskell setlocal shiftwidth=2
-    autocmd FileType haskell setlocal softtabstop=2
-    autocmd FileType haskell setlocal expandtab
-    autocmd FileType haskell setlocal formatprg=hindent
-    autocmd FileType haskell setlocal equalprg=hindent
-    " autocmd FileType haskell setlocal iskeyword=a-z,A-Z,48-57,_,.,39
-    autocmd FileType haskell setlocal iskeyword=a-z,A-Z,48-57,_,39
-
-    autocmd FileType haskell let g:haskellmode_completion_ghc = 0
-
-    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-    autocmd FileType haskell noremap <buffer> <leader>. :HdevtoolsClear<CR>:nohl<CR>
-    autocmd FileType haskell noremap <buffer> <F1> :HdevtoolsType<CR>
-    autocmd FileType haskell noremap <buffer> <leader>ht :HdevtoolsType<CR>
-    autocmd FileType haskell noremap <buffer> <leader>hi :HdevtoolsInfo<CR>
-    autocmd FileType haskell command! HdevtoolsKill :!killall hdevtools
-
-    autocmd FileType haskell noremap <buffer> <F12> :!stack exec -- hasktags --ignore-close-implementation --ctags .<CR>
-
-    autocmd FileType haskell noremap <buffer> <leader>rr :!runhaskell %<CR>
-    autocmd FileType haskell noremap <buffer> <leader>tw :GhcModTypeInsert<CR>
-
-    autocmd FileType haskell noremap <buffer> <leader>vm :w<CR>:call TmuxSendKeys(":l ".expand('%')."\nmain")<CR>
-    autocmd FileType haskell noremap <buffer> <leader>vl :w<CR>:call TmuxSendKeys(":l ".expand('%'))<CR>
-    autocmd FileType haskell noremap <buffer> <leader>vs :w<CR>:call TmuxSendKeys("stack ghci --with-ghc intero")<CR>
-    autocmd Filetype haskell nnoremap <buffer> <leader>vi vaw"hy<ESC>:call TmuxSendKeys(":info ".@h)<CR> | echo ""
-    autocmd Filetype haskell nnoremap <buffer> <leader>vt :call TmuxSendKeys(":type-at ".expand('%')." ".line(".")." ".col(".")." ".line(".")." ".(col(".")))<CR> | echo ""
-    autocmd Filetype haskell nnoremap <buffer> <leader>vd vaw<ESC>:call TmuxSendKeys(":loc-at ".expand('%')." ".line("'<")." ".col("'<")." ".line("'>")." ".(col("'>")-1).' "'.expand('<cword>').'"')<CR> | echo ""
-
-augroup END
-" }}}
-" Rust {{{
-augroup filetype_rust
-    autocmd!
-
-    autocmd BufWritePost * if &filetype=='rust' | execute ":Neomake" | endif
-    autocmd FileType rust nnoremap <buffer> <leader>ta  :!cargo test<CR>
-    autocmd FileType rust nnoremap <buffer> <leader>ts  :!cargo check<CR>
-    autocmd FileType rust nnoremap <buffer> <leader>rr  :!cargo run<CR>
-    autocmd FileType rust noremap <buffer> <F12> :silent! exec ":!rusty-tags vi --quiet &" <CR> | redraw!
-
-    autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/,$RUST_SRC_PATH/rusty-tags.vi
-augroup END
-" }}}
-" OCaml {{{
-if system("command -v opam") != ""
-    let g:opam_share_dir = substitute(system("opam config var share 2>/dev/null"), '[\r\n]*$', '', '')
-    execute "set rtp+=" . g:opam_share_dir . "/merlin/vim"
-    execute "set rtp+=" . g:opam_share_dir . "/ocp-indent/vim"
-    execute "set rtp+=" . g:opam_share_dir . "/ocp-index/vim"
-endif
-
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.ocaml = '[^. *\t]\.\w*\|\h\w*|#'
-
-augroup filetype_ocaml
-    autocmd!
-
-    autocmd BufRead,BufNewFile *.ml  setfiletype ocaml
-
-    autocmd FileType ocaml setlocal shiftwidth=2
-    autocmd FileType ocaml setlocal softtabstop=2
-    autocmd FileType ocaml setlocal expandtab
-    autocmd FileType ocaml let b:delimitMate_quotes = '"'
-
-    autocmd FileType ocaml nnoremap <buffer> <leader>rr :call RunOCaml()<CR>
-    autocmd FileType ocaml nnoremap <buffer> <leader>. :MerlinClearEnclosing<CR>:nohl<CR>
-    autocmd FileType ocaml nnoremap <buffer> <leader>ts :MerlinErrorCheck<CR>
-    autocmd FileType ocaml nnoremap <buffer> <leader>yt :MerlinYankLatestType<CR>
 augroup END
 " }}}
 " Perl {{{
@@ -508,6 +415,7 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>td  :PerlTestDir<CR>
     autocmd FileType perl nnoremap <buffer> <leader>tc  :PerlTestCreate<CR>
     autocmd FileType perl nnoremap <buffer> <leader>to  :PerlTestDirOpen<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>pp  :call PerlOpenModule()<CR>
 
     autocmd FileType perl nnoremap gci :call CommitPerlFiles()<CR>
 
@@ -603,30 +511,6 @@ augroup filetype_python
     autocmd FileType python nnoremap <buffer> <leader>rr :!python %<CR>
 augroup END
 " }}}
-" Clojure {{{
-augroup filetype_clojure
-    autocmd!
-    autocmd BufRead,BufWritePre,FileType clojure silent execute ":Rooter"
-
-    autocmd Syntax clojure syn match clojureRoundParen "("
-    autocmd Syntax clojure syn match clojureRoundParen ")"
-    autocmd Syntax clojure RainbowParenthesesActivate
-    autocmd Syntax clojure RainbowParenthesesLoadRound
-    autocmd Syntax clojure highlight clojureRoundParen cterm=bold
-
-    autocmd FileType clojure let b:delimitMate_quotes = '"'
-
-    autocmd FileType clojure nnoremap <buffer> <leader>rr :call RunClojure(0)<CR>
-    autocmd FileType clojure nnoremap <buffer> <leader>re :call RunClojure(1)<CR>
-
-    autocmd FileType clojure nmap <leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
-    autocmd FileType clojure nmap <leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)``
-    autocmd FileType clojure nmap <leader>e <Plug>FireplacePrint<Plug>(sexp_inner_element)``
-
-    " autocmd FileType clojure nnoremap ( ?[[({]<CR>:nohl<CR>
-    " autocmd FileType clojure nnoremap ) /[[({]<CR>:nohl<CR>
-augroup END
-" }}}
 " sh {{{
 augroup sh
     autocmd!
@@ -683,61 +567,6 @@ function! NewPerlModule()
     let l:path = substitute(l:path, '.pm$', '', '')
     let l:module_name = substitute(l:path, '/', '::', 'g')
     execute "normal! ggwi".l:module_name
-endfunction
-" }}}
-" NexElixirModule {{{
-function! NewElixirModule()
-    " get the part between lib/ and .ex
-    let l:path = substitute(expand('%:p'), '^.*/\(lib\|test\)/\(.*\).exs\?$', '\2', 'g')
-
-    " not inside 'lib' nor 'test'
-    if l:path == expand('%:p')
-        let l:path = 'my_module'
-    endif
-
-    " insert defmodule and capitalize the first letter of the module name
-    execute "normal! gg0idefmodule ".l:path." do\nend\<ESC>gg0W~"
-
-    " delete _, capitalize next letter
-    if getline(".") =~# '_'
-        :s/\v_(.)/\u\1/g
-    endif
-
-    " replace / with ., capitalize next letter
-    if getline(".") =~# '/'
-        :s/\v\/(.)/.\u\1/g
-    endif
-
-    execute "normal! o"
-    startinsert
-endfunction
-" }}}
-" NexHaskellModule {{{
-function! NewHaskellModule()
-    " get the part between lib/ and .ex
-    let l:path = substitute(expand('%:p'), '^.*/\(src\|t\)/\(.*\).hs$', '\2', 'g')
-
-    " not inside 'lib' nor 'test'
-    if l:path == expand('%:p')
-        let l:path = 'Main'
-    endif
-
-    0r ~/.vim/skeleton/haskell.module
-
-    execute "normal! gg/module Main\<CR>WcE".l:path."\<ESC>"
-
-    " delete _, capitalize next letter
-    if getline(".") =~# '_'
-        :s/\v_(.)/\u\1/g
-    endif
-
-    " replace / with ., capitalize next letter
-    if getline(".") =~# '/'
-        :s/\v\/(.)/.\u\1/g
-    endif
-
-    execute "normal! j"
-    startinsert
 endfunction
 " }}}
 " RunPerlTest {{{
@@ -889,19 +718,6 @@ function! ReplaceSelection() range
     endif
 endfunction
 " }}}
-" TmuxSendKeys {{{
-let g:tmux_pane_id = ""
-if filereadable("/tmp/.vim_tmux_pane_id")
-    let g:tmux_pane_id = readfile("/tmp/.vim_tmux_pane_id")[0]
-endif
-function! TmuxSendKeys(str)
-    if g:tmux_pane_id == ""
-        echo "set g:tmux_pane_id with the id of the TMUX pane or set \$VIM_TMUX_PANE_ID"
-    else
-        call system("tmux send-keys -t".g:tmux_pane_id." \"".a:str."\" Enter")
-    endif
-endfunction
-" }}}
 " ToggleLineNumbers {{{
 function! ToggleLineNumbers()
     if &number
@@ -913,9 +729,21 @@ function! ToggleLineNumbers()
     endif
 endfunction
 " }}}
-" RunOCaml {{{
-function! RunOCaml()
-    execute "normal! :!corebuild -no-links \<C-r>=expand('%:r')\<CR>.byte --\<CR>"
+" PerlOpenModule {{{
+function! PerlOpenModule()
+    let l:line = line(".")
+    let l:col = col(".")
+    let l:file = expand("%:p")
+
+    let l:cmd = "/home/davs/bin/perl_find_module.pl " . l:file . " " . l:line . " " . l:col
+    let l:result = system(l:cmd)
+    let l:result = substitute(l:result, '\n\+$', '', '')
+    if strlen(l:result) > 10
+        let l:tokens = split(l:result, "\t")
+        execute "tabnew " . l:tokens[0]
+        execute l:tokens[1]
+        " echo l:result
+    endif
 endfunction
 " }}}
 " }}}
