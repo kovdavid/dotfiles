@@ -415,7 +415,7 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>td  :PerlTestDir<CR>
     autocmd FileType perl nnoremap <buffer> <leader>tc  :PerlTestCreate<CR>
     autocmd FileType perl nnoremap <buffer> <leader>to  :PerlTestDirOpen<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>pp  :call PerlOpenModule()<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>mm  :call PerlOpenModule()<CR>
 
     autocmd FileType perl nnoremap gci :call CommitPerlFiles()<CR>
 
