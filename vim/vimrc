@@ -26,7 +26,6 @@ Plug 'jodosha/vim-godebug', { 'for': 'go' }
 
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
     Plug 'zchee/deoplete-go', { 'do' : 'make', 'for': 'go' }
 endif
 
