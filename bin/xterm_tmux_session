@@ -1,0 +1,2 @@
+#!/bin/bash
+tmux new -A -s "WS $(i3_current_workspace_number)"

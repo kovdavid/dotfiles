@@ -37,10 +37,10 @@ fi
 
 if [ -n "$SESSION_NAME" ] ; then
     $(tmux new-session -d -s $SESSION_NAME -n bash "$TMUX_CMD")
-	$(tmux new-session -d -t "$SESSION_NAME" -s "G|${SESSION_NAME}")
+    $(tmux new-session -d -t "$SESSION_NAME" -s "G|${SESSION_NAME}")
 else
     SESSION_NAME=$(tmux new-session -P -d "$TMUX_CMD" | cut -d":" -f1)
-	$(tmux new-session -d -t "$SESSION_NAME" -s "G|${SESSION_NAME}")
+    $(tmux new-session -d -t "$SESSION_NAME" -s "G|${SESSION_NAME}")
 fi
 
 SESSION_HISTORY=$(cat "$SESSION_HISTORY_FILE" | grep -vP "^$SESSION_NAME,")
