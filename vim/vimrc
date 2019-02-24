@@ -406,7 +406,9 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>td  :PerlTestDir<CR>
     autocmd FileType perl nnoremap <buffer> <leader>tc  :PerlTestCreate<CR>
     autocmd FileType perl nnoremap <buffer> <leader>to  :PerlTestDirOpen<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>mm  :call PerlOpenModule()<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>mt  :call PerlOpenModule(1)<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ms  :call PerlOpenModule(2)<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>mv  :call PerlOpenModule(3)<CR>
 
     autocmd FileType perl nnoremap gci :call CommitPerlFiles()<CR>
 
@@ -721,7 +723,8 @@ function! ToggleLineNumbers()
 endfunction
 " }}}
 " PerlOpenModule {{{
-function! PerlOpenModule()
+function! PerlOpenModule(type)
+    " t s v
     let l:line = line(".")
     let l:col = col(".")
     let l:file = expand("%:p")
@@ -731,7 +734,13 @@ function! PerlOpenModule()
     let l:result = substitute(l:result, '\n\+$', '', '')
     if strlen(l:result) > 10
         let l:tokens = split(l:result, "\t")
-        execute "tabnew " . l:tokens[0]
+        if a:type == 1
+            execute "tabnew " . l:tokens[0]
+        elseif a:type == 2
+            execute "split " . l:tokens[0]
+        else
+            execute "vsplit " . l:tokens[0]
+        endif
         execute l:tokens[1]
         " echo l:result
     endif

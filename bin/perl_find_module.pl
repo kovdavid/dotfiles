@@ -29,7 +29,7 @@ if ($line =~ m#((?:(?:[A-Z][A-Za-z]*::)+)\w+)\(#) {
 
 	my $file = join("/", @tokens).".pm";
 
-	my $cmd = "find $ENV{NIKE_HOME} -wholename '*$file' | xargs grep -n -m 1 -H '^sub $function'";
+	my $cmd = "find $ENV{NIKE_HOME}/ -wholename '*$file' | xargs grep -n -m 1 -H '^sub $function'";
 	my @res = `$cmd`;
 
 	if (scalar(@res)) {
