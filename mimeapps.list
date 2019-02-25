@@ -2,7 +2,7 @@
 x-scheme-handler/mailto=userapp-Thunderbird-S65IGX.desktop
 message/rfc822=userapp-Thunderbird-S65IGX.desktop
 application/x-extension-eml=userapp-Thunderbird-S65IGX.desktop
-application/pdf=google-chrome.desktop
+application/pdf=zathura.desktop
 image/png=ristretto.desktop
 image/jpeg=geeqie.desktop
 x-scheme-handler/http=google-chrome.desktop

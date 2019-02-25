@@ -4,9 +4,6 @@ general {
     interval = 2
 }
 
-order += "disk /"
-order += "disk /home"
-order += "disk /mnt/data"
 order += "wireless wlan0"
 order += "ethernet eth0"
 order += "battery 0"
