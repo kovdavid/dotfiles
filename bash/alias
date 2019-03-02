@@ -8,15 +8,14 @@ alias clr="clear"
 alias cp="cp -i"
 alias cpr="cp -i -r"
 alias df="df -h"
-alias dr="docker run -it --rm"
 alias dus="du -shc .??* * | sort -h"
-alias emacs="emacs -nw"
 alias fprove='forkprove -Mlib::require::all=t/lib,lib'
 alias d="docker"
 alias di="docker images"
 alias ddf="docker system df"
 alias dp="docker ps"
 alias dpa="docker ps -a"
+alias dr="docker run -it --rm"
 alias g="git"
 alias ga='git add'
 alias gaa='git add --all'
@@ -36,8 +35,6 @@ alias grel='git fetch origin; git branch -a | grep release | sed -e "s#remotes/[
 alias gfeat='git fetch origin; git branch -a | grep -v release | sed -e "s#remotes/[^/]*/##" | sort -V -u | tail'
 alias grep='grep --exclude-dir=.git'
 alias gst='git status'
-alias em='emacs --no-window'
-alias hdevtools='stack exec --no-ghc-package-path hdevtools --'
 alias la="ls -lha"
 alias less="less -R"
 alias ll="ls -lh"
@@ -45,23 +42,16 @@ alias lla="ls -lha"
 alias ls="ls --color=auto"
 alias mv="mv -i"
 alias ping8="ping 8.8.8.8"
-alias pl="perl"
-alias py="python"
-alias pynit="touch __init__.py"
 alias reload="source ~/.bashrc"
 alias rm="rm -i"
 alias ssht="TERM=xterm-256color ssh"
-alias sshx="ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/tmp/this_is_not_existing_i_hope/known_hosts"
 alias strace="strace -s 4096"
-alias stackreset="killall hdevtools; stack clean; stack build; hdevtools admin --start-server"
 alias tailf="tail -f"
 alias tm="tmux_start"
 alias tree="tree -C"
 alias up="cd \`git root\`"
 alias upt="cd \`git root\` && cd t"
-alias venv3="if [ -e venv ]; then source venv/bin/activate; else source /opt/python3/bin/activate; fi;"
 if [ -n "$(which nvim 2>/dev/null)" ] ; then
     alias vim="nvim"
 fi
 alias vp="touch .vimproject"
-alias w0="wget -O /dev/null"
