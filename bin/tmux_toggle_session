@@ -1,6 +1,8 @@
 #!/bin/bash
 
-TARGET_SESSION_NAME=${1:-"candyland"}
+HOSTNAME=$(hostname)
+
+TARGET_SESSION_NAME=${1:-$HOSTNAME}
 
 CURRENT_SESSION_NAME=$(tmux display-message -p '#{session_name}')
 if [ "$CURRENT_SESSION_NAME" == "$TARGET_SESSION_NAME" ] ; then

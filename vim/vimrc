@@ -177,7 +177,7 @@ set guioptions+=t "tearoff menu items
 set guitablabel=%t          "show only filename in tabs
 
 set t_Co=256
-set colorcolumn=100
+set colorcolumn=120
 if filereadable("/tmp/.Xresources_solarized")
     colorscheme solarized
     highlight CursorLine cterm=NONE ctermbg=253

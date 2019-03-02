@@ -6,6 +6,8 @@ if [ -e ~/dotfiles/bash/git ] ; then
     source ~/dotfiles/bash/git
 fi
 
+export HOSTNAME=$(hostname)
+
 export PS1='`EXIT=$?;[[ $EXIT -ne 0 ]] && echo "\e[31m\$EXIT\e[0m "`\e[34m`date "+%H:%M"`\e[0m [\u@\h:\w]\e[36m$(parse_git_branch)\e[0m\n$([ \j -gt 0 ] && echo "\j ")\\$ '
 
 shopt -s checkwinsize
