@@ -406,6 +406,7 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>mt  :call PerlOpenModule(1)<CR>
     autocmd FileType perl nnoremap <buffer> <leader>ms  :call PerlOpenModule(2)<CR>
     autocmd FileType perl nnoremap <buffer> <leader>mv  :call PerlOpenModule(3)<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>mm  :call PerlOpenModule(4)<CR>
 
     autocmd FileType perl nnoremap gci :call CommitPerlFiles()<CR>
 
@@ -735,8 +736,10 @@ function! PerlOpenModule(type)
             execute "tabnew " . l:tokens[0]
         elseif a:type == 2
             execute "split " . l:tokens[0]
-        else
+        elseif a:type == 3
             execute "vsplit " . l:tokens[0]
+        else
+            execute "e " . l:tokens[0]
         endif
         execute l:tokens[1]
         " echo l:result

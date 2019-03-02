@@ -6,6 +6,7 @@ nytprof*
 .nike_deploy
 .exrc
 *.swp
+.envrc
 
 # Devel::PDB
 .*-conf
