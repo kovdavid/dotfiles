@@ -132,21 +132,18 @@ nnoremap < <<
 " }}}
 " Tabs {{{
 set shiftwidth=4  " number of spaces for indenting
+set tabstop=4     " number of spaces for tabs
 set softtabstop=4 " number of spaces for tabs while editing
 set shiftround
+set modelines=0
 
 set list
 set listchars=tab:▸\ ,trail:·
 " }}}
 " NIKE {{{
 if filereadable(expand("~") . "/.nike")
-    set modelines=0
     set noexpandtab
-    set tabstop=4     " number of spaces for tabs
 else
-    " gives 4 lines for modelines (vim meta at the beginning/end of files)
-    set modelines=4
-    set tabstop=8     " number of spaces for tabs
     set expandtab
 endif
 " }}}
