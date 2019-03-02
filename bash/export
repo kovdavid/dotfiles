@@ -14,6 +14,9 @@ if [ -f /opt/perlbrew/etc/bashrc ] ; then
     export PERLBREW_HOME=/opt/perlbrew/.perlbrew
     export PATH="/opt/perlbrew/bin:$PATH"
     source /opt/perlbrew/etc/bashrc
+elif [ -d ~/.plenv/bin ] ; then
+    export PATH="~/.plenv/bin:$PATH"
+    eval "$(plenv init -)"
 fi
 
 export PATH="$HOME/bin:$JAVA_HOME:$PATH"

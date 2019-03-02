@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
 
+BEGIN { $ENV{NIKE_HOME} ||= "/usr/nikesoft" }
+
 use v5.10;
 use strict;
 use warnings;
