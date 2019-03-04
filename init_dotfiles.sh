@@ -91,8 +91,6 @@ ln -s ~/.vim ~/.nvim
 rm -rf ~/.config/redshift.conf
 ln -s ~/dotfiles/redshift.conf ~/.config/redshift.conf
 
-ln -s ~/dotfiles/compton.conf ~/.config/compton.conf
-
 mkdir -p ${XDG_CONFIG_HOME:=~/.config}
 rm -rf $XDG_CONFIG_HOME/nvim
 ln -s ~/.vim $XDG_CONFIG_HOME/nvim
