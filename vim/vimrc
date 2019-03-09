@@ -36,32 +36,24 @@ if !has('nvim')
     set nocp
     set encoding=utf-8
 endif
-set history=999                " history size
-set lazyredraw                 " don't redraw when executing macros (good performance option)
+set history=999  " history size
+set lazyredraw   " don't redraw when executing macros (good performance option)
 set ttyfast
-set hidden                     " hide buffers instead of closing them
+" set hidden       " hide buffers instead of closing them
 set backspace=indent,eol,start " allow backspace in insert mode
 set errorformat=%f:%l:%m
-set autowrite
 set nobackup
 set noswapfile
-set scrolloff=3                " when moving vertically set 3 lines to the cursor
+set scrolloff=3  " when moving vertically set 3 lines to the cursor
 set mousehide
 set mouse=niv
-if v:version > 703
-    set number
-    set relativenumber
-else
-    set number
-endif
+set number
+set relativenumber
 set splitbelow
 set splitright
 set nojoinspaces
-set clipboard^=unnamedplus,unnamed " add two more registers to clipboard
+set clipboard=unnamedplus,unnamed " add two more registers to clipboard
 set iskeyword-=:
-
-set exrc
-set secure
 
 set switchbuf=useopen,usetab,newtab
 set tags=./tags;/
@@ -296,13 +288,12 @@ noremap <c-t> :tabnew<CR>
 " EveryFile {{{
 augroup all_file_type
     autocmd!
-    if v:version > 703
-        autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber | setlocal number
-        autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber | setlocal number
-    endif
-    if !filereadable(expand("~") . "/.nike")
-        autocmd BufWritePre * %s/\s\+$//e
-    endif
+
+    autocmd WinEnter,FocusGained,BufEnter * setlocal relativenumber | setlocal number
+    autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber | setlocal number
+    autocmd BufWritePre * %s/\s\+$//e
+
+    autocmd BufRead,BufWritePre silent execute ":Rooter"
 
     " Turn off syntax syncing for large files
     autocmd BufEnter * if line2byte(line("$") + 1) > 1000000 | syntax clear | endif
@@ -316,6 +307,9 @@ augroup all_file_type
     autocmd Syntax * highlight NonText ctermfg=240 gui=bold guifg=#5b605e
 
     autocmd BufEnter * let &titlestring = $USER."@".hostname().":".expand("%:p")
+
+    autocmd BufRead,BufNewFile *.xml.sample  setfiletype xml
+    autocmd BufRead,BufNewFile *.sls setfiletype yaml
 augroup END
 " }}}
 " golang {{{
@@ -349,12 +343,6 @@ augroup filetype_golang
     autocmd FileType go noremap <buffer> <leader>gep oif err != nil {<CR>panic("")<CR>}<ESC>k$<LEFT><LEFT>i
 augroup END
 " }}}
-" lua {{{
-augroup filetype_lua
-    autocmd!
-    autocmd FileType lua noremap <buffer> <leader>rr :!lua %<CR>
-augroup END
-" }}}
 " Perl {{{
 augroup filetype_perl
     autocmd!
@@ -366,10 +354,6 @@ augroup filetype_perl
     autocmd BufNewFile *.t 0r ~/.vim/skeleton/perl.test
 
     autocmd BufRead,BufNewFile *.pm if line('$') == 1 && getline('.') == '' | call NewPerlModule() | endif
-
-    "autocmd BufWritePost * if &filetype=='perl' | call Check_time_since_last_commit() | endif
-
-    autocmd BufRead,BufWritePre,FileType perl silent execute ":Rooter"
 
     autocmd BufRead,BufNewFile *.pm  setlocal filetype=perl
     autocmd BufRead,BufNewFile *.pl  setlocal filetype=perl
@@ -387,9 +371,9 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>dt <ESC>ause v5.10;<CR>use Data::Dumper;<CR>local $Data::Dumper::Terse = 1;<CR>local $Data::Dumper::Indent = 0;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper();<LEFT><LEFT>
     autocmd FileType perl nnoremap <buffer> <leader>so <ESC>vapk:sort<CR>
 
-    autocmd FileType perl nnoremap <buffer> <leader>gu :let @/=expand("<cword>")<CR>:!grep -rP '(::<BAR>\->)<c-r>=expand("<cword>")<CR>' bin/ lib/ etc/<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>gd :let @/=expand("<cword>")<CR>:!grep -rP 'sub <c-r>=expand("<cword>")<CR>' bin/ lib/ etc/<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>ga :let @/=expand("<cword>")<CR>:!grep -rP '<c-r>=expand("<cword>")<CR>' bin/ lib/ etc/ t/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>gu :let @/=expand("<cword>")<CR>:!grep -rP '<c-r>=expand("<cword>")(<CR>' bin/ lib/ t/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>gd :let @/=expand("<cword>")<CR>:!grep -rP 'sub <c-r>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ga :let @/=expand("<cword>")<CR>:!grep -rP '<c-r>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>rr :!perl -Ilib %<CR>
 
@@ -408,36 +392,14 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>mv  :call PerlOpenModule(3)<CR>
     autocmd FileType perl nnoremap <buffer> <leader>mm  :call PerlOpenModule(4)<CR>
 
+    autocmd BufRead,BufNewFile $NIKE_HOME/* nnoremap <buffer> <leader>ts :!perl -I$NIKE_HOME/backend-core/lib -I$NIKE_HOME/lbamqp/lib -Ilib -It/lib -c %<CR>
+    autocmd BufRead,BufNewFile $NIKE_HOME/* setlocal noexpandtab
+
     autocmd FileType perl nnoremap gci :call CommitPerlFiles()<CR>
 
-    " autocmd FileType perl nnoremap <buffer> <leader>ps viw"hyouse v5.10; say "<C-r>h: $<C-r>h";<ESC>
-    " autocmd FileType perl nnoremap <buffer> <leader>pd viw"hyouse v5.10; use Data::Dumper; say "<C-r>h: ".Dumper($<C-r>h);<ESC>
     autocmd FileType perl nnoremap <buffer> <leader>ps 0f$lviw"hyouse v5.10; say "<C-r>h: $<C-r>h";<ESC>
     autocmd FileType perl nnoremap <buffer> <leader>pd 0f$lviw"hyouse v5.10; use Data::Dumper; local $Data::Dumper::Sortkeys = 1; local $Data::Dumper::Maxdepth = 2;<CR>say "<C-r>h: ".Dumper($<C-r>h);<ESC>
     autocmd FileType perl vnoremap <buffer> <leader>pd :call PerlDumpVariables()<CR>
-augroup END
-" }}}
-" HTML {{{
-augroup filetype_html
-    autocmd!
-    autocmd BufRead,BufNewFile *.tt setfiletype html
-    autocmd BufRead,BufNewFile *.tt setlocal foldmethod=marker
-
-    autocmd BufRead,BufWritePre,FileType html silent execute ":Rooter"
-
-    autocmd FileType html setlocal foldlevel=99
-    autocmd FileType html setlocal shiftwidth=2
-    autocmd FileType html setlocal tabstop=2
-    autocmd FileType html setlocal softtabstop=2
-    autocmd FileType html setlocal expandtab
-
-    autocmd FileType html highlight link htmlLink text
-    autocmd FileType html syn region htmlLink start="<a\>\_[^>]*\<href\>" end="</a>"me=e-4 keepend contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLinkText,javaScript,@htmlPreproc
-    autocmd FileType html syn match htmlLinkText contained contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLinkText,javaScript,@htmlPreproc "^\s*\zs.\{-}\ze\s*$"
-    autocmd FileType html syn match htmlLinkText contained contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLinkText,javaScript,@htmlPreproc "\S.\{-}\ze\s*$"
-    autocmd FileType html highlight def link htmlLinkText Underlined
-
-    autocmd FileType html iabbrev <buffer> nbsp &nbsp;
 augroup END
 " }}}
 " vim {{{
@@ -451,20 +413,6 @@ augroup filetype_vim
     autocmd FileType vim noremap <buffer> <leader>rr  :source %<CR>
 augroup END
 " }}}
-" javascript {{{
-augroup filetype_js
-    autocmd!
-
-    autocmd BufRead,BufWritePre,FileType javascript silent execute ":Rooter"
-
-    autocmd FileType javascript setlocal shiftwidth=2
-    autocmd FileType javascript setlocal softtabstop=2
-    autocmd FileType javascript setlocal expandtab
-    autocmd FileType javascript setlocal foldmethod=indent
-    autocmd FileType javascript setlocal foldlevelstart=20
-    autocmd FileType javascript let javaScript_fold=1
-augroup END
-" }}}
 " CursorLine {{{
 augroup CursorLine
     autocmd!
@@ -472,69 +420,10 @@ augroup CursorLine
     autocmd WinLeave * setlocal nocursorline
 augroup END
 " }}}
-" ruby {{{
-augroup filetype_ruby
-    autocmd!
-
-    autocmd BufRead,BufWritePre,FileType ruby silent execute ":Rooter"
-
-    autocmd FileType ruby,eruby let ruby_fold = 1
-    autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-    autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-
-    autocmd FileType ruby,eruby setlocal shiftwidth=2
-    autocmd FileType ruby,eruby setlocal softtabstop=2
-    autocmd FileType ruby,eruby setlocal expandtab
-
-    autocmd FileType ruby nnoremap <buffer> <leader>rr :!ruby %<CR>
-augroup END
-" }}}
-" python {{{
-augroup filetype_python
-    autocmd!
-
-    autocmd BufRead,BufWritePre,FileType python silent execute ":Rooter"
-
-    autocmd FileType python setlocal shiftwidth=2
-    autocmd FileType python setlocal softtabstop=2
-    autocmd FileType python setlocal expandtab
-
-    autocmd FileType python nnoremap <buffer> <leader>rr :!python %<CR>
-augroup END
-" }}}
 " sh {{{
 augroup sh
     autocmd!
     autocmd FileType sh nnoremap <buffer> <leader>rr :!bash %<CR>
-augroup END
-" }}}
-" C {{{
-augroup gcc
-    autocmd!
-    autocmd BufRead,BufWritePre,FileType c silent execute ":Rooter"
-    autocmd FileType c nnoremap <buffer> <leader>rr :!gcc -o <C-R>=expand("%:t:r")<CR> % && ./<C-R>=expand("%:t:r")<CR><CR>
-    autocmd FileType c nnoremap <buffer> <F12> :silent! exec ":!ctags_gen" <CR> | redraw!
-augroup END
-" }}}
-" Arduino {{{
-augroup arduino
-    autocmd!
-    autocmd BufRead,BufWritePre,FileType arduino silent execute ":Rooter"
-    autocmd FileType arduino nnoremap <buffer> <F12> :silent! exec ":!ctags_gen" <CR> | redraw!
-augroup END
-" }}}
-" XML {{{
-augroup filetype_xml
-    autocmd!
-    autocmd BufRead,BufNewFile *.xml.sample  setfiletype xml
-augroup END
-" }}}
-" SLS {{{
-augroup filetype_yaml
-    autocmd!
-    autocmd BufRead,BufNewFile *.sls setfiletype yaml
-
-    autocmd BufRead,BufWritePre,FileType yaml silent execute ":Rooter"
 augroup END
 " }}}
 " vimrc {{{
@@ -847,17 +736,6 @@ let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
 " }}}
 " neomake {{{
-" let g:neomake_haskell_enabled_makers = ['ghcmod']
-let g:neomake_haskell_enabled_makers = ['hdevtools']
-let g:neomake_error_sign = {
-    \ 'text': '✖',
-    \ 'texthl': 'ErrorMsg',
-    \ }
-let g:neomake_warning_sign = {
-    \ 'text': '☢',
-    \ 'texthl': 'WarningMsg',
-    \ }
-
 let g:neomake_rust_enabled_makers = ['cargo']
 let g:neomake_rust_cargo_maker = {
     \ 'exe': 'cargo',
