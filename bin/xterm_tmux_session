@@ -1,2 +1,12 @@
 #!/bin/bash
-tmux new -A -s "WS $(i3_current_workspace_number)"
+
+WS=$(i3_current_workspace_number)
+
+for i in {1..10}; do
+    NAME="WS $WS/$i"
+    tmux has -t="$NAME" &>/dev/null
+    if [[ $? != 0 ]] ; then
+        tmux new -s "$NAME"
+        break
+    fi
+done
