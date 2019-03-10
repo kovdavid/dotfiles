@@ -12,6 +12,10 @@ my ($input_file, $line_number, $column) = @ARGV;
 
 exit unless $input_file && $line_number;
 
+open my $log_fh, ">", "/tmp/perl_find_module.log" or die "open log: $!";
+say $log_fh join(" ", @ARGV);
+close $log_fh;
+
 open my $fh, "<", $input_file or die "open $input_file: $!";
 my @lines = <$fh>;
 close $fh;
@@ -31,7 +35,7 @@ if ($line =~ m#((?:(?:[A-Z][A-Za-z]*::)+)\w+)\(#) {
 
 	my $file = join("/", @tokens).".pm";
 
-	my $cmd = "find $ENV{NIKE_HOME}/ -wholename '*$file' | xargs grep -n -m 1 -H '^sub $function'";
+	my $cmd = "fd -c never -p '$file' $ENV{NIKE_HOME}/ | xargs grep -n -m 1 -H '^sub $function'";
 	my @res = `$cmd`;
 
 	if (scalar(@res)) {
@@ -42,7 +46,7 @@ if ($line =~ m#((?:(?:[A-Z][A-Za-z]*::)+)\w+)\(#) {
 	# Napr Prematch::Request::ManualManageKS::DeleteBet
 
 	my $file = "lib/".join("/", split("::", $1)).".pm";
-	my $cmd = "find /usr/nikesoft/ -wholename '*$file'";
+	my $cmd = "fd -c never -p '$file' $ENV{NIKE_HOME}/";
 	my @res = `$cmd`;
 
 	if (scalar(@res)) {
