@@ -18,7 +18,7 @@ bindsym $mod+t exec thunar
 bindsym $mod+d exec dmenu_run
 bindsym $mod+h exec i3_rename_workspace
 
-bindsym XF86AudioMute exec "amixer -q set Master toggle; killall -USR1 i3status"
+bindsym XF86AudioMute exec "amixer -D pulse set Master 1+ toggle; killall -USR1 i3status"
 bindsym XF86AudioMicMute exec "amixer -q set Capture toggle; killall -USR1 i3status"
 bindsym XF86AudioLowerVolume exec ~/bin/volume_lower.sh
 bindsym XF86AudioRaiseVolume exec ~/bin/volume_raise.sh
