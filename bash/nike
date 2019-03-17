@@ -21,4 +21,4 @@ alias zgrepew="zgrep -iP 'error|warn' "
 alias noproxy="export http_proxy=; export https_proxy=; export ftp_proxy=; export no_proxy=;"
 
 export PDB_use_HOME=1
-export NIKE_HOME="/usr/nikesoft"
+export NIKE_HOME="/home/davs/workspace/nikesoft"

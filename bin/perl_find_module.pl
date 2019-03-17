@@ -10,6 +10,10 @@ use Data::Dumper;
 
 my ($input_file, $line_number, $column) = @ARGV;
 
+# $input_file = "/usr/nikesoft/trading-platform/lib/Prematch/UFO/Fixtures.pm";
+# $line_number = 54;
+# $column = 30;
+
 exit unless $input_file && $line_number;
 
 open my $log_fh, ">", "/tmp/perl_find_module.log" or die "open log: $!";
@@ -42,10 +46,14 @@ if ($line =~ m#((?:(?:[A-Z][A-Za-z]*::)+)\w+)\(#) {
 		my ($file, $line, undef) = split(":", $res[0]);
 		say "$file\t$line";
 	}
-} elsif ($line =~ m#((?:(?:[A-Z][A-Za-z]*(?:::)?)+))#) {
+} elsif ($line =~ m#((?:(?:[A-Z][A-Za-z_]*(?:::)?)+))#) {
 	# Napr Prematch::Request::ManualManageKS::DeleteBet
 
-	my $file = "lib/".join("/", split("::", $1)).".pm";
+	my @tokens = split("::", $1);
+
+	# Prematch::Request::ManualManageKS::DeleteBet
+
+	my $file = "lib/".join("/", @tokens).".pm";
 	my $cmd = "fd -c never -p '$file' $ENV{NIKE_HOME}/";
 	my @res = `$cmd`;
 
@@ -53,5 +61,18 @@ if ($line =~ m#((?:(?:[A-Z][A-Za-z]*::)+)\w+)\(#) {
 		my $file = $res[0];
 		chomp $file;
 		say "$file\t0";
+	} else {
+		# Prematch::Request::ManualManageKS::DeleteBet - DeleteBet je asi nejaka konstanta
+
+		my $const = pop @tokens;
+
+		my $file = "lib/".join("/", @tokens).".pm";
+		my $cmd = "fd -c never -p '$file' $ENV{NIKE_HOME}/ | xargs grep -n -m 1 -H '$const'";
+		my @res = `$cmd`;
+
+		if (scalar(@res)) {
+			my ($file, $line, undef) = split(":", $res[0]);
+			say "$file\t$line";
+		}
 	}
 }
