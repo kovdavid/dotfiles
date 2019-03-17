@@ -293,7 +293,7 @@ augroup all_file_type
     autocmd WinLeave,FocusLost,BufLeave * setlocal norelativenumber | setlocal number
     autocmd BufWritePre * %s/\s\+$//e
 
-    autocmd BufRead,BufWritePre silent execute ":Rooter"
+    " autocmd BufEnter,BufRead,BufNewFile,BufWritePre silent execute ":Rooter"
 
     " Turn off syntax syncing for large files
     autocmd BufEnter * if line2byte(line("$") + 1) > 1000000 | syntax clear | endif
@@ -318,8 +318,6 @@ augroup filetype_golang
     autocmd FileType go setlocal shiftwidth=4
     autocmd FileType go setlocal tabstop=4
     autocmd FileType go setlocal softtabstop=4
-
-    autocmd BufRead,BufWritePre,FileType go silent execute ":Rooter"
 
     autocmd BufNewFile *.go 0r ~/.vim/skeleton/go.script
 
@@ -674,7 +672,7 @@ let g:clever_f_across_no_line = 0
 " Rooter {{{
 let g:rooter_patterns = [ '.vimproject', '.git/' ]
 let g:rooter_manual_only = 0
-let g:rooter_change_directory_for_non_project_files = 0
+let g:rooter_change_directory_for_non_project_files = 1
 " }}}
 " snippets {{{
 let g:snips_author = "David Kovacs [DavsX]"
