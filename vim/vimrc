@@ -389,6 +389,7 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>ms  :call PerlOpenModule(2)<CR>
     autocmd FileType perl nnoremap <buffer> <leader>mv  :call PerlOpenModule(3)<CR>
     autocmd FileType perl nnoremap <buffer> <leader>mm  :call PerlOpenModule(4)<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>me  :Explore<CR>
 
     autocmd BufRead,BufNewFile $NIKE_HOME/* nnoremap <buffer> <leader>ts :!perl -I$NIKE_HOME/backend-core/lib -I$NIKE_HOME/lbamqp/lib -Ilib -It/lib -c %<CR>
     autocmd BufRead,BufNewFile $NIKE_HOME/* setlocal noexpandtab
