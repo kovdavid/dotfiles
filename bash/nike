@@ -22,3 +22,4 @@ alias noproxy="export http_proxy=; export https_proxy=; export ftp_proxy=; expor
 
 export PDB_use_HOME=1
 export NIKE_HOME=$(readlink -f /usr/nikesoft)
+export TEST_CHODBA_USER="kovacs"
