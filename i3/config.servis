@@ -222,4 +222,3 @@ for_window [window_role="pop-up"] floating enable
 exec --no-startup-id sudo nm-applet &
 exec ~/bin/init_trackpoint &
 exec ~/bin/init_touchpad &
-exec redshift-gtk -l geoclue2 -t 6500:3500 -b 1.0:0.7 &
