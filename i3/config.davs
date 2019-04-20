@@ -37,7 +37,6 @@ bindsym $mod+b border toggle
 # scratchpad
 bindsym $mod+Shift+m move scratchpad
 bindsym $mod+m scratchpad show
-#bindsym $mod+m exec ~/bin/i3_todo_scratchpad
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left

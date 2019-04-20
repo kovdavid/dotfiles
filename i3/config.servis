@@ -11,20 +11,20 @@ bindsym $mod+Tab exec ~/bin/i3_jump_to_next_output
 bindsym $mod+Shift+Tab exec ~/bin/i3_move_to_next_output
 bindsym $mod+Return exec ~/bin/i3_cycle_windows
 
-bindsym $mod+x exec xterm
-bindsym $mod+i exec google-chrome
+bindsym $mod+x exec xterm -e ~/bin/xterm_tmux_session
+bindsym $mod+Shift+x exec xterm
+bindsym $mod+i exec firefox
 bindsym $mod+t exec thunar
 bindsym $mod+d exec dmenu_run
-bindcode 148 exec calc
-bindcode 156 exec ~/bin/toggle_amixer_volume
 bindsym $mod+h exec i3_rename_workspace
 
 bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 bindsym XF86AudioMicMute exec amixer -q set Capture toggle
 bindsym XF86AudioLowerVolume exec amixer -q set  Master 5%- unmute
 bindsym XF86AudioRaiseVolume exec amixer -q set  Master 5%+ unmute
-bindsym XF86ScreenSaver exec xlock
 bindsym XF86AudioPlay exec i3lock -c 000000
+bindsym XF86ScreenSaver exec i3lock -c 000000
+bindsym XF86Sleep exec "i3lock -c 000000; systemctl suspend"
 
 
 # kill focused window
@@ -50,6 +50,8 @@ bindsym $mod+Shift+Right move right
 
 # toggle split orientation
 bindsym $mod+s exec ~/bin/i3_toggle_split_orientation.sh
+
+bindsym --release $mod+Shift+s exec scrot -s -e 'mv $f /tmp/$f'
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -200,21 +202,24 @@ bindsym $mod+Shift+Delete mode $system_power_mode
 # finds out, if available)
 bar {
         font pango:DejaVu Sans Mono 12px
-        status_command i3_custom_status.sh
+        status_command $HOME/bin/i3_custom_status.sh
         tray_output $primary_output
 }
 
-for_window [class="(?i)xfce4-notifyd"] floating enable; focus mode_toggle
+# use xprop ;)
+for_window [class="(?i)xfce4-notifyd"] floating enable, focus mode_toggle
 for_window [class="(?i)galculator"] floating enable
 for_window [class="(?i)google-chrome"] border none
 for_window [class="(?i)chodba3"] floating enable
 for_window [class="(?i)pidgin"] floating enable
+for_window [class="(?i)floating"] floating enable
 for_window [class="Firefox"] border none
-for_window [title="File Operation Progress"] floating enable; focus mode_toggle
+for_window [class="factorio"] border none
+for_window [class="Nautilus" instance="file_progress"] floating enable
+for_window [window_role="pop-up"] floating enable
+# for_window [class="^jetbrains-.+"][window_type=dialog] focus
 
-exec sudo nm-applet &
+exec --no-startup-id sudo nm-applet &
 exec ~/bin/init_trackpoint &
 exec ~/bin/init_touchpad &
-exec (sleep 1 && nitrogen --restore ) &
 exec redshift-gtk -l geoclue2 -t 6500:3500 -b 1.0:0.7 &
-exec google-chrome
