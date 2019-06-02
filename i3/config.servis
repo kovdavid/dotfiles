@@ -25,6 +25,8 @@ bindsym XF86AudioRaiseVolume exec amixer -q set  Master 5%+ unmute
 bindsym XF86AudioPlay exec i3lock -c 000000
 bindsym XF86ScreenSaver exec i3lock -c 000000
 bindsym XF86Sleep exec "i3lock -c 000000; systemctl suspend"
+bindsym XF86MonBrightnessUp exec "brightness up"
+bindsym XF86MonBrightnessDown exec "brightness down"
 
 
 # kill focused window
