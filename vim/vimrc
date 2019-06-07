@@ -309,7 +309,7 @@ augroup all_file_type
     autocmd BufEnter * let &titlestring = $USER."@".hostname().":".expand("%:p")
 
     autocmd BufRead,BufNewFile *.xml.sample  setfiletype xml
-    autocmd BufRead,BufNewFile *.sls setfiletype yaml
+    autocmd BufRead,BufNewFile *.sls setfiletype jinja
 augroup END
 " }}}
 " golang {{{
@@ -423,6 +423,14 @@ augroup END
 augroup sh
     autocmd!
     autocmd FileType sh nnoremap <buffer> <leader>rr :!bash %<CR>
+augroup END
+" }}}
+" jinja {{{
+augroup jinja
+    autocmd!
+    autocmd FileType jinja setlocal expandtab
+    autocmd FileType jinja setlocal autoindent
+    autocmd FileType jinja setlocal tabstop=2
 augroup END
 " }}}
 " vimrc {{{
