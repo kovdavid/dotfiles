@@ -20,6 +20,7 @@ elif [ -d ~/.plenv/bin ] ; then
 fi
 
 export PATH="$HOME/bin:$JAVA_HOME:$PATH"
+[[ -d /opt/node ]] && export NODE_PATH="/opt/node"
 [[ -d /opt/rust/rustup ]] && export RUSTUP_HOME="/opt/rust/rustup"
 [[ -d /opt/rust/cargo ]] && export CARGO_HOME="/opt/rust/cargo"
 [[ -d /opt/rust/cargo/bin ]] && export PATH="/opt/rust/cargo/bin:$PATH"

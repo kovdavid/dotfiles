@@ -28,6 +28,7 @@
 /home/davs/.thunderbird
 /home/davs/.mozilla
 /home/davs/.gvfs
+/home/davs/.npm
 /home/davs/.local/bin
 
 /home/davs/workspace/rust/*/target
@@ -47,3 +48,4 @@ nytprof*
 *.swp
 
 .gradle/
+node_modules/
