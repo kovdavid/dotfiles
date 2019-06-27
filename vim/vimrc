@@ -369,9 +369,12 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>dt <ESC>ause v5.10;<CR>use Data::Dumper;<CR>local $Data::Dumper::Terse = 1;<CR>local $Data::Dumper::Indent = 0;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper();<LEFT><LEFT>
     autocmd FileType perl nnoremap <buffer> <leader>so <ESC>vapk:sort<CR>
 
-    autocmd FileType perl nnoremap <buffer> <leader>gu :let @/=expand("<cword>")<CR>:!grep -rP '<c-r>=expand("<cword>")(<CR>' bin/ lib/ t/<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>gd :let @/=expand("<cword>")<CR>:!grep -rP 'sub <c-r>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>ga :let @/=expand("<cword>")<CR>:!grep -rP '<c-r>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>gu :let @/=expand("<cword>")<CR>:!grep -rP '<C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>gd :let @/=expand("<cword>")<CR>:!grep -rP 'sub <C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ga :let @/=expand("<cword>")<CR>:!grep -rP '<C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>glu :let @/=expand("<cword>")<CR>:!grep -rlP '<C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>gld :let @/=expand("<cword>")<CR>:!grep -rlP 'sub <C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>gla :let @/=expand("<cword>")<CR>:!grep -rlP '<C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>rr :!perl -Ilib %<CR>
 
