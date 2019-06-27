@@ -38,11 +38,11 @@ remove_and_link_dotfile bash_profile
 remove_and_link_dotfile bashrc
 remove_and_link_dotfile ctags
 remove_and_link_dotfile fontconfig
-remove_and_link_dotfile gitconfig
 remove_and_link_dotfile screenrc
 remove_and_link_dotfile dircolors
 remove_and_link_dotfile ghci
 
+echo "You have to manually copy gitconfig and change email address!"
 echo "You have to manually link i3/config and i3/status!"
 # remove_and_link_dotfile i3/config
 # remove_and_link_dotfile i3/status
