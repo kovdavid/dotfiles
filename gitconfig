@@ -25,7 +25,7 @@
     root = !pwd
 [user]
     name = Dávid Kovács
-    email = kovdavid@gmail.com
+    email = david.kovacs@nike.sk
 [core]
     editor = vim
     pager = less -R
