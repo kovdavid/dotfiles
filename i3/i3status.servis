@@ -47,7 +47,7 @@ battery 0 {
 
 cpu_temperature 0 {
     format = "⌘ %degrees°C"
-    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp2_input"
+    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp2_input"
 }
 
 cpu_usage {

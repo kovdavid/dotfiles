@@ -394,8 +394,11 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>mm  :call PerlOpenModule(4)<CR>
     autocmd FileType perl nnoremap <buffer> <leader>me  :Explore<CR>
 
-    autocmd BufRead,BufNewFile $NIKE_HOME/* nnoremap <buffer> <leader>ts :!perl -I$NIKE_HOME/backend-core/lib -I$NIKE_HOME/lbamqp/lib -Ilib -It/lib -c %<CR>
     autocmd BufRead,BufNewFile $NIKE_HOME/* setlocal noexpandtab
+
+    if len($PERL_TEST_FILE_COMMAND) > 0
+        autocmd FileType perl let g:perl_test_file_command = $PERL_TEST_FILE_COMMAND
+    endif
 
     autocmd FileType perl nnoremap gci :call CommitPerlFiles()<CR>
 
@@ -457,55 +460,6 @@ function! NewPerlModule()
     let l:path = substitute(l:path, '.pm$', '', '')
     let l:module_name = substitute(l:path, '/', '::', 'g')
     execute "normal! ggwi".l:module_name
-endfunction
-" }}}
-" RunPerlTest {{{
-function! RunPerlTest(mode)
-    let l:path = expand('%')
-
-    let l:result = 0
-
-    if a:mode == 'file'
-        let l:result = RunTest(l:path)
-        "elseif a:mode == 'class'
-        "let l:class = GetPythonClassName()
-        "let l:result = RunTest(l:path . ":" . l:class)
-        "elseif a:mode == 'method'
-        "let l:class = GetPythonClassName()
-        "let l:method = GetPythonMethodName()
-        "let l:result = RunTest(l:path .":". l:class .".". l:method)
-    else
-        let l:result = RunTest('t/')
-    endif
-
-    if l:result == 0
-        let l:line = getqflist()[0]['text']
-
-        let l:list = matchlist(l:line, '\vFile "([^"]*)", line (\d+)')
-        if !empty(l:list)
-            let l:file = l:list[1]
-            let l:line_no = l:list[2]
-
-            if l:file =~# getcwd()
-                if l:file == expand('%:p')
-                    execute "normal! ".l:line_no."G"
-                else
-                    execute "badd +".l:line_no." ".l:file
-                    execute "vert sbuffer " . l:file
-                    execute "normal! ".l:line_no."G"
-                endif
-            endif
-            copen
-            wincmd k
-        else
-            let l:bufname = fnamemodify(buffer_name(getqflist()[0]['bufnr']), ':p')
-            if l:bufname =~# getcwd()
-                cc!
-            else
-                copen
-            endif
-        endif
-    endif
 endfunction
 " }}}
 " CloseHiddenbuffers {{{
@@ -690,12 +644,6 @@ let g:rooter_change_directory_for_non_project_files = 1
 let g:snips_author = "David Kovacs [DavsX]"
 let g:snips_email = "kovdavid@gmail.com"
 let g:snips_github = "http://github.com/DavsX"
-" }}}
-" test_class_runner {{{
-let $TAP_ELAPSED_FORMAT  = '%t1 elapsed'
-let g:perl_test_args_perl   = '-It/lib -Ilib'
-let g:perl_test_args_prove  = '-It/lib -Ilib -r -j9 --timer'
-let g:perl_test_all_command = 'prove'
 " }}}
 " NERDTree {{{
 function! NERDTreeFindToggle()
