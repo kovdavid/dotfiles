@@ -168,6 +168,7 @@ set guitablabel=%t          "show only filename in tabs
 set t_Co=256
 set colorcolumn=120
 if filereadable("/tmp/.Xresources_solarized")
+    set background=light
     colorscheme solarized
     highlight CursorLine cterm=NONE ctermbg=253
     highlight ColorColumn guibg=#333333 ctermbg=253
