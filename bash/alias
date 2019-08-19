@@ -58,3 +58,9 @@ if [ -n "$(which nvim 2>/dev/null)" ] ; then
     alias vim="nvim"
 fi
 alias vp="touch .vimproject"
+if [ -f ~/workspace/bash/jump/jump ] ; then
+	. ~/workspace/bash/jump/jump
+	alias j="__davsx_jump"
+else
+	alias j="echo 'Clone https://github.com/DavsX/jump.git to ~/workspace/bash/jump'"
+fi
