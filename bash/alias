@@ -32,6 +32,7 @@ alias gfo='git fetch origin && git rev-parse --abbrev-ref HEAD | xargs -I{} git 
 alias gfop='git fetch origin --prune'
 alias gpo='git push origin'
 alias gpoh='git push -u origin HEAD'
+alias gpohff='git push --force -u origin HEAD'
 alias gpullh='git rev-parse --abbrev-ref HEAD | xargs git pull origin'
 alias goon='git rebase --continue'
 alias grel='git fetch origin; git branch -a | grep release | sed -e "s#remotes/[^/]*/##" | sort -V -u | tail'

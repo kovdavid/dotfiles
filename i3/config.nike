@@ -227,6 +227,8 @@ for_window [class="Firefox"] border none
 for_window [title="File Operation Progress"] floating enable; focus mode_toggle
 
 exec ~/bin/mon right &
+exec ~/bin/xresources_zenburn &
 exec numlockx &
 exec (sleep 1 && nitrogen --restore ) &
-#exec pidgin -f &
+exec pidgin -f &
+exec --no-startup-id i3-msg 'workspace 2; workspace 1; workspace 12; workspace 11'

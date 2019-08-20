@@ -310,7 +310,7 @@ augroup all_file_type
     autocmd BufEnter * let &titlestring = $USER."@".hostname().":".expand("%:p")
 
     autocmd BufRead,BufNewFile *.xml.sample  setfiletype xml
-    autocmd BufRead,BufNewFile *.sls setfiletype jinja
+    autocmd BufRead,BufNewFile *.sls setfiletype yaml
 augroup END
 " }}}
 " golang {{{
