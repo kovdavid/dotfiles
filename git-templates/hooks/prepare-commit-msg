@@ -1,0 +1,7 @@
+#!/bin/bash
+
+JIRA_TAG=$(git rev-parse --abbrev-ref HEAD | grep -oP 'BAC-\d+')
+
+if [ -n "$JIRA_TAG" ] ; then
+	sed -i.bak -e "1s/^/$JIRA_TAG /" $1
+fi

@@ -43,6 +43,7 @@ remove_and_link_dotfile dircolors
 remove_and_link_dotfile ghci
 
 echo "You have to manually copy gitconfig and change email address!"
+ln -s ~/dotfiles/git-templates ~/.git-templates
 echo "You have to manually link i3/config and i3/status!"
 # remove_and_link_dotfile i3/config
 # remove_and_link_dotfile i3/status

@@ -52,3 +52,5 @@
     default = current
 [branch]
     autosetuprebase = always
+[init]
+	templatedir = ~/.git-templates

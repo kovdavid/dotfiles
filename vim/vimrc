@@ -326,7 +326,7 @@ augroup filetype_golang
     autocmd FileType go nnoremap <buffer> <leader>de o<ESC>ifmt.Printf("%+v\n")<CR>os.Exit(1)<ESC>:GoImports<CR>k$i,
 
     autocmd FileType go let g:go_fmt_command = "goimports"
-    autocmd FileType go let g:go_fmt_autosave = 0
+    autocmd FileType go let g:go_fmt_autosave = 1
     autocmd FileType go noremap <buffer> <leader>rr :!go run %<CR>
     autocmd FileType go noremap <buffer> <leader>i :GoInfo<CR>
     autocmd FileType go noremap <buffer> <leader>b :GoBuild<CR>
