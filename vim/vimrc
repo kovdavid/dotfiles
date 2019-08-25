@@ -25,8 +25,7 @@ Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'jodosha/vim-godebug', { 'for': 'go' }
 
 if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'zchee/deoplete-go', { 'do' : 'make', 'for': 'go' }
+    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 
 call plug#end()
@@ -321,12 +320,23 @@ augroup filetype_golang
     autocmd FileType go setlocal softtabstop=4
 
     autocmd BufNewFile *.go 0r ~/.vim/skeleton/go.script
+    autocmd BufWritePost *.go Neomake
 
     autocmd FileType go nnoremap <buffer> <leader>dd o<ESC>ifmt.Printf("%+v\n", )<LEFT>
     autocmd FileType go nnoremap <buffer> <leader>de o<ESC>ifmt.Printf("%+v\n")<CR>os.Exit(1)<ESC>:GoImports<CR>k$i,
 
     autocmd FileType go let g:go_fmt_command = "goimports"
+    autocmd FileType go let g:go_def_mode = "gopls"
+    autocmd FileType go let g:go_info_mode = "gopls"
     autocmd FileType go let g:go_fmt_autosave = 1
+    autocmd FileType go let g:go_fmt_fail_silently = 1
+
+    autocmd FileType go let g:neomake_error_sign   = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
+    autocmd FileType go let g:neomake_warning_sign = {'text': '∆', 'texthl': 'NeomakeWarningSign'}
+    autocmd FileType go let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
+    autocmd FileType go let g:neomake_info_sign    = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
+    autocmd FileType go let g:neomake_go_enabled_makers = [ 'go' ]
+
     autocmd FileType go noremap <buffer> <leader>rr :!go run %<CR>
     autocmd FileType go noremap <buffer> <leader>i :GoInfo<CR>
     autocmd FileType go noremap <buffer> <leader>b :GoBuild<CR>
@@ -702,15 +712,5 @@ let g:neomake_rust_cargo_maker = {
     \ 'append_file': 0,
     \ 'errorformat': '%Eerror%m,%Z\ %#-->\ %f:%l:%c',
     \ }
-" }}}
-" Racer {{{
-let g:racer_cmd = "/opt/rust/cargo/bin/racer"
-let g:racer_experimental_completer = 1
-let g:rustfmt_fail_silently = 1
-let g:rustfmt_autosave = 1
-let g:deoplete#enable_at_startup=1
-let g:deoplete#sources#rust#racer_binary='/opt/rust/cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path="/opt/rust/rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " }}}
 " }}}

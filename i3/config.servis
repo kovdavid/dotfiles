@@ -222,7 +222,7 @@ for_window [window_role="pop-up"] floating enable
 # for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [instance="__scratchpad"] move scratchpad
 
-exec --no-startup-id xterm -name __scratchpad -e "tmux new -s 'SCRATCHPAD'"
 exec --no-startup-id sudo nm-applet &
 exec ~/bin/init_trackpoint &
 exec ~/bin/init_touchpad &
+exec --no-startup-id xterm -name __scratchpad -e "tmux new -s 'SCRATCHPAD'"
