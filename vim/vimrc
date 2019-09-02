@@ -20,6 +20,7 @@ Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'rickhowe/diffchar.vim'
+Plug 'ervandew/supertab'
 
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'jodosha/vim-godebug', { 'for': 'go' }
@@ -676,14 +677,6 @@ nnoremap gca :Gwrite <BAR> Gcommit --amend<CR>ggA
 " supertab {{{
 let g:SuperTabDefaultCompletionType="<c-x><c-o>"
 let g:SuperTabClosePreviewOnPopupClose=1
-
-if has("gui_running")
-    imap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-else " no gui
-    if has("unix")
-        inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-    endif
-endif
 " }}}
 " NERDCommenter {{{
 let g:NERDCustomDelimiters = {
