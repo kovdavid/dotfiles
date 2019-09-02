@@ -65,3 +65,4 @@ if [ -f ~/workspace/bash/jump/jump ] ; then
 else
 	alias j="echo 'Clone https://github.com/DavsX/jump.git to ~/workspace/bash/jump'"
 fi
+alias xvim="xargs -o vim"

@@ -339,7 +339,7 @@ augroup filetype_golang
 
     autocmd FileType go noremap <buffer> <leader>rr :!go run %<CR>
     autocmd FileType go noremap <buffer> <leader>i :GoInfo<CR>
-    autocmd FileType go noremap <buffer> <leader>b :GoBuild<CR>
+    autocmd FileType go noremap <buffer> <leader>b :GoBuild -i<CR>
     autocmd FileType go noremap <buffer> <leader>ts :GoInstall<CR>
     autocmd FileType go noremap <buffer> <leader>gi :GoImports<CR>
     autocmd FileType go noremap <buffer> <leader>tf :GoTestFunc<CR>
@@ -380,11 +380,12 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>dt <ESC>ause v5.10;<CR>use Data::Dumper;<CR>local $Data::Dumper::Terse = 1;<CR>local $Data::Dumper::Indent = 0;<CR>local $Data::Dumper::Sortkeys = 1;<CR>local $Data::Dumper::Maxdepth = 2;<CR>say STDERR Dumper();<LEFT><LEFT>
     autocmd FileType perl nnoremap <buffer> <leader>so <ESC>vapk:sort<CR>
 
-    autocmd FileType perl nnoremap <buffer> <leader>gu :let @/=expand("<cword>")<CR>:!grep -rP '<C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>gd :let @/=expand("<cword>")<CR>:!grep -rP 'sub <C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>ga :let @/=expand("<cword>")<CR>:!grep -rP '<C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
+    " (?<!\$|@|%|{)
+    autocmd FileType perl nnoremap <buffer> <leader>gu  :let @/=expand("<cword>")<CR>:!grep -rP  '<C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
     autocmd FileType perl nnoremap <buffer> <leader>glu :let @/=expand("<cword>")<CR>:!grep -rlP '<C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>gd  :let @/=expand("<cword>")<CR>:!grep -rP  'sub <C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
     autocmd FileType perl nnoremap <buffer> <leader>gld :let @/=expand("<cword>")<CR>:!grep -rlP 'sub <C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ga  :let @/=expand("<cword>")<CR>:!grep -rP  '<C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
     autocmd FileType perl nnoremap <buffer> <leader>gla :let @/=expand("<cword>")<CR>:!grep -rlP '<C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>rr :!perl -Ilib %<CR>
@@ -535,19 +536,12 @@ endfunction
 function! CommitPerlFiles()
     let l:path = expand("%")
     let l:git_rev = system("git rev-parse --abbrev-ref HEAD 2>/dev/null")
-    let l:task_number = matchstr(l:git_rev, '\v(BAC-\d+)')
-    let l:msg_prefix = ''
-
-    if l:task_number != ''
-        let l:msg_prefix = l:task_number." "
-    endif
 
     if l:path =~# '\v^(bin|lib|t)\/.+(pl|pm|t)?$'
         let l:path = substitute(l:path, '\v(bin|lib|t)/', '', '')
         let l:path = substitute(l:path, '\/', '::', 'g')
 
-        let l:msg_prefix = l:msg_prefix.l:path
-        execute "normal! :Gwrite \<BAR> Gcommit\<CR>O".l:msg_prefix." - "
+        execute "normal! :Gwrite \<BAR> Gcommit\<CR>A".l:path." - "
     else
         execute "normal! :let @f=expand('%:t:r')\<CR>:Gwrite \<BAR> Gcommit\<CR>O\<C-R>f - \<space>"
     endif
@@ -704,13 +698,12 @@ let g:NERDSpaceDelims = 1
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
 " }}}
-" neomake {{{
-let g:neomake_rust_enabled_makers = ['cargo']
-let g:neomake_rust_cargo_maker = {
-    \ 'exe': 'cargo',
-    \ 'args': ['build'],
-    \ 'append_file': 0,
-    \ 'errorformat': '%Eerror%m,%Z\ %#-->\ %f:%l:%c',
-    \ }
-" }}}
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
 " }}}
