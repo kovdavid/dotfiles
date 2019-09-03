@@ -320,7 +320,7 @@ augroup filetype_golang
     autocmd FileType go setlocal tabstop=4
     autocmd FileType go setlocal softtabstop=4
 
-    autocmd BufNewFile *.go 0r ~/.vim/skeleton/go.script
+    autocmd BufRead,BufNewFile *.go if line('$') == 1 && getline('.') == '' | call NewGoFile() | endif
     autocmd BufWritePost *.go Neomake
 
     autocmd FileType go nnoremap <buffer> <leader>dd o<ESC>ifmt.Printf("%+v\n", )<LEFT>
@@ -473,6 +473,13 @@ function! NewPerlModule()
     let l:path = substitute(l:path, '.pm$', '', '')
     let l:module_name = substitute(l:path, '/', '::', 'g')
     execute "normal! ggwi".l:module_name
+endfunction
+" }}}
+" NewGoFile {{{
+function! NewGoFile()
+    0r ~/.vim/skeleton/go.script
+    let l:module = expand('%:h:t')
+    execute "normal! ggwi".l:module
 endfunction
 " }}}
 " CloseHiddenbuffers {{{
