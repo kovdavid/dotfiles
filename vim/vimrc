@@ -18,12 +18,10 @@ Plug 'junkblocker/git-time-lapse'
 Plug 'benekastah/neomake'
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'rickhowe/diffchar.vim'
 Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
 
 Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'jodosha/vim-godebug', { 'for': 'go' }
 
 if has('nvim')
     " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
