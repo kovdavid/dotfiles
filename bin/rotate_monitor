@@ -1,6 +1,14 @@
 #!/bin/bash
+
+TOUCHSCREEN=$(xinput | grep SIS0457 | cut -d"=" -f2 | cut -f1)
+TOUCHPAD=$(xinput | grep -i touchpad | cut -d"=" -f2 | cut -f1)
+
 if [ "$(xrandr | grep eDP-1 | grep 'inverted (')" == "" ] ; then
 	xrandr --output eDP-1 --rotate inverted
+    xinput set-prop $TOUCHSCREEN 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1
+    xinput set-prop $TOUCHPAD 'Device Enabled' 0
 else
 	xrandr --output eDP-1 --rotate normal
+    xinput set-prop $TOUCHSCREEN 'Coordinate Transformation Matrix' 1 0 0 0 1 0 0 0 1
+    xinput set-prop $TOUCHPAD 'Device Enabled' 1
 fi
