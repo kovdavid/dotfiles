@@ -20,8 +20,8 @@ bindsym $mod+h exec i3_rename_workspace
 
 bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 bindsym XF86AudioMicMute exec amixer -q set Capture toggle
-bindsym XF86AudioLowerVolume exec amixer -q set  Master 5%- unmute
-bindsym XF86AudioRaiseVolume exec amixer -q set  Master 5%+ unmute
+bindsym XF86AudioLowerVolume exec amixer -q set  Master 5%+ unmute
+bindsym XF86AudioRaiseVolume exec amixer -q set  Master 5%- unmute
 bindsym XF86AudioPlay exec i3lock -c 000000
 bindsym XF86ScreenSaver exec i3lock -c 000000
 bindsym XF86Sleep exec "i3lock -c 000000; systemctl suspend"
