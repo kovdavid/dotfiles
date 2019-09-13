@@ -59,6 +59,7 @@ augroup filetype_golang
 
     autocmd FileType go noremap <buffer> <leader>rr :!go run %<CR>
     autocmd FileType go noremap <buffer> <leader>i :GoInfo<CR>
+    autocmd FileType go noremap <buffer> <leader>d :GoDef<CR>
     autocmd FileType go noremap <buffer> <leader>b :GoBuild -i<CR>
     autocmd FileType go noremap <buffer> <leader>ts :GoInstall<CR>
     autocmd FileType go noremap <buffer> <leader>gi :GoImports<CR>
