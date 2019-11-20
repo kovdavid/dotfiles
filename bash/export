@@ -32,6 +32,7 @@ if [ -d /opt/go ] ; then
     export GOPATH="/opt/go"
     export PATH="/opt/go/bin:$PATH"
 fi
+export GO111MODULE=on
 
 export GOPROXY=direct
 export GO111MODULE=on

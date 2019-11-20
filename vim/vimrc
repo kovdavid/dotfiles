@@ -164,12 +164,22 @@ augroup sh
     autocmd FileType sh nnoremap <buffer> <leader>rr :!bash %<CR>
 augroup END
 " }}}
+" yaml {{{
+augroup yaml
+    autocmd!
+    autocmd FileType yaml set expandtab
+    autocmd FileType yaml set autoindent
+    autocmd FileType yaml set tabstop=2
+    autocmd FileType yaml set shiftwidth=2
+augroup END
+" }}}
 " jinja {{{
 augroup jinja
     autocmd!
-    autocmd FileType jinja setlocal expandtab
-    autocmd FileType jinja setlocal autoindent
-    autocmd FileType jinja setlocal tabstop=2
+    autocmd FileType jinja set expandtab
+    autocmd FileType jinja set autoindent
+    autocmd FileType jinja set tabstop=2
+    autocmd FileType jinja set shiftwidth=2
 augroup END
 " }}}
 " vimrc {{{
