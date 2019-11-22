@@ -26,7 +26,7 @@
     "L0R1C10": "KC(SCOLON)",
     "L0R1C11": "KC(ENTER)",
 
-    "L0R2C0":  "KC(LSHIFT)",
+    "L0R2C0":  "LP(0x03)",
     "L0R2C1":  "KC(Z)",
     "L0R2C2":  "KC(X)",
     "L0R2C3":  "KC(C)",
