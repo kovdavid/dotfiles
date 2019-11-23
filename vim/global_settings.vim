@@ -85,6 +85,12 @@ set modelines=0
 set expandtab
 if filereadable(expand("~") . "/.nike")
     set noexpandtab
+    if &filetype ==# 'sls' || &filetype ==# 'yaml'
+        set expandtab
+        set tabstop=2
+        set shiftwidth=2
+        set autoindent
+    endif
 end
 
 set list
