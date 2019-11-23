@@ -137,7 +137,6 @@ augroup filetype_perl
 
     autocmd FileType perl nnoremap <buffer> <leader>ps 0f$lviw"hyouse v5.10; say "<C-r>h: $<C-r>h";<ESC>
     autocmd FileType perl nnoremap <buffer> <leader>pd 0f$lviw"hyouse v5.10; use Data::Dumper; local $Data::Dumper::Sortkeys = 1; local $Data::Dumper::Maxdepth = 2;<CR>say "<C-r>h: ".Dumper($<C-r>h);<ESC>
-    autocmd FileType perl vnoremap <buffer> <leader>pd :call PerlDumpVariables()<CR>
 augroup END
 " }}}
 " vim {{{

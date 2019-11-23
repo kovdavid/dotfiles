@@ -25,7 +25,7 @@ nnoremap qw <C-W><C-W>
 nnoremap qe :tabprev<CR>
 nnoremap qr :tabnext<CR>
 
-vnoremap <leader>jf :!python -m json.tool<CR>
+vnoremap <leader>jf :!perl -MJSON::XS -e 'my $json = do { local $/; <STDIN> }; print JSON::XS->new()->canonical(1)->pretty(1)->encode(decode_json($json));'<CR>
 vnoremap <leader>ujf :!perl -MJSON::XS -e 'my $json = do { local $/; <STDIN> }; print encode_json(decode_json($json))'<CR>
 vnoremap <leader>xf :!xmllint --format -<CR>
 vnoremap <leader>sf :!sqlformat -r -s -<CR>
@@ -83,7 +83,7 @@ noremap <F2> :call ToggleLineNumbers()<CR>
 noremap <F3> :set cursorline!<CR>
 noremap <F4> :set cursorcolumn!<CR>
 noremap <F6> :set list!<CR>
-noremap <f7> :GitGutterToggle<CR>
+noremap <F7> :GitGutterToggle<CR>
 
 noremap <c-t> :tabnew<CR>
 
