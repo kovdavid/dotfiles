@@ -3,60 +3,98 @@
 use v5.10;
 use strict;
 use warnings;
-use POSIX qw[ strftime ];
 
-if (@ARGV) {
-    `redshift -x`;
-    exit;
-}
+use POSIX qw( strftime );
+
+my $STEPS = 5; # minutes
+
+my $config = normalize_config({
+    #hour + minute
+     0*60 + 00 => { temp => 1300, brightness => '0.70' },
+     6*60 + 30 => { temp => 1300, brightness => '0.70' },
+     8*60 + 00 => { temp => 2800, brightness => '0.80' },
+     9*60 + 00 => { temp => 4700, brightness => '1.00' },
+    16*60 + 00 => { temp => 4700, brightness => '1.00' },
+    21*60 + 00 => { temp => 1300, brightness => '0.70' },
+});
 
 my $now = time();
 my $hour = strftime("%H", localtime($now));
 my $minute = strftime("%M", localtime($now));
 
-my $config = {
-    0  => { 0 => "-O 1300 -b 0.7" },
-    1  => { 0 => "-O 1300 -b 0.7" },
-    2  => { 0 => "-O 1300 -b 0.7" },
-    3  => { 0 => "-O 1300 -b 0.7" },
-    4  => { 0 => "-O 1300 -b 0.7" },
-    5  => { 0 => "-O 1300 -b 0.7" },
-    6  => { 0 => "-O 1300 -b 0.7" },
-    7  => { 0 => "-O 1300 -b 0.8" },
-    8  => { 0 => "-O 2800 -b 0.8" },
-    9  => { 0 => "-O 4700 -b 1.0" },
-    10 => { 0 => "-O 4700 -b 1.0" },
-    11 => { 0 => "-O 4700 -b 1.0" },
-    12 => { 0 => "-O 4700 -b 1.0" },
-    13 => { 0 => "-O 4700 -b 1.0" },
-    14 => { 0 => "-O 4700 -b 1.0" },
-    15 => { 0 => "-O 4700 -b 1.0" },
-    16 => { 0 => "-O 4700 -b 1.0" },
-    17 => { 0 => "-O 2700 -b 0.8" },
-    18 => { 0 => "-O 2200 -b 0.8" },
-    19 => { 0 => "-O 2200 -b 0.8" },
-    20 => { 0 => "-O 2200 -b 0.7" },
-    21 => { 0 => "-O 1300 -b 0.7" },
-    22 => { 0 => "-O 1300 -b 0.7" },
-    23 => { 0 => "-O 1300 -b 0.7" },
-    24 => { 0 => "-O 1300 -b 0.7" },
-};
+my $key = get_config_key($hour, $minute);
+my $cmd = get_cmd($config->{$key});
 
-my $last_hour_key = 0;
-for my $hour_key (sort { $a <=> $b } keys %{ $config }) {
-    if ($hour_key > $hour) {
-        last;
-    }
-    $last_hour_key = $hour_key;
-}
-my $last_minute_key = 0;
-for my $minute_key (sort { $a <=> $b } keys %{ $config->{ $last_hour_key } }) {
-    if ($minute_key > $minute) {
-        last;
-    }
-    $last_minute_key = $minute_key;
+if (@ARGV) {
+    print_config($config);
+    say "key: $key";
+    say "cmd: $cmd";
+    exit;
 }
 
-my $args = $config->{ $last_hour_key }->{ $last_minute_key };
+exit system($cmd);
 
-`redshift -P $args`;
+sub normalize_config {
+    my ($config) = @_;
+
+    $config->{ 23*60 + 55 } = $config->{0};
+
+    my ($prev_setting, $prev_minute);
+    for my $minute (sort { $a <=> $b } keys %{ $config }) {
+        my $setting = $config->{$minute};
+
+        unless (defined($prev_minute)) {
+            $prev_setting = $setting;
+            $prev_minute = $minute;
+            next;
+        }
+
+        my $minute_steps = int( ($minute - $prev_minute)/$STEPS )-1;
+
+        my $prev_brightness = $prev_setting->{brightness};
+        my $prev_temp = $prev_setting->{temp};
+
+        my $temp_diff       = $setting->{temp}       - $prev_temp;
+        my $brightness_diff = $setting->{brightness} - $prev_brightness;
+
+        for my $min_step (1..$minute_steps) {
+            my $fill_minute = $prev_minute+($min_step * $STEPS);
+
+            my $brightness_increment = $min_step*( $brightness_diff/($minute_steps+1) );
+            my $temp_increment = $min_step*( $temp_diff/($minute_steps+1) );
+
+            $config->{$fill_minute}->{brightness} = $prev_brightness + $brightness_increment;
+            $config->{$fill_minute}->{temp} = $prev_temp + $temp_increment;
+        }
+
+        $prev_setting = $setting;
+        $prev_minute = $minute;
+    }
+
+    return $config;
+}
+
+sub get_config_key {
+    my ($hour, $minute) = @_;
+
+    $minute++ while ($minute % $STEPS);
+
+    return $hour*60 + $minute;
+}
+
+sub get_cmd {
+    my ($args) = @_;
+
+    my $brightness = sprintf("%.2f", $args->{brightness});
+    my $temp = int($args->{temp});
+
+    return "redshift -P -m randr -O $temp -b $brightness";
+}
+
+sub print_config {
+    my ($config) = @_;
+
+    for my $minute (sort { $a <=> $b } keys %{ $config }) {
+        say sprintf("minute:% 5d temp:%d brightness:%.2f", $minute, @{ $config->{$minute} }{qw( temp brightness )});
+    }
+}
