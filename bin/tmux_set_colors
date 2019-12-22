@@ -4,20 +4,14 @@ if [ -f /tmp/.Xresources_solarized ] ; then
     tmux set-option -g status-right ' #(tmux_get_pane_title) #[fg=colour0]%H:%M# %d-%b-%y'
     tmux set-option -g status-bg colour7
     tmux set-option -g status-fg colour248
-    tmux set-option -g status-attr dim
-    tmux set-window-option -g window-status-current-bg colour0
-    tmux set-window-option -g window-status-current-fg colour15
-    tmux set-window-option -g window-status-current-attr bold
+    tmux set-window-option -g window-status-current-style bg=colour0,fg=colour15,bold
     tmux set-window-option -g window-status-current-format '#I:#W#[fg=red,bold]#F'
     tmux set-window-option -g window-status-format '#I:#W#[fg=red,bold]#F'
 else
     tmux set-option -g status-right ' #(tmux_get_pane_title) #[fg=colour227]%H:%M#[fg=colour248] %d-%b-%y'
     tmux set-option -g status-bg colour235
     tmux set-option -g status-fg colour248
-    tmux set-option -g status-attr dim
-    tmux set-window-option -g window-status-current-bg colour237
-    tmux set-window-option -g window-status-current-fg colour227
-    tmux set-window-option -g window-status-current-attr bold
+    tmux set-window-option -g window-status-current-style bg=colour237,fg=colour227,bold
     tmux set-window-option -g window-status-current-format '#I:#W#[fg=red,bold]#F'
     tmux set-window-option -g window-status-format '#I:#W#[fg=red,bold]#F'
 fi
