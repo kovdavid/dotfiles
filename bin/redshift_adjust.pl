@@ -12,6 +12,7 @@ my $config = normalize_config({
     #hour + minute
      0*60 + 00 => { temp => 1300, brightness => '0.70' },
      6*60 + 30 => { temp => 1300, brightness => '0.70' },
+     7*60 + 30 => { temp => 1600, brightness => '0.70' },
      8*60 + 00 => { temp => 2800, brightness => '0.80' },
      9*60 + 00 => { temp => 4700, brightness => '1.00' },
     16*60 + 00 => { temp => 4700, brightness => '1.00' },
