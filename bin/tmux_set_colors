@@ -11,7 +11,7 @@ else
     tmux set-option -g status-right ' #(tmux_get_pane_title) #[fg=colour227]%H:%M#[fg=colour248] %d-%b-%y'
     tmux set-option -g status-bg colour235
     tmux set-option -g status-fg colour248
-    tmux set-window-option -g window-status-current-style bg=colour237,fg=colour227,bold
+    tmux set-window-option -g window-status-current-style bg=colour237,fg=colour226,bold,dim
     tmux set-window-option -g window-status-current-format '#I:#W#[fg=red,bold]#F'
     tmux set-window-option -g window-status-format '#I:#W#[fg=red,bold]#F'
 fi
