@@ -16,7 +16,6 @@ Plug 'junkblocker/git-time-lapse'
 Plug 'benekastah/neomake'
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'SirVer/ultisnips'
 
 Plug 'fatih/vim-go', { 'for': 'go' }
 

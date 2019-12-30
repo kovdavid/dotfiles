@@ -11,6 +11,7 @@ endif
 set lazyredraw   " don't redraw when executing macros (good performance option)
 set noswapfile
 set scrolloff=3  " when moving vertically set 3 lines to the cursor
+set backspace=indent,eol,start
 
 " set mousehide
 set mouse=niv
