@@ -12,6 +12,8 @@ focus_follows_mouse no
 bindsym $mod+Tab exec ~/bin/i3_jump_to_next_output
 bindsym $mod+Shift+Tab exec ~/bin/i3_move_to_next_output
 bindsym $mod+Return exec ~/bin/i3_cycle_windows
+# bindsym $mod+F13 exec ~/bin/i3_cycle_workspace down
+# bindsym $mod+F14 exec ~/bin/i3_cycle_workspace up
 
 bindsym $mod+x exec xterm -e ~/bin/xterm_tmux_session
 bindsym $mod+Shift+x exec xterm

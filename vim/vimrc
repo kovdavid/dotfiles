@@ -108,6 +108,7 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>gld :let @/=expand("<cword>")<CR>:!grep -rlP 'sub <C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
     autocmd FileType perl nnoremap <buffer> <leader>ga  :let @/=expand("<cword>")<CR>:!grep -rP  '<C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
     autocmd FileType perl nnoremap <buffer> <leader>gla :let @/=expand("<cword>")<CR>:!grep -rlP '<C-R>=expand("<cword>")<CR>' bin/ lib/ t/<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>gsc :let @/=expand("<cword>")<CR>:!grep -rP  '<C-R>=expand("<cword>")<CR>\(' bin/ lib/ t/<CR>
 
     autocmd FileType perl nnoremap <buffer> <leader>rr :!perl -Ilib %<CR>
 
