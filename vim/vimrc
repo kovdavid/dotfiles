@@ -125,7 +125,6 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <leader>ms  :call PerlOpenModule(2)<CR>
     autocmd FileType perl nnoremap <buffer> <leader>mv  :call PerlOpenModule(3)<CR>
     autocmd FileType perl nnoremap <buffer> <leader>mm  :call PerlOpenModule(4)<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>me  :Explore<CR>
 
     if len($PERL_TEST_FILE_COMMAND) > 0
         autocmd FileType perl let g:perl_test_file_command = $PERL_TEST_FILE_COMMAND

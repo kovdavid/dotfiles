@@ -32,6 +32,8 @@ vnoremap <leader>sf :!sqlformat -r -s -<CR>
 vnoremap <leader>pf :!perl -e 'use Data::Dumper; my $lines = do { local $/ = undef; <STDIN> }; print Dumper(eval $lines);'<CR>
 vnoremap <c-f> "sy/<C-R>s<CR>
 
+nnoremap <leader>me :let @/=expand("%:t")<CR>:Explore<CR>n:nohl<CR>
+
 " maximize current split
 nnoremap qa <C-W>_<C-W><BAR>
 " move to next split and maximize it
