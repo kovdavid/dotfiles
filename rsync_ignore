@@ -13,6 +13,7 @@
 /tmp
 /usr
 /var/cache
+/var/log
 /var/lib/mysql
 /var/lib/docker
 
