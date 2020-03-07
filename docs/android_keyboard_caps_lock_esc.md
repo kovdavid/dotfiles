@@ -2,8 +2,6 @@
 
 I've been using a rooted Android 9 tablet with Termux and it is great. I really wanted to change CAPS_LOCK to ESCAPE, because I'm used to that on my desktop when using vim. Fortunately I managed to do it. Here is how:
 
-## 1. Find the keyboard's Vendor and Product id
-
 1. Open tmux
 2. $ su
 3. $ cat /proc/bus/input/devices
