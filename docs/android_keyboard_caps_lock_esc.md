@@ -6,7 +6,7 @@ I've been using a rooted Android 9 tablet with Termux and it is great. I really 
 
 1. Open tmux
 2. $ su
-3. # cat /proc/bus/input/devices
+3. $ cat /proc/bus/input/devices
 
 	```
 	...
@@ -16,7 +16,7 @@ I've been using a rooted Android 9 tablet with Termux and it is great. I really 
 	...
 	```
 
-4. # mkdir -p /data/system/devices/keylayout
-5. # cp /system/usr/keylayout/Generic.kl /data/system/devices/keylayout/Vendor_046D_Product_B342_Version_0001.kl
-6. # vim /data/system/devices/keylayout/Vendor_046D_Product_B342_Version_0001.kl
+4. $ mkdir -p /data/system/devices/keylayout
+5. $ cp /system/usr/keylayout/Generic.kl /data/system/devices/keylayout/Vendor_046D_Product_B342_Version_0001.kl
+6. $ vim /data/system/devices/keylayout/Vendor_046D_Product_B342_Version_0001.kl
 7. Change line "key 58 CAPS_LOCK" to "key 58 ESCAPE"
