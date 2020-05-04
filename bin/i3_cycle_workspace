@@ -1,0 +1,44 @@
+#!/usr/bin/env perl
+
+use v5.10;
+use strict;
+use warnings;
+use JSON qw[ decode_json ];
+
+my $direction = shift || "up";
+if ($direction ne "up" && $direction ne "down") {
+	$direction = "up";
+}
+
+my $workspaces = decode_json(`i3-msg -t get_workspaces`);
+my $current_workspace = [
+    map { $_->{num} }
+    grep { $_->{focused} }
+    @{ $workspaces }
+]->[0];
+
+my $new_workspace;
+
+if ($direction eq "up") {
+	$new_workspace = $current_workspace + 1;
+
+	if ($new_workspace >= 20) {
+		$new_workspace = 20;
+	}
+	if ($new_workspace == 11) {
+		$new_workspace = 10;
+	}
+} else {
+	$new_workspace = $current_workspace - 1;
+
+	if ($new_workspace <= 0) {
+		$new_workspace = 1;
+	}
+	if ($new_workspace == 10) {
+		$new_workspace = 11;
+	}
+}
+
+`echo "\$(date) direction:$direction curr:$current_workspace next:$new_workspace" > /tmp/x`;
+
+# `i3-msg -t command workspace number $new_workspace`;

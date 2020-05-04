@@ -7,18 +7,31 @@ use strict;
 use warnings;
 use Carp;
 use Data::Dumper;
+use File::Basename;
 
-my ($input_file, $line_number, $column) = @ARGV;
+my ($input_file, $line_number, $column, $type) = @ARGV;
 
 # $input_file = "/usr/nikesoft/trading-platform/lib/Prematch/UFO/Fixtures.pm";
 # $line_number = 54;
 # $column = 30;
+# $type = 5;
 
 exit unless $input_file && $line_number;
 
 open my $log_fh, ">", "/tmp/perl_find_module.log" or die "open log: $!";
 say $log_fh join(" ", @ARGV);
 close $log_fh;
+
+if (($type // -1) == 5) {
+	my $dir = $input_file;
+	while ($dir ne '/') {
+		$dir = dirname($dir);
+		if ( -f "$dir.pm" ) {
+			say "$dir.pm\t0";
+		}
+	}
+	exit;
+}
 
 open my $fh, "<", $input_file or die "open $input_file: $!";
 my @lines = <$fh>;

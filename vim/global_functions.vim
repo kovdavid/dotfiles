@@ -88,7 +88,7 @@ function! PerlOpenModule(type)
     let l:col = col(".")
     let l:file = expand("%:p")
 
-    let l:cmd = "/home/davs/bin/perl_find_module.pl " . l:file . " " . l:line . " " . l:col
+    let l:cmd = "/home/davs/bin/perl_find_module.pl " . l:file . " " . l:line . " " . l:col . " " . a:type
     let l:result = system(l:cmd)
     let l:result = substitute(l:result, '\n\+$', '', '')
     if strlen(l:result) > 10
