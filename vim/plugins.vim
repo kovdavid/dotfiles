@@ -16,11 +16,9 @@ Plug 'junkblocker/git-time-lapse'
 Plug 'benekastah/neomake'
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fatih/vim-go', { 'for': 'go' }
-
-" if has('nvim')
-    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" endif
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 call plug#end()

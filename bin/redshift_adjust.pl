@@ -8,16 +8,46 @@ use POSIX qw( strftime );
 
 my $STEPS = 5; # minutes
 
-my $config = normalize_config({
-    #hour + minute
-     0*60 + 00 => { temp => 1300, brightness => '0.70' },
-     6*60 + 30 => { temp => 1300, brightness => '0.70' },
-     7*60 + 30 => { temp => 1600, brightness => '0.70' },
-     8*60 + 00 => { temp => 2800, brightness => '0.80' },
-     9*60 + 00 => { temp => 4700, brightness => '1.00' },
-    16*60 + 00 => { temp => 4700, brightness => '1.00' },
-    21*60 + 00 => { temp => 1300, brightness => '0.70' },
-});
+my $raw_config_by_month = [
+    {
+        months => [ 1, 2, 3, 10, 11, 12 ],
+        config => {
+            #hour + minute
+             0*60 + 00 => { temp => 1300, brightness => '0.70' },
+             6*60 + 30 => { temp => 1300, brightness => '0.70' },
+             7*60 + 30 => { temp => 1600, brightness => '0.70' },
+             8*60 + 00 => { temp => 2800, brightness => '0.80' },
+             9*60 + 00 => { temp => 4700, brightness => '1.00' },
+            16*60 + 00 => { temp => 4700, brightness => '1.00' },
+            21*60 + 00 => { temp => 1300, brightness => '0.70' },
+        },
+    },
+    {
+        months => [ 4, 5, 6, 7, 8, 9 ],
+        config => {
+            #hour + minute
+             0*60 + 00 => { temp => 1300, brightness => '0.70' },
+             6*60 + 30 => { temp => 1300, brightness => '0.70' },
+             7*60 + 30 => { temp => 2800, brightness => '0.70' },
+             8*60 + 00 => { temp => 4700, brightness => '1.00' },
+            18*60 + 00 => { temp => 4700, brightness => '1.00' },
+            21*60 + 00 => { temp => 1300, brightness => '0.70' },
+        },
+    },
+];
+
+my $config;
+my $month = int(strftime("%m", localtime(time)));
+for my $raw_config (@{ $raw_config_by_month }) {
+    if (grep { $_ == $month } @{ $raw_config->{months} }) {
+        $config = normalize_config($raw_config->{config});
+        last;
+    }
+}
+
+unless ($config) {
+    die "No config found for month $month";
+}
 
 my $now = time();
 my $hour = strftime("%H", localtime($now));

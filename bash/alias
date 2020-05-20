@@ -11,6 +11,7 @@ alias df="df -h"
 alias dus="du -shc .??* * | sort -h"
 alias fprove='forkprove -Mlib::require::all=t/lib,lib'
 alias d="docker"
+alias dcp="docker-compose"
 alias di="docker images"
 alias ddf="docker system df"
 alias dp='docker ps --format "table{{.Names}}\t{{.Image}}\t{{.Ports}}"'

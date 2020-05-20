@@ -64,10 +64,6 @@ nnoremap gd :Gvdiff<CR>
 nnoremap gci :let @f=expand("%:t:r")<CR>:Gwrite <BAR> Gcommit<CR>O<C-R>f:<space>
 nnoremap gca :Gwrite <BAR> Gcommit --amend<CR>ggA
 
-" Supertab
-let g:SuperTabDefaultCompletionType="<c-x><c-o>"
-let g:SuperTabClosePreviewOnPopupClose=1
-
 " NERDCommenter
 let g:NERDCustomDelimiters = {
             \ 'elixir': { 'left': '#' },
@@ -90,3 +86,8 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
+
+" LanguageCleant
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['javascript-typescript-stdio']
+    \ }

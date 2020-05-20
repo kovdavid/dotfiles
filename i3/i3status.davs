@@ -6,6 +6,7 @@ general {
 
 order += "wireless wlan0"
 order += "ethernet eth0"
+order += "ethernet usb0"
 order += "battery 0"
 order += "cpu_temperature 0"
 order += "cpu_usage"
@@ -21,6 +22,11 @@ wireless wlan0 {
 
 ethernet eth0 {
     format_up = "%ip"
+    format_down = ""
+}
+
+ethernet usb0 {
+    format_up = "☎ %ip"
     format_down = ""
 }
 
