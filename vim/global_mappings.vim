@@ -22,6 +22,8 @@ nnoremap ; :
 noremap <leader>w :w<CR>
 nnoremap qt <C-W><C-C>
 nnoremap qw <C-W><C-W>
+nnoremap qW <C-W><C-W>:setlocal winwidth=121<CR>
+nnoremap QW <C-W><C-W>:setlocal winwidth=121<CR>
 nnoremap qe :tabprev<CR>
 nnoremap qr :tabnext<CR>
 

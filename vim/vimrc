@@ -21,7 +21,8 @@ augroup all_file_type
     autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
     autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal winwidth=1 | setlocal wrap | setlocal nocursorbind | endif
-    autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=121 | endif
+    " autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=121 | endif
+    autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=1 | endif
 
     autocmd Syntax * highlight SpecialKey ctermfg=240 gui=bold guifg=#5b605e
     autocmd Syntax * highlight NonText ctermfg=240 gui=bold guifg=#5b605e
