@@ -4,6 +4,10 @@ use v5.10;
 use strict;
 use warnings;
 
+if ( -f "/tmp/redshift_disable" ) {
+    exit;
+}
+
 use POSIX qw( strftime );
 
 my $STEPS = 5; # minutes
@@ -15,7 +19,7 @@ my $raw_config_by_month = [
             #hour + minute
              0*60 + 00 => { temp => 1300, brightness => '0.70' },
              6*60 + 30 => { temp => 1300, brightness => '0.70' },
-             7*60 + 30 => { temp => 1600, brightness => '0.70' },
+             7*60 + 30 => { temp => 1900, brightness => '0.80' },
              8*60 + 00 => { temp => 2800, brightness => '0.80' },
              9*60 + 00 => { temp => 4700, brightness => '1.00' },
             16*60 + 00 => { temp => 4700, brightness => '1.00' },

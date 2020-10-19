@@ -21,8 +21,10 @@
 # home
 /home/davs/.cache
 /home/davs/dotfiles
+/home/davs/.cargo
 /home/davs/.cpanm
 /home/davs/.config/google-chrome
+/home/davs/.config/GIMP
 /home/davs/.config/coc
 /home/davs/.config/Code \-\ OSS
 /home/davs/.config/ultravnc-viewer
