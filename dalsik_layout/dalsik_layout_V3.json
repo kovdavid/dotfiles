@@ -36,8 +36,8 @@
     "L0R2C7":  "KC(M)",
     "L0R2C8":  "KC(COMMA)",
     "L0R2C9":  "KC(DOT)",
-    "L0R2C10": "KC(SLASH)",
     "L0R2C10": "D(LAYER_3,SLASH)",
+    "L0R2C10": "KC(SLASH)",
     "L0R2C11": "KC(DEL)",
 
     "L0R3C0":  "KC(LCTRL)",
