@@ -205,6 +205,7 @@ bar {
         font pango:DejaVu Sans Mono 12px
         status_command i3_custom_status.sh
         tray_output $primary_output
+        tray_output $secondary_output
 }
 
 # use xprop ;)
