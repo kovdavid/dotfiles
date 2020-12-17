@@ -28,7 +28,7 @@ bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 bindsym XF86AudioMicMute exec amixer -q set Capture toggle
 bindsym XF86AudioLowerVolume exec amixer -q set  Master 5%- unmute
 bindsym XF86AudioRaiseVolume exec amixer -q set  Master 5%+ unmute
-bindsym XF86ScreenSaver exec i3lock -c 000000
+bindsym XF86ScreenSaver exec /home/davs/bin/nike_lock
 
 # kill focused window
 bindsym $mod+Shift+Q kill
