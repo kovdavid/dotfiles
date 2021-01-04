@@ -91,3 +91,5 @@ let g:go_highlight_types = 1
 let g:LanguageClient_serverCommands = {
     \ 'javascript': ['javascript-typescript-stdio']
     \ }
+
+let g:coc_disable_startup_warning = 1
