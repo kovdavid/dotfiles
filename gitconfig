@@ -1,6 +1,7 @@
 [alias]
     st   = -c color.status=false status
     ci   = commit
+    cp   = cherry-pick
     br   = branch
     co   = checkout
     me   = merge --no-ff
