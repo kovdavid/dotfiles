@@ -90,10 +90,10 @@ rm -rf ~/.nvimrc
 rm -rf ~/.nvim
 ln -s ~/.vim/vimrc ~/.nvimrc
 ln -s ~/.vim ~/.nvim
-ln -s ~/dotfiles/vim ~/.config/nvim
+ln -s ~/.config/nvim ~/dotfiles/vim
 
 rm -rf ~/.config/redshift.conf
-ln -s ~/dotfiles/redshift.conf ~/.config/redshift.conf
+ln -s ~/.config/redshift.conf ~/dotfiles/redshift.conf
 
 mkdir -p ${XDG_CONFIG_HOME:=~/.config}
 rm -rf $XDG_CONFIG_HOME/nvim
