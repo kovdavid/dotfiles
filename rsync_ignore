@@ -39,6 +39,7 @@
 /home/davs/.gvfs
 /home/davs/.npm
 /home/davs/.local/bin
+/home/davs/.asdf
 
 /home/davs/workspace/rust/*/target
 /home/davs/workspace/ocaml/*/_build
