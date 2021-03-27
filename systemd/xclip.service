@@ -1,0 +1,14 @@
+[Unit]
+Description=Copy backend service piping input to xclip
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/xclip -i -f -selection primary
+StandardInput=socket
+StandardOutput=socket
+User=davs
+
+; Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+; Environment=XAUTHORITY=/home/davs/.Xauthority
+; ExecStart=/usr/bin/xclip -d :0.0 -i -f -selection primary
+; ExecStart=/usr/bin/xclip -i -f -selection primary

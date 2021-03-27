@@ -22,6 +22,7 @@ shopt -s histappend
 [[ -f ~/dotfiles/bash/export ]] && source ~/dotfiles/bash/export
 [[ -f ~/dotfiles/bash/alias ]] && source ~/dotfiles/bash/alias
 [[ -f ~/dotfiles/tmux-completion.bash ]] && source ~/dotfiles/tmux-completion.bash
+#[[ -f ~/dotfiles/mix_autocomplete.sh ]] && source ~/dotfiles/mix_autocomplete.sh
 
 if [ -f ~/dotfiles/nike ] ; then
     [[ -f ~/dotfiles/bash/nike ]] && source ~/dotfiles/bash/nike

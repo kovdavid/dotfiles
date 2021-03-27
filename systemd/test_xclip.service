@@ -1,0 +1,8 @@
+[Unit]
+Description=Test XClip
+
+[Service]
+ExecStart=/home/davs/dotfiles/systemd/xclip_test.sh
+
+[Install]
+WantedBy=multi-user.target

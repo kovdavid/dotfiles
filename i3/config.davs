@@ -1,6 +1,6 @@
 set $mod Mod4
-set $primary_output LVDS1
-set $secondary_output DP1
+set $primary_output DP1
+set $secondary_output LVDS1
 
 font pango:DejaVu Sans Mono 13px
 
@@ -72,16 +72,16 @@ bindsym $mod+space focus mode_toggle
 workspace_auto_back_and_forth yes
 bindsym $mod+z workspace back_and_forth
 
-workspace 1 output $primary_output
-workspace 2 output $primary_output
-workspace 3 output $primary_output
-workspace 4 output $primary_output
-workspace 5 output $primary_output
-workspace 6 output $primary_output
-workspace 7 output $primary_output
-workspace 8 output $primary_output
-workspace 9 output $primary_output
-workspace 10 output $primary_output
+workspace 1 output  $primary_output $secondary_output
+workspace 2 output  $primary_output $secondary_output
+workspace 3 output  $primary_output $secondary_output
+workspace 4 output  $primary_output $secondary_output
+workspace 5 output  $primary_output $secondary_output
+workspace 6 output  $primary_output $secondary_output
+workspace 7 output  $primary_output $secondary_output
+workspace 8 output  $primary_output $secondary_output
+workspace 9 output  $primary_output $secondary_output
+workspace 10 output $primary_output $secondary_output
 workspace 11 output $secondary_output
 workspace 12 output $secondary_output
 workspace 13 output $secondary_output
@@ -121,26 +121,26 @@ bindsym $mod+F11 workspace number 21
 bindsym $mod+F12 workspace number 22
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move container to workspace number 1
-bindsym $mod+Shift+at move container to workspace number 2
-bindsym $mod+Shift+numbersign move container to workspace number 3
-bindsym $mod+Shift+dollar move container to workspace number 4
-bindsym $mod+Shift+percent move container to workspace number 5
+bindsym $mod+Shift+exclam      move container to workspace number 1
+bindsym $mod+Shift+at          move container to workspace number 2
+bindsym $mod+Shift+numbersign  move container to workspace number 3
+bindsym $mod+Shift+dollar      move container to workspace number 4
+bindsym $mod+Shift+percent     move container to workspace number 5
 bindsym $mod+Shift+asciicircum move container to workspace number 6
-bindsym $mod+Shift+ampersand move container to workspace number 7
-bindsym $mod+Shift+asterisk move container to workspace number 8
-bindsym $mod+Shift+parenleft move container to workspace number 9
-bindsym $mod+Shift+parenright move container to workspace number 10
+bindsym $mod+Shift+ampersand   move container to workspace number 7
+bindsym $mod+Shift+asterisk    move container to workspace number 8
+bindsym $mod+Shift+parenleft   move container to workspace number 9
+bindsym $mod+Shift+parenright  move container to workspace number 10
 
-bindsym $mod+Shift+F1 move container to workspace number 11
-bindsym $mod+Shift+F2 move container to workspace number 12
-bindsym $mod+Shift+F3 move container to workspace number 13
-bindsym $mod+Shift+F4 move container to workspace number 14
-bindsym $mod+Shift+F5 move container to workspace number 15
-bindsym $mod+Shift+F6 move container to workspace number 16
-bindsym $mod+Shift+F7 move container to workspace number 17
-bindsym $mod+Shift+F8 move container to workspace number 18
-bindsym $mod+Shift+F9 move container to workspace number 19
+bindsym $mod+Shift+F1  move container to workspace number 11
+bindsym $mod+Shift+F2  move container to workspace number 12
+bindsym $mod+Shift+F3  move container to workspace number 13
+bindsym $mod+Shift+F4  move container to workspace number 14
+bindsym $mod+Shift+F5  move container to workspace number 15
+bindsym $mod+Shift+F6  move container to workspace number 16
+bindsym $mod+Shift+F7  move container to workspace number 17
+bindsym $mod+Shift+F8  move container to workspace number 18
+bindsym $mod+Shift+F9  move container to workspace number 19
 bindsym $mod+Shift+F10 move container to workspace number 20
 bindsym $mod+Shift+F11 move container to workspace number 21
 bindsym $mod+Shift+F12 move container to workspace number 22

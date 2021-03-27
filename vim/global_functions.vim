@@ -10,7 +10,7 @@ endfunction
 function! NewGoFile()
     0r ~/.vim/skeleton/go.script
     let l:module = expand('%:h:t')
-    execute "normal! ggwi".l:module
+    execute "normal! ggwC".l:module
 endfunction
 
 function! CloseHiddenBuffers()

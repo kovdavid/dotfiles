@@ -19,6 +19,9 @@ elif [ -d ~/.plenv/bin ] ; then
     eval "$(plenv init -)"
 fi
 
+[[ -f ~/.asdf/asdf.sh ]] && source ~/.asdf/asdf.sh
+[[ -f ~/.asdf/completions/asdf.bash ]] && source ~/.asdf/completions/asdf.bash
+
 export PATH="$HOME/bin:$JAVA_HOME:$PATH"
 # [[ -d /opt/node ]] && export NODE_PATH="/opt/node"
 [[ -d /opt/rust/rustup ]] && export RUSTUP_HOME="/opt/rust/rustup"

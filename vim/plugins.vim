@@ -17,8 +17,10 @@ Plug 'benekastah/neomake'
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'mhinz/vim-mix-format', { 'for': 'elixir' }
 Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'peitalin/vim-jsx-typescript'
+Plug 'elixir-editors/vim-elixir'
 
 call plug#end()

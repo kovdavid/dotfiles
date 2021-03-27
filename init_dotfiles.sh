@@ -15,6 +15,8 @@ if [ ! -d ~/bin ] ; then
 	mkdir ~/bin
 fi
 
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
+
 for script in $(ls ~/dotfiles/bin); do
 	if [ -f ~/bin/$script ] ; then
 		if [[ -z $(ls -l ~/bin/$script | grep dotfiles) ]] ; then
@@ -88,6 +90,7 @@ rm -rf ~/.nvimrc
 rm -rf ~/.nvim
 ln -s ~/.vim/vimrc ~/.nvimrc
 ln -s ~/.vim ~/.nvim
+ln -s ~/dotfiles/vim ~/.config/nvim
 
 rm -rf ~/.config/redshift.conf
 ln -s ~/dotfiles/redshift.conf ~/.config/redshift.conf

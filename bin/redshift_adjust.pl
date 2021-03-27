@@ -4,8 +4,31 @@ use v5.10;
 use strict;
 use warnings;
 
-if ( -f "/tmp/redshift_disable" ) {
-    exit;
+my $args = shift || '';
+
+use constant {
+    DISABLE_FILE => "/tmp/redshift_disable",
+};
+
+if ($args eq '-t') {
+    if ( -f DISABLE_FILE ) {
+        unlink DISABLE_FILE;
+    } else {
+        open my $fh, ">", DISABLE_FILE;
+        say $fh "";
+        close $fh;
+
+        exit system("redshift -x");
+    }
+}
+
+if ( -f DISABLE_FILE ) {
+    my $now = time();
+    my $mtime = (stat(DISABLE_FILE))[9];
+    my $file_age = abs($now - $mtime);
+    if ($file_age <= 3*3600) {
+        exit;
+    }
 }
 
 use POSIX qw( strftime );
@@ -19,8 +42,8 @@ my $raw_config_by_month = [
             #hour + minute
              0*60 + 00 => { temp => 1300, brightness => '0.70' },
              6*60 + 30 => { temp => 1300, brightness => '0.70' },
-             7*60 + 30 => { temp => 1900, brightness => '0.80' },
-             8*60 + 00 => { temp => 2800, brightness => '0.80' },
+             7*60 + 30 => { temp => 2400, brightness => '0.85' },
+             8*60 + 00 => { temp => 2800, brightness => '0.90' },
              9*60 + 00 => { temp => 4700, brightness => '1.00' },
             16*60 + 00 => { temp => 4700, brightness => '1.00' },
             21*60 + 00 => { temp => 1300, brightness => '0.70' },

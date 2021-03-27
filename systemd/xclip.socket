@@ -1,0 +1,10 @@
+[Unit]
+Description=Network copy backend for tmux based on xclip
+
+[Socket]
+ListenStream=0.0.0.0:18899
+Accept=yes
+StandardInput=socket
+
+[Install]
+WantedBy=multi-user.target
