@@ -1,4 +1,7 @@
 #!/bin/bash
+
+touch /tmp/.i3_split_orientation
+
 i3status -c ~/.i3/i3status | while :
 do
     read line;
