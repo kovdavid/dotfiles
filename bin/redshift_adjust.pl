@@ -17,9 +17,9 @@ if ($args eq '-t') {
         open my $fh, ">", DISABLE_FILE;
         say $fh "";
         close $fh;
-
-        exit system("redshift -x");
     }
+
+    exit system("redshift -x");
 }
 
 if ( -f DISABLE_FILE ) {
