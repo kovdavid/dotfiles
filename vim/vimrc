@@ -132,9 +132,21 @@ augroup filetype_perl
     autocmd FileType perl nnoremap <buffer> <silent> <F1> m`:%!perltidy<CR>g``
     autocmd FileType perl vnoremap <buffer> <silent> <F1> :%!perltidy<CR>
 
+    autocmd FileType perl let g:test_runner_single_command = "perl"
+    autocmd FileType perl let g:test_runner_multiple_command = "prove"
+    autocmd FileType perl let g:test_runner_test_dir = "t"
+    autocmd FileType perl let g:test_runner_test_suffix = "t"
+
     if len($PERL_TEST_FILE_COMMAND) > 0
         autocmd FileType perl let g:perl_test_file_command = $PERL_TEST_FILE_COMMAND
     endif
+    if len($TEST_RUNNER_SINGLE_COMMAND) > 0
+        autocmd FileType perl let g:test_runner_single_command = $TEST_RUNNER_SINGLE_COMMAND
+    endif
+    if len($TEST_RUNNER_MULTI_COMMAND) > 0
+        autocmd FileType perl let g:test_runner_single_command = $TEST_RUNNER_SINGLE_COMMAND
+    endif
+
 
     autocmd FileType perl nnoremap gci :call CommitPerlFiles()<CR>
 
