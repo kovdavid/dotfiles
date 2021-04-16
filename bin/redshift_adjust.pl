@@ -4,6 +4,8 @@ use v5.10;
 use strict;
 use warnings;
 
+use POSIX qw( strftime );
+
 my $args = shift || '';
 
 use constant {
@@ -13,10 +15,13 @@ use constant {
 if ($args eq '-t') {
     if ( -f DISABLE_FILE ) {
         unlink DISABLE_FILE;
+        say "unlink ${\DISABLE_FILE}";
     } else {
         open my $fh, ">", DISABLE_FILE;
         say $fh "";
         close $fh;
+
+        say "touch ${\DISABLE_FILE}";
     }
 
     exit system("redshift -x");
@@ -26,12 +31,16 @@ if ( -f DISABLE_FILE ) {
     my $now = time();
     my $mtime = (stat(DISABLE_FILE))[9];
     my $file_age = abs($now - $mtime);
+
+    say "${\DISABLE_FILE} exists age:$file_age";
+
     if ($file_age <= 3*3600) {
+        say "exit, because ${\DISABLE_FILE} is only $file_age sec old";
         exit;
     }
+} else {
+    say "${\DISABLE_FILE} does not exist";
 }
-
-use POSIX qw( strftime );
 
 my $STEPS = 5; # minutes
 
@@ -89,6 +98,8 @@ if (@ARGV) {
     say "cmd: $cmd";
     exit;
 }
+
+say "$cmd";
 
 exit system($cmd);
 

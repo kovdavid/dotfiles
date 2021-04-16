@@ -15,18 +15,22 @@ XTerm*allowWindowOps: true
 
 xterm*termName: xterm-256color
 XTerm*locale: true
-XTerm*VT100.translations: #override \n\
-    <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
-    <Key>XF86Launch5: string(0x1b) string("OP") \n\
-    <Key>XF86Launch6: string(0x1b) string("OQ") \n\
-    <Key>XF86Launch7: string(0x1b) string("OR") \n\
-    <Key>XF86Launch8: string(0x1b) string("OS") \n\
-    <Key>XF86Launch9: string(0x1b) string("[15~") \n\
-    <Key>XF86Favorites: string("TERM=xterm-256color")
+
+! Microsoft Natural 4000
+! XTerm*VT100.translations: #override \n\
+! <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
+! <Key>XF86Launch5: string(0x1b) string("OP") \n\
+! <Key>XF86Launch6: string(0x1b) string("OQ") \n\
+! <Key>XF86Launch7: string(0x1b) string("OR") \n\
+! <Key>XF86Launch8: string(0x1b) string("OS") \n\
+! <Key>XF86Launch9: string(0x1b) string("[15~") \n\
+! <Key>XF86Favorites: string("TERM=xterm-256color")
 
 !Alt key
 XTerm*metaSendsEscape: true
 
-Xterm*saveLines: 4096
+Xterm*saveLines: 9000
 
 #include "/home/davs/.Xresources.colorscheme"
+
+XTerm*utf8: 1
