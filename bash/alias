@@ -30,6 +30,7 @@ alias gci='git commit'
 alias gcidate='date "+%F %T" | git commit --file -'
 alias gco='git checkout'
 alias gfo='git fetch origin && git rev-parse --abbrev-ref HEAD | xargs -I{} git diff --stat {}..origin/{}'
+alias git_branches_without_remote="git branch -vv | grep 'gone]' | awk '{ print \$1 }'"
 alias gfop='git fetch origin --prune'
 alias gpo='git push origin'
 alias gpoh='git push -u origin HEAD'
