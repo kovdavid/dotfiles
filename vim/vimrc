@@ -116,22 +116,6 @@ augroup filetype_perl
     vnoremap <leader>pt :!perltidy<CR>
     nnoremap <leader>pt :%!perltidy<CR>
 
-    autocmd FileType perl nnoremap <buffer> <leader>ts  :!perl -Ilib -c %<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>tf  :PerlTestFile<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>tpf :PerlProveTestFile<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>ta  :PerlTestAll<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>td  :PerlTestDir<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>tc  :PerlTestCreate<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>to  :PerlTestDirOpen<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>mt  :call PerlOpenModule(1)<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>ms  :call PerlOpenModule(2)<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>mv  :call PerlOpenModule(3)<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>mm  :call PerlOpenModule(4)<CR>
-    autocmd FileType perl nnoremap <buffer> <leader>mp  :call PerlOpenModule(5)<CR>
-
-    autocmd FileType perl nnoremap <buffer> <silent> <F1> m`:%!perltidy<CR>g``
-    autocmd FileType perl vnoremap <buffer> <silent> <F1> :%!perltidy<CR>
-
     autocmd FileType perl let g:test_runner_single_command = "perl"
     autocmd FileType perl let g:test_runner_multiple_command = "prove"
     autocmd FileType perl let g:test_runner_test_dir = "t"
@@ -146,6 +130,21 @@ augroup filetype_perl
     if len($TEST_RUNNER_MULTI_COMMAND) > 0
         autocmd FileType perl let g:test_runner_single_command = $TEST_RUNNER_SINGLE_COMMAND
     endif
+
+    autocmd FileType perl nnoremap <buffer> <leader>ts  :!perl -Ilib -c %<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>tf  :RunSingleTest<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ta  :RunAllTests<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>td  :RunTestsInDir<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>tc  :CreateTestFile<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>to  :OpenTestDir<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>mt  :call PerlOpenModule(1)<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>ms  :call PerlOpenModule(2)<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>mv  :call PerlOpenModule(3)<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>mm  :call PerlOpenModule(4)<CR>
+    autocmd FileType perl nnoremap <buffer> <leader>mp  :call PerlOpenModule(5)<CR>
+
+    autocmd FileType perl nnoremap <buffer> <silent> <F1> m`:%!perltidy<CR>g``
+    autocmd FileType perl vnoremap <buffer> <silent> <F1> :%!perltidy<CR>
 
 
     autocmd FileType perl nnoremap gci :call CommitPerlFiles()<CR>
