@@ -30,6 +30,8 @@
 /home/davs/.config/Code \-\ OSS
 /home/davs/.config/Microsoft*
 /home/davs/.config/ultravnc-viewer
+/home/davs/.local/share/JetBrains
+/home/davs/.local/share/virtualenv
 /home/davs/.mozilla
 /home/davs/.hoogle
 /home/davs/.ghc-mod

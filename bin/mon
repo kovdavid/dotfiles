@@ -35,6 +35,8 @@ if [ -n "$OUTPUT2_CONNECTED" ] ; then
         $(xrandr --output $OUTPUT2 --right-of $OUTPUT1)
         $(xrandr --output $OUTPUT2 --pos ${WIDTH1}x-$HEIGTH2)
     fi
+else
+    $(xrandr --output $OUTPUT2 --off)
 fi
 
 if [ $(which nitrogen) ] ; then

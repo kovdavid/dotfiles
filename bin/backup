@@ -80,7 +80,7 @@ if [ ! -d /backup/data ]; then
 fi
 
 if [ -e /backup/backup_system ] ; then
-    echo "Backup type: system"
+    echo "Backup type: system. Press any key to continue."
     read -n 1
     rsync --archive --acls --xattrs --verbose --compress --delete \
           --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
@@ -88,7 +88,7 @@ if [ -e /backup/backup_system ] ; then
           --exclude="/mnt"                                        \
           / /backup/data
 elif [ -e /backup/backup_all ] ; then
-    echo "Backup type: all"
+    echo "Backup type: all. Press any key to continue."
     read -n 1
     rsync --archive --acls --xattrs --verbose --compress --delete \
           --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
@@ -97,7 +97,7 @@ elif [ -e /backup/backup_all ] ; then
           --include="/opt/factorio/***"                           \
           / /backup/data
 elif [ -e /backup/backup_home ] ; then
-    echo "Backup type: home"
+    echo "Backup type: home. Press any key to continue."
     read -n 1
     rsync --archive --acls --xattrs --verbose --compress --delete \
           --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
@@ -107,30 +107,30 @@ elif [ -e /backup/backup_home ] ; then
           --exclude="*"                                           \
           / /backup/data
 elif [ -e /backup/backup_8g ] ; then
-    echo "Backup type: 8G"
+    echo "Backup type: 8G. Press any key to continue."
     read -n 1
     rsync --archive --acls --xattrs --verbose --compress --delete \
-          --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
-          --exclude="/backup"                                     \
-          --exclude="/mnt"                                        \
+          --exclude-from="/home/davs/dotfiles/rsync_ignore" \
+          --exclude="/backup"                               \
+          --exclude="/mnt"                                  \
           / /backup/data
 elif [ -e /backup/backup_32g ] ; then
-    echo "Backup type: 32G"
+    echo "Backup type: 32G. Press any key to continue."
     read -n 1
     rsync --archive --acls --xattrs --verbose --compress --delete \
-          --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
-          --exclude="/backup"                                     \
-          --exclude="/mnt/data/Music"                             \
-          --exclude="/mnt/data/Audio"                             \
-          --exclude="/mnt/data/Software"                          \
-          --exclude="/mnt/data/Videos"                            \
-          --exclude="/mnt/data/School"                            \
+          --exclude-from="/home/davs/dotfiles/rsync_ignore" \
+          --exclude="/backup"                               \
+          --exclude="/mnt/data/Music"                       \
+          --exclude="/mnt/data/Audio"                       \
+          --exclude="/mnt/data/Software"                    \
+          --exclude="/mnt/data/Videos"                      \
+          --exclude="/mnt/data/School"                      \
           / /backup/data
 else
     echo "No backup type detected"
 fi
 
-touch /backup/last_run
+date '+%F %T' > /backup/last_run
 
 echo "rsync has finished..."
 sync
@@ -140,6 +140,8 @@ echo "======================="
 echo "`df -h /backup`"
 echo "======================="
 
+read -p "Backup done. Press any key to finish"
+
 umount /backup
 if mount | grep /backup > /dev/null ; then
     echo "/backup still mounted"
@@ -147,7 +149,7 @@ if mount | grep /backup > /dev/null ; then
 fi
 echo "/backup umounted..."
 
-rm -rf /backup
+rmdir /backup
 if [ -d /backup ] ; then
     echo "/backup still exists"
     exit 1
