@@ -21,7 +21,6 @@ augroup all_file_type
     autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
     autocmd WinEnter,FocusGained,BufEnter * if &diff | setlocal winwidth=1 | setlocal wrap | setlocal nocursorbind | endif
-    " autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=121 | endif
     autocmd WinEnter,FocusGained,BufEnter * if !&diff | setlocal winwidth=1 | endif
 
     autocmd Syntax * highlight SpecialKey ctermfg=240 gui=bold guifg=#5b605e
@@ -120,6 +119,7 @@ augroup filetype_perl
     autocmd FileType perl let g:test_runner_multiple_command = "prove"
     autocmd FileType perl let g:test_runner_test_dir = "t"
     autocmd FileType perl let g:test_runner_test_ext = "t"
+    autocmd FileType perl let g:test_runner_code_ext = "pm"
 
     if len($PERL_TEST_FILE_COMMAND) > 0
         autocmd FileType perl let g:perl_test_file_command = $PERL_TEST_FILE_COMMAND
@@ -128,7 +128,7 @@ augroup filetype_perl
         autocmd FileType perl let g:test_runner_single_command = $TEST_RUNNER_SINGLE_COMMAND
     endif
     if len($TEST_RUNNER_MULTI_COMMAND) > 0
-        autocmd FileType perl let g:test_runner_single_command = $TEST_RUNNER_SINGLE_COMMAND
+        autocmd FileType perl let g:test_runner_multiple_command = $TEST_RUNNER_MULTI_COMMAND
     endif
 
     autocmd FileType perl nnoremap <buffer> <leader>ts  :!perl -Ilib -c %<CR>
