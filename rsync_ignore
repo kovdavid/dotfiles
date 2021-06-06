@@ -30,6 +30,7 @@
 /home/davs/.config/Code \-\ OSS
 /home/davs/.config/Microsoft*
 /home/davs/.config/ultravnc-viewer
+/home/davs/.config/libreoffice
 /home/davs/.local/share/JetBrains
 /home/davs/.local/share/virtualenv
 /home/davs/.mozilla
@@ -42,10 +43,12 @@
 /home/davs/.npm
 /home/davs/.local/bin
 /home/davs/.asdf
+/home/davs/.kodi
 
 /home/davs/workspace/rust/*/target
 /home/davs/workspace/ocaml/*/_build
 /home/davs/workspace/elixir/*/deps
+/home/davs/workspace/elixir/*/_build
 /home/davs/workspace/java/*/build
 /home/davs/workspace/java/*/.gradle
 /home/davs/workspace/java/*/*/build
