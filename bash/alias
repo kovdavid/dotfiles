@@ -9,7 +9,6 @@ alias cp="cp -i"
 alias cpr="cp -i -r"
 alias df="df -h"
 alias dus="du -shc .??* * | sort -h"
-alias fprove='forkprove -Mlib::require::all=t/lib,lib'
 alias d="docker"
 alias dcp="docker-compose"
 alias di="docker images"
@@ -70,3 +69,4 @@ else
 	alias j="echo 'Clone https://github.com/DavsX/jump.git to ~/workspace/bash/jump'"
 fi
 alias xvim="xargs -o vim"
+alias dotfiles="chezmoi -S /home/davs/workspace/dotfiles"
