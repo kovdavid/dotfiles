@@ -1,4 +1,0 @@
-# keyboard:usb:v045Ep00DB*
-evdev:input:b0003v045Ep00DB*
- KEYBOARD_KEY_c022d=f18
- KEYBOARD_KEY_c022e=f19
