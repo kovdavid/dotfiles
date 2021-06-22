@@ -33,6 +33,15 @@ for script in $(ls ~/dotfiles/bin); do
 done
 
 echo "Linking dotfiles"
+
+ln -sf ~/dotfiles/dircolors ~/.bashrc.dircolors
+ln -sf ~/dotfiles/bash/env_settings ~/.bashrc.env_settings
+ln -sf ~/dotfiles/git-completion.bash ~/.bashrc.git-completion
+ln -sf ~/dotfiles/tmux-completion.bash ~/.bashrc.tmux-completion
+ln -sf ~/dotfiles/bash/export ~/.bashrc.export
+ln -sf ~/dotfiles/bash/alias ~/.bashrc.alias
+ln -sf ~/dotfiles/bash/nike ~/.bashrc.nike
+
 remove_and_link_dotfile Xdefaults
 remove_and_link_dotfile Xmodmap
 remove_and_link_dotfile Xresources

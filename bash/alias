@@ -69,4 +69,5 @@ else
 	alias j="echo 'Clone https://github.com/DavsX/jump.git to ~/workspace/bash/jump'"
 fi
 alias xvim="xargs -o vim"
-alias dotfiles="chezmoi -S /home/davs/workspace/dotfiles"
+alias dotfiles="chezmoi -S ~/workspace/dotfiles"
+alias noproxy="for e in http_proxy https_proxy ftp_proxy no_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY NO_PROXY; do unset \$e; done"

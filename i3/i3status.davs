@@ -31,7 +31,7 @@ ethernet usb0 {
 }
 
 time {
-    format ="[%V] %d-%m-%Y %H:%M"
+    format ="[%V] %F %T"
 }
 
 disk "/" {

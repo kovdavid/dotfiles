@@ -1,10 +1,10 @@
-[[ -f /etc/profile ]] && source /etc/profile
+bash_include () {
+    [[ -f "$1" ]] && source "$1"
+}
+
+bash_include /etc/profile
 
 set -o vi
-
-if [ -e ~/dotfiles/bash/git ] ; then
-    source ~/dotfiles/bash/git
-fi
 
 export HOSTNAME=$(hostname)
 
@@ -16,18 +16,13 @@ shopt -s histappend
 #free Ctrl-S and Ctrl-Q in terminal
 [[ $- == *i* ]] && stty -ixon
 
-[[ -f ~/dotfiles/dircolors ]] && eval "$(dircolors ~/dotfiles/dircolors)" > /dev/null
-[[ -f ~/dotfiles/bash/env_settings ]] && source ~/dotfiles/bash/env_settings
-[[ -f ~/dotfiles/git-completion.bash ]] && source ~/dotfiles/git-completion.bash
-[[ -f ~/dotfiles/bash/export ]] && source ~/dotfiles/bash/export
-[[ -f ~/dotfiles/bash/alias ]] && source ~/dotfiles/bash/alias
-[[ -f ~/dotfiles/tmux-completion.bash ]] && source ~/dotfiles/tmux-completion.bash
-#[[ -f ~/dotfiles/mix_autocomplete.sh ]] && source ~/dotfiles/mix_autocomplete.sh
-
-if [ -f ~/dotfiles/nike ] ; then
-    [[ -f ~/dotfiles/bash/nike ]] && source ~/dotfiles/bash/nike
-    [[ -f ~/dotfiles/bash/proxy ]] && source ~/dotfiles/bash/proxy
-fi
+[[ -f ~/.bashrc.dircolors ]] && eval "$(dircolors ~/.bashrc.dircolors)" > /dev/null
+bash_include ~/.bashrc.env_settings
+bash_include ~/.bashrc.git-completion
+bash_include ~/.bashrc.export
+bash_include ~/.bashrc.alias
+bash_include ~/.bashrc.tmux-completion
+bash_include ~/.bashrc.nike
 
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \1 $(parse_git_rev)$(parse_git_dirty)$(parse_git_stash_size)/"
