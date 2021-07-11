@@ -22,8 +22,8 @@ alias g="git"
 alias ga='git add'
 alias gaa='git add --all'
 alias gb='git branch'
-alias gdth='git difftool HEAD..'
-alias gdtsh='git diff --stat HEAD..'
+alias gdth='git difftool HEAD'
+alias gdtsh='git diff --stat HEAD'
 alias gchanged='(cd `git root`; git status --short | awk "{ print \$2 }")'
 alias gci='git commit'
 alias gcidate='date "+%F %T" | git commit --file -'
@@ -69,5 +69,4 @@ else
 	alias j="echo 'Clone https://github.com/DavsX/jump.git to ~/workspace/bash/jump'"
 fi
 alias xvim="xargs -o vim"
-alias dotfiles="chezmoi -S ~/workspace/dotfiles"
 alias noproxy="for e in http_proxy https_proxy ftp_proxy no_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY NO_PROXY; do unset \$e; done"
