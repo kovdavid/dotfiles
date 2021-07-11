@@ -15,7 +15,9 @@ if [ ! -d ~/bin ] ; then
 	mkdir ~/bin
 fi
 
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
+if [ ! -d ~/.asdf ] ; then
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
+fi
 
 for script in $(ls ~/dotfiles/bin); do
 	if [ -f ~/bin/$script ] ; then
@@ -34,13 +36,13 @@ done
 
 echo "Linking dotfiles"
 
-ln -sf ~/dotfiles/dircolors ~/.bashrc.dircolors
-ln -sf ~/dotfiles/bash/env_settings ~/.bashrc.env_settings
-ln -sf ~/dotfiles/git-completion.bash ~/.bashrc.git-completion
+ln -sf ~/dotfiles/dircolors            ~/.bashrc.dircolors
+ln -sf ~/dotfiles/bash/env_settings    ~/.bashrc.env_settings
+ln -sf ~/dotfiles/git-completion.bash  ~/.bashrc.git-completion
 ln -sf ~/dotfiles/tmux-completion.bash ~/.bashrc.tmux-completion
-ln -sf ~/dotfiles/bash/export ~/.bashrc.export
-ln -sf ~/dotfiles/bash/alias ~/.bashrc.alias
-ln -sf ~/dotfiles/bash/nike ~/.bashrc.nike
+ln -sf ~/dotfiles/bash/export          ~/.bashrc.export
+ln -sf ~/dotfiles/bash/alias           ~/.bashrc.alias
+ln -sf ~/dotfiles/bash/nike            ~/.bashrc.nike
 
 remove_and_link_dotfile Xdefaults
 remove_and_link_dotfile Xmodmap
@@ -53,11 +55,25 @@ remove_and_link_dotfile screenrc
 remove_and_link_dotfile dircolors
 remove_and_link_dotfile ghci
 
-echo "You have to manually copy gitconfig and change email address!"
-ln -s ~/dotfiles/git-templates ~/.git-templates
-echo "You have to manually link i3/config and i3/status!"
-# remove_and_link_dotfile i3/config
-# remove_and_link_dotfile i3/status
+ln -sf ~/dotfiles/gitconfig ~/.gitconfig
+if [ $(hostname) == "candyland" ] ; then
+    echo "[user]" > ~/.gitconfig.local
+    echo "    name = Dávid Kovács" >> ~/.gitconfig.local
+    echo "    email = kovdavid@gmail.com" >> ~/.gitconfig.local
+else
+    echo "You have to manually create ~/.gitconfig.local"
+fi
+
+rm -rf ~/.git-templates
+ln -s ~/dotfiles/git-templates/ ~/.git-templates
+
+if [ $(hostname) == "candyland" ] ; then
+    mkdir -p ~/.config/i3
+    ln -sf ~/dotfiles/i3/config.davs ~/.config/i3/config
+    ln -sf ~/dotfiles/i3/i3status.davs ~/.config/i3/i3status
+else
+    echo "You have to manually link i3/config and i3/status!"
+fi
 
 remove_and_link_dotfile vim
 remove_and_link_dotfile emacs.d
@@ -90,23 +106,11 @@ if [ ! -d ~/.irssi ] ; then
 fi
 ln -s -f ~/dotfiles/irssi_config ~/.irssi/config
 
-echo "Linking VIM"
-rm -rf ~/.vimrc
-ln -s ~/.vim/vimrc ~/.vimrc
-
 echo "Linking NVIM"
-rm -rf ~/.nvimrc
-rm -rf ~/.nvim
-ln -s ~/.vim/vimrc ~/.nvimrc
-ln -s ~/.vim ~/.nvim
-ln -s ~/.config/nvim ~/dotfiles/vim
+rm -rf ~/.config/nvim
+ln -sf ~/dotfiles/vim ~/.config/nvim
 
-rm -rf ~/.config/redshift.conf
-ln -s ~/.config/redshift.conf ~/dotfiles/redshift.conf
-
-mkdir -p ${XDG_CONFIG_HOME:=~/.config}
-rm -rf $XDG_CONFIG_HOME/nvim
-ln -s ~/.vim $XDG_CONFIG_HOME/nvim
+ln -sf ~/dotfiles/redshift.conf ~/.config/redshift.conf
 
 ln -s -f ~/dotfiles/Xresources.zenburn ~/.Xresources.colorscheme
 

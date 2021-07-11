@@ -24,9 +24,8 @@
     rec  = rebase --continue
     mt   = mergetool
     root = !pwd
-[user]
-    name = Dávid Kovács
-    email = david.kovacs@nike.sk
+[include]
+    path = ~/.gitconfig.local
 [core]
     editor = vim
     pager = less -R
