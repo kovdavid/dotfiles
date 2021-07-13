@@ -3544,6 +3544,7 @@ __git_complete ()
 	___git_complete $1 $func
 }
 
+___git_complete g __git_main
 ___git_complete git __git_main
 ___git_complete gitk __gitk_main
 
