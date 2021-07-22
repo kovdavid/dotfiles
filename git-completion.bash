@@ -3545,8 +3545,16 @@ __git_complete ()
 }
 
 ___git_complete g __git_main
+___git_complete ga _git_add
+___git_complete gb _git_branch
+___git_complete gci _git_commit
+___git_complete gco _git_checkout
+___git_complete gdth __git_complete_revlist_file
+___git_complete gdtsh __git_complete_revlist_file
 ___git_complete git __git_main
 ___git_complete gitk __gitk_main
+___git_complete gpo _git_push
+___git_complete gst _git_stash
 
 # The following are necessary only for Cygwin, and only are needed
 # when the user has tab-completed the executable name and consequently
