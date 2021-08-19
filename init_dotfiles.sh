@@ -72,14 +72,15 @@ fi
 rm -rf ~/.git-templates
 ln -s ~/dotfiles/git-templates/ ~/.git-templates
 
+mkdir -p ~/.config/i3
+mkdir -p ~/.config/i3status
+
 if [ $(hostname) == "candyland" ] ; then
-    mkdir -p ~/.config/i3
     ln -sf ~/dotfiles/i3/config.davs ~/.config/i3/config
-    ln -sf ~/dotfiles/i3/i3status.davs ~/.config/i3/i3status
+    ln -sf ~/dotfiles/i3/i3status.davs ~/.config/i3status/config
 elif [ $(hostname) == "neverland" ] ; then
-    mkdir -p ~/.config/i3
     ln -sf ~/dotfiles/i3/config.nike ~/.config/i3/config
-    ln -sf ~/dotfiles/i3/i3status.nike ~/.config/i3/i3status
+    ln -sf ~/dotfiles/i3/i3status.nike ~/.config/i3status/config
 else
     echo "You have to manually link i3/config and i3/status!"
 fi

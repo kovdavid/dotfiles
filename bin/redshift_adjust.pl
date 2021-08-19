@@ -9,38 +9,18 @@ use POSIX qw( strftime );
 my $args = shift || '';
 
 use constant {
-    DISABLE_FILE => "/tmp/redshift_disable",
+    DISABLE_FILE    => "/tmp/redshift_disable",
+    LOG_FILE        => "/tmp/redshift_adjust.log",
+    CORRECTION_FILE => "/tmp/redshift_correction.cfg",
+
+    MAX_BRIGHTNESS => 1.0,
+    MAX_TEMP => 6500,
 };
 
-if ($args eq '-t') {
-    if ( -f DISABLE_FILE ) {
-        unlink DISABLE_FILE;
-        say "unlink ${\DISABLE_FILE}";
-    } else {
-        open my $fh, ">", DISABLE_FILE;
-        say $fh "";
-        close $fh;
+open my $log, ">>", LOG_FILE;
 
-        say "touch ${\DISABLE_FILE}";
-    }
-
-    exit system("redshift -x");
-}
-
-if ( -f DISABLE_FILE ) {
-    my $now = time();
-    my $mtime = (stat(DISABLE_FILE))[9];
-    my $file_age = abs($now - $mtime);
-
-    say "${\DISABLE_FILE} exists age:$file_age";
-
-    if ($file_age <= 3*3600) {
-        say "exit, because ${\DISABLE_FILE} is only $file_age sec old";
-        exit;
-    }
-} else {
-    say "${\DISABLE_FILE} does not exist";
-}
+handle_args($args);
+my ($correction_temp, $correction_brightness) = get_corrections();
 
 my $STEPS = 5; # minutes
 
@@ -90,7 +70,7 @@ my $hour = strftime("%H", localtime($now));
 my $minute = strftime("%M", localtime($now));
 
 my $key = get_config_key($hour, $minute);
-my $cmd = get_cmd($config->{$key});
+my $cmd = get_cmd($config->{$key}, $correction_brightness, $correction_temp);
 
 if (@ARGV) {
     print_config($config);
@@ -99,7 +79,7 @@ if (@ARGV) {
     exit;
 }
 
-say "$cmd";
+print_log($cmd);
 
 exit system($cmd);
 
@@ -152,10 +132,17 @@ sub get_config_key {
 }
 
 sub get_cmd {
-    my ($args) = @_;
+    my ($args, $correction_brightness, $correction_temp) = @_;
 
-    my $brightness = sprintf("%.2f", $args->{brightness});
-    my $temp = int($args->{temp});
+    my $brightness = sprintf("%.2f", $args->{brightness} + $correction_brightness);
+    my $temp = int($args->{temp} + $correction_temp);
+
+    if ($brightness > MAX_BRIGHTNESS) {
+        $brightness = MAX_BRIGHTNESS;
+    }
+    if ($temp > MAX_TEMP) {
+        $temp = MAX_TEMP;
+    }
 
     return "redshift -P -m randr -O $temp -b $brightness";
 }
@@ -166,4 +153,63 @@ sub print_config {
     for my $minute (sort { $a <=> $b } keys %{ $config }) {
         say sprintf("minute:% 5d temp:%d brightness:%.2f", $minute, @{ $config->{$minute} }{qw( temp brightness )});
     }
+}
+
+sub print_log {
+    my ($msg) = @_;
+
+    my $date = strftime("%F %T", localtime());
+
+    say $log "$date $msg";
+    say $msg;
+}
+
+sub handle_args {
+    my ($args) = @_;
+
+    if ($args eq '-d') {
+        if ( -f DISABLE_FILE ) {
+            unlink DISABLE_FILE;
+            print_log("unlink ${\DISABLE_FILE}");
+        } else {
+            open my $fh, ">", DISABLE_FILE;
+            say $fh "";
+            close $fh;
+
+            print_log("touch ${\DISABLE_FILE}");
+        }
+
+        exit system("redshift -x");
+    }
+
+    if ( -f DISABLE_FILE ) {
+        my $now = time();
+        my $mtime = (stat(DISABLE_FILE))[9];
+        my $file_age = abs($now - $mtime);
+
+        print_log("${\DISABLE_FILE} exists age:$file_age");
+
+        if ($file_age <= 3*3600) {
+            print_log("exit, because ${\DISABLE_FILE} is only $file_age sec old");
+            exit;
+        }
+    } else {
+        print_log("${\DISABLE_FILE} does not exist");
+    }
+}
+
+sub get_corrections {
+    if (-f CORRECTION_FILE) {
+        open my $fh, "<", CORRECTION_FILE or die "Could not open ${\CORRECTION_FILE}: $!";
+        my $line = <$fh>;
+        close $fh;
+
+        chomp $line;
+        if ($line =~ /^(\d+) ((\d+)\.(\d+))$/) {
+            print_log("Using corrections temp:$1 brightness:$2");
+            return ($1, $2);
+        }
+    }
+
+    return (0, 0);
 }
