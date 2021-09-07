@@ -11,9 +11,7 @@ function remove_and_link_to_tmp {
 }
 
 echo "Linking scripts"
-if [ ! -d ~/bin ] ; then
-	mkdir ~/bin
-fi
+mkdir -p ~/bin
 
 if [ ! -d ~/.asdf ] ; then
     git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
@@ -111,9 +109,7 @@ remove_and_link_to_tmp bundler
 remove_and_link_to_tmp adobe
 
 echo "IRSSI"
-if [ ! -d ~/.irssi ] ; then
-	mkdir ~/.irssi
-fi
+mkdir -p ~/.irssi
 ln -s -f ~/dotfiles/irssi_config ~/.irssi/config
 
 echo "Linking NVIM"
