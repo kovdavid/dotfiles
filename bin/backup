@@ -1,6 +1,12 @@
 #!/bin/bash
 # --filter=":- .gitignore" \
 
+set -e
+
+RSYNC="rsync --archive --acls --xattrs --verbose --compress --delete"
+RSYNC="$RSYNC --exclude-from='/home/davs/dotfiles/rsync_ignore'"
+RSYNC="$RSYNC --exclude='/backup'"
+
 if [ $# -eq 1 ] ; then
     FSCK=0
     DEVICE=$1
@@ -56,16 +62,7 @@ fi
 mkdir /backup
 echo "/backup created..."
 
-if [ ! -d /backup ] ; then
-    echo "/backup does not exist"
-    exit 1
-fi
-
 mount /dev/mapper/backup /backup
-if ! mount | grep /backup > /dev/null ; then
-    echo "/backup not mounted"
-    exit 1
-fi
 echo "/backup mounted..."
 mount | grep "/backup"
 
@@ -74,15 +71,10 @@ if [ ! -d /backup/data ]; then
     mkdir /backup/data
 fi
 
-if [ ! -d /backup/data ]; then
-    echo "/backup/data does not exist"
-    exit 1
-fi
-
 if [ -e /backup/backup_system ] ; then
     echo "Backup type: system. Press any key to continue."
     read -n 1
-    rsync --archive --acls --xattrs --verbose --compress --delete \
+     \
           --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
           --exclude="/backup"                                     \
           --exclude="/mnt"                                        \
@@ -90,42 +82,29 @@ if [ -e /backup/backup_system ] ; then
 elif [ -e /backup/backup_all ] ; then
     echo "Backup type: all. Press any key to continue."
     read -n 1
-    rsync --archive --acls --xattrs --verbose --compress --delete \
-          --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
-          --exclude="/backup"                                     \
-          --include="/opt/minecraft/***"                          \
-          --include="/opt/factorio/***"                           \
-          / /backup/data
+    $RSYNC / /backup/data
 elif [ -e /backup/backup_home ] ; then
     echo "Backup type: home. Press any key to continue."
     read -n 1
-    rsync --archive --acls --xattrs --verbose --compress --delete \
-          --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
-          --exclude="/backup"                                     \
-          --include="/home/"                                      \
-          --include="/home/davs/***"                              \
-          --exclude="*"                                           \
-          / /backup/data
+    $RSYNC \
+        --include="/home/"         \
+        --include="/home/davs/***" \
+        --exclude="*"              \
+        / /backup/data
 elif [ -e /backup/backup_8g ] ; then
     echo "Backup type: 8G. Press any key to continue."
     read -n 1
-    rsync --archive --acls --xattrs --verbose --compress --delete \
-          --exclude-from="/home/davs/dotfiles/rsync_ignore" \
-          --exclude="/backup"                               \
-          --exclude="/mnt"                                  \
-          / /backup/data
+    $RSYNC --exclude="/mnt" / /backup/data
 elif [ -e /backup/backup_32g ] ; then
     echo "Backup type: 32G. Press any key to continue."
     read -n 1
-    rsync --archive --acls --xattrs --verbose --compress --delete \
-          --exclude-from="/home/davs/dotfiles/rsync_ignore" \
-          --exclude="/backup"                               \
-          --exclude="/mnt/data/Music"                       \
-          --exclude="/mnt/data/Audio"                       \
-          --exclude="/mnt/data/Software"                    \
-          --exclude="/mnt/data/Videos"                      \
-          --exclude="/mnt/data/School"                      \
-          / /backup/data
+    $RSYNC \
+        --exclude="/mnt/data/Music"                       \
+        --exclude="/mnt/data/Audio"                       \
+        --exclude="/mnt/data/Software"                    \
+        --exclude="/mnt/data/Videos"                      \
+        --exclude="/mnt/data/School"                      \
+        / /backup/data
 else
     echo "No backup type detected"
 fi
@@ -143,17 +122,9 @@ echo "======================="
 read -p "Backup done. Press any key to finish"
 
 umount /backup
-if mount | grep /backup > /dev/null ; then
-    echo "/backup still mounted"
-    exit 1
-fi
 echo "/backup umounted..."
 
 rmdir /backup
-if [ -d /backup ] ; then
-    echo "/backup still exists"
-    exit 1
-fi
 echo "/backup deleted..."
 
 if [ $FSCK -eq 1 ] ; then
@@ -164,10 +135,6 @@ if [ $FSCK -eq 1 ] ; then
 fi
 
 $CRYPTSETUP luksClose /dev/mapper/backup
-if [ -e /dev/mapper/backup ] ; then
-    echo "/dev/mapper/backup still exists"
-    exit 1
-fi
 echo "/dev/mapper/backup removed..."
 
 # DEVICE=$(echo "/dev/$1" | sed -e 's/[0-9]$//')

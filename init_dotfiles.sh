@@ -132,6 +132,11 @@ if [ -x "$(command -v redshift)" ] ; then
 		echo "*/10 * * * * ~/dotfiles/bin/redshift_adjust.sh" >> /tmp/mycron
 		crontab /tmp/mycron
 	fi
+	if ! grep -q "clean_daily.sh" /tmp/mycron ; then
+		echo "Setting crontab for clean_daily"
+		echo "*/30 * * * * ~/dotfiles/bin/clean_daily.sh" >> /tmp/mycron
+		crontab /tmp/mycron
+    fi
 	rm /tmp/mycron
 fi
 
