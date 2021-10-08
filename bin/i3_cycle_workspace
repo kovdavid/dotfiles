@@ -1,44 +1,54 @@
 #!/usr/bin/env perl
 
-use v5.10;
 use strict;
 use warnings;
 use JSON qw[ decode_json ];
 
-my $direction = shift || "up";
-if ($direction ne "up" && $direction ne "down") {
-	$direction = "up";
+my $workspaces = decode_json(`i3-msg -tget_workspaces`);
+
+my $direction = shift || 'right';
+if ($direction ne 'left' and $direction ne 'right') {
+    $direction = 'right';
 }
 
-my $workspaces = decode_json(`i3-msg -t get_workspaces`);
-my $current_workspace = [
-    map { $_->{num} }
-    grep { $_->{focused} }
-    @{ $workspaces }
-]->[0];
+my %workspaces_before;
+my %workspaces_after;
+my $focused_workspace;
 
-my $new_workspace;
+for my $workspace (@{ $workspaces }) {
+    my $output = $workspace->{output};
+    if ($workspace->{focused}) {
+        $focused_workspace = {
+            num => $workspace->{num},
+            output => $workspace->{output},
+        };
+    } else {
+        if ($focused_workspace) {
+            push @{ $workspaces_after{$output} }, $workspace->{num};
+        } else {
+            push @{ $workspaces_before{$output} }, $workspace->{num};
+        }
+    }
+}
 
-if ($direction eq "up") {
-	$new_workspace = $current_workspace + 1;
+my $workspaces_before_output = $workspaces_before{ $focused_workspace->{output} };
+my $workspaces_after_output  = $workspaces_after{ $focused_workspace->{output} };
 
-	if ($new_workspace >= 20) {
-		$new_workspace = 20;
-	}
-	if ($new_workspace == 11) {
-		$new_workspace = 10;
-	}
+my $jump_to_workspace;
+if ($direction eq 'left') {
+    if (@{ $workspaces_before_output || [] }) {
+        $jump_to_workspace = $workspaces_before_output->[-1];
+    } elsif (@{ $workspaces_after_output || [] }) {
+        $jump_to_workspace = $workspaces_after_output->[-1];
+    }
 } else {
-	$new_workspace = $current_workspace - 1;
-
-	if ($new_workspace <= 0) {
-		$new_workspace = 1;
-	}
-	if ($new_workspace == 10) {
-		$new_workspace = 11;
-	}
+    if (@{ $workspaces_after_output || [] }) {
+        $jump_to_workspace = $workspaces_after_output->[0];
+    } elsif (@{ $workspaces_before_output || [] }) {
+        $jump_to_workspace = $workspaces_before_output->[0];
+    }
 }
 
-`echo "\$(date) direction:$direction curr:$current_workspace next:$new_workspace" > /tmp/x`;
-
-# `i3-msg -t command workspace number $new_workspace`;
+if ($jump_to_workspace) {
+    `i3-msg -tcommand 'workspace number $jump_to_workspace'`;
+}
