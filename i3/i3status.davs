@@ -68,14 +68,14 @@ cpu_usage {
 
 volume master {
     format = "☊ %volume"
-    device = "default"
+    device = "sysdefault"
     mixer = "Master"
     mixer_idx = 0
 }
 
 volume PCM {
     format = "☋ %volume"
-    device = "default"
+    device = "sysdefault"
     mixer = "PCM"
     mixer_idx = 0
 }

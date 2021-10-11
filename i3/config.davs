@@ -7,6 +7,8 @@ font pango:DejaVu Sans Mono 13px
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# focus_follows_mouse no
+
 bindsym $mod+Tab exec ~/bin/i3_jump_to_next_output
 bindsym $mod+Shift+Tab exec ~/bin/i3_move_to_next_output
 bindsym $mod+Return exec ~/bin/i3_cycle_windows
