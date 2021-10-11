@@ -1,0 +1,73 @@
+#!/usr/bin/env perl
+
+use v5.16;
+use strict;
+use warnings;
+
+use constant STEP => 5;
+
+my $master_data=`amixer get -M Master`;
+my ($master_volume) = ($master_data =~ /\[(\d+)%\]/);
+
+my $pcm_data=`amixer get -M PCM`;
+my ($pcm_volume) = ($pcm_data =~ /\[(\d+)%\]/);
+
+my $direction = shift || 'down';
+if ($direction ne 'up' and $direction ne 'down') {
+    $direction = 'down';
+}
+
+if ($direction eq 'down') {
+    if ($pcm_volume eq 100) {
+        system('amixer -q set -M PCM 90%');
+        system('amixer -q set -M Speaker 90%');
+        system('amixer -q set -M Headphone 90%');
+    } else {
+        if ($master_volume > STEP) {
+            my $new_volume = round_to_nearest($master_volume - STEP, STEP);
+            system("amixer -q set -M Master $new_volume%");
+        } else {
+            system('amixer -q set -M Master 0%');
+        }
+    }
+} else {
+    if ($master_volume < 100) {
+        if ($master_volume < 100 - STEP) {
+            my $new_volume = round_to_nearest($master_volume + STEP, STEP);
+            system("amixer -q set -M Master $new_volume%");
+        } else {
+            system('amixer -q set -M Master 100%');
+        }
+    } else {
+        system('amixer -q set -M PCM 100%');
+        system('amixer -q set -M Speaker 100%');
+        system('amixer -q set -M Headphone 100%');
+    }
+}
+
+system("killall -USR1 i3status");
+
+sub round_to_nearest {
+    my ($input, $nearest) = @_;
+    return STEP*int( $input/STEP + 0.51);
+}
+
+__END__
+
+MASTER_VOL=$(amixer get -M Master | awk -F"[][]" '/dB/ { print $2 }' | sed -e 's/%//g')
+PCM_VOL=$(amixer get -M PCM | awk -F"[][]" '/dB/ { print $2 }' | sed -e 's/%//g' | head -n 1)
+
+if [ "$MASTER_VOL" != "100" ] ; then
+    if [ "$MASTER_VOL" -lt "95" ] ; then
+        NEW_VOL="$((MASTER_VOL+5))"
+        amixer -q set -M Master $NEW_VOL%
+    else
+        amixer -q set -M Master 100%
+    fi
+else
+    amixer -q set -M PCM 100%
+    amixer -q set -M Speaker 100%
+    amixer -q set -M Headphone 100%
+fi
+
+killall -USR1 i3status
