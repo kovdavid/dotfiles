@@ -1,8 +1,8 @@
 #!/bin/sh
 # $Xorg: xinitrc.cpp,v 1.3 2000/08/17 19:54:30 cpqbld Exp $
 
-xset s 1800 1800
-xset dpms 1800 1800 1800
+xset s 900 900
+xset dpms 900 900 900
 
 userresources=~/.Xresources
 usermodmap=~/.Xmodmap
