@@ -41,6 +41,13 @@ set linebreak
         " au InsertLeave * set timeoutlen=1000
     " augroup END
 " endif
+set updatetime=300
+
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
 if isdirectory($VIM_UNDODIR)
     set undodir=$VIM_UNDODIR
@@ -84,15 +91,6 @@ set softtabstop=4 " number of spaces for tabs while editing
 set shiftround
 set modelines=0
 set expandtab
-if filereadable(expand("~") . "/.nike")
-    set noexpandtab
-    if &filetype ==# 'sls' || &filetype ==# 'yaml'
-        set expandtab
-        set tabstop=2
-        set shiftwidth=2
-        set autoindent
-    endif
-end
 
 set list
 set listchars=tab:▸\ ,trail:·

@@ -171,6 +171,18 @@ augroup CursorLine
     autocmd WinLeave * setlocal nocursorline
 augroup END
 " }}}
+" TypeScript {{{
+augroup TypeScript
+    autocmd!
+
+    autocmd FileType typescript,typescriptreact setlocal shiftwidth=2
+    autocmd FileType typescript,typescriptreact setlocal tabstop=2
+
+    autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup END
+" }}}
 " sh {{{
 augroup sh
     autocmd!

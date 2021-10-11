@@ -87,9 +87,11 @@ let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 
-" LanguageCleant
+" LanguageClient
 let g:LanguageClient_serverCommands = {
     \ 'javascript': ['javascript-typescript-stdio']
     \ }
 
 let g:coc_disable_startup_warning = 1
+
+let g:coc_global_extensions = ['coc-tsserver', 'coc-eslint', 'coc-prettier']

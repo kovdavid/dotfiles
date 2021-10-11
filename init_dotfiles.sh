@@ -40,7 +40,6 @@ ln -sf ~/dotfiles/git-completion.bash  ~/.bashrc.git-completion
 ln -sf ~/dotfiles/tmux-completion.bash ~/.bashrc.tmux-completion
 ln -sf ~/dotfiles/bash/export          ~/.bashrc.export
 ln -sf ~/dotfiles/bash/alias           ~/.bashrc.alias
-ln -sf ~/dotfiles/bash/nike            ~/.bashrc.nike
 ln -sf ~/dotfiles/bash/common          ~/.bashrc.common
 
 remove_and_link_dotfile Xdefaults
