@@ -27,8 +27,6 @@ function! CloseHiddenBuffers()
             execute 'bd ' . buffer
         endif
     endfor
-
-    execute "NERDTree | NERDTreeToggle"
 endfunction
 
 function! DeleteFile()

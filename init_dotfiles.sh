@@ -13,10 +13,6 @@ function remove_and_link_to_tmp {
 echo "Linking scripts"
 mkdir -p ~/bin
 
-if [ ! -d ~/.asdf ] ; then
-    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
-fi
-
 for script in $(ls ~/dotfiles/bin); do
 	if [ -f ~/bin/$script ] ; then
 		if [[ -z $(ls -l ~/bin/$script | grep dotfiles) ]] ; then
