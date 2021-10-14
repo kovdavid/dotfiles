@@ -1,0 +1,71 @@
+general {
+    output_format = "i3bar"
+    colors = true
+    interval = 2
+}
+
+order += "wireless wlan0"
+order += "ethernet eth0"
+order += "ethernet usb0"
+order += "battery 0"
+order += "cpu_temperature 0"
+order += "cpu_usage"
+order += "load"
+order += "volume master"
+order += "volume PCM"
+order += "time"
+
+wireless wlan0 {
+    format_up = "%essid %ip ‣ %quality"
+    format_down = ""
+}
+
+ethernet eth0 {
+    format_up = "%ip"
+    format_down = ""
+}
+
+ethernet usb0 {
+    format_up = "☎ %ip"
+    format_down = ""
+}
+
+time {
+    format ="[%V] %F %T"
+}
+
+disk "/" {
+    format = "/ %free"
+}
+
+battery 0 {
+    format = "B %status %percentage %remaining"
+    path = "/sys/class/power_supply/BAT%d/uevent"
+}
+
+cpu_temperature 0 {
+    format = "%degrees°C"
+    path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+load {
+    format = "L %1min"
+}
+
+cpu_usage {
+    format = "U %usage"
+}
+
+volume master {
+    format = "☊ %volume"
+    device = "sysdefault"
+    mixer = "Master"
+    mixer_idx = 0
+}
+
+volume PCM {
+    format = "☋ %volume"
+    device = "sysdefault"
+    mixer = "PCM"
+    mixer_idx = 0
+}

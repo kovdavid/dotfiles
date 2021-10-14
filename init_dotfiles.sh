@@ -54,6 +54,10 @@ if [ $(hostname) == "candyland" ] ; then
     echo "[user]" > ~/.gitconfig.local
     echo "    name = Dávid Kovács" >> ~/.gitconfig.local
     echo "    email = kovdavid@gmail.com" >> ~/.gitconfig.local
+elif [ $(hostname) == "neverland" ] ; then
+    echo "[user]" > ~/.gitconfig.local
+    echo "    name = Dávid Kovács" >> ~/.gitconfig.local
+    echo "    email = david.kovacs@vacuumlabs.com" >> ~/.gitconfig.local
 else
     echo "You have to manually create ~/.gitconfig.local"
 fi
@@ -65,8 +69,11 @@ mkdir -p ~/.config/i3
 mkdir -p ~/.config/i3status
 
 if [ $(hostname) == "candyland" ] ; then
-    ln -sf ~/dotfiles/i3/config.davs ~/.config/i3/config
-    ln -sf ~/dotfiles/i3/i3status.davs ~/.config/i3status/config
+    ln -sf ~/dotfiles/i3/config.candyland ~/.config/i3/config
+    ln -sf ~/dotfiles/i3/i3status.candyland ~/.config/i3status/config
+elif [ $(hostname) == "neverland" ] ; then
+    ln -sf ~/dotfiles/i3/config.neverland ~/.config/i3/config
+    ln -sf ~/dotfiles/i3/i3status.neverland ~/.config/i3status/config
 else
     echo "You have to manually link i3/config and i3/status!"
 fi

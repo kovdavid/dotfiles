@@ -45,6 +45,7 @@
 /home/davs/.local/bin
 /home/davs/.asdf
 /home/davs/.kodi
+/home/davs/.vim_undo_and_swap
 
 /home/davs/workspace/rust/*/target
 /home/davs/workspace/ocaml/*/_build
