@@ -28,8 +28,8 @@ nnoremap QW <C-W><C-W>:setlocal winwidth=121<CR>
 nnoremap qe :tabprev<CR>
 nnoremap qr :tabnext<CR>
 
-vnoremap <leader>jf :!perl -MJSON::XS -e 'my $json = do { local $/; <STDIN> }; print JSON::XS->new()->canonical(1)->pretty(1)->encode(decode_json($json));'<CR>
-vnoremap <leader>ujf :!perl -MJSON::XS -e 'my $json = do { local $/; <STDIN> }; print encode_json(decode_json($json))'<CR>
+vnoremap <leader>jf  :!perl -MJSON::XS -E 'my $json = do { local $/; <STDIN> }; print JSON::XS->new()->utf8(1)->canonical(1)->pretty(1)->encode(decode_json($json));'<CR>
+vnoremap <leader>ujf :!perl -MJSON::XS -E 'my $json = do { local $/; <STDIN> }; print encode_json(decode_json($json))'<CR>
 vnoremap <leader>xf :!xmllint --format -<CR>
 vnoremap <leader>sf :!sqlformat -r -s -<CR>
 vnoremap <leader>pf :!perl -e 'use Data::Dumper; my $lines = do { local $/ = undef; <STDIN> }; print Dumper(eval $lines);'<CR>

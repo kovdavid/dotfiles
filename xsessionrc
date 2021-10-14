@@ -1,9 +1,16 @@
-if [ -n "$(xinput list | grep 'TPPS/2 IBM TrackPoint')" ] ; then
-    xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
-    xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
-    xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
-    xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5
-    xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Middle Button Emulation" 1
-    xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Middle Button Timeout" 50
+IBM_TRACKPOINT="TPPS/2 IBM TrackPoint"
+ELAN_TRACKPOINT="TPPS/2 Elan TrackPoint"
+
+if xinput list | grep -q "$IBM_TRACKPOINT" ; then
+    xinput set-prop "$IBM_TRACKPOINT" "Evdev Wheel Emulation" 1
+    xinput set-prop "$IBM_TRACKPOINT" "Evdev Wheel Emulation Button" 2
+    xinput set-prop "$IBM_TRACKPOINT" "Evdev Wheel Emulation Timeout" 200
+    xinput set-prop "$IBM_TRACKPOINT" "Evdev Wheel Emulation Axes" 6 7 4 5
+    xinput set-prop "$IBM_TRACKPOINT" "Evdev Middle Button Emulation" 1
+    xinput set-prop "$IBM_TRACKPOINT" "Evdev Middle Button Timeout" 50
+fi
+if xinput list | grep -q "$ELAN_TRACKPOINT" ; then
+    xinput set-prop "$ELAN_TRACKPOINT" "libinput Middle Emulation Enabled" 1
+    xinput set-prop "$ELAN_TRACKPOINT" "libinput Accel Profile Enabled" 0, 0
 fi
 xset r 108
