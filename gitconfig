@@ -25,6 +25,7 @@
     re    = rebase -i
     rec   = rebase --continue
     mt    = mergetool
+    rstaged = restore --staged
     root  = !pwd
 [include]
     path = ~/.gitconfig.local
