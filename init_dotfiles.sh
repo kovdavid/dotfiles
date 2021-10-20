@@ -67,6 +67,7 @@ ln -s ~/dotfiles/git-templates/ ~/.git-templates
 
 mkdir -p ~/.config/i3
 mkdir -p ~/.config/i3status
+mkdir -p ~/.config/alacritty
 
 if [ $(hostname) == "candyland" ] ; then
     ln -sf ~/dotfiles/i3/config.candyland ~/.config/i3/config
@@ -78,6 +79,8 @@ else
     echo "You have to manually link i3/config and i3/status!"
 fi
 
+ln -sf ~/dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
+
 remove_and_link_dotfile vim
 remove_and_link_dotfile emacs.d
 remove_and_link_dotfile xinitrc
@@ -85,6 +88,7 @@ remove_and_link_dotfile inputrc
 remove_and_link_dotfile tmux.conf
 remove_and_link_dotfile tmux_templates
 remove_and_link_dotfile xprofile
+remove_and_link_dotfile xsession
 remove_and_link_dotfile xsessionrc
 remove_and_link_dotfile gtkrc-2.0
 remove_and_link_dotfile gtkrc-2.0.mine
