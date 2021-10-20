@@ -13,27 +13,15 @@ if [ $? -eq 0 ] ; then
         $XINPUT "libinput Middle Emulation Enabled" 1
     fi
 else
-    if echo $TOUCHPAD | grep -q "SynPS/2 Synaptics TouchPad"; then
-        $XINPUT "Device Enabled" 0
-        $XINPUT "Device Enabled" 1
-        # left click on tap
-        $XINPUT "libinput Tapping Enabled" 1
-        # 2 finger - middle click, 3 finger - right click
-        $XINPUT "libinput Tapping Button Mapping Enabled" 0, 1
-        $XINPUT "libinput Disable While Typing Enabled" 0
-        $XINPUT "libinput Accel Profile Enabled" 0, 1 # flat
-        $XINPUT "libinput Accel Speed" 1
-    elif [ -n "$DEVICE" ] ; then
-        $XINPUT "Device Enabled" 0
-        $XINPUT "Device Enabled" 1
-        $XINPUT "Synaptics Tap Action" 0, 0, 0, 0, 1, 2, 3
-        $XINPUT "Synaptics Edge Scrolling" 0, 0, 0
-        $XINPUT "Synaptics Gestures" 1
-        $XINPUT "Synaptics Locked Drags" 0
-        $XINPUT "Synaptics Locked Drags Timeout" 5000
-        $XINPUT "Synaptics Move Speed" 1, 1.75, 0.04, 0
-        $XINPUT "Synaptics Two-Finger Pressure" 40
-        $XINPUT "Synaptics Two-Finger Width" 8
-        $XINPUT "Synaptics Two-Finger Scrolling" 1, 0
-    fi
+    $XINPUT "Device Enabled" 0
+    $XINPUT "Device Enabled" 1
+    $XINPUT "Synaptics Tap Action" 0, 0, 0, 0, 1, 2, 3
+    $XINPUT "Synaptics Edge Scrolling" 0, 0, 0
+    $XINPUT "Synaptics Gestures" 1
+    $XINPUT "Synaptics Locked Drags" 0
+    $XINPUT "Synaptics Locked Drags Timeout" 5000
+    $XINPUT "Synaptics Move Speed" 1, 1.75, 0.04, 0
+    $XINPUT "Synaptics Two-Finger Pressure" 40
+    $XINPUT "Synaptics Two-Finger Width" 8
+    $XINPUT "Synaptics Two-Finger Scrolling" 1, 0
 fi

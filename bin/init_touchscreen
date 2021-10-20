@@ -1,8 +1,0 @@
-#!/bin/bash
-
-DEVICE=$(xinput | grep SIS0457 | cut -d"=" -f2 | cut -f1)
-
-if [ -n "$DEVICE" ] ; then
-	xinput set-prop $DEVICE "Device Enabled" 0
-	xinput set-prop $DEVICE "Device Enabled" 1
-fi
