@@ -13,8 +13,8 @@ bindsym $mod+Tab exec ~/bin/i3_jump_to_next_output
 bindsym $mod+Shift+Tab exec ~/bin/i3_move_to_next_output
 bindsym $mod+Return exec ~/bin/i3_cycle_windows
 
-bindsym $mod+x exec xterm -e ~/bin/xterm_tmux_session
-bindsym $mod+Shift+x exec xterm
+bindsym $mod+x exec alacritty -e ~/bin/xterm_tmux_session
+bindsym $mod+Shift+x exec alacritty
 bindsym $mod+i exec firefox
 bindsym $mod+t exec thunar
 bindsym $mod+d exec dmenu_run
@@ -24,8 +24,8 @@ bindsym XF86AudioMute exec "amixer -D pulse set Master 1+ toggle; killall -USR1 
 bindsym XF86AudioMicMute exec "amixer -q set Capture toggle; killall -USR1 i3status"
 bindsym XF86AudioLowerVolume exec ~/bin/i3_volume_change down
 bindsym XF86AudioRaiseVolume exec ~/bin/i3_volume_change up
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && notify-send -t 1000 "Brightness $(brightnessctl)"
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && notify-send -t 1000 "Brightness $(brightnessctl)"
 bindsym XF86ScreenSaver exec i3lock -c 000000
 bindsym XF86Sleep exec "i3lock -c 000000; systemctl suspend"
 bindsym XF86Launch1 exec ~/bin/toggle_amixer_volume
@@ -220,6 +220,7 @@ for_window [class="(?i)floating"] floating enable
 for_window [window_role="(?i)browser"] border none
 for_window [class="(?i)firefox"] border none
 for_window [class="factorio"] border none
+for_window [class="Alacritty"] border none
 for_window [class="Nautilus" instance="file_progress"] floating enable
 for_window [window_role="pop-up"] floating enable
 # for_window [class="^jetbrains-.+"][window_type=dialog] focus
@@ -228,6 +229,8 @@ exec ~/bin/mon &
 exec --no-startup-id sudo nm-applet &
 exec ~/bin/init_trackpoint &
 exec ~/bin/init_touchpad &
+exec xmodmap ~/.Xmodmap &
+exec xrdb -merge ~/.Xresources &
 exec (sleep 1 && nitrogen --restore) &
 exec /usr/bin/sed -i "s/^[^#]/# &/" /home/davs/.ssh/authorized_keys
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 000000 --nofork
