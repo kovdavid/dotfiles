@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ -n "$1" ] ; then
+    cat ~/.git_save
+    exit
+fi
+
+PWD=$(pwd)
+DATE=$(date '+%F %T')
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+REV=$(git rev-parse --short HEAD)
+
+echo "$DATE $PWD BRANCH:$BRANCH REV:$REV" >> ~/.git_save

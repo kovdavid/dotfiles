@@ -2,7 +2,7 @@
 
 set -e
 
-DIR=/mnt/data/NO_BACKUP/clean_daily
+DIR=/clean_daily
 
 if [ ! -d $DIR ] ; then
     exit
@@ -10,6 +10,7 @@ fi
 
 cd $DIR
 
+touch .envrc
 ENVRC=$(cat .envrc)
 
 sudo find . -type f -mmin +1440 -delete
