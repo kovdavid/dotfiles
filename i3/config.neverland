@@ -17,7 +17,7 @@ bindsym $mod+x exec alacritty -e ~/bin/xterm_tmux_session
 bindsym $mod+Shift+x exec alacritty
 bindsym $mod+i exec firefox
 bindsym $mod+t exec thunar
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono-13'
 bindsym $mod+h exec i3_rename_workspace
 
 bindsym XF86AudioMute exec "amixer -D pulse set Master 1+ toggle; killall -USR1 i3status"
