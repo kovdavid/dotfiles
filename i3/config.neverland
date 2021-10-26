@@ -1,6 +1,6 @@
 set $mod Mod4
-set $primary_output eDP
-set $secondary_output LVDS1
+set $primary_output HDMI-A-0
+set $secondary_output eDP
 
 font pango:DejaVu Sans Mono 15px
 
@@ -20,7 +20,7 @@ bindsym $mod+t exec thunar
 bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono-13'
 bindsym $mod+h exec i3_rename_workspace
 
-bindsym XF86AudioMute exec "amixer -D pulse set Master 1+ toggle; killall -USR1 i3status"
+# bindsym XF86AudioMute exec "amixer -D pulse set Master 1+ toggle; killall -USR1 i3status"
 bindsym XF86AudioMicMute exec "amixer -q set Capture toggle; killall -USR1 i3status"
 bindsym XF86AudioLowerVolume exec ~/bin/i3_volume_change down
 bindsym XF86AudioRaiseVolume exec ~/bin/i3_volume_change up
@@ -220,12 +220,12 @@ for_window [class="(?i)floating"] floating enable
 for_window [window_role="(?i)browser"] border none
 for_window [class="(?i)firefox"] border none
 for_window [class="factorio"] border none
-for_window [class="Alacritty"] border none
+# for_window [class="Alacritty"] border none
 for_window [class="Nautilus" instance="file_progress"] floating enable
 for_window [window_role="pop-up"] floating enable
 # for_window [class="^jetbrains-.+"][window_type=dialog] focus
 
-exec ~/bin/mon &
+exec ~/bin/mon left &
 exec --no-startup-id sudo nm-applet &
 exec ~/bin/init_trackpoint &
 exec ~/bin/init_touchpad &

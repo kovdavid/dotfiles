@@ -1,4 +1,7 @@
 [alias]
+    a     = add
+    aa    = add --all
+    aan   = add --all -n
     st    = -c color.status=false status
     ci    = commit
     cp    = cherry-pick
@@ -19,6 +22,7 @@
     lod   = log --pretty=format:'%h %ad %s' --date=short
     lomd  = log --oneline --reverse -100 master..HEAD
     lomds = log --oneline --reverse -100 master..HEAD --stat
+    lomdn = log --oneline --reverse -100 master..HEAD --name-only
     lg    = log --oneline --graph --all
     ld    = log --oneline --reverse HEAD ^develop --no-merges
     lm    = log --oneline --reverse HEAD ^master --no-merges

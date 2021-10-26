@@ -1,7 +1,7 @@
 {
   "keys": {
     "L0R0C0":  "KC(TAB)",
-    "L0R0C1":  "KC(Q)",
+    "L0R0C1":  "D(LAYER_4,Q)",
     "L0R0C2":  "KC(W)",
     "L0R0C3":  "KC(E)",
     "L0R0C4":  "KC(R)",
@@ -14,7 +14,7 @@
     "L0R0C11": "KC(QUOTE)",
 
     "L0R1C0":  "D(LCTRL,ESC)",
-    "L0R1C1":  "D(LAYER_4,A)",
+    "L0R1C1":  "KC(A)",
     "L0R1C2":  "KC(S)",
     "L0R1C3":  "KC(D)",
     "L0R1C4":  "KC(F)",

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+LAST_COMMAND="up"
+
+function draw_menu {
+    BRIGHTNESSCTL=$(brightnessctl)
+
+    CURRENT=$(echo $BRIGHTNESSCTL | grep -oP 'Current brightness: (\d+)' | grep -oP '\d+')
+    MAX=$(echo $BRIGHTNESSCTL | grep -oP 'Max brightness: (\d+)' | grep -oP '\d+')
+
+    PERCENTAGE=$(( 100 * $CURRENT / $MAX ))
+
+    MSG="CURR:$CURRENT MAX:$MAX [$PERCENTAGE%]"
+    if [ $LAST_COMMAND == "up" ] ; then
+        CHOICES="up\ndown\ndone"
+    else
+        CHOICES="down\nup\ndone"
+    fi
+    echo -e $CHOICES | dmenu -b -p "$MSG" -fn 'DejaVu Sans Mono-13'
+}
+
+RUN=1
+while [ $RUN -eq 1 ] ; do
+    RESULT=$(draw_menu)
+
+    if [ $RESULT == "up" ] ; then
+        LAST_COMMAND="up"
+        brightnessctl set 5%+
+    elif [ $RESULT == "down" ] ; then
+        LAST_COMMAND="down"
+        brightnessctl set 5%-
+    else
+        RUN=0
+    fi
+done

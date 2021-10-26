@@ -32,8 +32,8 @@ if [ -n "$OUTPUT2_CONNECTED" ] ; then
         $(xrandr --output $OUTPUT2 --pos ${WIDTH1}x-$DELTA_Y)
     else
         $(xrandr --output $OUTPUT2 --mode $RESOLUTION2)
-        $(xrandr --output $OUTPUT2 --right-of $OUTPUT1)
-        $(xrandr --output $OUTPUT2 --pos ${WIDTH1}x-$HEIGTH2)
+        $(xrandr --output $OUTPUT2 --left-of $OUTPUT1)
+        $(xrandr --output $OUTPUT2 --pos 0x0)
     fi
 else
     $(xrandr --output $OUTPUT2 --off)
