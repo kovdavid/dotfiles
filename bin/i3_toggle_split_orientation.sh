@@ -18,4 +18,5 @@ else
         rm -rf $FILE
     fi
 fi
-ps fax | grep 'i3status -c' | grep -v grep | awk '{ print $1 }' | xargs kill -USR1
+
+pidof i3status | xargs kill -USR1
