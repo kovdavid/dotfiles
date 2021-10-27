@@ -20,6 +20,10 @@ bindsym $mod+t exec thunar
 bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono-13'
 bindsym $mod+h exec i3_rename_workspace
 
+# PageUp & PageDown
+bindsym $mod+Prior exec i3_cycle_workspace left
+bindsym $mod+Next exec i3_cycle_workspace right
+
 bindsym XF87AudioMute exec "amixer -D pulse set Master 1+ toggle; killall -USR1 i3status"
 bindsym XF86AudioMicMute exec "amixer -q set Capture toggle; killall -USR1 i3status"
 bindsym XF86AudioLowerVolume exec ~/bin/i3_volume_change down

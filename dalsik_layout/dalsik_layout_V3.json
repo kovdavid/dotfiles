@@ -158,8 +158,8 @@
     "L2R3C11": "TRANS",
 
     "L3R0C0":  "TRANS",
-    "L3R0C1":  "LGUI(F11)",
-    "L3R0C2":  "LGUI(F12)",
+    "L3R0C1":  "KC(NO)",
+    "L3R0C2":  "KC(NO)",
     "L3R0C3":  "LALT(A)",
     "L3R0C4":  "LALT(S)",
     "L3R0C5":  "AUDIO_VOLUP",
@@ -171,8 +171,8 @@
     "L3R0C11": "KC_M1(0x9E)",
 
     "L3R1C0":  "TRANS",
-    "L3R1C1":  "KC(NO)",
-    "L3R1C2":  "KC(NO)",
+    "L3R1C1":  "LGUI(PGUP)",
+    "L3R1C2":  "LGUI(PGDN)",
     "L3R1C3":  "LALT(Q)",
     "L3R1C4":  "LALT(W)",
     "L3R1C5":  "AUDIO_VOLDOWN",
