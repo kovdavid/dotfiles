@@ -52,3 +52,6 @@ export LANG="en_US.UTF-8"
 export LC_COLLATE=C
 export LC_CTYPE="sk_SK.UTF-8"
 export LC_TIME="sk_SK.UTF-8"
+
+export HISTSIZE=-1
+export HISTFILESIZE=-1
