@@ -1,0 +1,30 @@
+#!/usr/bin/env perl
+
+use v5.10;
+use strict;
+use warnings;
+
+my $file = "$ENV{HOME}/.bash_history";
+
+open my $fh_read, "<:raw", $file or die "Could not open bash_history for reading: $!";
+my @lines = <$fh_read>;
+close $fh_read;
+
+my @result;
+my %duplicates;
+
+for my $line (reverse @lines) {
+    chomp $line;
+    next if $duplicates{$line};
+    $duplicates{$line} = 1;
+    push @result, $line;
+}
+
+my $output = join("\n", reverse @result);
+
+open my $fh_write, ">:raw", $file or die "Could not open bash_history for writing: $!";
+print $fh_write $output;
+close $fh_write;
+
+say "Before:".scalar(@lines);
+say "After:".scalar(@result);

@@ -12,9 +12,9 @@ function draw_menu {
 
     MSG="CURR:$CURRENT MAX:$MAX [$PERCENTAGE%]"
     if [ $LAST_COMMAND == "up" ] ; then
-        CHOICES="up\ndown\ndone"
+        CHOICES="up\ndown\nexit"
     else
-        CHOICES="down\nup\ndone"
+        CHOICES="down\nup\nexit"
     fi
     echo -e $CHOICES | dmenu -b -p "$MSG" -fn 'DejaVu Sans Mono-13'
 }
