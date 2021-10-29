@@ -24,7 +24,7 @@ bindsym $mod+h exec i3_rename_workspace
 bindsym $mod+Prior exec i3_cycle_workspace left
 bindsym $mod+Next exec i3_cycle_workspace right
 
-bindsym XF87AudioMute exec "amixer -D pulse set Master 1+ toggle; killall -USR1 i3status"
+bindsym XF86AudioMute exec "amixer -D pulse set Master 1+ toggle; killall -USR1 i3status"
 bindsym XF86AudioMicMute exec "amixer -q set Capture toggle; killall -USR1 i3status"
 bindsym XF86AudioLowerVolume exec ~/bin/i3_volume_change down
 bindsym XF86AudioRaiseVolume exec ~/bin/i3_volume_change up
@@ -238,3 +238,4 @@ exec xrdb -merge ~/.Xresources &
 exec (sleep 1 && nitrogen --restore) &
 exec /usr/bin/sed -i "s/^[^#]/# &/" /home/davs/.ssh/authorized_keys
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 000000 --nofork
+exec --no-startup-id /home/davs/dotfiles/bin/deduplicate_bash_history &

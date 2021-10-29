@@ -178,10 +178,10 @@ augroup TypeScript
     autocmd FileType typescript,typescriptreact setlocal shiftwidth=2
     autocmd FileType typescript,typescriptreact setlocal tabstop=2
 
-    autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+    autocmd FileType typescript,typescriptreact setlocal formatprg=prettier\ --parser\ typescript
 
-    autocmd FileType typescript nnoremap <buffer> <leader>dd <ESC>aconsole.log("\n\n========DAVS");<cr>console.log()<LEFT>
-    autocmd FileType typescript nnoremap <buffer> <leader>df <ESC>aimport('fs').then((fs) => {<CR>fs.writeFileSync('/clean_daily/out.json', JSON.stringify(out))<CR>process.exit(1)<CR>})<UP><UP><ESC>wwwwwww
+    autocmd FileType typescript,typescriptreact nnoremap <buffer> <leader>dd <ESC>aconsole.log("\n\n========DAVS");<cr>console.log()<LEFT>
+    autocmd FileType typescript,typescriptreact nnoremap <buffer> <leader>df <ESC>aimport('fs').then((fs) => {<CR>fs.writeFileSync('/clean_daily/out.json', JSON.stringify(out))<CR>process.exit(1)<CR>})<UP><UP><ESC>wwwwwww
 
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup END
