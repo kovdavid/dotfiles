@@ -23,4 +23,5 @@ Xterm*saveLines: 9000
 
 XTerm*utf8: 1
 
+#include "/home/davs/.Xresources.local"
 #include "/home/davs/.Xresources.colorscheme"

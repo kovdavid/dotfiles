@@ -38,6 +38,8 @@ ln -sf ~/dotfiles/bash/export          ~/.bashrc.export
 ln -sf ~/dotfiles/bash/alias           ~/.bashrc.alias
 ln -sf ~/dotfiles/bash/common          ~/.bashrc.common
 
+touch ~/.Xresources.local
+
 remove_and_link_dotfile Xdefaults
 remove_and_link_dotfile Xmodmap
 remove_and_link_dotfile Xresources
