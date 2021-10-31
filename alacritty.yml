@@ -28,7 +28,7 @@ selection:
   save_to_clipboard: true
 
 mouse_bindings:
-  - { mouse: Middle, action: PasteSelection }
+  - {mouse: Middle, action: PasteSelection}
 
 cursor:
   style:
@@ -36,39 +36,39 @@ cursor:
     blinking: Off
 
 # Base16 Zenburn 256 - alacritty color config
-# elnawe
+# https://github.com/haldai/mydotfiles/blob/master/.Xresources
 colors:
   # Default colors
   primary:
-    background: '#3A3A3A'
-    foreground: '#FFFFFF'
+    background: '0x3F3F3F'
+    foreground: '0xDCDCCC'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
-    text: '0x383838'
+    text: '0x3F3F3F'
     cursor: '0xdcdccc'
 
   # Normal colors
   normal:
-    black:   '0x383838'
-    red:     '0xdca3a3'
-    green:   '0x5f7f5f'
-    yellow:  '0xe0cf9f'
-    blue:    '0x7cb8bb'
-    magenta: '0xdc8cc3'
-    cyan:    '0x93e0e3'
-    white:   '0xdcdccc'
+    black:   '0x3F3F3F'
+    red:     '0xCC9393'
+    green:   '0x7F9F7F'
+    yellow:  '0xF0DFAF'
+    blue:    '0x8CD0D3'
+    magenta: '0xDC8CC3'
+    cyan:    '0x93E0E3'
+    white:   '0xDCDCCC'
 
   # Bright colors
   bright:
-    black:   '0x6f6f6f'
-    red:     '0xdca3a3'
-    green:   '0x5f7f5f'
-    yellow:  '0xe0cf9f'
-    blue:    '0x7cb8bb'
-    magenta: '0xdc8cc3'
-    cyan:    '0x93e0e3'
-    white:   '0xffffff'
+    black:   '0x7F7F7F'
+    red:     '0x9C6363'
+    green:   '0x5F7F5F'
+    yellow:  '0xD0BF8F'
+    blue:    '0x94BFF3'
+    magenta: '0xCB7BB2'
+    cyan:    '0x82CFD2'
+    white:   '0xFFFFEF'
 
   indexed_colors:
     - { index: 16, color: '0xdfaf8f' }

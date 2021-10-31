@@ -26,6 +26,7 @@ export PATH="$HOME/bin:$JAVA_HOME:$PATH"
 [[ -d /opt/rust/cargo ]] && export CARGO_HOME="/opt/rust/cargo"
 [[ -d ~/.cargo/bin ]] && export PATH="~/.cargo/bin:$PATH"
 [[ -d ~/.yarn/bin ]] && export PATH="~/.yarn/bin:$PATH"
+[[ -d ~/.local/bin ]] && export PATH="~/.local/bin:$PATH"
 [[ -d /opt/rust/cargo/bin ]] && export PATH="/opt/rust/cargo/bin:$PATH"
 [[ -n "$(which rustc 2>/dev/null)" && -d "$(rustc --print sysroot)/lib/rustlib/src/rust/src" ]] && \
     export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
@@ -35,7 +36,6 @@ if [ -d /opt/go ] ; then
     export GOPATH="/opt/go"
     export PATH="/opt/go/bin:$PATH"
 fi
-export GO111MODULE=on
 
 export GOPROXY=direct
 export GO111MODULE=on

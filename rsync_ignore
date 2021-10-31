@@ -21,6 +21,7 @@
 # home
 /home/davs/.cache
 /home/davs/dotfiles
+/home/davs/.arduino15
 /home/davs/.cargo
 /home/davs/.cpanm
 /home/davs/.config/google-chrome
@@ -42,10 +43,12 @@
 /home/davs/.mozilla
 /home/davs/.gvfs
 /home/davs/.npm
+/home/davs/.yarn
 /home/davs/.local/bin
 /home/davs/.asdf
 /home/davs/.kodi
 /home/davs/.vim_undo_and_swap
+/home/davs/.vscode
 
 /home/davs/workspace/rust/*/target
 /home/davs/workspace/ocaml/*/_build
