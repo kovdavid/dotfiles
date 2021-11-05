@@ -5,7 +5,7 @@ set -e
 
 RSYNC="rsync --archive --acls --xattrs --verbose --compress --delete"
 RSYNC="$RSYNC --exclude-from=/home/davs/dotfiles/rsync_ignore"
-RSYNC="$RSYNC --exclude='/backup'"
+RSYNC="$RSYNC --exclude=/backup"
 
 if [ $# -eq 1 ] ; then
     FSCK=0
