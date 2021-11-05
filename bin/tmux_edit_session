@@ -4,14 +4,12 @@ CURRENT_SESSION_ID=$(tmux display-message -p '#{session_id}')
 SESSION_ID=${1:-$CURRENT_SESSION_ID}
 SESSION_NAME=$(tmux list-sessions -F '#{session_id} #{session_name}' | grep $SESSION_ID | cut -f1 -d ' ' --complement)
 DEFAULT_COMMAND=$(tmux show-options -v -t $SESSION_ID default-command)
-SSH_HOST=$(echo "$DEFAULT_COMMAND" | grep -oP 'ssh \S+' | cut -d" " -f2)
 CD_DIR=$(echo "$DEFAULT_COMMAND" | grep -oP 'cd .*?;' | cut -d" " -f2 | sed -e 's/;$//g')
 NEW_SESSION_NAME=''
 
 echo "Editing session $SESSION_ID"
 
 read -p "Session name: " -e -i "$SESSION_NAME" NEW_SESSION_NAME
-read -p "SSH host: " -e -i "$SSH_HOST" SSH_HOST
 read -p "Default directory: " -e -i "$CD_DIR" CD_DIR
 
 [[ "$NEW_SESSION_NAME" == "hs" ]] && NEW_SESSION_NAME="λ"
@@ -20,12 +18,7 @@ if [ "$CD_DIR" == "pwd" ] ; then
     CD_DIR=$(tmux display-message -t{last} -p '#{pane_current_path}')
 fi
 
-TMUX_CMD=""
-if [ -n "$SSH_HOST" ] ; then
-    TMUX_CMD="ssh $SSH_HOST -t 'cd $CD_DIR; exec bash'; exec \$SHELL"
-else
-    TMUX_CMD="cd $CD_DIR; bash"
-fi
+TMUX_CMD="cd $CD_DIR; bash"
 
 if [ -n "$NEW_SESSION_NAME" ] ; then
     if [ "$NEW_SESSION_NAME" != "$SESSION_NAME" ] ; then

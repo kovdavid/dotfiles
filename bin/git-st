@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+DATE=$(date '+%F %T')
+REV=$(git rev-parse --short HEAD)
+
+git stash -m "REV:$REV DATE:$DATE"

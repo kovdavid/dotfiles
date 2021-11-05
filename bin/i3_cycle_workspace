@@ -3,12 +3,31 @@
 use strict;
 use warnings;
 use JSON qw[ decode_json ];
+use List::Util qw[ min max ];
+
+use constant {
+    MIN_WS_NUMBER => 0,
+    MAX_WS_NUMBER => 20,
+};
 
 my $workspaces = decode_json(`i3-msg -tget_workspaces`);
 
-my $direction = shift || 'right';
-if ($direction ne 'left' and $direction ne 'right') {
-    $direction = 'right';
+my $args = {
+    direction => 'right',
+    move_window => 0,
+    sequential => 0,
+};
+
+for my $argv (@ARGV) {
+    if ($argv eq 'left') {
+        $args->{direction} = 'left';
+    }
+    if ($argv eq 'move_window') {
+        $args->{move_window} = 1;
+    }
+    if ($argv eq 'sequential') {
+        $args->{sequential} = 1;
+    }
 }
 
 my %workspaces_before;
@@ -35,20 +54,31 @@ my $workspaces_before_output = $workspaces_before{ $focused_workspace->{output} 
 my $workspaces_after_output  = $workspaces_after{ $focused_workspace->{output} };
 
 my $jump_to_workspace;
-if ($direction eq 'left') {
-    if (@{ $workspaces_before_output || [] }) {
-        $jump_to_workspace = $workspaces_before_output->[-1];
-    } elsif (@{ $workspaces_after_output || [] }) {
-        $jump_to_workspace = $workspaces_after_output->[-1];
+if ($args->{sequential}) {
+    if ($args->{direction} eq 'left') {
+        $jump_to_workspace = max(MIN_WS_NUMBER, $focused_workspace->{num} - 1);
+    } else {
+        $jump_to_workspace = min(MAX_WS_NUMBER, $focused_workspace->{num} + 1);
     }
 } else {
-    if (@{ $workspaces_after_output || [] }) {
-        $jump_to_workspace = $workspaces_after_output->[0];
-    } elsif (@{ $workspaces_before_output || [] }) {
-        $jump_to_workspace = $workspaces_before_output->[0];
+    if ($args->{direction} eq 'left') {
+        if (@{ $workspaces_before_output || [] }) {
+            $jump_to_workspace = $workspaces_before_output->[-1];
+        } elsif (@{ $workspaces_after_output || [] }) {
+            $jump_to_workspace = $workspaces_after_output->[-1];
+        }
+    } else {
+        if (@{ $workspaces_after_output || [] }) {
+            $jump_to_workspace = $workspaces_after_output->[0];
+        } elsif (@{ $workspaces_before_output || [] }) {
+            $jump_to_workspace = $workspaces_before_output->[0];
+        }
     }
 }
 
 if ($jump_to_workspace) {
+    if ($args->{move_window}) {
+        `i3-msg -tcommand 'move window to workspace number $jump_to_workspace'`;
+    }
     `i3-msg -tcommand 'workspace number $jump_to_workspace'`;
 }

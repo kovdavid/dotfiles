@@ -3,24 +3,13 @@
 echo "New window"
 
 WINDOW_NAME=''
-SSH_HOST=''
 CD_DIR=${NIKE_HOME-:''}
 
 read -p "Window name: " WINDOW_NAME
 
-read -p "SSH host: " SSH_HOST
-if [ -z "$WINDOW_NAME" ] ; then
-    WINDOW_NAME=$SSH_HOST
-fi
-
 read -e -p "Default directory: " -i "$NIKE_HOME" CD_DIR
 
-TMUX_CMD=""
-if [ -n "$SSH_HOST" ] ; then
-    TMUX_CMD="ssh $SSH_HOST -t 'cd $CD_DIR; exec bash'; exec \$SHELL"
-else
-    TMUX_CMD="cd $CD_DIR; bash"
-fi
+TMUX_CMD="cd $CD_DIR; bash"
 
 if [ -n "$WINDOW_NAME" ] ; then
     $(tmux new-window -d -n $WINDOW_NAME "$TMUX_CMD")

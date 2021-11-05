@@ -8,32 +8,19 @@ SESSION_HISTORY_FILE=~/.tmux_session_history
 [[ ! -f $SESSION_HISTORY_FILE ]] && touch "$SESSION_HISTORY_FILE"
 
 SESSION_NAME=''
-SSH_HOST=''
 CD_DIR=''
 
 read -p "Session name: " SESSION_NAME
 
 SESSION_HISTORY_ENTRY=$(grep -P "^$SESSION_NAME," "$SESSION_HISTORY_FILE")
 
-IFS=, read _UNUSED SSH_HOST HISTORY_CD_DIR <<< "$SESSION_HISTORY_ENTRY"
+IFS=, read _UNUSED HISTORY_CD_DIR <<< "$SESSION_HISTORY_ENTRY"
 
 [[ -n "$HISTORY_CD_DIR" ]] && CD_DIR=$HISTORY_CD_DIR
 
-read -e -p "SSH host: " -i "$SSH_HOST" SSH_HOST
-if [ -z "$SESSION_NAME" ] ; then
-    SESSION_NAME=$SSH_HOST
-fi
-
 read -e -p "Default directory: " -i "$CD_DIR" CD_DIR
 
-TMUX_CMD=""
-if [ -n "$SSH_HOST" ] ; then
-    TMUX_CMD="ssh $SSH_HOST -t 'cd $CD_DIR; exec bash'; exec \$SHELL"
-else
-    TMUX_CMD="cd $CD_DIR; bash"
-fi
-
-[[ "$SESSION_NAME" == "irc" ]] && TMUX_CMD="bash -c irssi"
+TMUX_CMD="cd $CD_DIR; bash"
 
 if [ -n "$SESSION_NAME" ] ; then
     $(tmux new-session -d -s $SESSION_NAME -n bash "$TMUX_CMD")
@@ -45,7 +32,7 @@ fi
 
 SESSION_HISTORY=$(cat "$SESSION_HISTORY_FILE" | grep -vP "^$SESSION_NAME,")
 echo -e "$SESSION_HISTORY" > "$SESSION_HISTORY_FILE"
-echo -e "$SESSION_NAME,$SSH_HOST,$CD_DIR" >> "$SESSION_HISTORY_FILE"
+echo -e "$SESSION_NAME,$CD_DIR" >> "$SESSION_HISTORY_FILE"
 
 $(tmux set-option -t $SESSION_NAME default-command "$TMUX_CMD")
 $(tmux set-option -t "G|${SESSION_NAME}" default-command "$TMUX_CMD")
