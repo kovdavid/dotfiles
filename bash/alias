@@ -20,6 +20,7 @@ alias dr="docker run -it --rm"
 alias de="docker exec -it"
 alias g="git"
 alias ga='git add'
+alias gap='git add --patch'
 alias gaa='git add --all'
 alias gb='git branch'
 alias gdth='git difftool HEAD'
