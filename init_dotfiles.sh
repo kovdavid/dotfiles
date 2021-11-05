@@ -38,7 +38,9 @@ ln -sf ~/dotfiles/bash/export          ~/.bashrc.export
 ln -sf ~/dotfiles/bash/alias           ~/.bashrc.alias
 ln -sf ~/dotfiles/bash/common          ~/.bashrc.common
 
-touch ~/.Xresources.local
+if [ ! -f ~/.Xresources.local ] ; then
+    echo "XTerm*faceSize: 11" > ~/.Xresources.local
+fi
 
 remove_and_link_dotfile Xdefaults
 remove_and_link_dotfile Xmodmap

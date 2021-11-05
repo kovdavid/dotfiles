@@ -7,7 +7,6 @@ Xft.dpi: 96
 Xft.rgba: rgb
 
 XTerm*faceName: DejaVu Sans Mono
-XTerm*faceSize: 11
 !XTerm*Background: #333333
 !XTerm*Foreground: #ffffff
 !XTerm*Background: #3A3A3A
