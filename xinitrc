@@ -4,20 +4,7 @@
 xset s 900 900
 xset dpms 900 900 900
 
-userresources=~/.Xresources
-usermodmap=~/.Xmodmap
-sysresources=/etc/X11/xinit/.Xresources
-sysmodmap=/etc/X11/xinit/.Xmodmap
-
-# merge in defaults and keymaps
-[ -f $sysresources ] && /usr/bin/xrdb -merge $sysresources
-[ -f $sysmodmap ] && /usr/bin/xmodmap $sysmodmap
-[ -f $userresources ] && /usr/bin/xrdb -merge $userresources
-[ -f $usermodmap ] && /usr/bin/xmodmap $usermodmap
 [ -f ~/dotfiles/bash/env_settings ] && source ~/dotfiles/bash/env_settings
-
-/usr/bin/xmodmap -e 'keycode 66 = Escape'
-/usr/bin/xmodmap -e 'clear Lock'
 
 if [ -r /etc/xprofile ]; then
     source /etc/xprofile

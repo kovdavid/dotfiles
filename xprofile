@@ -3,3 +3,5 @@
 if [ -f /usr/bin/syndaemon ] ; then
     /usr/bin/syndaemon -td
 fi
+
+[[ -f /home/davs/.xsession ]] && source /home/davs/.xsession
