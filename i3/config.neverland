@@ -23,6 +23,12 @@ bindsym $mod+h exec i3_rename_workspace
 # PageUp & PageDown
 bindsym $mod+Prior exec i3_cycle_workspace left
 bindsym $mod+Next exec i3_cycle_workspace right
+bindsym $mod+Shift+Prior exec i3_cycle_workspace left move_window
+bindsym $mod+Shift+Next exec i3_cycle_workspace right move_window
+bindsym $mod+Control+Prior exec i3_cycle_workspace left sequential
+bindsym $mod+Control+Next exec i3_cycle_workspace right sequential
+bindsym $mod+Shift+Control+Prior exec i3_cycle_workspace left sequential move_window
+bindsym $mod+Shift+Control+Next exec i3_cycle_workspace right sequential move_window
 
 bindsym XF86AudioMute exec "amixer -D pulse set Master 1+ toggle; killall -USR1 i3status"
 bindsym XF86AudioMicMute exec "amixer -q set Capture toggle; killall -USR1 i3status"
