@@ -1,6 +1,8 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact"],
+    "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "py"],
     "eslint.autoFixOnSave": true,
     "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-    "prettier.disableSuccessMessage": true
+    "prettier.disableSuccessMessage": true,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black"
 }

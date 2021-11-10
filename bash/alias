@@ -38,8 +38,6 @@ alias gpohff='git push --force -u origin HEAD'
 alias gpullh='git rev-parse --abbrev-ref HEAD | xargs git pull origin'
 alias gsync='git rev-parse --abbrev-ref HEAD | xargs git pull origin && git push -u origin HEAD'
 alias goon='git rebase --continue'
-alias grel='git fetch origin; git branch -a | grep release | sed -e "s#remotes/[^/]*/##" | sort -V -u | tail'
-alias gfeat='git fetch origin; git branch -a | grep -v release | sed -e "s#remotes/[^/]*/##" | sort -V -u | tail'
 alias grep='grep --exclude-dir=.git'
 alias gst='git status'
 alias la="ls -lha"
@@ -52,7 +50,6 @@ alias ping8="ping 8.8.8.8"
 alias reload="source ~/.bashrc"
 alias rm="rm -i"
 alias split50="split -b50M"
-alias ssht="TERM=xterm-256color ssh"
 alias strace="strace -s 4096"
 alias tailf="tail -f"
 alias tm="tmux_start"
@@ -70,4 +67,3 @@ else
 	alias j="echo 'Clone https://github.com/DavsX/jump.git to ~/workspace/bash/jump'"
 fi
 alias xvim="xargs -o vim"
-alias noproxy="for e in http_proxy https_proxy ftp_proxy no_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY NO_PROXY; do unset \$e; done"
