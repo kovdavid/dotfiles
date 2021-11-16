@@ -1,0 +1,20 @@
+# pacmd list-cards
+# ls /dev/snd/by-path/*
+# udevadm info --name snd/controlCX --attribute-walk
+# udevadm control --reload-rules && udevadm trigger && udevadm trigger --attr-match=subsystem=sound
+# https://www.alsa-project.org/wiki/Changing_card_IDs_with_udev
+
+# udevadm info -q path -n "snd/by-path/pci-0000:07:00.1" | xargs udevadm test 2>&1
+
+# SUBSYSTEM!="sound", GOTO="alsa_naming_end"
+# ACTION!="add", GOTO="alsa_naming_end"
+
+# ATTRS{vendor}=="0x1002", ATTRS{device}=="0x15e3", ATTRS{id}="Intel Generic", ATTRS{number}="1"
+# ATTRS{vendor}=="0x1002", ATTRS{device}=="0x1637", ATTRS{id}="AMD Generic", ATTRS{number}="2"
+# ATTRS{idVendor}=="1002", ATTRS{idDevice}=="15e3", ATTRS{id}="Intel Generic", ATTRS{number}="1"
+# ATTRS{idVendor}=="1002", ATTRS{idDevice}=="1637", ATTRS{id}="AMD Generic", ATTRS{number}="2"
+
+DEVPATH=="/devices/pci0000:00/0000:00:08.1/0000:07:00.6/sound/card*", ATTR{id}="MyCard1", ATTR{number}="1"
+DEVPATH=="/devices/pci0000:00/0000:00:08.1/0000:07:00.1/sound/card*", ATTR{id}="MyCard2", ATTR{number}="2"
+
+# LABEL="alsa_naming_end"
