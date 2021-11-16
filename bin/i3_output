@@ -1,0 +1,14 @@
+#!/bin/bash
+
+NUMBER=$(\
+    i3-msg -tget_workspaces \
+    | jq '.[] | select( .visible == true and .focused == false)' \
+    | jq '.num' \
+)
+
+if [ "$1" == "jump" ] ; then
+    i3-msg -tcommand "workspace number $NUMBER"
+elif [ "$1" == "move" ] ; then
+    i3-msg -tcommand "move window to workspace number $NUMBER"
+fi
+
