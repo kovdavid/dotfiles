@@ -1,5 +1,6 @@
 set $mod Mod4
-set $primary_output HDMI-A-0
+# set $primary_output HDMI-A-0
+set $primary_output DisplayPort-0
 set $secondary_output eDP
 
 font pango:DejaVu Sans Mono 15px
@@ -9,8 +10,8 @@ floating_modifier $mod
 
 # focus_follows_mouse no
 
-bindsym $mod+Tab exec ~/bin/i3_jump_to_next_output
-bindsym $mod+Shift+Tab exec ~/bin/i3_move_to_next_output
+bindsym $mod+Tab exec ~/bin/i3_output jump
+bindsym $mod+Shift+Tab exec ~/bin/i3_output move
 bindsym $mod+Return exec ~/bin/i3_cycle_windows
 
 bindsym $mod+x exec alacritty -e ~/bin/xterm_tmux_session
@@ -21,10 +22,15 @@ bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono-13'
 bindsym $mod+h exec i3_rename_workspace
 
 # PageUp & PageDown
-bindsym $mod+Prior exec i3_cycle_workspace left
-bindsym $mod+Next exec i3_cycle_workspace right
+bindsym $mod+Prior exec i3_cycle_workspace left sequential
+bindsym $mod+Next exec i3_cycle_workspace right sequential
 bindsym $mod+Shift+Prior exec i3_cycle_workspace left move_window
 bindsym $mod+Shift+Next exec i3_cycle_workspace right move_window
+# F13
+bindsym $mod+XF86Tools exec i3_cycle_workspace left move_window sequential
+# F14
+bindsym $mod+XF86Launch5 exec i3_cycle_workspace right move_window sequential
+
 bindsym $mod+Control+Prior exec i3_cycle_workspace left sequential
 bindsym $mod+Control+Next exec i3_cycle_workspace right sequential
 bindsym $mod+Shift+Control+Prior exec i3_cycle_workspace left sequential move_window
@@ -62,7 +68,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # toggle split orientation
-bindsym $mod+s exec ~/bin/i3_toggle_split_orientation.sh
+bindsym $mod+s split toggle
 
 bindsym --release $mod+Shift+s exec scrot -s -e 'mv $f /clean_daily/$f'
 
@@ -215,7 +221,7 @@ bindsym $mod+Shift+Delete mode $system_power_mode
 # finds out, if available)
 bar {
     font pango:DejaVu Sans Mono 14px
-    status_command i3_custom_status.sh
+    status_command i3status -c ~/.config/i3status/config
     tray_output $primary_output
     tray_output $secondary_output
 }
@@ -223,7 +229,7 @@ bar {
 # use xprop ;)
 for_window [class="(?i)xfce4-notifyd"] floating enable, focus mode_toggle
 for_window [class="(?i)galculator"] floating enable
-for_window [class="(?i)google-chrome"] border none
+for_window [class="(?i)google-chrome"] bordesnone
 for_window [class="(?i)chodba3"] floating enable
 for_window [class="(?i)pidgin"] floating enable
 for_window [class="(?i)floating"] floating enable
@@ -234,6 +240,7 @@ for_window [class="factorio"] border none
 for_window [class="Nautilus" instance="file_progress"] floating enable
 for_window [window_role="pop-up"] floating enable
 # for_window [class="^jetbrains-.+"][window_type=dialog] focus
+for_window [class="(?i)pavucontrol"] floating enable, move position mouse, move down 30, move left 30, sticky enable
 
 exec ~/bin/mon left &
 exec --no-startup-id sudo nm-applet &
