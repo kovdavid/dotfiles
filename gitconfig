@@ -31,6 +31,7 @@
     mt    = mergetool
     rstaged = restore --staged
     root  = !pwd
+    backup = archive --format=tar --output=backup.tar.gz HEAD
 [include]
     path = ~/.gitconfig.local
 [core]
