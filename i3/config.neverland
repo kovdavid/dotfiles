@@ -44,7 +44,6 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && notify-send -t 1000 
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && notify-send -t 1000 "Brightness $(brightnessctl)"
 bindsym XF86ScreenSaver exec i3lock -c 000000
 bindsym XF86Sleep exec "i3lock -c 000000; systemctl suspend"
-bindsym XF86Launch1 exec ~/bin/toggle_amixer_volume
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -90,10 +89,15 @@ bindsym $mod+space focus mode_toggle
 workspace_auto_back_and_forth yes
 bindsym $mod+z workspace back_and_forth
 
-workspace 1 output  $primary_output $secondary_output
-workspace 2 output  $primary_output $secondary_output
-workspace 3 output  $primary_output $secondary_output
-workspace 4 output  $primary_output $secondary_output
+set $ws1 "1: www"
+set $ws2 "2: tmux"
+set $ws3 "3: chat"
+set $ws4 "4: idea"
+
+workspace $ws1 output  $primary_output $secondary_output
+workspace $ws2 output  $primary_output $secondary_output
+workspace $ws3 output  $primary_output $secondary_output
+workspace $ws4 output  $primary_output $secondary_output
 workspace 5 output  $primary_output $secondary_output
 workspace 6 output  $primary_output $secondary_output
 workspace 7 output  $primary_output $secondary_output
@@ -114,10 +118,10 @@ workspace 21 output $secondary_output
 workspace 22 output $secondary_output
 
 # switch to workspace
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
 bindsym $mod+5 workspace number 5
 bindsym $mod+6 workspace number 6
 bindsym $mod+7 workspace number 7
@@ -139,10 +143,10 @@ bindsym $mod+F11 workspace number 21
 bindsym $mod+F12 workspace number 22
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam      move container to workspace number 1
-bindsym $mod+Shift+at          move container to workspace number 2
-bindsym $mod+Shift+numbersign  move container to workspace number 3
-bindsym $mod+Shift+dollar      move container to workspace number 4
+bindsym $mod+Shift+exclam      move container to workspace $ws1
+bindsym $mod+Shift+at          move container to workspace $ws2
+bindsym $mod+Shift+numbersign  move container to workspace $ws3
+bindsym $mod+Shift+dollar      move container to workspace $ws4
 bindsym $mod+Shift+percent     move container to workspace number 5
 bindsym $mod+Shift+asciicircum move container to workspace number 6
 bindsym $mod+Shift+ampersand   move container to workspace number 7
@@ -244,6 +248,7 @@ for_window [class="(?i)pavucontrol"] floating enable, move position mouse, move 
 
 exec ~/bin/mon left &
 exec --no-startup-id sudo nm-applet &
+exec --no-startup-id setkxbmap us,sk -option 'grp:alt_shift_toggle' &
 exec ~/bin/init_trackpoint &
 exec ~/bin/init_touchpad &
 exec xmodmap ~/.Xmodmap &

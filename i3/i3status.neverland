@@ -39,33 +39,26 @@ disk "/" {
 }
 
 battery 0 {
-    format = "B %status %percentage %remaining"
+    format = "🔌 %status %percentage %remaining"
     path = "/sys/class/power_supply/BAT%d/uevent"
 }
 
 cpu_temperature 0 {
-    format = "%degrees°C"
+    format = "🌡️%degrees°C"
     path = "/sys/class/thermal/thermal_zone0/temp"
 }
 
 load {
-    format = "L %1min"
+    format = "%1min"
 }
 
 cpu_usage {
-    format = "U %usage"
+    format = "🔳 %usage"
 }
 
 volume master {
-    format = "☊ %volume"
-    device = "sysdefault"
+    format = "🔊 %volume"
+    device = "pulse"
     mixer = "Master"
-    mixer_idx = 0
-}
-
-volume PCM {
-    format = "☋ %volume"
-    device = "sysdefault"
-    mixer = "PCM"
     mixer_idx = 0
 }

@@ -7,6 +7,10 @@ echo "New session"
 SESSION_HISTORY_FILE=~/.tmux_session_history
 [[ ! -f $SESSION_HISTORY_FILE ]] && touch "$SESSION_HISTORY_FILE"
 
+echo ""
+cat $SESSION_HISTORY_FILE | sort
+echo ""
+
 SESSION_NAME=''
 CD_DIR=''
 

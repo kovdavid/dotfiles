@@ -89,7 +89,7 @@ set shiftwidth=4  " number of spaces for indenting
 set tabstop=4     " number of spaces for tabs
 set softtabstop=4 " number of spaces for tabs while editing
 set shiftround
-set modelines=0
+set modelines=1
 set expandtab
 
 set list
@@ -117,7 +117,7 @@ set guioptions+=t  "tearoff menu items
 set guitablabel=%t "show only filename in tabs
 
 set t_Co=256
-set colorcolumn=120
+set colorcolumn=80
 if filereadable("/tmp/.Xresources_solarized")
     set background=light
     colorscheme solarized

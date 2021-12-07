@@ -1,8 +1,11 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "py"],
+    "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "py", "python"],
     "eslint.autoFixOnSave": true,
     "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
     "prettier.disableSuccessMessage": true,
     "python.linting.flake8Enabled": true,
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "~/.local/bin/black",
+    "python.venvPath": "/home/davs/.cache/pypoetry/virtualenvs",
+    "settings.python.analysis.typeCheckingMode": "off"
 }

@@ -131,3 +131,6 @@ noremap <c-t> :tabnew<CR>
 nnoremap <leader>cl :call CloseHiddenBuffers()<CR>
 
 nnoremap <space> za
+
+noremap ZZ <c-w>_ \| <c-w>\|
+noremap Zz <c-w>=

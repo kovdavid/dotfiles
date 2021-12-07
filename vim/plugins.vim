@@ -24,5 +24,6 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'elixir-editors/vim-elixir'
 Plug 'mhinz/vim-mix-format'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ton/vim-alternate'
 
 call plug#end()

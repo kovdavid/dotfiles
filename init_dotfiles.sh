@@ -7,7 +7,11 @@ function remove_and_link_dotfile {
 
 function remove_and_link_to_tmp {
     $(rm -rf ~/.$1)
-    $(ln -s /tmp ~/.$1)
+    if [ -d /opt/$1 ] ; then
+        $(ln -s /opt/$1 ~/.$1)
+    else
+        $(ln -s /tmp ~/.$1)
+    fi
 }
 
 echo "Linking scripts"
@@ -84,6 +88,7 @@ else
 fi
 
 ln -sf ~/dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
+ln -s ~/dotfiles/rofi ~/.config
 
 remove_and_link_dotfile vim
 remove_and_link_dotfile emacs.d
