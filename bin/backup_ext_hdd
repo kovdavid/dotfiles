@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if [ $# -ne 1 ] ; then
+    echo "Usage: `basename $0` directory"
+    exit 1
+fi
+
+if [ ! -d "$1" ] ; then
+    echo "Directory $1 does not exist"
+    exit 2
+fi
+
+if [ ! -f "$1/last_backup_run" ] ; then
+    echo "File $1/last_backup_run does not exist"
+    exit 3
+fi
+
+rsync --archive --acls --xattrs --verbose --compress --delete \
+        --exclude-from="/home/davs/dotfiles/rsync_ignore"     \
+        --exclude="/backup"                                   \
+        --include="/opt"                                      \
+        --include="/opt/factorio"                             \
+        --include="/opt/factorio/***"                         \
+        / "$1"
+
+touch "$1/last_backup_run"
