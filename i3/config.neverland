@@ -36,8 +36,8 @@ bindsym $mod+Control+Next exec i3_cycle_workspace right sequential
 bindsym $mod+Shift+Control+Prior exec i3_cycle_workspace left sequential move_window
 bindsym $mod+Shift+Control+Next exec i3_cycle_workspace right sequential move_window
 
-bindsym XF86AudioMute exec "amixer -D pulse set Master 1+ toggle; killall -USR1 i3status"
-bindsym XF86AudioMicMute exec "amixer -q set Capture toggle; killall -USR1 i3status"
+bindsym XF86AudioMute exec "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+bindsym XF86AudioMicMute exec "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
 bindsym XF86AudioLowerVolume exec ~/bin/i3_volume_change down
 bindsym XF86AudioRaiseVolume exec ~/bin/i3_volume_change up
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && notify-send -t 1000 "Brightness $(brightnessctl)"
@@ -119,9 +119,9 @@ workspace 22 output $secondary_output
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace number 5
 bindsym $mod+6 workspace number 6
 bindsym $mod+7 workspace number 7
@@ -248,7 +248,7 @@ for_window [class="(?i)pavucontrol"] floating enable, move position mouse, move 
 
 exec ~/bin/mon left &
 exec --no-startup-id sudo nm-applet &
-exec --no-startup-id setkxbmap us,sk -option 'grp:alt_shift_toggle' &
+exec --no-startup-id setxkbmap us,sk -option 'grp:alt_shift_toggle' &
 exec ~/bin/init_trackpoint &
 exec ~/bin/init_touchpad &
 exec xmodmap ~/.Xmodmap &

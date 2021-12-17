@@ -6,6 +6,25 @@ use warnings;
 
 use constant STEP => 5;
 
+my $pactl_data = `pactl get-sink-volume \@DEFAULT_SINK@`;
+my ($pactl_volume) = $pactl_data =~ /(\d+%)/;
+my ($volume) = $pactl_volume =~ /(\d+)/;
+
+my $direction = shift || 'down';
+if ($direction ne 'up' and $direction ne 'down') {
+    $direction = 'down';
+}
+
+if ($direction eq 'up') {
+    if ($volume <= 100 - STEP) {
+        `pactl set-sink-volume \@DEFAULT_SINK@ +${\STEP}%`;
+    }
+} elsif ($direction eq 'down') {
+    `pactl set-sink-volume \@DEFAULT_SINK@ -${\STEP}%`;
+}
+
+__END__
+
 my $master_data=`amixer get -M Master`;
 my ($master_volume) = ($master_data =~ /\[(\d+)%\]/);
 

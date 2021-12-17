@@ -1,9 +1,9 @@
 " vimrc by Davs
-source ~/.vim/plugins.vim
-source ~/.vim/global_settings.vim
-source ~/.vim/global_functions.vim
-source ~/.vim/global_mappings.vim
-source ~/.vim/plugin_settings.vim
+source ~/dotfiles/vim/plugins.vim
+source ~/dotfiles/vim/global_settings.vim
+source ~/dotfiles/vim/global_functions.vim
+source ~/dotfiles/vim/global_mappings.vim
+source ~/dotfiles/vim/plugin_settings.vim
 " Filetype {{{
 " EveryFile {{{
 augroup all_file_type
@@ -208,6 +208,16 @@ augroup jinja
     autocmd FileType jinja setlocal autoindent
     autocmd FileType jinja setlocal tabstop=2
     autocmd FileType jinja setlocal shiftwidth=2
+augroup END
+" }}}
+" python {{{
+augroup python
+    autocmd!
+
+    autocmd FileType python setlocal expandtab
+    autocmd FileType python setlocal autoindent
+
+    autocmd FileType python nnoremap <buffer> <leader>rr :!env python %<CR>
 augroup END
 " }}}
 " vimrc {{{

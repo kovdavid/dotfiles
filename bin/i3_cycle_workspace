@@ -77,8 +77,14 @@ if ($args->{sequential}) {
 }
 
 if ($jump_to_workspace) {
-    if ($args->{move_window}) {
-        `i3-msg -tcommand 'move window to workspace number $jump_to_workspace'`;
+    my $workspace_name = `grep 'set \$ws$jump_to_workspace' ~/.config/i3/config`;
+
+    if ($workspace_name && $workspace_name =~ /"(.*)"/) {
+        $jump_to_workspace = $1;
     }
-    `i3-msg -tcommand 'workspace number $jump_to_workspace'`;
+
+    if ($args->{move_window}) {
+        `i3-msg -tcommand 'move window to workspace $jump_to_workspace'`;
+    }
+    `i3-msg -tcommand 'workspace $jump_to_workspace'`;
 }

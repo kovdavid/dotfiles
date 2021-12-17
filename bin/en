@@ -1,4 +1,4 @@
 #!/bin/bash
 
-setxkbmap en_US
+setxkbmap us,sk -option 'grp:alt_shift_toggle'
 xmodmap ~/.Xmodmap

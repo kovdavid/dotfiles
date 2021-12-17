@@ -25,5 +25,6 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'mhinz/vim-mix-format'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ton/vim-alternate'
+Plug 'dense-analysis/ale', { 'for': 'python' }
 
 call plug#end()
