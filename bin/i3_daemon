@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+
+import re
+
+from i3ipc import Connection, Event
+
+
+def on_window_new(i3, e):
+    ws = i3.get_tree().find_focused().workspace()
+    windows = [w.window_class for w in ws.leaves()]
+
+    if len(windows) == 1 and re.match("^\d+$", ws.name):
+        workspace_name = ws.name + ": " + windows[0]
+        i3.command('rename workspace to "%s"' % workspace_name)
+
+
+def on_window_close(i3, e):
+    ws = i3.get_tree().find_focused().workspace()
+
+    if not len(ws.leaves()):
+        i3.command('rename workspace to "%s"' % ws.num)
+
+
+if __name__ == "__main__":
+    i3 = Connection()
+    i3.on(Event.WINDOW_NEW, on_window_new)
+    i3.on(Event.WINDOW_CLOSE, on_window_close)
+    i3.main()
