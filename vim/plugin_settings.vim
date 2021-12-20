@@ -97,3 +97,6 @@ let g:coc_disable_startup_warning = 1
 let g:coc_global_extensions = ['coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-pyright']
 
 let g:AlternateExtensionMappings = [{'.cpp' : '.h', '.h' : '.ino', '.ino' : '.cpp'}, {'.c': '.h', '.h': '.c'}]
+
+" Ale
+let b:ale_fixers = {'python': ['add_blank_lines_for_python_control_statements', 'black', 'isort', 'trim_whitespace']}
