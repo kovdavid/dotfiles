@@ -54,8 +54,7 @@ alias strace="strace -s 4096"
 alias tailf="tail -f"
 alias tm="tmux_start"
 alias tree="tree -C"
-alias up="cd \`git root\`"
-alias upt="cd \`git root\` && cd t"
+alias up="cd \`get_up_directory\`"
 if [ -n "$(which nvim 2>/dev/null)" ] ; then
     alias vim="nvim"
 fi

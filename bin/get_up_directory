@@ -1,0 +1,18 @@
+#!/bin/bash
+
+CURRENT_DIR=$(pwd)
+NEW_DIR="/"
+
+while [[ "$PWD" != "/" ]] ; do
+    if [ -f .vimproject ] || [ -d .git ] ; then
+        NEW_DIR=$PWD
+        break
+    fi
+    cd ..
+done
+
+if [ "$NEW_DIR" != "/" ] ; then
+    echo $NEW_DIR
+else
+    echo $CURRENT_DIR
+fi

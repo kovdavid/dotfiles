@@ -88,7 +88,7 @@ else
 fi
 
 ln -sf ~/dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
-ln -s ~/dotfiles/rofi ~/.config
+ln -sf ~/dotfiles/rofi ~/.config
 
 remove_and_link_dotfile vim
 remove_and_link_dotfile emacs.d
