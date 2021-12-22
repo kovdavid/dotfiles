@@ -98,8 +98,8 @@ set listchars=tab:▸\ ,trail:·
 " Statusline
 set statusline=
 set statusline +=%1*\ %n\ %*            "buffer number
-set statusline +=%{fugitive#statusline()} "git branch"
-set statusline +=%4*\ %<%-.40F%*        "full path
+" set statusline +=%{fugitive#statusline()} "git branch"
+set statusline +=%4*\ %<%-.80f%*        "relative path
 set statusline +=%2*%m%*                "modified flag
 set statusline +=%1*%=%5l%*             "current line
 set statusline +=%2*/%L%*               "total lines

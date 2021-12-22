@@ -18,6 +18,8 @@ nnoremap <leader>db :windo set scrollbind!<CR>
 nnoremap <leader>du :windo diffupdate<CR>
 nnoremap <leader>dw :windo set diffopt+=iwhite<CR>
 
+nnoremap <C-G> 2<C-G>
+
 " Basic maps
 nnoremap ; :
 noremap <leader>w :w<CR>
