@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -f /tmp/.Xresources_solarized ] ; then
-    tmux set-option -g status-right ' #(tmux_get_pane_title) #[fg=colour0]%H:%M# %F'
+    tmux set-option -g status-right ' #(tmux_status_right_i3_info) #[fg=colour0]%H:%M'
     tmux set-option -g status-bg colour7
     tmux set-option -g status-fg colour248
     tmux set-window-option -g window-status-current-style bg=colour0,fg=colour15,bold
