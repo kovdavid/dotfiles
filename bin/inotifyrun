@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# Example:
+# inotifyrun "lib test" "mix test"
+
+PIDFILE=/tmp/inotifyrun.pid
+RUNNING_ICON="/usr/share/icons/oxygen/base/64x64/actions/system-reboot.png"
+SUCCESS_ICON="/usr/share/icons/oxygen/base/64x64/status/security-high.png"
+FAILURE_ICON="/usr/share/icons/oxygen/base/64x64/status/security-low.png"
+
+kill_command()
+{
+    PID=`cat $PIDFILE`
+    if [ $PID ]; then
+        kill -q $PID &>/dev/null
+    fi
+}
+
+control_c()
+{
+    kill_command
+    exit $?
+}
+
+trap control_c SIGINT
+
+if [ $# -eq 0 ] ; then
+    echo "Usage: $(basename $0) \"dir1 dir2\" \"command1; command2\""
+    exit
+fi
+
+directory=$1
+shift
+command=$@
+
+touch $PIDFILE
+
+iteration=1
+
+inotifywait -m --format "%w %f" -e modify -r $directory | while IFS=" " read DIR FILE
+do
+    [[ "$DIR" == */\.git/* ]] && continue
+    [[ "$DIR" == */\.next/* ]] && continue
+    [[ "$DIR" == */build/* ]] && continue
+    [[ "$DIR" == */node_modules/* ]] && continue
+    git check-ignore -q $DIR$FILE
+    RES=$?
+    [[ "$RES" -eq "0" ]] && continue
+
+    kill_command
+
+    clear
+
+    echo "$(date +'%F %T') Running $command"
+
+    eval "$command" &
+    PID=$!
+    echo $PID > $PIDFILE
+
+    # notify-send -t 1000 "$command" "RUNNING #$iteration" -i $RUNNING_ICON
+
+    wait $PID
+    RESULT=$?
+    if [ "$RESULT" -eq "0" ]; then
+        notify-send -t 1000 "$command" "SUCCESS #$iteration" -i $SUCCESS_ICON
+    else
+        notify-send -t 1000 "$command" "FAILURE #$iteration" -i $FAILURE_ICON
+    fi
+
+    echo "CHANGED $(date '+%F %T') => $DIR$FILE"
+
+    iteration=$((iteration+1))
+done
