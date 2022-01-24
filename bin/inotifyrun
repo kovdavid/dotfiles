@@ -36,6 +36,7 @@ command=$@
 touch $PIDFILE
 
 iteration=1
+LAST_TIMESTAMP=0
 
 inotifywait -m --format "%w %f" -e modify -r $directory | while IFS=" " read DIR FILE
 do
@@ -46,6 +47,12 @@ do
     git check-ignore -q $DIR$FILE
     RES=$?
     [[ "$RES" -eq "0" ]] && continue
+
+    TIMESTAMP=$(date '+%s')
+    if (( $TIMESTAMP <= $LAST_TIMESTAMP + 2 )) ; then
+        continue
+    fi
+    LAST_TIMESTAMP=$TIMESTAMP
 
     kill_command
 

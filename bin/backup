@@ -74,7 +74,7 @@ fi
 if [ -e /backup/backup_system ] ; then
     echo "Backup type: system. Press any key to continue."
     read -n 1
-     \
+    $RSYNC \
           --exclude-from="/home/davs/dotfiles/rsync_ignore"       \
           --exclude="/backup"                                     \
           --exclude="/mnt"                                        \

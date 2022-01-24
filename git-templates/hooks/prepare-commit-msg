@@ -2,6 +2,6 @@
 
 JIRA_TAG=$(git rev-parse --abbrev-ref HEAD | grep -oP '^\w+-\d+')
 
-if [ -n "$JIRA_TAG" ] ; then
+if [ -n "$JIRA_TAG" ] &&  [[ ! "$(head -n1 $1)" =~ /^$JIRA_TAG/ ]] ; then
 	sed -i.bak -e "1s/^/$JIRA_TAG /" $1
 fi

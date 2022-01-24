@@ -4,6 +4,7 @@
     aan   = add --all -n
     st    = -c color.status=false status
     ci    = commit
+    ciamend = commit --amend
     cp    = cherry-pick
     br    = branch
     co    = checkout
