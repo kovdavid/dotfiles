@@ -1,16 +1,27 @@
 #!/usr/bin/env perl
 
+use v5.10;
 use strict;
 use warnings;
 use JSON qw[ decode_json ];
 use List::Util qw[ min max ];
+use Data::Dumper;
 
 use constant {
     MIN_WS_NUMBER => 0,
     MAX_WS_NUMBER => 20,
 };
 
-my $workspaces = decode_json(`i3-msg -tget_workspaces`);
+sub execute_command {
+    my ($cmd) = @_;
+
+    say $cmd;
+
+    my $result = `$cmd`;
+    return $result;
+}
+
+my $workspaces = decode_json(execute_command("i3-msg -tget_workspaces"));
 
 my $args = {
     direction => 'right',
@@ -36,16 +47,18 @@ my $focused_workspace;
 
 for my $workspace (@{ $workspaces }) {
     my $output = $workspace->{output};
+    my $workspace_data = {
+        num => $workspace->{num},
+        name => $workspace->{name},
+        output => $workspace->{output},
+    };
     if ($workspace->{focused}) {
-        $focused_workspace = {
-            num => $workspace->{num},
-            output => $workspace->{output},
-        };
+        $focused_workspace = $workspace_data;
     } else {
         if ($focused_workspace) {
-            push @{ $workspaces_after{$output} }, $workspace->{num};
+            push @{ $workspaces_after{$output} }, $workspace_data;
         } else {
-            push @{ $workspaces_before{$output} }, $workspace->{num};
+            push @{ $workspaces_before{$output} }, $workspace_data;
         }
     }
 }
@@ -53,13 +66,23 @@ for my $workspace (@{ $workspaces }) {
 my $workspaces_before_output = $workspaces_before{ $focused_workspace->{output} };
 my $workspaces_after_output  = $workspaces_after{ $focused_workspace->{output} };
 
+
 my $jump_to_workspace;
 if ($args->{sequential}) {
+    my $workspace_number;
     if ($args->{direction} eq 'left') {
-        $jump_to_workspace = max(MIN_WS_NUMBER, $focused_workspace->{num} - 1);
+        $workspace_number = max(MIN_WS_NUMBER, $focused_workspace->{num} - 1);
     } else {
-        $jump_to_workspace = min(MAX_WS_NUMBER, $focused_workspace->{num} + 1);
+        $workspace_number = min(MAX_WS_NUMBER, $focused_workspace->{num} + 1);
     }
+
+    my ($workspace) = grep { $_->{num} == $workspace_number } @{ $workspaces };
+
+    $jump_to_workspace = {
+        num    => $workspace->{num}    // $workspace_number,
+        name   => $workspace->{name}   // $workspace_number,
+        output => $workspace->{output} // $focused_workspace->{output},
+    };
 } else {
     if ($args->{direction} eq 'left') {
         if (@{ $workspaces_before_output || [] }) {
@@ -77,14 +100,17 @@ if ($args->{sequential}) {
 }
 
 if ($jump_to_workspace) {
-    my $workspace_name = `grep 'set \$ws$jump_to_workspace' ~/.config/i3/config`;
+    say Dumper({ jump_to_workspace => $jump_to_workspace });
 
-    if ($workspace_name && $workspace_name =~ /"(.*)"/) {
-        $jump_to_workspace = $1;
+    if ($jump_to_workspace->{num} eq $jump_to_workspace->{name}) {
+        my $workspace_name = `grep 'set \$ws$jump_to_workspace->{num}' ~/.config/i3/config`;
+        if ($workspace_name && $workspace_name =~ /"(.*)"/) {
+            $jump_to_workspace->{name} = $1;
+        }
     }
 
     if ($args->{move_window}) {
-        `i3-msg -tcommand 'move window to workspace $jump_to_workspace'`;
+        execute_command("i3-msg -tcommand 'move window to workspace $jump_to_workspace->{name}'");
     }
-    `i3-msg -tcommand 'workspace $jump_to_workspace'`;
+    execute_command("i3-msg -tcommand 'workspace $jump_to_workspace->{name}'");
 }
