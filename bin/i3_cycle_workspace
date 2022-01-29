@@ -8,7 +8,7 @@ use List::Util qw[ min max ];
 use Data::Dumper;
 
 use constant {
-    MIN_WS_NUMBER => 0,
+    MIN_WS_NUMBER => 1,
     MAX_WS_NUMBER => 20,
 };
 
@@ -21,7 +21,7 @@ sub execute_command {
     return $result;
 }
 
-my $workspaces = decode_json(execute_command("i3-msg -tget_workspaces"));
+my $workspaces = decode_json(`i3-msg -tget_workspaces`);
 
 my $args = {
     direction => 'right',
@@ -41,6 +41,8 @@ for my $argv (@ARGV) {
     }
 }
 
+say Dumper({ args => $args });
+
 my %workspaces_before;
 my %workspaces_after;
 my $focused_workspace;
@@ -54,6 +56,7 @@ for my $workspace (@{ $workspaces }) {
     };
     if ($workspace->{focused}) {
         $focused_workspace = $workspace_data;
+        say Dumper({ focused_workspace => $focused_workspace })
     } else {
         if ($focused_workspace) {
             push @{ $workspaces_after{$output} }, $workspace_data;
@@ -71,10 +74,14 @@ my $jump_to_workspace;
 if ($args->{sequential}) {
     my $workspace_number;
     if ($args->{direction} eq 'left') {
+        say "sequential left";
         $workspace_number = max(MIN_WS_NUMBER, $focused_workspace->{num} - 1);
     } else {
+        say "sequential right";
         $workspace_number = min(MAX_WS_NUMBER, $focused_workspace->{num} + 1);
     }
+
+    say "workspace_number:$workspace_number";
 
     my ($workspace) = grep { $_->{num} == $workspace_number } @{ $workspaces };
 
@@ -99,7 +106,7 @@ if ($args->{sequential}) {
     }
 }
 
-if ($jump_to_workspace) {
+if ($jump_to_workspace && $jump_to_workspace->{num} != $focused_workspace->{num}) {
     say Dumper({ jump_to_workspace => $jump_to_workspace });
 
     if ($jump_to_workspace->{num} eq $jump_to_workspace->{name}) {

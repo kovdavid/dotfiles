@@ -10,7 +10,11 @@ def on_window_new(i3, e):
     windows = [w.window_class for w in ws.leaves()]
 
     if len(windows) == 1 and re.match("^\d+$", ws.name):
-        workspace_name = ws.name + ": " + windows[0]
+        window_name = windows[0]
+        if window_name == "jetbrains-pycharm":
+            window_name = "PyCharm"
+
+        workspace_name = ws.name + ": " + window_name
         i3.command('rename workspace to "%s"' % workspace_name)
 
 
