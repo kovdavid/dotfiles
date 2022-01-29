@@ -1,0 +1,6 @@
+#!/bin/bash
+
+INPUT=$1
+OUTPUT=$2
+
+ffmpeg -i "$1" -pix_fmt yuv420p "$2"
