@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# image_001.jpg, image_002.jpg etc.
+
+ffmpeg -framerate 10 -i image_%03d.jpg -pix_fmt yuv420 out.mp4
