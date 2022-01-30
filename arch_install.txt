@@ -1,0 +1,14 @@
+Thinkpad T14s Gen2 Ryzen 4650U
+
+cat <<EOT > /etc/modprobe.d/sound.conf
+options snd_hda_intel enable=1 index=0
+options snd_hda_intel enable=0 index=1
+EOT
+
+cat <<EOT > /etc/modprobe.d/nobeep.conf
+blacklist pcspkr
+EOT
+
+cat <<EOT > /etc/modprobe.d/thinkpad_acpi.conf
+options thinkpad_acpi fan_control=1
+EOT
