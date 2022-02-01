@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ "$1" = "" ] ; then
+    sudo su -c "echo level auto > /proc/acpi/ibm/fan"
+else
+    sudo su -c "echo level $1 > /proc/acpi/ibm/fan"
+fi
