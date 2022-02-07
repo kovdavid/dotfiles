@@ -1,0 +1,14 @@
+#!/bin/bash
+
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+RENAME='n'
+
+if [ -n "$CURRENT_BRANCH" ] ; then
+	echo "Rename '$CURRENT_BRANCH' to 'merged_$CURRENT_BRANCH'? [y/N]"
+	read -s -n 1 RENAME
+	if [ "$RENAME" == "y" ] ; then
+		$(git branch -m $CURRENT_BRANCH merged_$CURRENT_BRANCH)
+	else
+		echo "Aborting"
+	fi
+fi
