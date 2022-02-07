@@ -1,0 +1,11 @@
+#!/bin/bash
+
+BRIGHTNESS_FILE="/sys/class/backlight/amdgpu_bl0/brightness"
+
+if [ -z "$1" ] ; then
+    echo "$BRIGHTNESS_FILE"
+    cat $BRIGHTNESS_FILE
+else
+    sudo su -c "echo $1 > $BRIGHTNESS_FILE"
+fi
+

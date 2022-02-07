@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ $# -eq 1 ] ; then
+    # tlp setcharge 99 99
+    tpacpi-bat -s ST 0 99
+    tpacpi-bat -s SP 0 99
+    echo "Charging battery"
+else
+    # tlp setcharge 60 90
+    tpacpi-bat -s ST 0 60
+    tpacpi-bat -s SP 0 80
+    echo "Default battery charge policy"
+fi
