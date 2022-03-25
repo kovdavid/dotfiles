@@ -12,3 +12,9 @@ EOT
 cat <<EOT > /etc/modprobe.d/thinkpad_acpi.conf
 options thinkpad_acpi fan_control=1
 EOT
+
+$ grep GRUB_CMDLINE_LINUX_DEFAULT /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash net.ifnames=0 initcall_blacklist=elants_i2c_driver_init"
+
+$ cat /etc/bluetooth/main.conf
+AutoEnable=false

@@ -49,8 +49,8 @@
     "L0R3C7":  "LP(0x02)",
     "L0R3C8":  "LP(0x03)",
     "L0R3C9":  "KC(NO)",
-    "L0R3C10": "KC(NO)",
-    "L0R3C11": "KC(NO)",
+    "L0R3C10": "KC(LEFT)",
+    "L0R3C11": "KC(RIGHT)",
 
     "L1R0C0":  "TRANS",
     "L1R0C1":  "KC(BSLASH)",
@@ -157,8 +157,8 @@
     "L2R3C11": "TRANS",
 
     "L3R0C0":  "TRANS",
-    "L3R0C1":  "KC(NO)",
-    "L3R0C2":  "KC(NO)",
+    "L3R0C1":  "LGUI(F13)",
+    "L3R0C2":  "LGUI(F14)",
     "L3R0C3":  "LALT(A)",
     "L3R0C4":  "LALT(S)",
     "L3R0C5":  "AUDIO_VOLUP",
