@@ -220,9 +220,4 @@ augroup python
     autocmd FileType python nnoremap <buffer> <leader>rr :!env python %<CR>
 augroup END
 " }}}
-" vimrc {{{
-noremap <leader>se :tabnew $MYVIMRC<CR>
-noremap <leader>ss :source $MYVIMRC<CR>
-noremap <leader>sl :execute getline(".")<CR>
-" }}}
 " }}}

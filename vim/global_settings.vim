@@ -31,6 +31,10 @@ set complete-=i
 set formatoptions=l
 set linebreak
 
+if has("ide")
+    set ideajoin
+endif
+
 " fast exiting insert mode; the removes the 1sec delay when not in GUI
 " set timeout timeoutlen=1000 ttimeoutlen=1000
 " if !has('gui_running')

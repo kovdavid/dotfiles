@@ -26,7 +26,11 @@ let g:ctrlp_custom_ignore = {
             \ 'file': '\v(__init2__\.py|\.pyc)$',
             \ }
 
-nnoremap <leader>, :CtrlP<CR>
+if has("ide")
+    nnoremap <leader>, :action GotoFile<CR>
+else
+    nnoremap <leader>, :CtrlP<CR>
+endif
 
 " Clever-f
 let g:clever_f_across_no_line = 0

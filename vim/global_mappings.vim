@@ -136,3 +136,32 @@ nnoremap <space> za
 
 noremap ZZ <c-w>_ \| <c-w>\|
 noremap Zz <c-w>=
+
+if has("ide")
+    sethandler <C-W>r a:vim
+
+    nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
+    nnoremap <leader>h :action HideActiveWindow<CR>
+    nnoremap <leader>se :action ShowErrorDescription<CR>
+    nnoremap <leader>sd :action QuickJavaDoc<CR>
+    nnoremap <leader>sa :action ShowIntentionActions<CR>
+    nnoremap <leader>to :action ActivateTerminalToolWindow<CR>
+    nnoremap <leader>tt :action Terminal.OpenInTerminal<CR>
+    nnoremap <C-W>r :action MoveEditorToOppositeTabGroup<CR>
+    nnoremap <leader>n :action ShowNavBar<CR>
+    nnoremap <leader>cc :action CommentByLineComment<CR>
+    vnoremap <leader>cc :action CommentByLineComment<CR>
+    nnoremap <leader>cu :action CommentByLineComment<CR>
+    vnoremap <leader>cu :action CommentByLineComment<CR>
+    nnoremap <leader>p :action ActivateProjectToolWindow<CR>
+    nnoremap <leader>gd :action GotoDeclaration<CR>
+    nnoremap <c-o> :action Back<CR>
+endif
+
+if has("ide")
+    noremap <leader>ss :source ~/.ideavimrc<CR>
+else
+    noremap <leader>se :tabnew $MYVIMRC<CR>
+    noremap <leader>ss :source $MYVIMRC<CR>
+endif
+noremap <leader>sl :execute getline(".")<CR>
