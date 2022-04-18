@@ -1,0 +1,10 @@
+# Redmi 9T wifi issues
+- Keep WiFi on during sleep: Always = 2
+- Keep WiFi on during sleep: Only When Plugged In = 1
+- Keep WiFi on during sleep: Never = 0
+
+> adb shell settings list global | grep -w wifi_sleep_policy
+wifi_sleep_policy=2
+> adb shell
+> su
+#> settings put global wifi_sleep_policy 1

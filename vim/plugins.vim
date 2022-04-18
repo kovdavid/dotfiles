@@ -17,13 +17,13 @@ Plug 'junkblocker/git-time-lapse'
 Plug 'benekastah/neomake'
 Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'fatih/vim-go'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'elixir-editors/vim-elixir'
-Plug 'mhinz/vim-mix-format'
+" Plug 'fatih/vim-go'
+" Plug 'HerringtonDarkholme/yats.vim'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'peitalin/vim-jsx-typescript'
+" Plug 'MaxMEllon/vim-jsx-pretty'
+" Plug 'elixir-editors/vim-elixir'
+" Plug 'mhinz/vim-mix-format'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ton/vim-alternate'
 Plug 'dense-analysis/ale', { 'for': 'python' }
