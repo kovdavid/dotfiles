@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 xrandr_output=$(xrandr)
 
 DISCONNECTED_DEVICES=$(echo -e "$xrandr_output" | grep -w 'disconnected' | cut -d" " -f 1)
@@ -20,7 +22,7 @@ if [ -z "$PRIMARY_DEVICE" ] ; then
     exit 1
 fi
 
-PRIMARY_RESOLUTION=$(echo $XRANDR_PRIMARY_OUTPUT | grep -oP '\d+x\d+')
+PRIMARY_RESOLUTION=$(echo -e "$xrandr_output" | grep -A1 "^$PRIMARY_DEVICE" | tail -n1 | grep -oP '\d+x\d+')
 if [ -z "$PRIMARY_RESOLUTION" ] ; then
     echo "No primary resolution found"
     exit 1
@@ -41,7 +43,7 @@ if [ -z "$SECONDARY_DEVICE" ] ; then
     exit 1
 fi
 
-SECONDARY_RESOLUTION=$(echo -e "$xrandr_output" | grep -A1 "^$SECONDARY_DEVICE" | grep -oP '\d+x\d+')
+SECONDARY_RESOLUTION=$(echo -e "$xrandr_output" | grep -A1 "^$SECONDARY_DEVICE" | tail -n1 | grep -oP '\d+x\d+')
 if [ -z "$SECONDARY_RESOLUTION" ] ; then
     echo "No secondary resolution found"
     exit 1
