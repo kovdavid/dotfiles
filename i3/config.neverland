@@ -1,7 +1,7 @@
 set $mod Mod4
-# set $primary_output HDMI-A-0
-set $primary_output DisplayPort-0
-set $secondary_output eDP
+set $dp_screen DisplayPort-0
+set $hdmi_screen HDMI-A-0
+set $laptop_screen eDP
 
 font pango:DejaVu Sans Mono 15px
 
@@ -92,28 +92,28 @@ bindsym $mod+z workspace back_and_forth
 set $ws1 "1: www"
 set $ws2 "2: tmux"
 
-workspace $ws1 output  $primary_output $secondary_output
-workspace $ws2 output  $primary_output $secondary_output
-workspace 3 output  $primary_output $secondary_output
-workspace 4 output  $primary_output $secondary_output
-workspace 5 output  $primary_output $secondary_output
-workspace 6 output  $primary_output $secondary_output
-workspace 7 output  $primary_output $secondary_output
-workspace 8 output  $primary_output $secondary_output
-workspace 9 output  $primary_output $secondary_output
-workspace 10 output $primary_output $secondary_output
-workspace 11 output $secondary_output
-workspace 12 output $secondary_output
-workspace 13 output $secondary_output
-workspace 14 output $secondary_output
-workspace 15 output $secondary_output
-workspace 16 output $secondary_output
-workspace 17 output $secondary_output
-workspace 18 output $secondary_output
-workspace 19 output $secondary_output
-workspace 20 output $secondary_output
-workspace 21 output $secondary_output
-workspace 22 output $secondary_output
+workspace $ws1 output $dp_screen $hdmi_screen $laptop_screen
+workspace $ws2 output $dp_screen $hdmi_screen $laptop_screen
+workspace 3    output $dp_screen $hdmi_screen $laptop_screen
+workspace 4    output $dp_screen $hdmi_screen $laptop_screen
+workspace 5    output $dp_screen $hdmi_screen $laptop_screen
+workspace 6    output $dp_screen $hdmi_screen $laptop_screen
+workspace 7    output $dp_screen $hdmi_screen $laptop_screen
+workspace 8    output $dp_screen $hdmi_screen $laptop_screen
+workspace 9    output $dp_screen $hdmi_screen $laptop_screen
+workspace 10   output $dp_screen $hdmi_screen $laptop_screen
+workspace 11   output $laptop_screen $dp_screen $hdmi_screen
+workspace 12   output $laptop_screen $dp_screen $hdmi_screen
+workspace 13   output $laptop_screen $dp_screen $hdmi_screen
+workspace 14   output $laptop_screen $dp_screen $hdmi_screen
+workspace 15   output $laptop_screen $dp_screen $hdmi_screen
+workspace 16   output $laptop_screen $dp_screen $hdmi_screen
+workspace 17   output $laptop_screen $dp_screen $hdmi_screen
+workspace 18   output $laptop_screen $dp_screen $hdmi_screen
+workspace 19   output $laptop_screen $dp_screen $hdmi_screen
+workspace 20   output $laptop_screen $dp_screen $hdmi_screen
+workspace 21   output $laptop_screen $dp_screen $hdmi_screen
+workspace 22   output $laptop_screen $dp_screen $hdmi_screen
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -213,19 +213,35 @@ mode $system_power_mode {
     bindsym p exec "i3-msg 'mode default'; systemctl suspend"
 
     bindsym Escape mode "default"
-    bindsym Enter mode "default"
-    bindsym c mode "default"
+    bindsym Enter  mode "default"
+    bindsym c      mode "default"
 }
 
 bindsym $mod+Shift+Delete mode $system_power_mode
+
+set $monitor_modes "secondary (l)eft | secondary (r)ight | secondary (o)ff | primary o(f)f | (c)ancel"
+
+mode $monitor_modes {
+    bindsym l exec "mon left"  ; mode "default"
+    bindsym r exec "mon right" ; mode "default"
+    bindsym o exec "mon off"   ; mode "default"
+    bindsym f exec "mon sec"   ; mode "default"
+
+    bindsym Escape mode "default"
+    bindsym Enter  mode "default"
+    bindsym c      mode "default"
+}
+
+bindsym $mod+Shift+Z mode $monitor_modes
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
     font pango:DejaVu Sans Mono 14px
     status_command i3status -c ~/.config/i3status/config
-    tray_output $primary_output
-    tray_output $secondary_output
+    tray_output $dp_screen
+    tray_output $hdmi_screen
+    tray_output $laptop_screen
 }
 
 # use xprop ;)
