@@ -2,6 +2,8 @@
 
 set -e
 
+xmodmap ~/.Xmodmap
+
 xrandr_output=$(xrandr)
 
 DISCONNECTED_DEVICES=$(echo -e "$xrandr_output" | grep -w 'disconnected' | cut -d" " -f 1)
