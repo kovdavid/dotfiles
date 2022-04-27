@@ -18,3 +18,135 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet splash net.ifnames=0 initcall_blacklist=elants
 
 $ cat /etc/bluetooth/main.conf
 AutoEnable=false
+
+# Arch install on Thinkpad T14 AMD Ryzen 4650U
+
+* download the install ISO
+* create install USB key
+    * `dd bs=4M if=path/to/archlinux-version-x86_64.iso of=/dev/sdX conv=fsync oflag=direct status=progress`
+* boot (installing to /dev/sdb)
+* configure wifi
+    `iwctl`
+    `device list`
+    `station wlan0 scan`
+    `station wlan0 get-networks`
+    `station wlan0 connect`
+* partitioning
+    * https://jherrlin.github.io/posts/arch-install/
+    * `gdisk /dev/sdb`
+        # Remove all partitions
+        # Create two new partitions
+        # +1GB           EF00   EFI and boot
+        # rest of disk   8300   home and system
+
+        mkfs.fat -F32 /dev/nvmw0n1p1
+
+        rmmod pcspkr
+
+        # Create LUKS device
+        # Check the results
+        # Create header backup
+        # Mount the device
+        cryptsetup -v --use-random luksFormat /dev/nvmw0n1p2
+        cryptsetup luksDump /dev/nvmw0n1p2
+        cryptsetup luksHeaderBackup /dev/nvme0n1p2 --header-backup-file luks_header_backup_`date +%Y-%m-%d`
+        cryptsetup luksOpen /dev/nvmw0n1p2 cryptroot
+
+        # Create file system on luks device
+        mkfs.ext4 /dev/mapper/cryptroot
+
+        # Mount partitions
+        mount /dev/mapper/cryptroot /mnt
+        mkdir -p /mnt/boot
+        mount /dev/nvmw0n1p1 /mnt/boot
+
+        pacstrap /mnt base base-devel linux linux-firmware git emacs sudo networkmanager bash-completion
+
+        genfstab -pU /mnt >> /mnt/etc/fstab
+
+        arch-chroot /mnt /bin/bash
+
+        timedatectl set-timezone Europe/Bratislava
+
+        hwclock --systohc --utc
+
+        echo "neverland" > /etc/hostname
+
+        vim /etc/locale.gen
+        # uncomment:
+        # en_US.UTF-8 UTF-8
+        # sk_SK.UTF-8 UTF-8
+        # hu_HU.UTF-8 UTF-8
+
+        locale-gen
+
+        echo LANG=en_US.UTF-8 > /etc/locale.conf
+        echo LANGUAGE=en_US >> /etc/locale.conf
+        echo LC_ALL=C >> /etc/locale.conf
+
+        passwd
+
+        groupadd davs
+        useradd -m -g davs -G wheel,video,disk davs
+        passwd davs
+
+        visudo
+        # uncomment `%wheel ALL=(ALL:ALL) NOPASSWD: ALL`
+
+        emacs /etc/mkinitcpio.conf
+        # Open mkinitcpio.conf and add the following to each section:
+        # MODULES=(ext4)
+        # On 'HOOKS' add 'encrypt' before 'filesystem'
+        # Something like this:
+        # HOOKS=(base udev autodetect modconf block encrypt filesystems keyboard fsck)
+
+        mkinitcpio -p linux
+
+        bootctl --path=/boot install
+
+        echo 'default arch' >> /boot/loader/loader.conf
+        echo 'timeout 5' >> /boot/loader/loader.conf
+
+        blkid -s PARTUUID -o value /dev/XXX2 >> /boot/loader/entries/arch.conf
+
+        pacman -S amd-ucode
+
+        vi /boot/loader/entries/arch.conf
+        # Add the following content to arch.conf
+        # The partition <PARTUUID> is already in the file.
+        title Arch Linux
+        linux /vmlinuz-linux
+        initrd /amd-ucode.img
+        initrd /initramfs-linux.img
+        options cryptdevice=PARTUUID=<PARTUUID>:cryptroot root=/dev/mapper/cryptroot net.ifnames=0 initcall_blacklist=elants_i2c_driver_init rw
+
+        # Exit new system and go into the cd shell
+        exit
+
+        # Unmount all
+        umount -R /mnt
+
+        # Reboot system
+        shutdown -r now
+* after reboot
+systemctl start NetworkManager
+systemctl enable NetworkManager
+nmcli device wifi connect <SSID|BSSID> password <password>
+
+https://wiki.archlinux.org/title/Ryzen
+https://wiki.archlinux.org/title/AMDGPU
+
+https://github.com/Jguer/yay
+
+pacman -S xf86-video-amdgpu vulkan-radeon libva-mesa-driver mesa-vdpau
+pacman -S vlc firefox ttf-liberation ttf-droid ttf-bitstream-vera ttf-dejavu noto-fonts
+pacman -S lightdm-gtk-greeter
+systemctl enable lightdm
+groupadd -r autologin
+gpasswd -a davs autologin
+
+yay -S xinit-xsession gvfs thunar-volman
+
+vim /etc/lightdm/lightdm.conf
+# autologin-user=davs
+# autologin-session=xinitrc
