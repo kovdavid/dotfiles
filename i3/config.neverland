@@ -274,3 +274,4 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 000000 --nofork
 exec --no-startup-id /home/davs/dotfiles/bin/deduplicate_bash_history &
 exec --no-startup-id pasystray &
 exec --no-startup-id blueman-applet &
+exec dex -ae i3
