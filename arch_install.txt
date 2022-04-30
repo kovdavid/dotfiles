@@ -168,3 +168,5 @@ Terminal=false
 Type=Application
 Categories=
 NoDisplay=true
+
+# check /etc/xdg/autostart directory (nm-applet pasystray blueman-applet )
