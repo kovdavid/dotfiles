@@ -150,3 +150,21 @@ yay -S xinit-xsession gvfs thunar-volman
 vim /etc/lightdm/lightdm.conf
 # autologin-user=davs
 # autologin-session=xinitrc
+
+vim /etc/pam.d/lightdm-autologin
+# at the end of auth section
+auth optional pam_gnome_keyring.so
+# at the end of session section
+session optional pam_gnome_keyring.so auto_start
+
+yay -S gnome-keyring polkit-gnome seahorse  # change keyring password
+
+vim gnome-authentication-agent-1.desktop
+[Desktop Entry]
+Name=PolicyKit Authentication Agent
+Comment=PolicyKit Authentication Agent
+Exec=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+Terminal=false
+Type=Application
+Categories=
+NoDisplay=true
