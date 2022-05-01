@@ -1,5 +1,16 @@
 #!/bin/bash
 
+set -e
+
+function cleanup {
+    unset -f remove_and_link_dotfile
+    unset -f remove_and_link_to_tmp
+    unset -f ensure_user_group
+    unset -f ensure_sudoers_entry
+    unset -f ensure_xkb
+    unset -f ensure_file_content_root
+}
+
 function remove_and_link_dotfile {
     $(rm -rf ~/.$1)
     $(ln -s ~/dotfiles/$1 ~/.$1)
@@ -13,6 +24,98 @@ function remove_and_link_to_tmp {
         $(ln -s /tmp ~/.$1)
     fi
 }
+
+function ensure_user_group {
+    if [ ! $(getent group $1) ] ; then
+        echo "Creating group $1"
+        sudo groupadd $1
+    fi
+    if [ ! $(groups $USER | tr ' ' '\n' | grep -w $1) ] ; then
+        echo "Adding user to group $1"
+        sudo usermod -a -G $1 $USER
+    fi
+}
+
+function ensure_file_content_root() {
+    FILE=$1
+    CONTENT=$2
+
+    sudo -s -- <<EOF
+        [ ! -f $FILE ] && echo "Creating $FILE" && echo "$CONTENT" > $FILE
+        [ "\$(cat $FILE)" != "$CONTENT" ] && echo "Replacing $FILE" && cat $FILE && echo "$CONTENT" > $FILE
+        exit 0
+EOF
+}
+
+function ensure_sudoers_entry {
+    CONTENT="%$USER ALL=(ALL:ALL) NOPASSWD: ALL"
+    FILE="/etc/sudoers.d/01-$USER"
+    ensure_file_content_root "$FILE" "$CONTENT"
+}
+
+function ensure_xkb {
+    SYMBOLS_FILE="/usr/share/X11/xkb/symbols/davs"
+    SYMBOLS_CONTENT=$(cat <<EOC
+partial alphanumeric_keys modifier_keys
+xkb_symbols "davs" {
+    key <RALT> { [ underscore, BackSpace, BackSpace, BackSpace ] };
+    key <LSGT> { [ underscore, EuroSign, EuroSign, EuroSign ] };
+    key <CAPS> { [ Escape ] };
+};
+EOC
+)
+
+    ensure_file_content_root "$SYMBOLS_FILE" "$SYMBOLS_CONTENT"
+
+    EVDEV_FILE="/usr/share/X11/xkb/rules/evdev"
+    EVDEV_CONTENT=$(grep -A1 -P "^!\s*option\s*=\s*symbols" $EVDEV_FILE | tail -n 1 | sed 's/\s//g')
+    EVDEV_EXPECTED="\ \ davs:davs\t=\t+davs(davs)"
+
+    if [ "$EVDEV_CONTENT" != "davs:davs=+davs(davs)" ] ; then
+        echo "Adding [$EVDEV_EXPECTED] to $EVDEV_FILE"
+        sudo sed -i "/^!\s*option\s*=\s*symbols/a$EVDEV_EXPECTED" $EVDEV_FILE
+    fi
+
+    EVDEV_LST_FILE="/usr/share/X11/xkb/rules/evdev.lst"
+    EVDEV_LST_CONTENT=$(grep -B2 -P '^\s*\bctrl\b' $EVDEV_LST_FILE | head -n1 | awk '{ print $1 }')
+    EVDEV_LST_EXPECTED="\ \ davs                 Davs mappings\n\ \ davs:davs            Davs mappings"
+
+    if [ "$EVDEV_LST_CONTENT" != "davs" ] ; then
+        echo "Adding [$EVDEV_LST_EXPECTED] to $EVDEV_LST_FILE"
+        sudo sed -i "/^\s*ctrl\s\+/i$EVDEV_LST_EXPECTED" $EVDEV_LST_FILE
+    fi
+
+    XORG_CONF_FILE="/etc/X11/xorg.conf.d/00-keyboard.conf"
+    XORG_CONF_CONTENT=$(cat <<EOC
+Section \"InputClass\"
+    Identifier \"system-keyboard\"
+    MatchIsKeyboard \"on\"
+    Option \"XkbLayout\" \"us,sk\"
+    Option \"XkbModel\" \"pc105\"
+    Option \"XkbOptions\" \"davs:davs\"
+EndSection
+EOC
+)
+    ensure_file_content_root "$XORG_CONF_FILE" "$XORG_CONF_CONTENT"
+}
+
+ensure_user_group $USER
+ensure_user_group wheel
+ensure_user_group autologin
+ensure_user_group storage
+ensure_user_group disk
+ensure_user_group audio
+ensure_user_group users
+
+if [ $(id $USER --group --name) != "$USER" ] ; then
+    echo "Changing primary group to $USER"
+    sudo usermod -g $USER $USER
+fi
+
+ensure_sudoers_entry
+ensure_xkb
+
+exit
 
 echo "Linking scripts"
 mkdir -p ~/bin
@@ -150,5 +253,5 @@ fi
 
 echo "DONE"
 
-unset -f remove_and_link_dotfile
-unset -f remove_and_link_to_tmp
+cleanup
+unset -f cleanup
