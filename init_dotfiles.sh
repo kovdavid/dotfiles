@@ -8,6 +8,8 @@ function cleanup {
     unset -f ensure_user_group
     unset -f ensure_sudoers_entry
     unset -f ensure_xkb
+    unset -f ensure_tlp
+    unset -f ensure_tlp_value
     unset -f ensure_file_content_root
 }
 
@@ -99,6 +101,31 @@ EOC
     ensure_file_content_root "$XORG_CONF_FILE" "$XORG_CONF_CONTENT"
 }
 
+function ensure_tlp_value {
+    NAME=$1
+    VALUE=$2
+
+    TLP_FILE="/etc/tlp.conf"
+
+    CURRENT=$(grep "^$NAME" $TLP_FILE || true)
+    EXPECTED="$NAME=$VALUE"
+
+    if [ -z "$CURRENT" ] ; then
+        echo "Initializing $EXPECTED in $TLP_FILE"
+        echo "$EXPECTED" | sudo tee -a $TLP_FILE
+    elif [ $(echo "$CURRENT" | cut -d '=' -f2) -ne "$VALUE" ] ; then
+        echo "Changing to $EXPECTED in $TLP_FILE"
+        sudo sed -i "/^$NAME/c\ $NAME=$VALUE" $TLP_FILE
+    fi
+}
+
+function ensure_tlp {
+    ensure_tlp_value "START_CHARGE_THRESH_BAT0" "70"
+    ensure_tlp_value "STOP_CHARGE_THRESH_BAT0" "90"
+    ensure_tlp_value "CPU_BOOST_ON_AC" "1"
+    ensure_tlp_value "CPU_BOOST_ON_BAT" "0"
+}
+
 ensure_user_group $USER
 ensure_user_group wheel
 ensure_user_group autologin
@@ -114,6 +141,7 @@ fi
 
 ensure_sudoers_entry
 ensure_xkb
+ensure_tlp
 
 exit
 
