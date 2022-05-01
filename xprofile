@@ -4,4 +4,10 @@ if [ -f /usr/bin/syndaemon ] ; then
     /usr/bin/syndaemon -td
 fi
 
+if [ -n "$DESKTOP_SESSION" ] && [ ! -n "$SSH_AUTH_SOCK" ] ; then
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
+fi
+
 [[ -f /home/davs/.xsession ]] && source /home/davs/.xsession
+[[ -f /home/davs/.xsessionrc ]] && source /home/davs/.xsessionrc
