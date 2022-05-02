@@ -30,7 +30,7 @@ function ensure_user_group {
         echo "Creating group $1"
         sudo groupadd $1
     fi
-    if [ ! $(groups $USER | tr ' ' '\n' | grep -w $1) ] ; then
+    if ! $(groups $USER | tr ' ' '\n' | grep -q -w $1) ; then
         echo "Adding user to group $1"
         sudo usermod -a -G $1 $USER
     fi
