@@ -145,6 +145,7 @@ systemctl enable lightdm
 groupadd -r autologin
 gpasswd -a davs autologin
 
+yay -S accountsservice # for dbus/pam/keyring
 yay -S xinit-xsession gvfs thunar-volman
 
 vim /etc/lightdm/lightdm.conf

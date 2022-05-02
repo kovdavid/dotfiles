@@ -1,0 +1,10 @@
+[Unit]
+Description=clean daily
+
+[Timer]
+OnBootSec=0min
+OnCalendar=*:0/10
+Unit=clean_daily.service
+
+[Install]
+WantedBy=timers.target

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 function cleanup {
     unset -f remove_and_link_dotfile
     unset -f remove_and_link_to_tmp
@@ -138,6 +136,8 @@ if [ $(id $USER --group --name) != "$USER" ] ; then
     echo "Changing primary group to $USER"
     sudo usermod -g $USER $USER
 fi
+
+sudo mkdir -p /clean_daily
 
 ensure_sudoers_entry
 ensure_xkb
@@ -278,6 +278,13 @@ if [ -x "$(command -v redshift)" ] ; then
     fi
 	rm /tmp/mycron
 fi
+
+echo "Enabling fstrim.timer"
+sudo systemctl enable fstrim.timer
+
+mkdir -p ~/.config/systemd/user
+ln -s ~/dotfiles/systemd/i3lock/i3lock.service ~/.config/systemd/user/
+systemctl enable --user i3lock.service
 
 echo "DONE"
 
