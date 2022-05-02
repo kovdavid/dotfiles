@@ -9,6 +9,7 @@ function cleanup {
     unset -f ensure_tlp
     unset -f ensure_tlp_value
     unset -f ensure_file_content_root
+    unset -f ensure_polkit
 }
 
 function remove_and_link_dotfile {
@@ -99,6 +100,23 @@ EOC
     ensure_file_content_root "$XORG_CONF_FILE" "$XORG_CONF_CONTENT"
 }
 
+function ensure_polkit {
+    POLKIT_FILE="/etc/polkit-1/rules.d/49-nopasswd_global.rules"
+    POLKIT_CONTENT=$(cat <<EOC
+/* Allow members of the wheel group to execute any actions
+ * without password authentication, similar to \"sudo NOPASSWD:\"
+ */
+polkit.addRule(function(action, subject) {
+    if (subject.isInGroup(\"davs\")) {
+        return polkit.Result.YES;
+    }
+});
+EOC
+)
+
+    ensure_file_content_root "$POLKIT_FILE" "$POLKIT_CONTENT"
+}
+
 function ensure_tlp_value {
     NAME=$1
     VALUE=$2
@@ -142,6 +160,7 @@ sudo mkdir -p /clean_daily
 ensure_sudoers_entry
 ensure_xkb
 ensure_tlp
+ensure_polkit
 
 exit
 
