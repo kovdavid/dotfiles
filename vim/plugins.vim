@@ -27,5 +27,6 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ton/vim-alternate'
 Plug 'dense-analysis/ale', { 'for': 'python' }
+Plug 'morhetz/gruvbox'
 
 call plug#end()

@@ -128,6 +128,7 @@ if filereadable("/tmp/.Xresources_solarized")
     highlight CursorLine cterm=NONE ctermbg=253
     highlight ColorColumn guibg=#333333 ctermbg=253
 else
+    set background=dark
     colorscheme zenburn
     highlight CursorLine cterm=NONE ctermbg=239
     highlight ColorColumn guibg=#333333 ctermbg=8

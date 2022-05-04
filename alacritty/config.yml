@@ -1,0 +1,39 @@
+env:
+  TERM: alacritty
+
+window:
+  dynamic_padding: true
+  decorations: full
+  dynamic_title: true
+  padding:
+    x: 0
+    y: 0
+
+scrolling:
+  history: 10000
+
+font:
+  normal:
+    family: DejaVu Sans Mono
+  bold:
+    family: DejaVu Sans Mono
+  italic:
+    family: DejaVu Sans Mono
+  bold_italic:
+    family: DejaVu Sans Mono
+
+  size: 13
+
+selection:
+  save_to_clipboard: true
+
+mouse_bindings:
+  - {mouse: Middle, action: PasteSelection}
+
+cursor:
+  style:
+    shape: Block
+    blinking: Off
+
+import:
+  - ~/dotfiles/alacritty/colors.yml

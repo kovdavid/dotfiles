@@ -1,0 +1,23 @@
+#!/bin/bash
+
+SCHEME="dark"
+if [ "$1" == "light" ] || [ "$1" == "l" ] ; then
+    SCHEME="light"
+fi
+
+echo "Setting scheme $SCHEME"
+
+echo "Linking VIM config"
+ln -sf ~/dotfiles/vim/colors_$SCHEME.vim ~/dotfiles/vim/colors.vim
+
+for socket in $(netstat -nxl | grep nvim | awk '{ print $NF }'); do
+    echo "Reloading vim on $socket"
+    python -c "from pynvim import attach; nvim = attach('socket', path='$socket'); nvim.command('source \$MYVIMRC')" &
+done
+
+echo "Linking Alacritty config"
+ln -sf ~/dotfiles/alacritty/color_$SCHEME.yml ~/dotfiles/alacritty/colors.yml
+
+echo "Linking tmux config"
+ln -sf ~/dotfiles/tmux_color_$SCHEME.conf ~/dotfiles/tmux_color.conf
+tmux source-file ~/.tmux.conf

@@ -12,3 +12,6 @@ bash/nike_alias
 bash/nike_tmux_templates
 bash/env_settings
 vim/.init.vim-rplugin*
+vim/colors.vim
+alacritty/colors.yml
+tmux_color.conf

@@ -4,6 +4,7 @@ source ~/dotfiles/vim/global_settings.vim
 source ~/dotfiles/vim/global_functions.vim
 source ~/dotfiles/vim/global_mappings.vim
 source ~/dotfiles/vim/plugin_settings.vim
+source ~/dotfiles/vim/colors.vim
 " Filetype {{{
 " EveryFile {{{
 augroup all_file_type

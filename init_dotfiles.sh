@@ -163,8 +163,6 @@ ensure_xkb
 ensure_tlp
 ensure_polkit
 
-exit
-
 echo "Linking scripts"
 mkdir -p ~/bin
 
@@ -226,7 +224,6 @@ ln -s ~/dotfiles/git-templates/ ~/.git-templates
 
 mkdir -p ~/.config/i3
 mkdir -p ~/.config/i3status
-mkdir -p ~/.config/alacritty
 
 if [ $(hostname) == "candyland" ] ; then
     ln -sf ~/dotfiles/i3/config.candyland ~/.config/i3/config
@@ -238,7 +235,8 @@ else
     echo "You have to manually link i3/config and i3/status!"
 fi
 
-ln -sf ~/dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
+mkdir -p ~/.config/alacritty
+ln -sf ~/dotfiles/alacritty/config.yml ~/.config/alacritty/alacritty.yml
 ln -sf ~/dotfiles/rofi ~/.config
 
 remove_and_link_dotfile vim
@@ -303,8 +301,10 @@ echo "Enabling fstrim.timer"
 sudo systemctl enable fstrim.timer
 
 mkdir -p ~/.config/systemd/user
-ln -s ~/dotfiles/systemd/i3lock/i3lock.service ~/.config/systemd/user/
+ln -sf ~/dotfiles/systemd/i3lock/i3lock.service ~/.config/systemd/user/
 systemctl enable --user i3lock.service
+
+~/dotfiles/bin/colors
 
 echo "DONE"
 
