@@ -275,8 +275,6 @@ ln -sf ~/dotfiles/vim ~/.config/nvim
 
 ln -sf ~/dotfiles/redshift.conf ~/.config/redshift.conf
 
-ln -s -f ~/dotfiles/Xresources.zenburn ~/.Xresources.colorscheme
-
 echo "Linking mimeapps.list"
 mkdir -p ~/.local/share/applications
 ln -f -s ~/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list
