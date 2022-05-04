@@ -1,4 +1,3 @@
 #!/bin/bash
 
-setxkbmap sk,us -option 'grp:alt_shift_toggle'
-xmodmap ~/.Xmodmap
+setxkbmap us,sk -option 'davs:davs'

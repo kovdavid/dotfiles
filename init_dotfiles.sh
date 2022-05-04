@@ -58,7 +58,8 @@ function ensure_xkb {
     SYMBOLS_FILE="/usr/share/X11/xkb/symbols/davs"
     SYMBOLS_CONTENT=$(cat <<EOC
 partial alphanumeric_keys modifier_keys
-xkb_symbols "davs" {
+xkb_symbols \"davs\" {
+    include \"group(lalt_lshift_toggle)\"
     key <RALT> { [ underscore, BackSpace, BackSpace, BackSpace ] };
     key <LSGT> { [ underscore, EuroSign, EuroSign, EuroSign ] };
     key <CAPS> { [ Escape ] };
