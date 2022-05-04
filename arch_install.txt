@@ -201,3 +201,9 @@ EndSection
 EOT
 
 # Use ibus for layout switching. Start with `ibus-daemon`
+
+# Passwords:
+# secret-tool store --label='My label' password my_service
+Password: *input*
+# secret-tool lookup password my_service
+*input*
