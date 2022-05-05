@@ -102,13 +102,23 @@ EOC
 }
 
 function ensure_polkit {
-    POLKIT_FILE="/etc/polkit-1/rules.d/49-nopasswd_global.rules"
+    # action.id are in /usr/share/polkit-1/actions
+    # try prompt with `pkexec --user davs gparted`
+    # to store pass into keyring: `secret-tool store --lable 'MyLable' server MyServer user MyUser key MyKey`
+    POLKIT_FILE="/etc/polkit-1/rules.d/49-nopasswd_davs.rules"
     POLKIT_CONTENT=$(cat <<EOC
 /* Allow members of the wheel group to execute any actions
  * without password authentication, similar to \"sudo NOPASSWD:\"
  */
 polkit.addRule(function(action, subject) {
-    if (subject.isInGroup(\"davs\")) {
+    if (
+        subject.isInGroup(\"davs\")
+        && (
+            action.id.startsWith(\"org.freedesktop.udisks2\")
+            || action.id.startsWith(\"org.freedesktop.NetworkManager\")
+
+        )
+    ) {
         return polkit.Result.YES;
     }
 });

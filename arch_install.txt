@@ -109,7 +109,9 @@ AutoEnable=false
 
         blkid -s PARTUUID -o value /dev/XXX2 >> /boot/loader/entries/arch.conf
 
-        pacman -S amd-ucode
+        pacman -S vim neovim tree alacritty acpi fwupd htop iotop powertop thuner openssl openssh pass git amd-ucode
+        pacman -S xf86-video-amdgpu libva-mesa-driver mesa-vdpau vlc firefox ttf-liberation ttf-droid noto-fonts ttf-bitstream-vera ttf-dejavu
+        yay -S dex seahorse gnome-keyring gnome-polkit oxygen-icons ibus strace fstrim rofi
 
         vi /boot/loader/entries/arch.conf
         # Add the following content to arch.conf
@@ -147,6 +149,7 @@ gpasswd -a davs autologin
 
 yay -S accountsservice # for dbus/pam/keyring
 yay -S xinit-xsession gvfs thunar-volman
+yay -S dex nitrogen i3lock
 
 vim /etc/lightdm/lightdm.conf
 # autologin-user=davs
@@ -170,7 +173,7 @@ Type=Application
 Categories=
 NoDisplay=true
 
-# check /etc/xdg/autostart directory (nm-applet pasystray blueman-applet )
+# check /etc/xdg/autostart directory (nm-applet pasystray blueman-applet)
 
 cat <<EOT > /usr/share/X11/xkb/symbols/davs
 partial alphanumeric_keys modifier_keys
