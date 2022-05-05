@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ x"$@" = x"quit" ] ; then
+    exit 0
+fi
+>&2 echo "Davs"
+>&2 echo "retv: $ROFI_RETV"
+>&2 echo "info: $ROFI_INFO"
+>&2 echo "data: $ROFI_DATA"
+>&2 echo "x: $ROFI_OUTSIDE"
+>&2 echo "ARGS: $@"
+env
+env | grep ^ROFI
+# echo -en "\0prompt\x1fDavs prompt\n"
+# echo -en "\0message\x1fDavs message\n"
+echo -en "\x00data\x1ftest\n"
+echo -en "reload\x00icon\x1ffolder\n"
+echo -en "reload2\x00info\x1ftest\n"
+echo "quit"

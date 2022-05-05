@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# rofi -theme grunvbox-dark-soft -show window
+# rofi -combi-modi window,run -theme gruvbox-dark-soft -show combi -icon-theme Papirus -show-icons
+
+# rofi -theme gruvbox-dark-soft -icon-theme Papirus -show-icons -show drun
+
+rofi -show script -modi "script:custom_rofi_script" -icon-theme Papirus -show-icons
