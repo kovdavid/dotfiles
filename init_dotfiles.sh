@@ -245,9 +245,10 @@ else
     echo "You have to manually link i3/config and i3/status!"
 fi
 
+mkdir -p ~/.config/rofi
+
 mkdir -p ~/.config/alacritty
 ln -sf ~/dotfiles/alacritty/config.yml ~/.config/alacritty/alacritty.yml
-ln -sf ~/dotfiles/rofi ~/.config
 
 remove_and_link_dotfile vim
 remove_and_link_dotfile emacs.d

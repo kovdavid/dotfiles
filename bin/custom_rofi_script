@@ -19,14 +19,31 @@ function menu_item {
 function run_cmd {
     CMD=$1
 
-    coproc ( $CMD  > /dev/null 2>&1 )
+    echo $CMD >> /tmp/rofi.log
+
+    coproc ( $CMD  >> /tmp/rofi.log 2>&1 )
+}
+
+function draw_brightness_menu {
+    CURRENT=$(brightnessctl --machine-readable info | cut -d ',' -f 4)
+    LAST_COMMAND=$(cat /tmp/.rofi_last_brightness_command)
+
+    echo -en "\x00prompt\x1f$CURRENT\n"
+    if [ "$ACTION" == "down" ] ; then
+        menu_item "main brightness" "down" "arrow-down"
+        menu_item "main brightness" "up" "arrow-up"
+    else
+        menu_item "main brightness" "up" "arrow-up"
+        menu_item "main brightness" "down" "arrow-down"
+    fi
 }
 
 if [ "$ACTION" == "quit" ] ; then
     exit 0
 fi
 
-if [ -z "$ROFI_INFO" ] ; then
+if [ "$ROFI_INFO" == "" ] ; then
+    menu_item "main" "tmux" "utilities-terminal"
     menu_item "main" "terminal" "utilities-terminal"
     menu_item "main" "firefox" "firefox"
     menu_item "main" "thunar" "folder"
@@ -34,12 +51,15 @@ if [ -z "$ROFI_INFO" ] ; then
     menu_item "main" "pavucontrol" "player-volume"
     menu_item "main" "i3 rename workspace" "edit-rename"
     menu_item "main" "scrot" "camera-photo"
+    menu_item "main" "run" "system-run"
+    menu_item "main" "window" "preferences-system-windows"
+    menu_item "main" "Toggle color scheme" "kcolorchooser"
     menu_item "main" "power" "preferences-system-power-management"
     menu_item "main" "display" "preferences-desktop-display"
+    menu_item "main" "brightness" "video-display"
     menu_item "main" "quit" "application-exit"
 elif [ "$ROFI_INFO" == "main" ] ; then
     if [ "$ACTION" == "power" ] ; then
-        menu_item "main power" "sleep+lock" "system-switch-user"
         menu_item "main power" "sleep" "system-suspend"
         menu_item "main power" "lock" "system-lock-screen"
         menu_item "main power" "halt" "system-shutdown"
@@ -49,6 +69,30 @@ elif [ "$ROFI_INFO" == "main" ] ; then
         menu_item "main display" "mexternal onitor right" "arrow-right"
         menu_item "main display" "notebook only" "computer-laptop"
         menu_item "main display" "external monitor only" "video-display"
+    elif [ "$ACTION" == "brightness" ] ; then
+        draw_brightness_menu
+    elif [ "$ACTION" == "tmux" ] ; then
+        run_cmd "alacritty -e xterm_tmux_session"
+    elif [ "$ACTION" == "terminal" ] ; then
+        run_cmd "alacritty"
+    elif [ "$ACTION" == "firefox" ] ; then
+        run_cmd "firefox"
+    elif [ "$ACTION" == "thunar" ] ; then
+        run_cmd "thunar"
+    elif [ "$ACTION" == "gimp" ] ; then
+        run_cmd "gimp"
+    elif [ "$ACTION" == "pavucontrol" ] ; then
+        run_cmd "pavucontrol"
+    elif [ "$ACTION" == "i3 rename workspace" ] ; then
+        run_cmd "i3_rename_workspace"
+    elif [ "$ACTION" == "scrot" ] ; then
+        run_cmd "scrot --select --freeze /clean_daily/%F-%T.png"
+    elif [ "$ACTION" == "run" ] ; then
+        run_cmd "rofi -show run"
+    elif [ "$ACTION" == "window" ] ; then
+        run_cmd "rofi -show window"
+    elif [ "$ACTION" == "Toggle color scheme" ] ; then
+        run_cmd "color_scheme"
     fi
 elif [ "$ROFI_INFO" == "main display" ] ; then
     if [ "$ACTION" == "monitor left" ] ; then
@@ -61,9 +105,7 @@ elif [ "$ROFI_INFO" == "main display" ] ; then
         run_cmd "mon sec"
     fi
 elif [ "$ROFI_INFO" == "main power" ] ; then
-    if [ "$ACTION" == "sleep+lock" ] ; then
-        run_cmd "i3lock -c 333333; systemctl suspend"
-    elif [ "$ACTION" == "sleep" ] ; then
+    if [ "$ACTION" == "sleep" ] ; then
         run_cmd "systemctl suspend"
     elif [ "$ACTION" == "lock" ] ; then
         run_cmd "i3lock -c 333333"
@@ -72,4 +114,13 @@ elif [ "$ROFI_INFO" == "main power" ] ; then
     elif [ "$ACTION" == "reboot" ] ; then
         run_cmd "systemctl reboot"
     fi
+elif [ "$ROFI_INFO" == "main brightness" ] ; then
+    if [ "$ACTION" == "up" ] ; then
+        brightnessctl --quiet set 5%+
+        echo "up" > /tmp/.rofi_last_brightness_command
+    elif [ "$ACTION" == "down" ] ; then
+        brightnessctl --quiet set 5%-
+        echo "down" > /tmp/.rofi_last_brightness_command
+    fi
+    draw_brightness_menu
 fi

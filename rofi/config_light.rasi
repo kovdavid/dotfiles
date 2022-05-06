@@ -1,0 +1,6 @@
+configuration {
+    show-icons: true;
+    icon-theme: "oxygen";
+    font: "mono 14";
+}
+@theme "gruvbox-light-soft"

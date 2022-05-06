@@ -1,8 +1,16 @@
 #!/bin/bash
 
-SCHEME="dark"
-if [ "$1" == "light" ] || [ "$1" == "l" ] ; then
+if [ -z "$1" ] ; then
+    CURRENT_THEME=$(readlink -f ~/dotfiles/vim/colors.vim | grep -oP 'dark|light')
+    if [ "$CURRENT_THEME" == "dark" ] ; then
+        SCHEME="light"
+    else
+        SCHEME="dark"
+    fi
+elif [ "$1" == "light" ] || [ "$1" == "l" ] ; then
     SCHEME="light"
+elif [ "$1" == "dark" ] || [ "$1" == "d" ] ; then
+    SCHEME="dark"
 fi
 
 echo "Setting scheme $SCHEME"
@@ -25,3 +33,6 @@ tmux source-file ~/.tmux.conf
 echo "Linking Xresources"
 ln -sf ~/dotfiles/Xresources.$SCHEME ~/.Xresources.colorscheme
 xrdb /home/davs/.Xresources
+
+echo "Linking rofi"
+ln -sf ~/dotfiles/rofi/config_$SCHEME.rasi ~/.config/rofi/config.rasi
