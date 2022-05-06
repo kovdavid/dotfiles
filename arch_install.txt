@@ -117,7 +117,7 @@ AutoEnable=false
         cd
 
         yay -S dex seahorse gnome-keyring gnome-polkit oxygen-icons ibus strace fstrim rofi
-        yay -S python-pynvim
+        yay -S python-pynvim notify-osd gnome-session
 
         vi /boot/loader/entries/arch.conf
         # Add the following content to arch.conf
