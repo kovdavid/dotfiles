@@ -1,5 +1,5 @@
 set $mod Mod4
-set $dp_screen DisplayPort-0
+set $dp_screen DisplayPort-1
 set $hdmi_screen HDMI-A-0
 set $laptop_screen eDP
 

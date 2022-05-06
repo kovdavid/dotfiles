@@ -313,7 +313,10 @@ mkdir -p ~/.config/systemd/user
 ln -sf ~/dotfiles/systemd/i3lock/i3lock.service ~/.config/systemd/user/
 systemctl enable --user i3lock.service
 
-~/dotfiles/bin/colors
+sudo systemctl mask systemd-rfkill.socket
+sudo systemctl mask systemd-rfkill.service
+
+~/dotfiles/bin/color_scheme dark
 
 echo "DONE"
 
