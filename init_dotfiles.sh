@@ -7,7 +7,6 @@ function cleanup {
     unset -f ensure_sudoers_entry
     unset -f ensure_xkb
     unset -f ensure_tlp
-    unset -f ensure_tlp_value
     unset -f ensure_file_content_root
     unset -f ensure_polkit
 }
@@ -128,29 +127,20 @@ EOC
     ensure_file_content_root "$POLKIT_FILE" "$POLKIT_CONTENT"
 }
 
-function ensure_tlp_value {
-    NAME=$1
-    VALUE=$2
-
-    TLP_FILE="/etc/tlp.conf"
-
-    CURRENT=$(grep "^$NAME" $TLP_FILE || true)
-    EXPECTED="$NAME=$VALUE"
-
-    if [ -z "$CURRENT" ] ; then
-        echo "Initializing $EXPECTED in $TLP_FILE"
-        echo "$EXPECTED" | sudo tee -a $TLP_FILE
-    elif [ $(echo "$CURRENT" | cut -d '=' -f2) -ne "$VALUE" ] ; then
-        echo "Changing to $EXPECTED in $TLP_FILE"
-        sudo sed -i "/^$NAME/c\ $NAME=$VALUE" $TLP_FILE
-    fi
-}
-
 function ensure_tlp {
-    ensure_tlp_value "START_CHARGE_THRESH_BAT0" "70"
-    ensure_tlp_value "STOP_CHARGE_THRESH_BAT0" "90"
-    ensure_tlp_value "CPU_BOOST_ON_AC" "1"
-    ensure_tlp_value "CPU_BOOST_ON_BAT" "0"
+    TLP_FILE="/etc/tlp.d/01-davs.conf"
+    TLP_CONTENT=$(cat <<EOC
+START_CHARGE_THRESH_BAT0=70
+STOP_CHARGE_THRESH_BAT0=90
+
+CPU_BOOST_ON_AC=1
+CPU_BOOST_ON_BAT=0
+
+DEVICES_TO_DISABLE_ON_STARTUP=\"bluetooth\"
+EOC
+)
+
+    ensure_file_content_root "$TLP_FILE" "$TLP_CONTENT"
 }
 
 ensure_user_group $USER
