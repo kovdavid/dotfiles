@@ -306,6 +306,12 @@ systemctl enable --user i3lock.service
 sudo systemctl mask systemd-rfkill.socket
 sudo systemctl mask systemd-rfkill.service
 
+# To prefer libinput over synaptics
+if [ ! -f /etc/X11/xorg.conf.d/40-libinput.conf ] ; then
+    echo "Linking 40-libinput.conf. Restart will be necessary"
+    sudo ln -s /usr/share/X11/xorg.conf.d/40-libinput.conf /etc/X11/xorg.conf.d/40-libinput.conf
+fi
+
 ~/dotfiles/bin/color_scheme dark
 
 echo "DONE"
