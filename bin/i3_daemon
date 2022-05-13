@@ -3,6 +3,26 @@
 import re
 
 from i3ipc import Connection, Event
+from pprint import pprint
+from functools import cache
+
+
+@cache
+def parse_named_workspaces_from_config():
+    with open("/home/davs/.config/i3/config", "r") as f:
+        lines = f.readlines()
+        lines = filter(lambda l: l.startswith("set $ws"), lines)
+        lines = map(lambda l: l.rstrip(), lines)
+        lines = list(lines)
+
+    result = []
+    for line in lines:
+        m = re.match("^set \$ws(\d+)", line)
+        if m:
+            workspace_number = int(m.group(1))
+            result.append(workspace_number)
+
+    return result
 
 
 def on_window_new(i3, e):
@@ -12,7 +32,9 @@ def on_window_new(i3, e):
     if len(windows) == 1 and re.match("^\d+$", ws.name):
         window_name = windows[0]
         if window_name == "jetbrains-pycharm":
-            window_name = "PyCharm"
+            window_name = "pycharm"
+        if window_name == "Slack":
+            window_name = "chat"
 
         workspace_name = ws.name + ": " + window_name
         i3.command('rename workspace to "%s"' % workspace_name)
@@ -21,7 +43,9 @@ def on_window_new(i3, e):
 def on_window_close(i3, e):
     ws = i3.get_tree().find_focused().workspace()
 
-    if not len(ws.leaves()):
+    named_workspaces_from_config = parse_named_workspaces_from_config()
+
+    if not len(ws.leaves()) and ws.num not in named_workspaces_from_config:
         i3.command('rename workspace to "%s"' % ws.num)
 
 

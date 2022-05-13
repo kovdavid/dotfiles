@@ -1,5 +1,5 @@
 set $mod Mod4
-set $dp_screen DisplayPort-1
+set $dp_screen DisplayPort-0
 set $hdmi_screen HDMI-A-0
 set $laptop_screen eDP
 
@@ -275,4 +275,5 @@ exec --no-startup-id /home/davs/dotfiles/bin/deduplicate_bash_history &
 # exec --no-startup-id pasystray &
 # exec --no-startup-id blueman-applet &
 exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id i3_daemon &
 exec (sleep 3 && xmodmap ~/.Xmodmap) &
