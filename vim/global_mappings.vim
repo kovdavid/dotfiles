@@ -155,6 +155,7 @@ if has("ide")
     vnoremap <leader>cu :action CommentByLineComment<CR>
     nnoremap <leader>p :action ActivateProjectToolWindow<CR>
     nnoremap <leader>gd :action GotoDeclaration<CR>
+    nnoremap <leader>fu :action FindUsages<CR>
     nnoremap <c-o> :action Back<CR>
 endif
 
