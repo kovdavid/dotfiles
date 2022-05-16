@@ -1,11 +1,21 @@
 #!/bin/bash
 
-device=$(xinput | grep -i trackpoint | cut -d"=" -f2 | cut -f1)
+IBM_TRACKPOINT="TPPS/2 IBM TrackPoint"
+ELAN_TRACKPOINT="TPPS/2 Elan TrackPoint"
+
+device=$(xinput | grep -w "$IBM_TRACKPOINT" | cut -d"=" -f2 | cut -f1)
 if [ -n "$device" ] ; then
+    echo "Setting $IBM_TRACKPOINT"
     xinput set-prop $device "Evdev Wheel Emulation" 1
     xinput set-prop $device "Evdev Wheel Emulation Button" 2
     xinput set-prop $device "Evdev Wheel Emulation Timeout" 200
     xinput set-prop $device "Evdev Wheel Emulation Axes" 6 7 4 5
     xinput set-prop $device "Evdev Middle Button Emulation" 1
     xinput set-prop $device "Evdev Middle Button Timeout" 50
+fi
+device=$(xinput | grep -w "$ELAN_TRACKPOINT" | cut -d"=" -f2 | cut -f1)
+if [ -n "$device" ] ; then
+    echo "Setting $ELAN_TRACKPOINT"
+    xinput set-prop $device "libinput Middle Emulation Enabled" 1
+    xinput set-prop $device "libinput Accel Profile Enabled" 0, 0
 fi

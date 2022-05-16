@@ -245,8 +245,6 @@ remove_and_link_dotfile inputrc
 remove_and_link_dotfile tmux.conf
 remove_and_link_dotfile tmux_templates
 remove_and_link_dotfile xprofile
-remove_and_link_dotfile xsession
-remove_and_link_dotfile xsessionrc
 remove_and_link_dotfile gtkrc-2.0
 remove_and_link_dotfile gtkrc-2.0.mine
 remove_and_link_dotfile git_global_ignore
@@ -304,8 +302,7 @@ sudo systemctl mask systemd-rfkill.service
 # To prefer libinput over synaptics
 if [ ! -f /etc/X11/xorg.conf.d/40-libinput.conf ] ; then
     echo "Linking 40-libinput.conf. Restart will be necessary"
-    echo "DISABLED FOR NOW"
-    # sudo ln -s /usr/share/X11/xorg.conf.d/40-libinput.conf /etc/X11/xorg.conf.d/40-libinput.conf
+    sudo ln -sf /usr/share/X11/xorg.conf.d/40-libinput.conf /etc/X11/xorg.conf.d/40-libinput.conf
 fi
 
 ~/dotfiles/bin/color_scheme dark
