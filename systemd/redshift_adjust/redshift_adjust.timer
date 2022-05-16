@@ -1,0 +1,10 @@
+[Unit]
+Description=redshift_adjust
+
+[Timer]
+OnBootSec=10min
+OnCalendar=*:0/10
+Unit=redshift_adjust.service
+
+[Install]
+WantedBy=timers.target

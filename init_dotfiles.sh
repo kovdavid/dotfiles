@@ -156,8 +156,6 @@ if [ $(id $USER --group --name) != "$USER" ] ; then
     sudo usermod -g $USER $USER
 fi
 
-sudo mkdir -p /clean_daily
-
 ensure_sudoers_entry
 ensure_xkb
 ensure_tlp
@@ -281,21 +279,6 @@ mkdir -p ~/.local/share/applications
 ln -f -s ~/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list
 ln -f -s ~/dotfiles/mimeapps.list ~/.config/mimeapps.list
 
-if [ -x "$(command -v redshift)" ] ; then
-	crontab -l > /tmp/mycron
-	if ! grep -q "redshift_adjust.sh" /tmp/mycron ; then
-		echo "Setting crontab for redshift_adjust"
-		echo "*/10 * * * * ~/dotfiles/bin/redshift_adjust.sh" >> /tmp/mycron
-		crontab /tmp/mycron
-	fi
-	if ! grep -q "clean_daily.sh" /tmp/mycron ; then
-		echo "Setting crontab for clean_daily"
-		echo "*/30 * * * * ~/dotfiles/bin/clean_daily.sh" >> /tmp/mycron
-		crontab /tmp/mycron
-    fi
-	rm /tmp/mycron
-fi
-
 echo "Enabling fstrim.timer"
 sudo systemctl enable fstrim.timer
 
@@ -303,13 +286,26 @@ mkdir -p ~/.config/systemd/user
 ln -sf ~/dotfiles/systemd/i3lock/i3lock.service ~/.config/systemd/user/
 systemctl enable --user i3lock.service
 
+sudo mkdir -p /clean_daily
+sudo chown davs:davs /clean_daily
+
+for timer_unit in clean_daily redshift_adjust ; do
+    echo "Setting up systemd-timer $timer_unit"
+    ln -sf ~/dotfiles/systemd/$timer_unit/$timer_unit.timer ~/.config/systemd/user/
+    ln -sf ~/dotfiles/systemd/$timer_unit/$timer_unit.service ~/.config/systemd/user/
+    systemctl --user daemon-reload
+    systemctl enable --user $timer_unit.timer
+    systemctl restart --user $timer_unit.timer
+done
+
 sudo systemctl mask systemd-rfkill.socket
 sudo systemctl mask systemd-rfkill.service
 
 # To prefer libinput over synaptics
 if [ ! -f /etc/X11/xorg.conf.d/40-libinput.conf ] ; then
     echo "Linking 40-libinput.conf. Restart will be necessary"
-    sudo ln -s /usr/share/X11/xorg.conf.d/40-libinput.conf /etc/X11/xorg.conf.d/40-libinput.conf
+    echo "DISABLED FOR NOW"
+    # sudo ln -s /usr/share/X11/xorg.conf.d/40-libinput.conf /etc/X11/xorg.conf.d/40-libinput.conf
 fi
 
 ~/dotfiles/bin/color_scheme dark

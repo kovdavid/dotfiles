@@ -2,7 +2,7 @@
 Description=clean daily
 
 [Timer]
-OnBootSec=0min
+OnBootSec=10min
 OnCalendar=*:0/10
 Unit=clean_daily.service
 
