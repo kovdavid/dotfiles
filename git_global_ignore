@@ -8,6 +8,7 @@ nytprof*
 *.swp
 .envrc
 .vscode
+.vim
 
 # Devel::PDB
 .*-conf
