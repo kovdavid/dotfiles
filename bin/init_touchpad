@@ -4,17 +4,27 @@ SYNAPTICS_TOUCHPAD="SynPS/2 Synaptics TouchPad"
 device=$(xinput | grep -w "$SYNAPTICS_TOUCHPAD" | cut -d"=" -f2 | cut -f1)
 if [ -n "$device" ] ; then
     echo "Setting $SYNAPTICS_TOUCHPAD"
-    xinput set-prop $device "Device Enabled" 0
-    xinput set-prop $device "Device Enabled" 1
-    xinput set-prop $device "Synaptics Tap Action" 0, 0, 0, 0, 1, 2, 3
-    xinput set-prop $device "Synaptics Edge Scrolling" 0, 0, 0
-    xinput set-prop $device "Synaptics Gestures" 1
-    xinput set-prop $device "Synaptics Locked Drags" 0
-    xinput set-prop $device "Synaptics Locked Drags Timeout" 5000
-    xinput set-prop $device "Synaptics Move Speed" 1, 1.75, 0.04, 0
-    xinput set-prop $device "Synaptics Two-Finger Pressure" 40
-    xinput set-prop $device "Synaptics Two-Finger Width" 8
-    xinput set-prop $device "Synaptics Two-Finger Scrolling" 1, 0
+
+    xinput list-props $device | grep -q "libinput Tapping Enabled"
+    if [ $? -eq 0 ] ; then
+        echo "Using libinput"
+        xinput set-prop $device "libinput Tapping Enabled" 1
+        xinput set-prop $device "libinput Tapping Button Mapping Enabled" 0, 1
+        xinput set-prop $device "libinput Middle Emulation Enabled" 1
+    else
+        echo "Using Synaptics"
+        xinput set-prop $device "Device Enabled" 0
+        xinput set-prop $device "Device Enabled" 1
+        xinput set-prop $device "Synaptics Tap Action" 0, 0, 0, 0, 1, 2, 3
+        xinput set-prop $device "Synaptics Edge Scrolling" 0, 0, 0
+        xinput set-prop $device "Synaptics Gestures" 1
+        xinput set-prop $device "Synaptics Locked Drags" 0
+        xinput set-prop $device "Synaptics Locked Drags Timeout" 5000
+        xinput set-prop $device "Synaptics Move Speed" 1, 1.75, 0.04, 0
+        xinput set-prop $device "Synaptics Two-Finger Pressure" 40
+        xinput set-prop $device "Synaptics Two-Finger Width" 8
+        xinput set-prop $device "Synaptics Two-Finger Scrolling" 1, 0
+    fi
 fi
 
 LIBINPUT_TOUCHPAD="PS/2 TouchPad" # TODO specify

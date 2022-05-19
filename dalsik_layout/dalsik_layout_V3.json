@@ -46,7 +46,7 @@
     "L0R3C4":  "LP(0x01)",
     "L0R3C5":  "D(LSHIFT,SPACE)",
     "L0R3C6":  "KC(BSPACE)",
-    "L0R3C6":  "DS(LAYER_3,BSPACE)",
+    "L0R3C6":  "D(LAYER_2,BSPACE)",
     "L0R3C7":  "LP(0x02)",
     "L0R3C8":  "LP(0x03)",
     "L0R3C9":  "KC(NO)",

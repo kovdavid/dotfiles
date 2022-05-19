@@ -157,6 +157,8 @@ if has("ide")
     nnoremap <leader>gd :action GotoDeclaration<CR>
     nnoremap <leader>fu :action FindUsages<CR>
     nnoremap <c-o> :action Back<CR>
+    nnoremap <leader>ogh :action Github.Open.In.Browser<CR>
+    nnoremap <leader>z :action MaximizeEditorInSplit<CR>
 endif
 
 if has("ide")
