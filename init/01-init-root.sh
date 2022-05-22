@@ -27,6 +27,8 @@ function ensure_file_content() {
     if [ "$(cat $FILE)" != "$CONTENT" ] ; then
         echo "Replacing $FILE"
         cat $FILE
+        echo "with"
+        echo -e "$CONTENT"
         echo "$CONTENT" > $FILE
     fi
 }
@@ -41,8 +43,8 @@ function ensure_xkb_config {
     SYMBOLS_FILE="/usr/share/X11/xkb/symbols/davs"
     SYMBOLS_CONTENT=$(cat <<EOC
 partial alphanumeric_keys modifier_keys
-xkb_symbols \"davs\" {
-    include \"group(lalt_lshift_toggle)\"
+xkb_symbols "davs" {
+    include "group(lalt_lshift_toggle)"
     key <RALT> { [ underscore, BackSpace, BackSpace, BackSpace ] };
     key <LSGT> { [ underscore, EuroSign, EuroSign, EuroSign ] };
     key <CAPS> { [ Escape ] };
@@ -73,12 +75,12 @@ EOC
 
     XORG_CONF_FILE="/etc/X11/xorg.conf.d/00-keyboard.conf"
     XORG_CONF_CONTENT=$(cat <<EOC
-Section \"InputClass\"
-    Identifier \"system-keyboard\"
-    MatchIsKeyboard \"on\"
-    Option \"XkbLayout\" \"us,sk\"
-    Option \"XkbModel\" \"pc105\"
-    Option \"XkbOptions\" \"davs:davs\"
+Section "InputClass"
+    Identifier "system-keyboard"
+    MatchIsKeyboard "on"
+    Option "XkbLayout" "us,sk"
+    Option "XkbModel" "pc105"
+    Option "XkbOptions" "davs:davs"
 EndSection
 EOC
 )
@@ -94,7 +96,7 @@ STOP_CHARGE_THRESH_BAT0=90
 CPU_BOOST_ON_AC=1
 CPU_BOOST_ON_BAT=0
 
-DEVICES_TO_DISABLE_ON_STARTUP=\"bluetooth\"
+DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
 EOC
 )
 
@@ -108,14 +110,14 @@ function ensure_polkit_config {
     POLKIT_FILE="/etc/polkit-1/rules.d/49-nopasswd_davs.rules"
     POLKIT_CONTENT=$(cat <<EOC
 /* Allow members of the wheel group to execute any actions
- * without password authentication, similar to \"sudo NOPASSWD:\"
+ * without password authentication, similar to "sudo NOPASSWD:"
  */
 polkit.addRule(function(action, subject) {
     if (
-        subject.isInGroup(\"davs\")
+        subject.isInGroup("davs")
         && (
-            action.id.startsWith(\"org.freedesktop.udisks2\")
-            || action.id.startsWith(\"org.freedesktop.NetworkManager\")
+            action.id.startsWith("org.freedesktop.udisks2")
+            || action.id.startsWith("org.freedesktop.NetworkManager")
 
         )
     ) {

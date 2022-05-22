@@ -179,34 +179,6 @@ NoDisplay=true
 
 # check /etc/xdg/autostart directory (nm-applet pasystray blueman-applet)
 
-cat <<EOT > /usr/share/X11/xkb/symbols/davs
-partial alphanumeric_keys modifier_keys
-xkb_symbols "davs" {
-    key <RALT> { [ underscore, BackSpace, BackSpace, BackSpace ] };
-    key <LSGT> { [ underscore, EuroSign, EuroSign, EuroSign ] };
-    key <CAPS> { [ Escape ] };
-};
-EOT
-
-# Inside /usr/share/X11/xkb/rules/evdev after '! option = symbols' put
-davs:davs = +davs(davs)
-
-# Inside /usr/share/X11/xkb/rules/evdev.lst before 'ctrl Ctrl position' put
-davs Davs mapping
-davs:davs Davs mapping
-
-# Then use "setxkbmap us,sk -option 'davs:davs'"
-
-cat <<EOT > /etc/X11/xorg.conf.d/00-keyboard.conf
-Section "InputClass"
-    Identifier "system-keyboard"
-    MatchIsKeyboard "on"
-    Option "XkbLayout" "us,sk"
-    Option "XkbModel" "pc105"
-    Option "XkbOptions" "davs:davs"
-EndSection
-EOT
-
 # Use ibus for layout switching. Start with `ibus-daemon`
 
 # Passwords:
