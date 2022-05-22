@@ -62,6 +62,7 @@ xkb_symbols \"davs\" {
     key <RALT> { [ underscore, BackSpace, BackSpace, BackSpace ] };
     key <LSGT> { [ underscore, EuroSign, EuroSign, EuroSign ] };
     key <CAPS> { [ Escape ] };
+    key <PRSC> { [ Menu, Menu, Menu, Menu ] };
 };
 EOC
 )

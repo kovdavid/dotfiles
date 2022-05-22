@@ -243,6 +243,9 @@ bar {
     tray_output $dp_screen
     tray_output $hdmi_screen
     tray_output $laptop_screen
+
+    # mode hide
+    # modifier $mod
 }
 
 # use xprop ;)
@@ -262,7 +265,7 @@ for_window [window_role="pop-up"] floating enable
 for_window [class="^jetbrains-.+"] border none
 for_window [class="(?i)pavucontrol"] floating enable, move position mouse, move down 30, move left 30, sticky enable
 
-exec --no-startup-id setxkbmap us,sk -option 'grp:alt_shift_toggle' &
+exec --no-startup-id setxkbmap us,sk -option 'davs:davs' &
 exec ~/bin/mon left &
 exec ~/bin/init_trackpoint &
 exec ~/bin/init_touchpad &
