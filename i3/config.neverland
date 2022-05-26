@@ -43,8 +43,8 @@ bindsym XF86AudioLowerVolume exec ~/bin/i3_volume_change down
 bindsym XF86AudioRaiseVolume exec ~/bin/i3_volume_change up
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && notify-send -t 1000 "Brightness $(brightnessctl)"
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && notify-send -t 1000 "Brightness $(brightnessctl)"
-bindsym XF86ScreenSaver exec i3lock -c 000000
-bindsym XF86Sleep exec "i3lock -c 000000; systemctl suspend"
+bindsym XF86ScreenSaver exec i3lock_wrapper
+bindsym XF86Sleep exec "i3lock_wrapper; systemctl suspend"
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -209,8 +209,8 @@ set $system_power_mode "(s)leep+lock | slee(p) | (h)alt | (r)eboot | (l)ock | (c
 mode $system_power_mode {
     bindsym h exec "i3-msg 'mode default'; systemctl poweroff"
     bindsym r exec "i3-msg 'mode default'; systemctl reboot"
-    bindsym l exec "i3-msg 'mode default'; i3lock -c 333333"
-    bindsym s exec "i3-msg 'mode default'; i3lock -c 333333; systemctl suspend"
+    bindsym l exec "i3-msg 'mode default'; i3lock_wrapper"
+    bindsym s exec "i3-msg 'mode default'; i3lock_wrapper; systemctl suspend"
     bindsym p exec "i3-msg 'mode default'; systemctl suspend"
 
     bindsym Escape mode "default"
@@ -272,7 +272,7 @@ exec ~/bin/init_touchpad &
 exec xrdb -merge ~/.Xresources &
 exec (sleep 1 && nitrogen --restore) &
 exec /usr/bin/sed -i "s/^[^#]/# &/" /home/davs/.ssh/authorized_keys
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 000000 --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock_wrapper --nofork
 exec --no-startup-id /home/davs/dotfiles/bin/deduplicate_bash_history &
 # exec --no-startup-id nm-applet &
 # exec --no-startup-id pasystray &

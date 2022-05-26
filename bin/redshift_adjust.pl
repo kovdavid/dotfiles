@@ -46,8 +46,9 @@ my $raw_config_by_month = [
              6*60 + 30 => { temp => 3200, brightness => '0.80' },
              7*60 + 30 => { temp => 4200, brightness => '0.90' },
              8*60 + 00 => { temp => 6500, brightness => '1.00' },
-            18*60 + 00 => { temp => 6500, brightness => '1.00' },
-            21*60 + 00 => { temp => 1300, brightness => '0.70' },
+            19*60 + 30 => { temp => 6500, brightness => '1.00' },
+            21*60 + 00 => { temp => 4200, brightness => '1.00' },
+            23*60 + 00 => { temp => 1300, brightness => '0.70' },
         },
     },
 ];

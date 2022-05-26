@@ -139,6 +139,11 @@ if [ $(id davs --group --name) != "davs" ] ; then
     usermod -g davs davs
 fi
 
+if ! id i3lock &>/dev/null; then
+    echo "Creating user i3lock. You must manually set the password with 'sudo passwd i3lock'"
+    useradd --system --shell /bin/false i3lock
+fi
+
 ensure_user_group wheel
 ensure_user_group autologin
 ensure_user_group storage
@@ -148,12 +153,6 @@ ensure_user_group users
 ensure_user_group plugdev
 ensure_user_group bluetooth
 ensure_user_group docker
-
-if [ $(id davs --group --name) != "davs" ] ; then
-    echo "Changing primary group to davs"
-    groupadd $group
-    usermod -g davs davs
-fi
 
 ensure_sudoers_entry
 ensure_xkb_config

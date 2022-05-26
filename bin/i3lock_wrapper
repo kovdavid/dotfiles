@@ -1,0 +1,13 @@
+#!/bin/bash
+
+xhost +
+
+i3lock="i3lock -c 333333"
+PASSWORD_SET=$(sudo passwd --status i3lock 2>/dev/null | awk '{ print $2 }')
+
+if [ "$PASSWORD_SET" = "P" ] ; then
+    sudo -u i3lock $i3lock
+else
+    echo "Set the password for the i3lock user!"
+    $i3lock
+fi
