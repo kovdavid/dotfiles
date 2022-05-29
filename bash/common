@@ -16,7 +16,6 @@ shopt -s histappend
 #free Ctrl-S and Ctrl-Q in terminal
 [[ $- == *i* ]] && stty -ixon
 
-[[ -f ~/.bashrc.dircolors ]] && eval "$(dircolors ~/.bashrc.dircolors)" > /dev/null
 bash_include ~/.bashrc.env_settings
 bash_include ~/.bashrc.git-completion
 bash_include ~/.bashrc.export

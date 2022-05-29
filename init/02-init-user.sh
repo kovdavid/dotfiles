@@ -34,7 +34,6 @@ done
 
 echo "Linking dotfiles"
 
-ln -sf ~/dotfiles/dircolors            ~/.bashrc.dircolors
 ln -sf ~/dotfiles/bash/env_settings    ~/.bashrc.env_settings
 ln -sf ~/dotfiles/git-completion.bash  ~/.bashrc.git-completion
 ln -sf ~/dotfiles/tmux-completion.bash ~/.bashrc.tmux-completion
@@ -56,11 +55,6 @@ ln -sf ~/dotfiles/Xresources/Xresources ~/.Xresources
 
 remove_and_link_dotfile bash_profile
 remove_and_link_dotfile bashrc
-remove_and_link_dotfile ctags
-remove_and_link_dotfile fontconfig
-remove_and_link_dotfile screenrc
-remove_and_link_dotfile dircolors
-remove_and_link_dotfile ghci
 
 ln -sf ~/dotfiles/gitconfig ~/.gitconfig
 if [ $(hostname) == "candyland" ] ; then
@@ -97,7 +91,6 @@ mkdir -p ~/.config/alacritty
 ln -sf ~/dotfiles/alacritty/config.yml ~/.config/alacritty/alacritty.yml
 
 remove_and_link_dotfile vim
-remove_and_link_dotfile emacs.d
 remove_and_link_dotfile xinitrc
 remove_and_link_dotfile inputrc
 remove_and_link_dotfile tmux.conf
@@ -106,8 +99,6 @@ remove_and_link_dotfile xprofile
 remove_and_link_dotfile gtkrc-2.0
 remove_and_link_dotfile gtkrc-2.0.mine
 remove_and_link_dotfile git_global_ignore
-remove_and_link_dotfile perltidyrc
-remove_and_link_dotfile ocamlinit
 
 echo "Linking directories"
 remove_and_link_dir thumbnails

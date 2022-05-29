@@ -1,4 +1,0 @@
-:set prompt "\ESC[34mλ> \ESC[m"
-:set prompt2 "\ESC[34mλ| \ESC[m"
-:def hoogle \x -> return $ ":!hoogle search \"" ++ x ++ "\""
-:def doc \x -> return $ ":!hoogle search -i \"" ++ x ++ "\""
