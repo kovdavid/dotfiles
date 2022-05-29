@@ -2,8 +2,6 @@
 
 set -e
 
-xmodmap ~/.Xmodmap
-
 xrandr_output=$(xrandr)
 
 DISCONNECTED_DEVICES=$(echo -e "$xrandr_output" | grep -w 'disconnected' | cut -d" " -f 1)
@@ -77,9 +75,6 @@ else
     $(xrandr --output $SECONDARY_DEVICE --left-of $PRIMARY_DEVICE)
     $(xrandr --output $SECONDARY_DEVICE --pos 0x0)
 fi
-
-sh ~/.xsessionrc
-xmodmap ~/.Xmodmap
 
 if [ $(which nitrogen) ] ; then
     sleep 2

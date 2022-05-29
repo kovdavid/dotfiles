@@ -279,4 +279,3 @@ exec --no-startup-id /home/davs/dotfiles/bin/deduplicate_bash_history &
 # exec --no-startup-id blueman-applet &
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id i3_daemon &
-exec (sleep 3 && xmodmap ~/.Xmodmap) &

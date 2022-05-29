@@ -46,8 +46,6 @@ if [ ! -f ~/.Xresources.local ] ; then
     echo "XTerm*faceSize: 11" > ~/.Xresources.local
 fi
 
-remove_and_link_dotfile Xdefaults
-remove_and_link_dotfile Xmodmap
 remove_and_link_dotfile Xresources
 remove_and_link_dotfile bash_profile
 remove_and_link_dotfile bashrc
