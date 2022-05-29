@@ -5,6 +5,22 @@ source ~/dotfiles/vim/global_functions.vim
 source ~/dotfiles/vim/global_mappings.vim
 source ~/dotfiles/vim/plugin_settings.vim
 source ~/dotfiles/vim/colors.vim
+
+set t_Co=256
+if has('gui_running')
+    highlight VertSplit guifg=fg guibg=bg
+else
+    highlight VertSplit ctermfg=bg ctermbg=fg
+endif
+
+highlight Search cterm=underline
+
+" Diff
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+
 " Filetype {{{
 " EveryFile {{{
 augroup all_file_type

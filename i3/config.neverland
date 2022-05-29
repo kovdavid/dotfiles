@@ -265,12 +265,12 @@ for_window [window_role="pop-up"] floating enable
 for_window [class="^jetbrains-.+"] border none
 for_window [class="(?i)pavucontrol"] floating enable, move position mouse, move down 30, move left 30, sticky enable
 
-exec --no-startup-id setxkbmap us,sk -option 'davs:davs' &
+exec --no-startup-id en &
 exec ~/bin/mon left &
 exec ~/bin/init_trackpoint &
 exec ~/bin/init_touchpad &
-exec xrdb -merge ~/.Xresources &
-exec (sleep 1 && nitrogen --restore) &
+# exec xrdb -merge ~/.Xresources &
+# exec (sleep 1 && nitrogen --restore) &
 exec /usr/bin/sed -i "s/^[^#]/# &/" /home/davs/.ssh/authorized_keys
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock_wrapper --nofork
 exec --no-startup-id /home/davs/dotfiles/bin/deduplicate_bash_history &

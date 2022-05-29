@@ -43,10 +43,17 @@ ln -sf ~/dotfiles/bash/alias           ~/.bashrc.alias
 ln -sf ~/dotfiles/bash/common          ~/.bashrc.common
 
 if [ ! -f ~/.Xresources.local ] ; then
-    echo "XTerm*faceSize: 11" > ~/.Xresources.local
+    if [ $(hostname) == "candyland" ] ; then
+        echo "XTerm*faceSize: 11" > ~/.Xresources.local
+    elif [ $(hostname) == "neverland" ] ; then
+        echo "XTerm*faceSize: 13" > ~/.Xresources.local
+    else
+        echo "You have to manually create ~/.Xresources.local"
+    fi
 fi
 
-remove_and_link_dotfile Xresources
+ln -sf ~/dotfiles/Xresources/Xresources ~/.Xresources
+
 remove_and_link_dotfile bash_profile
 remove_and_link_dotfile bashrc
 remove_and_link_dotfile ctags

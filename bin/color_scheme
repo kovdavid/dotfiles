@@ -31,8 +31,8 @@ ln -sf ~/dotfiles/tmux_color_$SCHEME.conf ~/dotfiles/tmux_color.conf
 tmux source-file ~/.tmux.conf
 
 echo "Linking Xresources"
-ln -sf ~/dotfiles/Xresources.$SCHEME ~/.Xresources.colorscheme
-xrdb /home/davs/.Xresources
+ln -sf ~/dotfiles/Xresources/Xresources.$SCHEME ~/.Xresources.colorscheme
+xrdb -merge /home/davs/.Xresources
 
 echo "Linking rofi"
 ln -sf ~/dotfiles/rofi/config_$SCHEME.rasi ~/.config/rofi/config.rasi

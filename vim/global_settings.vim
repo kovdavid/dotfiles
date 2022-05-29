@@ -120,37 +120,11 @@ set guioptions+=i  "vim icon
 set guioptions+=t  "tearoff menu items
 set guitablabel=%t "show only filename in tabs
 
-set t_Co=256
 set colorcolumn=80
-if filereadable("/tmp/.Xresources_solarized")
-    set background=light
-    colorscheme solarized
-    highlight CursorLine cterm=NONE ctermbg=253
-    highlight ColorColumn guibg=#333333 ctermbg=253
-else
-    set background=dark
-    colorscheme zenburn
-    highlight CursorLine cterm=NONE ctermbg=239
-    highlight ColorColumn guibg=#333333 ctermbg=8
-endif
-
-if has('gui_running')
-    highlight VertSplit guifg=fg guibg=bg
-else
-    highlight VertSplit ctermfg=bg ctermbg=fg
-endif
-
-highlight Search cterm=underline
 
 set title
 set noerrorbells
 set showmode
-
-" Diff
-highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
 
 set nocursorbind
 set noscrollbind

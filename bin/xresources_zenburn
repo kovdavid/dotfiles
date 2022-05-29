@@ -1,6 +1,0 @@
-#!/bin/bash
-
-rm /home/davs/.Xresources.colorscheme 2>/dev/null
-ln -s /home/davs/dotfiles/Xresources.zenburn /home/davs/.Xresources.colorscheme
-xrdb /home/davs/.Xresources
-rm /tmp/.Xresources_solarized 2>/dev/null
