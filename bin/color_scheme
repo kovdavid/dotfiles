@@ -27,7 +27,7 @@ echo "Linking Alacritty config"
 ln -sf ~/dotfiles/alacritty/color_$SCHEME.yml ~/dotfiles/alacritty/colors.yml
 
 echo "Linking tmux config"
-ln -sf ~/dotfiles/tmux_color_$SCHEME.conf ~/dotfiles/tmux_color.conf
+ln -sf ~/dotfiles/tmux/color_$SCHEME.conf ~/dotfiles/tmux/color.conf
 tmux source-file ~/.tmux.conf
 
 echo "Linking Xresources"

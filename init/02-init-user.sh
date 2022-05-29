@@ -36,7 +36,7 @@ echo "Linking dotfiles"
 
 ln -sf ~/dotfiles/bash/env_settings    ~/.bashrc.env_settings
 ln -sf ~/dotfiles/git-completion.bash  ~/.bashrc.git-completion
-ln -sf ~/dotfiles/tmux-completion.bash ~/.bashrc.tmux-completion
+ln -sf ~/dotfiles/tmux/completion.bash ~/.bashrc.tmux-completion
 ln -sf ~/dotfiles/bash/export          ~/.bashrc.export
 ln -sf ~/dotfiles/bash/alias           ~/.bashrc.alias
 ln -sf ~/dotfiles/bash/common          ~/.bashrc.common
@@ -90,11 +90,12 @@ mkdir -p ~/.config/rofi
 mkdir -p ~/.config/alacritty
 ln -sf ~/dotfiles/alacritty/config.yml ~/.config/alacritty/alacritty.yml
 
+ln -sf ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
+ln -sf ~/dotfiles/tmux/templates ~/.tmux_templates
+
 remove_and_link_dotfile vim
 remove_and_link_dotfile xinitrc
 remove_and_link_dotfile inputrc
-remove_and_link_dotfile tmux.conf
-remove_and_link_dotfile tmux_templates
 remove_and_link_dotfile xprofile
 remove_and_link_dotfile gtkrc-2.0
 remove_and_link_dotfile gtkrc-2.0.mine
