@@ -177,3 +177,22 @@ if [ ! -f /etc/X11/xorg.conf.d/40-libinput.conf ] ; then
     echo "Linking 40-libinput.conf. Restart will be necessary"
     ln -sf /usr/share/X11/xorg.conf.d/40-libinput.conf /etc/X11/xorg.conf.d/40-libinput.conf
 fi
+
+SKU_NUMBER=$(dmidecode | grep 'SKU Number' | grep -v 'Not Specified' | sed -e 's/^\s*SKU Number:\s*//')
+
+if [ "$SKU_NUMBER" == "LENOVO_MT_20UE_BU_Think_FM_ThinkPad T14 Gen 1" ] ; then
+    # Issue with the HDMI and Internal sound card interchanging their order randombly
+    # This disables sound over HDMI
+    SOUND=$(cat <<EOC
+options snd_hda_intel enable=1 index=0
+options snd_hda_intel enable=0 index=1
+EOC
+)
+    ensure_file_content "/etc/modprobe.d/sound.conf" "$SOUND"
+
+    NOBEEP="blacklist pcspkr"
+    ensure_file_content "/etc/modprobe.d/nobeep.conf" "$NOBEEP"
+
+    THINKPAD_ACPI="options thinkpad_acpi fan_control=1"
+    ensure_file_content "/etc/modprobe.d/thinkpad_acpi.conf" "$THINKPAD_ACPI"
+fi

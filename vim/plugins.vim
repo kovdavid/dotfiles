@@ -5,7 +5,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-rooter'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-vinegar'
@@ -28,5 +28,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ton/vim-alternate'
 Plug 'dense-analysis/ale', { 'for': 'python' }
 Plug 'morhetz/gruvbox'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()

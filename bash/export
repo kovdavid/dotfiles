@@ -53,7 +53,7 @@ export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 
 [[ -n "$(which direnv 2>/dev/null)" ]] && eval "$(direnv hook bash)"
 
-export EDITOR=vim
+export EDITOR=nvim
 
 export HISTCONTROL=ignoreboth
 
@@ -65,4 +65,4 @@ export LC_TIME="sk_SK.UTF-8"
 export HISTSIZE=-1
 export HISTFILESIZE=-1
 
-export GIT_EDITOR='vim +startinsert!'
+export GIT_EDITOR='nvim +startinsert!'
