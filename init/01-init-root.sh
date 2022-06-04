@@ -172,6 +172,8 @@ systemctl start fstrim.timer
 systemctl mask systemd-rfkill.socket
 systemctl mask systemd-rfkill.service
 
+systemctl enable avahi-daemon.service
+
 # To prefer libinput over synaptics
 if [ ! -f /etc/X11/xorg.conf.d/40-libinput.conf ] ; then
     echo "Linking 40-libinput.conf. Restart will be necessary"
