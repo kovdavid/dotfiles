@@ -113,7 +113,7 @@ AutoEnable=false
         pacman -S xf86-video-amdgpu libva-mesa-driver mesa-vdpau vlc firefox ttf-liberation ttf-droid noto-fonts ttf-bitstream-vera ttf-dejavu
         pacman -S xorg-server xorg-server-common inetutils
         pacman -S go dmidecode xterm i3-wm tlp xorg-xrdb xorg-apps pasystray network-manager-applet blueman
-        pacman -S dmenu xss-lock i3status ripgrep bat fd fzf lm_sensors brightnessctl ttf-font-awesome pipewire-pulse pipewire-alsa mpv smplayer ffmpeg acpi jdk11-openjdk reflector
+        pacman -S dmenu xss-lock i3status ripgrep bat fd dust fzf lm_sensors brightnessctl ttf-font-awesome pipewire-pulse pipewire-alsa mpv smplayer ffmpeg acpi jdk11-openjdk reflector
         pacman -S rsync curl redshift scrot
         pacman -S cpupower xdg-user-dirs zathura
         pacman -S gimp alsa-utils
@@ -124,7 +124,7 @@ AutoEnable=false
         cd
 
         yay -S dex seahorse gnome-keyring polkit-gnome oxygen-icons ibus strace fstrim rofi
-        yay -S python-pynvim notify-osd gnome-session
+        yay -S python-pynvim gnome-session dunst
         yay -S yarn jq docker-compose docker run-parts networkmanager-openvpn python-i3ipc xclip direnv python-poetry bash-completion symlinks geeqie perl-json perl-json-xs thunar-archive-plugin xarchiver
 
         vi /boot/loader/entries/arch.conf
