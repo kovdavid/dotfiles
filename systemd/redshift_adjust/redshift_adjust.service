@@ -3,6 +3,7 @@ Description=redshift_adjust
 
 [Service]
 Type=oneshot
+Environment=DISPLAY=:0
 ExecStart=%h/bin/redshift_adjust.pl
 
 [Install]

@@ -111,14 +111,19 @@ AutoEnable=false
 
         pacman -S vim neovim tree alacritty acpi fwupd htop iotop powertop thuner openssl openssh pass git amd-ucode net-tools
         pacman -S xf86-video-amdgpu libva-mesa-driver mesa-vdpau vlc firefox ttf-liberation ttf-droid noto-fonts ttf-bitstream-vera ttf-dejavu
-        pacman -S xorg-server inetutils
+        pacman -S xorg-server xorg-server-common inetutils
+        pacman -S go dmidecode xterm i3-wm tlp xorg-xrdb xorg-apps pasystray network-manager-applet blueman
+        pacman -S dmenu xss-lock i3status ripgrep bat fd fzf lm_sensors brightnessctl ttf-font-awesome pipewire-pulse pipewire-alsa mpv smplayer ffmpeg acpi jdk11-openjdk reflector
+        pacman -S rsync curl redshift scrot
+        pacman -S cpupower xdg-user-dirs zathura
 
         # https://github.com/Jguer/yay
         cd /tmp; pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
         cd
 
-        yay -S dex seahorse gnome-keyring gnome-polkit oxygen-icons ibus strace fstrim rofi
+        yay -S dex seahorse gnome-keyring polkit-gnome oxygen-icons ibus strace fstrim rofi
         yay -S python-pynvim notify-osd gnome-session
+        yay -S yarn jq docker-compose docker run-parts networkmanager-openvpn python-i3ipc xclip direnv python-poetry bash-completion symlinks geeqie perl-json perl-json-xs thunar-archive-plugin xarchiver
 
         vi /boot/loader/entries/arch.conf
         # Add the following content to arch.conf
@@ -127,6 +132,15 @@ AutoEnable=false
         linux /vmlinuz-linux
         initrd /amd-ucode.img
         initrd /initramfs-linux.img
+        options cryptdevice=PARTUUID=<PARTUUID>:cryptroot root=/dev/mapper/cryptroot net.ifnames=0 initcall_blacklist=elants_i2c_driver_init rw
+
+        vi /boot/loader/entries/arch-lts.conf
+        # Add the following content to arch.conf
+        # The partition <PARTUUID> is already in the file.
+        title Arch Linux LTS
+        linux /vmlinuz-linux-lts
+        initrd /amd-ucode.img
+        initrd /initramfs-linux-lts.img
         options cryptdevice=PARTUUID=<PARTUUID>:cryptroot root=/dev/mapper/cryptroot net.ifnames=0 initcall_blacklist=elants_i2c_driver_init rw
 
         # Exit new system and go into the cd shell
@@ -156,6 +170,15 @@ yay -S accountsservice # for dbus/pam/keyring
 yay -S xinit-xsession gvfs thunar-volman
 yay -S dex nitrogen i3lock
 
+systemctl start bluetooth
+systemctl enable bluetooth
+
+systemctl start avahi-daemon
+systemctl enable avahi-daemon
+
+systemctl start tlp
+systemctl enable tlp
+
 vim /etc/lightdm/lightdm.conf
 # autologin-user=davs
 # autologin-session=xinitrc
@@ -179,6 +202,9 @@ Categories=
 NoDisplay=true
 
 # check /etc/xdg/autostart directory (nm-applet pasystray blueman-applet)
+
+# Run as user to disable bluetooth by default
+gsettings set org.blueman.plugins.powermanager auto-power-on false
 
 # Use ibus for layout switching. Start with `ibus-daemon`
 

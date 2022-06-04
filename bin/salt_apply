@@ -1,2 +1,0 @@
-#!/bin/bash
-salt-call state.apply --state-output=changes $1 2>&1

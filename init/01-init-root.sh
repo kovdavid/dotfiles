@@ -118,7 +118,7 @@ polkit.addRule(function(action, subject) {
         && (
             action.id.startsWith("org.freedesktop.udisks2")
             || action.id.startsWith("org.freedesktop.NetworkManager")
-
+            || action.id.startsWith("org.blueman")
         )
     ) {
         return polkit.Result.YES;
@@ -153,6 +153,7 @@ ensure_user_group users
 ensure_user_group plugdev
 ensure_user_group bluetooth
 ensure_user_group docker
+ensure_user_group lp
 
 ensure_sudoers_entry
 ensure_xkb_config
@@ -197,4 +198,6 @@ EOC
 
     THINKPAD_ACPI="options thinkpad_acpi fan_control=1"
     ensure_file_content "/etc/modprobe.d/thinkpad_acpi.conf" "$THINKPAD_ACPI"
+
+    ensure_file_content "/etc/xdg/user-dirs.defaults" "DOWNLOAD=Downloads"
 fi
