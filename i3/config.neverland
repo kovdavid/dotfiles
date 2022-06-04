@@ -14,8 +14,8 @@ bindsym $mod+Tab exec ~/bin/i3_output jump
 bindsym $mod+Shift+Tab exec ~/bin/i3_output move
 bindsym $mod+Return exec ~/bin/i3_cycle_windows
 
-bindsym $mod+x exec alacritty -e ~/bin/xterm_tmux_session
-# bindsym $mod+x exec rofi -show script -modi "script:custom_rofi_script"
+# bindsym $mod+x exec alacritty -e ~/bin/xterm_tmux_session
+bindsym $mod+x exec rofi -show script -modi "script:custom_rofi_script"
 bindsym $mod+Shift+x exec alacritty
 bindsym $mod+i exec firefox
 bindsym $mod+t exec thunar

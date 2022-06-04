@@ -116,6 +116,8 @@ AutoEnable=false
         pacman -S dmenu xss-lock i3status ripgrep bat fd fzf lm_sensors brightnessctl ttf-font-awesome pipewire-pulse pipewire-alsa mpv smplayer ffmpeg acpi jdk11-openjdk reflector
         pacman -S rsync curl redshift scrot
         pacman -S cpupower xdg-user-dirs zathura
+        pacman -S gimp alsa-utils
+        pacman -S nginx
 
         # https://github.com/Jguer/yay
         cd /tmp; pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
@@ -175,6 +177,12 @@ systemctl enable bluetooth
 
 systemctl start avahi-daemon
 systemctl enable avahi-daemon
+
+systemctl start nginx
+systemctl enable nginx
+
+systemctl start docker
+systemctl enable docker
 
 systemctl start tlp
 systemctl enable tlp
