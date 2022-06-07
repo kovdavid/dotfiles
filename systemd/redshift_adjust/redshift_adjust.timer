@@ -2,8 +2,8 @@
 Description=redshift_adjust
 
 [Timer]
-OnBootSec=10min
-OnCalendar=*:0/10
+OnBootSec=1min
+OnCalendar=*:0/2
 Unit=redshift_adjust.service
 
 [Install]

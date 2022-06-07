@@ -51,13 +51,15 @@ if [ "$ROFI_INFO" == "" ] ; then
     menu_item "main" "pavucontrol" "player-volume"
     menu_item "main" "i3 rename workspace" "edit-rename"
     menu_item "main" "scrot" "camera-photo"
+    menu_item "main" "full-screen scrot in 5 seconds" "camera-photo"
     menu_item "main" "slack" "slack"
     menu_item "main" "zoom" "zoom"
+    menu_item "main" "postman" "postman"
     menu_item "main" "run" "system-run"
     menu_item "main" "window" "preferences-system-windows"
     menu_item "main" "Toggle color scheme" "kcolorchooser"
     menu_item "main" "power" "preferences-system-power-management"
-    menu_item "main" "display" "preferences-desktop-display"
+    menu_item "main" "monitor" "preferences-desktop-display"
     menu_item "main" "brightness" "video-display"
     menu_item "main" "quit" "application-exit"
 elif [ "$ROFI_INFO" == "main" ] ; then
@@ -66,11 +68,11 @@ elif [ "$ROFI_INFO" == "main" ] ; then
         menu_item "main power" "lock" "system-lock-screen"
         menu_item "main power" "halt" "system-shutdown"
         menu_item "main power" "reboot" "system-reboot"
-    elif [ "$ACTION" == "display" ] ; then
-        menu_item "main display" "external monitor left" "arrow-left"
-        menu_item "main display" "mexternal onitor right" "arrow-right"
-        menu_item "main display" "notebook only" "computer-laptop"
-        menu_item "main display" "external monitor only" "video-display"
+    elif [ "$ACTION" == "monitor" ] ; then
+        menu_item "main monitor" "external monitor left" "arrow-left"
+        menu_item "main monitor" "mexternal onitor right" "arrow-right"
+        menu_item "main monitor" "notebook only" "computer-laptop"
+        menu_item "main monitor" "external monitor only" "video-display"
     elif [ "$ACTION" == "brightness" ] ; then
         draw_brightness_menu
     elif [ "$ACTION" == "tmux" ] ; then
@@ -89,10 +91,14 @@ elif [ "$ROFI_INFO" == "main" ] ; then
         run_cmd "i3_rename_workspace"
     elif [ "$ACTION" == "scrot" ] ; then
         run_cmd "scrot --select --freeze /clean_daily/%F-%T.png"
+    elif [ "$ACTION" == "full-screen scrot in 5 seconds" ] ; then
+        run_cmd "scrot --delay 5 /clean_daily/%F-%T.png"
     elif [ "$ACTION" == "slack" ] ; then
         run_cmd "slack"
     elif [ "$ACTION" == "zoom" ] ; then
         run_cmd "zoom"
+    elif [ "$ACTION" == "postman" ] ; then
+        run_cmd "postman"
     elif [ "$ACTION" == "run" ] ; then
         run_cmd "rofi -show run"
     elif [ "$ACTION" == "window" ] ; then
@@ -100,10 +106,10 @@ elif [ "$ROFI_INFO" == "main" ] ; then
     elif [ "$ACTION" == "Toggle color scheme" ] ; then
         run_cmd "color_scheme"
     fi
-elif [ "$ROFI_INFO" == "main display" ] ; then
-    if [ "$ACTION" == "monitor left" ] ; then
+elif [ "$ROFI_INFO" == "main monitor" ] ; then
+    if [ "$ACTION" == "external monitor left" ] ; then
         run_cmd "mon left"
-    elif [ "$ACTION" == "monitor right" ] ; then
+    elif [ "$ACTION" == "external monitor right" ] ; then
         run_cmd "mon right"
     elif [ "$ACTION" == "notebook only" ] ; then
         run_cmd "mon off"
