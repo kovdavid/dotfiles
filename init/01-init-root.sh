@@ -8,7 +8,11 @@ fi
 function ensure_user_group {
     if [ ! $(getent group $1) ] ; then
         echo "Creating group $1"
-        groupadd $1
+        if [ -z "$2" ] ; then
+            groupadd $1
+        else
+            groupadd -g $2 $1
+        fi
     fi
     if ! $(groups davs | tr ' ' '\n' | grep -q -w $1) ; then
         echo "Adding user to group $1"
@@ -154,6 +158,8 @@ ensure_user_group plugdev
 ensure_user_group bluetooth
 ensure_user_group docker
 ensure_user_group lp
+ensure_user_group uucp
+ensure_user_group ext_hdd 1221
 
 ensure_sudoers_entry
 ensure_xkb_config
