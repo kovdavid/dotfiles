@@ -35,7 +35,7 @@ function parse_git_rev {
 }
 
 function parse_git_wip_commit {
-    [[ $(git log -1 --pretty=%B 2> /dev/null) == WIP* ]] && echo -e " \033[33;5;7m WIP \033[0m"
+    [[ $(git log -1 --pretty=%B 2> /dev/null) == *WIP* ]] && echo -e " \033[33;5;7m WIP \033[0m"
 
 }
 

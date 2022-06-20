@@ -94,7 +94,7 @@ EOC
 function ensure_tlp_config {
     TLP_FILE="/etc/tlp.d/01-davs.conf"
     TLP_CONTENT=$(cat <<EOC
-START_CHARGE_THRESH_BAT0=70
+START_CHARGE_THRESH_BAT0=60
 STOP_CHARGE_THRESH_BAT0=90
 
 CPU_BOOST_ON_AC=1
