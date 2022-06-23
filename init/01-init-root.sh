@@ -206,4 +206,38 @@ EOC
     ensure_file_content "/etc/modprobe.d/thinkpad_acpi.conf" "$THINKPAD_ACPI"
 
     ensure_file_content "/etc/xdg/user-dirs.defaults" "DOWNLOAD=Downloads"
+
+    THINKFAN_CONFIG=$(cat <<EOC
+# find /sys -name temp1_input
+sensors:
+  - hwmon: /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5
+    indices: [1]
+
+fans:
+  - tpacpi: /proc/acpi/ibm/fan
+
+levels:
+  - [0, 0, 55]
+  - [1, 48, 60]
+  - [2, 50, 65]
+  - [3, 65, 70]
+  - [4, 70, 75]
+  - [5, 72, 255]
+EOC
+)
+
+    ensure_file_content "/etc/thinkfan.yaml" "$THINKFAN_CONFIG"
+
+    THINKFAN_OVERRIDE=$(cat <<EOC
+[Service]
+# Decrease biasing (up to -b-10) if your fan speed changes too quickly,
+# Increase biasing (up to -b20) if your fan speed changes too slowly.
+Environment='THINKFAN_ARGS=-b-5'
+EOC
+)
+
+    mkdir -p /etc/systemd/system/thinkfan.service.d/
+    ensure_file_content "/etc/systemd/system/thinkfan.service.d/override.conf" "$THINKFAN_OVERRIDE"
+
+    systemctl enable --now thinkfan.service
 fi
