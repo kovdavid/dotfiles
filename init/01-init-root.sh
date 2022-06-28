@@ -208,9 +208,12 @@ EOC
     ensure_file_content "/etc/xdg/user-dirs.defaults" "DOWNLOAD=Downloads"
 
     THINKFAN_CONFIG=$(cat <<EOC
-# find /sys -name temp1_input
+# There should be hwmonX directories inside the 'hwmon' path
+# Inside the hwmonX we want, there is a 'name' file containing the value we need here
+# Indices are for tempX_input
 sensors:
-  - hwmon: /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5
+  - hwmon: /sys/devices/platform/thinkpad_hwmon/hwmon
+    name: thinkpad
     indices: [1]
 
 fans:
