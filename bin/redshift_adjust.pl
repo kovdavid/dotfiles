@@ -5,6 +5,7 @@ use strict;
 use warnings;
 
 use POSIX qw( strftime );
+use JSON qw( encode_json decode_json );
 
 my $args = shift || '';
 
@@ -194,21 +195,20 @@ sub handle_args {
             print_log("exit, because ${\DISABLE_FILE} is only $file_age sec old");
             exit;
         }
-    } else {
-        print_log("${\DISABLE_FILE} does not exist");
     }
 }
 
 sub get_corrections {
     if (-f CORRECTION_FILE) {
         open my $fh, "<", CORRECTION_FILE or die "Could not open ${\CORRECTION_FILE}: $!";
-        my $line = <$fh>;
+        my $json = do { local $/ = undef; <$fh> };
         close $fh;
 
-        chomp $line;
-        if ($line =~ /^(\d+) ((\d+)\.(\d+))$/) {
-            print_log("Using corrections temp:$1 brightness:$2");
-            return ($1, $2);
+        my $corrections = decode_json($json);
+
+        if (defined $corrections->{temp} and defined $corrections->{brightness}) {
+            print_log("Using corrections temp:$corrections->{temp} brightness:$corrections->{brightness}");
+            return ($corrections->{temp}, $corrections->{brightness});
         }
     }
 
