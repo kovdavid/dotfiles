@@ -170,7 +170,7 @@ gpasswd -a davs autologin
 
 yay -S accountsservice # for dbus/pam/keyring
 yay -S xinit-xsession gvfs thunar-volman
-yay -S dex nitrogen i3lock
+yay -S dex nitrogen i3lock dhcpcd
 
 systemctl start bluetooth
 systemctl enable bluetooth
