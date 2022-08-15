@@ -97,7 +97,7 @@ function ensure_tlp_config {
 START_CHARGE_THRESH_BAT0=60
 STOP_CHARGE_THRESH_BAT0=90
 
-CPU_BOOST_ON_AC=1
+CPU_BOOST_ON_AC=0
 CPU_BOOST_ON_BAT=0
 
 DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
@@ -160,6 +160,7 @@ ensure_user_group docker
 ensure_user_group lp
 ensure_user_group uucp
 ensure_user_group ext_hdd 1221
+ensure_user_group vboxusers
 
 ensure_sudoers_entry
 ensure_xkb_config

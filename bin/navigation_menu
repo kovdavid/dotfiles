@@ -1,0 +1,43 @@
+#!/bin/bash
+
+XTERM_COLS=$(tput cols)
+XTERM_ROWS=$(tput lines)
+
+CHOICE=$(dialog \
+    --clear \
+    --title "Navigation" \
+    --menu "Choose one of the following options:" \
+	$(($XTERM_ROWS-6)) $(($XTERM_COLS-6)) $(($XTERM_COLS)) \
+	"r" "Tmux - pane prev" \
+	"t" "Tmux - pane next" \
+	"f" "Tmux - window prev" \
+	"g" "Tmux - window next" \
+	"v" "Tmux - session prev" \
+	"b" "Tmux - session next" \
+	2>&1 >/dev/tty
+)
+
+case $CHOICE in
+    "r")
+        tmux select-pane -t :.- \; display-panes
+        ;;
+    "t")
+        tmux select-pane -t :.+ \; display-panes
+        ;;
+    "f")
+        tmux previous-window \; display-panes
+        ;;
+    "g")
+        tmux previous-window \; display-panes
+        ;;
+    "v")
+        tmux switch-client -p \; display-panes
+        ;;
+    "b")
+        tmux switch-client -n \; display-panes
+        ;;
+    *)
+        ;;
+esac
+
+echo "[[[$CHOICE]]]"
