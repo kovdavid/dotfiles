@@ -2,6 +2,8 @@
 
 set -e
 
+[[ $(which nitrogen) ]] && nitrogen --restore
+
 xrandr_output=$(xrandr)
 
 DISCONNECTED_DEVICES=$(echo -e "$xrandr_output" | grep -w 'disconnected' | cut -d" " -f 1)
