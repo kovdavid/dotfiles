@@ -1,0 +1,16 @@
+#!/bin/bash
+
+CMD="$@"
+
+RETRY=1
+
+while [ "$RETRY" -eq "1" ] ; do
+    echo "Retrying $CMD"
+    eval "$CMD"
+    RESULT=$?
+    if [ "$RESULT" -eq "0" ] ; then
+        RETRY=0
+    else
+        sleep 1
+    fi
+done
