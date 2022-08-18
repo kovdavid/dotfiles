@@ -208,7 +208,31 @@ EOC
 
     ensure_file_content "/etc/xdg/user-dirs.defaults" "DOWNLOAD=Downloads"
 
-    THINKFAN_CONFIG=$(cat <<EOC
+    THINKFAN_CONFIG_COOL=$(cat <<EOC
+# There should be hwmonX directories inside the 'hwmon' path
+# Inside the hwmonX we want, there is a 'name' file containing the value we need here
+# Indices are for tempX_input
+sensors:
+  - hwmon: /sys/devices/platform/thinkpad_hwmon/hwmon
+    name: thinkpad
+    indices: [1]
+
+fans:
+  - tpacpi: /proc/acpi/ibm/fan
+
+levels:
+  - [0, 0, 47]
+  - [1, 45, 50]
+  - [2, 47, 53]
+  - [3, 50, 57]
+  - [4, 55, 65]
+  - [5, 60, 255]
+EOC
+)
+
+    ensure_file_content "/etc/thinkfan.cool.yaml" "$THINKFAN_CONFIG_COOL"
+
+    THINKFAN_CONFIG_QUIET=$(cat <<EOC
 # There should be hwmonX directories inside the 'hwmon' path
 # Inside the hwmonX we want, there is a 'name' file containing the value we need here
 # Indices are for tempX_input
@@ -230,7 +254,11 @@ levels:
 EOC
 )
 
-    ensure_file_content "/etc/thinkfan.yaml" "$THINKFAN_CONFIG"
+    ensure_file_content "/etc/thinkfan.quiet.yaml" "$THINKFAN_CONFIG_QUIET"
+
+    if [ ! -L "/etc/thinkfan.yaml" ] ; then
+        ln -sf /etc/thinkfan.cool.yaml /etc/thinkfan.yaml
+    fi
 
     THINKFAN_OVERRIDE=$(cat <<EOC
 [Service]

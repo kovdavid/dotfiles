@@ -1,7 +1,26 @@
 #!/bin/bash
 
-if [ "$1" = "" ] ; then
-    sudo su -c "echo level auto > /proc/acpi/ibm/fan"
+if [ "$1" == "" ] ; then
+    echo "===== /proc/acpi/ibm/fan"
+    cat /proc/acpi/ibm/fan
+    echo "===== thinkfan"
+    echo -n "Thinkfan config: "
+    readlink -f /etc/thinkfan.yaml
+    systemctl status thinkfan
 else
-    sudo su -c "echo level $1 > /proc/acpi/ibm/fan"
+    if [ "$1" == "cool" ] ; then
+        echo "Thinkfan cool"
+        sudo ln -sf /etc/thinkfan.cool.yaml /etc/thinkfan.yaml
+        sudo systemctl restart thinkfan
+    elif [ "$1" == "quiet" ] ; then
+        echo "Thinkfan quiet"
+        sudo ln -sf /etc/thinkfan.quiet.yaml /etc/thinkfan.yaml
+        sudo systemctl restart thinkfan
+    elif [ "$1" == "auto" ] ; then
+        echo "Setting level auto"
+        sudo su -c "echo level auto > /proc/acpi/ibm/fan"
+    else
+        echo "Setting level $1"
+        sudo su -c "echo level $1 > /proc/acpi/ibm/fan"
+    fi
 fi
