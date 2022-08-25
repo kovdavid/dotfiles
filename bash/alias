@@ -4,7 +4,7 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 alias cal="cal -m"
-alias clr="clear"
+alias clr="for i in {1..100}; do echo ; done; clear"
 alias cp="cp -i"
 alias cpr="cp -i -r"
 alias df="df -h"
@@ -65,4 +65,4 @@ if [ -f ~/workspace/bash/jump/jump ] ; then
 else
 	alias j="echo 'Clone https://github.com/DavsX/jump.git to ~/workspace/bash/jump'"
 fi
-alias xvim="xargs -o vim"
+alias xvim="xargs -o nvim"
