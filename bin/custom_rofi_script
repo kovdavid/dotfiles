@@ -59,6 +59,7 @@ fi
 
 if [ "$ROFI_INFO" == "" ] ; then
     menu_item "main" "tmux" "utilities-terminal"
+    menu_item "main" "tmux_join" "utilities-terminal"
     menu_item "main" "terminal" "utilities-terminal"
     menu_item "main" "pavucontrol" "player-volume"
     menu_item "main" "i3 rename workspace" "edit-rename"
@@ -89,6 +90,8 @@ elif [ "$ROFI_INFO" == "main" ] ; then
         draw_brightness_menu
     elif [ "$ACTION" == "tmux" ] ; then
         run_cmd "alacritty -e xterm_tmux_session"
+    elif [ "$ACTION" == "tmux_join" ] ; then
+        run_cmd "alacritty -e tmux_join"
     elif [ "$ACTION" == "terminal" ] ; then
         run_cmd "alacritty"
     elif [ "$ACTION" == "pavucontrol" ] ; then
