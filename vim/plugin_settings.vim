@@ -78,7 +78,7 @@ let g:NERDRemoveExtraSpaces = 1
 let g:NERDSpaceDelims = 1
 
 " delimitMate
-let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_cr = 0
 let g:delimitMate_expand_space = 1
 
 " vim-go

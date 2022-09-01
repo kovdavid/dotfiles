@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "primary:"
+xclip -o -selection primary
+echo "secondary"
+xclip -o -selection secondary
+echo "clipboard"
+xclip -o -selection clipboard
+
