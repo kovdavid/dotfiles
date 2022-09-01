@@ -25,20 +25,30 @@ control_c()
 trap control_c SIGINT
 
 if [ $# -eq 0 ] ; then
-    echo "Usage: $(basename $0) \"dir1 dir2\" \"command1; command2\""
+    echo "Usage: $(basename $0) dir1 dir2 -- command"
     exit
 fi
 
-directory=$1
-shift
-command=$@
+directory_args=""
+command=""
+parsing_commands=0
+
+for arg in "$@"; do
+    if [ "$arg" == "--" ] ; then
+        parsing_commands=1
+    elif [ "$parsing_commands" == "0" ] ; then
+        directory_args="$directory_args -r $arg"
+    else
+        command="$command $arg"
+    fi
+done
 
 touch $PIDFILE
 
 iteration=1
 LAST_TIMESTAMP=0
 
-inotifywait -m --format "%w %f" -e modify -r $directory | while IFS=" " read DIR FILE
+inotifywait -m --format "%w %f" -e modify $directory_args | while IFS=" " read DIR FILE
 do
     [[ "$DIR" == */\.git/* ]] && continue
     [[ "$DIR" == */\.next/* ]] && continue

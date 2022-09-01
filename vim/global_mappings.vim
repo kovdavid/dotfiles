@@ -51,7 +51,6 @@ xnoremap Q :normal @q <CR>
 "move to matching brace pair
 nnoremap <tab> %
 
-
 " Coc.vim
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :

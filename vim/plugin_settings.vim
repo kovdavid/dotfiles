@@ -99,7 +99,8 @@ let g:LanguageClient_serverCommands = {
 let g:coc_disable_startup_warning = 1
 
 " JavaScript - 'coc-tsserver', 'coc-eslint', 'coc-prettier',
-let g:coc_global_extensions = [ 'coc-pyright' ]
+" Python - 'coc-pyright
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-eslint', 'coc-prettier' ]
 
 let g:AlternateExtensionMappings = [{'.cpp' : '.h', '.h' : '.ino', '.ino' : '.cpp'}, {'.c': '.h', '.h': '.c'}]
 
