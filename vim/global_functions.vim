@@ -88,6 +88,24 @@ function! GrepSelection() range
     endif
 endfunction
 
+function! AgSelection() range
+    let l:line_no = line("'>") - line("'<") + 1
+    if l:line_no == 1
+        try
+            let a_save = @a
+            normal! gv"ay
+            let l:escaped = escape(@a, '\/')
+            let l:escaped = substitute(l:escaped, "\r", '', '')
+            let l:escaped = substitute(l:escaped, "\n", '', '')
+            call feedkeys(":\<c-u>Ag ".l:escaped."", 'n')
+        finally
+            let @a = a_save
+        endtry
+    else
+        echo "More than 1 line selected!"
+    endif
+endfunction
+
 function! ToggleLineNumbers()
     if &number
         set nonumber

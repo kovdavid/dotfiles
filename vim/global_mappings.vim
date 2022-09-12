@@ -7,6 +7,7 @@ nnoremap <leader>/ /\v
 
 vnoremap <C-r> :call ReplaceSelection()<CR>
 vnoremap <leader>gp :call GrepSelection()<CR>
+vnoremap <leader>ag :call AgSelection()<CR>
 nnoremap <leader>rw viw"hy:s/<C-r>h//g<left><left>
 
 vnoremap > >gv

@@ -33,11 +33,15 @@ def on_window_new(i3, e):
         window_name = windows[0]
         if window_name == "jetbrains-pycharm":
             window_name = "pycharm"
+        if window_name == "jetbrains-idea-ce":
+            window_name = "idea"
         if window_name == "Slack":
             window_name = "chat"
 
         workspace_name = ws.name + ": " + window_name
-        i3.command('rename workspace to "%s"' % workspace_name)
+        command = 'rename workspace to "%s"' % workspace_name
+        print(command)
+        i3.command(command)
 
 
 def on_window_move(i3, e):
@@ -50,7 +54,9 @@ def on_window_close(i3, e):
     named_workspaces_from_config = parse_named_workspaces_from_config()
 
     if not len(ws.leaves()) and ws.num not in named_workspaces_from_config:
-        i3.command('rename workspace to "%s"' % ws.num)
+        command = 'rename workspace to "%s"' % ws.num
+        print(command)
+        i3.command(command)
 
 
 if __name__ == "__main__":
