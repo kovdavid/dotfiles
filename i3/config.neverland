@@ -262,7 +262,7 @@ for_window [class="factorio"] border none
 # for_window [class="Alacritty"] border none
 for_window [class="Nautilus" instance="file_progress"] floating enable
 for_window [window_role="pop-up"] floating enable
-# for_window [class="^jetbrains-.+"][window_type=dialog] focus
+for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [class="^jetbrains-.+"] border none
 for_window [class="(?i)pavucontrol"] floating enable, move position mouse, move down 30, move left 30, sticky enable
 
@@ -279,4 +279,4 @@ exec --no-startup-id /home/davs/dotfiles/bin/deduplicate_bash_history &
 # exec --no-startup-id pasystray &
 # exec --no-startup-id blueman-applet &
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id i3_daemon &>>/clean_daily/i3_daemon.log &
+exec --no-startup-id i3_daemon >>/clean_daily/i3_daemon.log 2>&1 &

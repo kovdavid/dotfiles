@@ -10,6 +10,8 @@ nytprof*
 .vscode
 .vim
 
+local.properties
+
 # Devel::PDB
 .*-conf
 .*-conf.rc

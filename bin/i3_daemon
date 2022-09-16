@@ -29,8 +29,12 @@ def on_window_new(i3, e):
     ws = i3.get_tree().find_focused().workspace()
     windows = [w.window_class for w in ws.leaves()]
 
+    for window in ws.leaves():
+        pprint(vars(window))
+
     if len(windows) == 1 and re.match("^\d+$", ws.name):
         window_name = windows[0]
+
         if window_name == "jetbrains-pycharm":
             window_name = "pycharm"
         if window_name == "jetbrains-idea-ce":
