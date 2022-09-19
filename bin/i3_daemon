@@ -42,6 +42,8 @@ class i3Daemon:
             for window in workspace.nodes + workspace.floating_nodes:
                 self.register_window_to_workspace(window.id, workspace_number)
 
+            self.rename_workspace(i3, workspace_number)
+
     def get_window_name(self, workspace_number, window_properties) -> str:
         window_name: str = window_properties["class"]
         window_title: str = window_properties["title"]
@@ -49,15 +51,17 @@ class i3Daemon:
         if window_name == "jetbrains-pycharm":
             window_name = "pycharm"
         elif window_name == "jetbrains-idea-ce":
-            window_name = "idea"
+            window_name = " idea"
             if m := WINDOW_TITLE_REGEXP_IDEA.match(window_title):
                 window_name += f" {m.group(1)}"
         elif window_name == "Slack":
-            window_name = "chat"
-        elif window_name == "Alacritty" and workspace_number in [1, 11]:
-            window_name = "tmux"
-        elif window_name == "firefox" and workspace_number in [2, 12]:
-            window_name = "www"
+            window_name = " chat"
+        elif window_name == "Alacritty" and workspace_number in [2, 12]:
+            window_name = " tmux"
+        elif window_name == "firefox" and workspace_number in [1, 11]:
+            window_name = " www"
+        elif window_name == "Thunar":
+            window_name = " Thunar"
 
         return window_name
 
@@ -175,7 +179,7 @@ class i3Daemon:
 
         workspace_number = con.num
 
-        print(f"on_window_title workspace:{workspace_number}")
+        #  print(f"on_window_title workspace:{workspace_number}")
 
         self.rename_workspace(i3, workspace_number)
 

@@ -147,7 +147,6 @@ if has("ide")
     nnoremap <leader>se :action ShowErrorDescription<CR>
     nnoremap <leader>sd :action QuickJavaDoc<CR>
     nnoremap <leader>sa :action ShowIntentionActions<CR>
-    nnoremap <leader>to :action ActivateTerminalToolWindow<CR>
     nnoremap <leader>tt :action Terminal.OpenInTerminal<CR>
     nnoremap <C-W>r :action MoveEditorToOppositeTabGroup<CR>
     nnoremap <leader>n :action ShowNavBar<CR>
@@ -155,7 +154,6 @@ if has("ide")
     vnoremap <leader>cc :action CommentByLineComment<CR>
     nnoremap <leader>cu :action CommentByLineComment<CR>
     vnoremap <leader>cu :action CommentByLineComment<CR>
-    nnoremap <leader>p :action ActivateProjectToolWindow<CR>
     nnoremap <leader>gd :action GotoDeclaration<CR>
     nnoremap <leader>gi :action GotoImplementation<CR>
     nnoremap <leader>fu :action FindUsages<CR>
@@ -163,6 +161,10 @@ if has("ide")
     nnoremap <leader>ogh :action Github.Open.In.Browser<CR>
     nnoremap <leader>z :action MaximizeEditorInSplit<CR>
     nnoremap <leader>ff :action ShowReformatFileDialog<CR>
+    nnoremap <leader>rr :action Rerun<CR>
+    nnoremap <leader>art :action ActivateRunToolWindow<CR>
+    nnoremap <leader>att :action ActivateTerminalToolWindow<CR>
+    nnoremap <leader>p :action ActivateProjectToolWindow<CR>
 endif
 
 if has("ide")
