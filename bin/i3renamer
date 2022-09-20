@@ -2,13 +2,12 @@
 
 from collections import defaultdict
 import re
-
+import logging
 from i3ipc import Connection, Event
 
 WINDOW_TITLE_REGEXP_IDEA = re.compile("^([^\[]+) \[")
 
-
-class i3Daemon:
+class i3Renamer:
     """Daemon for renaming workspaces based on the first window"""
     def __init__(self, i3) -> None:
         # Keep track where each window is
@@ -51,17 +50,17 @@ class i3Daemon:
         if window_name == "jetbrains-pycharm":
             window_name = "pycharm"
         elif window_name == "jetbrains-idea-ce":
-            window_name = " idea"
+            window_name = ""
             if m := WINDOW_TITLE_REGEXP_IDEA.match(window_title):
                 window_name += f" {m.group(1)}"
         elif window_name == "Slack":
-            window_name = " chat"
-        elif window_name == "Alacritty" and workspace_number in [2, 12]:
-            window_name = " tmux"
-        elif window_name == "firefox" and workspace_number in [1, 11]:
-            window_name = " www"
+            window_name = ""
+        elif window_name == "Alacritty":
+            window_name = ""
+        elif window_name == "firefox":
+            window_name = ""
         elif window_name == "Thunar":
-            window_name = " Thunar"
+            window_name = ""
 
         return window_name
 
@@ -185,8 +184,12 @@ class i3Daemon:
 
 
 if __name__ == "__main__":
+    print("Starting i3renamer")
+
+    logging.basicConfig(level=logging.DEBUG)
+
     i3 = Connection()
 
-    daemon = i3Daemon(i3)
+    i3Renamer(i3)
 
     i3.main()

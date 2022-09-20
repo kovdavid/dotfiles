@@ -1,0 +1,16 @@
+[Unit]
+Description=i3renamer
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Environment=DISPLAY=:0
+ExecStart=%h/bin/i3renamer
+Restart=on-failure
+RestartSec=5s
+
+StandardOutput=append:/clean_daily/i3renamer.log
+StandardError=append:/clean_daily/i3renamer.log
+
+[Install]
+WantedBy=multi-user.target

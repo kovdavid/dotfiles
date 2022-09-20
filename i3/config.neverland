@@ -245,6 +245,10 @@ bar {
     tray_output $hdmi_screen
     tray_output $laptop_screen
 
+    colors {
+        inactive_workspace #5f676a #222222 #888888
+    }
+
     # mode hide
     # modifier $mod
 }
@@ -279,4 +283,3 @@ exec --no-startup-id /home/davs/dotfiles/bin/deduplicate_bash_history &
 # exec --no-startup-id pasystray &
 # exec --no-startup-id blueman-applet &
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id i3_daemon >>/clean_daily/i3_daemon.log 2>&1 &
