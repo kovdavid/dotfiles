@@ -1,38 +1,43 @@
 [alias]
-    a     = add
-    aa    = add --all
-    aan   = add --all -n
-    st    = -c color.status=false status
-    ci    = commit
-    ciamend = commit --amend
-    cp    = cherry-pick
-    br    = branch
-    co    = checkout
-    me    = merge --no-ff
-    ms    = merge --squash
-    dt    = difftool
-    dtc   = difftool --cached
-    dtn   = difftool --name-only
-    dts   = difftool --stat
-    di    = diff
-    din   = diff --name-only
-    dic   = diff --cached
-    dis   = diff --stat
-    lc    = log -1 --format=%cd
-    lo    = log --oneline --reverse -100
-    lod   = log --pretty=format:'%h %ad %s' --date=short
-    lomd  = log --oneline --reverse -100 master..HEAD
-    lomds = log --oneline --reverse -100 master..HEAD --stat
-    lomdn = log --oneline --reverse -100 master..HEAD --name-only
-    lg    = log --oneline --graph --all
-    ld    = log --oneline --reverse HEAD ^develop --no-merges
-    lm    = log --oneline --reverse HEAD ^master --no-merges
-    re    = rebase -i
-    rec   = rebase --continue
-    mt    = mergetool
-    rstaged = restore --staged
-    root  = !pwd
-    backup = archive --format=tar --output=backup.tar.gz HEAD
+    a           = add
+    aa          = add --all
+    ap          = add --patch
+    aan         = add --all -n
+    st          = -c color.status=false status
+    ci          = commit
+    ciamend     = commit --amend
+    cp          = cherry-pick
+    br          = branch
+    co          = checkout
+    me          = merge --no-ff
+    ms          = merge --squash
+    dt          = difftool
+    dtc         = difftool --cached
+    dtn         = difftool --name-only
+    dts         = difftool --stat
+    di          = diff
+    din         = diff --name-only
+    dic         = diff --cached
+    dis         = diff --stat
+    lc          = log -1 --format=%cd
+    lo          = log --oneline --reverse -100
+    lod         = log --pretty=format:'%h %ad %s' --date=short
+    lomd        = !git log --oneline --reverse -100 $(git main-branch)..HEAD
+    lomds       = !git log --oneline --reverse -100 $(git main-branch)..HEAD --stat
+    lomdn       = !git log --oneline --reverse -100 $(git main-branch)..HEAD --name-only
+    dth         = difftool HEAD
+    dtsh        = diff --stat HEAD
+    lg          = log --oneline --graph --all
+    ld          = log --oneline --reverse HEAD ^develop --no-merges
+    lm          = !git log --oneline --reverse HEAD ^$(git main-branch) --no-merges
+    re          = rebase -i
+    rec         = rebase --continue
+    mt          = mergetool
+    rstaged     = restore --staged
+    root        = !pwd
+    main-branch = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4
+    remotesh    = remote set-head origin --auto
+    backup      = archive --format=tar --output=backup.tar.gz HEAD
 [include]
     path = ~/.gitconfig.local
 [core]

@@ -181,16 +181,25 @@ class i3Renamer:
 
         workspace_number = con.num
 
-        #  print(f"on_window_title workspace:{workspace_number}")
-
         self.rename_workspace(i3, workspace_number)
 
 
 if __name__ == "__main__":
-    print("Starting i3renamer")
+    print("                                                    ")
+    print(" _ ____  _____                                      ")
+    print("(_)___ \|  __ \                                     ")
+    print(" _  __) | |__) |___ _ __   __ _ _ __ ___   ___ _ __ ")
+    print("| ||__ <|  _  // _ \ '_ \ / _` | '_ ` _ \ / _ \ '__|")
+    print("| |___) | | \ \  __/ | | | (_| | | | | | |  __/ |   ")
+    print("|_|____/|_|  \_\___|_| |_|\__,_|_| |_| |_|\___|_|   ")
+    print("                                                    ")
 
+    print("Creating i3 connection")
     i3 = Connection()
 
+    print("Creating i3Renamer instance")
     i3Renamer(i3)
 
+    print("Running main loop")
     i3.main()
+    print("Exiting main loop")

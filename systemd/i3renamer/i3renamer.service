@@ -5,6 +5,7 @@ StartLimitBurst=5
 
 [Service]
 Environment=DISPLAY=:0
+Environment=PYTHONUNBUFFERED=1
 ExecStart=%h/bin/i3renamer
 Restart=on-failure
 RestartSec=5s
