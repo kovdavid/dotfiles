@@ -2,7 +2,6 @@
 
 from collections import defaultdict
 import re
-import logging
 from i3ipc import Connection, Event
 
 WINDOW_TITLE_REGEXP_IDEA = re.compile("^([^\[]+) \[")
@@ -61,6 +60,10 @@ class i3Renamer:
             window_name = ""
         elif window_name == "Thunar":
             window_name = ""
+        elif window_name == "qBittorrent":
+            window_name = " qB"
+        elif window_name == "vlc":
+            window_name = " "
 
         return window_name
 
@@ -185,8 +188,6 @@ class i3Renamer:
 
 if __name__ == "__main__":
     print("Starting i3renamer")
-
-    logging.basicConfig(level=logging.DEBUG)
 
     i3 = Connection()
 
