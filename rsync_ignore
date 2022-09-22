@@ -72,3 +72,5 @@ __pycache__/
 .gradle/
 node_modules/
 .next/
+build/
+.yarn/
