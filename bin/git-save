@@ -10,4 +10,9 @@ DATE=$(date '+%F %T')
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 REV=$(git rev-parse --short HEAD)
 
-echo "$DATE $PWD REV:$REV BRANCH:$BRANCH" >> ~/.git_save
+LOG="$DATE $PWD REV:$REV BRANCH:$BRANCH"
+if [ "$BRANCH" != $(git main-branch) ] ; then
+    LOG="$LOG MAIN_REV:$(git rev-parse --short $(git main-branch))"
+fi
+
+echo "$LOG" >> ~/.git_save

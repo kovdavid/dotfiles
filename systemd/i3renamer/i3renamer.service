@@ -14,4 +14,4 @@ StandardOutput=append:/clean_daily/i3renamer.log
 StandardError=append:/clean_daily/i3renamer.log
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
