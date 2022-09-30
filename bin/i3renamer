@@ -64,6 +64,10 @@ class i3Renamer:
             window_name = " qB"
         elif window_name == "vlc":
             window_name = " "
+        elif window_name == "Zathura":
+            window_name = ""
+        elif window_name == "Galculator":
+            window_name = ""
 
         return window_name
 
