@@ -14,6 +14,7 @@ image/x-nikon-nef=geeqie.desktop
 message/rfc822=userapp-Thunderbird-S65IGX.desktop
 text/html=firefox.desktop
 text/plain=gvim.desktop
+text/xml=firefox.desktop
 video/mp4=vlc.desktop
 video/quicktime=vlc.desktop
 video/x-matroska=vlc.desktop
