@@ -71,7 +71,7 @@ bindsym $mod+Shift+Right move right
 # toggle split orientation
 bindsym $mod+s split toggle
 
-bindsym --release $mod+Shift+s exec scrot -s -e 'mv $f /clean_daily/$f'
+bindsym --release $mod+Shift+s exec "sleep 0.2; scrot -s -e 'mv $f /clean_daily/$f'"
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
