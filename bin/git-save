@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -n "$1" ] ; then
+if [[ "$@" == "show" ]] ; then
     cat ~/.git_save
     exit
 fi
@@ -14,5 +14,6 @@ LOG="$DATE $PWD REV:$REV BRANCH:$BRANCH"
 if [ "$BRANCH" != $(git main-branch) ] ; then
     LOG="$LOG MAIN_REV:$(git rev-parse --short $(git main-branch))"
 fi
+LOG="$LOG NOTE:$@"
 
 echo "$LOG" >> ~/.git_save
