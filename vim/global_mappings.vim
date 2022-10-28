@@ -166,6 +166,8 @@ if has("ide")
     nnoremap <leader>art :action ActivateRunToolWindow<CR>
     nnoremap <leader>att :action ActivateTerminalToolWindow<CR>
     nnoremap <leader>p :action ActivateProjectToolWindow<CR>
+    nnoremap <leader>oi :action OptimizeImports<CR>
+    nnoremap <leader>, :action GotoClass<CR>
 endif
 
 if has("ide")

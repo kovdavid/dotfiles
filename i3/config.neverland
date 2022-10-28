@@ -268,6 +268,8 @@ for_window [class="Nautilus" instance="file_progress"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [class="^jetbrains-.+" window_type="dialog"] focus
 for_window [class="^jetbrains-.+"] border none
+# tmux windows - check 'set-titles-string' in tmux.conf
+for_window [title="^ .+"] border none
 for_window [class="^jetbrains-.+" title="(?i)conflicts"] border pixel 5, move position center
 for_window [class="^jetbrains-.+" title="(?i)merge .+"] border pixel 5, move position center
 for_window [class="(?i)pavucontrol"] floating enable, move position mouse, move down 30, move left 30, sticky enable
