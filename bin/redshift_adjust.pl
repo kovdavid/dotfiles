@@ -14,7 +14,9 @@ use constant {
     LOG_FILE        => "/tmp/redshift_adjust.log",
     CORRECTION_FILE => "/tmp/redshift_correction.cfg",
 
+    MIN_BRIGHTNESS => 0.2,
     MAX_BRIGHTNESS => 1.0,
+    MIN_TEMP => 1000,
     MAX_TEMP => 6500,
 };
 
@@ -139,8 +141,14 @@ sub get_cmd {
     my $brightness = sprintf("%.2f", $args->{brightness} + $correction_brightness);
     my $temp = int($args->{temp} + $correction_temp);
 
+    if ($brightness < MIN_BRIGHTNESS) {
+        $brightness = MIN_BRIGHTNESS;
+    }
     if ($brightness > MAX_BRIGHTNESS) {
         $brightness = MAX_BRIGHTNESS;
+    }
+    if ($temp < MIN_TEMP) {
+        $temp = MIN_TEMP;
     }
     if ($temp > MAX_TEMP) {
         $temp = MAX_TEMP;
@@ -185,9 +193,7 @@ sub handle_args {
     }
 
     if ( -f DISABLE_FILE ) {
-        my $now = time();
-        my $mtime = (stat(DISABLE_FILE))[9];
-        my $file_age = abs($now - $mtime);
+        my $file_age = get_file_age(DISABLE_FILE);
 
         print_log("${\DISABLE_FILE} exists age:$file_age");
 
@@ -196,10 +202,49 @@ sub handle_args {
             exit;
         }
     }
+
+    my ($correction_temp, $correction_brightness) = get_corrections();
+    if ($args eq '--brightness-correction-up') {
+        save_corrections($correction_temp, $correction_brightness + 0.05);
+    } elsif ($args eq '--brightness-correction-down') {
+        save_corrections($correction_temp, $correction_brightness - 0.05);
+    } elsif ($args eq '--temp-correction-up') {
+        save_corrections($correction_temp + 100, $correction_brightness);
+    } elsif ($args eq '--temp-correction-down') {
+        save_corrections($correction_temp - 100, $correction_brightness);
+    }
+}
+
+sub save_corrections {
+    my ($temp, $brightness) = @_;
+
+    print_log("Setting corrections temp:$temp brightness:$brightness");
+
+    my $json = encode_json({ temp => $temp, brightness => $brightness });
+    open my $fh, ">", CORRECTION_FILE or die "Could not open ${\CORRECTION_FILE}: $!";
+    say $fh $json;
+    close $fh;
+}
+
+sub get_file_age {
+    my ($file) = @_;
+
+    my $now = time();
+    my $mtime = (stat($file))[9];
+    my $file_age = abs($now - $mtime);
+
+    return $file_age;
 }
 
 sub get_corrections {
     if (-f CORRECTION_FILE) {
+        my $file_age = get_file_age(CORRECTION_FILE);
+
+        if ($file_age > 3*3600) {
+            print_log("ignoring ${\CORRECTION_FILE}, because it is too old");
+            return (0, 0);
+        }
+
         open my $fh, "<", CORRECTION_FILE or die "Could not open ${\CORRECTION_FILE}: $!";
         my $json = do { local $/ = undef; <$fh> };
         close $fh;

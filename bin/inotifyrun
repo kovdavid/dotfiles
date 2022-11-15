@@ -48,7 +48,7 @@ touch $PIDFILE
 iteration=1
 LAST_TIMESTAMP=0
 
-inotifywait -m --format "%w %f" -e modify $directory_args | while IFS=" " read DIR FILE
+inotifywait -m --format "%w %f %T" --timefmt "%s" -e modify $directory_args | while IFS=" " read DIR FILE TIMESAMP
 do
     [[ "$DIR" == */\.git/* ]] && continue
     [[ "$DIR" == */\.next/* ]] && continue
@@ -58,7 +58,7 @@ do
     RES=$?
     [[ "$RES" -eq "0" ]] && continue
 
-    TIMESTAMP=$(date '+%s')
+    # TIMESTAMP=$(date '+%s')
     if (( $TIMESTAMP <= $LAST_TIMESTAMP + 2 )) ; then
         continue
     fi
@@ -66,6 +66,9 @@ do
 
     kill_command
 
+    for i in {1..100}; do
+        echo ""
+    done
     clear
 
     echo "$(date +'%F %T') Running $command"
