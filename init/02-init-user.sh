@@ -33,6 +33,9 @@ systemctl enable --user i3lock.service
 ln -sf ~/dotfiles/systemd/i3renamer/i3renamer.service ~/.config/systemd/user
 systemctl enable --user i3renamer.service
 
+ln -sf ~/dotfiles/systemd/dalsik_daemon/dalsik_daemon.service ~/.config/systemd/user
+systemctl enable --user dalsik_daemon.service
+
 for timer_unit in clean_daily redshift_adjust ; do
     echo "Setting up systemd-timer $timer_unit"
     ln -sf ~/dotfiles/systemd/$timer_unit/$timer_unit.timer ~/.config/systemd/user/

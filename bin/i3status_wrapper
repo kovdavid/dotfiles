@@ -23,21 +23,39 @@ my $layer_colors = [
     "#FF00FF",
 ];
 
+my $dalsik_layer_change = "/tmp/dalsik_layer_change";
+my $dalsik_modifier_change = "/tmp/dalsik_modifier_change";
+
 # Read lines forever, ignore a comma at the beginning if it exists.
 while (my ($statusline) = (<STDIN> =~ /^,?(.*)/)) {
     my @blocks = @{decode_json($statusline)};
 
-    if ( -f "/home/davs/workspace/avr/dalsik/utils/cmd_get_layer_index.pl" ) {
-        my $result = `~/workspace/avr/dalsik/utils/cmd_get_layer_index.pl`;
+    if ( -f $dalsik_modifier_change ) {
+        open my $fh, "<", $dalsik_modifier_change;
+        my @lines = <$fh>;
+        close $fh;
 
-        if ($result =~ /^(\d+)/) {
-            my $layer = $1;
-            if ($layer > 0) {
+        for my $line (reverse @lines) {
+            if ($line =~ m/^(\w+) (\d)/) {
+                my $mod = $1;
+                my $pressed = $2;
                 unshift @blocks, {
-                    full_text => "Dalsik layer [$layer]",
-                    color => $layer_colors->[$layer] || $layer_colors->[0],
+                    full_text => $mod,
+                    color => $pressed ? "#FF0000" : "#FFFFFF",
                 };
             }
+        }
+    }
+    if ( -f $dalsik_layer_change ) {
+        open my $fh, "<", $dalsik_layer_change;
+        my $layer = <$fh>;
+        close $fh;
+
+        if ($layer > 0) {
+            unshift @blocks, {
+                full_text => "Dalsik layer [$layer]",
+                color => $layer_colors->[$layer] || $layer_colors->[0],
+            };
         }
     }
 

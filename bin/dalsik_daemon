@@ -1,0 +1,68 @@
+#!/usr/bin/env python
+
+import re
+import serial
+import os
+import time
+
+layer_change_re = re.compile(r"LAYER_CHANGE:(\d+)")
+modifier_change_re = re.compile(r"MODIFIER_CHANGE:(.)")
+
+def loop():
+    ser = serial.Serial(
+        port="/dev/ttyACM0",
+        baudrate=9600,
+    )
+
+    while True:
+        line = ser.readline().decode("ascii").rstrip()
+        print(f"Received {line}")
+
+        layer_change_match = layer_change_re.match(line)
+        if layer_change_match:
+            new_layer = layer_change_match.group(1)
+            print(f"LAYER_CHANGE:{new_layer}")
+            with open("/tmp/dalsik_layer_change", "w") as f:
+                f.write(new_layer)
+            os.system("killall -USR1 i3status")
+
+        modifier_change_match = modifier_change_re.match(line)
+        if modifier_change_match:
+            modifiers_str = modifier_change_match.group(1)
+            modifiers = int(modifiers_str, 16)
+
+            state = list()
+            if modifiers & (1 << 0) or modifiers & (1 << 4):
+                state.append("CTRL 1")
+            else:
+                state.append("CTRL 0")
+            if modifiers & (1 << 1) or modifiers & (1 << 5):
+                state.append("SHIFT 1")
+            else:
+                state.append("SHIFT 0")
+            if modifiers & (1 << 2) or modifiers & (1 << 6):
+                state.append("ALT 1")
+            else:
+                state.append("ALT 0")
+            if modifiers & (1 << 3) or modifiers & (1 << 7):
+                state.append("GUI 1")
+            else:
+                state.append("GUI 0")
+
+            with open("/tmp/dalsik_modifier_change", "w") as f:
+                f.write("\n".join(state))
+            os.system("killall -USR1 i3status")
+
+    ser.close()
+
+
+if __name__ == "__main__":
+    while True:
+        try:
+            print("Running loop")
+            loop()
+            print("Exiting loop")
+        except Exception as e:
+            print(e)
+            print("Sleeping for 10 seconds")
+            time.sleep(10)
