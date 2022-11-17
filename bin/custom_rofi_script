@@ -33,23 +33,20 @@ function run_cmd {
 
 function draw_brightness_menu {
     CURRENT=$(brightnessctl --machine-readable info | cut -d ',' -f 4)
-    LAST_COMMAND=$(cat /tmp/.rofi_last_brightness_command)
 
     echo -en "\x00prompt\x1f$CURRENT\n"
-    if [ "$ACTION" == "down" ] ; then
-        menu_item "main brightness" "down" "arrow-down"
-        menu_item "main brightness" "up" "arrow-up"
-    else
-        menu_item "main brightness" "up" "arrow-up"
-        menu_item "main brightness" "down" "arrow-down"
-    fi
+    menu_item "main brightness" "up" "arrow-up"
+    menu_item "main brightness" "down" "arrow-down"
 }
 
 function draw_redshift_menu {
-    TEMP=$(redshift -p 2>/dev/null | grep 'Color temperature:' | cut -d" " -f3)
-    BRIGHTNESS=$(redshift -p 2>/dev/null | grep 'Brightness' | cut -d" " -f2)
+    # TEMP=$(redshift -p 2>/dev/null | grep 'Color temperature:' | cut -d" " -f3)
+    # BRIGHTNESS=$(redshift -p 2>/dev/null | grep 'Brightness' | cut -d" " -f2)
 
-    echo -en "\x00prompt\x1fTEMP:$TEMP BRIGHTNESS:$BRIGHTNESS\n"
+    if [ -f /tmp/redshift_correction.cfg ] ; then
+        content=$(cat /tmp/redshift_correction.cfg)
+        echo -en "\x00prompt\x1f$content\n"
+    fi
 
     menu_item "main redshift" "run" "system-run"
     menu_item "main redshift" "disable" "system-run"
@@ -140,6 +137,7 @@ elif [ "$ROFI_INFO" == "main redshift" ] ; then
     elif [ "$ACTION" == "temp correct down" ] ; then
         run_cmd "redshift_adjust.pl --temp-correction-down"
     fi
+    sleep 0.1
     draw_redshift_menu
 elif [ "$ROFI_INFO" == "main power" ] ; then
     if [ "$ACTION" == "screensaver" ] ; then
@@ -156,10 +154,8 @@ elif [ "$ROFI_INFO" == "main power" ] ; then
 elif [ "$ROFI_INFO" == "main brightness" ] ; then
     if [ "$ACTION" == "up" ] ; then
         brightnessctl --quiet set 5%+
-        echo "up" > /tmp/.rofi_last_brightness_command
     elif [ "$ACTION" == "down" ] ; then
         brightnessctl --quiet set 5%-
-        echo "down" > /tmp/.rofi_last_brightness_command
     fi
     draw_brightness_menu
 fi

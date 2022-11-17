@@ -6,13 +6,6 @@ use strict;
 use warnings;
 
 use JSON::XS;
-use File::Slurp qw( read_file );
-
-my $orientation_file = "/tmp/.i3_split_orientation";
-my $redshift_monitor_file = "/tmp/redshift_monitor";
-
-`touch $orientation_file`;
-`touch $redshift_monitor_file`;
 
 $| = 1;
 
@@ -22,29 +15,29 @@ print scalar <STDIN>;
 # The second line contains the start of the infinite array.
 print scalar <STDIN>;
 
+my $layer_colors = [
+    "#FFFFFF",
+    "#00FF00",
+    "#FFFF00",
+    "#FF0000",
+    "#FF00FF",
+];
+
 # Read lines forever, ignore a comma at the beginning if it exists.
 while (my ($statusline) = (<STDIN> =~ /^,?(.*)/)) {
     my @blocks = @{decode_json($statusline)};
 
-    my $orientation = read_file($orientation_file);
-    unshift @blocks, {
-        full_text => $orientation eq 'horizontal' ? "I" : "—",
-    };
+    if ( -f "/home/davs/workspace/avr/dalsik/utils/cmd_get_layer_index.pl" ) {
+        my $result = `~/workspace/avr/dalsik/utils/cmd_get_layer_index.pl`;
 
-    my $redshift_monitor = read_file($redshift_monitor_file);
-    if ($redshift_monitor && $redshift_monitor =~ m/^(\d+)\s*([-\d\.]+)$/) {
-        my $temp_diff = $1;
-        my $brightness_diff = $2;
-
-        if (abs($brightness_diff) > 0.01) {
-            my $color = $brightness_diff > 0 ? '#FF0000' : "#00FF00";
-            unshift @blocks,
-                { color => $color, full_text => "B:$brightness_diff" };
-        }
-        if ($temp_diff != 0) {
-            my $color = $temp_diff > 0 ? '#FF0000' : "#00FF00";
-            unshift @blocks,
-                { color => $color, full_text => "T:$temp_diff" };
+        if ($result =~ /^(\d+)/) {
+            my $layer = $1;
+            if ($layer > 0) {
+                unshift @blocks, {
+                    full_text => "Dalsik layer [$layer]",
+                    color => $layer_colors->[$layer] || $layer_colors->[0],
+                };
+            }
         }
     }
 

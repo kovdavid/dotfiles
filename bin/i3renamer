@@ -2,6 +2,7 @@
 
 from collections import defaultdict
 import re
+import sys
 from i3ipc import Connection, Event
 
 WINDOW_TITLE_REGEXP_IDEA = re.compile("^([^\[]+) \[")
@@ -207,3 +208,4 @@ if __name__ == "__main__":
     print("Running main loop")
     i3.main()
     print("Exiting main loop")
+    sys.exit(1)

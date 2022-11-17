@@ -76,6 +76,11 @@ my $minute = strftime("%M", localtime($now));
 my $key = get_config_key($hour, $minute);
 my $cmd = get_cmd($config->{$key}, $correction_brightness, $correction_temp);
 
+if ($args eq "--dry-run") {
+    say "$cmd";
+    exit;
+}
+
 if (@ARGV) {
     print_config($config);
     say "key: $key";
@@ -203,14 +208,17 @@ sub handle_args {
         }
     }
 
-    my ($correction_temp, $correction_brightness) = get_corrections();
     if ($args eq '--brightness-correction-up') {
+        my ($correction_temp, $correction_brightness) = get_corrections();
         save_corrections($correction_temp, $correction_brightness + 0.05);
     } elsif ($args eq '--brightness-correction-down') {
+        my ($correction_temp, $correction_brightness) = get_corrections();
         save_corrections($correction_temp, $correction_brightness - 0.05);
     } elsif ($args eq '--temp-correction-up') {
+        my ($correction_temp, $correction_brightness) = get_corrections();
         save_corrections($correction_temp + 100, $correction_brightness);
     } elsif ($args eq '--temp-correction-down') {
+        my ($correction_temp, $correction_brightness) = get_corrections();
         save_corrections($correction_temp - 100, $correction_brightness);
     }
 }
@@ -220,7 +228,7 @@ sub save_corrections {
 
     print_log("Setting corrections temp:$temp brightness:$brightness");
 
-    my $json = encode_json({ temp => $temp, brightness => $brightness });
+    my $json = JSON->new->canonical->encode({ temp => $temp, brightness => $brightness });
     open my $fh, ">", CORRECTION_FILE or die "Could not open ${\CORRECTION_FILE}: $!";
     say $fh $json;
     close $fh;

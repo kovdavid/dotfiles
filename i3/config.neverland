@@ -240,7 +240,7 @@ bindsym $mod+Shift+Z mode $monitor_modes
 # finds out, if available)
 bar {
     font pango:DejaVu Sans Mono 14px
-    status_command i3status -c ~/.config/i3status/config
+    status_command i3status -c ~/.config/i3status/config | ~/bin/i3status_wrapper
     tray_output $dp_screen
     tray_output $hdmi_screen
     tray_output $laptop_screen
