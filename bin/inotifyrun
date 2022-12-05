@@ -48,7 +48,7 @@ touch $PIDFILE
 iteration=1
 LAST_TIMESTAMP=0
 
-inotifywait -m --format "%w %f %T" --timefmt "%s" -e modify $directory_args | while IFS=" " read DIR FILE TIMESAMP
+inotifywait -m --format "%w %f" --timefmt "%s" -e modify $directory_args | while IFS=" " read DIR FILE
 do
     [[ "$DIR" == */\.git/* ]] && continue
     [[ "$DIR" == */\.next/* ]] && continue
@@ -58,8 +58,8 @@ do
     RES=$?
     [[ "$RES" -eq "0" ]] && continue
 
-    # TIMESTAMP=$(date '+%s')
-    if (( $TIMESTAMP <= $LAST_TIMESTAMP + 2 )) ; then
+    TIMESTAMP=$(date '+%s')
+    if (( $TIMESTAMP <= $LAST_TIMESTAMP + 3 )) ; then
         continue
     fi
     LAST_TIMESTAMP=$TIMESTAMP
@@ -71,7 +71,7 @@ do
     done
     clear
 
-    echo "$(date +'%F %T') Running $command"
+    echo "$(date +'%F %T') Running $command because of $DIR$FILE"
 
     eval "$command" &
     PID=$!

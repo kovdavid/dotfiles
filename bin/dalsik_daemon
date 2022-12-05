@@ -26,6 +26,8 @@ def loop():
                 f.write(new_layer)
             os.system("killall -USR1 i3status")
 
+            continue
+
         modifier_change_match = modifier_change_re.match(line)
         if modifier_change_match:
             modifiers_str = modifier_change_match.group(1)
@@ -53,6 +55,11 @@ def loop():
                 f.write("\n".join(state))
             os.system("killall -USR1 i3status")
 
+            continue
+
+        with open("/tmp/dalsik.log", "a") as f:
+            f.write(line + '\n')
+
     ser.close()
 
 
@@ -64,5 +71,5 @@ if __name__ == "__main__":
             print("Exiting loop")
         except Exception as e:
             print(e)
-            print("Sleeping for 10 seconds")
-            time.sleep(10)
+            print("Sleeping for 120 seconds")
+            time.sleep(120)

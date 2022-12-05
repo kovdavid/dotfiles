@@ -44,8 +44,8 @@ class i3Renamer:
             self.rename_workspace(i3, workspace_number)
 
     def get_window_name(self, workspace_number, window_properties) -> str:
-        window_name: str = window_properties["class"]
-        window_title: str = window_properties["title"]
+        window_name: str = window_properties.get("class", "")
+        window_title: str = window_properties.get("title", "")
 
         if window_name == "jetbrains-pycharm":
             window_name = "pycharm"

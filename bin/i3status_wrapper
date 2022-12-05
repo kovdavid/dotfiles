@@ -51,12 +51,10 @@ while (my ($statusline) = (<STDIN> =~ /^,?(.*)/)) {
         my $layer = <$fh>;
         close $fh;
 
-        if ($layer > 0) {
-            unshift @blocks, {
-                full_text => "Dalsik layer [$layer]",
+        unshift @blocks, {
+                full_text => "L[$layer]",
                 color => $layer_colors->[$layer] || $layer_colors->[0],
-            };
-        }
+        };
     }
 
     print encode_json(\@blocks) . ",\n";
