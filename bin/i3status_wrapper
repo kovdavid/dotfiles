@@ -41,7 +41,7 @@ while (my ($statusline) = (<STDIN> =~ /^,?(.*)/)) {
                 my $pressed = $2;
                 unshift @blocks, {
                     full_text => $mod,
-                    color => $pressed ? "#FF0000" : "#FFFFFF",
+                    color => $pressed ? "#FFFFFF" : "#555555",
                 };
             }
         }
