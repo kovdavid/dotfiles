@@ -1,7 +1,8 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "py", "python"],
+    "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "py", "python", "rust"],
     "eslint.autoFixOnSave": true,
     "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
     "prettier.disableSuccessMessage": true,
-    "coc.preferences.noselect": true
+    "coc.preferences.noselect": true,
+    "rust-analyzer.server.path": "/home/davs/.cargo/bin/rust-analyzer"
 }
