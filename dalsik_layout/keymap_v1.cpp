@@ -17,12 +17,12 @@
 #define GUI_PGDN LGUI(KC_PGDN)
 #define SHFT_INS LSHIFT(KC_INS)
 
-const KeyCoords combo1[] PROGMEM = { { 1, 2 }, { 1, 3 } };
-const KeyCoords combo2[] PROGMEM = { { 1, 3 }, { 1, 4 } };
+const KeyCoords combo1[] PROGMEM = { { 1, 2 }, { 1, 3 }           };
+const KeyCoords combo2[] PROGMEM = {           { 1, 3 }, { 1, 4 } };
 const KeyCoords combo3[] PROGMEM = { { 1, 2 }, { 1, 3 }, { 1, 4 } };
 
-const KeyCoords combo4[] PROGMEM = { { 1, 7 }, { 1, 8 } };
-const KeyCoords combo5[] PROGMEM = { { 1, 8 }, { 1, 9 } };
+const KeyCoords combo4[] PROGMEM = { { 1, 7 }, { 1, 8 }           };
+const KeyCoords combo5[] PROGMEM = {           { 1, 8 }, { 1, 9 } };
 const KeyCoords combo6[] PROGMEM = { { 1, 7 }, { 1, 8 }, { 1, 9 } };
 
 ComboState combos[] = COMBOS({
