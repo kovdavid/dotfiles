@@ -5,6 +5,7 @@ else
 fi
 
 export WINEARCH=win32
+[[ -d /opt/wine ]] && export WINEPREFIX=/opt/wine
 
 export MYSQL_PS1="\u@`hostname` [\d]> "
 
