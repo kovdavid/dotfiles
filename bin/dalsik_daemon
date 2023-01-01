@@ -7,8 +7,8 @@ import time
 import sys
 from datetime import datetime
 
-layer_change_re = re.compile(r"LAYER_CHANGE:(\d+)")
-modifier_change_re = re.compile(r"MODIFIER_CHANGE:(.)")
+layer_change_re = re.compile(r"L:(\d+)")
+modifier_change_re = re.compile(r"M:(.)")
 
 def loop():
     ser = serial.Serial(
@@ -35,26 +35,12 @@ def loop():
             modifiers_str = modifier_change_match.group(1)
             modifiers = int(modifiers_str, 16)
 
-            state = list()
-            if modifiers & (1 << 1) or modifiers & (1 << 5):
-                state.append("SHIFT 1")
-            else:
-                state.append("SHIFT 0")
-
-            if modifiers & (1 << 3) or modifiers & (1 << 7):
-                state.append("GUI 1")
-            else:
-                state.append("GUI 0")
-
-            if modifiers & (1 << 0) or modifiers & (1 << 4):
-                state.append("CTRL 1")
-            else:
-                state.append("CTRL 0")
-
-            if modifiers & (1 << 2) or modifiers & (1 << 6):
-                state.append("ALT 1")
-            else:
-                state.append("ALT 0")
+            state = [
+                check_modifier(modifiers, "SHIFT", 1),
+                check_modifier(modifiers, "GUI", 3),
+                check_modifier(modifiers, "CTRL", 0),
+                check_modifier(modifiers, "ALT", 1),
+            ]
 
             with open("/tmp/dalsik_modifier_change", "w") as f:
                 f.write("\n".join(state))
@@ -63,6 +49,12 @@ def loop():
             continue
 
     ser.close()
+
+
+def check_modifier(modifiers, name, shift):
+    if modifiers & (1 << shift) or modifiers & (1 << shift + 4):
+        return f"{name} 1"
+    return f"{name} 0"
 
 
 def remove(filePath):
