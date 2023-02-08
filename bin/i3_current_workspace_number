@@ -1,2 +1,2 @@
 #!/bin/bash
-i3-msg -t get_workspaces | jq '.[] | select( .focused )' | jq '.num'
+i3-msg -t get_workspaces | jq '.[] | select( .focused ) | .num'

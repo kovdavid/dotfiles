@@ -224,3 +224,5 @@ Password: *input*
 
 # To use different SSH key for a project in git:
 git config core.sshCommand "ssh -i ~/.ssh/id_rsa_example -F /dev/null"
+
+yay -S programmer-calculator # pcalc
