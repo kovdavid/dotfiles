@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ARG_SESSION_NAME=$1
-ARG_SESSIOn_DIR=$2
+ARG_SESSION_DIR=$2
 
 CURR_SESSION_NAME=$(tmux display-message -p "#{session_name}")
 

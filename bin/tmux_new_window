@@ -1,13 +1,24 @@
 #!/bin/bash
 
+ARG_WINDOW_NAME=$1
+ARG_WINDOW_DIR=$2
+
 echo "New window"
 
 WINDOW_NAME=''
-CD_DIR=${NIKE_HOME-:''}
+CD_DIR=${CD_DIR-:''}
 
-read -p "Window name: " WINDOW_NAME
+if [ -z "$ARG_WINDOW_NAME" ] ; then
+    read -p "Window name: " WINDOW_NAME
+else
+    WINDOW_NAME=$ARG_WINDOW_NAME
+fi
 
-read -e -p "Default directory: " -i "$NIKE_HOME" CD_DIR
+if [ -z "$ARG_WINDOW_DIR" ] ; then
+    read -e -p "Default directory: " -i "$CD_DIR" CD_DIR
+else
+    CD_DIR=$ARG_WINDOW_DIR
+fi
 
 TMUX_CMD="cd $CD_DIR; bash"
 

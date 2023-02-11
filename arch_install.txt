@@ -52,6 +52,13 @@ AutoEnable=false
         cryptsetup luksHeaderBackup /dev/nvme0n1p2 --header-backup-file luks_header_backup_`date +%Y-%m-%d`
         cryptsetup luksOpen /dev/nvmw0n1p2 cryptroot
 
+        # Enable trim
+        $ cryptsetup --allow-discards --persistent refresh cryptroot
+        # Check
+        $ cryptsetup luksDump /dev/nvme0n1p2 | grep Flags
+        Flags:          allow-discards
+        $ systemctl enable --now fstrim.timer
+
         # Create file system on luks device
         mkfs.ext4 /dev/mapper/cryptroot
 
