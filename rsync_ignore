@@ -1,10 +1,7 @@
 /dev
 /lost+found
 /media
-/mnt/data/NO_BACKUP
-/mnt/data/steam
-/mnt/data/playonlinux
-/mnt/data/docker
+/clean_daily
 /mnt/ext_hdd
 /mnt/mount
 /opt
@@ -19,8 +16,9 @@
 /var/lib/docker
 
 # home
+/home/davs/Downloads
+/home/davs/dotfiles/vim/plugged
 /home/davs/.cache
-/home/davs/dotfiles
 /home/davs/.arduino15
 /home/davs/.cargo
 /home/davs/.cpanm
@@ -35,12 +33,12 @@
 /home/davs/.config/libreoffice
 /home/davs/.local/share/JetBrains
 /home/davs/.local/share/virtualenv
-/home/davs/.mozilla
 /home/davs/.hoogle
 /home/davs/.ghc-mod
 /home/davs/.thumbnails
 /home/davs/.thunderbird
-/home/davs/.mozilla
+/home/davs/.mozilla/**/storage
+/home/davs/.mozilla/**/Crash\ Reports
 /home/davs/.gvfs
 /home/davs/.npm
 /home/davs/.yarn
@@ -60,6 +58,7 @@
 /home/davs/workspace/java/*/*/.gradle
 /home/davs/workspace/go/bin
 /home/davs/workspace/go/pkg
+/home/davs/workspace/**/build
 
 /mnt/data/java
 
@@ -68,9 +67,9 @@ Makefile.old
 nytprof*
 *.swp
 
-__pycache__/
 .gradle/
-node_modules/
 .next/
-build/
 .yarn/
+build/
+__pycache__/
+node_modules/

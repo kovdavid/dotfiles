@@ -59,6 +59,10 @@ AutoEnable=false
         Flags:          allow-discards
         $ systemctl enable --now fstrim.timer
 
+        # Disable automatic update of restic
+        $ vim /etc/pacman.conf
+        IgnorePkg = restic
+
         # Create file system on luks device
         mkfs.ext4 /dev/mapper/cryptroot
 
