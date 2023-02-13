@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ ! -d /opt/backup ] ; then
+    echo "Directory /opt/backup does not exist"
+    exit 1
+fi
+
+cd /opt/backup
+
+source .envrc
+
+if ! restic snapshots &>/dev/null ; then
+    echo "####### $(date '+%F %T') Initializing repository"
+    restic init
+fi
+
+echo "####### $(date '+%F %T') Running backup"
+restic backup --exclude-file /home/davs/dotfiles/rsync_ignore --exclude-caches --no-scan /home/davs
+
+echo "####### $(date '+%F %T') Cleaning up old snapshots"
+restic forget --keep-last 5 --keep-daily 7 --keep-weekly 4 --keep-monthly 1 --prune
+
+echo "####### $(date '+%F %T') Checking repository"
+restic check
+
+echo "####### $(date '+%F %T') Current snapshots"
+restic snapshots
+
+echo "####### $(date '+%F %T') Directory sizes"
+du -shc .??* * | sort -h

@@ -1,0 +1,12 @@
+[Unit]
+Description=Restic backup local
+
+[Service]
+Type=oneshot
+ExecStart=%h/bin/restic_backup_local
+
+StandardOutput=append:/clean_daily/restic_backup_local.log
+StandardError=append:/clean_daily/restic_backup_local.log
+
+[Install]
+WantedBy=multi-user.target

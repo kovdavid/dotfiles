@@ -1,0 +1,10 @@
+[Unit]
+Description=Restic backup local
+
+[Timer]
+OnBootSec=10min
+OnUnitActiveSec=2h
+Unit=restic_backup_local.service
+
+[Install]
+WantedBy=timers.target
