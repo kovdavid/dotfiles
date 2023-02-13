@@ -36,3 +36,5 @@ restic snapshots
 
 echo "####### $(date '+%F %T') Directory sizes"
 du -shc .??* * | sort -h
+
+date '+%F %T' > last_backup

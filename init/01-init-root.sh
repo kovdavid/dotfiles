@@ -97,14 +97,20 @@ function ensure_tlp_config {
 START_CHARGE_THRESH_BAT0=60
 STOP_CHARGE_THRESH_BAT0=90
 
-CPU_BOOST_ON_AC=0
-CPU_BOOST_ON_BAT=0
-
 DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
 EOC
 )
 
     ensure_file_content "$TLP_FILE" "$TLP_CONTENT"
+
+    ensure_file_content "/etc/tlp.d/cpu_boost_off" $'CPU_BOOST_ON_AC=0\nCPU_BOOST_ON_BAT=0'
+    ensure_file_content "/etc/tlp.d/cpu_boost_on" $'CPU_BOOST_ON_AC=1\nCPU_BOOST_ON_BAT=1'
+    ensure_file_content "/etc/tlp.d/cpu_boost_ac" $'CPU_BOOST_ON_AC=1\nCPU_BOOST_ON_BAT=0'
+
+    if [ ! -f /etc/tlp.d/02-cpu_boost.conf ] ; then
+        echo "Linking 02-cpu_boost.conf to cpu_boost_ac."
+        ln -sf /etc/tlp.d/cpu_boost_ac /etc/tlp.d/02-cpu_boost.conf
+    fi
 }
 
 function ensure_polkit_config {

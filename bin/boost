@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ "$1" == "" ] ; then
+    readlink -f /etc/tlp.d/02-cpu_boost.conf
+    cat /etc/tlp.d/02-cpu_boost.conf
+else
+    if [ "$1" == "off" ] ; then
+        echo "Boost off"
+        sudo ln -sf /etc/tlp.d/cpu_boost_off /etc/tlp.d/02-cpu_boost.conf
+    elif [ "$1" == "ac" ] ; then
+        echo "Boost ac"
+        sudo ln -sf /etc/tlp.d/cpu_boost_ac /etc/tlp.d/02-cpu_boost.conf
+    elif [ "$1" == "on" ] ; then
+        echo "Boost on"
+        sudo ln -sf /etc/tlp.d/cpu_boost_on /etc/tlp.d/02-cpu_boost.conf
+    fi
+    readlink -f /etc/tlp.d/02-cpu_boost.conf
+    cat /etc/tlp.d/02-cpu_boost.conf
+    sudo tlp start
+fi
