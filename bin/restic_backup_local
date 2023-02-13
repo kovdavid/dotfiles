@@ -2,6 +2,14 @@
 
 if [ ! -d /opt/backup ] ; then
     echo "Directory /opt/backup does not exist"
+    echo "Run the following:"
+    echo ""
+    echo "sudo mkdir /opt/backup"
+    echo "sudo chown davs:davs /opt/backup"
+    echo "chmod g-rwx,o-rwx /opt/backup"
+    echo "chmod g+s /opt/backup"
+    echo "setfacl -d -m g::000 /opt/backup"
+    echo "setfacl -d -m o::000 /opt/backup"
     exit 1
 fi
 
