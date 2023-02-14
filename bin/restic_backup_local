@@ -13,9 +13,59 @@ if [ ! -d /opt/backup ] ; then
     exit 1
 fi
 
+echo ""
+echo "#########################################"
+echo "####### $(date '+%F %T') $0 start #######"
+echo "#########################################"
+echo ""
+
 cd /opt/backup
 
+if [ ! -f .envrc ] ; then
+    echo "/opt/backup/.envrc is missing"
+    echo "Create it with contents:"
+    echo ""
+    echo "export RESTIC_CACHE_DIR=/opt/backup/cache"
+    echo "export RESTIC_REPOSITORY=/opt/backup/restic"
+    echo "export RESTIC_PASSWORD_FILE=/opt/backup/.restic_password"
+    echo "export RESTIC_BACKUP_DIR=\"/home/davs\""
+    exit 1
+fi
+
 source .envrc
+
+if [ "$1" == "b2" ] ; then
+    echo "####### $(date '+%F %T') Using BlackBlaze"
+
+    if [ ! -f ".envrc.b2" ] ; then
+        echo "/opt/backup/.envrc.b2 is missing"
+        echo "Create it with contents:"
+        echo ""
+        echo "export B2_ACCOUNT_ID=\"account_key_id\""
+        echo "export B2_ACCOUNT_KEY=\"account_key\""
+        echo "export RESTIC_REPOSITORY=\"b2:bucket-name\""
+        exit 1
+    fi
+
+    source .envrc.b2
+fi
+
+if [ -z "$RESTIC_BACKUP_DIR" ] ; then
+    echo "RESTIC_BACKUP_DIR is not set; something is wrong. Exiting."
+    exit 1
+fi
+if [ ! -d "$RESTIC_BACKUP_DIR" ] ; then
+    echo "RESTIC_BACKUP_DIR:$RESTIC_BACKUP_DIR does not exist. Exiting."
+    exit 1
+fi
+
+echo "####### RESTIC_BACKUP_DIR:$RESTIC_BACKUP_DIR"
+echo "####### RESTIC_REPOSITORY:$RESTIC_REPOSITORY"
+
+while pidof restic > /dev/null; do
+    echo "####### $(date '+%F %T') Waiting for another restic instance to finish"
+    sleep 10
+done
 
 if ! restic snapshots &>/dev/null ; then
     echo "####### $(date '+%F %T') Initializing repository"
@@ -23,10 +73,10 @@ if ! restic snapshots &>/dev/null ; then
 fi
 
 echo "####### $(date '+%F %T') Running backup"
-restic backup --exclude-file /home/davs/dotfiles/rsync_ignore --exclude-caches --no-scan /home/davs
+restic backup --exclude-file /home/davs/dotfiles/rsync_ignore --exclude-caches --no-scan $RESTIC_BACKUP_DIR
 
 echo "####### $(date '+%F %T') Cleaning up old snapshots"
-restic forget --keep-last 5 --keep-daily 7 --keep-weekly 4 --keep-monthly 1 --prune
+restic forget --keep-last 10 --keep-daily 7 --keep-weekly 4 --keep-monthly 1 --prune
 
 echo "####### $(date '+%F %T') Checking repository"
 restic check

@@ -143,7 +143,8 @@ if has("ide")
     sethandler <C-W>r a:vim
 
     nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
-    nnoremap <leader>h :action HideActiveWindow<CR>
+    nnoremap <leader>ha :action HideActiveWindow<CR>
+    nnoremap <leader>ht :action HideAllWindows<CR>
     nnoremap <leader>se :action ShowErrorDescription<CR>
     nnoremap <leader>sd :action QuickJavaDoc<CR>
     nnoremap <leader>sa :action ShowIntentionActions<CR>

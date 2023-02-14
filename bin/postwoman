@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Open http://localhost:3333"
+
+docker run --name hoppscotch -p 3333:3000 hoppscotch/hoppscotch:latest

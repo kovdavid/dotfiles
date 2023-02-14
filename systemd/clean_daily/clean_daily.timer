@@ -2,8 +2,10 @@
 Description=clean daily
 
 [Timer]
-OnBootSec=10min
-OnCalendar=*:0/10
+; Activate first time 1h after boot
+OnBootSec=1h
+; Activate 8h after previous activation
+OnUnitActiveSec=8h
 Unit=clean_daily.service
 
 [Install]
