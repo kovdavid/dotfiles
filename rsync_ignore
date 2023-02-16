@@ -32,6 +32,7 @@
 /home/davs/.config/ultravnc-viewer
 /home/davs/.config/libreoffice
 /home/davs/.local/share/JetBrains
+/home/davs/.local/share/nvim
 /home/davs/.local/share/virtualenv
 /home/davs/.local/pipx
 /home/davs/.hoogle
@@ -71,6 +72,8 @@ nytprof*
 .gradle/
 .next/
 .yarn/
+.mypy_cache/
 build/
 __pycache__/
 node_modules/
+/home/davs/workspace/**/docker/*/data

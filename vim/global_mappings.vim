@@ -141,34 +141,38 @@ noremap Zz <c-w>=
 
 if has("ide")
     sethandler <C-W>r a:vim
+    set NERDTree
 
-    nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
-    nnoremap <leader>ha :action HideActiveWindow<CR>
-    nnoremap <leader>ht :action HideAllWindows<CR>
-    nnoremap <leader>se :action ShowErrorDescription<CR>
-    nnoremap <leader>sd :action QuickJavaDoc<CR>
-    nnoremap <leader>sa :action ShowIntentionActions<CR>
-    nnoremap <leader>tt :action Terminal.OpenInTerminal<CR>
     nnoremap <C-W>r :action MoveEditorToOppositeTabGroup<CR>
-    nnoremap <leader>n :action ShowNavBar<CR>
+    nnoremap <c-o> :action Back<CR>
+    nnoremap <c-e> :action RecentFiles<CR>
+    nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
+    nnoremap <leader>, :action GotoClass<CR>
+    nnoremap <leader>ar :action ActivateRunToolWindow<CR>
+    nnoremap <leader>at :action ActivateTerminalToolWindow<CR>
     nnoremap <leader>cc :action CommentByLineComment<CR>
-    vnoremap <leader>cc :action CommentByLineComment<CR>
     nnoremap <leader>cu :action CommentByLineComment<CR>
-    vnoremap <leader>cu :action CommentByLineComment<CR>
+    nnoremap <leader>ff :action ShowReformatFileDialog<CR>
+    nnoremap <leader>fu :action FindUsages<CR>
     nnoremap <leader>gd :action GotoDeclaration<CR>
     nnoremap <leader>gi :action GotoImplementation<CR>
     nnoremap <leader>gt :action GotoTypeDeclaration<CR>
-    nnoremap <leader>fu :action FindUsages<CR>
-    nnoremap <c-o> :action Back<CR>
+    nnoremap <leader>ha :action HideActiveWindow<CR>
+    nnoremap <leader>ht :action HideAllWindows<CR>
+    nnoremap <leader>n :action ShowNavBar<CR>
     nnoremap <leader>ogh :action Github.Open.In.Browser<CR>
-    nnoremap <leader>z :action MaximizeEditorInSplit<CR>
-    nnoremap <leader>ff :action ShowReformatFileDialog<CR>
-    nnoremap <leader>rr :action Rerun<CR>
-    nnoremap <leader>art :action ActivateRunToolWindow<CR>
-    nnoremap <leader>att :action ActivateTerminalToolWindow<CR>
-    nnoremap <leader>p :action ActivateProjectToolWindow<CR>
     nnoremap <leader>oi :action OptimizeImports<CR>
-    nnoremap <leader>, :action GotoClass<CR>
+    nnoremap <leader>p :action ActivateProjectToolWindow<CR>
+    nnoremap <leader>rr :action Rerun<CR>
+    nnoremap <leader>sa :action ShowIntentionActions<CR>
+    nnoremap <leader>sd :action QuickJavaDoc<CR>
+    nnoremap <leader>se :action ShowErrorDescription<CR>
+    nnoremap <leader>sr :action Refactorings.QuickListPopupAction<CR>
+    nnoremap <leader>tt :action Terminal.OpenInTerminal<CR>
+    nnoremap <leader>z :action MaximizeEditorInSplit<CR>
+    nnoremap <space> :action ExpandCollapseToggleAction<CR>
+    vnoremap <leader>cc :action CommentByLineComment<CR>
+    vnoremap <leader>cu :action CommentByLineComment<CR>
 endif
 
 if has("ide")

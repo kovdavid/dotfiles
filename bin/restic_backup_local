@@ -88,3 +88,5 @@ echo "####### $(date '+%F %T') Directory sizes"
 du -shc .??* * | sort -h
 
 date '+%F %T' > last_backup
+
+echo "####### $(date '+%F %T') Finished"

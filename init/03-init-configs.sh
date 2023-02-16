@@ -87,6 +87,7 @@ ln -sf ~/dotfiles/redshift.conf ~/.config/redshift.conf
 echo "Linking mimeapps.list"
 mkdir -p ~/.local/share/applications
 ln -f -s ~/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list
+ln -f -s ~/dotfiles/mimeapps.list ~/.local/share/applications/defaults.list
 ln -f -s ~/dotfiles/mimeapps.list ~/.config/mimeapps.list
 
 ~/dotfiles/bin/color_scheme dark

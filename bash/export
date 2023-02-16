@@ -9,7 +9,8 @@ export WINEARCH=win32
 
 export MYSQL_PS1="\u@`hostname` [\d]> "
 
-export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
+# export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
+export SDKMAN_DIR=/opt/sdkman
 
 if [ -f /opt/perlbrew/etc/bashrc ] ; then
     export PERLBREW_HOME=/opt/perlbrew/.perlbrew
