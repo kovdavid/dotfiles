@@ -1,0 +1,18 @@
+#!/bin/bash
+
+RESOLUTION=$(xrandr | grep -w 'connected primary' -A1 | tail -n1 | awk '{ print $1 }')
+
+WIDTH=$(echo "$RESOLUTION" | awk -F 'x' '{print $1}')
+HEIGTH=$(echo "$RESOLUTION" | awk -F 'x' '{print $2}')
+
+echo "WIDTH:$WIDTH"
+echo "HEIGTH:$HEIGTH"
+
+i3-msg 'exec alacritty -e "tmux_start"'
+sleep 1
+i3-msg 'border pixel 10; move scratchpad'
+i3-msg 'scratchpad show'
+i3-msg "resize set width $(( $WIDTH*90/100 )) px"
+i3-msg "resize set height $(( $HEIGTH*90/100 )) px"
+i3-msg 'move position center'
+i3-msg 'move scratchpad'
