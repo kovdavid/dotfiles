@@ -25,6 +25,8 @@ const KeyCoords combo4[] PROGMEM = { { 1, 7 }, { 1, 8 }           };
 const KeyCoords combo5[] PROGMEM = {           { 1, 8 }, { 1, 9 } };
 const KeyCoords combo6[] PROGMEM = { { 1, 7 }, { 1, 8 }, { 1, 9 } };
 
+const KeyCoords combo7[] PROGMEM = { { 1, 4 }, { 1, 7 } };
+
 ComboState combos[] = COMBOS({
     COMBO(combo1, OSM(MOD_LSHIFT)),
     COMBO(combo2, OSM(MOD_LGUI)),
@@ -33,6 +35,8 @@ ComboState combos[] = COMBOS({
     COMBO(combo4, OSM(MOD_LCTRL)),
     COMBO(combo5, OSM(MOD_LALT)),
     COMBO(combo6, OSM(MOD_LCTRL | MOD_LALT)),
+
+    COMBO(combo7, LCTRL(KC_A)),
 });
 
 const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
@@ -55,7 +59,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
         KC_TAB,    KC_Q,   KC_W,     KC_E,     KC_R,   KC_T,       KC_Y,     KC_U,   KC_I,     KC_O,    KC_P,       KC_QUOT,
         CTRL_ESC,  KC_A,   KC_S,     KC_D,     KC_F,   KC_G,       KC_H,     KC_J,   KC_K,     KC_L,    L3_SCOLON,  KC_ENTER,
         OSM_SHFT,  KC_Z,   KC_X,     KC_C,     KC_V,   KC_B,       KC_N,     KC_M,   KC_COMM,  KC_DOT,  L4_SLASH,   KC_DELETE,
-        OSM_CTRL,  LP(3),  OSM_ALT,  OSM_GUI,  LP(1),  SHIFT_SPC,  L2_BSPC,  LP(3),  LP(3),    LHT(1),  KC_LEFT,    KC_RIGHT
+        OSM_CTRL,  LP(3),  OSM_ALT,  OSM_GUI,  LP(1),  SHIFT_SPC,  L2_BSPC,  LP(3),  LHT(3),   LHT(1),  KC_LEFT,    KC_RIGHT
     ),
 
     /* Layer 1
@@ -143,6 +147,6 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
         KC_TAB,    XXXXXXX,   XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,    KC_QUOT,
         CTRL_ESC,  OSM_SHFT,  OSM_GUI,   OSM_CTRL, OSM_ALT,  XXXXXXX,    XXXXXXX,  GUI_F13,  GUI_F14,  XXXXXXX,    L3_SCOLON,  KC_ENTER,
         OSM_SHFT,  XXXXXXX,   XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  GUI_PGUP, GUI_PGDN, LGUI(KC_Z), L4_SLASH,   KC_DELETE,
-        OSM_CTRL,  LP(3),     OSM_ALT,   OSM_GUI,  LP(1),    SHIFT_SPC,  L2_BSPC,  LP(3),    LP(3),    LHT(1),     KC_LEFT,    KC_RIGHT
+        OSM_CTRL,  LP(3),     OSM_ALT,   OSM_GUI,  LP(1),    SHIFT_SPC,  L2_BSPC,  _______,  _______,  LHT(1),     KC_LEFT,    KC_RIGHT
     ),
 });

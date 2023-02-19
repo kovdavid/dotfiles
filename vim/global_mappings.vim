@@ -143,6 +143,7 @@ if has("ide")
     sethandler <C-W>r a:vim
     set NERDTree
 
+    nnoremap g; :action JumpToLastChange<CR>
     nnoremap <C-W>r :action MoveEditorToOppositeTabGroup<CR>
     nnoremap <c-o> :action Back<CR>
     nnoremap <c-e> :action RecentFiles<CR>
@@ -173,6 +174,7 @@ if has("ide")
     nnoremap <space> :action ExpandCollapseToggleAction<CR>
     vnoremap <leader>cc :action CommentByLineComment<CR>
     vnoremap <leader>cu :action CommentByLineComment<CR>
+
 endif
 
 if has("ide")
