@@ -25,7 +25,7 @@ if [ ! -f .envrc ] ; then
     echo "/opt/backup/.envrc is missing"
     echo "Create it with contents:"
     echo ""
-    echo "export RESTIC_CACHE_DIR=/opt/backup/cache"
+    echo "export RESTIC_CACHE_DIR=/opt/backup/cache/local"
     echo "export RESTIC_REPOSITORY=/opt/backup/restic"
     echo "export RESTIC_PASSWORD_FILE=/opt/backup/.restic_password"
     echo "export RESTIC_BACKUP_DIR=\"/home/davs\""
@@ -44,6 +44,7 @@ if [ "$1" == "b2" ] ; then
         echo "export B2_ACCOUNT_ID=\"account_key_id\""
         echo "export B2_ACCOUNT_KEY=\"account_key\""
         echo "export RESTIC_REPOSITORY=\"b2:bucket-name\""
+        echo "export RESTIC_CACHE_DIR=/opt/backup/cache/b2"
         exit 1
     fi
 

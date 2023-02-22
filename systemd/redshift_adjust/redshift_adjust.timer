@@ -2,8 +2,10 @@
 Description=redshift_adjust
 
 [Timer]
-OnBootSec=1min
-OnCalendar=*:0/2
+; Activate first time 1min after boot
+OnBootSec=1m
+; Activate 5m after previous activation
+OnUnitActiveSec=5m
 Unit=redshift_adjust.service
 
 [Install]
