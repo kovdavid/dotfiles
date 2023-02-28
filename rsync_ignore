@@ -14,6 +14,7 @@
 /var/log
 /var/lib/mysql
 /var/lib/docker
+/var/lib/systemd
 
 # home
 /home/davs/Downloads
@@ -76,4 +77,4 @@ nytprof*
 build/
 __pycache__/
 node_modules/
-/home/davs/workspace/**/docker/*/data
+/home/davs/workspace/**/docker/**/data

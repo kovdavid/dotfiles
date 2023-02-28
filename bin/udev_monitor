@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+sudo udevadm control --log-priority=debug
+sudo unbuffer udevadm monitor --environment | tee -a /clean_daily/udev

@@ -55,10 +55,13 @@ if [ -z "$RESTIC_BACKUP_DIR" ] ; then
     echo "RESTIC_BACKUP_DIR is not set; something is wrong. Exiting."
     exit 1
 fi
-if [ ! -d "$RESTIC_BACKUP_DIR" ] ; then
-    echo "RESTIC_BACKUP_DIR:$RESTIC_BACKUP_DIR does not exist. Exiting."
-    exit 1
-fi
+
+for dir in $RESTIC_BACKUP_DIR; do
+    if [ ! -d "$dir" ] ; then
+        echo "RESTIC_BACKUP_DIR:$dir does not exist. Exiting."
+        exit 1
+    fi
+done
 
 echo "####### RESTIC_BACKUP_DIR:$RESTIC_BACKUP_DIR"
 echo "####### RESTIC_REPOSITORY:$RESTIC_REPOSITORY"
