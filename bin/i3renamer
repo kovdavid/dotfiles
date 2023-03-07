@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-from collections import defaultdict
+import os
 import re
 import sys
 import time
+from collections import defaultdict
 from i3ipc import Connection, Event
 from pprint import pprint
 
@@ -242,7 +243,7 @@ class i3Renamer:
         self.rename_workspace(i3, workspace_number)
 
 
-if __name__ == "__main__":
+def run():
     print("                                                    ")
     print(" _ ____  _____                                      ")
     print("(_)___ \|  __ \                                     ")
@@ -262,3 +263,12 @@ if __name__ == "__main__":
     i3.main()
     print("Exiting main loop")
     sys.exit(1)
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        arg = sys.argv[1]
+        if arg in ["status", "stop", "start", "restart", "mask", "unmask"]:
+            os.system(f"systemctl --user {arg} i3renamer")
+    else:
+        run()
+
