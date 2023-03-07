@@ -114,7 +114,6 @@ class i3Renamer:
         if not self.workspace_to_window_ids[workspace_number]:
             self.workspace_to_window_ids.pop(workspace_number, None)
         self.window_to_workspace_id.pop(window_id, None)
-        self.last_seen_scratchpad_output.pop(window_id, None)
 
     def rename_workspace(self, i3, workspace_number):
         """Rename workspace based on the first window"""
@@ -167,6 +166,7 @@ class i3Renamer:
         window_id: int = container.get("id")
 
         self.unregister_window_from_workspace(container, workspace_number)
+        self.last_seen_scratchpad_output.pop(window_id, None)
 
         print(f"on_window_close workspace:{workspace_number} window:{window_id}")
 
@@ -205,9 +205,9 @@ class i3Renamer:
 
                 for output in filter(lambda o: o.name == output_name, i3_outputs):
                     width = int(output.rect.width * 0.95)
-                    height = int(output.rect.height * 0.9)
+                    height = int(output.rect.height * 0.95)
 
-                    print(f"Resizing scratchpad window {window_id} on output {output_name}")
+                    print(f"Resizing scratchpad window {window_id} on output {output_name} - last seen on {last_seen_output}")
 
                     i3.command(f"border pixel 10")
                     i3.command(f"resize set width {width} px")
