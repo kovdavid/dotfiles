@@ -25,6 +25,7 @@ my $layer_colors = [
 
 my $dalsik_layer_change = "/tmp/dalsik_layer_change";
 my $dalsik_modifier_change = "/tmp/dalsik_modifier_change";
+my $dalsik_caps_word_change = "/tmp/dalsik_caps_word_change";
 
 # Read lines forever, ignore a comma at the beginning if it exists.
 while (my ($statusline) = (<STDIN> =~ /^,?(.*)/)) {
@@ -52,9 +53,21 @@ while (my ($statusline) = (<STDIN> =~ /^,?(.*)/)) {
         close $fh;
 
         unshift @blocks, {
-                full_text => "L[$layer]",
-                color => $layer_colors->[$layer] || $layer_colors->[0],
+            full_text => "L[$layer]",
+            color => $layer_colors->[$layer] || $layer_colors->[0],
         };
+    }
+    if ( -f $dalsik_caps_word_change ) {
+        open my $fh, "<", $dalsik_caps_word_change;
+        my $caps_word = <$fh>;
+        close $fh;
+
+        if ($caps_word) {
+            unshift @blocks, {
+                full_text => "CAPS_WORD",
+                color => "#00FF00",
+            };
+        }
     }
 
     print encode_json(\@blocks) . ",\n";

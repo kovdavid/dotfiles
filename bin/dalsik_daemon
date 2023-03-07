@@ -8,6 +8,7 @@ import sys
 from datetime import datetime
 
 layer_change_re = re.compile(r"L:(\d+)")
+caps_word_change_re = re.compile(r"CW:(\d+)")
 modifier_change_re = re.compile(r"M:(.)")
 
 def loop():
@@ -26,6 +27,15 @@ def loop():
             new_layer = layer_change_match.group(1)
             with open("/tmp/dalsik_layer_change", "w") as f:
                 f.write(new_layer)
+            os.system("killall -USR1 i3status")
+
+            continue
+
+        caps_word_change_match = caps_word_change_re.match(line)
+        if caps_word_change_match:
+            new_caps_word = caps_word_change_match.group(1)
+            with open("/tmp/dalsik_caps_word_change", "w") as f:
+                f.write(new_caps_word)
             os.system("killall -USR1 i3status")
 
             continue

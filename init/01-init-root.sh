@@ -176,8 +176,8 @@ ensure_polkit_config
 mkdir -p /opt/cache
 chown -R davs:davs /opt/cache
 
-sudo mkdir -p /clean_daily
-sudo chown davs:davs /clean_daily
+sudo mkdir -p /clean_daily /clean_monthly
+sudo chown davs:davs /clean_daily /clean_monthly
 
 echo "Enabling fstrim.timer"
 systemctl enable fstrim.timer

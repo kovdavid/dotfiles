@@ -69,7 +69,18 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # toggle split orientation
-bindsym $mod+s split toggle
+set $split_orientation "(v)ertical | (h)orizontal | (c)ancel"
+
+mode $split_orientation {
+    bindsym v mode default; split vertical
+    bindsym h mode default; split horizontal
+
+    bindsym Escape mode "default"
+    bindsym Enter  mode "default"
+    bindsym c      mode "default"
+}
+
+bindsym $mod+s mode $split_orientation
 
 bindsym --release $mod+Shift+s exec "sleep 0.2; scrot -s -e 'mv $f /clean_daily/$f'"
 
@@ -285,4 +296,5 @@ exec --no-startup-id /home/davs/dotfiles/bin/deduplicate_bash_history &
 # exec --no-startup-id nm-applet &
 # exec --no-startup-id pasystray &
 # exec --no-startup-id blueman-applet &
+exec --no-startup-id redshift_adjust.pl &
 exec --no-startup-id dex --autostart --environment i3
