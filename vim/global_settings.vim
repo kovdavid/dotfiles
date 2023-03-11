@@ -120,7 +120,7 @@ set guioptions+=i  "vim icon
 set guioptions+=t  "tearoff menu items
 set guitablabel=%t "show only filename in tabs
 
-set colorcolumn=80
+set colorcolumn=120
 
 set title
 set noerrorbells
