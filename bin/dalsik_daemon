@@ -46,8 +46,8 @@ def loop():
             modifiers = int(modifiers_str, 16)
 
             state = [
-                check_modifier(modifiers, "SHIFT", 1),
                 check_modifier(modifiers, "GUI", 3),
+                check_modifier(modifiers, "SHIFT", 1),
                 check_modifier(modifiers, "CTRL", 0),
                 check_modifier(modifiers, "ALT", 2),
             ]

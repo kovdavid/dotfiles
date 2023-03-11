@@ -1,12 +1,13 @@
 #include "keymap.h"
 #include "combos.h"
 
+// New experimental keymap. Inspiration from:
 // https://github.com/aleksbrgt/qmk_firmware/blob/corne_combos/keyboards/crkbd/keymaps/5col/keymap.c
 
 #define LDEFAULT 0
 #define LNUM 1
 #define LNAV 3
-#define LGUI 4
+#define LWIN 4
 
 #define OSM_SHFT  OSM(MOD_LSHIFT)
 #define OSM_CTRL  OSM(MOD_LCTRL)
@@ -22,11 +23,13 @@
 #define GUI_F14  LGUI(KC_F14)
 #define GUI_PGUP LGUI(KC_PGUP)
 #define GUI_PGDN LGUI(KC_PGDN)
+#define GUI_TAB  LGUI(KC_TAB)
+#define GUI_STAB LGUI(LSHIFT(KC_TAB))
 
 #define LNUM_TAB    DL(LNUM, KC_TAB)
 #define LNAV_ENT    DSL(LNAV, KC_ENTER)
 #define LNAV_SCOLON DSL(LNAV, KC_SEMICOLON)
-#define LGUI_SLASH  DSL(LGUI, KC_SLASH)
+#define LWIN_SLASH  DSL(LWIN, KC_SLASH)
 
     /* Combos
            0        1        2        3        4        5          6        7        8        9        10       11
@@ -45,15 +48,18 @@
        └────────┴────────┴────────┴────────┴────────┴────────┘ └────────┴────────┴────────┴────────┴────────┴────────┘
      */
 
-const KeyCoords combo1[] PROGMEM = { { 1, 1 }, { 1, 2 }           };
-const KeyCoords combo2[] PROGMEM = {           { 1, 2 }, { 1, 3 } };
-const KeyCoords combo3[] PROGMEM = { { 1, 1 }, { 1, 2 }, { 1, 3 } };
+const KeyCoords combo1[] PROGMEM = { { 1, 1 }, { 1, 2 }           }; // LGUI
+const KeyCoords combo2[] PROGMEM = {           { 1, 2 }, { 1, 3 } }; // LSHIFT
+const KeyCoords combo3[] PROGMEM = { { 1, 1 }, { 1, 2 }, { 1, 3 } }; // LGUI + LSHIFT
 
-const KeyCoords combo4[] PROGMEM = { { 1, 8 }, { 1, 9 }            };
-const KeyCoords combo5[] PROGMEM = {           { 1, 9 }, { 1, 10 } };
-const KeyCoords combo6[] PROGMEM = { { 1, 8 }, { 1, 9 }, { 1, 10 } };
+const KeyCoords combo4[] PROGMEM = { { 1, 8 }, { 1, 9 }            }; // LCTRL
+const KeyCoords combo5[] PROGMEM = {           { 1, 9 }, { 1, 10 } }; // LALT
+const KeyCoords combo6[] PROGMEM = { { 1, 8 }, { 1, 9 }, { 1, 10 } }; // LCTRL + LALT
 
 const KeyCoords combo7[] PROGMEM = { { 3, 5 }, { 3, 6 } }; // CAPS_WORD
+
+const KeyCoords combo8[] PROGMEM = { { 2, 8 }, { 2, 9 }            }; // _
+const KeyCoords combo9[] PROGMEM = {           { 2, 9 }, { 2, 10 } }; // -
 
 ComboState combos[] = COMBOS({
     COMBO(combo1, OSM(MOD_LGUI)),
@@ -65,6 +71,8 @@ ComboState combos[] = COMBOS({
     COMBO(combo6, OSM(MOD_LCTRL | MOD_LALT)),
 
     COMBO(combo7, CAPS_WORD),
+    COMBO(combo8, KC_UNDS),
+    COMBO(combo9, KC_MINS)
 });
 
 const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
@@ -76,7 +84,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
        │   A    │   S    │   D    │   F    │   G    │  Alt+  │ │  Alt+  │   H    │   J    │   K    │   L    │ L NAV  │
        │        │        │        │        │        │   Q    │ │   W    │        │        │        │        │   ;    │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
-       │   Z    │   X    │   C    │   V    │   B    │  Alt+  │ │  Alt+  │   N    │   M    │   ,    │   .    │ L GUI  │
+       │   Z    │   X    │   C    │   V    │   B    │  Alt+  │ │  Alt+  │   N    │   M    │   ,    │   .    │ L WIN  │
        │        │        │        │        │        │   1    │ │   2    │        │        │        │        │   /    │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
        │  OSM   │  OSM   │        │  CTRL  │ SHIFT  │ L NUM  │ │ BSPACE │ L NAV  │ DELETE │        │        │  LHT   │
@@ -86,8 +94,8 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
     LAYOUT_4x12(
         KC_Q,      KC_W,      KC_E,     KC_R,      KC_T,       LALT(KC_A),  /**/  LALT(KC_S),  KC_Y,      KC_U,       KC_I,     KC_O,     KC_P,
         KC_A,      KC_S,      KC_D,     KC_F,      KC_G,       LALT(KC_Q),  /**/  LALT(KC_W),  KC_H,      KC_J,       KC_K,     KC_L,     LNAV_SCOLON,
-        KC_Z,      KC_X,      KC_C,     KC_V,      KC_B,       LALT(KC_1),  /**/  LALT(KC_2),  KC_N,      KC_M,       KC_COMM,  KC_DOT,   LGUI_SLASH,
-        OSM_CTRL,  OSM_SHFT,  XXXXXXX,  CTRL_ESC,  SHIFT_SPC,  LNUM_TAB,    /**/  KC_BSPC,     LNAV_ENT,  KC_DELETE,  XXXXXXX,  XXXXXXX,  LHT(LNAV),
+        KC_Z,      KC_X,      KC_C,     KC_V,      KC_B,       LALT(KC_1),  /**/  LALT(KC_2),  KC_N,      KC_M,       KC_COMM,  KC_DOT,   LWIN_SLASH,
+        OSM_CTRL,  OSM_SHFT,  XXXXXXX,  CTRL_ESC,  SHIFT_SPC,  LNUM_TAB,    /**/  KC_BSPC,     LNAV_ENT,  KC_DELETE,  XXXXXXX,  XXXXXXX,  LHT(LNAV)
     ),
 
     /* Layer NUM
@@ -98,7 +106,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
        │  GUI   │  SHIFT │  CTRL  │  ALT   │        │        │ │        │   =    │   4    │   5    │   6    │   '    │
        │        │        │        │        │        │        │ │        │⇧  +    │⇧  $    │⇧  %    │⇧  ^    │⇧  "    │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
-       │        │        │        │        │        │        │ │        │   \    │   1    │   2    │   3    │   `    │
+       │        │        │        │   -    │        │        │ │        │   \    │   1    │   2    │   3    │   `    │
        │        │        │        │        │        │        │ │        │⇧  |    │⇧  !    │⇧  @    │⇧  #    │⇧  ~    │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
        │  OSM   │  OSM   │        │        │        │ L NUM  │ │ BSPACE │   0    │ DELETE │        │        │        │
@@ -108,8 +116,8 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
     LAYOUT_4x12(
         XXXXXXX,   XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   /**/  XXXXXXX,  KC_LBRC,  KC_7,       KC_8,     KC_9,     KC_RBRC,
         KC_LGUI,   KC_LSFT,   KC_LCTL,  KC_LALT,  XXXXXXX,  XXXXXXX,   /**/  XXXXXXX,  KC_EQL,   KC_4,       KC_5,     KC_6,     KC_QUOT,
-        XXXXXXX,   XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   /**/  XXXXXXX,  KC_BSLS,  KC_1,       KC_2,     KC_3,     KC_GRV,
-        OSM_CTRL,  OSM_SHFT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  LNUM_TAB,  /**/  KC_BSPC,  KC_0,     KC_DELETE,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+        XXXXXXX,   XXXXXXX,   XXXXXXX,  KC_MINS,  XXXXXXX,  XXXXXXX,   /**/  XXXXXXX,  KC_BSLS,  KC_1,       KC_2,     KC_3,     KC_GRV,
+        OSM_CTRL,  OSM_SHFT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  LNUM_TAB,  /**/  KC_BSPC,  KC_0,     KC_DELETE,  XXXXXXX,  XXXXXXX,  XXXXXXX
     ),
 
     /* Layer 3
@@ -131,7 +139,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX
     ),
 
     /* Layer NAV
@@ -145,26 +153,26 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
        │  F9    │  F10   │  F11   │  F12   │        │ VolMut │ │        │        │  Home  │ Insert │  End   │        │
        │        │        │        │        │        │        │ │        │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
-       │  OSM   │  OSM   │        │  CTRL  │ SHIFT  │ L NUM  │ │ BSPACE │ L NAV  │ DELETE │        │        │        │
-       │  CTRL  │  SHIFT │        │ ESCAPE │ SPACE  │   TAB  │ │        │ RETURN │        │        │        │        │
+       │  OSM   │  OSM   │        │  CTRL  │ SHIFT  │ L NUM  │ │ BSPACE │ L NAV  │ DELETE │        │        │  LHT   │
+       │  CTRL  │  SHIFT │        │ ESCAPE │ SPACE  │   TAB  │ │        │ RETURN │        │        │        │  NAV   │
        └────────┴────────┴────────┴────────┴────────┴────────┘ └────────┴────────┴────────┴────────┴────────┴────────┘
      */
     LAYOUT_4x12(
         KC_F1,     KC_F2,     KC_F3,    KC_F4,     XXXXXXX,    KC_VOLUP,  /**/  KC_SCR_SVR,  XXXXXXX,   KC_PGUP,    KC_UP,    KC_PGDN,   XXXXXXX,
         KC_F5,     KC_F6,     KC_F7,    KC_F8,     XXXXXXX,    KC_VOLDN,  /**/  XXXXXXX,     SHFT_INS,  KC_LEFT,    KC_DOWN,  KC_RIGHT,  XXXXXXX,
         KC_F9,     KC_F10,    KC_F11,   KC_F12,    XXXXXXX,    KC_MUTE,   /**/  XXXXXXX,     XXXXXXX,   KC_HOME,    KC_INS,   KC_END,    XXXXXXX,
-        OSM_CTRL,  OSM_SHFT,  XXXXXXX,  CTRL_ESC,  SHIFT_SPC,  LNUM_TAB,  /**/  KC_BSPC,     LNAV_ENT,  KC_DELETE,  XXXXXXX,  XXXXXXX,   XXXXXXX,
+        OSM_CTRL,  OSM_SHFT,  XXXXXXX,  CTRL_ESC,  SHIFT_SPC,  LNUM_TAB,  /**/  KC_BSPC,     LNAV_ENT,  KC_DELETE,  XXXXXXX,  XXXXXXX,   LHT(LNAV)
     ),
 
     /* Layer GUI
        ┌────────┬────────┬────────┬────────┬────────┬────────┐ ┌────────┬────────┬────────┬────────┬────────┬────────┐
-       │        │        │        │        │        │        │ │        │        │        │        │        │        │
-       │        │        │        │        │        │        │ │        │        │        │        │        │        │
+       │        │        │        │        │        │        │ │        │        │  Gui+  │  Gui+  │        │        │
+       │        │        │        │        │        │        │ │        │        │  Tab   │ S(Tab) │        │        │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
        │        │        │        │        │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │        │
        │        │        │        │        │        │        │ │        │        │  F13   │  F14   │   R    │        │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
-       │        │        │        │        │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │ L GUI  │
+       │        │        │        │        │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │ L WIN  │
        │        │        │        │        │        │        │ │        │        │  PgUp  │  PgDn  │   Z    │   /    │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
        │        │        │        │        │        │        │ │        │        │        │        │        │        │
@@ -172,9 +180,9 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
        └────────┴────────┴────────┴────────┴────────┴────────┘ └────────┴────────┴────────┴────────┴────────┴────────┘
      */
     LAYOUT_4x12(
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX,
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_TAB,   GUI_STAB,  XXXXXXX,     XXXXXXX,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_F13,   GUI_F14,   LGUI(KC_R),  XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_PGUP,  GUI_PGDN,  LGUI(KC_Z),  LGUI_SLASH,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX,
-    ),
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_PGUP,  GUI_PGDN,  LGUI(KC_Z),  LWIN_SLASH,
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX
+    )
 });
