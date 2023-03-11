@@ -5,11 +5,17 @@ import re
 import sys
 import time
 from collections import defaultdict
+from datetime import datetime
 from i3ipc import Connection, Event
 from pprint import pprint
 
 WINDOW_TITLE_REGEXP_IDEA = re.compile("^([^\[]+) \[")
 SCRATCHPAD_WORKSPACE_NUM = -1
+
+def log(msg: str):
+    now = datetime.now()
+    print(f"{now} {msg}")
+
 
 class i3Renamer:
     """Daemon for renaming workspaces based on the first window"""
@@ -44,7 +50,7 @@ class i3Renamer:
         for workspace in workspaces:
             workspace_number = workspace.num
 
-            print(f"Initializing workspace {workspace_number}")
+            log(f"Initializing workspace {workspace_number}")
 
             for window in workspace.nodes + workspace.floating_nodes:
                 self.register_window_to_workspace(window.ipc_data, workspace_number)
@@ -77,24 +83,26 @@ class i3Renamer:
             window_name = ""
         elif window_name == "Galculator":
             window_name = ""
+        elif window_name == "beekeeper-studio":
+            window_name = " SQL"
 
         return window_name
 
     def run_command(self, i3, command):
         time.sleep(0.1) # There is a race between window movement and workspace renaming
-        print(f"Running command: {command}")
+        log(f"Running command: {command}")
         i3.command(command)
 
     def register_window_to_workspace(self, window, workspace_number):
         window_id = window['id']
 
         if not window.get('window_properties'):
-            print(f"Window {window_id} without window_properties")
+            log(f"Window {window_id} without window_properties")
             for window in window['nodes'] + window['floating_nodes']:
                 self.register_window_to_workspace(window, workspace_number)
             return
 
-        print(f"Registering window {window_id} on workspace {workspace_number}")
+        log(f"Registering window {window_id} on workspace {workspace_number}")
 
         self.workspace_to_window_ids[workspace_number].add(window_id)
         self.window_to_workspace_id[window_id] = workspace_number
@@ -103,12 +111,12 @@ class i3Renamer:
         window_id = window['id']
 
         if not window.get('window_properties'):
-            print(f"Window {window_id} without window_properties")
+            log(f"Window {window_id} without window_properties")
             for window in window['nodes'] + window['floating_nodes']:
                 self.unregister_window_from_workspace(window, workspace_number)
             return
 
-        print(f"Unregistering window {window_id} on workspace {workspace_number}")
+        log(f"Unregistering window {window_id} on workspace {workspace_number}")
 
         self.workspace_to_window_ids[workspace_number].discard(window_id)
         if not self.workspace_to_window_ids[workspace_number]:
@@ -152,7 +160,7 @@ class i3Renamer:
         container = event.ipc_data.get("container")
         window_id: int = container.get("id")
 
-        print(f"on_window_new workspace:{workspace_number} window:{window_id}")
+        log(f"on_window_new workspace:{workspace_number} window:{window_id}")
 
         self.rename_workspace(i3, workspace)
 
@@ -168,7 +176,7 @@ class i3Renamer:
         self.unregister_window_from_workspace(container, workspace_number)
         self.last_seen_scratchpad_output.pop(window_id, None)
 
-        print(f"on_window_close workspace:{workspace_number} window:{window_id}")
+        log(f"on_window_close workspace:{workspace_number} window:{window_id}")
 
         self.rename_workspace(i3, workspace)
 
@@ -180,7 +188,7 @@ class i3Renamer:
         window_id: int = container.get("id")
 
         if not container.get('window_properties'):
-            print(f"Window {window_id} without window_properties")
+            log(f"Window {window_id} without window_properties")
             for window in container['nodes'] + container['floating_nodes']:
                 self._do_on_window_move(i3, window)
             return
@@ -192,7 +200,7 @@ class i3Renamer:
         old_workspace_number = self.window_to_workspace_id[window_id]
         new_workspace_number = con.num
 
-        print(f"on_window_move from {old_workspace_number} to {new_workspace_number}")
+        log(f"on_window_move id {window_id} from {old_workspace_number} to {new_workspace_number}")
 
         if old_workspace_number == SCRATCHPAD_WORKSPACE_NUM:
             output_name = container.get("output")
@@ -207,7 +215,7 @@ class i3Renamer:
                     width = int(output.rect.width * 0.95)
                     height = int(output.rect.height * 0.95)
 
-                    print(f"Resizing scratchpad window {window_id} on output {output_name} - last seen on {last_seen_output}")
+                    log(f"Resizing scratchpad window {window_id} on output {output_name} - last seen on {last_seen_output}")
 
                     i3.command(f"border pixel 10")
                     i3.command(f"resize set width {width} px")
@@ -225,7 +233,7 @@ class i3Renamer:
         workspace = event.ipc_data.get("current")
         workspace_number: int = workspace["num"]
 
-        print(f"on_workspace_empty workspace:{workspace_number} {workspace['name']}")
+        log(f"on_workspace_empty workspace:{workspace_number} {workspace['name']}")
 
         self.rename_workspace(i3, workspace_number)
 
@@ -253,15 +261,15 @@ def run():
     print("|_|____/|_|  \_\___|_| |_|\__,_|_| |_| |_|\___|_|   ")
     print("                                                    ")
 
-    print("Creating i3 connection")
+    log("Creating i3 connection")
     i3 = Connection()
 
-    print("Creating i3Renamer instance")
+    log("Creating i3Renamer instance")
     i3Renamer(i3)
 
-    print("Running main loop")
+    log("Running main loop")
     i3.main()
-    print("Exiting main loop")
+    log("Exiting main loop")
     sys.exit(1)
 
 if __name__ == "__main__":

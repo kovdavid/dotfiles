@@ -24,6 +24,7 @@
 /home/davs/.arduino15
 /home/davs/.cargo
 /home/davs/.cpanm
+/home/davs/.m2
 /home/davs/.config/google-chrome
 /home/davs/.config/GIMP
 /home/davs/.config/coc
@@ -51,6 +52,8 @@
 /home/davs/.kodi
 /home/davs/.vim_undo_and_swap
 /home/davs/.vscode
+/home/davs/.kube
+/home/davs/.java
 
 /home/davs/workspace/rust/*/target
 /home/davs/workspace/ocaml/*/_build

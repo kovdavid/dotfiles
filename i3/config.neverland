@@ -3,6 +3,10 @@ set $dp_screen DisplayPort-0
 set $hdmi_screen HDMI-A-0
 set $laptop_screen eDP
 
+smart_gaps on
+smart_borders no_gaps
+gaps inner 10
+
 font pango:DejaVu Sans Mono 15px
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -69,7 +73,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # toggle split orientation
-set $split_orientation "(v)ertical | (h)orizontal | (c)ancel"
+set $split_orientation "(v)ertical || <> (h)orizontal -> <> (c)ancel"
 
 mode $split_orientation {
     bindsym v mode default; split vertical

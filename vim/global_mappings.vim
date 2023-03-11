@@ -158,6 +158,7 @@ if has("ide")
     nnoremap <leader>gd :action GotoDeclaration<CR>
     nnoremap <leader>gi :action GotoImplementation<CR>
     nnoremap <leader>gt :action GotoTypeDeclaration<CR>
+    nnoremap <leader>ge :action GotoNextError<CR>
     nnoremap <leader>ha :action HideActiveWindow<CR>
     nnoremap <leader>ht :action HideAllWindows<CR>
     nnoremap <leader>n :action ShowNavBar<CR>

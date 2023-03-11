@@ -1,7 +1,7 @@
 [Unit]
 Description=i3renamer
 StartLimitIntervalSec=300
-StartLimitBurst=5
+StartLimitBurst=10
 
 [Service]
 Environment=DISPLAY=:0
