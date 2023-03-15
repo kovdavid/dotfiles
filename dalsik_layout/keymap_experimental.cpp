@@ -25,6 +25,7 @@
 #define GUI_PGUP LGUI(KC_PGUP)
 #define GUI_PGDN LGUI(KC_PGDN)
 #define GUI_TAB  LGUI(KC_TAB)
+#define GUI_RET  LGUI(KC_ENTER)
 #define GUI_STAB LGUI(LSHIFT(KC_TAB))
 
 #define LNUM_TAB    DL(LNUM, KC_TAB)
@@ -36,7 +37,7 @@
     /* Combos
            0        1        2        3        4        5          6        7        8        9        10       11
        ┌────────┬────────┬────────┬────────┬────────┐                   ┌────────┬────────┬────────┬────────┬────────┐
-     0 │        │        │        │        │        │                   │        │        │        │        │        │
+     0 │        │        │        │        │        │                   │        │      *CTRL  +   A*       │        │
        │        │        │        │        │        │                   │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤                   ├────────┼────────┼────────┼────────┼────────┤
      1 │        │     *GUI*    *SHIFT*     │        │                   │        │      *CTRL*   *ALT*      │        │
@@ -59,6 +60,7 @@ const KeyCoords combo5[] PROGMEM = {           { 1, 9 }, { 1, 10 } }; // LALT
 const KeyCoords combo6[] PROGMEM = { { 1, 8 }, { 1, 9 }, { 1, 10 } }; // LCTRL + LALT
 
 const KeyCoords combo7[] PROGMEM = { { 3, 5 }, { 3, 6 } }; // CAPS_WORD
+const KeyCoords combo8[] PROGMEM = { { 0, 8 }, { 0, 9 }, { 0, 10 } }; // Ctrl+a
 
 ComboState combos[] = COMBOS({
     COMBO(combo1, OSM(MOD_LGUI)),
@@ -69,7 +71,8 @@ ComboState combos[] = COMBOS({
     COMBO(combo5, OSM(MOD_LALT)),
     COMBO(combo6, OSM(MOD_LCTRL | MOD_LALT)),
 
-    COMBO(combo7, CAPS_WORD)
+    COMBO(combo7, CAPS_WORD),
+    COMBO(combo8, LCTRL(KC_A))
 });
 
 const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
@@ -119,10 +122,10 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
 
     /* Layer SYM
        ┌────────┬────────┬────────┬────────┬────────┬────────┐ ┌────────┬────────┬────────┬────────┬────────┬────────┐
-       │   !    │   @    │   #    │   $    │   ~    │        │ │        │        │   (    │   "    │   )    │        │
+       │   !    │   @    │   #    │   $    │   ~    │        │ │        │        │   [    │   "    │   ]    │        │
        │        │        │        │        │        │        │ │        │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
-       │   %    │   ^    │   &    │   *    │   -    │        │ │        │        │   [    │   _    │   ]    │*L SYM *│
+       │   %    │   ^    │   &    │   *    │   -    │        │ │        │        │   (    │   _    │   )    │*L SYM *│
        │        │        │        │        │        │        │ │        │        │        │        │        │*  ;   *│
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
        │   \    │   |    │   =    │   +    │   `    │        │ │        │        │   {    │   '    │   }    │        │
@@ -133,8 +136,8 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
        └────────┴────────┴────────┴────────┴────────┴────────┘ └────────┴────────┴────────┴────────┴────────┴────────┘
      */
     LAYOUT_4x12(
-        KC_EXLM,   KC_AT,   KC_HASH,  KC_DLR,    KC_TILD,    XXXXXXX,   /**/  XXXXXXX,   XXXXXXX,  KC_LPRN,    KC_DQUO,  KC_RPRN,   XXXXXXX,
-        KC_PERC,  KC_CIRC,  KC_AMPR,  KC_ASTR,   KC_MINS,    XXXXXXX,   /**/  XXXXXXX,   XXXXXXX,  KC_LBRC,    KC_UNDS,  KC_RBRC,   LSYM_SCOLON,
+        KC_EXLM,   KC_AT,   KC_HASH,  KC_DLR,    KC_TILD,    XXXXXXX,   /**/  XXXXXXX,   XXXXXXX,  KC_LBRC,    KC_DQUO,  KC_RBRC,   XXXXXXX,
+        KC_PERC,  KC_CIRC,  KC_AMPR,  KC_ASTR,   KC_MINS,    XXXXXXX,   /**/  XXXXXXX,   XXXXXXX,  KC_LPRN,    KC_UNDS,  KC_RPRN,   LSYM_SCOLON,
         KC_BSLS,  KC_PIPE,  KC_EQL,   KC_PLUS,   KC_GRV,     XXXXXXX,   /**/  XXXXXXX,   XXXXXXX,  KC_LCBR,    KC_QUOT,  KC_RCBR,   XXXXXXX,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  CTRL_ESC,  SHIFT_SPC,  LNUM_TAB,  /**/  KC_ENTER,  KC_BSPC,  KC_DELETE,  XXXXXXX,  XXXXXXX,   XXXXXXX
     ),
@@ -172,14 +175,14 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
        │        │        │        │        │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │*L WIN *│
        │        │        │        │        │        │        │ │        │        │  PgUp  │  PgDn  │   Z    │*  /   *│
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
-       │        │        │        │        │        │        │ │        │        │        │        │        │        │
-       │        │        │        │        │        │        │ │        │        │        │        │        │        │
+       │        │        │        │        │        │        │ │        │  Gui+  │        │        │        │        │
+       │        │        │        │        │        │        │ │        │ RETURN │        │        │        │        │
        └────────┴────────┴────────┴────────┴────────┴────────┘ └────────┴────────┴────────┴────────┴────────┴────────┘
      */
     LAYOUT_4x12(
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_TAB,   GUI_STAB,  XXXXXXX,     XXXXXXX,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_F13,   GUI_F14,   LGUI(KC_R),  XXXXXXX,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_PGUP,  GUI_PGDN,  LGUI(KC_Z),  LWIN_SLASH,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  GUI_RET,  XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX
     )
 });
