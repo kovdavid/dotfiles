@@ -2,6 +2,7 @@
 
 import os
 import re
+import signal
 import sys
 import time
 from collections import defaultdict
@@ -33,6 +34,18 @@ class i3Renamer:
         i3.on(Event.WINDOW_MOVE, self.on_window_move)
         i3.on(Event.WINDOW_TITLE, self.on_window_title)
         i3.on(Event.WORKSPACE_EMPTY, self.on_workspace_empty)
+
+    def print_internal_state(self, signal, frame):
+        log("workspace_to_window_ids:")
+        for workspace, window_ids in self.workspace_to_window_ids.items():
+            window_ids_str = ",".join(str(w) for w in list(window_ids))
+            log(f"\tworkspace_num:{workspace} window_ids:{window_ids_str}")
+        log("window_to_workspace_id:")
+        for window_id, workspace_num in self.window_to_workspace_id.items():
+            log(f"\twindow_id:{window_id} workspace_num:{workspace_num}")
+        log("last_seen_scratchpad_output:")
+        for window_id, output in self.last_seen_scratchpad_output.items():
+            log(f"\twindow_id:{window_id} output:{output}")
 
     def _init_tree(self, i3):
         tree = i3.get_tree()
@@ -265,10 +278,13 @@ def run():
     i3 = Connection()
 
     log("Creating i3Renamer instance")
-    i3Renamer(i3)
+    instance = i3Renamer(i3)
+
+    signal.signal(signal.SIGHUP, instance.print_internal_state)
 
     log("Running main loop")
     i3.main()
+
     log("Exiting main loop")
     sys.exit(1)
 
