@@ -23,7 +23,6 @@ class i3Renamer:
 
     def __init__(self, i3) -> None:
         # Keep track where each window is
-        self.workspace_to_window_ids: dict[int, set[int]] = defaultdict(set)
         self.window_to_workspace_id: dict[int, int] = dict()
         self.last_seen_scratchpad_output: dict[int, str] = dict()
 
@@ -36,10 +35,6 @@ class i3Renamer:
         i3.on(Event.WORKSPACE_EMPTY, self.on_workspace_empty)
 
     def print_internal_state(self, signal, frame):
-        log("workspace_to_window_ids:")
-        for workspace, window_ids in self.workspace_to_window_ids.items():
-            window_ids_str = ",".join(str(w) for w in list(window_ids))
-            log(f"\tworkspace_num:{workspace} window_ids:{window_ids_str}")
         log("window_to_workspace_id:")
         for window_id, workspace_num in self.window_to_workspace_id.items():
             log(f"\twindow_id:{window_id} workspace_num:{workspace_num}")
@@ -117,7 +112,6 @@ class i3Renamer:
 
         log(f"Registering window {window_id} on workspace {workspace_number}")
 
-        self.workspace_to_window_ids[workspace_number].add(window_id)
         self.window_to_workspace_id[window_id] = workspace_number
 
     def unregister_window_from_workspace(self, window, workspace_number):
@@ -131,9 +125,6 @@ class i3Renamer:
 
         log(f"Unregistering window {window_id} on workspace {workspace_number}")
 
-        self.workspace_to_window_ids[workspace_number].discard(window_id)
-        if not self.workspace_to_window_ids[workspace_number]:
-            self.workspace_to_window_ids.pop(workspace_number, None)
         self.window_to_workspace_id.pop(window_id, None)
 
     def rename_workspace(self, i3, workspace_number):

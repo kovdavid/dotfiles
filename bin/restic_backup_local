@@ -51,6 +51,11 @@ if [ "$1" == "b2" ] ; then
     source .envrc.b2
 fi
 
+unset DRY_RUN
+if [ "${BASH_ARGV[0]}" == "dry" ] ; then
+    DRY_RUN="--dry-run"
+fi
+
 if [ -z "$RESTIC_BACKUP_DIR" ] ; then
     echo "RESTIC_BACKUP_DIR is not set; something is wrong. Exiting."
     exit 1
@@ -77,7 +82,12 @@ if ! restic snapshots &>/dev/null ; then
 fi
 
 echo "####### $(date '+%F %T') Running backup"
-restic backup --exclude-file /home/davs/dotfiles/rsync_ignore --exclude-caches --no-scan $RESTIC_BACKUP_DIR
+restic backup $DRY_RUN --exclude-file /home/davs/dotfiles/rsync_ignore --exclude-caches --no-scan $RESTIC_BACKUP_DIR
+
+if [ -n "$DRY_RUN" ] ; then
+    echo "####### $(date '+%F %T') Finished dry-run"
+    exit
+fi
 
 echo "####### $(date '+%F %T') Cleaning up old snapshots"
 restic forget --keep-last 10 --keep-daily 7 --keep-weekly 4 --keep-monthly 1 --prune

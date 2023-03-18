@@ -104,7 +104,8 @@ let g:coc_global_extensions = [
     \ 'coc-pyright',
     \ 'coc-tsserver',
     \ 'coc-eslint',
-    \ 'coc-prettier'
+    \ 'coc-prettier',
+    \ 'coc-rust-analyzer',
     \ ]
 
 let g:AlternateExtensionMappings = [{'.cpp' : '.h', '.h' : '.ino', '.ino' : '.cpp'}, {'.c': '.h', '.h': '.c'}]

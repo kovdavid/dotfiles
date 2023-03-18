@@ -17,15 +17,7 @@ floating_modifier $mod
 bindsym $mod+Tab exec ~/bin/i3_output jump
 bindsym $mod+Shift+Tab exec ~/bin/i3_output move
 bindsym $mod+Return exec ~/bin/i3_cycle_windows
-
 bindsym $mod+x exec rofi -show script -modi "script:custom_rofi_script"
-# bindsym $mod+d exec rofi -show run
-# bindsym $mod+x exec alacritty -e ~/bin/xterm_tmux_session
-# bindsym $mod+Shift+x exec alacritty
-# bindsym $mod+i exec firefox
-# bindsym $mod+t exec thunar
-# bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono-13'
-# bindsym $mod+h exec i3_rename_workspace
 
 # PageUp & PageDown
 bindsym $mod+Prior exec i3_cycle_workspace left sequential
@@ -62,22 +54,22 @@ bindsym $mod+Shift+m move scratchpad
 bindsym $mod+m scratchpad show
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
 bindsym $mod+Right focus right
 
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
 bindsym $mod+Shift+Right move right
 
 # toggle split orientation
-set $split_orientation "(v)ertical || <> (h)orizontal -> <> (c)ancel"
+set $split_orientation "(d)own | (r)ight | (c)ancel"
 
 mode $split_orientation {
-    bindsym v mode default; split vertical
-    bindsym h mode default; split horizontal
+    bindsym d split vertical   ; mode "default"
+    bindsym r split horizontal ; mode "default"
 
     bindsym Escape mode "default"
     bindsym Enter  mode "default"
@@ -189,18 +181,11 @@ bindsym $mod+Shift+R restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# resize window (you can also use the mouse for that)
 mode "resize" {
-    # These bindings trigger as soon as you enter the resize mode
-
-    # Pressing left will shrink the window’s width.
-    # Pressing right will grow the window’s width.
-    # Pressing up will shrink the window’s height.
-    # Pressing down will grow the window’s height.
-    #bindsym j resize shrink width 10 px or 10 ppt
-    #bindsym k resize grow height 10 px or 10 ppt
-    #bindsym l resize shrink height 10 px or 10 ppt
-    #bindsym semicolon resize grow width 10 px or 10 ppt
+    bindsym h resize grow   width  5 px or 10 ppt
+    bindsym j resize grow   height 5 px or 10 ppt
+    bindsym k resize shrink height 5 px or 10 ppt
+    bindsym l resize shrink width  5 px or 10 ppt
 
     bindsym Right resize shrink width 5 px or 10 ppt
     bindsym Left resize grow width 5 px or 10 ppt
@@ -263,9 +248,6 @@ bar {
     colors {
         inactive_workspace #5f676a #222222 #888888
     }
-
-    # mode hide
-    # modifier $mod
 }
 
 # use xprop ;)
