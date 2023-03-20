@@ -1,0 +1,68 @@
+#!/bin/bash
+
+. /home/davs/.bash_profile
+
+await_window () {
+    while true; do
+        sleep 1
+        if [ "$(i3_focused_window_name)" == "$1" ] ; then
+            break
+        fi
+    done
+}
+
+i3-msg "workspace number 2"
+i3-msg 'exec alacritty -e "tmux_start"'
+await_window "Alacritty"
+
+tmux_new_session vl
+
+i3-msg "workspace number 1"
+i3-msg 'exec firefox'
+await_window "firefox"
+
+i3-msg "workspace number 3"
+i3-msg 'exec "idea"'
+await_window "jetbrains-idea-ce"
+
+i3-msg "workspace number 4"
+i3-msg 'exec Thunar'
+await_window "Thunar"
+
+# Second monitor
+if [[ $(xrandr | grep -w connected | wc -l) -gt 1 ]] ; then
+    i3-msg "workspace number 12"
+    i3-msg 'exec alacritty -e "tmux_join"'
+    await_window "Alacritty"
+
+    i3-msg "workspace number 11"
+    i3-msg 'exec firefox'
+    await_window "firefox"
+
+    i3-msg "workspace number 13"
+    i3-msg 'exec "slack"'
+    await_window "Slack"
+
+    i3-msg "workspace number 14"
+    i3-msg 'exec Thunar'
+    await_window "Thunar"
+else
+    i3-msg "workspace number 5"
+    i3-msg 'exec "slack"'
+    await_window "Slack"
+fi
+
+i3-msg "workspace number 9"
+i3-msg 'exec alacritty -e "tmux_start"'
+await_window "Alacritty"
+i3-msg 'move scratchpad'
+
+sleep 1
+
+i3-msg "workspace number 11"
+i3-msg "workspace number 1"
+
+# sleep 1
+
+# Twisto VPN
+# nmcli con up vpn-name
