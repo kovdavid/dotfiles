@@ -67,3 +67,4 @@ else
 	alias j="echo 'Clone https://github.com/DavsX/jump.git to ~/workspace/bash/jump'"
 fi
 alias xvim="xargs -o nvim"
+alias rgtree="rg --files | tree --fromfile"
