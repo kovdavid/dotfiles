@@ -192,9 +192,9 @@ sub handle_args {
             close $fh;
 
             print_log("touch ${\DISABLE_FILE}");
-        }
 
-        exit system("redshift -x");
+            exit system("redshift -x");
+        }
     }
 
     if ( -f DISABLE_FILE ) {
