@@ -1,9 +1,9 @@
 #!/bin/bash
 
-killall -q polybar
+killall -q -w polybar
 
 for monitor in $(polybar --list-monitors | cut -d":" -f1); do
-    MONITOR=$monitor polybar --reload main 2>&1 | tee -a /tmp/polybar_${monitor}.log & disown
+    MONITOR=$monitor polybar 2>&1 | tee -a /tmp/polybar_${monitor}.log & disown
 done
 
 echo "Polybar started..."

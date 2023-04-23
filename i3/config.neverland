@@ -239,8 +239,9 @@ bindsym $mod+Shift+Z mode $monitor_modes
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    font pango:DejaVu Sans Mono 14px
-    status_command i3status -c ~/.config/i3status/config | ~/bin/i3status_wrapper
+    font pango:DejaVu Sans Mono, pango:FontAwesome6Free, pango:FontAwesome6Brands 14px
+    # status_command i3status -c ~/.config/i3status/config | ~/bin/i3status_wrapper
+    status_command i3status-rs ~/.config/i3status/config.toml
     tray_output $dp_screen
     tray_output $hdmi_screen
     tray_output $laptop_screen
@@ -270,10 +271,10 @@ for_window [class="^jetbrains-.+" title="(?i)conflicts"] border pixel 5, move po
 for_window [class="^jetbrains-.+" title="(?i)merge .+"] border pixel 5, move position center
 for_window [class="(?i)pavucontrol"] floating enable, move position mouse, move down 30, move left 30, sticky enable
 
-exec --no-startup-id en &
-exec ~/bin/mon left &
-exec ~/bin/init_trackpoint &
-exec ~/bin/init_touchpad &
+exec_always --no-startup-id en &
+exec_always --no-startup-id ~/bin/mon left &
+exec_always --no-startup-id ~/bin/init_trackpoint &
+exec_always --no-startup-id ~/bin/init_touchpad &
 # exec xrdb -merge ~/.Xresources &
 # exec (sleep 1 && nitrogen --restore) &
 exec /usr/bin/sed -i "s/^[^#]/# &/" /home/davs/.ssh/authorized_keys
@@ -284,3 +285,4 @@ exec --no-startup-id /home/davs/dotfiles/bin/deduplicate_bash_history &
 # exec --no-startup-id blueman-applet &
 exec --no-startup-id redshift_adjust.pl &
 exec --no-startup-id dex --autostart --environment i3
+# exec_always --no-startup-id ~/dotfiles/polybar/launch.sh &

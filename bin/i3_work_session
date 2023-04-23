@@ -64,5 +64,5 @@ i3-msg "workspace number 1"
 
 # sleep 1
 
-# Twisto VPN
+# VPN
 # nmcli con up vpn-name

@@ -238,3 +238,4 @@ git config core.sshCommand "ssh -i ~/.ssh/id_rsa_example -F /dev/null"
 
 yay -S programmer-calculator # pcalc
 yay -S pamixer
+yay -S upower

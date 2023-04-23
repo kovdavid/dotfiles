@@ -1,70 +1,85 @@
 #!/usr/bin/env python
 
 import re
+from typing import Literal, NoReturn
 import serial
 import os
 import time
 import sys
 from datetime import datetime
+from collections import defaultdict
 
-layer_change_re = re.compile(r"L:(\d+)")
-caps_word_change_re = re.compile(r"CW:(\d+)")
-modifier_change_re = re.compile(r"M:(.)")
+layer_change_re: re.Pattern[str] = re.compile(r"L:(\d+)")
+caps_word_change_re: re.Pattern[str] = re.compile(r"CW:(\d+)")
+modifier_change_re: re.Pattern[str] = re.compile(r"M:(.)")
 
-def loop():
-    ser = serial.Serial(
+current_layer: Literal['0', '1'] = "0"
+caps_word: Literal['0', '1'] = "0"
+modifiers: defaultdict[str, Literal['0', '1']] = defaultdict(lambda: "0")
+
+
+def notify_bar():
+    os.system("pkill -SIGRTMIN+4 i3status-rs")
+
+
+def loop() -> NoReturn:
+    ser: serial.Serial = serial.Serial(
         port="/dev/ttyACM0",
         baudrate=9600,
     )
 
     while True:
-        now = datetime.now()
-        line = ser.readline().decode("ascii").rstrip()
+        now: datetime = datetime.now()
+        line: str = ser.readline().decode("ascii").rstrip()
         print(f"{now} Received {line}")
 
         layer_change_match = layer_change_re.match(line)
         if layer_change_match:
-            new_layer = layer_change_match.group(1)
-            with open("/tmp/dalsik_layer_change", "w") as f:
-                f.write(new_layer)
-            os.system("killall -USR1 i3status")
+            globals()["current_layer"] = layer_change_match.group(1)
+            dump_state()
 
             continue
 
         caps_word_change_match = caps_word_change_re.match(line)
         if caps_word_change_match:
-            new_caps_word = caps_word_change_match.group(1)
-            with open("/tmp/dalsik_caps_word_change", "w") as f:
-                f.write(new_caps_word)
-            os.system("killall -USR1 i3status")
+            globals()["caps_word"] = caps_word_change_match.group(1)
+            dump_state()
 
             continue
 
         modifier_change_match = modifier_change_re.match(line)
         if modifier_change_match:
-            modifiers_str = modifier_change_match.group(1)
-            modifiers = int(modifiers_str, 16)
+            modifiers_str: str = modifier_change_match.group(1)
+            modifiers_bitmask: int = int(modifiers_str, 16)
 
-            state = [
-                check_modifier(modifiers, "GUI", 3),
-                check_modifier(modifiers, "SHIFT", 1),
-                check_modifier(modifiers, "CTRL", 0),
-                check_modifier(modifiers, "ALT", 2),
-            ]
+            modifiers["CTRL"] = extract_modifier(modifiers_bitmask, 0)
+            modifiers["SHIFT"] = extract_modifier(modifiers_bitmask, 1)
+            modifiers["ALT"] = extract_modifier(modifiers_bitmask, 2)
+            modifiers["GUI"] = extract_modifier(modifiers_bitmask, 3)
 
-            with open("/tmp/dalsik_modifier_change", "w") as f:
-                f.write("\n".join(state))
-            os.system("killall -USR1 i3status")
+            dump_state()
 
             continue
 
-    ser.close()
 
-
-def check_modifier(modifiers, name, shift):
+def extract_modifier(modifiers, shift) -> Literal['1', '0']:
     if modifiers & (1 << shift) or modifiers & (1 << shift + 4):
-        return f"{name} 1"
-    return f"{name} 0"
+        return "1"
+    return "0"
+
+
+def dump_state() -> None:
+    with open("/tmp/dalsik.env", "w") as f:
+        f.writelines([
+            f"CAPS_WORD={caps_word}\n",
+            f"LAYER={current_layer}\n",
+            f"CTRL={modifiers['CTRL']}\n",
+            f"SHIFT={modifiers['SHIFT']}\n",
+            f"ALT={modifiers['ALT']}\n",
+            f"GUI={modifiers['GUI']}\n",
+        ])
+
+    notify_bar()
 
 
 def remove(filePath):
@@ -77,12 +92,11 @@ def run_loop():
         try:
             print("Running loop")
             loop()
-            print("Exiting loop")
         except Exception as e:
             print(e)
 
-        remove("/tmp/dalsik_layer_change")
-        remove("/tmp/dalsik_modifier_change")
+        remove("/tmp/dalsik.env")
+        notify_bar()
 
         print("Sleeping for 60 seconds")
         time.sleep(60)
@@ -95,4 +109,3 @@ if __name__ == "__main__":
             os.system(f"systemctl --user {arg} dalsik_daemon")
     else:
         run_loop()
-

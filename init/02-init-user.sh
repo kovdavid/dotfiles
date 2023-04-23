@@ -30,8 +30,8 @@ mkdir -p ~/.config/systemd/user
 ln -sf ~/dotfiles/systemd/i3lock/i3lock.service ~/.config/systemd/user/
 systemctl enable --user i3lock.service
 
-ln -sf ~/dotfiles/systemd/i3renamer/i3renamer.service ~/.config/systemd/user
-systemctl enable --user i3renamer.service
+ln -sf ~/dotfiles/systemd/i3daemon/i3daemon.service ~/.config/systemd/user
+systemctl enable --user i3daemon.service
 
 ln -sf ~/dotfiles/systemd/dalsik_daemon/dalsik_daemon.service ~/.config/systemd/user
 systemctl enable --user dalsik_daemon.service

@@ -1,0 +1,16 @@
+[Unit]
+Description=i3daemon
+StartLimitIntervalSec=300
+StartLimitBurst=10
+
+[Service]
+Environment=DISPLAY=:0
+ExecStart=%h/bin/i3daemon
+Restart=on-failure
+RestartSec=5s
+
+StandardOutput=append:/clean_daily/i3daemon.log
+StandardError=append:/clean_daily/i3daemon.log
+
+[Install]
+WantedBy=default.target

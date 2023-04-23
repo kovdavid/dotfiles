@@ -15,9 +15,7 @@ ln -sf ~/dotfiles/bash/alias           ~/.bashrc.alias
 ln -sf ~/dotfiles/bash/common          ~/.bashrc.common
 
 if [ ! -f ~/.Xresources.local ] ; then
-    if [ $(hostname) == "candyland" ] ; then
-        echo "XTerm*faceSize: 11" > ~/.Xresources.local
-    elif [ $(hostname) == "neverland" ] ; then
+    if [ $(hostname) == "neverland" ] ; then
         echo "XTerm*faceSize: 13" > ~/.Xresources.local
     else
         echo "You have to manually create ~/.Xresources.local"
@@ -30,14 +28,10 @@ remove_and_link_dotfile bash_profile
 remove_and_link_dotfile bashrc
 
 ln -sf ~/dotfiles/gitconfig ~/.gitconfig
-if [ $(hostname) == "candyland" ] ; then
+if [ $(hostname) == "neverland" ] ; then
     echo "[user]" > ~/.gitconfig.local
     echo "    name = Dávid Kovács" >> ~/.gitconfig.local
     echo "    email = kovdavid@gmail.com" >> ~/.gitconfig.local
-elif [ $(hostname) == "neverland" ] ; then
-    echo "[user]" > ~/.gitconfig.local
-    echo "    name = Dávid Kovács" >> ~/.gitconfig.local
-    echo "    email = david.kovacs@vacuumlabs.com" >> ~/.gitconfig.local
 else
     echo "You have to manually create ~/.gitconfig.local"
 fi
@@ -48,12 +42,9 @@ ln -s ~/dotfiles/git-templates/ ~/.git-templates
 mkdir -p ~/.config/i3
 mkdir -p ~/.config/i3status
 
-if [ $(hostname) == "candyland" ] ; then
-    ln -sf ~/dotfiles/i3/config.candyland ~/.config/i3/config
-    ln -sf ~/dotfiles/i3/i3status.candyland ~/.config/i3status/config
-elif [ $(hostname) == "neverland" ] ; then
+if [ $(hostname) == "neverland" ] ; then
     ln -sf ~/dotfiles/i3/config.neverland ~/.config/i3/config
-    ln -sf ~/dotfiles/i3/i3status.neverland ~/.config/i3status/config
+    ln -sf ~/dotfiles/i3/i3status-rust.neverland ~/.config/i3status/config.toml
 else
     echo "You have to manually link i3/config and i3/status!"
 fi

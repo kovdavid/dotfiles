@@ -1,0 +1,73 @@
+icons_format = "{icon}"
+
+[theme]
+theme = "gruvbox-dark"
+
+[icons]
+icons = "awesome4"
+
+[[block]]
+block = "focused_window"
+[block.format]
+full = " $title.str(max_w:51) |"
+
+[[block]]
+block = "custom"
+command = ''' bash ~/dotfiles/i3/dalsik.sh '''
+hide_when_empty = true
+signal = 4
+
+[[block]]
+block = "disk_space"
+path = "/"
+info_type = "available"
+alert_unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+format = " $icon $available.eng(w:2) "
+
+[[block]]
+block = "backlight"
+format = "$icon $brightness"
+
+[[block]]
+block = "cpu"
+format = " $icon $utilization $boost "
+format_alt = " $icon $utilization $boost $frequency /$max_frequency "
+
+[[block]]
+block = "temperature"
+inputs = ["CPU"]
+format = " $icon $max"
+
+[[block]]
+block = "battery"
+driver = "upower"
+device = "DisplayDevice"
+format = " $icon $percentage $time "
+not_charging_format = " $icon $percentage"
+
+[[block]]
+block = "custom"
+command = '''xkblayout-state print "%s"'''
+interval = 2
+
+[[block]]
+block = "net"
+format = " $icon "
+format_alt = " $icon {$signal_strength $ssid $frequency|Wired connection} via $device at $ip "
+
+[[block]]
+block = "sound"
+[[block.click]]
+button = "left"
+action = "toggle_mute"
+[[block.click]]
+button = "right"
+cmd = "pavucontrol"
+
+[[block]]
+block = "time"
+[block.format]
+full = "$timestamp.datetime(f:'%F %T') "
