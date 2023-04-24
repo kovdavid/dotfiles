@@ -57,6 +57,8 @@ interval = 2
 block = "net"
 format = " $icon "
 format_alt = " $icon {$signal_strength $ssid $frequency|Wired connection} via $device at $ip "
+[block.theme_overrides]
+idle_fg = "#167ECC"
 
 [[block]]
 block = "sound"

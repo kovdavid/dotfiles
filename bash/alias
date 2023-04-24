@@ -28,6 +28,7 @@ alias gdtsh='git diff --stat HEAD'
 alias gchanged='(cd `git root`; git status --short | awk "{ print \$2 }")'
 alias gci='git commit'
 alias gcidate='date "+%F %T" | git commit --file -'
+alias gciwip='date "+%F %T" | (echo -n "WIP " && cat) | git commit --file -'
 alias gco='git checkout'
 alias gfo='git fetch origin && git rev-parse --abbrev-ref HEAD | xargs -I{} git diff --stat {}..origin/{}'
 alias git_branches_without_remote="git branch -vv | grep 'gone]' | awk '{ print \$1 }'"
