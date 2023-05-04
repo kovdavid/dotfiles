@@ -1,5 +1,6 @@
 #include "keymap.h"
 #include "combos.h"
+#include "tapdance.h"
 
 // New experimental keymap. Inspiration from:
 // https://github.com/aleksbrgt/qmk_firmware/blob/corne_combos/keyboards/crkbd/keymaps/5col/keymap.c
@@ -75,6 +76,13 @@ ComboState combos[] = COMBOS({
     COMBO(combo8, LCTRL(KC_A))
 });
 
+// Just testing
+const uint32_t tapdance1[] PROGMEM = { KC_A, KC_B, LGUI(KC_C) };
+
+TapDance tapdances[] = {
+    TAPDANCE(tapdance1),
+};
+
 const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
     /* Layer DEFAULT
        ┌────────┬────────┬────────┬────────┬────────┬────────┐ ┌────────┬────────┬────────┬────────┬────────┬────────┐
@@ -95,7 +103,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
         KC_Q,      KC_W,      KC_E,     KC_R,      KC_T,       LALT(KC_A),  /**/  LALT(KC_S),  KC_Y,      KC_U,       KC_I,     KC_O,     KC_P,
         KC_A,      KC_S,      KC_D,     KC_F,      KC_G,       LALT(KC_Q),  /**/  LALT(KC_W),  KC_H,      KC_J,       KC_K,     KC_L,     LSYM_SCOLON,
         KC_Z,      KC_X,      KC_C,     KC_V,      KC_B,       LALT(KC_1),  /**/  LALT(KC_2),  KC_N,      KC_M,       KC_COMM,  KC_DOT,   LWIN_SLASH,
-        OSM_CTRL,  OSM_SHFT,  XXXXXXX,  CTRL_ESC,  SHIFT_SPC,  LNUM_TAB,    /**/  LNUM_RET,    LNAV_BSPC,  KC_DELETE,  XXXXXXX,  XXXXXXX,  LHT(LNAV)
+        OSM_CTRL,  OSM_SHFT,  XXXXXXX,  CTRL_ESC,  SHIFT_SPC,  LNUM_TAB,    /**/  LNUM_RET,    LNAV_BSPC, KC_DELETE,  XXXXXXX,  XXXXXXX,  LHT(LNAV)
     ),
 
     /* Layer NUM
@@ -169,11 +177,11 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
        │        │        │        │        │        │        │ │        │        │  Gui+  │  Gui+  │        │        │
        │        │        │        │        │        │        │ │        │        │  Tab   │ S(Tab) │        │        │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
-       │        │        │        │        │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │        │
-       │        │        │        │        │        │        │ │        │        │  F13   │  F14   │   R    │        │
+       │        │ MOUSE  │ MOUSE  │ MOUSE  │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │        │
+       │        │ B LEFT │ B MID  │ B RIGHT│        │        │ │        │        │  F13   │  F14   │   R    │        │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
-       │        │        │        │        │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │*L WIN *│
-       │        │        │        │        │        │        │ │        │        │  PgUp  │  PgDn  │   Z    │*  /   *│
+       │        │ MS BTN │        │ MS BTN │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │*L WIN *│
+       │        │   4    │        │   5    │        │        │ │        │        │  PgUp  │  PgDn  │   Z    │*  /   *│
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
        │        │        │        │        │        │        │ │        │  Gui+  │        │        │        │        │
        │        │        │        │        │        │        │ │        │ RETURN │        │        │        │        │
@@ -181,8 +189,8 @@ const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
      */
     LAYOUT_4x12(
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_TAB,   GUI_STAB,  XXXXXXX,     XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_F13,   GUI_F14,   LGUI(KC_R),  XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_PGUP,  GUI_PGDN,  LGUI(KC_Z),  LWIN_SLASH,
+        XXXXXXX,  MS(BTN1), MS(BTN3), MS(BTN2), XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_F13,   GUI_F14,   LGUI(KC_R),  XXXXXXX,
+        XXXXXXX,  MS(BTN4), XXXXXXX,  MS(BTN5), XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_PGUP,  GUI_PGDN,  LGUI(KC_Z),  LWIN_SLASH,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  GUI_RET,  XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX
     )
 });
