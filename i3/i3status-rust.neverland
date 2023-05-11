@@ -50,7 +50,8 @@ not_charging_format = " $icon $percentage"
 
 [[block]]
 block = "custom"
-command = '''xkblayout-state print "%s"'''
+command = '''xkblayout-state print "%s" | sed -e "s/us//"'''
+hide_when_empty = true
 interval = 2
 
 [[block]]

@@ -41,9 +41,9 @@ let g:rooter_manual_only = 0
 let g:rooter_change_directory_for_non_project_files = 1
 
 " snippets
-let g:snips_author = "David Kovacs [DavsX]"
+let g:snips_author = "Dávid Kovács"
 let g:snips_email = "kovdavid@gmail.com"
-let g:snips_github = "http://github.com/DavsX"
+let g:snips_github = "http://github.com/kovdavid"
 
 " NERDTree
 function! NERDTreeFindToggle()

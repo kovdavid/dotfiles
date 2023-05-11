@@ -15,7 +15,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-endwise'
 Plug 'junkblocker/git-time-lapse'
 Plug 'benekastah/neomake'
-Plug 'DavsX/vim_test_runner', { 'for': 'perl' }
+Plug 'kovdavid/vim_test_runner', { 'for': 'perl' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 " Plug 'fatih/vim-go'
 " Plug 'HerringtonDarkholme/yats.vim'

@@ -20,6 +20,10 @@ else
     CD_DIR=$ARG_WINDOW_DIR
 fi
 
+if [ "$CD_DIR" == "pwd" ] ; then
+    CD_DIR=$(tmux display-message -t{last} -p '#{pane_current_path}')
+fi
+
 TMUX_CMD="cd $CD_DIR; bash"
 
 if [ -n "$WINDOW_NAME" ] ; then

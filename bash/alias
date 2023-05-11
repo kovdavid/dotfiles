@@ -65,7 +65,7 @@ if [ -f ~/workspace/bash/jump/jump ] ; then
 	. ~/workspace/bash/jump/jump
 	alias j="__davsx_jump"
 else
-	alias j="echo 'Clone https://github.com/DavsX/jump.git to ~/workspace/bash/jump'"
+	alias j="echo 'Clone https://github.com/kovdavid/jump.git to ~/workspace/bash/jump'"
 fi
 alias xvim="xargs -o nvim"
 alias rgtree="rg --files | tree --fromfile"
