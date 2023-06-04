@@ -56,7 +56,7 @@
 /home/davs/.kube
 /home/davs/.java
 
-/home/davs/workspace/rust/*/target
+/home/davs/workspace/rust/**/target
 /home/davs/workspace/ocaml/*/_build
 /home/davs/workspace/elixir/*/deps
 /home/davs/workspace/elixir/*/_build

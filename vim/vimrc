@@ -240,4 +240,12 @@ augroup python
     autocmd FileType python nnoremap <buffer> <leader>rr :!env python %<CR>
 augroup END
 " }}}
+" JavaScript {{{
+" TypeScript {{{
+augroup TypeScript
+    autocmd!
+
+    autocmd FileType javascript nnoremap <buffer> <leader>rr :!node %<CR>
+augroup END
+" }}}
 " }}}
