@@ -80,6 +80,7 @@ let g:NERDSpaceDelims = 1
 " delimitMate
 let g:delimitMate_expand_cr = 0
 let g:delimitMate_expand_space = 1
+let g:delimitMate_quotes = "\" '"
 
 " vim-go
 let g:go_highlight_build_constraints = 1
@@ -101,7 +102,7 @@ let g:coc_disable_startup_warning = 1
 " JavaScript - 'coc-tsserver', 'coc-eslint', 'coc-prettier',
 " Python - 'coc-pyright
 let g:coc_global_extensions = [
-    \ 'coc-pyright',
+    \ 'coc-jedi',
     \ 'coc-tsserver',
     \ 'coc-eslint',
     \ 'coc-prettier',
