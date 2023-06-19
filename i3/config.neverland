@@ -38,8 +38,8 @@ bindsym XF86AudioMute exec "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 bindsym XF86AudioMicMute exec "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
 bindsym XF86AudioLowerVolume exec ~/bin/i3_volume_change down
 bindsym XF86AudioRaiseVolume exec ~/bin/i3_volume_change up
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && notify-send -t 1000 "Brightness $(brightnessctl)"
-bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && notify-send -t 1000 "Brightness $(brightnessctl)"
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && pkill -SIGRTMIN+5 i3status-rs
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && pkill -SIGRTMIN+5 i3status-rs
 bindsym XF86ScreenSaver exec i3lock_wrapper
 bindsym XF86Sleep exec "i3lock_wrapper; systemctl suspend"
 

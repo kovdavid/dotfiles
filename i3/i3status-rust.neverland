@@ -30,6 +30,7 @@ format = " $icon $available.eng(w:2) "
 [[block]]
 block = "backlight"
 format = "$icon $brightness"
+signal = 5
 
 [[block]]
 block = "cpu"
