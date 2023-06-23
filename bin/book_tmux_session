@@ -1,0 +1,33 @@
+#!/bin/bash
+
+. /home/davs/.bash_profile
+
+cd /home/davs/workspace/ebook-keyboard
+
+i3-msg 'exec alacritty -e "tmux_start"'
+sleep 1
+
+tmux_new_session book
+
+tmux rename-window book
+tmux send-keys "cd book" C-m
+tmux send-keys "ls [0-9]*.md | tail -n 1 | xvim" C-m
+
+CODE_DIR=$(ls -d code/[1-9]* | tail -n 1)
+NEWEST_FILE=$(cd $CODE_DIR; find lib/ -print0 | xargs -r -0 ls -1 -t | head -1)
+
+tmux_new_window "code" "$(pwd)/$CODE_DIR"
+tmux send-keys "git status" C-m
+tmux send-keys "vim $NEWEST_FILE" C-m
+
+
+tmux_new_window "build" "$(pwd)/$CODE_DIR"
+# tmux send-keys "clr ; rm -rf build/ ; make 2>&1 > /dev/null | head -n 40" C-m
+tmux send-keys 'inotifyrun lib/ test/ -- "for i in {1..100}; do echo ; done; clear ; rm -rf build/ ; make 2>&1 > /dev/null | head -n 40"' C-m
+
+tmux_new_window "dalsik" /home/davs/workspace/avr/dalsik
+
+tmux_new_window "serve" $(pwd)
+tmux send-keys "make serve"
+
+tmux next-window
