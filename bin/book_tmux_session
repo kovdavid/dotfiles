@@ -20,12 +20,14 @@ tmux_new_window "code" "$(pwd)/$CODE_DIR"
 tmux send-keys "git status" C-m
 tmux send-keys "vim $NEWEST_FILE" C-m
 
-
 tmux_new_window "build" "$(pwd)/$CODE_DIR"
 # tmux send-keys "clr ; rm -rf build/ ; make 2>&1 > /dev/null | head -n 40" C-m
-tmux send-keys 'inotifyrun lib/ test/ -- "for i in {1..100}; do echo ; done; clear ; rm -rf build/ ; make 2>&1 > /dev/null | head -n 40"' C-m
+tmux send-keys 'inotifyrun lib/ test/ -- "for i in {1..100}; do echo; done; rm -rf build/ ; make 2>&1 > /dev/null | head -n 40"' C-m
 
 tmux_new_window "dalsik" /home/davs/workspace/avr/dalsik
+
+tmux_new_window "test" "$(pwd)/$CODE_DIR"
+tmux send-keys 'inotifyrun lib/ test/ -- "for i in {1..100}; do echo; done; make test"' C-m
 
 tmux_new_window "serve" $(pwd)
 tmux send-keys "make serve"

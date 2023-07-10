@@ -59,6 +59,7 @@ alias tree="tree -C"
 alias up="cd \`get_up_directory\`"
 if [ -n "$(which nvim 2>/dev/null)" ] ; then
     alias vim="nvim"
+    alias view="nvim -M"
 fi
 alias vp="touch .vimproject"
 if [ -f ~/workspace/bash/jump/jump ] ; then
