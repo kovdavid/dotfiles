@@ -45,35 +45,7 @@ let g:snips_author = "Dávid Kovács"
 let g:snips_email = "kovdavid@gmail.com"
 let g:snips_github = "http://github.com/kovdavid"
 
-" NERDTree
-function! NERDTreeFindToggle()
-    if &filetype=='nerdtree'
-        execute 'NERDTreeClose'
-    else
-        if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
-            execute 'NERDTreeClose'
-        else
-            execute 'NERDTreeFind'
-        endif
-    endif
-endfunction
-nnoremap <F5> :call NERDTreeFindToggle()<CR>
-
-let NERDTreeIgnore = ['\.pyc$']
-let NERDTreeChDirMode=0
-
-" Fugitive
-nnoremap gst :Gstatus<CR>5j
-nnoremap gd :Gvdiff<CR>
-nnoremap gci :let @f=expand("%:t:r")<CR>:Gwrite <BAR> Gcommit<CR>O<C-R>f:<space>
-nnoremap gca :Gwrite <BAR> Gcommit --amend<CR>ggA
-
 " NERDCommenter
-let g:NERDCustomDelimiters = {
-            \ 'elixir': { 'left': '#' },
-            \ 'haskell': { 'left': '--' },
-            \ 'arduino': { 'left': '//' }
-            \}
 let g:NERDRemoveExtraSpaces = 1
 let g:NERDSpaceDelims = 1
 
@@ -81,21 +53,6 @@ let g:NERDSpaceDelims = 1
 let g:delimitMate_expand_cr = 0
 let g:delimitMate_expand_space = 1
 let g:delimitMate_quotes = "\" '"
-
-" vim-go
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-
-" LanguageClient
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['javascript-typescript-stdio']
-    \ }
 
 let g:coc_disable_startup_warning = 1
 
@@ -110,6 +67,3 @@ let g:coc_global_extensions = [
     \ ]
 
 let g:AlternateExtensionMappings = [{'.cpp' : '.h', '.h' : '.ino', '.ino' : '.cpp'}, {'.c': '.h', '.h': '.c'}]
-
-" Ale
-let b:ale_fixers = {'python': ['add_blank_lines_for_python_control_statements', 'black', 'isort', 'trim_whitespace']}

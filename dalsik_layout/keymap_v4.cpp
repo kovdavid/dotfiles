@@ -16,15 +16,9 @@
 #define OSM_ALT   OSM(MOD_LALT)
 #define OSM_GUI   OSM(MOD_LGUI)
 
-#define CTRL_ESC  DM(MOD_LCTRL, KC_ESCAPE)
-#define SHIFT_SPC DM(MOD_LSHIFT, KC_SPACE)
+#define CTRL_ESC  D(MOD_LCTRL, KC_ESCAPE)
+#define SHIFT_SPC D(MOD_LSHIFT, KC_SPACE)
 #define SHFT_INS  LSHIFT(KC_INS)
-
-#define M_BTN1 MOUSE_BUTTON(BTN1)
-#define M_BTN2 MOUSE_BUTTON(BTN2)
-#define M_BTN3 MOUSE_BUTTON(BTN3)
-#define M_BTN4 MOUSE_BUTTON(BTN4)
-#define M_BTN5 MOUSE_BUTTON(BTN5)
 
 // i3 navigation
 #define GUI_F13  LGUI(KC_F13)
@@ -89,7 +83,7 @@ const TapDance tapdances[] = TAPDANCES({
     TAPDANCE(tapdance1),
 });
 
-const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] PROGMEM = KEYMAP({
+const uint32_t keymap[][KEYBOARD_ROWS][KEYBOARD_COLS] PROGMEM = KEYMAP({
     /* Layer DEFAULT
        ┌────────┬────────┬────────┬────────┬────────┬────────┐ ┌────────┬────────┬────────┬────────┬────────┬────────┐
        │   Q    │   W    │   E    │   R    │   T    │  Alt+  │ │  Alt+  │   Y    │   U    │   I    │   O    │   P    │
@@ -183,8 +177,8 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] PROGMEM = KEYMAP({
        │        │        │        │        │        │        │ │        │        │  Gui+  │  Gui+  │        │        │
        │        │        │        │        │        │        │ │        │        │  Tab   │ S(Tab) │        │        │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
-       │        │ MS BTN │ MS BTN │ MS BTN │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │        │
-       │        │  LEFT  │ MIDDLE │ RIGHT  │        │        │ │        │        │  F13   │  F14   │   R    │        │
+       │        │ MOUSE  │ MOUSE  │ MOUSE  │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │        │
+       │        │ B LEFT │ B MID  │ B RIGHT│        │        │ │        │        │  F13   │  F14   │   R    │        │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
        │        │ MS BTN │        │ MS BTN │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │*L WIN *│
        │        │   4    │        │   5    │        │        │ │        │        │  PgUp  │  PgDn  │   Z    │*  /   *│
@@ -195,8 +189,8 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] PROGMEM = KEYMAP({
      */
     LAYOUT_4x12(
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_TAB,   GUI_STAB,  XXXXXXX,     XXXXXXX,
-        XXXXXXX,  M_BTN1 ,  M_BTN3 ,  M_BTN2 ,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_F13,   GUI_F14,   LGUI(KC_R),  XXXXXXX,
-        XXXXXXX,  M_BTN4 ,  XXXXXXX,  M_BTN5 ,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_PGUP,  GUI_PGDN,  LGUI(KC_Z),  LWIN_SLASH,
+        XXXXXXX,  MS(BTN1), MS(BTN3), MS(BTN2), XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_F13,   GUI_F14,   LGUI(KC_R),  XXXXXXX,
+        XXXXXXX,  MS(BTN4), XXXXXXX,  MS(BTN5), XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_PGUP,  GUI_PGDN,  LGUI(KC_Z),  LWIN_SLASH,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  GUI_RET,  XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX
     )
 });

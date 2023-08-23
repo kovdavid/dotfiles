@@ -173,11 +173,10 @@ ensure_xkb_config
 ensure_tlp_config
 ensure_polkit_config
 
-mkdir -p /opt/cache
-chown -R davs:davs /opt/cache
-
-sudo mkdir -p /clean_daily /clean_manually
-sudo chown davs:davs /clean_daily /clean_manually
+for dir in "/opt/cache" "/opt/javascript" "/clean_daily" "/clean_manually"; do
+    mkdir -p "$dir"
+    chown -R davs:davs "$dir"
+end
 
 echo "Enabling fstrim.timer"
 systemctl enable fstrim.timer

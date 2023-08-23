@@ -1,18 +1,3 @@
-function! NewPerlModule()
-    0r ~/.vim/skeleton/perl.package
-    let l:path = expand('%:p')
-    let l:path = substitute(l:path, '^.*/\(lib\|t\)/', '', '')
-    let l:path = substitute(l:path, '.pm$', '', '')
-    let l:module_name = substitute(l:path, '/', '::', 'g')
-    execute "normal! ggwi".l:module_name
-endfunction
-
-function! NewGoFile()
-    0r ~/.vim/skeleton/go.script
-    let l:module = expand('%:h:t')
-    execute "normal! ggwC".l:module
-endfunction
-
 function! CloseHiddenBuffers()
     let visible_buffers = {}
 
@@ -27,29 +12,6 @@ function! CloseHiddenBuffers()
             execute 'bd ' . buffer
         endif
     endfor
-endfunction
-
-function! DeleteFile()
-    let l:path = expand('%:p')
-    let l:confirm = input('Delete '.l:path.'? [YES]: ')
-    if l:confirm ==# 'YES'
-        call delete(l:path) | bdelete!
-    endif
-endfunction
-
-function! CommitPerlFiles()
-    let l:path = expand("%")
-    let l:git_rev = system("git rev-parse --abbrev-ref HEAD 2>/dev/null")
-
-    if l:path =~# '\v^(bin|lib|t)\/.+(pl|pm|t)?$'
-        let l:path = substitute(l:path, '\v(bin|lib|t)/', '', '')
-        let l:path = substitute(l:path, '\/', '::', 'g')
-
-        execute "normal! :Gwrite \<BAR> Gcommit\<CR>A".l:path." - "
-    else
-        execute "normal! :let @f=expand('%:t:r')\<CR>:Gwrite \<BAR> Gcommit\<CR>O\<C-R>f - \<space>"
-    endif
-
 endfunction
 
 function! ReplaceSelection() range
@@ -113,29 +75,5 @@ function! ToggleLineNumbers()
     else
         set number
         set relativenumber
-    endif
-endfunction
-
-function! PerlOpenModule(type)
-    " t s v
-    let l:line = line(".")
-    let l:col = col(".")
-    let l:file = expand("%:p")
-
-    let l:cmd = "/home/davs/bin/perl_find_module.pl " . l:file . " " . l:line . " " . l:col . " " . a:type
-    let l:result = system(l:cmd)
-    let l:result = substitute(l:result, '\n\+$', '', '')
-    if strlen(l:result) > 10
-        let l:tokens = split(l:result, "\t")
-        if a:type == 1
-            execute "tabnew " . l:tokens[0]
-        elseif a:type == 2
-            execute "split " . l:tokens[0]
-        elseif a:type == 3
-            execute "vsplit " . l:tokens[0]
-        else
-            execute "e " . l:tokens[0]
-        endif
-        execute l:tokens[1]
     endif
 endfunction

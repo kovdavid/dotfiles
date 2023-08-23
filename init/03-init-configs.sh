@@ -57,7 +57,6 @@ ln -sf ~/dotfiles/alacritty/config.yml ~/.config/alacritty/alacritty.yml
 ln -sf ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/tmux/templates ~/.tmux_templates
 
-remove_and_link_dotfile vim
 remove_and_link_dotfile xinitrc
 remove_and_link_dotfile inputrc
 remove_and_link_dotfile xprofile
@@ -71,7 +70,8 @@ ln -s -f ~/dotfiles/irssi_config ~/.irssi/config
 
 echo "Linking NVIM"
 rm -rf ~/.config/nvim
-ln -sf ~/dotfiles/vim ~/.config/nvim
+rm -rf ~/.vim
+ln -sf ~/dotfiles/nvim ~/.config/nvim
 
 ln -sf ~/dotfiles/redshift.conf ~/.config/redshift.conf
 
