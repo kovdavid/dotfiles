@@ -106,6 +106,11 @@ return require('packer').startup({
             config = function() require("user.plugins.align") end,
         })
 
+        use({
+            "numToStr/Comment.nvim",
+            config = function () require("user.plugins.comment") end
+        })
+
         -----------------
         -- Completions --
         -----------------
