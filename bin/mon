@@ -71,6 +71,12 @@ elif [ "$1" == "r" ] || [ "$1" == "right" ] ; then
     $(xrandr --output $SECONDARY_DEVICE --mode $SECONDARY_RESOLUTION)
     $(xrandr --output $SECONDARY_DEVICE --right-of $PRIMARY_DEVICE)
     $(xrandr --output $SECONDARY_DEVICE --pos ${WIDTH_PRIMARY}x-$DELTA_Y)
+elif [ "$1" == "t" ] || [ "$1" == "top" ] ; then
+    let "POSX = ($WIDTH_SECONDARY - $WIDTH_PRIMARY) / 2"
+    echo "Setting secondary device $SECONDARY_DEVICE to resolution $SECONDARY_RESOLUTION top of $PRIMARY_DEVICE with pos -${POSX}x0"
+    $(xrandr --output $SECONDARY_DEVICE --mode $SECONDARY_RESOLUTION)
+    $(xrandr --output $SECONDARY_DEVICE --above $PRIMARY_DEVICE)
+    $(xrandr --output $SECONDARY_DEVICE --pos -${POSX}x0)
 else
     echo "Setting secondary device $SECONDARY_DEVICE to resolution $SECONDARY_RESOLUTION left of $PRIMARY_DEVICE with pos 0x0"
     $(xrandr --output $SECONDARY_DEVICE --mode $SECONDARY_RESOLUTION)

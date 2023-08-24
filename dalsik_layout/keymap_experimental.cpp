@@ -17,7 +17,7 @@
 #define OSM_GUI   OSM(MOD_LGUI)
 
 #define CTRL_ESC  DM(MOD_LCTRL, KC_ESCAPE)
-#define SHIFT_SPC DM(MOD_LSHIFT, KC_SPACE)
+#define SHIFT_SPC THDM(MOD_LSHIFT, KC_SPACE)
 #define SHFT_INS  LSHIFT(KC_INS)
 
 #define M_BTN1 MOUSE_BUTTON(BTN1)
@@ -36,7 +36,7 @@
 #define GUI_STAB LGUI(LSHIFT(KC_TAB))
 
 #define LNUM_TAB    DL(LNUM, KC_TAB)
-#define LNAV_BSPC   DSL(LNAV, KC_BACKSPACE)
+#define LNAV_BSPC   THDL(LNAV, KC_BACKSPACE)
 #define LSYM_SCOLON DSL(LSYM, KC_SEMICOLON)
 #define LWIN_SLASH  DSL(LWIN, KC_SLASH)
 #define LNUM_RET    DSL(LNUM, KC_ENTER)
@@ -102,7 +102,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] PROGMEM = KEYMAP({
        │        │        │        │        │        │   1    │ │   2    │        │        │        │        │   /    │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
        │  OSM   │  OSM   │        │  CTRL  │ SHIFT  │ L NUM  │ │ L NUM  │ L NAV  │ DELETE │        │        │  LHT   │
-       │  CTRL  │  SHIFT │        │ ESCAPE │ SPACE  │   TAB  │ │ RETURN │ BSPACE │        │        │        │  NAV   │
+       │  CTRL  │  SHIFT │        │ ESCAPE │ SPACE  │  TAB   │ │ RETURN │ BSPACE │        │        │        │  NAV   │
        └────────┴────────┴────────┴────────┴────────┴────────┘ └────────┴────────┴────────┴────────┴────────┴────────┘
      */
     LAYOUT_4x12(
