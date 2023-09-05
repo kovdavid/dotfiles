@@ -97,7 +97,7 @@ keymap("n", "<", "<<", opts)
 
 keymap("n", "<C-G>", "2<C-G>", opts) -- print the full path of the file. See ':help CTRL-G'
 
-keymap("n", ";", ":", opts)
+keymap("n", ";", ":", { noremap = true })
 
 keymap("n", "<leader>w", ":w<CR>", opts)                        -- write file
 
