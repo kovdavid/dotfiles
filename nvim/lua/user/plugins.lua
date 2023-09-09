@@ -37,6 +37,7 @@ return require('packer').startup({
         --------
         use("phha/zenburn.nvim")
         use("ellisonleao/gruvbox.nvim")
+        -- use("rebelot/kanagawa.nvim")
         use({"nvim-lualine/lualine.nvim", config = function() require("user.plugins.lualine") end})
 
         -----------------------------------

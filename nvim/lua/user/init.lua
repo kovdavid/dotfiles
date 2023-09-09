@@ -10,6 +10,7 @@ require("user.lsp")
 require("gruvbox").setup()
 vim.cmd("set background=dark")
 vim.cmd("colorscheme zenburn")
+-- vim.cmd("colorscheme kanagawa")
 
 vim.keymap.set("n", "<leader>ss", ReloadConfig, { noremap = true, silent = false })
 vim.keymap.set("n", "<leader>se", ":tabnew ~/.config/nvim/init.lua<CR>", { noremap = true, silent = false })
