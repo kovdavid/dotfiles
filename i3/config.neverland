@@ -18,6 +18,7 @@ bindsym $mod+Tab exec ~/bin/i3_output jump
 bindsym $mod+Shift+Tab exec ~/bin/i3_output move
 bindsym $mod+Return exec ~/bin/i3_cycle_windows
 bindsym $mod+x exec rofi -show script -modi "script:custom_rofi_script"
+bindsym $mod+c exec rofi -show run
 
 # PageUp & PageDown
 bindsym $mod+Prior exec i3_cycle_workspace left sequential
