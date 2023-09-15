@@ -140,7 +140,6 @@ EOC
     ensure_file_content "$POLKIT_FILE" "$POLKIT_CONTENT"
 }
 
-
 ## START
 
 if [ $(id davs --group --name) != "davs" ] ; then
@@ -175,8 +174,8 @@ ensure_polkit_config
 
 for dir in "/opt/cache" "/opt/javascript" "/clean_daily" "/clean_manually"; do
     mkdir -p "$dir"
-    chown -R davs:davs "$dir"
-end
+    chown davs:davs "$dir"
+done
 
 echo "Enabling fstrim.timer"
 systemctl enable fstrim.timer
