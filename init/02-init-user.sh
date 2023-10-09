@@ -9,6 +9,19 @@ function remove_and_link_dir {
     fi
 }
 
+mkdir -p /opt/javascript/config/yarn
+mkdir -p /opt/javascript/meteor
+mkdir -p /opt/javascript/node
+mkdir -p /opt/javascript/npm
+mkdir -p /opt/javascript/npm-packages
+mkdir -p /opt/javascript/nvm
+mkdir -p /opt/javascript/yarn
+
+rm -rf ~/.meteor; ln -sf /opt/javascript/meteor ~/.meteor
+rm -rf ~/.npm; ln -sf /opt/javascript/npm ~/.npm
+rm -rf ~/.yarn; ln -sf /opt/javascript/yarn ~/.yarn
+rm -rf ~/.config/yarn; ln -sf /opt/javascript/config/yarn ~/.config/yarn
+
 echo "Linking scripts"
 mkdir -p ~/bin
 

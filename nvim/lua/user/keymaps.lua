@@ -129,8 +129,6 @@ keymap({ "n", "v" }, "k", "gk", opts)
 keymap("n", "Q", "<NOP>", opts)                                                    -- disable Ex mode
 keymap("x", "Q", ":normal @q <CR>", opts)                                          -- execute '@q' macro
 
-keymap("n", "<leader>me", ":let @/=expand('%:t')<CR>:Explore<CR>n:nohl<CR>", opts) -- open :Explore with cursor on the current file
-
 keymap("n", "<F2>", function()
     -- Toggle line numbers
     if opt.number:get() then
@@ -170,3 +168,10 @@ keymap("n", "<space>", "za", opts)
 keymap("n", "<leader>tw", "<cmd>:%s/\\s\\+$//e<CR>", opts)
 
 keymap("n", "<leader>lr", vim.lsp.buf.rename, opts)
+
+-- keymap("n", "<leader>me", ":let @/=expand('%:t')<CR>:Explore<CR>n:nohl<CR>", opts) -- open :Explore with cursor on the current file
+keymap("n", "<leader>m", ":NvimTreeFindFile<CR>", opts)
+
+keymap("i", "<c-l>", "<c-x><c-l>", opts)
+
+keymap("n", "<leader>jf", ":%!jq --indent 4<CR>", opts)

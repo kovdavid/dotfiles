@@ -18,9 +18,12 @@ echo "Setting scheme $SCHEME"
 echo "Linking VIM config"
 ln -sf ~/dotfiles/vim/colors_$SCHEME.vim ~/dotfiles/vim/colors.vim
 
+echo "Linking NVIM config"
+ln -sf ~/dotfiles/nvim/lua/user/colors_$SCHEME.lua ~/dotfiles/nvim/lua/user/colors.lua
+
 for socket in $(netstat -nxl | grep nvim | awk '{ print $NF }'); do
     echo "Reloading vim on $socket"
-    python -c "from pynvim import attach; nvim = attach('socket', path='$socket'); nvim.command('source \$MYVIMRC')" &
+    python -c "from pynvim import attach; nvim = attach('socket', path='$socket'); nvim.lua.ReloadConfig()" &
 done
 
 echo "Linking Alacritty config"

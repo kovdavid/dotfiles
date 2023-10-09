@@ -63,6 +63,7 @@ remove_and_link_dotfile xprofile
 remove_and_link_dotfile gtkrc-2.0
 remove_and_link_dotfile gtkrc-2.0.mine
 remove_and_link_dotfile git_global_ignore
+remove_and_link_dotfile npmrc
 
 echo "IRSSI"
 mkdir -p ~/.irssi

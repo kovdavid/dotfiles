@@ -21,6 +21,7 @@ bash_include ~/.bashrc.git-completion
 bash_include ~/.bashrc.export
 bash_include ~/.bashrc.alias
 bash_include ~/.bashrc.tmux-completion
+bash_include /usr/share/nvm/init-nvm.sh
 
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \1 $(parse_git_rev)$(parse_git_dirty)$(parse_git_stash_size)$(parse_git_wip_commit)/"

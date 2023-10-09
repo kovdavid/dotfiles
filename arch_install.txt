@@ -179,6 +179,10 @@ systemctl enable lightdm
 groupadd -r autologin
 gpasswd -a davs autologin
 
+# In firefox set in about:config
+layout.css.devPixelsPerPx = 1.3
+full-screen-api.ignore-widgets = true
+
 yay -S accountsservice # for dbus/pam/keyring
 yay -S xinit-xsession gvfs thunar-volman
 yay -S dex nitrogen i3lock dhcpcd

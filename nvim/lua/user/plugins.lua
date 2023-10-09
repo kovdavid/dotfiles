@@ -37,7 +37,7 @@ return require('packer').startup({
         --------
         use("phha/zenburn.nvim")
         use("ellisonleao/gruvbox.nvim")
-        -- use("rebelot/kanagawa.nvim")
+        use("rebelot/kanagawa.nvim")
         use({"nvim-lualine/lualine.nvim", config = function() require("user.plugins.lualine") end})
 
         -----------------------------------
@@ -90,13 +90,22 @@ return require('packer').startup({
             config = function()
                 require("project_nvim").setup({
                     detection_methods = { "pattern" },
-                    patterns = { ".git", ".vimproject" },
+                    patterns = { ".git/config", ".vimproject" },
                 })
             end
         })
 
         use({ "nvim-telescope/telescope.nvim", config = function() require("user.plugins.telescope") end })
         use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
+
+        use({
+            "nvim-tree/nvim-tree.lua",
+            requires = { 'nvim-tree/nvim-web-devicons' },
+            config = function() 
+                require("user.plugins.nvim-tree")
+            end
+        })
+
 
         ----------------
         -- Formatting --
@@ -129,8 +138,15 @@ return require('packer').startup({
                 {'hrsh7th/nvim-cmp'},
                 {'hrsh7th/cmp-nvim-lsp'},
                 {'hrsh7th/cmp-buffer'},
+                {'hrsh7th/cmp-path'},
                 {'L3MON4D3/LuaSnip'},
             }
+        })
+
+        use({
+            "jose-elias-alvarez/null-ls.nvim",
+            config = function() require("user.plugins.null-ls") end,
+            requires = { "nvim-lua/plenary.nvim" },
         })
 
         if packer_bootstrapped then

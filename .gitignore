@@ -17,3 +17,4 @@ alacritty/colors.yml
 tmux_color.conf
 rofi/config.rasi
 nvim/plugin/packer_compiled.lua
+nvim/lua/user/colors.lua

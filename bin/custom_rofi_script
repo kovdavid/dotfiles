@@ -86,6 +86,7 @@ elif [ "$ROFI_INFO" == "main" ] ; then
     elif [ "$ACTION" == "monitor" ] ; then
         menu_item "main monitor" "external monitor left" "arrow-left"
         menu_item "main monitor" "external monitor right" "arrow-right"
+        menu_item "main monitor" "external monitor top" "arrow-up"
         menu_item "main monitor" "notebook only" "computer-laptop"
         menu_item "main monitor" "external monitor only" "video-display"
     elif [ "$ACTION" == "redshift" ] ; then
@@ -118,6 +119,8 @@ elif [ "$ROFI_INFO" == "main monitor" ] ; then
         run_cmd "mon left"
     elif [ "$ACTION" == "external monitor right" ] ; then
         run_cmd "mon right"
+    elif [ "$ACTION" == "external monitor top" ] ; then
+        run_cmd "mon top"
     elif [ "$ACTION" == "notebook only" ] ; then
         run_cmd "mon off"
     elif [ "$ACTION" == "external monitor only" ] ; then

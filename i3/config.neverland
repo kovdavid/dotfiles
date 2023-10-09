@@ -253,7 +253,8 @@ bar {
 }
 
 # use xprop ;)
-for_window [class="(?i)xfce4-notifyd"] floating enable, focus mode_toggle
+# for_window [class="(?i)xfce4-notifyd"] floating enable, focus mode_toggle
+for_window [class="(?i)xfce4-notifyd"] floating enable, focus prev
 for_window [class="(?i)galculator"] floating enable
 for_window [class="(?i)google-chrome"] bordesnone
 for_window [class="(?i)chodba3"] floating enable
@@ -273,7 +274,7 @@ for_window [class="^jetbrains-.+" title="(?i)merge .+"] border pixel 5, move pos
 for_window [class="(?i)pavucontrol"] floating enable, move position mouse, move down 30, move left 30, sticky enable
 
 exec_always --no-startup-id en &
-exec_always --no-startup-id ~/bin/mon top &
+exec_always --no-startup-id ~/bin/mon left &
 exec_always --no-startup-id ~/bin/init_trackpoint &
 exec_always --no-startup-id ~/bin/init_touchpad &
 # exec xrdb -merge ~/.Xresources &

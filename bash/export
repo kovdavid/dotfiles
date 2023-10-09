@@ -22,8 +22,8 @@ elif [ -d ~/.plenv/bin ] ; then
 fi
 
 export PATH="$HOME/bin:$JAVA_HOME:$PATH"
-[[ -d /opt/node ]] && export NODE_PATH="/opt/node"
-[[ -d /opt/node/bin ]] && export PATH="/opt/node/bin:$PATH"
+[[ -d /opt/javascript/node ]] && export NODE_PATH="/opt/javascript/node"
+[[ -d /opt/javascript/node/bin ]] && export PATH="/opt/javascript/node/bin:$PATH"
 [[ -d /opt/rust/rustup ]] && export RUSTUP_HOME="/opt/rust/rustup"
 [[ -d /opt/rust/cargo ]] && export CARGO_HOME="/opt/rust/cargo"
 [[ -d ~/.cargo/bin ]] && export PATH="~/.cargo/bin:$PATH"
@@ -37,6 +37,17 @@ export RUST_BACKTRACE=0
 if [ -d /opt/go ] ; then
     export GOPATH="/opt/go"
     export PATH="$GOPATH/bin:$PATH"
+fi
+
+if [ -d /opt/javascript/npm-packages ] ; then
+    export NPM_PACKAGES="/opt/javascript/npm-packages"
+    export PATH="$NPM_PACKAGES/bin:$PATH"
+    export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+    export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+fi
+
+if [ -d /opt/javascript/nvm ] ; then
+    export NVM_DIR="/opt/javascript/nvm"
 fi
 
 if [ -d /opt/pyenv ] ; then
