@@ -1,0 +1,12 @@
+[Unit]
+Description=Restic Work backup local
+
+[Timer]
+; Activate first time 2h after boot
+OnBootSec=1h
+; Activate 4h after previous activation
+OnUnitActiveSec=2h
+Unit=restic_work_backup_local.service
+
+[Install]
+WantedBy=timers.target

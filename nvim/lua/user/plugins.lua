@@ -84,13 +84,22 @@ return require('packer').startup({
         })
 
         use({ "kylechui/nvim-surround", config = function() require("nvim-surround").setup({}) end })
+        use('tpope/vim-fugitive')
+        -- use({
+        --     "ahmedkhalf/project.nvim",
+        --     config = function()
+        --         require("project_nvim").setup({
+        --             detection_methods = { "pattern" },
+        --             patterns = { ".git", ".vimproject" },
+        --         })
+        --     end
+        -- })
 
         use({
-            "ahmedkhalf/project.nvim",
+            "notjedi/nvim-rooter.lua",
             config = function()
-                require("project_nvim").setup({
-                    detection_methods = { "pattern" },
-                    patterns = { ".git/config", ".vimproject" },
+                require("nvim-rooter").setup({
+                    rooter_patterns = { ".git/config", ".vimproject" }
                 })
             end
         })
@@ -106,6 +115,23 @@ return require('packer').startup({
             end
         })
 
+        use({
+            "lewis6991/gitsigns.nvim",
+            config = function() require("user.plugins.gitsigns") end,
+        })
+
+        -- use({
+        --     "NeogitOrg/neogit",
+        --     requires = {
+        --         "nvim-lua/plenary.nvim",         -- required
+        --         "nvim-telescope/telescope.nvim", -- optional
+        --         "sindrets/diffview.nvim",        -- optional
+        --         "ibhagwan/fzf-lua",              -- optional
+        --     },
+        --     config = function()
+        --         require("user.plugins.neogit")
+        --     end
+        -- })
 
         ----------------
         -- Formatting --

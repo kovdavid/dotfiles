@@ -3,13 +3,14 @@ misc/
 tags
 Makefile.old
 nytprof*
-.nike_deploy
 .exrc
 *.swp
 .envrc
 .vscode
 .vim
-
+.nvmrc
+.pylintrc
+.flake8
 local.properties
 
 # Devel::PDB
@@ -17,5 +18,3 @@ local.properties
 .*-conf.rc
 .*-stderr
 .*-stdout
-.pylintrc
-.flake8

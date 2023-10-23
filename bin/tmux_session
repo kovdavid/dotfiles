@@ -1,0 +1,26 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use v5.10;
+use List::Util qw(first);
+
+my $direction = "forward";
+if ($ARGV[0] && $ARGV[0] eq "-p") {
+    $direction = "backward";
+}
+
+chomp(my $current_session = `tmux display-message -p '#S'`);
+
+my $grep_arg = "-v";
+if ($current_session =~ m/^G\|/) {
+    $grep_arg = ""
+}
+
+chomp(my @sessions = `tmux list-sessions | cut -d":" -f1 | grep $grep_arg "^G|"`);
+
+my $index = first { $sessions[$_] eq $current_session } 0..$#sessions;
+my $new_index = $direction eq "forward" ? $index + 1 : $index - 1;
+my $new_session = $sessions[ $new_index % scalar(@sessions) ];
+
+print $new_session;

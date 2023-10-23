@@ -7,6 +7,7 @@
 
 // TODO:
 //     =>
+//     <> on the same layer as modifiers
 //     127.0.0.1
 //     in vim:
 //          qw - switch split
@@ -18,6 +19,7 @@
 //          <alt>1 - 2 - cycle session
 //          <alt>q - w - cycle window
 //          <alt>a - s - cycle pane
+//
 
 #define LDEFAULT 0
 #define LNUM 1
@@ -50,11 +52,11 @@
 #define GUI_STAB LGUI(LSHIFT(KC_TAB))
 
 #define LNUM_TAB    DL(LNUM, KC_TAB)
-#define LNAV_RET    THDL(LNAV, KC_ENTER)
+#define LNAV_BSPC   THDL(LNAV, KC_BSPC)
 #define LSYM_SCOLON DSL(LSYM, KC_SEMICOLON)
 #define LWIN_SLASH  DSL(LWIN, KC_SLASH)
-// define LNUM_BSPC   DSL(LNUM, KC_BACKSPACE)
-#define LNUM_BSPC   THDL(LNUM, KC_BACKSPACE)
+// define LNUM_RET   DSL(LNUM, KC_ENTER)
+#define LNUM_RET    THDL(LNUM, KC_ENTER)
 
     /* Combos
            0        1        2        3        4        5          6        7        8        9        10       11
@@ -117,14 +119,14 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] PROGMEM = KEYMAP({
        │        │        │        │        │        │   1    │ │   2    │        │        │        │        │   /    │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
        │  OSM   │  OSM   │        │  CTRL  │ SHIFT  │ L NUM  │ │ L NUM  │ L NAV  │ DELETE │        │        │  LHT   │
-       │  CTRL  │  SHIFT │        │ ESCAPE │ SPACE  │  TAB   │ │ BSPACE │ RETURN │        │        │        │  NAV   │
+       │  CTRL  │  SHIFT │        │ ESCAPE │ SPACE  │  TAB   │ │ RETURN │ BSPACE │        │        │        │  NAV   │
        └────────┴────────┴────────┴────────┴────────┴────────┘ └────────┴────────┴────────┴────────┴────────┴────────┘
      */
     LAYOUT_4x12(
         KC_Q,      KC_W,      KC_E,     KC_R,      KC_T,       LALT(KC_A),  /**/  LALT(KC_S),  KC_Y,      KC_U,       KC_I,     KC_O,     KC_P,
         KC_A,      KC_S,      KC_D,     KC_F,      KC_G,       LALT(KC_Q),  /**/  LALT(KC_W),  KC_H,      KC_J,       KC_K,     KC_L,     LSYM_SCOLON,
         KC_Z,      KC_X,      KC_C,     KC_V,      KC_B,       LALT(KC_1),  /**/  LALT(KC_2),  KC_N,      KC_M,       KC_COMM,  KC_DOT,   LWIN_SLASH,
-        OSM_CTRL,  OSM_SHFT,  XXXXXXX,  CTRL_ESC,  SHIFT_SPC,  LNUM_TAB,    /**/  LNUM_BSPC,   LNAV_RET,  KC_DELETE,  XXXXXXX,  XXXXXXX,  LHT(LNAV)
+        OSM_CTRL,  OSM_SHFT,  XXXXXXX,  CTRL_ESC,  SHIFT_SPC,  LNUM_TAB,    /**/  LNUM_RET,    LNAV_BSPC, KC_DELETE,  XXXXXXX,  XXXXXXX,  LHT(LNAV)
     ),
 
     /* Layer NUM
@@ -139,7 +141,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] PROGMEM = KEYMAP({
        │        │        │        │        │        │        │ │        │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
        │  OSM   │  OSM   │        │  CTRL  │ SHIFT  │*L NUM *│ │*L NUM *│ L NAV  │ DELETE │        │        │        │
-       │  CTRL  │  SHIFT │        │ ESCAPE │ SPACE  │*  TAB *│ │*BSPACE*│ RETURN │        │        │        │        │
+       │  CTRL  │  SHIFT │        │ ESCAPE │ SPACE  │*  TAB *│ │*RETURN*│ BSPACE │        │        │        │        │
        └────────┴────────┴────────┴────────┴────────┴────────┘ └────────┴────────┴────────┴────────┴────────┴────────┘
      */
     LAYOUT_4x12(
@@ -160,7 +162,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] PROGMEM = KEYMAP({
        │   \    │   |    │   =    │   -    │   +    │        │ │        │        │   {    │   '    │   }    │        │
        │        │        │        │        │        │        │ │        │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
-       │        │        │        │  CTRL  │ SHIFT  │ L NUM  │ │ BSPACE │ RETURN │ DELETE │        │        │        │
+       │        │        │        │  CTRL  │ SHIFT  │ L NUM  │ │ RETURN │ BSPACE │ DELETE │        │        │        │
        │        │        │        │ ESCAPE │ SPACE  │   TAB  │ │        │        │        │        │        │        │
        └────────┴────────┴────────┴────────┴────────┴────────┘ └────────┴────────┴────────┴────────┴────────┴────────┘
      */
@@ -168,7 +170,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] PROGMEM = KEYMAP({
         KC_EXLM,   KC_AT,   KC_HASH,  KC_DLR,    KC_TILD,    XXXXXXX,   /**/  XXXXXXX,  XXXXXXX,   KC_LBRC,    KC_DQUO,  KC_RBRC,   XXXXXXX,
         KC_PERC,  KC_CIRC,  KC_AMPR,  KC_ASTR,   KC_GRV,     XXXXXXX,   /**/  XXXXXXX,  XXXXXXX,   KC_LPRN,    KC_UNDS,  KC_RPRN,   LSYM_SCOLON,
         KC_BSLS,  KC_PIPE,  KC_EQL,   KC_MINS,   KC_PLUS,    XXXXXXX,   /**/  XXXXXXX,  XXXXXXX,   KC_LCBR,    KC_QUOT,  KC_RCBR,   XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  CTRL_ESC,  SHIFT_SPC,  LNUM_TAB,  /**/  KC_BSPC,  KC_ENTER,  KC_DELETE,  XXXXXXX,  XXXXXXX,   XXXXXXX
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  CTRL_ESC,  SHIFT_SPC,  LNUM_TAB,  /**/  KC_ENTER, KC_BSPC,   KC_DELETE,  XXXXXXX,  XXXXXXX,   XXXXXXX
     ),
 
     /* Layer NAV
@@ -183,7 +185,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] PROGMEM = KEYMAP({
        │        │        │        │        │        │        │ │        │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
        │  OSM   │  OSM   │        │  CTRL  │ SHIFT  │ L NUM  │ │ L NUM  │*L NAV *│ DELETE │        │        │* LHT  *│
-       │  CTRL  │  SHIFT │        │ ESCAPE │ SPACE  │   TAB  │ │ BSPACE │*RETURN*│        │        │        │* NAV  *│
+       │  CTRL  │  SHIFT │        │ ESCAPE │ SPACE  │   TAB  │ │ RETURN │*BSPACE*│        │        │        │* NAV  *│
        └────────┴────────┴────────┴────────┴────────┴────────┘ └────────┴────────┴────────┴────────┴────────┴────────┘
      */
     LAYOUT_4x12(
@@ -204,14 +206,14 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] PROGMEM = KEYMAP({
        │        │ MS BTN │        │ MS BTN │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │*L WIN *│
        │        │   4    │        │   5    │        │        │ │        │        │  PgUp  │  PgDn  │   Z    │*  /   *│
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
-       │        │        │        │        │        │        │ │        │  Gui+  │        │        │        │        │
-       │        │        │        │        │        │        │ │        │ RETURN │        │        │        │        │
+       │        │        │        │        │        │        │ │  Gui+  │        │        │        │        │        │
+       │        │        │        │        │        │        │ │ RETURN │        │        │        │        │        │
        └────────┴────────┴────────┴────────┴────────┴────────┘ └────────┴────────┴────────┴────────┴────────┴────────┘
      */
     LAYOUT_4x12(
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_TAB,   GUI_STAB,  XXXXXXX,     XXXXXXX,
         XXXXXXX,  M_BTN1 ,  M_BTN3 ,  M_BTN2 ,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_F13,   GUI_F14,   LGUI(KC_R),  XXXXXXX,
         XXXXXXX,  M_BTN4 ,  XXXXXXX,  M_BTN5 ,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_PGUP,  GUI_PGDN,  LGUI(KC_Z),  LWIN_SLASH,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  GUI_RET,  XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  GUI_RET,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX
     )
 });

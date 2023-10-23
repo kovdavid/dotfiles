@@ -7,15 +7,6 @@ local sources = {
         filetypes = {
             "javascript",
             "typescript",
-            "css",
-            "scss",
-            "html",
-            "json",
-            "yaml",
-            "markdown",
-            "graphql",
-            "md",
-            "txt",
         },
         only_local = "node_modules/.bin",
     }),
@@ -29,6 +20,7 @@ null_ls.setup({
 
         if client.supports_method("textDocument/formatting") then
             vim.keymap.set("n", "<leader>f", function()
+                print("Formatting with LSP " .. client.name)
                 vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
             end, { buffer = bufnr, desc = "[lsp] format" })
 
@@ -37,6 +29,7 @@ null_ls.setup({
                 group = augroup,
                 buffer = bufnr,
                 callback = function()
+                    print("Formatting with LSP " .. client.name)
                     vim.lsp.buf.format({ bufnr = bufnr })
                 end,
                 desc = "[lsp] format on save"
@@ -45,6 +38,7 @@ null_ls.setup({
 
         if client.supports_method("textDocument/rangeFormatting") then
             vim.keymap.set("x", "<Leader>f", function()
+                print("Formatting with LSP " .. client.name)
                 vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
             end, { buffer = bufnr, desc = "[lsp] format" })
         end

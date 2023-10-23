@@ -254,7 +254,7 @@ bar {
 
 # use xprop ;)
 # for_window [class="(?i)xfce4-notifyd"] floating enable, focus mode_toggle
-for_window [class="(?i)xfce4-notifyd"] floating enable, focus prev
+for_window [class="(?i)xfce4-notifyd"] floating enable
 for_window [class="(?i)galculator"] floating enable
 for_window [class="(?i)google-chrome"] bordesnone
 for_window [class="(?i)chodba3"] floating enable
@@ -273,10 +273,13 @@ for_window [class="^jetbrains-.+" title="(?i)conflicts"] border pixel 5, move po
 for_window [class="^jetbrains-.+" title="(?i)merge .+"] border pixel 5, move position center
 for_window [class="(?i)pavucontrol"] floating enable, move position mouse, move down 30, move left 30, sticky enable
 
+# no_focus [class="(?i)xfce4-notifyd"]
+no_focus [window_role="pop-up"]
+
 exec_always --no-startup-id en &
 exec_always --no-startup-id ~/bin/mon left &
-exec_always --no-startup-id ~/bin/init_trackpoint &
-exec_always --no-startup-id ~/bin/init_touchpad &
+exec_always --no-startup-id ~/bin/init_touchpad
+exec_always --no-startup-id ~/bin/init_trackpoint
 # exec xrdb -merge ~/.Xresources &
 # exec (sleep 1 && nitrogen --restore) &
 exec /usr/bin/sed -i "s/^[^#]/# &/" /home/davs/.ssh/authorized_keys

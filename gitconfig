@@ -70,5 +70,6 @@
     autosetuprebase = always
 [init]
     templatedir = ~/.git-templates
-[includeIf "gitdir:~/workspace/vacuumlabs/"]
-    path = ~/workspace/vacuumlabs/.gitconfig
+[includeIf "gitdir:~/workspace/techmates/"]
+    path = ~/workspace/techmates/.gitconfig
+

@@ -1,0 +1,109 @@
+#!/bin/bash
+
+RESTIC_DIR="/opt/work_backup"
+
+if [ ! -d "$RESTIC_DIR" ] ; then
+    echo "Directory $RESTIC_DIR does not exist"
+    echo "Run the following:"
+    echo ""
+    echo "sudo mkdir $RESTIC_DIR"
+    echo "sudo chown davs:davs $RESTIC_DIR"
+    echo "chmod g-rwx,o-rwx $RESTIC_DIR"
+    echo "chmod g+s $RESTIC_DIR"
+    echo "setfacl -d -m g::000 $RESTIC_DIR"
+    echo "setfacl -d -m o::000 $RESTIC_DIR"
+    exit 1
+fi
+
+echo ""
+echo "#########################################"
+echo "####### $(date '+%F %T') $0 start #######"
+echo "#########################################"
+echo ""
+
+cd $RESTIC_DIR
+
+if [ ! -f .envrc ] ; then
+    echo "$RESTIC_DIR/.envrc is missing"
+    echo "Create it with contents:"
+    echo ""
+    echo "export RESTIC_CACHE_DIR=$RESTIC_DIR/cache/local"
+    echo "export RESTIC_REPOSITORY=$RESTIC_DIR/restic"
+    echo "export RESTIC_PASSWORD_FILE=$RESTIC_DIR/.restic_password"
+    echo "export RESTIC_BACKUP_DIR=\"/home/davs\""
+    exit 1
+fi
+
+source .envrc
+
+if [ "$1" == "b2" ] ; then
+    echo "####### $(date '+%F %T') Using BlackBlaze"
+
+    if [ ! -f ".envrc.b2" ] ; then
+        echo "$RESTIC_DIR/.envrc.b2 is missing"
+        echo "Create it with contents:"
+        echo ""
+        echo "export B2_ACCOUNT_ID=\"account_key_id\""
+        echo "export B2_ACCOUNT_KEY=\"account_key\""
+        echo "export RESTIC_REPOSITORY=\"b2:bucket-name\""
+        echo "export RESTIC_CACHE_DIR=$RESTIC_DIR/cache/b2"
+        exit 1
+    fi
+
+    source .envrc.b2
+fi
+
+unset DRY_RUN
+if [ "${BASH_ARGV[0]}" == "dry" ] ; then
+    DRY_RUN="--dry-run"
+fi
+
+if [ -z "$RESTIC_BACKUP_DIR" ] ; then
+    echo "RESTIC_BACKUP_DIR is not set; something is wrong. Exiting."
+    exit 1
+fi
+
+for dir in $RESTIC_BACKUP_DIR; do
+    if [ ! -d "$dir" ] ; then
+        echo "RESTIC_BACKUP_DIR:$dir does not exist. Exiting."
+        exit 1
+    fi
+done
+
+echo "####### RESTIC_BACKUP_DIR:$RESTIC_BACKUP_DIR"
+echo "####### RESTIC_REPOSITORY:$RESTIC_REPOSITORY"
+
+while pidof restic > /dev/null; do
+    echo "####### $(date '+%F %T') Waiting for another restic instance to finish"
+    sleep 10
+done
+
+if ! restic snapshots &>/dev/null ; then
+    echo "####### $(date '+%F %T') Initializing repository"
+    restic init
+fi
+
+echo "####### $(date '+%F %T') Running backup"
+grep -v "$RESTIC_BACKUP_DIR" /home/davs/dotfiles/rsync_ignore > rsync_ignore
+restic backup $DRY_RUN --exclude-file rsync_ignore --exclude-caches --no-scan $RESTIC_BACKUP_DIR
+
+if [ -n "$DRY_RUN" ] ; then
+    echo "####### $(date '+%F %T') Finished dry-run"
+    exit
+fi
+
+echo "####### $(date '+%F %T') Cleaning up old snapshots"
+restic forget --keep-last 10 --keep-daily 7 --keep-weekly 4 --keep-monthly 1 --prune
+
+echo "####### $(date '+%F %T') Checking repository"
+restic check
+
+echo "####### $(date '+%F %T') Current snapshots"
+restic snapshots
+
+echo "####### $(date '+%F %T') Directory sizes"
+du -shc .??* * | sort -h
+
+date '+%F %T' > last_backup
+
+echo "####### $(date '+%F %T') Finished"

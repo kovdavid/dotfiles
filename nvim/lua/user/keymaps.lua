@@ -21,7 +21,7 @@ local function highlight_word(args)
     opt.hlsearch = true
 end
 
-keymap("n", "<leader>.", ":nohlsearch<CR>", opts)
+keymap("n", "<leader>/", ":nohlsearch<CR>", opts)
 keymap("n", "<leader>>", function() highlight_word({ exact_match = true }) end, opts)
 keymap("n", "<leader>?", function() highlight_word({ exact_match = false }) end, opts)
 
@@ -170,8 +170,13 @@ keymap("n", "<leader>tw", "<cmd>:%s/\\s\\+$//e<CR>", opts)
 keymap("n", "<leader>lr", vim.lsp.buf.rename, opts)
 
 -- keymap("n", "<leader>me", ":let @/=expand('%:t')<CR>:Explore<CR>n:nohl<CR>", opts) -- open :Explore with cursor on the current file
-keymap("n", "<leader>m", ":NvimTreeFindFile<CR>", opts)
+keymap("n", "<leader> ", ":NvimTreeFindFile<CR>", opts)
 
 keymap("i", "<c-l>", "<c-x><c-l>", opts)
 
 keymap("n", "<leader>jf", ":%!jq --indent 4<CR>", opts)
+
+keymap("n", "<leader>db", ":windo set scrollbind!<CR>", opts)
+keymap("n", "<leader>du", ":windo diffupdate<CR>", opts)
+-- keymap("n", "<leader>dw", ":windo set diffopt+=iwhite<CR>", opts)
+keymap("n", "<leader>dw", ":windo set diffopt+=iwhiteall<CR>", opts)
