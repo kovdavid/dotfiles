@@ -8,11 +8,11 @@ if [ "$1" == "" ] ; then
     readlink -f /etc/thinkfan.yaml
     systemctl status thinkfan
 else
-    if [ "$1" == "cool" ] ; then
+    if [ "$1" == "cool" ] || [ "$1" == "c" ] ; then
         echo "Thinkfan cool"
         sudo ln -sf /etc/thinkfan.cool.yaml /etc/thinkfan.yaml
         sudo systemctl restart thinkfan
-    elif [ "$1" == "quiet" ] ; then
+    elif [ "$1" == "quiet" ] || [ "$1" == "q" ] ; then
         echo "Thinkfan quiet"
         sudo ln -sf /etc/thinkfan.quiet.yaml /etc/thinkfan.yaml
         sudo systemctl restart thinkfan

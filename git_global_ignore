@@ -13,6 +13,8 @@ nytprof*
 .flake8
 local.properties
 
+node_modules/
+
 # Devel::PDB
 .*-conf
 .*-conf.rc

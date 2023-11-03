@@ -1,3 +1,3 @@
 #!/bin/bash
 
-setxkbmap us,sk -option 'davs:davs'
+setxkbmap -layout us,sk -variant ,qwerty -option 'davs:davs'

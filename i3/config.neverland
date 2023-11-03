@@ -290,4 +290,5 @@ exec --no-startup-id /home/davs/dotfiles/bin/deduplicate_bash_history &
 # exec --no-startup-id blueman-applet &
 exec --no-startup-id redshift_adjust.pl &
 exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id touchpad_log &
 # exec_always --no-startup-id ~/dotfiles/polybar/launch.sh &

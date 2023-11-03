@@ -84,6 +84,7 @@ Section "InputClass"
     MatchIsKeyboard "on"
     Option "XkbLayout" "us,sk"
     Option "XkbModel" "pc105"
+    Option "XkbVariant" ",qwerty"
     Option "XkbOptions" "davs:davs"
 EndSection
 EOC

@@ -73,3 +73,6 @@
 [includeIf "gitdir:~/workspace/techmates/"]
     path = ~/workspace/techmates/.gitconfig
 
+# To override SSH key (for example in the includeIf config above), use:
+# [core]
+#     sshCommand = ssh -i ~/.ssh/some_key -F /dev/null

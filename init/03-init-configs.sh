@@ -65,6 +65,10 @@ remove_and_link_dotfile gtkrc-2.0.mine
 remove_and_link_dotfile git_global_ignore
 remove_and_link_dotfile npmrc
 
+mkdir -p ~/.config/pnpm
+rm -f ~/.config/pnpm/rc
+ln -s -f ~/dotfiles/pnpm ~/.config/pnpm/rc
+
 echo "IRSSI"
 mkdir -p ~/.irssi
 ln -s -f ~/dotfiles/irssi_config ~/.irssi/config

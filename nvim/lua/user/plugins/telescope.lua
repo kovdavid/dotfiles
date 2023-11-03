@@ -26,7 +26,7 @@ require('telescope').load_extension('fzf')
 local opts = { noremap = true, silent = true }
 
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader><leader>', function() builtin.find_files({ hidden = true }) end, opts)
+vim.keymap.set('n', '<leader><leader>', function() builtin.find_files({ hidden = false }) end, opts)
 vim.keymap.set('n', '<leader>m', function() builtin.find_files({ cwd = vim.fn.expand("%:p:h") }) end, opts)
 vim.keymap.set('n', '<leader>.', function() builtin.buffers({ cwd_only = true, ignore_current_buffer = true, sort_lastused = true }) end, opts)
 

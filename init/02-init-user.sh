@@ -12,6 +12,7 @@ function remove_and_link_dir {
 mkdir -p /opt/javascript/config/yarn
 mkdir -p /opt/javascript/meteor
 mkdir -p /opt/javascript/node
+mkdir -p /opt/javascript/pnpm
 mkdir -p /opt/javascript/npm
 mkdir -p /opt/javascript/npm-packages
 mkdir -p /opt/javascript/nvm

@@ -7,12 +7,12 @@ require('nvim-treesitter.configs').setup({
     -- nvim-treesitter/nvim-treesitter (self config)
     auto_install = true,
     ensure_installed = {
-        'c',
-        'cpp',
+        -- 'c',
+        -- 'cpp',
         'dockerfile',
         'lua',
-        'rust',
-        'go',
+        -- 'rust',
+        -- 'go',
         'javascript',
         'typescript',
         'tsx',
@@ -23,7 +23,7 @@ require('nvim-treesitter.configs').setup({
         'json',
         'bash',
         -- 'perl',
-        'python',
+        -- 'python',
     },
     highlight = {
         enable = true,
