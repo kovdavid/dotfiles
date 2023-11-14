@@ -246,3 +246,11 @@ yay -S upower
 
 Use KeepassXC as system keyring
 https://wiki.chucknemeth.com/linux/security/keyring/keepassxc-keyring
+# Enable SecretService in KeeypassXC
+$ systemctl --user disable gnome-keyring-daemon.service
+$ systemctl --user disable gnome-keyring-daemon.socket
+$ sudo systemctl --global disable gnome-keyring-daemon.socket
+$ clear them in /etc/xdg/autostart
+$ create files ~/.config/autostart/{gnome-keyring-pkcs11.desktop,gnome-keyring-secrets.desktop,gnome-keyring-ssh.desktop} with the content:
+[Desktop entry]
+Hidden=true
