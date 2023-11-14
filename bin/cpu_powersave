@@ -2,3 +2,6 @@
 
 sudo cpupower frequency-set -g powersave
 sudo ryzenadj --power-saving
+
+boost off
+fan quiet

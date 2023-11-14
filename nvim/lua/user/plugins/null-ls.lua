@@ -29,7 +29,7 @@ null_ls.setup({
                 group = augroup,
                 buffer = bufnr,
                 callback = function()
-                    print("Formatting with LSP " .. client.name)
+                    print("Formatting on save with LSP " .. client.name)
                     vim.lsp.buf.format({ bufnr = bufnr })
                 end,
                 desc = "[lsp] format on save"

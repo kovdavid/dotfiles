@@ -1,3 +1,41 @@
+set number
+set relativenumber
+set signcolumn=number
+
+set splitbelow
+set splitright
+set nojoinspaces
+set clipboard=unnamedplus,unnamed,ideaput " add two more registers to clipboard
+
+set switchbuf=useopen,usetab,newtab
+
+set ideajoin
+
+" Word wrap not in the middle of the word
+set formatoptions=l
+set linebreak
+
+let mapleader = ","
+let maplocalleader = "\\"
+
+" Search
+set showmatch
+set hlsearch
+set incsearch
+set ignorecase
+
+" Indents
+set autoindent
+set copyindent
+
+" Tabs
+set shiftwidth=4  " number of spaces for indenting
+set tabstop=4     " number of spaces for tabs
+set softtabstop=4 " number of spaces for tabs while editing
+set shiftround
+set modelines=1
+set expandtab
+
 nnoremap <leader>. :nohl<CR>
 nnoremap <leader>> :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>
 nnoremap <leader>? :let @/ = expand('<cword>')\|set hlsearch<CR>
@@ -81,11 +119,10 @@ nnoremap <C-W>r :action MoveEditorToOppositeTabGroup<CR>
 nnoremap <c-o> :action Back<CR>
 nnoremap <c-e> :action RecentFiles<CR>
 nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
-nnoremap <leader>, :action GotoClass<CR>
+# nnoremap <leader>, :action GotoClass<CR>
 nnoremap <leader>ar :action ActivateRunToolWindow<CR>
 nnoremap <leader>at :action ActivateTerminalToolWindow<CR>
-nnoremap <leader>cc :action CommentByLineComment<CR>
-nnoremap <leader>cu :action CommentByLineComment<CR>
+nnoremap <leader>c :action CommentByLineComment<CR>
 nnoremap <leader>ff :action ShowReformatFileDialog<CR>
 nnoremap <leader>fu :action FindUsages<CR>
 nnoremap <leader>gd :action GotoDeclaration<CR>
@@ -110,41 +147,3 @@ vnoremap <leader>cc :action CommentByLineComment<CR>
 vnoremap <leader>cu :action CommentByLineComment<CR>
 
 nnoremap <leader>, :action GotoFile<CR>
-
-set number
-set relativenumber
-set signcolumn=number
-
-set splitbelow
-set splitright
-set nojoinspaces
-set clipboard=unnamedplus,unnamed " add two more registers to clipboard
-
-set switchbuf=useopen,usetab,newtab
-
-set ideajoin
-
-" Word wrap not in the middle of the word
-set formatoptions=l
-set linebreak
-
-let mapleader = ","
-let maplocalleader = "\\"
-
-" Search
-set showmatch
-set hlsearch
-set incsearch
-set ignorecase
-
-" Indents
-set autoindent
-set copyindent
-
-" Tabs
-set shiftwidth=4  " number of spaces for indenting
-set tabstop=4     " number of spaces for tabs
-set softtabstop=4 " number of spaces for tabs while editing
-set shiftround
-set modelines=1
-set expandtab

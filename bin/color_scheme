@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "$1" ] ; then
-    CURRENT_THEME=$(readlink -f ~/dotfiles/vim/colors.vim | grep -oP 'dark|light')
+    CURRENT_THEME=$(readlink -f ~/dotfiles/nvim/lua/user/colors.lua | grep -oP 'dark|light')
     if [ "$CURRENT_THEME" == "dark" ] ; then
         SCHEME="light"
     else

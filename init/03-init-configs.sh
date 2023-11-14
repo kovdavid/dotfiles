@@ -86,6 +86,13 @@ ln -f -s ~/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list
 ln -f -s ~/dotfiles/mimeapps.list ~/.local/share/applications/defaults.list
 ln -f -s ~/dotfiles/mimeapps.list ~/.config/mimeapps.list
 
+echo "Creating keepassxc autostart service"
+KEEPASSXC_FILE="${XDG_DATA_HOME:-$HOME/.local/share}/dbus-1/services/org.freedesktop.secrets.service"
+mkdir -p $(dirname "$KEEPASSXC_FILE")
+echo "[D-BUS Service]" > "$KEEPASSXC_FILE"
+echo "Name=org.freedesktop.secrets" >> "$KEEPASSXC_FILE"
+echo "Exec=/usr/bin/keepassxc"  >> "$KEEPASSXC_FILE"
+
 ~/dotfiles/bin/color_scheme dark
 
 echo "DONE"

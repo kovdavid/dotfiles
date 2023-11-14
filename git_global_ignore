@@ -12,8 +12,7 @@ nytprof*
 .pylintrc
 .flake8
 local.properties
-
-node_modules/
+.idea
 
 # Devel::PDB
 .*-conf
