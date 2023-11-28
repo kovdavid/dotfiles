@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-local all_files_group = vim.api.nvim_create_augroup("all_files", { clear = true})
+local all_files_group = vim.api.nvim_create_augroup("all_files", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = all_files_group,
     callback = function ()
@@ -31,5 +31,16 @@ vim.api.nvim_create_autocmd({ "WinLeave", "FocusLost", "BufLeave" }, {
     callback = function ()
         vim.cmd("setlocal norelativenumber")
         vim.cmd("setlocal number")
+    end
+})
+
+local markdown_group = vim.api.nvim_create_augroup("markdown_group", { clear = true })
+vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
+    group = markdown_group,
+    pattern = {"todo.md"},
+    callback = function (ev)
+        local keymap_options = { buffer = ev.buf, silent = true, noremap = true }
+        vim.keymap.set("i", "<F5>", "<C-R>=strftime('%F')<CR>", keymap_options)
+        vim.keymap.set("i", "<F6>", "<C-R>=strftime('%FT%T')<CR>", keymap_options)
     end
 })

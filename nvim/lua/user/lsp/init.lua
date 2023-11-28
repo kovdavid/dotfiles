@@ -13,13 +13,11 @@ end)
 -- (Optional) Configure lua language server for neovim
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
-
 require("lspconfig").tsserver.setup({
     capabilities = require("cmp_nvim_lsp").default_capabilities(),
     on_attach = function(client)
         client.resolved_capabilities.document_formatting = false
     end,
 })
-
 
 lsp.setup()

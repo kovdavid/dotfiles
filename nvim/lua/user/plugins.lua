@@ -85,6 +85,7 @@ return require('packer').startup({
 
         use({ "kylechui/nvim-surround", config = function() require("nvim-surround").setup({}) end })
         use('tpope/vim-fugitive')
+        use('junkblocker/git-time-lapse')
         -- use({
         --     "ahmedkhalf/project.nvim",
         --     config = function()
@@ -110,7 +111,7 @@ return require('packer').startup({
         use({
             "nvim-tree/nvim-tree.lua",
             requires = { 'nvim-tree/nvim-web-devicons' },
-            config = function() 
+            config = function()
                 require("user.plugins.nvim-tree")
             end
         })
