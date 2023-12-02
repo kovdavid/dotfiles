@@ -27,6 +27,7 @@
 /home/davs/.cpanm
 /home/davs/.m2
 /home/davs/.config/google-chrome
+/home/davs/.config/chromium
 /home/davs/.config/GIMP
 /home/davs/.config/coc
 /home/davs/.config/yarn
@@ -40,12 +41,12 @@
 /home/davs/.local/share/virtualenv
 /home/davs/.local/share/Trash
 /home/davs/.local/pipx
+/home/davs/.local/lib/python*
 /home/davs/.hoogle
 /home/davs/.ghc-mod
 /home/davs/.thumbnails
 /home/davs/.thunderbird
-/home/davs/.mozilla/**/storage
-/home/davs/.mozilla/**/Crash\ Reports
+/home/davs/.mozilla
 /home/davs/.gvfs
 /home/davs/.npm
 /home/davs/.yarn

@@ -3,7 +3,7 @@ Description=Restic work backup local
 
 [Service]
 Type=oneshot
-ExecStart=%h/bin/restic_work_backup_local
+ExecStart=%h/bin/restic_backup_local /opt/work_backup
 
 StandardOutput=append:/clean_daily/restic_work_backup_local.log
 StandardError=append:/clean_daily/restic_work_backup_local.log
