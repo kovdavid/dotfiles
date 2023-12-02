@@ -3,6 +3,10 @@ local null_ls = require("null-ls")
 local sources = {
     null_ls.builtins.code_actions.eslint,
     null_ls.builtins.code_actions.shellcheck,
+    null_ls.builtins.code_actions.gitsigns,
+    null_ls.builtins.code_actions.refactoring,
+    null_ls.builtins.diagnostics.shellcheck,
+    null_ls.builtins.formatting.shfmt,
     null_ls.builtins.formatting.prettierd.with({
         filetypes = {
             "javascript",
@@ -25,15 +29,18 @@ null_ls.setup({
             end, { buffer = bufnr, desc = "[lsp] format" })
 
             vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                group = augroup,
-                buffer = bufnr,
-                callback = function()
-                    print("Formatting on save with LSP " .. client.name)
-                    vim.lsp.buf.format({ bufnr = bufnr })
-                end,
-                desc = "[lsp] format on save"
-            })
+
+            if not os.getenv("DISABLE_AUTOFORMAT") then
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                    group = augroup,
+                    buffer = bufnr,
+                    callback = function()
+                        print("Formatting on save with LSP " .. client.name)
+                        vim.lsp.buf.format({ bufnr = bufnr })
+                    end,
+                    desc = "[lsp] format on save"
+                })
+            end
         end
 
         if client.supports_method("textDocument/rangeFormatting") then

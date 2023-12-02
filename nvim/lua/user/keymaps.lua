@@ -129,19 +129,19 @@ keymap({ "n", "v" }, "k", "gk", opts)
 keymap("n", "Q", "<NOP>", opts)                                                    -- disable Ex mode
 keymap("x", "Q", ":normal @q <CR>", opts)                                          -- execute '@q' macro
 
-keymap("n", "<F2>", function()
-    -- Toggle line numbers
-    if opt.number:get() then
-        vim.opt["number"] = false
-        vim.opt["relativenumber"] = false
-    else
-        vim.opt["number"] = true
-        vim.opt["relativenumber"] = true
-    end
-end, opts)
-keymap("n", "<F3>", ":set cursorline!<CR>", opts)
-keymap("n", "<F4>", ":set cursorcolumn!<CR>", opts)
-keymap("n", "<F6>", ":set list!<CR>", opts)
+-- keymap("n", "<F2>", function()
+--     -- Toggle line numbers
+--     if opt.number:get() then
+--         vim.opt["number"] = false
+--         vim.opt["relativenumber"] = false
+--     else
+--         vim.opt["number"] = true
+--         vim.opt["relativenumber"] = true
+--     end
+-- end, opts)
+-- keymap("n", "<F3>", ":set cursorline!<CR>", opts)
+-- keymap("n", "<F4>", ":set cursorcolumn!<CR>", opts)
+-- keymap("n", "<F6>", ":set list!<CR>", opts)
 
 vim.api.nvim_exec([[
 function! CloseHiddenBuffers()
@@ -175,6 +175,7 @@ keymap("n", "<leader> ", ":NvimTreeFindFile<CR>", opts)
 keymap("i", "<c-l>", "<c-x><c-l>", opts)
 
 keymap("n", "<leader>jf", ":%!jq --indent 4<CR>", opts)
+keymap("n", "<leader>jg", ":%!gron<CR>", opts)
 
 keymap("n", "<leader>db", ":windo set scrollbind!<CR>", opts)
 keymap("n", "<leader>du", ":windo diffupdate<CR>", opts)

@@ -55,7 +55,15 @@ return require('packer').startup({
         use({ 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' })
         use({ 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' })
         use({ 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' })
-        use({ 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' })
+        use({
+            'JoosepAlviste/nvim-ts-context-commentstring',
+            config = function ()
+                require('ts_context_commentstring').setup {
+                    enable_autocmd = false,
+                }
+            end,
+            after = 'nvim-treesitter'
+        })
         use({
             'abecodes/tabout.nvim',
             config = function()

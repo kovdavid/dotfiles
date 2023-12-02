@@ -7,12 +7,8 @@ require('nvim-treesitter.configs').setup({
     -- nvim-treesitter/nvim-treesitter (self config)
     auto_install = true,
     ensure_installed = {
-        -- 'c',
-        -- 'cpp',
         'dockerfile',
         'lua',
-        -- 'rust',
-        -- 'go',
         'javascript',
         'typescript',
         'tsx',
@@ -22,8 +18,6 @@ require('nvim-treesitter.configs').setup({
         'css',
         'json',
         'bash',
-        -- 'perl',
-        -- 'python',
     },
     highlight = {
         enable = true,
@@ -39,14 +33,14 @@ require('nvim-treesitter.configs').setup({
     -- windwp/nvim-ts-autotag
     autotag = {
         enable = true,
+        enable_rename = true,
+        enable_close = true,
+        enable_close_on_slash = true,
+        -- filetypes = { "html" , "xml" },
     },
     -- nvim-treesitter/nvim-treesitter-refactor
     refactor = {
         highlight_definitions = { enable = true },
         -- highlight_current_scope = { enable = false },
-    },
-    context_commentstring = {
-        enable = true,
-        enable_autocmd = false,
     },
 })
