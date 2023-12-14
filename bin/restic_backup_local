@@ -1,6 +1,7 @@
 #!/bin/bash
 
 RESTIC_DIR=$1
+UPLOAD_TO_B2=$2
 
 if [ ! -d "$RESTIC_DIR" ]; then
 	echo "Directory $RESTIC_DIR does not exist"
@@ -37,7 +38,7 @@ fi
 # shellcheck disable=1091
 source .envrc
 
-if [ "$1" == "b2" ]; then
+if [ "$UPLOAD_TO_B2" == "b2" ]; then
 	echo "####### $(date '+%F %T') Using BlackBlaze"
 
 	if [ ! -f ".envrc.b2" ]; then

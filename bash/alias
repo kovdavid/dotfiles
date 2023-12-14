@@ -62,6 +62,7 @@ if [ -n "$(which nvim 2>/dev/null)" ] ; then
     alias vim="nvim"
     alias view="nvim -M"
     alias vimdiff="nvim -d"
+    alias vimg="nvim -c 'Git | wincmd k | hide'"
 fi
 alias vp="touch .vimproject"
 if [ -f ~/workspace/bash/jump/jump ] ; then

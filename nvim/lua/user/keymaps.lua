@@ -118,6 +118,7 @@ keymap("i", "<c-f>", "<c-x><c-f>", opts)              -- autocomplete files
 
 keymap("n", "qa", "<C-W>_<C-W><BAR>", opts)           -- maximize current split
 keymap("n", "qs", "<C-W><C-W><C-W>_<C-W><BAR>", opts) -- move to next split and maximize it
+keymap("n", "qd", "<C-W>=", opts) -- move to next split and maximize it
 
 -- Movement maps
 keymap({ "n", "v", "o" }, "H", "^", opts) -- beginning of line
