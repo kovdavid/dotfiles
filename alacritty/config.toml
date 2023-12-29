@@ -1,0 +1,42 @@
+import = ["/home/davs/dotfiles/alacritty/colors.toml"]
+
+[cursor.style]
+blinking = "Off"
+shape = "Block"
+
+[env]
+TERM = "alacritty"
+
+[font]
+size = 13
+
+[font.bold]
+family = "DejaVu Sans Mono"
+
+[font.bold_italic]
+family = "DejaVu Sans Mono"
+
+[font.italic]
+family = "DejaVu Sans Mono"
+
+[font.normal]
+family = "DejaVu Sans Mono"
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Middle"
+
+[scrolling]
+history = 10000
+
+[selection]
+save_to_clipboard = true
+
+[window]
+decorations = "full"
+dynamic_padding = true
+dynamic_title = true
+
+[window.padding]
+x = 0
+y = 0
