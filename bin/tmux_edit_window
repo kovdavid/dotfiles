@@ -2,7 +2,7 @@
 
 CURRENT_WINDOW_ID=$(tmux display-message -p '#{window_id}')
 WINDOW_ID=${1:-$CURRENT_WINDOW_ID}
-WINDOW_NAME=$(tmux list-windows -aF '#{window_id} #{window_name}' | grep $WINDOW_ID | head -n 1 | cut -f1 -d ' ' --complement)
+WINDOW_NAME=$(tmux list-windows -aF '#{window_id} #{window_name}' | grep "$WINDOW_ID" | head -n 1 | cut -f1 -d ' ' --complement)
 
 echo "Editing window $WINDOW_ID"
 echo ""
@@ -10,28 +10,28 @@ echo "Input 'pwd' as window name to use current directory name"
 echo "Input 'pwd' as default directory to use the current one"
 echo ""
 
-DEFAULT_COMMAND=$(tmux show-options -qv @${WINDOW_ID}_default_command)
+DEFAULT_COMMAND=$(tmux show-options -qv "@$WINDOW_ID"_default_command)
 CD_DIR=$(echo "$DEFAULT_COMMAND" | grep -oP 'cd .*?;' | cut -d" " -f2 | sed -e 's/;$//g')
 NEW_WINDOW_NAME=''
 
 read -p "Window name: " -e -i "$WINDOW_NAME" NEW_WINDOW_NAME
 
-if [ "$NEW_WINDOW_NAME" == "pwd" ] || [ -z "$NEW_WINDOW_NAME" ] ; then
-    PANE_DIR=$(tmux display-message -t{last} -p '#{pane_current_path}')
-    NEW_WINDOW_NAME=$(basename "$PANE_DIR")
-    CD_DIR="pwd"
+if [ "$NEW_WINDOW_NAME" == "pwd" ] || [ -z "$NEW_WINDOW_NAME" ]; then
+	PANE_DIR=$(tmux display-message -t{last} -p '#{pane_current_path}')
+	NEW_WINDOW_NAME=$(basename "$PANE_DIR")
+	CD_DIR="pwd"
 fi
 
 read -p "Default directory: " -e -i "$CD_DIR" CD_DIR
 
-if [ "$CD_DIR" == "pwd" ] ; then
-    CD_DIR=$(tmux display-message -t{last} -p '#{pane_current_path}')
+if [ "$CD_DIR" == "pwd" ]; then
+	CD_DIR=$(tmux display-message -t{last} -p '#{pane_current_path}')
 fi
 
 TMUX_CMD="cd $CD_DIR; bash"
 
-if [ -n "$NEW_WINDOW_NAME" ] && [ "$NEW_WINDOW_NAME" != "$WINDOW_NAME" ] ; then
-    $(tmux rename-window -t $WINDOW_ID $NEW_WINDOW_NAME)
+if [ -n "$NEW_WINDOW_NAME" ] && [ "$NEW_WINDOW_NAME" != "$WINDOW_NAME" ]; then
+	$(tmux rename-window -t $WINDOW_ID $NEW_WINDOW_NAME)
 fi
 
 $(tmux set-option @${WINDOW_ID}_default_command "$TMUX_CMD")

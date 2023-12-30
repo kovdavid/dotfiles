@@ -4,5 +4,8 @@ require("nvim-tree").setup({
             quit_on_open = true,
             resize_window = true,
         }
+    },
+    view = {
+        adaptive_size = true,
     }
 })

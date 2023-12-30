@@ -15,6 +15,7 @@
 /var/log
 /var/lib/mysql
 /var/lib/mongodb/
+/var/lib/pacman
 /var/lib/docker
 /var/lib/systemd
 

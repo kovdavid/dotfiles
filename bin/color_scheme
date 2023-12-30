@@ -1,16 +1,16 @@
 #!/bin/bash
 
-if [ -z "$1" ] ; then
-    CURRENT_THEME=$(readlink -f ~/dotfiles/nvim/lua/user/colors.lua | grep -oP 'dark|light')
-    if [ "$CURRENT_THEME" == "dark" ] ; then
-        SCHEME="light"
-    else
-        SCHEME="dark"
-    fi
-elif [ "$1" == "light" ] || [ "$1" == "l" ] ; then
-    SCHEME="light"
-elif [ "$1" == "dark" ] || [ "$1" == "d" ] ; then
-    SCHEME="dark"
+if [ -z "$1" ]; then
+	CURRENT_THEME=$(readlink -f ~/dotfiles/nvim/lua/user/colors.lua | grep -oP 'dark|light')
+	if [ "$CURRENT_THEME" == "dark" ]; then
+		SCHEME="light"
+	else
+		SCHEME="dark"
+	fi
+elif [ "$1" == "light" ] || [ "$1" == "l" ]; then
+	SCHEME="light"
+elif [ "$1" == "dark" ] || [ "$1" == "d" ]; then
+	SCHEME="dark"
 fi
 
 echo "Setting scheme $SCHEME"
@@ -22,12 +22,12 @@ echo "Linking NVIM config"
 ln -sf ~/dotfiles/nvim/lua/user/colors_$SCHEME.lua ~/dotfiles/nvim/lua/user/colors.lua
 
 for socket in $(netstat -nxl | grep nvim | awk '{ print $NF }'); do
-    echo "Reloading vim on $socket"
-    python -c "from pynvim import attach; nvim = attach('socket', path='$socket'); nvim.lua.ReloadConfig()" &
+	echo "Reloading vim on $socket"
+	python -c "from pynvim import attach; nvim = attach('socket', path='$socket'); nvim.lua.ReloadConfig()" &
 done
 
 echo "Linking Alacritty config"
-ln -sf ~/dotfiles/alacritty/color_$SCHEME.yml ~/dotfiles/alacritty/colors.yml
+ln -sf ~/dotfiles/alacritty/color_$SCHEME.toml ~/dotfiles/alacritty/colors.toml
 
 echo "Linking tmux config"
 ln -sf ~/dotfiles/tmux/color_$SCHEME.conf ~/dotfiles/tmux/color.conf
