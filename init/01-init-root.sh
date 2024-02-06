@@ -49,7 +49,7 @@ function ensure_xkb_config {
 partial alphanumeric_keys modifier_keys
 xkb_symbols "davs" {
     include "group(lalt_lshift_toggle)"
-    key <RALT> { [ underscore, BackSpace, BackSpace, BackSpace ] };
+    key <RALT> { [ underscore, Multi_key, Multi_key, Multi_key ] };
     key <LSGT> { [ underscore, EuroSign, EuroSign, EuroSign ] };
     key <CAPS> { [ Escape ] };
     key <PRSC> { [ Menu, Menu, Menu, Menu ] };

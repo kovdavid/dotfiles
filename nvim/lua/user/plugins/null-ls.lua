@@ -1,4 +1,5 @@
 local null_ls = require("null-ls")
+local notify = require('notify')
 
 local sources = {
     null_ls.builtins.code_actions.eslint,
@@ -11,8 +12,14 @@ local sources = {
         filetypes = {
             "javascript",
             "typescript",
+            "javascriptreact",
+            "typescriptreact",
         },
-        only_local = "node_modules/.bin",
+        -- only_local = "node_modules/.bin",
+        condition = function(utils)
+            return utils.root_has_file({ ".editorconfig" })
+        end,
+        debug = false,
     }),
 }
 
@@ -20,22 +27,25 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null_ls.setup({
     sources = sources,
+    debug = false,
     on_attach = function(client, bufnr)
 
         if client.supports_method("textDocument/formatting") then
+            notify("Setting up formatting with " .. client.name)
+
             vim.keymap.set("n", "<leader>f", function()
-                print("Formatting with LSP " .. client.name)
-                vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+                -- notify("Formatting with LSP " .. client.name)
+                vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf(), timeout_ms = 5000 })
             end, { buffer = bufnr, desc = "[lsp] format" })
 
             vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 
-            if not os.getenv("DISABLE_AUTOFORMAT") then
+            if os.getenv("ENABLE_AUTOFORMAT") then
                 vim.api.nvim_create_autocmd("BufWritePre", {
                     group = augroup,
                     buffer = bufnr,
                     callback = function()
-                        print("Formatting on save with LSP " .. client.name)
+                        -- notify("Formatting on save with LSP " .. client.name)
                         vim.lsp.buf.format({ bufnr = bufnr })
                     end,
                     desc = "[lsp] format on save"
@@ -45,7 +55,7 @@ null_ls.setup({
 
         if client.supports_method("textDocument/rangeFormatting") then
             vim.keymap.set("x", "<Leader>f", function()
-                print("Formatting with LSP " .. client.name)
+                -- notify("Formatting with LSP " .. client.name)
                 vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
             end, { buffer = bufnr, desc = "[lsp] format" })
         end

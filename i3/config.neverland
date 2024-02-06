@@ -79,6 +79,20 @@ mode $split_orientation {
 
 bindsym $mod+s mode $split_orientation
 
+# toggle layout
+set $layout "(t)ab | (d)efault"
+
+mode $layout {
+    bindsym t layout tabbed  ; mode "default"
+    bindsym d layout default ; mode "default"
+
+    bindsym Escape mode "default"
+    bindsym Enter  mode "default"
+    bindsym c      mode "default"
+}
+
+bindsym $mod+l mode $layout
+
 bindsym --release $mod+Shift+s exec "sleep 0.2; scrot -s -e 'mv $f /clean_daily/$f'"
 
 # enter fullscreen mode for the focused container

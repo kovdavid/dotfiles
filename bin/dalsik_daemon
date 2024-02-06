@@ -11,7 +11,7 @@ from collections import defaultdict
 
 layer_change_re: re.Pattern[str] = re.compile(r"L:(\d+)")
 caps_word_change_re: re.Pattern[str] = re.compile(r"CW:(\d+)")
-modifier_change_re: re.Pattern[str] = re.compile(r"M:(.)")
+modifier_change_re: re.Pattern[str] = re.compile(r"M:(.+)")
 
 current_layer: Literal['0', '1'] = "0"
 caps_word: Literal['0', '1'] = "0"

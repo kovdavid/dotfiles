@@ -39,6 +39,7 @@ return require('packer').startup({
         use("ellisonleao/gruvbox.nvim")
         use("rebelot/kanagawa.nvim")
         use({"nvim-lualine/lualine.nvim", config = function() require("user.plugins.lualine") end})
+        use("rcarriga/nvim-notify")
 
         -----------------------------------
         -- Treesitter: Better Highlights --
@@ -93,6 +94,7 @@ return require('packer').startup({
 
         use({ "kylechui/nvim-surround", config = function() require("nvim-surround").setup({}) end })
         use('tpope/vim-fugitive')
+        use('sindrets/diffview.nvim')
         use('junkblocker/git-time-lapse')
         -- use({
         --     "ahmedkhalf/project.nvim",
