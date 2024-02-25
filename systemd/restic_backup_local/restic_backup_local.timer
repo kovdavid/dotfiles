@@ -4,8 +4,8 @@ Description=Restic backup local
 [Timer]
 ; Activate first time 2h after boot
 OnBootSec=2h
-; Activate 4h after previous activation
-OnUnitActiveSec=4h
+; Activate 2h after previous activation
+OnUnitActiveSec=2h
 Unit=restic_backup_local.service
 
 [Install]

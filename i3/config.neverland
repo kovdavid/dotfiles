@@ -1,5 +1,6 @@
 set $mod Mod4
 set $dp_screen DisplayPort-0
+set $dp_screen2 DisplayPort-1
 set $hdmi_screen HDMI-A-0
 set $laptop_screen eDP
 
@@ -116,28 +117,28 @@ bindsym $mod+z workspace back_and_forth
 # set $ws1 "1: www"
 # set $ws2 "2: tmux"
 
-workspace 1    output $dp_screen $hdmi_screen $laptop_screen
-workspace 2    output $dp_screen $hdmi_screen $laptop_screen
-workspace 3    output $dp_screen $hdmi_screen $laptop_screen
-workspace 4    output $dp_screen $hdmi_screen $laptop_screen
-workspace 5    output $dp_screen $hdmi_screen $laptop_screen
-workspace 6    output $dp_screen $hdmi_screen $laptop_screen
-workspace 7    output $dp_screen $hdmi_screen $laptop_screen
-workspace 8    output $dp_screen $hdmi_screen $laptop_screen
-workspace 9    output $dp_screen $hdmi_screen $laptop_screen
-workspace 10   output $dp_screen $hdmi_screen $laptop_screen
-workspace 11   output $laptop_screen $dp_screen $hdmi_screen
-workspace 12   output $laptop_screen $dp_screen $hdmi_screen
-workspace 13   output $laptop_screen $dp_screen $hdmi_screen
-workspace 14   output $laptop_screen $dp_screen $hdmi_screen
-workspace 15   output $laptop_screen $dp_screen $hdmi_screen
-workspace 16   output $laptop_screen $dp_screen $hdmi_screen
-workspace 17   output $laptop_screen $dp_screen $hdmi_screen
-workspace 18   output $laptop_screen $dp_screen $hdmi_screen
-workspace 19   output $laptop_screen $dp_screen $hdmi_screen
-workspace 20   output $laptop_screen $dp_screen $hdmi_screen
-workspace 21   output $laptop_screen $dp_screen $hdmi_screen
-workspace 22   output $laptop_screen $dp_screen $hdmi_screen
+workspace 1    output $dp_screen $dp_screen2 $hdmi_screen $laptop_screen
+workspace 2    output $dp_screen $dp_screen2 $hdmi_screen $laptop_screen
+workspace 3    output $dp_screen $dp_screen2 $hdmi_screen $laptop_screen
+workspace 4    output $dp_screen $dp_screen2 $hdmi_screen $laptop_screen
+workspace 5    output $dp_screen $dp_screen2 $hdmi_screen $laptop_screen
+workspace 6    output $dp_screen $dp_screen2 $hdmi_screen $laptop_screen
+workspace 7    output $dp_screen $dp_screen2 $hdmi_screen $laptop_screen
+workspace 8    output $dp_screen $dp_screen2 $hdmi_screen $laptop_screen
+workspace 9    output $dp_screen $dp_screen2 $hdmi_screen $laptop_screen
+workspace 10   output $dp_screen $dp_screen2 $hdmi_screen $laptop_screen
+workspace 11   output $laptop_screen $dp_screen $dp_screen2 hdmi_screen
+workspace 12   output $laptop_screen $dp_screen $dp_screen2 hdmi_screen
+workspace 13   output $laptop_screen $dp_screen $dp_screen2 hdmi_screen
+workspace 14   output $laptop_screen $dp_screen $dp_screen2 hdmi_screen
+workspace 15   output $laptop_screen $dp_screen $dp_screen2 hdmi_screen
+workspace 16   output $laptop_screen $dp_screen $dp_screen2 hdmi_screen
+workspace 17   output $laptop_screen $dp_screen $dp_screen2 hdmi_screen
+workspace 18   output $laptop_screen $dp_screen $dp_screen2 hdmi_screen
+workspace 19   output $laptop_screen $dp_screen $dp_screen2 hdmi_screen
+workspace 20   output $laptop_screen $dp_screen $dp_screen2 hdmi_screen
+workspace 21   output $laptop_screen $dp_screen hdmi_screen
+workspace 22   output $laptop_screen $dp_screen hdmi_screen
 
 # switch to workspace
 bindsym $mod+1 workspace number 1
@@ -258,6 +259,7 @@ bar {
     # status_command i3status -c ~/.config/i3status/config | ~/bin/i3status_wrapper
     status_command i3status-rs ~/.config/i3status/config.toml
     tray_output $dp_screen
+    tray_output $dp_screen2
     tray_output $hdmi_screen
     tray_output $laptop_screen
 

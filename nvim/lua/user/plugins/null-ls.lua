@@ -2,10 +2,10 @@ local null_ls = require("null-ls")
 local notify = require('notify')
 
 local sources = {
-    null_ls.builtins.code_actions.eslint,
-    null_ls.builtins.code_actions.shellcheck,
-    null_ls.builtins.code_actions.gitsigns,
-    null_ls.builtins.code_actions.refactoring,
+    -- null_ls.builtins.code_actions.eslint,
+    -- null_ls.builtins.code_actions.shellcheck,
+    -- null_ls.builtins.code_actions.gitsigns,
+    -- null_ls.builtins.code_actions.refactoring,
     null_ls.builtins.diagnostics.shellcheck,
     null_ls.builtins.formatting.shfmt,
     null_ls.builtins.formatting.prettierd.with({
@@ -21,6 +21,9 @@ local sources = {
         end,
         debug = false,
     }),
+    -- null_ls.builtins.formatting.eslint.with({
+    --     format = { enable = false }
+    -- })
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -28,6 +31,7 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
     sources = sources,
     debug = false,
+    root_dir = require("null-ls.utils").root_pattern(".vimproject"),
     on_attach = function(client, bufnr)
 
         if client.supports_method("textDocument/formatting") then

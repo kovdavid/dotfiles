@@ -13,6 +13,7 @@ nytprof*
 .flake8
 local.properties
 .idea
+worktree/
 
 # Devel::PDB
 .*-conf

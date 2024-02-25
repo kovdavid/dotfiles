@@ -57,6 +57,9 @@ ln -sf ~/dotfiles/alacritty/config.toml ~/.config/alacritty/alacritty.toml
 ln -sf ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/tmux/templates ~/.tmux_templates
 
+mkdir -p ~/.config/Thunar
+ln -sf ~/dotfiles/Thunar/uca.xml ~/.config/Thunar/uca.xml
+
 remove_and_link_dotfile xinitrc
 remove_and_link_dotfile inputrc
 remove_and_link_dotfile xprofile

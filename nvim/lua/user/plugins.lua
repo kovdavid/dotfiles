@@ -93,18 +93,7 @@ return require('packer').startup({
         })
 
         use({ "kylechui/nvim-surround", config = function() require("nvim-surround").setup({}) end })
-        use('tpope/vim-fugitive')
         use('sindrets/diffview.nvim')
-        use('junkblocker/git-time-lapse')
-        -- use({
-        --     "ahmedkhalf/project.nvim",
-        --     config = function()
-        --         require("project_nvim").setup({
-        --             detection_methods = { "pattern" },
-        --             patterns = { ".git", ".vimproject" },
-        --         })
-        --     end
-        -- })
 
         use({
             "notjedi/nvim-rooter.lua",
@@ -184,6 +173,11 @@ return require('packer').startup({
             "jose-elias-alvarez/null-ls.nvim",
             config = function() require("user.plugins.null-ls") end,
             requires = { "nvim-lua/plenary.nvim" },
+        })
+
+        use({
+            "LunarVim/bigfile.nvim",
+            config = function() require("bigfile").setup() end,
         })
 
         if packer_bootstrapped then

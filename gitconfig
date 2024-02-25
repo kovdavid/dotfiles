@@ -48,10 +48,15 @@
     quotepath = false
 [diff]
     tool = nvimdiff
+    algorithm = histogram
+    submodule = log
 [difftool "nvimdiff"]
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [merge]
     tool = fugitive
+    conflictstyle = zdiff3
+[status]
+    submoduleSummary = true
 [color]
     ui = auto
 [grep]
@@ -68,6 +73,7 @@
     default = current
 [branch]
     autosetuprebase = always
+    sort = -committerdate
 [init]
     templatedir = ~/.git-templates
 [includeIf "gitdir:~/workspace/techmates/"]

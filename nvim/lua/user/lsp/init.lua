@@ -22,4 +22,12 @@ require("lspconfig").tsserver.setup({
     end,
 })
 
+require("lspconfig").eslint.setup({
+  on_attach = function(client)
+      if client.resolved_capabilities then
+          client.resolved_capabilities.document_formatting = false
+      end
+  end,
+})
+
 lsp.setup()
