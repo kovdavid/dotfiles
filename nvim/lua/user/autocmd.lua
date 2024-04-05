@@ -8,6 +8,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+local javascript_group = vim.api.nvim_create_augroup("javascript", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "javascript" },
+    group = javascript_group,
+    callback = function ()
+        local opts = { noremap = true, silent = true }
+        vim.keymap.set("n", "<leader>rr", ":!node %<CR>", opts)
+    end,
+})
+
 local all_files_group = vim.api.nvim_create_augroup("all_files", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = all_files_group,

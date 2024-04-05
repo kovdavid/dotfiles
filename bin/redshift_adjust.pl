@@ -29,7 +29,7 @@ my $STEPS = 5; # minutes
 
 my $raw_config_by_month = [
     {
-        months => [ 1, 2, 3, 10, 11, 12 ],
+        months => [ 1, 2, 10, 11, 12 ],
         config => {
             #hour + minute
              0*60 + 00 => { temp => 1300, brightness => '0.70' },
@@ -42,7 +42,7 @@ my $raw_config_by_month = [
         },
     },
     {
-        months => [ 4, 5, 6, 7, 8, 9 ],
+        months => [ 3, 4, 5, 6, 7, 8, 9 ],
         config => {
             #hour + minute
              0*60 + 00 => { temp => 1300, brightness => '0.70' },

@@ -88,7 +88,7 @@ end
 
 keymap("v", "<leader>gw", function() grep_selection({ full_word = false }) end, opts)
 keymap("v", "<leader>gwf", function() grep_selection({ full_word = true }) end, opts)
-keymap("n", "<leader>lg", function() require('telescope.builtin').live_grep() end, opts)
+-- keymap("n", "<leader>lg", function() require('telescope.builtin').live_grep() end, opts)
 
 keymap("v", ">", ">gv", opts)
 keymap("v", "<", "<gv", opts)
@@ -168,17 +168,17 @@ keymap("n", "<TAB>", "%", opts)
 keymap("n", "<space>", "za", opts)
 keymap("n", "<leader>tw", "<cmd>:%s/\\s\\+$//e<CR>", opts)
 
-keymap("n", "<leader>lr", vim.lsp.buf.rename, opts)
+-- keymap("n", "<leader>lr", vim.lsp.buf.rename, opts)
 
 -- keymap("n", "<leader>me", ":let @/=expand('%:t')<CR>:Explore<CR>n:nohl<CR>", opts) -- open :Explore with cursor on the current file
-keymap("n", "<leader> ", ":NvimTreeFindFile<CR>", opts)
+-- keymap("n", "<leader> ", ":NvimTreeFindFile<CR>", opts)
 
 keymap("i", "<c-l>", "<c-x><c-l>", opts)
 
-keymap("n", "<leader>jf", ":%!jq --indent 4<CR>", opts)
-keymap("n", "<leader>jg", ":%!gron<CR>", opts)
+-- keymap("n", "<leader>jf", ":%!jq --indent 4<CR>", opts)
+-- keymap("n", "<leader>jg", ":%!gron<CR>", opts)
 
-keymap("n", "<leader>db", ":windo set scrollbind!<CR>", opts)
-keymap("n", "<leader>du", ":windo diffupdate<CR>", opts)
+-- keymap("n", "<leader>db", ":windo set scrollbind!<CR>", opts)
+-- keymap("n", "<leader>du", ":windo diffupdate<CR>", opts)
 -- keymap("n", "<leader>dw", ":windo set diffopt+=iwhite<CR>", opts)
-keymap("n", "<leader>dw", ":windo set diffopt+=iwhiteall<CR>", opts)
+-- keymap("n", "<leader>dw", ":windo set diffopt+=iwhiteall<CR>", opts)

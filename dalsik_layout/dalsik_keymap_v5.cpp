@@ -200,20 +200,20 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] PROGMEM = KEYMAP({
        │        │        │        │        │        │        │ │        │        │  Gui+  │  Gui+  │        │        │
        │        │        │        │        │        │        │ │        │        │  Tab   │ S(Tab) │        │        │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
-       │        │ MS BTN │ MS BTN │ MS BTN │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │        │
-       │        │  LEFT  │ MIDDLE │ RIGHT  │        │        │ │        │        │  F13   │  F14   │   R    │        │
+       │        │        │        │        │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │        │
+       │        │        │        │        │        │        │ │        │        │  F13   │  F14   │   R    │        │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
-       │        │ MS BTN │        │ MS BTN │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │*L WIN *│
-       │        │   4    │        │   5    │        │        │ │        │        │  PgUp  │  PgDn  │   Z    │*  /   *│
+       │        │        │        │        │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │*L WIN *│
+       │        │        │        │        │        │        │ │        │        │  PgUp  │  PgDn  │   Z    │*  /   *│
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
        │        │        │        │        │        │        │ │  Gui+  │        │        │        │        │        │
        │        │        │        │        │        │        │ │ RETURN │        │        │        │        │        │
        └────────┴────────┴────────┴────────┴────────┴────────┘ └────────┴────────┴────────┴────────┴────────┴────────┘
      */
     LAYOUT_4x12(
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_TAB,   GUI_STAB,  XXXXXXX,     XXXXXXX,
-        XXXXXXX,  M_BTN1 ,  M_BTN3 ,  M_BTN2 ,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_F13,   GUI_F14,   LGUI(KC_R),  XXXXXXX,
-        XXXXXXX,  M_BTN4 ,  XXXXXXX,  M_BTN5 ,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_PGUP,  GUI_PGDN,  LGUI(KC_Z),  LWIN_SLASH,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  GUI_RET,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX
+        LGUI(KC_F1), LGUI(KC_F2), LGUI(KC_F3), LGUI(KC_F4), LGUI(KC_F5),    XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_TAB,   GUI_STAB,  XXXXXXX,     XXXXXXX,
+        LGUI(KC_1),  LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4),  LGUI(KC_5),     XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_F13,   GUI_F14,   LGUI(KC_R),  XXXXXXX,
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_PGUP,  GUI_PGDN,  LGUI(KC_Z),  LWIN_SLASH,
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  MOD_LSHIFT,   XXXXXXX,  /**/  GUI_RET,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX
     )
 });

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ "$1" == "disable" ]] ; then
+    echo "Disabling screensaver"
+    xset s off
+    xset -dpms
+fi

@@ -36,7 +36,7 @@ require('nvim-treesitter.configs').setup({
         enable_rename = true,
         enable_close = true,
         enable_close_on_slash = true,
-        -- filetypes = { "html" , "xml" },
+        filetypes = { "html" , "ejs", "javascript", "typescript", "mason", "javascriptreact", "typescriptreact" },
     },
     -- nvim-treesitter/nvim-treesitter-refactor
     refactor = {

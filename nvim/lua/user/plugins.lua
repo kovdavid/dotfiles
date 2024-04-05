@@ -26,20 +26,20 @@ return require('packer').startup({
 
         use('wbthomason/packer.nvim')
 
-        ----------------------
-        -- Required plugins --
-        ----------------------
+        -- ----------------------
+        -- -- Required plugins --
+        -- ----------------------
 
         use('nvim-lua/plenary.nvim')
 
-        --------
-        -- UI --
-        --------
+        -- --------
+        -- -- UI --
+        -- --------
+
         use("phha/zenburn.nvim")
         use("ellisonleao/gruvbox.nvim")
         use("rebelot/kanagawa.nvim")
         use({"nvim-lualine/lualine.nvim", config = function() require("user.plugins.lualine") end})
-        use("rcarriga/nvim-notify")
 
         -----------------------------------
         -- Treesitter: Better Highlights --
@@ -56,91 +56,41 @@ return require('packer').startup({
         use({ 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' })
         use({ 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' })
         use({ 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' })
-        use({
-            'JoosepAlviste/nvim-ts-context-commentstring',
-            config = function ()
-                require('ts_context_commentstring').setup {
-                    enable_autocmd = false,
-                }
-            end,
-            after = 'nvim-treesitter'
-        })
-        use({
-            'abecodes/tabout.nvim',
-            config = function()
-                require('user.plugins.tabout')
-            end,
-            wants = {'nvim-treesitter'},
-            after = {'nvim-cmp'},
-        })
 
         ----------------
         -- Navigation --
         ----------------
 
-        use({
-            'rhysd/clever-f.vim',
-            config = function()
-                require("user.plugins.clever-f")
-            end
-        })
+         use({ 'rhysd/clever-f.vim', config = function() require('user.plugins.clever-f') end })
+         use({ 'stevearc/oil.nvim', config = function() require('oil').setup() end })
+         use({ 'kylechui/nvim-surround', config = function() require('nvim-surround').setup({}) end })
+         use({ 'sindrets/diffview.nvim' })
+         use({ 'notjedi/nvim-rooter.lua', config = function() require('user.plugins.nvim-rooter') end })
+         use({ 'nvim-telescope/telescope.nvim', config = function() require('user.plugins.telescope') end })
+         use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
+         use({ 'lewis6991/gitsigns.nvim', config = function() require('user.plugins.gitsigns') end, })
+         use({ 'folke/which-key.nvim', config = function() require('user.plugins.which-key') end, })
+         use({ 'bloznelis/before.nvim', config = function() require('user.plugins.before') end, })
 
-        use({
-            "windwp/nvim-autopairs",
-            config = function()
-                require("nvim-autopairs").setup({})
-            end
-        })
+         use({
+             'windwp/nvim-autopairs',
+             config = function()
+                 require('nvim-autopairs').setup({})
+             end
+         })
 
-        use({ "kylechui/nvim-surround", config = function() require("nvim-surround").setup({}) end })
-        use('sindrets/diffview.nvim')
 
-        use({
-            "notjedi/nvim-rooter.lua",
-            config = function()
-                require("nvim-rooter").setup({
-                    rooter_patterns = { ".git/config", ".vimproject" }
-                })
-            end
-        })
-
-        use({ "nvim-telescope/telescope.nvim", config = function() require("user.plugins.telescope") end })
-        use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
-
-        use({
-            "nvim-tree/nvim-tree.lua",
-            requires = { 'nvim-tree/nvim-web-devicons' },
-            config = function()
-                require("user.plugins.nvim-tree")
-            end
-        })
-
-        use({
-            "lewis6991/gitsigns.nvim",
-            config = function() require("user.plugins.gitsigns") end,
-        })
-
-        -- use({
-        --     "NeogitOrg/neogit",
-        --     requires = {
-        --         "nvim-lua/plenary.nvim",         -- required
-        --         "nvim-telescope/telescope.nvim", -- optional
-        --         "sindrets/diffview.nvim",        -- optional
-        --         "ibhagwan/fzf-lua",              -- optional
-        --     },
-        --     config = function()
-        --         require("user.plugins.neogit")
-        --     end
-        -- })
+         use({
+             'nvim-tree/nvim-tree.lua',
+             requires = { 'nvim-tree/nvim-web-devicons' },
+             config = function()
+                 require('user.plugins.nvim-tree')
+             end
+         })
 
         ----------------
         -- Formatting --
         ----------------
-
-        use({
-            "Vonr/align.nvim",
-            config = function() require("user.plugins.align") end,
-        })
 
         use({
             "numToStr/Comment.nvim",
@@ -169,16 +119,16 @@ return require('packer').startup({
             }
         })
 
-        use({
-            "jose-elias-alvarez/null-ls.nvim",
-            config = function() require("user.plugins.null-ls") end,
-            requires = { "nvim-lua/plenary.nvim" },
-        })
+         use({
+             "jose-elias-alvarez/null-ls.nvim",
+             config = function() require("user.plugins.null-ls") end,
+             requires = { "nvim-lua/plenary.nvim" },
+         })
 
-        use({
-            "LunarVim/bigfile.nvim",
-            config = function() require("bigfile").setup() end,
-        })
+         use({
+             "LunarVim/bigfile.nvim",
+             config = function() require("bigfile").setup() end,
+         })
 
         if packer_bootstrapped then
             require('packer').sync()
