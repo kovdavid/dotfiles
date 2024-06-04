@@ -31,6 +31,7 @@ return require('packer').startup({
         -- ----------------------
 
         use('nvim-lua/plenary.nvim')
+        use('kkharji/sqlite.lua')
 
         -- --------
         -- -- UI --
@@ -61,32 +62,41 @@ return require('packer').startup({
         -- Navigation --
         ----------------
 
-         use({ 'rhysd/clever-f.vim', config = function() require('user.plugins.clever-f') end })
-         use({ 'stevearc/oil.nvim', config = function() require('oil').setup() end })
-         use({ 'kylechui/nvim-surround', config = function() require('nvim-surround').setup({}) end })
-         use({ 'sindrets/diffview.nvim' })
-         use({ 'notjedi/nvim-rooter.lua', config = function() require('user.plugins.nvim-rooter') end })
-         use({ 'nvim-telescope/telescope.nvim', config = function() require('user.plugins.telescope') end })
-         use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
-         use({ 'lewis6991/gitsigns.nvim', config = function() require('user.plugins.gitsigns') end, })
-         use({ 'folke/which-key.nvim', config = function() require('user.plugins.which-key') end, })
-         use({ 'bloznelis/before.nvim', config = function() require('user.plugins.before') end, })
+        use({ 'rhysd/clever-f.vim', config = function() require('user.plugins.clever-f') end })
+        use({ 'stevearc/oil.nvim', config = function() require('oil').setup() end })
+        use({ 'kylechui/nvim-surround', config = function() require('nvim-surround').setup({}) end })
+        use({ 'sindrets/diffview.nvim' })
+        use({ 'notjedi/nvim-rooter.lua', config = function() require('user.plugins.nvim-rooter') end })
+        use({ 'nvim-telescope/telescope.nvim', config = function() require('user.plugins.telescope') end })
+        use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
+        use({ 'lewis6991/gitsigns.nvim', config = function() require('user.plugins.gitsigns') end, })
+        use({ 'folke/which-key.nvim', config = function() require('user.plugins.which-key') end, })
+        use({ 'bloznelis/before.nvim', config = function() require('user.plugins.before') end, })
+        use({
+            "danielfalk/smart-open.nvim",
+            branch = "0.2.x",
+            config = function() require("telescope").load_extension("smart_open") end,
+            requires = {
+                {"kkharji/sqlite.lua"},
+                { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+            }
+        })
 
-         use({
-             'windwp/nvim-autopairs',
-             config = function()
-                 require('nvim-autopairs').setup({})
-             end
-         })
+        use({
+            'windwp/nvim-autopairs',
+            config = function()
+                require('nvim-autopairs').setup({})
+            end
+        })
 
 
-         use({
-             'nvim-tree/nvim-tree.lua',
-             requires = { 'nvim-tree/nvim-web-devicons' },
-             config = function()
-                 require('user.plugins.nvim-tree')
-             end
-         })
+        use({
+            'nvim-tree/nvim-tree.lua',
+            requires = { 'nvim-tree/nvim-web-devicons' },
+            config = function()
+                require('user.plugins.nvim-tree')
+            end
+        })
 
         ----------------
         -- Formatting --
@@ -119,16 +129,21 @@ return require('packer').startup({
             }
         })
 
-         use({
-             "jose-elias-alvarez/null-ls.nvim",
-             config = function() require("user.plugins.null-ls") end,
-             requires = { "nvim-lua/plenary.nvim" },
-         })
+        -- use({
+        --     "jose-elias-alvarez/null-ls.nvim",
+        --     config = function() require("user.plugins.null-ls") end,
+        --     requires = { "nvim-lua/plenary.nvim" },
+        -- })
 
-         use({
-             "LunarVim/bigfile.nvim",
-             config = function() require("bigfile").setup() end,
-         })
+        use({
+            "stevearc/conform.nvim",
+            config = function() require("user.plugins.conform") end,
+        })
+
+        use({
+            "LunarVim/bigfile.nvim",
+            config = function() require("bigfile").setup() end,
+        })
 
         if packer_bootstrapped then
             require('packer').sync()

@@ -1,4 +1,6 @@
+vim.cmd("hi clear")
 vim.cmd("set background=dark")
 -- vim.cmd("colorscheme kanagawa")
+vim.cmd("colorscheme vim")
 vim.cmd("colorscheme zenburn")
 vim.cmd("highlight CursorLine guibg=#4f4f4f guifg=NONE")

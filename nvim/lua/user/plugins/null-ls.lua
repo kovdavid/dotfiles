@@ -9,6 +9,7 @@ local sources = {
     null_ls.builtins.formatting.shfmt,
     null_ls.builtins.formatting.prettier.with({
         filetypes = {
+            "astro",
             "javascript",
             "typescript",
             "javascriptreact",

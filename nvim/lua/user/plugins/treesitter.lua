@@ -5,7 +5,8 @@
 
 require('nvim-treesitter.configs').setup({
     -- nvim-treesitter/nvim-treesitter (self config)
-    auto_install = true,
+    -- auto_install = true,
+    auto_install = false,
     ensure_installed = {
         'dockerfile',
         'lua',

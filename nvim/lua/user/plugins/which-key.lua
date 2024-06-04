@@ -15,14 +15,17 @@ wk.setup({
     },
 })
 
+vim.cmd("unmap gc")
+vim.cmd("unmap gcc")
+
 wk.register({
     ["d"] = {
         name = "diff",
         ["w"] = { ":windo set diffopt+=iwhiteall<CR>", "diff +iwhite" },
         ["u"] = { ":windo diffupdate<CR>", "diff update" },
         ["b"] = { ":windo set scrollbind!<CR>", "diff scrollbind!" },
-        ["o"] = { ":DiffviewOpen", "DiffviewOpen" },
-        ["f"] = { ":DiffviewFileHistory %<CR>", "DiffviewFileHistory" },
+        ["o"] = { ":DiffviewOpen", "DiffviewOpen", silent=false },
+        ["f"] = { ":DiffviewFileHistory %<CR>", "DiffviewFileHistory", silent=false },
         ["c"] = { ":DiffviewClose<CR>", "DiffviewClose" },
     },
     ["h"] = {
@@ -58,7 +61,9 @@ wk.register({
         },
     },
     [" "] = { ":NvimTreeFindFile<CR>", "NvimTree" },
-    ["<leader>"] = { function() require('telescope.builtin').find_files({ hidden = false }) end, "telescope project" },
+    ["f"] = { function() require("conform").format({ async = true }) end, "Format with conform" },
+    ["<leader>"] = { function() require('telescope').extensions.smart_open.smart_open({ cwd_only = true, filename_first = false }) end, "telescope project" },
+    -- ["<leader>"] = { function() require('telescope.builtin').find_files({ hidden = false }) end, "telescope project" },
 }, { prefix = "<leader>", mode = "n" })
 
 wk.register({
@@ -95,7 +100,8 @@ wk.register({
     ["g"] = {
         ["d"] = { vim.lsp.buf.definition, "LSP definition" },
         ["D"] = { vim.lsp.buf.declaration, "LSP declaration" },
-        ["r"] = { vim.lsp.buf.references, "LSP references" },
+        -- ["c"] = { function() require('telescope.builtin').lsp_incoming_calls() end, "LSP incoming calls" },
+        ["r"] = { function() require('telescope.builtin').lsp_references() end, "LSP references" },
         ["i"] = { vim.lsp.buf.implementation, "LSP implementation" },
         ["l"] = { vim.diagnostic.open_float, "LSP diagnostic" },
         ["o"] = { vim.lsp.buf.type_definition, "Type definition" },
