@@ -21,6 +21,17 @@ elif [ -d ~/.plenv/bin ] ; then
     eval "$(plenv init -)"
 fi
 
+if [ -f /opt/javascript/completion-for-pnpm.bash ] ; then
+    source /opt/javascript/completion-for-pnpm.bash
+else
+    if [ -n "$(which pnpm 2>/dev/null)" && -d /opt/javascript ] ; then
+        pnpm completion bash > /opt/javascript/completion-for-pnpm.bash
+        source /opt/javascript/completion-for-pnpm.bash
+    fi
+fi
+
+[[ -d "$HOME/.meteor" ]] && export PATH="$HOME/.meteor:$PATH"
+
 export PATH="$HOME/bin:$JAVA_HOME:$PATH"
 [[ -d /opt/javascript/node ]] && export NODE_PATH="/opt/javascript/node"
 [[ -d /opt/javascript/node/bin ]] && export PATH="/opt/javascript/node/bin:$PATH"
