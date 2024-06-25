@@ -1,3 +1,6 @@
-require('nvim-rooter').setup({
-    rooter_patterns = { '.git/config', '.vimproject' }
-})
+return {
+    "notjedi/nvim-rooter.lua",
+    opts = {
+        rooter_patterns = { '.git/config', '.vimproject' }
+    }
+}

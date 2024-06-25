@@ -1,3 +1,9 @@
-vim.g.clever_f_across_no_line = 1
-vim.g.clever_f_smart_case = 1
-vim.g.clever_f_fix_key_direction = 1
+return {
+    "rhysd/clever-f.vim",
+    keys = "f",
+    config = function()
+        vim.g.clever_f_across_no_line = 1
+        vim.g.clever_f_smart_case = 1
+        vim.g.clever_f_fix_key_direction = 1
+    end
+}

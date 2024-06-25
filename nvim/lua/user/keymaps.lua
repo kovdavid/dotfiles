@@ -86,10 +86,6 @@ local function grep_selection(opts)
     require('telescope.builtin').live_grep({ default_text = selection })
 end
 
-keymap("v", "<leader>gw", function() grep_selection({ full_word = false }) end, opts)
-keymap("v", "<leader>gwf", function() grep_selection({ full_word = true }) end, opts)
--- keymap("n", "<leader>lg", function() require('telescope.builtin').live_grep() end, opts)
-
 keymap("v", ">", ">gv", opts)
 keymap("v", "<", "<gv", opts)
 keymap("n", ">", ">>", opts)
@@ -130,20 +126,6 @@ keymap({ "n", "v" }, "k", "gk", opts)
 keymap("n", "Q", "<NOP>", opts)                                                    -- disable Ex mode
 keymap("x", "Q", ":normal @q <CR>", opts)                                          -- execute '@q' macro
 
--- keymap("n", "<F2>", function()
---     -- Toggle line numbers
---     if opt.number:get() then
---         vim.opt["number"] = false
---         vim.opt["relativenumber"] = false
---     else
---         vim.opt["number"] = true
---         vim.opt["relativenumber"] = true
---     end
--- end, opts)
--- keymap("n", "<F3>", ":set cursorline!<CR>", opts)
--- keymap("n", "<F4>", ":set cursorcolumn!<CR>", opts)
--- keymap("n", "<F6>", ":set list!<CR>", opts)
-
 vim.api.nvim_exec([[
 function! CloseHiddenBuffers()
     let visible_buffers = {}
@@ -168,17 +150,4 @@ keymap("n", "<TAB>", "%", opts)
 keymap("n", "<space>", "za", opts)
 keymap("n", "<leader>tw", "<cmd>:%s/\\s\\+$//e<CR>", opts)
 
--- keymap("n", "<leader>lr", vim.lsp.buf.rename, opts)
-
--- keymap("n", "<leader>me", ":let @/=expand('%:t')<CR>:Explore<CR>n:nohl<CR>", opts) -- open :Explore with cursor on the current file
--- keymap("n", "<leader> ", ":NvimTreeFindFile<CR>", opts)
-
 keymap("i", "<c-l>", "<c-x><c-l>", opts)
-
--- keymap("n", "<leader>jf", ":%!jq --indent 4<CR>", opts)
--- keymap("n", "<leader>jg", ":%!gron<CR>", opts)
-
--- keymap("n", "<leader>db", ":windo set scrollbind!<CR>", opts)
--- keymap("n", "<leader>du", ":windo diffupdate<CR>", opts)
--- keymap("n", "<leader>dw", ":windo set diffopt+=iwhite<CR>", opts)
--- keymap("n", "<leader>dw", ":windo set diffopt+=iwhiteall<CR>", opts)
