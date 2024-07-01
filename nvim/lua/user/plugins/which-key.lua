@@ -57,8 +57,9 @@ return {
             ["l"] = {
                 name = "LSP",
                 ["r"] = { vim.lsp.buf.rename, "rename" },
-                ["a"] = { ":TSToolsAddMissingImports<CR>", "TSToolsAddMissingImports" },
-                ["o"] = { ":TSToolsOrganizeImports<CR>", "TSToolsOrganizeImports" },
+                ["a"] = { ":TSToolsAddMissingImports<CR>", "TSTools AddMissingImports" },
+                ["o"] = { ":TSToolsOrganizeImports<CR>", "TSTools OrganizeImports" },
+                ["f"] = { ":TSToolsRenameFile<CR>", "TSTools RenameFile" },
             },
             ["t"] = {
                 name = "Telescope",
