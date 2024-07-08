@@ -18,6 +18,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+local hurl_group = vim.api.nvim_create_augroup("hurl", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "hurl" },
+    group = hurl_group,
+    callback = function ()
+        local opts = { noremap = true, silent = true }
+        vim.keymap.set("n", "<leader>rr", ":!hurl %<CR>", opts)
+    end,
+})
+
 local all_files_group = vim.api.nvim_create_augroup("all_files", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = all_files_group,

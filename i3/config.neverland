@@ -301,9 +301,7 @@ exec_always --no-startup-id ~/bin/init_trackpoint
 exec /usr/bin/sed -i "s/^[^#]/# &/" /home/davs/.ssh/authorized_keys
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock_wrapper --nofork
 exec --no-startup-id /home/davs/dotfiles/bin/deduplicate_bash_history &
-# exec --no-startup-id nm-applet &
-# exec --no-startup-id pasystray &
-# exec --no-startup-id blueman-applet &
+exec --no-startup-id /home/davs/dotfiles/bin/keepassxc_backup.sh &
 exec --no-startup-id redshift_adjust.pl &
 exec --no-startup-id dex --autostart --environment i3
 # exec --no-startup-id touchpad_log &
