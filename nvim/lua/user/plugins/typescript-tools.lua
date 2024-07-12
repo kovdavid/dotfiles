@@ -4,7 +4,7 @@ return {
     opts = {
         settings = {
             separate_diagnostic_server = false,
-            tsserver_max_memory = 600,
+            tsserver_max_memory = 1024,
         }
     },
 }

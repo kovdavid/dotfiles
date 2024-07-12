@@ -71,6 +71,8 @@
     default = current
 [pull]
     default = current
+[rerere]
+	enabled = true
 [branch]
     autosetuprebase = always
     sort = -committerdate
