@@ -40,3 +40,13 @@ dynamic_title = true
 [window.padding]
 x = 0
 y = 0
+
+[[hints.enabled]]
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+hyperlinks = true
+post_processing = true
+action = 'Copy'
+
+  [hints.enabled.mouse]
+  enabled = true
+  mods = 'Control'

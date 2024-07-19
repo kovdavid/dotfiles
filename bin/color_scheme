@@ -15,8 +15,8 @@ fi
 
 echo "Setting scheme $SCHEME"
 
-echo "Linking VIM config"
-ln -sf ~/dotfiles/vim/colors_$SCHEME.vim ~/dotfiles/vim/colors.vim
+# echo "Linking VIM config"
+# ln -sf ~/dotfiles/vim/colors_$SCHEME.vim ~/dotfiles/vim/colors.vim
 
 echo "Linking NVIM config"
 ln -sf ~/dotfiles/nvim/lua/user/colors_$SCHEME.lua ~/dotfiles/nvim/lua/user/colors.lua

@@ -136,7 +136,7 @@ AutoEnable=false
 
         yay -S dex seahorse gnome-keyring polkit-gnome oxygen-icons ibus strace fstrim rofi
         yay -S python-pynvim gnome-session dunst
-        yay -S yarn jq docker-compose docker run-parts networkmanager-openvpn python-i3ipc xclip direnv python-poetry bash-completion symlinks geeqie perl-json perl-json-xs thunar-archive-plugin xarchiver
+        yay -S yarn jq docker-compose docker docker-buildx run-parts networkmanager-openvpn python-i3ipc xclip direnv python-poetry bash-completion symlinks geeqie perl-json perl-json-xs thunar-archive-plugin xarchiver
 
         vi /boot/loader/entries/arch.conf
         # Add the following content to arch.conf
