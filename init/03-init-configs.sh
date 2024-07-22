@@ -1,8 +1,8 @@
 #!/bin/bash
 
 function remove_and_link_dotfile {
-	$(rm -rf ~/.$1)
-	$(ln -s ~/dotfiles/$1 ~/.$1)
+	rm -rf "$HOME/.$1"
+	ln -s "$HOME/dotfiles/$1" "$HOME/.$1"
 }
 
 echo "Linking dotfiles"
@@ -15,7 +15,7 @@ ln -sf ~/dotfiles/bash/alias ~/.bashrc.alias
 ln -sf ~/dotfiles/bash/common ~/.bashrc.common
 
 if [ ! -f ~/.Xresources.local ]; then
-	if [ $(hostname) == "neverland" ]; then
+	if [ "$(hostname)" == "neverland" ]; then
 		echo "XTerm*faceSize: 13" >~/.Xresources.local
 	else
 		echo "You have to manually create ~/.Xresources.local"
@@ -28,7 +28,7 @@ remove_and_link_dotfile bash_profile
 remove_and_link_dotfile bashrc
 
 ln -sf ~/dotfiles/gitconfig ~/.gitconfig
-if [ $(hostname) == "neverland" ]; then
+if [ "$(hostname)" == "neverland" ] && [ ! -f ~/.gitconfig.local ]; then
 	echo "[user]" >~/.gitconfig.local
 	echo "    name = Dávid Kovács" >>~/.gitconfig.local
 	echo "    email = kovdavid@gmail.com" >>~/.gitconfig.local
@@ -42,7 +42,7 @@ ln -s ~/dotfiles/git-templates/ ~/.git-templates
 mkdir -p ~/.config/i3
 mkdir -p ~/.config/i3status
 
-if [ $(hostname) == "neverland" ]; then
+if [ "$(hostname)" == "neverland" ]; then
 	ln -sf ~/dotfiles/i3/config.neverland ~/.config/i3/config
 	ln -sf ~/dotfiles/i3/i3status-rust.neverland ~/.config/i3status/config.toml
 else
@@ -91,7 +91,7 @@ ln -f -s ~/dotfiles/mimeapps.list ~/.config/mimeapps.list
 
 echo "Creating keepassxc autostart service"
 KEEPASSXC_FILE="${XDG_DATA_HOME:-$HOME/.local/share}/dbus-1/services/org.freedesktop.secrets.service"
-mkdir -p $(dirname "$KEEPASSXC_FILE")
+mkdir -p "$(dirname "$KEEPASSXC_FILE")"
 echo "[D-BUS Service]" >"$KEEPASSXC_FILE"
 echo "Name=org.freedesktop.secrets" >>"$KEEPASSXC_FILE"
 echo "Exec=/usr/bin/keepassxc" >>"$KEEPASSXC_FILE"
