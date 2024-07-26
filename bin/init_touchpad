@@ -40,6 +40,8 @@ MIX_TOUCHPAD="PS/2 Synaptics TouchPad"
 device=$(xinput | grep -w "$MIX_TOUCHPAD" | cut -d"=" -f2 | cut -f1)
 if [ -n "$device" ] ; then
     echo "Setting $MIX_TOUCHPAD"
+    xinput set-prop $device "Device Enabled" 0
+    xinput set-prop $device "Device Enabled" 1
     xinput set-prop $device "libinput Middle Emulation Enabled" 1
     xinput set-prop $device "libinput Natural Scrolling Enabled" 0 # Changes scroll direction
 fi
