@@ -45,7 +45,9 @@ return {
                 ["p"] = { function() require("gitsigns").prev_hunk() end, "prev hunk" },
                 ["w"] = { function() require("gitsigns").preview_hunk() end, "preview hunk" },
                 ["s"] = { function() require("gitsigns").stage_hunk() end, "stage hunk" },
+                ["S"] = { function() require("gitsigns").stage_buffer() end, "stage buffer" },
                 ["r"] = { function() require("gitsigns").reset_hunk() end, "reset hunk" },
+                ["R"] = { function() require("gitsigns").reset_buffer() end, "reset buffer" },
                 ["b"] = { function() require("gitsigns").blame_line({ full = true }) end, "blame line" },
                 ["d"] = { function() require("gitsigns").diffthis() end, "diff" },
                 ["t"] = {
@@ -89,11 +91,10 @@ return {
                     ["f"] = { function() require('telescope.builtin').live_grep({ default_text = require('user.utils').get_telescope_grep_selection({ full_word = true }) }) end, "Live grep full word" },
                 },
             },
-            ["j"] = {
-                name = "json",
-                ["c"] = { ":!jq --compact-output<CR>", "jq compact" },
-                ["f"] = { ":!jq --indent 4<CR>", "jq format" },
-                ["g"] = { ":!gron<CR>", "gron format" },
+            ["h"] = {
+                name = "hunk",
+                ["s"] = { function() require("gitsigns").stage_hunk() end, "stage hunk" },
+                ["r"] = { function() require("gitsigns").reset_hunk() end, "reset hunk" },
             },
         }, { prefix = "<leader>", mode = "v" })
 
@@ -104,6 +105,7 @@ return {
                     name = "json",
                     ["c"] = { ":%!jq --compact-output<CR>", "jq compact" },
                     ["f"] = { ":%!jq --indent 4<CR>", "jq format" },
+                    ["s"] = { ":%!jq --sort-keys --indent 4<CR>", "jq format" },
                     ["g"] = { ":%!gron<CR>", "gron format" },
                     ["u"] = { ":%!gron -u<CR>", "gron unformat" },
                 },

@@ -4,4 +4,12 @@ if [[ "$1" == "disable" ]] ; then
     echo "Disabling screensaver"
     xset s off
     xset -dpms
+elif [[ -n "$1" ]] ; then
+    echo "Setting screensaver to $1"
+    xset s "$1" "$1"
+    xset dpms "$1" "$1" "$1"
+else
+    echo "Setting screensaver to 900"
+    xset s 900 900
+    xset dpms 900 900 900
 fi
