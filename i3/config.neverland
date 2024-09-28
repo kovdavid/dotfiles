@@ -294,8 +294,8 @@ no_focus [window_role="pop-up"]
 
 exec_always --no-startup-id en &
 exec_always --no-startup-id ~/bin/mon left &
-exec_always --no-startup-id ~/bin/init_touchpad
-exec_always --no-startup-id ~/bin/init_trackpoint
+exec_always --no-startup-id ~/bin/init_touchpad &
+exec_always --no-startup-id ~/bin/init_trackpoint &
 # exec xrdb -merge ~/.Xresources &
 # exec (sleep 1 && nitrogen --restore) &
 exec /usr/bin/sed -i "s/^[^#]/# &/" /home/davs/.ssh/authorized_keys
@@ -305,5 +305,6 @@ exec --no-startup-id /home/davs/dotfiles/bin/keepassxc_backup.sh &
 exec --no-startup-id /home/davs/dotfiles/init/03-init-configs.sh &
 exec --no-startup-id redshift_adjust.pl &
 exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id turbo &
 # exec --no-startup-id touchpad_log &
 # exec_always --no-startup-id ~/dotfiles/polybar/launch.sh &

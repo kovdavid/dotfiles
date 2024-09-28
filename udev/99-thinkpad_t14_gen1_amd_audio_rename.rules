@@ -14,7 +14,13 @@
 # ATTRS{idVendor}=="1002", ATTRS{idDevice}=="15e3", ATTRS{id}="Intel Generic", ATTRS{number}="1"
 # ATTRS{idVendor}=="1002", ATTRS{idDevice}=="1637", ATTRS{id}="AMD Generic", ATTRS{number}="2"
 
-DEVPATH=="/devices/pci0000:00/0000:00:08.1/0000:07:00.6/sound/card*", ATTR{id}="MyCard1", ATTR{number}="1"
-DEVPATH=="/devices/pci0000:00/0000:00:08.1/0000:07:00.1/sound/card*", ATTR{id}="MyCard2", ATTR{number}="2"
+# DEVPATH=="/devices/pci0000:00/0000:00:08.1/0000:07:00.6/sound/card*", ATTR{id}="MyCard1", ATTR{number}="1"
+# DEVPATH=="/devices/pci0000:00/0000:00:08.1/0000:07:00.1/sound/card*", ATTR{id}="MyCard2", ATTR{number}="2"
+
+# lspci | grep -i audio
+#
+SUBSYSTEM=="sound", ACTION=="add", ATTR{name}=="HDA Intel", ATTR{device}=="07:00.1", ATTR{new_name}=="Audio 1"
+SUBSYSTEM=="sound", ACTION=="add", ATTR{name}=="HDA Intel", ATTR{device}=="07:00.5", ATTR{new_name}=="Audio 2"
+SUBSYSTEM=="sound", ACTION=="add", ATTR{name}=="HDA Intel", ATTR{device}=="07:00.6", ATTR{new_name}=="Audio 3"
 
 # LABEL="alsa_naming_end"

@@ -35,6 +35,8 @@ return {
             }
         })
 
+        require("lspconfig").clangd.setup({})
+
         lsp.setup()
     end
 }

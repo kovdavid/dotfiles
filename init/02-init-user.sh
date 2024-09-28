@@ -16,12 +16,14 @@ mkdir -p /opt/javascript/pnpm
 mkdir -p /opt/javascript/npm
 mkdir -p /opt/javascript/npm-packages
 mkdir -p /opt/javascript/nvm
+mkdir -p /opt/javascript/fnm
 mkdir -p /opt/javascript/yarn
 
 rm -rf ~/.meteor; ln -sf /opt/javascript/meteor ~/.meteor
 rm -rf ~/.npm; ln -sf /opt/javascript/npm ~/.npm
 rm -rf ~/.yarn; ln -sf /opt/javascript/yarn ~/.yarn
 rm -rf ~/.config/yarn; ln -sf /opt/javascript/config/yarn ~/.config/yarn
+rm -rf ~/.local/share/fnm; ln -sf /opt/javascript/fnm ~/.local/share/fnm
 
 echo "Linking scripts"
 mkdir -p ~/bin

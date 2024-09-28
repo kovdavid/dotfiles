@@ -24,9 +24,18 @@ fi
 if [ -f /opt/javascript/completion-for-pnpm.bash ] ; then
     source /opt/javascript/completion-for-pnpm.bash
 else
-    if [ -n "$(which pnpm 2>/dev/null)" && -d /opt/javascript ] ; then
+    if [[ -n "$(which pnpm 2>/dev/null)" && -d /opt/javascript ]] ; then
         pnpm completion bash > /opt/javascript/completion-for-pnpm.bash
         source /opt/javascript/completion-for-pnpm.bash
+    fi
+fi
+
+if [ -f /opt/javascript/completion-for-fnm.bash ] ; then
+    source /opt/javascript/completion-for-fnm.bash
+else
+    if [[ -n "$(which fnm 2>/dev/null)" && -d /opt/javascript ]] ; then
+        fnm completions --shell bash > /opt/javascript/completion-for-fnm.bash
+        source /opt/javascript/completion-for-fnm.bash
     fi
 fi
 
@@ -76,6 +85,8 @@ export GO111MODULE=on
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 
 [[ -n "$(which direnv 2>/dev/null)" ]] && eval "$(direnv hook bash)"
+[[ -n "$(which fnm 2>/dev/null)" ]] && eval "$(fnm env --use-on-cd --version-file-strategy=recursive --fnm-dir=/opt/javascript/fnm --log-level=quiet --shell bash)"
+
 
 export EDITOR=nvim
 

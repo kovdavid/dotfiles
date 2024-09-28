@@ -114,6 +114,25 @@ EOC
     fi
 }
 
+function ensure_nginx_pacman_hook {
+    HOOK_FILE="/usr/share/libalpm/hooks/99-custom-nginx.hook"
+    HOOK_CONTENT=$(cat <<EOC
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = nginx
+
+[Action]
+Description = Link custom nginx homepage
+When = PostTransaction
+Exec = ln -sf /home/davs/workspace/nginx_index.html /usr/share/nginx/html/index.html
+EOC
+)
+
+    ensure_file_content "$HOOK_FILE" "$HOOK_CONTENT"
+}
+
 function ensure_polkit_config {
     # action.id are in /usr/share/polkit-1/actions
     # try prompt with `pkexec --user davs gparted`
@@ -172,6 +191,7 @@ ensure_sudoers_entry
 ensure_xkb_config
 ensure_tlp_config
 ensure_polkit_config
+ensure_nginx_pacman_hook
 
 for dir in "/opt/cache" "/opt/javascript" "/clean_daily" "/clean_manually"; do
     mkdir -p "$dir"

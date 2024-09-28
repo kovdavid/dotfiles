@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Usage: $0 [disable|300]"
+
 if [[ "$1" == "disable" ]] ; then
     echo "Disabling screensaver"
     xset s off

@@ -77,7 +77,16 @@ return {
                 },
             },
             [" "] = { ":NvimTreeFindFile<CR>", "NvimTree" },
-            ["f"] = { function() require("conform").format({ async = true }) end, "Format with conform" },
+            ["f"] = {
+                function()
+                    if os.getenv("FORMATTER") == "lsp" then
+                        vim.lsp.buf.format()
+                    else
+                        require("conform").format({ async = true })
+                    end
+                end,
+                "Format with conform"
+            },
             ["<leader>"] = { function() require('telescope').extensions.smart_open.smart_open({ cwd_only = true, filename_first = false }) end, "telescope project" },
             -- ["<leader>"] = { function() require('telescope.builtin').find_files({ hidden = false }) end, "telescope project" },
         }, { prefix = "<leader>", mode = "n" })
