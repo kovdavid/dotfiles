@@ -37,7 +37,7 @@
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "935bedf39c440de2f97ce58dbbb44a40402057c1" },
   "telescope.nvim": { "branch": "master", "commit": "bfcc7d5c6f12209139f175e6123a7b7de6d9c18a" },
   "typescript-tools.nvim": { "branch": "master", "commit": "5da4d695d66f676eb6ea766b946e86f93baaafe7" },
-  "which-key.nvim": { "branch": "main", "commit": "0099511294f16b81c696004fa6a403b0ae61f7a0" },
-  "zenbones.nvim": { "branch": "main", "commit": "e9ba8305f65524f9355515cdd8704b2c6ba2def6" },
+  "which-key.nvim": { "branch": "main", "commit": "8badb359f7ab8711e2575ef75dfe6fbbd87e4821" },
+  "zenbones.nvim": { "branch": "main", "commit": "88960c8aa3ad8aff0bcccdce7cd23629c7a3c510" },
   "zenburn.nvim": { "branch": "master", "commit": "f5ee12b30119499c7fa7f95719cd7c5aab9f9f29" }
 }

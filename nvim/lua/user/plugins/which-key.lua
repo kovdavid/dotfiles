@@ -3,135 +3,105 @@ return {
     event = "VeryLazy",
     init = function()
         vim.o.timeout = true
-        vim.o.timeoutlen = 300
-
-        -- vim.cmd("unmap gc")
-        -- vim.cmd("unmap gcc")
-    end,
-    config = function()
-        local wk = require("which-key")
-        wk.setup({
-            plugins = {
-                marks = true,
-                registers = true,
-                presets = {
-                    operators = true,
-                    motions = true,
-                    text_objects = true,
-                    windows = true,
-                    nav = true,
-                    z = true,
-                    g = true,
-                }
-            },
-        })
+        vim.o.timeoutlen = 200
 
         vim.cmd("unmap gc")
         vim.cmd("unmap gcc")
-
-        wk.register({
-            ["d"] = {
-                name = "diff",
-                ["w"] = { ":windo set diffopt+=iwhiteall<CR>", "diff +iwhite" },
-                ["u"] = { ":windo diffupdate<CR>", "diff update" },
-                ["b"] = { ":windo set scrollbind!<CR>", "diff scrollbind!" },
-                ["o"] = { ":DiffviewOpen", "DiffviewOpen", silent=false },
-                ["f"] = { ":DiffviewFileHistory %<CR>", "DiffviewFileHistory", silent=false },
-                ["c"] = { ":DiffviewClose<CR>", "DiffviewClose" },
-            },
-            ["h"] = {
-                name = "hunk",
-                ["n"] = { function() require("gitsigns").next_hunk() end, "next hunk" },
-                ["p"] = { function() require("gitsigns").prev_hunk() end, "prev hunk" },
-                ["w"] = { function() require("gitsigns").preview_hunk() end, "preview hunk" },
-                ["s"] = { function() require("gitsigns").stage_hunk() end, "stage hunk" },
-                ["S"] = { function() require("gitsigns").stage_buffer() end, "stage buffer" },
-                ["r"] = { function() require("gitsigns").reset_hunk() end, "reset hunk" },
-                ["R"] = { function() require("gitsigns").reset_buffer() end, "reset buffer" },
-                ["b"] = { function() require("gitsigns").blame_line({ full = true }) end, "blame line" },
-                ["d"] = { function() require("gitsigns").diffthis() end, "diff" },
-                ["t"] = {
-                    name = "toggle",
-                    ["b"] = { function() require("gitsigns").toggle_current_line_blame() end, "toggle blame current line" },
-                    ["d"] = { function() require("gitsigns").toggle_deleted() end, "toggle deleted" },
-                },
-            },
-            ["l"] = {
-                name = "LSP",
-                ["r"] = { vim.lsp.buf.rename, "rename" },
-                ["a"] = { ":TSToolsAddMissingImports<CR>", "TSTools AddMissingImports" },
-                ["o"] = { ":TSToolsOrganizeImports<CR>", "TSTools OrganizeImports" },
-                ["f"] = { ":TSToolsRenameFile<CR>", "TSTools RenameFile" },
-            },
-            ["t"] = {
-                name = "Telescope",
-                ["r"] = { function() require('telescope.builtin').resume() end, "Telescope resume" },
-                ["b"] = { function() require('telescope').extensions.before.before() end, "Telescope before" } ,
-                ["f"] = { function() require('telescope.builtin').buffers({ cwd_only = true, ignore_current_buffer = true, sort_lastused = true }) end, "Telescope buffers" },
-                ["d"] = { function() require('telescope.builtin').find_files({ cwd = vim.fn.expand("%:p:h") }) end, "Telescope directory" },
-                ["g"] = {
-                    name = "Grep",
-                    ["l"] = { function() require('telescope.builtin').live_grep() end, "Live grep" },
-                    ["w"] = { function() require('telescope.builtin').live_grep({ default_text = vim.fn.expand('<cword>') }) end, "Live grep word" },
-                    ["f"] = { function() require('telescope.builtin').live_grep({ default_text = '\\b' .. vim.fn.expand('<cword>') .. '\\b' }) end, "Live grep full word" },
-                },
-            },
-            [" "] = { ":NvimTreeFindFile<CR>", "NvimTree" },
-            ["f"] = {
-                function()
-                    if os.getenv("FORMATTER") == "lsp" then
-                        vim.lsp.buf.format()
-                    else
-                        require("conform").format({ async = true })
-                    end
-                end,
-                "Format with conform"
-            },
-            ["<leader>"] = { function() require('telescope').extensions.smart_open.smart_open({ cwd_only = true, filename_first = false }) end, "telescope project" },
-            -- ["<leader>"] = { function() require('telescope.builtin').find_files({ hidden = false }) end, "telescope project" },
-        }, { prefix = "<leader>", mode = "n" })
-
-        wk.register({
-            ["t"] = {
-                name = "Telescope",
-                ["g"] = {
-                    name = "Grep",
-                    ["w"] = { function() require('telescope.builtin').live_grep({ default_text = require('user.utils').get_telescope_grep_selection({ full_word = false }) }) end, "Live grep word" },
-                    ["f"] = { function() require('telescope.builtin').live_grep({ default_text = require('user.utils').get_telescope_grep_selection({ full_word = true }) }) end, "Live grep full word" },
-                },
-            },
-            ["h"] = {
-                name = "hunk",
-                ["s"] = { function() require("gitsigns").stage_hunk() end, "stage hunk" },
-                ["r"] = { function() require("gitsigns").reset_hunk() end, "reset hunk" },
-            },
-        }, { prefix = "<leader>", mode = "v" })
-
-        local normalAndVisualModes = {"n", "v"}
-        for _, mode in ipairs(normalAndVisualModes) do
-            wk.register({
-                ["j"] = {
-                    name = "json",
-                    ["c"] = { ":%!jq --compact-output<CR>", "jq compact" },
-                    ["f"] = { ":%!jq --indent 4<CR>", "jq format" },
-                    ["s"] = { ":%!jq --sort-keys --indent 4<CR>", "jq format" },
-                    ["g"] = { ":%!gron<CR>", "gron format" },
-                    ["u"] = { ":%!gron -u<CR>", "gron unformat" },
-                },
-            }, { prefix = "<leader>", mode = mode })
-        end
-
-        wk.register({
-            ["g"] = {
-                ["d"] = { vim.lsp.buf.definition, "LSP definition" },
-                ["D"] = { vim.lsp.buf.declaration, "LSP declaration" },
-                -- ["c"] = { function() require('telescope.builtin').lsp_incoming_calls() end, "LSP incoming calls" },
-                ["r"] = { function() require('telescope.builtin').lsp_references() end, "LSP references" },
-                ["i"] = { vim.lsp.buf.implementation, "LSP implementation" },
-                ["l"] = { vim.diagnostic.open_float, "LSP diagnostic" },
-                ["o"] = { vim.lsp.buf.type_definition, "Type definition" },
-                ["s"] = { vim.lsp.buf.signature_help, "Signature help" },
-            },
-        })
     end,
+    opts = {
+        -- plugins = {
+        --     marks = true,
+        --     registers = true,
+        --     presets = {
+        --         operators = true,
+        --         -- motions = true,
+        --         -- text_objects = true,
+        --         -- windows = true,
+        --         -- nav = true,
+        --         -- z = true,
+        --         -- g = true,
+        --     }.
+        -- },
+    },
+    keys = {
+        { "<leader>dw", ":windo set diffopt+=iwhiteall<CR>", desc = "diff +iwhite" },
+        { "<leader>du", ":windo diffupdate<CR>", desc = "diff update" },
+        { "<leader>db", ":windo set scrollbind!<CR>", desc = "diff scrollbind!" },
+        { "<leader>do", ":DiffviewOpen", desc = "DiffviewOpen", silent = false },
+        { "<leader>df", ":DiffviewFileHistory %<CR>", desc = "DiffviewFileHistory", silent=false },
+        { "<leader>dc", ":DiffviewClose<CR>", desc = "DiffviewClose" },
+
+        { "<leader>hn", function() require("gitsigns").next_hunk() end, desc = "next hunk" },
+        { "<leader>hp", function() require("gitsigns").prev_hunk() end, desc = "prev hunk" },
+        { "<leader>hw", function() require("gitsigns").preview_hunk() end, desc = "preview hunk" },
+        { "<leader>hs", function() require("gitsigns").stage_hunk() end, desc = "stage hunk" },
+        { "<leader>hS", function() require("gitsigns").stage_buffer() end, desc = "stage buffer" },
+        { "<leader>hr", function() require("gitsigns").reset_hunk() end, desc = "reset hunk" },
+        { "<leader>hR", function() require("gitsigns").reset_buffer() end, desc = "reset buffer" },
+        { "<leader>hb", function() require("gitsigns").blame_line({ full = true }) end, desc = "blame line" },
+        { "<leader>hd", function() require("gitsigns").diffthis() end, desc = "diff" },
+        { "<leader>htb", function() require("gitsigns").toggle_current_line_blame() end, desc = "toggle blame current line" },
+        { "<leader>htd", function() require("gitsigns").toggle_deleted() end, desc = "toggle deleted" },
+
+        { "<leader>lr", vim.lsp.buf.rename, desc = "rename" },
+        { "<leader>la", ":TSToolsAddMissingImports<CR>", desc = "TSTools AddMissingImports" },
+        { "<leader>lo", ":TSToolsOrganizeImports<CR>", desc = "TSTools OrganizeImports" },
+        { "<leader>lf", ":TSToolsRenameFile<CR>", desc = "TSTools RenameFile" },
+
+        { "<leader>tr", function() require('telescope.builtin').resume() end, desc = "Telescope resume" },
+        { "<leader>tb", function() require('telescope').extensions.before.before() end, desc = "Telescope before" } ,
+        { "<leader>tf", function() require('telescope.builtin').buffers({ cwd_only = true, ignore_current_buffer = true, sort_lastused = true }) end, desc = "Telescope buffers" },
+        { "<leader>td", function() require('telescope.builtin').find_files({ cwd = vim.fn.expand("%:p:h") }) end, desc = "Telescope directory" },
+        { "<leader>tdl", function() require('telescope.builtin').live_grep() end, desc = "Live grep" },
+        { "<leader>tdw", function() require('telescope.builtin').live_grep({ default_text = vim.fn.expand('<cword>') }) end, desc = "Live grep word" },
+        { "<leader>tdf", function() require('telescope.builtin').live_grep({ default_text = '\\b' .. vim.fn.expand('<cword>') .. '\\b' }) end, desc = "Live grep full word" },
+
+        { "<leader> ", ":NvimTreeFindFile<CR>", desc = "NvimTree" },
+        {
+            "<leader>f",
+            function()
+                if os.getenv("FORMATTER") == "lsp" then
+                    vim.lsp.buf.format()
+                else
+                    require("conform").format({ async = true })
+                end
+            end,
+            desc = "Format"
+        },
+        { "<leader><leader>", function() require('telescope').extensions.smart_open.smart_open({ cwd_only = true, filename_first = false }) end, desc = "telescope project" },
+        -- { "<leader><leader>", function() require('telescope.builtin').find_files({ hidden = false }) end, desc = "telescope project" },
+
+        {
+            "<leader>tgw",
+            function()
+                require('telescope.builtin').live_grep({ default_text = require('user.utils').get_telescope_grep_selection({ full_word = false }) })
+            end,
+            mode = { 'v' },
+            desc = "Live grep word"
+        },
+        {
+            "<leader>tg",
+            function()
+                require('telescope.builtin').live_grep({ default_text = require('user.utils').get_telescope_grep_selection({ full_word = true }) })
+            end,
+            mode = { 'v' },
+            desc = "Live grep full word",
+        },
+        { "<leader>hs", function() require("gitsigns").stage_hunk() end, desc = "stage hunk", mode = { 'v' } },
+        { "<leader>hr", function() require("gitsigns").reset_hunk() end, desc = "reset hunk", mode = { 'v' } },
+
+        { "<leader>gd", vim.lsp.buf.definition, desc = "LSP definition" },
+        { "<leader>gD", vim.lsp.buf.declaration, desc = "LSP declaration" },
+        { "<leader>gr", function() require('telescope.builtin').lsp_references() end, desc = "LSP references" },
+        { "<leader>gi", vim.lsp.buf.implementation, desc = "LSP implementation" },
+        { "<leader>gl", vim.diagnostic.open_float, desc = "LSP diagnostic" },
+        { "<leader>go", vim.lsp.buf.type_definition, desc = "Type definition" },
+        { "<leader>gs", vim.lsp.buf.signature_help, desc = "Signature help" },
+
+        { "<leader>jc", ":%!jq --compact-output<CR>", desc = "jq compact", mode = { 'v', 'n', } },
+        { "<leader>jf", ":%!jq --indent 4<CR>", desc = "jq format", mode = { 'v', 'n', } },
+        { "<leader>js", ":%!jq --sort-keys --indent 4<CR>", desc = "jq format", mode = { 'v', 'n', } },
+        { "<leader>jg", ":%!gron<CR>", desc = "gron format", mode = { 'v', 'n', } },
+        { "<leader>ju", ":%!gron -u<CR>", desc = "gron unformat", mode = { 'v', 'n', } },
+    },
 }
