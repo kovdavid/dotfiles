@@ -1,6 +1,6 @@
 return {
     "VonHeikemen/lsp-zero.nvim",
-    branch = 'v2.x',
+    branch = 'v4.x',
     dependencies = {
         -- LSP Support
         {'neovim/nvim-lspconfig'},
@@ -15,11 +15,18 @@ return {
         {'L3MON4D3/LuaSnip'},
     },
     config = function()
-        local lsp = require('lsp-zero').preset({})
+        local lsp_zero = require('lsp-zero')
 
-        lsp.on_attach(function(client, bufnr)
-            lsp.default_keymaps({buffer = bufnr})
-        end)
+        local lsp_attach = function(client, bufnr)
+            lsp_zero.default_keymaps({buffer = bufnr})
+        end
+
+        lsp_zero.extend_lspconfig({
+            capabilities = require('cmp_nvim_lsp').default_capabilities(),
+            lsp_attach = lsp_attach,
+            float_border = 'rounded',
+            sign_text = true,
+        })
 
         require("lspconfig").eslint.setup({
             capabilities = require("cmp_nvim_lsp").default_capabilities(),
@@ -36,7 +43,5 @@ return {
         })
 
         require("lspconfig").clangd.setup({})
-
-        lsp.setup()
     end
 }

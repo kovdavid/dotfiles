@@ -52,9 +52,9 @@ return {
         { "<leader>tb", function() require('telescope').extensions.before.before() end, desc = "Telescope before" } ,
         { "<leader>tf", function() require('telescope.builtin').buffers({ cwd_only = true, ignore_current_buffer = true, sort_lastused = true }) end, desc = "Telescope buffers" },
         { "<leader>td", function() require('telescope.builtin').find_files({ cwd = vim.fn.expand("%:p:h") }) end, desc = "Telescope directory" },
-        { "<leader>tdl", function() require('telescope.builtin').live_grep() end, desc = "Live grep" },
-        { "<leader>tdw", function() require('telescope.builtin').live_grep({ default_text = vim.fn.expand('<cword>') }) end, desc = "Live grep word" },
-        { "<leader>tdf", function() require('telescope.builtin').live_grep({ default_text = '\\b' .. vim.fn.expand('<cword>') .. '\\b' }) end, desc = "Live grep full word" },
+        { "<leader>tgl", function() require('telescope.builtin').live_grep() end, desc = "Live grep" },
+        { "<leader>tgw", function() require('telescope.builtin').live_grep({ default_text = vim.fn.expand('<cword>') }) end, desc = "Live grep word" },
+        { "<leader>tgf", function() require('telescope.builtin').live_grep({ default_text = '\\b' .. vim.fn.expand('<cword>') .. '\\b' }) end, desc = "Live grep full word" },
 
         { "<leader> ", ":NvimTreeFindFile<CR>", desc = "NvimTree" },
         {
@@ -90,13 +90,13 @@ return {
         { "<leader>hs", function() require("gitsigns").stage_hunk() end, desc = "stage hunk", mode = { 'v' } },
         { "<leader>hr", function() require("gitsigns").reset_hunk() end, desc = "reset hunk", mode = { 'v' } },
 
-        { "<leader>gd", vim.lsp.buf.definition, desc = "LSP definition" },
-        { "<leader>gD", vim.lsp.buf.declaration, desc = "LSP declaration" },
-        { "<leader>gr", function() require('telescope.builtin').lsp_references() end, desc = "LSP references" },
-        { "<leader>gi", vim.lsp.buf.implementation, desc = "LSP implementation" },
-        { "<leader>gl", vim.diagnostic.open_float, desc = "LSP diagnostic" },
-        { "<leader>go", vim.lsp.buf.type_definition, desc = "Type definition" },
-        { "<leader>gs", vim.lsp.buf.signature_help, desc = "Signature help" },
+        { "gd", vim.lsp.buf.definition, desc = "LSP definition" },
+        { "gD", vim.lsp.buf.declaration, desc = "LSP declaration" },
+        { "gr", function() require('telescope.builtin').lsp_references() end, desc = "LSP references" },
+        { "gi", vim.lsp.buf.implementation, desc = "LSP implementation" },
+        { "gl", vim.diagnostic.open_float, desc = "LSP diagnostic" },
+        { "go", vim.lsp.buf.type_definition, desc = "Type definition" },
+        { "gs", vim.lsp.buf.signature_help, desc = "Signature help" },
 
         { "<leader>jc", ":%!jq --compact-output<CR>", desc = "jq compact", mode = { 'v', 'n', } },
         { "<leader>jf", ":%!jq --indent 4<CR>", desc = "jq format", mode = { 'v', 'n', } },
