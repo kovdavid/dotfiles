@@ -15,6 +15,9 @@ return {
         {'L3MON4D3/LuaSnip'},
     },
     config = function()
+        require('mason').setup({})
+        require('mason-lspconfig').setup({})
+
         local lsp_zero = require('lsp-zero')
 
         local lsp_attach = function(client, bufnr)
@@ -32,7 +35,7 @@ return {
             capabilities = require("cmp_nvim_lsp").default_capabilities(),
             on_attach = function(client)
                 if client.resolved_capabilities then
-                    client.resolved_capabilities.document_formatting = false
+                    client.resolved_capabilities.document_formatting = true
                 end
             end,
             settings = {
