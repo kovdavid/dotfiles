@@ -15,6 +15,9 @@ return {
             -- separate_diagnostic_server = false,
             -- tsserver_max_memory = 1536,
         },
+        tsserver_file_preferences = {
+            -- importModuleSpecifierPreference = "non-relative"
+        },
         on_attach = function(client, bufnr)
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false

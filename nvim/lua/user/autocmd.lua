@@ -25,6 +25,7 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function ()
         local opts = { noremap = true, silent = true }
         vim.keymap.set("n", "<leader>rr", ":!hurl %<CR>", opts)
+        vim.keymap.set("n", "<leader>rv", ":!hurl --verbose %<CR>", opts)
     end,
 })
 
