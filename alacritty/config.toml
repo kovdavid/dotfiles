@@ -1,3 +1,4 @@
+[general]
 import = ["/home/davs/dotfiles/alacritty/colors.toml"]
 
 [cursor.style]

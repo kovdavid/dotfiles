@@ -255,3 +255,7 @@ $ clear them in /etc/xdg/autostart
 $ create files ~/.config/autostart/{gnome-keyring-pkcs11.desktop,gnome-keyring-secrets.desktop,gnome-keyring-ssh.desktop} with the content:
 [Desktop entry]
 Hidden=true
+
+Emoji in fonts
+yay -S ttf-twemoji
+# then make the symlink into /etc/fonts/conf.d it wants
