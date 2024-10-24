@@ -44,6 +44,10 @@ return {
         { "<leader>htd", function() require("gitsigns").toggle_deleted() end, desc = "toggle deleted" },
 
         { "<leader>lr", vim.lsp.buf.rename, desc = "rename" },
+        { "<leader>ld", function()
+                vim.lsp.set_log_level(vim.log.levels.DEBUG)
+                vim.lsp.log.set_format_func(vim.inspect)
+            end, desc = "debug" },
         { "<leader>la", ":TSToolsAddMissingImports<CR>", desc = "TSTools AddMissingImports" },
         { "<leader>lo", ":TSToolsOrganizeImports<CR>", desc = "TSTools OrganizeImports" },
         { "<leader>lf", ":TSToolsRenameFile<CR>", desc = "TSTools RenameFile" },
