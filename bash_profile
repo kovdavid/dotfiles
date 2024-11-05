@@ -1,1 +1,1 @@
-source ~/.bashrc.common
+source ~/dotfiles/bash/common

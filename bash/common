@@ -16,11 +16,11 @@ shopt -s histappend
 #free Ctrl-S and Ctrl-Q in terminal
 [[ $- == *i* ]] && stty -ixon
 
-bash_include ~/.bashrc.env_settings
-bash_include ~/.bashrc.git-completion
-bash_include ~/.bashrc.export
-bash_include ~/.bashrc.alias
-bash_include ~/.bashrc.tmux-completion
+bash_include ~/dotfiles/bash/local
+bash_include ~/dotfiles/git-completion.bash
+bash_include ~/dotfiles/bash/export
+bash_include ~/dotfiles/bash/alias
+bash_include ~/dotfiles/tmux/completion.bash
 bash_include /usr/share/nvm/init-nvm.sh
 
 function parse_git_branch {
