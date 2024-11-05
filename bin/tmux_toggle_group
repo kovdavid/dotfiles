@@ -1,0 +1,12 @@
+#!/bin/bash
+
+CURRENT_SESSION=$(tmux display-message -p '#S')
+
+GREP_ARG=""
+if [[ "$CURRENT_SESSION" =~ G\|* ]] ; then
+    GREP_ARG="-v"
+fi
+
+SESSION=$(tmux list-sessions | cut -d":" -f1 | grep $GREP_ARG "^G|" | head -n 1)
+
+tmux switch-client -t "$SESSION"

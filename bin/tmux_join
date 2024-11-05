@@ -1,5 +1,5 @@
 #!/bin/bash
-HOSTNAME=$(hostname)
+HOSTNAME=$(hostname | tr '.' '-')
 
 tmux new-session -d -t "$HOSTNAME" -s "G|$HOSTNAME"
 tmux attach-session -t "G|$HOSTNAME"
