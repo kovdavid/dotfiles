@@ -1,3 +1,4 @@
 #!/bin/bash
 
 sudo cpupower frequency-set -g schedutil
+sudo cpupower frequency-set --max 2100MHz
