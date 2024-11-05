@@ -1,0 +1,6 @@
+[terminal.shell]
+program = "/opt/homebrew/bin/bash"
+args = ["-l", "-c", "~/dotfiles/bin/tmux_start; bash"]
+
+[window]
+option_as_alt = "Both"

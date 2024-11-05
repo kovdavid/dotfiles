@@ -67,7 +67,7 @@ if vim.fn.isdirectory(undodir) then
 end
 
 local swapdir = os.getenv("VIM_SWAPDIR")
-if vim.fn.isdirectory(swapdir) then
+if swapdir and vim.fn.isdirectory(swapdir) then
     options["directory"] = swapdir .. "//"
     options["swapfile"] = true
 end

@@ -1,5 +1,8 @@
 [general]
-import = ["/home/davs/dotfiles/alacritty/colors.toml"]
+import = [
+    "~/dotfiles/alacritty/local.toml",
+    "~/dotfiles/alacritty/colors.toml",
+]
 
 [cursor.style]
 blinking = "Off"

@@ -76,10 +76,20 @@ done
 echo "####### RESTIC_BACKUP_DIR:$RESTIC_BACKUP_DIR"
 echo "####### RESTIC_REPOSITORY:$RESTIC_REPOSITORY"
 
+if [[ $(uname -a) == Darwin* ]] ; then
+    # Mac
+    while pgrep restic >/dev/null; do
+        echo "####### $(date '+%F %T') Waiting for another restic instance to finish"
+        sleep 10
+    done
+else
+    # Linux
 while pidof restic >/dev/null; do
 	echo "####### $(date '+%F %T') Waiting for another restic instance to finish"
 	sleep 10
 done
+fi
+
 
 if ! restic snapshots &>/dev/null; then
 	echo "####### $(date '+%F %T') Initializing repository"

@@ -2,7 +2,7 @@
 
 FILE="davs.kdbx"
 
-cd "/home/davs/.keepassxc" || exit 1
+cd "~/.keepassxc" || exit 1
 
 mkdir -p "backup"
 

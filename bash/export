@@ -87,6 +87,8 @@ export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 [[ -n "$(which direnv 2>/dev/null)" ]] && eval "$(direnv hook bash)"
 [[ -n "$(which fnm 2>/dev/null)" ]] && eval "$(fnm env --use-on-cd --version-file-strategy=recursive --fnm-dir=/opt/javascript/fnm --log-level=quiet --shell bash)"
 
+[[ -f /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 export EDITOR=nvim
 
