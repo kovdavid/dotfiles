@@ -11,6 +11,5 @@ if tmux list-sessions ; then
         fi
     done
 else
-    HOSTNAME=$(hostname)
-    tmux new -s "$HOSTNAME"
+    tmux new -s "main"
 fi
