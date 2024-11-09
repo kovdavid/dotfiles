@@ -5,6 +5,11 @@ if [ $(whoami) != "root" ] ; then
     exit 1
 fi
 
+if [[ $(uname -a) == Darwin* ]] ; then
+    echo "MacOS detected. Exiting"
+    exit
+fi
+
 function ensure_user_group {
     if [ ! $(getent group $1) ] ; then
         echo "Creating group $1"
