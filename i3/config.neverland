@@ -260,8 +260,8 @@ bar {
     status_command i3status-rs ~/.config/i3status/config.toml
     tray_output $dp_screen
     tray_output $dp_screen2
-    tray_output $hdmi_screen
     tray_output $laptop_screen
+    tray_output $hdmi_screen
 
     colors {
         inactive_workspace #5f676a #222222 #888888
