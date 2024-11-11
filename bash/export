@@ -12,15 +12,6 @@ export MYSQL_PS1="\u@`hostname` [\d]> "
 # export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 export SDKMAN_DIR=/opt/sdkman
 
-if [ -f /opt/perlbrew/etc/bashrc ] ; then
-    export PERLBREW_HOME=/opt/perlbrew/.perlbrew
-    export PATH="/opt/perlbrew/bin:$PATH"
-    source /opt/perlbrew/etc/bashrc
-elif [ -d ~/.plenv/bin ] ; then
-    export PATH="~/.plenv/bin:$PATH"
-    eval "$(plenv init -)"
-fi
-
 if [ -f /opt/javascript/completion-for-pnpm.bash ] ; then
     source /opt/javascript/completion-for-pnpm.bash
 else
@@ -68,15 +59,6 @@ fi
 
 if [ -d /opt/javascript/nvm ] ; then
     export NVM_DIR="/opt/javascript/nvm"
-fi
-
-if [ -d /opt/pyenv ] ; then
-    export PYENV_ROOT="/opt/pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    if [ -f $PYENV_ROOT/bin/pyenv ] ; then
-        eval "$(pyenv init --path)"
-        eval "$(pyenv init -)"
-    fi
 fi
 
 export GOPROXY=direct
