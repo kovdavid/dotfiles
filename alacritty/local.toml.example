@@ -4,3 +4,15 @@ args = ["-l", "-c", "~/dotfiles/bin/tmux_start; bash"]
 
 [window]
 option_as_alt = "Both"
+
+[font.bold]
+family = "DejaVu Sans Mono"
+
+[font.bold_italic]
+family = "DejaVu Sans Mono"
+
+[font.italic]
+family = "DejaVu Sans Mono"
+
+[font.normal]
+family = "DejaVu Sans Mono"

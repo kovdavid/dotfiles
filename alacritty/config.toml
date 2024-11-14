@@ -14,18 +14,6 @@ TERM = "alacritty"
 [font]
 size = 13
 
-[font.bold]
-family = "DejaVu Sans Mono"
-
-[font.bold_italic]
-family = "DejaVu Sans Mono"
-
-[font.italic]
-family = "DejaVu Sans Mono"
-
-[font.normal]
-family = "DejaVu Sans Mono"
-
 [[mouse.bindings]]
 action = "PasteSelection"
 mouse = "Middle"
