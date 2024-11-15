@@ -45,6 +45,8 @@
 // i3 navigation
 #define GUI_F13  LGUI(KC_F13)
 #define GUI_F14  LGUI(KC_F14)
+#define GUI_F15  LGUI(KC_F15)
+#define GUI_F16  LGUI(KC_F16)
 #define GUI_PGUP LGUI(KC_PGUP)
 #define GUI_PGDN LGUI(KC_PGDN)
 #define GUI_TAB  LGUI(KC_TAB)
@@ -204,16 +206,16 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] PROGMEM = KEYMAP({
        │        │        │        │        │        │        │ │        │        │  F13   │  F14   │   R    │        │
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
        │        │        │        │        │        │        │ │        │        │  Gui+  │  Gui+  │  Gui+  │*L WIN *│
-       │        │        │        │        │        │        │ │        │        │  PgUp  │  PgDn  │   Z    │*  /   *│
+       │        │        │        │        │        │        │ │        │        │  F15   │  F16   │   Z    │*  /   *│
        ├────────┼────────┼────────┼────────┼────────┼────────┤ ├────────┼────────┼────────┼────────┼────────┼────────┤
        │        │        │        │        │        │        │ │  Gui+  │        │        │        │        │        │
        │        │        │        │        │        │        │ │ RETURN │        │        │        │        │        │
        └────────┴────────┴────────┴────────┴────────┴────────┘ └────────┴────────┴────────┴────────┴────────┴────────┘
      */
     LAYOUT_4x12(
-        LGUI(KC_F1), LGUI(KC_F2), LGUI(KC_F3), LGUI(KC_F4), LGUI(KC_F5),    XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_TAB,   GUI_STAB,  XXXXXXX,     XXXXXXX,
-        LGUI(KC_1),  LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4),  LGUI(KC_5),     XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_F13,   GUI_F14,   LGUI(KC_R),  XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_PGUP,  GUI_PGDN,  LGUI(KC_Z),  LWIN_SLASH,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  MOD_LSHIFT,   XXXXXXX,  /**/  GUI_RET,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX
+        LGUI(KC_F1), LGUI(KC_F2), LGUI(KC_F3), LGUI(KC_F4), LGUI(KC_F5), XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_TAB,  GUI_STAB,  XXXXXXX,     XXXXXXX,
+        LGUI(KC_1),  LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4),  LGUI(KC_5),  XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_F13,  GUI_F14,   LGUI(KC_R),  XXXXXXX,
+        XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,  /**/  XXXXXXX,  XXXXXXX,  GUI_F15,  GUI_F16,   LGUI(KC_Z),  LWIN_SLASH,
+        XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     MOD_LSHIFT,  XXXXXXX,  /**/  GUI_RET,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,     XXXXXXX
     )
 });

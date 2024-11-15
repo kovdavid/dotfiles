@@ -61,7 +61,7 @@ return {
         { "<leader>tgf", function() require('telescope.builtin').live_grep({ default_text = '\\b' .. vim.fn.expand('<cword>') .. '\\b' }) end, desc = "Live grep full word" },
 
         { "<leader> ", ":NvimTreeFindFile<CR>", desc = "NvimTree" },
-        { "<leader>cf", function() require("conform").format({ async = true }) end, desc = "Conform Format" },
+        { "<leader>cf", function() require("conform").format({ async = true }) end, desc = "Conform Format", mode = { 'n', 'v' } },
         {
             "<leader>f",
             function()
