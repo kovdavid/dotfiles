@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ "$@" == "show" ]] ; then
+if [[ "$@" == "show" ]] || [[ "$@" == "list" ]] ; then
     cat ~/.git_save
     exit
 fi
