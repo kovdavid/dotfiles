@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if [ -f /tmp/.ssh_agent ]; then
-    eval `cat /tmp/.ssh_agent`
-else
-    ssh_agent=$(ssh-agent -s)
-    echo $ssh_agent > /tmp/.ssh_agent
-    eval $ssh_agent
-fi
