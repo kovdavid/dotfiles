@@ -61,6 +61,4 @@ for timer_unit in clean_daily redshift_adjust restic_backup_local restic_work_ba
     systemctl restart --user $timer_unit.timer
 done
 
-systemctl --user enable --now ssh-agent.service
-
 echo "DONE"

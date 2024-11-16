@@ -4,7 +4,7 @@ else
    export TERM=xterm-256color
 fi
 
-[[ -e "$XDG_RUNTIME_DIR/ssh-agent.socket" ]] && export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
+[[ -e $XDG_RUNTIME_DIR/gcr/.ssh ]] && export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/.ssh
 
 export WINEARCH=win32
 [[ -d /opt/wine ]] && export WINEPREFIX=/opt/wine
