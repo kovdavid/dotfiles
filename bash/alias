@@ -77,5 +77,6 @@ else
 	alias j="echo 'Clone https://github.com/kovdavid/jump.git to ~/workspace/bash/jump'"
 fi
 alias xvim="xargs -o nvim"
+alias vc='git status --short | cut -d" " -f 3 | fzf -m --preview "git diff $@ --color=always -- {-1}" | xargs -o nvim'
 alias fzfvim="vim \$(fzf)"
 alias rgtree="rg --files | tree --fromfile"

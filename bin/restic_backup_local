@@ -110,7 +110,7 @@ if [ -n "$DRY_RUN" ]; then
 fi
 
 echo "####### $(date '+%F %T') Cleaning up old snapshots"
-restic forget --keep-last 20 --keep-daily 14 --keep-weekly 8 --keep-monthly 6 --keep-yearly 2 --prune
+restic forget --keep-last 5 --keep-hourly 12 --keep-daily 14 --keep-weekly 8 --keep-monthly 6 --keep-yearly 2 --prune
 
 echo "####### $(date '+%F %T') Checking repository"
 restic check

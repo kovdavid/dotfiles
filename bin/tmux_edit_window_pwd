@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ -n "$2" ] ; then
+    WINDOW="-t $1"
+    DIR=$2
+elif [ -n "$1" ] ; then
+    WINDOW=""
+    DIR=$1
+else
+    DIR="."
+fi
+
+WINDOW_ID=$(tmux display-message $WINDOW -p '#{window_id}')
+
+CD_DIR=$(readlink -f "$DIR")
+
+$(tmux set-option @${WINDOW_ID}_default_command "cd $CD_DIR; bash")
