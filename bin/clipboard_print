@@ -3,9 +3,9 @@
 echo "primary:"
 xclip -o -selection primary
 echo ""
-echo "secondary"
-xclip -o -selection secondary
-echo ""
+# echo "secondary"
+# xclip -o -selection secondary
+# echo ""
 echo "clipboard"
 xclip -o -selection clipboard
-
+echo ""

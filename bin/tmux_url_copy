@@ -1,2 +1,2 @@
 #!/bin/bash
-tmux capture-pane -J -p -e | grep -oE '(https?)://.*[^>]' | uniq | fzf-tmux -d20 --no-preview | xclip -i -selection primary -selection clipboard
+tmux capture-pane -J -p -e | grep -oE '(https?)://.*[^>]' | uniq | fzf-tmux -d20 --no-preview | xclip -in -filter -selection primary | xclip -in -selection clipboard
