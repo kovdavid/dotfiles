@@ -22,13 +22,13 @@ bindsym $mod+x exec rofi -show script -modi "script:custom_rofi_script"
 bindsym $mod+c exec rofi -show run
 
 # F13
-bindsym $mod+XF86Tools exec i3_cycle_workspace left move_window sequential
+bindsym $mod+XF86Tools   exec i3_cycle_workspace left sequential
 # F14
-bindsym $mod+XF86Launch5 exec i3_cycle_workspace right move_window sequential
+bindsym $mod+XF86Launch5 exec i3_cycle_workspace right sequential
 # F15
-bindsym $mod+XF86Launch6 exec i3_cycle_workspace left sequential
+bindsym $mod+XF86Launch6 exec i3_cycle_workspace left move_window sequential
 # F16
-bindsym $mod+XF86Launch7 exec i3_cycle_workspace right sequential
+bindsym $mod+XF86Launch7 exec i3_cycle_workspace right move_window sequential
 
 bindsym XF86AudioMute exec "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 bindsym XF86AudioMicMute exec "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
