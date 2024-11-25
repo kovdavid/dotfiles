@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# keyboard auto repeat
+xset r rate 300 40
+
 # if [ -n "$DESKTOP_SESSION" ] ; then
     # eval $(gnome-keyring-daemon --replace --components=ssh,secrets,pkcs11,gpg)
     # export SSH_AUTH_SOCK

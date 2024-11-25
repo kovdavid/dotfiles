@@ -18,6 +18,8 @@ floating_modifier $mod
 bindsym $mod+Tab exec ~/bin/i3_output jump
 bindsym $mod+Shift+Tab exec ~/bin/i3_output move
 bindsym $mod+Return exec ~/bin/i3_cycle_windows
+
+# rofi -show combi -combi-modi "script:custom_rofi_script,run" -modi combi
 bindsym $mod+x exec rofi -show script -modi "script:custom_rofi_script"
 bindsym $mod+c exec rofi -show run
 
