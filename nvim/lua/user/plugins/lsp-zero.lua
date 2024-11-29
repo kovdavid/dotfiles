@@ -38,6 +38,9 @@ return {
                     client.resolved_capabilities.document_formatting = true
                 end
             end,
+            root_dir = function(...)
+                return require("lspconfig.util").root_pattern(".vimproject", ".git")(...)
+            end,
             settings = {
                 experimental = {
                     useFlatConfig = false
