@@ -2,7 +2,9 @@
 
 set -e
 
-DIR=/clean_daily
+DIR=${1:-/clean_daily}
+
+echo "DIR:$DIR"
 
 if [ ! -d $DIR ] ; then
     exit
