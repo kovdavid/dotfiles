@@ -16,11 +16,11 @@ shopt -s histappend
 #free Ctrl-S and Ctrl-Q in terminal
 [[ $- == *i* ]] && stty -ixon
 
-bash_include ~/dotfiles/bash/local
 bash_include ~/dotfiles/git-completion.bash
 bash_include ~/dotfiles/bash/export
 bash_include ~/dotfiles/bash/alias
 bash_include ~/dotfiles/tmux/completion.bash
+bash_include ~/dotfiles/bash/local
 
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \1 $(parse_git_rev)$(parse_git_dirty)$(parse_git_stash_size)$(parse_git_wip_commit)/"
