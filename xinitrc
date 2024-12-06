@@ -5,7 +5,7 @@ xset s 900 900
 xset dpms 900 900 900
 
 # keyboard auto repeat
-xset r rate 300 40
+xset r rate 220 40
 
 [ -f ~/dotfiles/bash/env_settings ] && source ~/dotfiles/bash/env_settings
 
