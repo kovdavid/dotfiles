@@ -13,6 +13,7 @@ nytprof*
 .flake8
 local.properties
 .idea
+.eslintcache
 worktree/
 
 # Devel::PDB
