@@ -86,4 +86,7 @@ export LC_TIME="sk_SK.UTF-8"
 export HISTSIZE=-1
 export HISTFILESIZE=-1
 
+# Docker build = show stdout output
+export BUILDKIT_PROGRESS=plain
+
 export GIT_EDITOR='nvim +startinsert!'
