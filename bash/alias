@@ -80,5 +80,6 @@ else
 fi
 alias xvim="xargs -o nvim"
 alias vc='git status --short . | cut -d" " -f 3 | fzf -m --preview "git diff $@ --color=always -- {-1}" | xargs -o nvim'
+alias vcr='git diff --name-only --diff-filter=U --relative | fzf -m --preview "git diff $@ --color=always -- {-1}" | xargs -o nvim'
 alias fzfvim="vim \$(fzf)"
 alias rgtree="rg --files | tree --fromfile"
