@@ -16,4 +16,5 @@ if [ "$BRANCH" != $(git main-branch) ] ; then
 fi
 LOG="$LOG NOTE:$@"
 
+echo "$LOG"
 echo "$LOG" >> ~/.git_save

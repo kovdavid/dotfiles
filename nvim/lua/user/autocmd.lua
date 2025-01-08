@@ -65,3 +65,14 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
         vim.keymap.set("i", "<F6>", "<C-R>=strftime('%FT%T')<CR>", keymap_options)
     end
 })
+
+local make_group = vim.api.nvim_create_augroup("make_group", { clear = true })
+vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
+    group = make_group,
+    callback = function()
+        vim.bo.expandtab = false
+        vim.bo.tabstop = 4
+        vim.bo.shiftwidth = 4
+        vim.bo.softtabstop = 4
+    end,
+})
