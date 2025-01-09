@@ -47,6 +47,7 @@ alias gsync='git rev-parse --abbrev-ref HEAD | xargs git pull origin && git push
 alias goon='git rebase --continue'
 alias grep='grep --exclude-dir=.git'
 alias gst='git status'
+alias gl='git lod .'
 alias la="ls -lha"
 alias less="less -R"
 alias ll="ls -lh"
