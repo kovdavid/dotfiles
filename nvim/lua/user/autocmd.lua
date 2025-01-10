@@ -69,6 +69,7 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
 local make_group = vim.api.nvim_create_augroup("make_group", { clear = true })
 vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
     group = make_group,
+    pattern = { "make" },
     callback = function()
         vim.bo.expandtab = false
         vim.bo.tabstop = 4
