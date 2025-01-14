@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 SESSION_ID=$(tmux display-message -p '#{session_id}')
 WINDOW_ID=$(tmux display-message -p '#{window_id}')
@@ -7,9 +7,11 @@ WINDOW_DEFAULT_COMMAND=$(tmux show-options -qv @${WINDOW_ID}_default_command)
 SESSION_DEFAULT_COMMAND=$(tmux show-options -qv -t ${SESSION_ID} default-command)
 
 if [ -n "$WINDOW_DEFAULT_COMMAND" ] ; then
-	eval "$WINDOW_DEFAULT_COMMAND"
+    echo "Using WINDOW_DEFAULT_COMMAND:$WINDOW_DEFAULT_COMMAND" >> /tmp/$(basename $0)
+    eval "$WINDOW_DEFAULT_COMMAND"
 elif [ -n "$SESSION_DEFAULT_COMMAND" ] ; then
-	eval "$SESSION_DEFAULT_COMMAND"
+    echo "Using SESSION_DEFAULT_COMMAND:$SESSION_DEFAULT_COMMAND" >> /tmp/$(basename $0)
+    eval "$SESSION_DEFAULT_COMMAND"
 else
-	eval "exec $SHELL"
+    eval "exec $SHELL"
 fi

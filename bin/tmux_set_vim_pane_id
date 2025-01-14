@@ -1,3 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+exec > >(tee -a /tmp/$(basename $0)) 2>&1
 
 tmux display-message -p '#{pane_id}' > /tmp/.vim_tmux_pane_id

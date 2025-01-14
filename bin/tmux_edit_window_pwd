@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+exec > >(tee -a /tmp/$(basename $0)) 2>&1
 
 if [ -n "$2" ] ; then
     WINDOW="-t $1"

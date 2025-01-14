@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+exec > >(tee -a /tmp/$(basename $0)) 2>&1
 
 while read SESSION_DATA; do
 	SESSION_ID=$(echo "$SESSION_DATA" | cut -f1 -d ' ')

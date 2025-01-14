@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+exec > >(tee -a /tmp/$(basename $0)) 2>&1
 
 CURRENT_WINDOW_ID=$(tmux display-message -p '#{window_id}')
 WINDOW_ID=${1:-$CURRENT_WINDOW_ID}

@@ -1,3 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+exec > >(tee -a /tmp/$(basename $0)) 2>&1
+
 tmux new-session -d -t "main" -s "G|main"
 tmux attach-session -t "G|main"

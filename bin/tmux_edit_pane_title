@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+exec > >(tee -a /tmp/$(basename $0)) 2>&1
 
 PANE_ID=$(tmux display-message -t{last} -p '#{pane_id}')
 CURRENT_PANE_TITLE=$(tmux show-options -qv @${PANE_ID}_title)

@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+exec > >(tee -a /tmp/$(basename $0)) 2>&1
 
 if [[ $(uname -a) == Darwin* ]] ; then
     tmux capture-pane -J -p -e | grep -oE '(https?)://.*[^>]' | uniq | fzf-tmux -d20 --no-preview | pbcopy
