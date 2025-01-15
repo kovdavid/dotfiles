@@ -2,4 +2,10 @@
 
 exec > >(tee -a /tmp/$(basename $0)) 2>&1
 
-tmux attach-session -t "main" || tmux new -s "main"
+tmux has-session -t "main"
+
+if [ $? -eq 0 ] ; then
+    tmux attach-session -t "main"
+else
+    tmux new -s "main"
+fi
