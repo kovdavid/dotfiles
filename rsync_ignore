@@ -89,6 +89,7 @@ nytprof*
 .yarn/
 .meteor/
 .mypy_cache/
+dist/
 build/
 __pycache__/
 node_modules/
