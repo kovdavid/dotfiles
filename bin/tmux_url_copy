@@ -2,9 +2,11 @@
 
 exec > >(tee -a /tmp/$(basename $0)) 2>&1
 
+COMMON="tmux capture-pane -J -p -e | grep -oE '(https?)://[^\">]+' | uniq | fzf-tmux -d20 --no-preview"
+
 if [[ $(uname -a) == Darwin* ]] ; then
-    tmux capture-pane -J -p -e | grep -oE '(https?)://.*[^>]' | uniq | fzf-tmux -d20 --no-preview | pbcopy
+    eval $COMMON | pbcopy
 else
-    tmux capture-pane -J -p -e | grep -oE '(https?)://.*[^>]' | uniq | fzf-tmux -d20 --no-preview | xclip -in -filter -selection primary | xclip -in -selection clipboard
+    eval $COMMON | xclip -in -filter -selection primary | xclip -in -selection clipboard
 fi
 
