@@ -2,7 +2,7 @@
 
 exec > >(tee -a /tmp/$(basename $0)) 2>&1
 
-COMMON="tmux capture-pane -J -p -e | grep -oE '(https?)://[^\">]+' | uniq | fzf-tmux -d20 --no-preview"
+COMMON="tmux capture-pane -J -p -e | grep -oE '(https?)://[^\">]+' | fzf-tmux -d20 --no-preview"
 
 if [[ $(uname -a) == Darwin* ]] ; then
     eval $COMMON | pbcopy
