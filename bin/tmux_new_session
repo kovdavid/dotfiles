@@ -7,14 +7,15 @@ ARG_SESSION_DIR=$2
 
 CURR_SESSION_NAME=$(tmux display-message -p "#{session_name}")
 
-echo "New session"
-
 SESSION_HISTORY_FILE=~/.tmux_session_history
 [[ ! -f $SESSION_HISTORY_FILE ]] && touch "$SESSION_HISTORY_FILE"
 
-echo ""
-cat $SESSION_HISTORY_FILE | sort
-echo ""
+if [[ -t 0 ]] ; then
+    echo "New session"
+    echo ""
+    cat $SESSION_HISTORY_FILE | sort
+    echo ""
+fi
 
 SESSION_NAME=''
 CD_DIR=''
