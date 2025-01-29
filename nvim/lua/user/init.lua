@@ -1,4 +1,5 @@
 require("user.utils")
+require("user.filetype")
 require("user.globals")
 require("user.options")
 require("user.keymaps")
