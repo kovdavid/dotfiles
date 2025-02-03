@@ -19,7 +19,7 @@ alias ddf="docker system df"
 alias dp='docker ps --format "table{{.Names}}\t{{.Image}}\t{{.Ports}}"'
 alias dpp='docker ps --format "table{{.Names}}\t{{.Image}}"'
 alias dpa='docker ps -a --format "table{{.Names}}\t{{.Image}}\t{{.Ports}}"'
-alias dr="docker run -it --rm"
+alias dr="docker run --add-host=host.docker.internal:host-gateway -it --rm"
 alias de="docker exec -it"
 alias disable_parse_git_branch="function parse_git_branch { echo ' DISABLED'; }"
 alias g="git"
