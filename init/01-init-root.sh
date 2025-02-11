@@ -149,6 +149,21 @@ EOC
     ensure_file_content "$HOOK_FILE" "$HOOK_CONTENT"
 }
 
+function ensure_systemd_sleep_entry {
+    HOOK_FILE="/lib/systemd/system-sleep/99-sleep-log"
+    HOOK_CONTENT=$(cat <<EOC
+#!/bin/sh
+
+mkdir -p /clean_manually
+echo "`date '+%FT%T'` $1 $2" >> /clean_manually/sleep.log
+EOC
+)
+
+    ensure_file_content "$HOOK_FILE" "$HOOK_CONTENT"
+
+    chmod +x $HOOK_FILE
+}
+
 function ensure_polkit_config {
     # action.id are in /usr/share/polkit-1/actions
     # try prompt with `pkexec --user davs gparted`
@@ -208,6 +223,7 @@ ensure_xkb_config
 ensure_tlp_config
 ensure_polkit_config
 ensure_nginx_pacman_hook
+ensure_systemd_sleep_entry
 
 for dir in "/opt/cache" "/opt/javascript" "/clean_daily" "/clean_manually"; do
     mkdir -p "$dir"
