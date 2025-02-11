@@ -155,7 +155,7 @@ function ensure_systemd_sleep_entry {
 #!/bin/sh
 
 mkdir -p /clean_manually
-echo "`date '+%FT%T'` $1 $2" >> /clean_manually/sleep.log
+echo "`date '+%FT%T'` \$1 \$2" >> /clean_manually/sleep.log
 EOC
 )
 
