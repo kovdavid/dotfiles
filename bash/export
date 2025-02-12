@@ -59,6 +59,8 @@ if [ -d /opt/javascript/npm-packages ] ; then
     export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 fi
 
+export NODE_OPTIONS="--max-old-space-size=4096"
+
 if [ -d /opt/javascript/nvm ] ; then
     export NVM_DIR="/opt/javascript/nvm"
 fi
