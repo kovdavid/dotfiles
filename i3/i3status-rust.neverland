@@ -28,6 +28,11 @@ alert = 10.0
 format = " $icon $available.eng(w:2) "
 
 [[block]]
+block = "memory"
+format = " $icon $mem_used_percents.eng(w:2) $icon_swap $swap_used_percents.eng(w:2) "
+format_alt = " $icon $mem_used.eng(prefix:Mi)/$mem_total.eng(prefix:Mi) $icon_swap $swap_used.eng(prefix:Mi)/$swap_total.eng(prefix:Mi) "
+
+[[block]]
 block = "backlight"
 format = "$icon $brightness"
 signal = 5
