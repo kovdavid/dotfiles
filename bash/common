@@ -23,11 +23,15 @@ bash_include ~/dotfiles/tmux/completion.bash
 bash_include ~/dotfiles/bash/local
 
 function parse_git_branch {
+    echo " $(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+}
+
+function parse_git_branch_old {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \1 $(parse_git_rev)$(parse_git_dirty)$(parse_git_stash_size)$(parse_git_wip_commit)/"
 }
 
 function parse_git_dirty {
-    [[ $(git status 2> /dev/null | tail -n1) =~  "nothing to commit" ]] || echo " *"
+    git diff-index --quiet HEAD -- && echo "" || echo " *"
 }
 
 function parse_git_rev {
