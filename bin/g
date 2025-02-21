@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [ $# -gt 0 ] ; then
+    git "$@"
+    exit $!
+fi
+
+echo -n "🫒 branch:     "
+git rev-parse --abbrev-ref HEAD
+
+echo -n "🔹 revision:   "
+git rev-parse --short HEAD
+
+# echo -n "dirty:      "
+# git diff-index --quiet HEAD -- && echo "" || echo "*"
+
+echo -n "🐙 stash size: "
+git stash list 2>/dev/null | wc -l
+
+echo ""
+
+git log -1 --oneline
+
+echo ""
+
+echo "🔄 Changed files:"
+git diff-index --name-only HEAD | sort
