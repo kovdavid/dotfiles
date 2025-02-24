@@ -14,8 +14,11 @@ git rev-parse --short HEAD
 # echo -n "dirty:      "
 # git diff-index --quiet HEAD -- && echo "" || echo "*"
 
-echo -n "🐙 stash size: "
-git stash list 2>/dev/null | wc -l
+STASH_SIZE=$(git stash list 2>/dev/null | wc -l)
+if [[ "$STASH_SIZE" -gt 0 ]] ; then
+    echo -n "🐙 stash size: "
+    echo "$STASH_SIZE"
+fi
 
 echo ""
 
