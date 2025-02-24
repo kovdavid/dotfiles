@@ -1,0 +1,31 @@
+#!/bin/bash
+
+SESSION_ID=$(tmux display-message -p '#{session_id}')
+WINDOW_ID=$(tmux display-message -p '#{window_id}')
+PANE_ID=$(tmux display-message -p '#{pane_id}')
+
+echo "SESSION_ID:$SESSION_ID"
+echo "WINDOW_ID:$WINDOW_ID"
+echo "PANE_ID:$PANE_ID"
+
+echo ""
+
+SESSION_NAME=$(tmux display-message -p '#{session_name}')
+WINDOW_NAME=$(tmux display-message -p '#{window_name}')
+
+echo "SESSION_NAME:$SESSION_NAME"
+echo "WINDOW_NAME:$WINDOW_NAME"
+
+echo ""
+
+SESSION_DEFAULT_COMMAND=$(tmux show-options -qv -t ${SESSION_ID} default-command)
+WINDOW_DEFAULT_COMMAND=$(tmux show-options -qv -t ${SESSION_ID} @@6_default_command)
+
+echo "Default command"
+echo "SESSION_DEFAULT_COMMAND:$SESSION_DEFAULT_COMMAND"
+echo "WINDOW_DEFAULT_COMMAND:$WINDOW_DEFAULT_COMMAND"
+
+echo ""
+
+echo "tmux show-options"
+tmux show-options
