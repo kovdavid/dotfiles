@@ -23,5 +23,28 @@ git log -1 --oneline
 
 echo ""
 
-echo "🔄 Changed files:"
-git diff-index --name-only HEAD | sort
+STASHED=$(git diff --name-only --cached)
+if [ -n "$STASHED" ] ; then
+    echo "✅ Stashed files:"
+    echo -en "\e[32m"
+    echo -e "$STASHED"
+    echo -en "\e[0m"
+fi
+
+CHANGED=$(git diff --name-only)
+if [ -n "$CHANGED" ] ; then
+    [[ -n "$STASHED" ]] && echo ""
+
+    echo "🔄 Changed files:"
+    echo -e "$CHANGED"
+fi
+
+UNTRACKED=$(git ls-files --others --exclude-standard)
+if [ -n "$UNTRACKED" ] ; then
+    [[ -n "$STASHED" || -n "$CHANGED" ]] && echo ""
+
+    echo "🔍 Untracked files:"
+    echo -en "\e[31m"
+    echo -e "$UNTRACKED"
+    echo -en "\e[0m"
+fi

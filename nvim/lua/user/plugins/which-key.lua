@@ -102,7 +102,7 @@ return {
         { "gl", vim.diagnostic.open_float, desc = "LSP diagnostic" },
         { "go", vim.lsp.buf.type_definition, desc = "Type definition" },
         { "gs", vim.lsp.buf.signature_help, desc = "Signature help" },
-
+        { "<leader>bc", ":%s/\\e\\[[0-9;]*m//g<CR>", desc="Clear Bash escape sequences"},
         { "<leader>jc", ":%!jq --compact-output<CR>", desc = "jq compact", mode = { 'v', 'n', } },
         { "<leader>jf", ":%!jq --indent 4<CR>", desc = "jq format", mode = { 'v', 'n', } },
         { "<leader>js", ":%!jq --sort-keys --indent 4<CR>", desc = "jq format", mode = { 'v', 'n', } },
