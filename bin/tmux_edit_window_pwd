@@ -14,7 +14,9 @@ fi
 
 WINDOW_ID=$(tmux display-message $WINDOW -p '#{window_id}')
 
+echo "WINDOW_ID:$WINDOW_ID WINDOW:$WINDOW"
+
 CD_DIR=$(readlink -f "$DIR")
 
 # -s -> server option
-$(tmux set-option -s @${WINDOW_ID}_default_command "cd $CD_DIR; bash")
+$(tmux set-option @${WINDOW_ID}_default_command "cd $CD_DIR; bash")
