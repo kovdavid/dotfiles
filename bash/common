@@ -23,27 +23,5 @@ bash_include ~/dotfiles/tmux/completion.bash
 bash_include ~/dotfiles/bash/local
 
 function parse_git_branch {
-    echo " $(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
-}
-
-function parse_git_branch_old {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \1 $(parse_git_rev)$(parse_git_dirty)$(parse_git_stash_size)$(parse_git_wip_commit)/"
-}
-
-function parse_git_dirty {
-    git diff-index --quiet HEAD -- && echo "" || echo " *"
-}
-
-function parse_git_rev {
-    git rev-parse --short HEAD 2> /dev/null
-}
-
-function parse_git_wip_commit {
-    [[ $(git log -1 --pretty=%B 2> /dev/null) == *WIP* ]] && echo -e " \033[33;5;7m WIP \033[0m"
-
-}
-
-function parse_git_stash_size {
-    SIZE=$(git stash list 2>/dev/null | wc -l)
-    [[ "$SIZE" -gt "0" ]] && echo -e "\033[0;31m >$SIZE<\033[0m"
+    echo " $(git rev-parse --abbrev-ref HEAD 2>/dev/null) $(git rev-parse --short HEAD 2> /dev/null)"
 }
