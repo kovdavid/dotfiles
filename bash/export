@@ -92,3 +92,4 @@ export HISTFILESIZE=-1
 export BUILDKIT_PROGRESS=plain
 
 export GIT_EDITOR='nvim +startinsert!'
+export MANPAGER='nvim +Man!'
