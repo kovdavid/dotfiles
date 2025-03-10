@@ -1,0 +1,11 @@
+[Unit]
+Description=Startup - Shutdown log
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/home/davs/dotfiles/systemd/startup_shutdown_log/startup_shutdown_log startup
+ExecStop=/home/davs/dotfiles/systemd/startup_shutdown_log/startup_shutdown_log shutdown
+
+[Install]
+WantedBy=default.target

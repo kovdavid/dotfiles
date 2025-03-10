@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo "$(date '+%FT%T') $1" >> /clean_manually/startup_shutdown.log
