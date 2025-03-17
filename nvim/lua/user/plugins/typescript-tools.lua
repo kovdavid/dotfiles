@@ -21,6 +21,12 @@ return {
         on_attach = function(client, bufnr)
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
+
+            local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
+
+            if filetype == "DiffviewFiles" or filetype == "DiffviewFileHistory" then
+                return false
+            end
         end,
         jsx_close_tag = {
             enable = true,

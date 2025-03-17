@@ -23,5 +23,5 @@ bash_include ~/dotfiles/tmux/completion.bash
 bash_include ~/dotfiles/bash/local
 
 function parse_git_branch {
-    echo " $(git rev-parse --abbrev-ref HEAD 2>/dev/null) $(git rev-parse --short HEAD 2> /dev/null)"
+    echo " $(git rev-parse --abbrev-ref HEAD 2>/dev/null) $(git rev-parse --short HEAD 2> /dev/null)$(test -f "$(git rev-parse --git-path refs/stash 2>/dev/null)" && echo -e '\e[31m S')"
 }
