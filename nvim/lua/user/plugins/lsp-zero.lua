@@ -50,6 +50,7 @@ return {
 
         require("lspconfig").clangd.setup({})
         require("lspconfig").gopls.setup({})
+        require("lspconfig").rust_analyzer.setup({})
         require("lspconfig").pyright.setup({})
     end
 }
