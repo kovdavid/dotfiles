@@ -34,23 +34,20 @@ if [ -n "$STASHED" ] ; then
     echo "✅ Stashed files:"
     echo -en "\e[32m"
     echo -e "$STASHED"
-    echo -en "\e[0m"
+    echo -e "\e[0m"
 fi
 
 # CHANGED=$(git diff --name-only)
 CHANGED=$(echo -n "$STATUS" | rg '^ \w ')
 if [ -n "$CHANGED" ] ; then
-    [[ -n "$STASHED" ]] && echo ""
-
     echo "🔄 Changed files:"
     echo -e "$CHANGED"
+    echo ""
 fi
 
 # UNTRACKED=$(git ls-files --others --exclude-standard)
 UNTRACKED=$(echo -n "$STATUS" | rg '^\?\? ')
 if [ -n "$UNTRACKED" ] ; then
-    [[ -n "$STASHED" || -n "$CHANGED" ]] && echo ""
-
     echo "🔍 Untracked files:"
     echo -en "\e[31m"
     echo -e "$UNTRACKED"

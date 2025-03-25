@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd({ "WinLeave", "FocusLost", "BufLeave" }, {
 local markdown_group = vim.api.nvim_create_augroup("markdown_group", { clear = true })
 vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
     group = markdown_group,
-    pattern = {"todo.md"},
+    pattern = {"todo.md", "TODO.md"},
     callback = function (ev)
         local keymap_options = { buffer = ev.buf, silent = true, noremap = true }
         vim.keymap.set("i", "<F5>", "<C-R>=strftime('%F')<CR>", keymap_options)
