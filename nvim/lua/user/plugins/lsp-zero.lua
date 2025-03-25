@@ -37,6 +37,10 @@ return {
                 if client.resolved_capabilities then
                     client.resolved_capabilities.document_formatting = true
                 end
+
+                if filetype == "DiffviewFiles" or filetype == "DiffviewFileHistory" then
+                    return false
+                end
             end,
             root_dir = function(...)
                 return require("lspconfig.util").root_pattern(".vimproject", ".git")(...)

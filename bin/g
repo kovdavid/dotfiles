@@ -26,7 +26,10 @@ git log -1 --oneline
 
 echo ""
 
-STASHED=$(git diff --name-only --cached)
+STATUS=$(git status --porcelain)
+
+# STASHED=$(git diff --name-only --cached)
+STASHED=$(echo -n "$STATUS" | rg '^\w  ')
 if [ -n "$STASHED" ] ; then
     echo "✅ Stashed files:"
     echo -en "\e[32m"
@@ -34,7 +37,8 @@ if [ -n "$STASHED" ] ; then
     echo -en "\e[0m"
 fi
 
-CHANGED=$(git diff --name-only)
+# CHANGED=$(git diff --name-only)
+CHANGED=$(echo -n "$STATUS" | rg '^ \w ')
 if [ -n "$CHANGED" ] ; then
     [[ -n "$STASHED" ]] && echo ""
 
@@ -42,7 +46,8 @@ if [ -n "$CHANGED" ] ; then
     echo -e "$CHANGED"
 fi
 
-UNTRACKED=$(git ls-files --others --exclude-standard)
+# UNTRACKED=$(git ls-files --others --exclude-standard)
+UNTRACKED=$(echo -n "$STATUS" | rg '^\?\? ')
 if [ -n "$UNTRACKED" ] ; then
     [[ -n "$STASHED" || -n "$CHANGED" ]] && echo ""
 

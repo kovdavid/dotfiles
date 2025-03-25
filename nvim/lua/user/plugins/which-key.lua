@@ -92,8 +92,22 @@ return {
             mode = { 'v' },
             desc = "Live grep full word",
         },
-        { "<leader>hs", function() require("gitsigns").stage_hunk() end, desc = "stage hunk", mode = { 'v' } },
-        { "<leader>hr", function() require("gitsigns").reset_hunk() end, desc = "reset hunk", mode = { 'v' } },
+        {
+            "<leader>hs",
+            function()
+                require("gitsigns").stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+            end,
+            desc = "stage hunk",
+            mode = { 'v' }
+        },
+        {
+            "<leader>hr",
+            function()
+                require("gitsigns").reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+            end,
+            desc = "reset hunk",
+            mode = { 'v' }
+        },
 
         { "gd", vim.lsp.buf.definition, desc = "LSP definition" },
         { "gD", vim.lsp.buf.declaration, desc = "LSP declaration" },
