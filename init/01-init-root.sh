@@ -91,21 +91,11 @@ Section "InputClass"
     Option "XkbModel" "pc105"
     Option "XkbVariant" ",qwerty"
     Option "XkbOptions" "davs:davs"
-EndSection
-EOC
-)
-    ensure_file_content "$XORG_CONF_FILE" "$XORG_CONF_CONTENT"
-
-    XORG_CONF_FILE2="/etc/X11/xorg.conf.d/01-keyboard-repeat.conf"
-    XORG_CONF_CONTENT2=$(cat <<EOC
-Section "InputClass"
-    Identifier "Keyboard Repeat Rate"
-    MatchIsKeyboard "on"
     Option "AutoRepeat" "220 40"
 EndSection
 EOC
 )
-    ensure_file_content "$XORG_CONF_FILE2" "$XORG_CONF_CONTENT2"
+    ensure_file_content "$XORG_CONF_FILE" "$XORG_CONF_CONTENT"
 }
 
 function ensure_tlp_config {
