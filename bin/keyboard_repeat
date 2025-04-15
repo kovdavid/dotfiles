@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Before"
+xset q | grep repeat
+
+xset r rate 220 40
+
+echo ""
+
+echo "After"
+xset q | grep repeat

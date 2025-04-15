@@ -4,8 +4,8 @@ return {
     opts = {
         callout = {
             log = { raw = '[!LOG]', rendered = '󰥔 Log', highlight = 'RenderMarkdownInfo' },
-            schedule = { raw = '[!SCHEDULE]', rendered = '󰥔 Schedule', highlight = 'RenderMarkdownSuccess' },
-            schedule = { raw = '[!MEETING]', rendered = '󰥔 Meeting', highlight = 'RenderMarkdownInfo' },
+            schedule = { raw = '[!SCHEDULE]', rendered = '󰥔 Schedule', highlight = 'RenderMarkdownInfo' },
+            meeting = { raw = '[!MEETING]', rendered = '󰥔 Meeting', highlight = 'RenderMarkdownInfo' },
         },
     }
 }
