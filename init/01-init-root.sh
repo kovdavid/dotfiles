@@ -91,7 +91,7 @@ Section "InputClass"
     Option "XkbModel" "pc105"
     Option "XkbVariant" ",qwerty"
     Option "XkbOptions" "davs:davs"
-    Option "AutoRepeat" "220 40"
+    Option "AutoRepeat" "220 60"
 EndSection
 EOC
 )
