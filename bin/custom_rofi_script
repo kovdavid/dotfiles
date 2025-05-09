@@ -89,6 +89,7 @@ elif [ "$ROFI_INFO" == "main" ] ; then
         menu_item "main monitor" "external monitor top" "arrow-up"
         menu_item "main monitor" "notebook only" "computer-laptop"
         menu_item "main monitor" "external monitor only" "video-display"
+        menu_item "main monitor" "reset & external monitor left" "arrow-left"
     elif [ "$ACTION" == "redshift" ] ; then
         draw_redshift_menu
     elif [ "$ACTION" == "brightness" ] ; then
@@ -123,6 +124,10 @@ elif [ "$ROFI_INFO" == "main monitor" ] ; then
         run_cmd "mon top"
     elif [ "$ACTION" == "notebook only" ] ; then
         run_cmd "mon off"
+    elif [ "$ACTION" == "reset & external monitor left" ] ; then
+        run_cmd "mon off"
+        sleep 3
+        run_cmd "mon left"
     elif [ "$ACTION" == "external monitor only" ] ; then
         run_cmd "mon sec"
     fi
