@@ -47,7 +47,7 @@ return {
             end,
             settings = {
                 experimental = {
-                    useFlatConfig = false
+                    useFlatConfig = os.getenv("ESLINT_FLAT_CONFIG") == 'true'
                 }
             }
         })
