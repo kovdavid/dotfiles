@@ -88,3 +88,5 @@ if [ $(which nitrogen) ] ; then
     sleep 2
     nitrogen --restore 2> /dev/null
 fi
+
+[ -x ~/bin/keyboard_repeat ] && bash ~/bin/keyboard_repeat

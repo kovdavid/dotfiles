@@ -15,9 +15,14 @@ return {
             -- separate_diagnostic_server = false,
             -- tsserver_max_memory = 1536,
         },
-        -- tsserver_file_preferences = {
-            -- importModuleSpecifierPreference = "non-relative"
-        -- },
+        tsserver_file_preferences = {
+            importModuleSpecifierPreference = "project-relative",
+            autoImportFileExcludePatterns = {
+                    -- Exclude all files from nestjs-pino package
+                    "nestjs-pino/.*",
+                    ".*/nestjs-pino/.*",
+            },
+        },
         on_attach = function(client, bufnr)
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
