@@ -20,8 +20,10 @@ bindsym $mod+Shift+Tab exec ~/bin/i3_output move
 bindsym $mod+Return exec ~/bin/i3_cycle_windows
 
 # rofi -show combi -combi-modi "script:custom_rofi_script,run" -modi combi
-bindsym $mod+x exec rofi -show script -modi "script:custom_rofi_script"
-bindsym $mod+c exec rofi -show run
+# bindsym $mod+x exec rofi -show script -modi "script:custom_rofi_script"
+# bindsym $mod+c exec rofi -show run
+
+bindsym $mod+space exec rofi -show
 
 # F13
 bindsym $mod+XF86Tools   exec i3_cycle_workspace left sequential
@@ -102,7 +104,7 @@ bindsym $mod+f fullscreen
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # focus the child container
 #bindcode $mod+d focus child

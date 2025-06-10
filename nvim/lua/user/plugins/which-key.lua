@@ -8,21 +8,7 @@ return {
         vim.cmd("unmap gc")
         vim.cmd("unmap gcc")
     end,
-    opts = {
-        -- plugins = {
-        --     marks = true,
-        --     registers = true,
-        --     presets = {
-        --         operators = true,
-        --         -- motions = true,
-        --         -- text_objects = true,
-        --         -- windows = true,
-        --         -- nav = true,
-        --         -- z = true,
-        --         -- g = true,
-        --     }.
-        -- },
-    },
+    opts = {},
     keys = {
         { "<leader>dw", ":windo set diffopt+=iwhiteall<CR>", desc = "diff +iwhite" },
         { "<leader>du", ":windo diffupdate<CR>", desc = "diff update" },
@@ -42,6 +28,12 @@ return {
         { "<leader>hd", function() require("gitsigns").diffthis() end, desc = "diff" },
         { "<leader>htb", function() require("gitsigns").toggle_current_line_blame() end, desc = "toggle blame current line" },
         { "<leader>htd", function() require("gitsigns").toggle_deleted() end, desc = "toggle deleted" },
+
+        { "<leader>ha", function() require("harpoon"):list():add() end, desc = "harpoon add" },
+        { "<leader>hl", function() require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end, desc = "harpoon list" },
+        { "<C-y>", function() require("harpoon"):list():select(1) end, desc = "harpoon item 1" },
+        { "<C-u>", function() require("harpoon"):list():select(2) end, desc = "harpoon item 2" },
+        { "<C-i>", function() require("harpoon"):list():select(3) end, desc = "harpoon item 3" },
 
         { "<leader>lr", vim.lsp.buf.rename, desc = "rename" },
         { "<leader>ld", function()

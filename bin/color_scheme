@@ -38,4 +38,4 @@ ln -sf ~/dotfiles/Xresources/Xresources.$SCHEME ~/.Xresources.colorscheme
 xrdb -merge /home/davs/.Xresources
 
 echo "Linking rofi"
-ln -sf ~/dotfiles/rofi/config_$SCHEME.rasi ~/.config/rofi/config.rasi
+ln -sf ~/dotfiles/rofi/theme_$SCHEME.rasi ~/.config/rofi/theme.rasi
