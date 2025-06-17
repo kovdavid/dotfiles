@@ -51,7 +51,9 @@ function draw_performance_menu {
     menu_item "main performance" "boost on" "cpu"
     menu_item "main performance" "schedutil" "cpu"
     menu_item "main performance" "fan cool" "preferences-system"
-    menu_item "main performance" "ryzenadj" "cpu"
+    menu_item "main performance" "ryzenadj 65" "cpu"
+    menu_item "main performance" "ryzenadj 75" "cpu"
+    menu_item "main performance" "keyboard repeat" "input-keyboard"
 }
 
 function draw_redshift_menu {
@@ -120,12 +122,12 @@ elif [ "$ROFI_INFO" = "main" ] ; then
     elif [ "$ACTION" = "thunar" ] ; then
         run_cmd "thunar"
     elif [ "$ACTION" = "flameshot" ] ; then
-        FILENAME=$(date '+%F-%T.png')
+        FILENAME=$(date '+%FT%T.png')
         run_cmd "flameshot gui -p /clean_daily/$FILENAME"
     elif [ "$ACTION" = "keepassxc" ] ; then
         run_cmd "keepassxc"
     elif [ "$ACTION" = "full-screen (5s)" ] ; then
-        FILENAME=$(date '+%F-%T.png')
+        FILENAME=$(date '+%FT%T.png')
         run_cmd "flameshot full -d 5000 -p /clean_daily/$FILENAME"
     elif [ "$ACTION" = "firefox" ] ; then
         run_cmd "firefox"
@@ -200,9 +202,12 @@ elif [ "$ROFI_INFO" = "main performance" ] ; then
         run_cmd "fan cool"
     elif [ "$ACTION" = "fan cool" ] ; then
         run_cmd "fan cool"
-    elif [ "$ACTION" = "ryzdenadj" ] ; then
+    elif [ "$ACTION" = "ryzenadj 65" ] ; then
         run_cmd "sudo ryzenadj --stapm-limit=18000 --fast-limit=18000 --slow-limit=18000 --tctl-temp=65"
-        # run_cmd "sudo ryzenadj --stapm-limit=24000 --fast-limit=24000 --slow-limit=24000 --tctl-temp=75"
+    elif [ "$ACTION" = "ryzenadj 75" ] ; then
+        run_cmd "sudo ryzenadj --stapm-limit=24000 --fast-limit=24000 --slow-limit=24000 --tctl-temp=75"
+    elif [ "$ACTION" = "keyboard repeat" ] ; then
+        run_cmd "keyboard_repeat"
     fi
 
     draw_performance_menu

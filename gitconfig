@@ -1,8 +1,8 @@
 [alias]
     a           = add
     aa          = add --all
+    an          = add --all -N
     ap          = add --patch
-    aan         = add --all -n
     st          = -c color.status=false status
     ci          = commit
     ciamend     = commit --amend
@@ -11,6 +11,8 @@
     co          = checkout
     me          = merge --no-ff
     ms          = merge --squash
+    d           = diff
+    ds          = diff --stat
     dt          = difftool
     dtc         = difftool --cached
     dtn         = difftool --name-only

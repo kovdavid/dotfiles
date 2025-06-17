@@ -27,6 +27,7 @@ function run_cmd {
 if [ "$ROFI_INFO" = "" ] ; then
     menu_item "main" "firefox 1990" "firefox"
     menu_item "main" "beekeeper" "beekeeper-studio"
+    menu_item "main" "work session" "preferences-system"
 elif [ "$ROFI_INFO" = "main" ] ; then
     if [ "$ACTION" = "thunar" ] ; then
         run_cmd "thunar"
@@ -34,5 +35,7 @@ elif [ "$ROFI_INFO" = "main" ] ; then
         run_cmd "firefox_1990"
     elif [ "$ACTION" = "beekeeper" ] ; then
         run_cmd "beekeeper-studio"
+    elif [ "$ACTION" = "work session" ] ; then
+        run_cmd "work_session"
     fi
 fi

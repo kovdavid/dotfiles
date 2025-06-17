@@ -12,7 +12,7 @@ shape = "Block"
 TERM = "alacritty"
 
 [font]
-size = 13
+size = 16
 
 [[mouse.bindings]]
 action = "PasteSelection"
