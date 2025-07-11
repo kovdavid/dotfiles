@@ -53,7 +53,7 @@ function draw_performance_menu {
     menu_item "main performance" "fan cool" "preferences-system"
     menu_item "main performance" "ryzenadj 65" "cpu"
     menu_item "main performance" "ryzenadj 75" "cpu"
-    menu_item "main performance" "keyboard repeat" "input-keyboard"
+    menu_item "main performance" "battery-saver" "cpu"
 }
 
 function draw_redshift_menu {
@@ -188,6 +188,8 @@ elif [ "$ROFI_INFO" = "main brightness" ] ; then
     fi
     draw_brightness_menu
 elif [ "$ROFI_INFO" = "main performance" ] ; then
+    RYZEN65="sudo ryzenadj --stapm-limit=18000 --fast-limit=18000 --slow-limit=18000 --tctl-temp=65"
+    RYZEN75="sudo ryzenadj --stapm-limit=24000 --fast-limit=24000 --slow-limit=24000 --tctl-temp=75"
     if [ "$ACTION" = "boost off" ] ; then
         run_cmd "boost off"
     elif [ "$ACTION" = "boost on" ] ; then
@@ -203,11 +205,11 @@ elif [ "$ROFI_INFO" = "main performance" ] ; then
     elif [ "$ACTION" = "fan cool" ] ; then
         run_cmd "fan cool"
     elif [ "$ACTION" = "ryzenadj 65" ] ; then
-        run_cmd "sudo ryzenadj --stapm-limit=18000 --fast-limit=18000 --slow-limit=18000 --tctl-temp=65"
+        run_cmd "$RYZEN65"
     elif [ "$ACTION" = "ryzenadj 75" ] ; then
-        run_cmd "sudo ryzenadj --stapm-limit=24000 --fast-limit=24000 --slow-limit=24000 --tctl-temp=75"
-    elif [ "$ACTION" = "keyboard repeat" ] ; then
-        run_cmd "keyboard_repeat"
+        run_cmd "$RYZEN75"
+    elif [ "$ACTION" = "battery-saver" ] ; then
+        run_cmd "boost off; cpu_powersave; fan quiet; $RYZEN65; keyboard_repeat"
     fi
 
     draw_performance_menu

@@ -30,6 +30,8 @@ if [ "$ROFI_INFO" = "" ] ; then
     menu_item "main" "work session" "preferences-system"
     menu_item "main" "rquickshare" "rquickshare"
     menu_item "main" "gimp" "gimp"
+    menu_item "main" "keyboard repeat" "input-keyboard"
+    menu_item "main" "touchpad" "input-touchpad"
 elif [ "$ROFI_INFO" = "main" ] ; then
     if [ "$ACTION" = "thunar" ] ; then
         run_cmd "thunar"
@@ -43,5 +45,9 @@ elif [ "$ROFI_INFO" = "main" ] ; then
         run_cmd "rquickshare"
     elif [ "$ACTION" = "gimp" ] ; then
         run_cmd "gimp"
+    elif [ "$ACTION" = "keyboard repeat" ] ; then
+        run_cmd "keyboard_repeat"
+    elif [ "$ACTION" = "touchpad" ] ; then
+        run_cmd "init_touchpad"
     fi
 fi
