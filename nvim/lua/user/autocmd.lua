@@ -107,3 +107,12 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
         -- end
     end,
 })
+
+local typescript_group = vim.api.nvim_create_augroup("typescript_group", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = "typescript_group",
+  pattern = "*.ts",
+  callback = function()
+    vim.lsp.buf.code_action({ apply = true, context = { only = { "source.addMissingImports.ts" }, diagnostics = {} } })
+  end,
+})

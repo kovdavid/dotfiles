@@ -3,12 +3,12 @@ return {
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     lazy = true,
     ft = {
-        "javascript",
-        "javascriptreact",
-        "javascript.jsx",
-        "typescript",
-        "typescriptreact",
-        "typescript.tsx",
+        -- "javascript",
+        -- "javascriptreact",
+        -- "javascript.jsx",
+        -- "typescript",
+        -- "typescriptreact",
+        -- "typescript.tsx",
     },
     opts = {
         settings = {
