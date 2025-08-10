@@ -58,6 +58,9 @@ local options = {
 
     foldmethod = "indent",
     foldlevel = 20,
+
+    -- default border for floating windows
+    winborder = "rounded",
 }
 
 local undodir = os.getenv("VIM_UNDODIR")
