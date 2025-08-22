@@ -30,6 +30,7 @@ if [ "$ROFI_INFO" = "" ] ; then
     menu_item "main" "work session" "preferences-system"
     menu_item "main" "rquickshare" "rquickshare"
     menu_item "main" "gimp" "gimp"
+    menu_item "main" "smplayer" "smplayer"
     menu_item "main" "libreoffice" "libreoffice-base"
     menu_item "main" "keyboard repeat" "input-keyboard"
     menu_item "main" "touchpad" "input-touchpad"
@@ -46,6 +47,8 @@ elif [ "$ROFI_INFO" = "main" ] ; then
         run_cmd "rquickshare"
     elif [ "$ACTION" = "gimp" ] ; then
         run_cmd "gimp"
+    elif [ "$ACTION" = "smplayer" ] ; then
+        run_cmd "smplayer"
     elif [ "$ACTION" = "libreoffice" ] ; then
         run_cmd "libreoffice"
     elif [ "$ACTION" = "keyboard repeat" ] ; then

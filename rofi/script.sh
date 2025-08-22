@@ -54,6 +54,7 @@ function draw_performance_menu {
     menu_item "main performance" "ryzenadj 65" "cpu"
     menu_item "main performance" "ryzenadj 75" "cpu"
     menu_item "main performance" "battery-saver" "cpu"
+    menu_item "main performance" "normal" "cpu"
 }
 
 function draw_redshift_menu {
@@ -104,9 +105,9 @@ elif [ "$ROFI_INFO" = "main" ] ; then
         menu_item "main monitor" "external monitor left" "arrow-left"
         menu_item "main monitor" "external monitor right" "arrow-right"
         menu_item "main monitor" "external monitor top" "arrow-up"
+        menu_item "main monitor" "reset & external monitor left" "arrow-left"
         menu_item "main monitor" "notebook only" "computer-laptop"
         menu_item "main monitor" "external monitor only" "video-display"
-        menu_item "main monitor" "reset & external monitor left" "arrow-left"
     elif [ "$ACTION" = "redshift" ] ; then
         draw_redshift_menu
     elif [ "$ACTION" = "brightness" ] ; then
@@ -209,7 +210,9 @@ elif [ "$ROFI_INFO" = "main performance" ] ; then
     elif [ "$ACTION" = "ryzenadj 75" ] ; then
         run_cmd "$RYZEN75"
     elif [ "$ACTION" = "battery-saver" ] ; then
-        run_cmd "boost off; cpu_powersave; fan quiet; $RYZEN65; keyboard_repeat"
+        run_cmd "boost off; cpu_powersave; fan quiet; $RYZEN65; keyboard_repeat; init_touchpad"
+    elif [ "$ACTION" = "normal" ] ; then
+        run_cmd "boost on; cpu_schedutil; fan cool; $RYZEN65; keyboard_repeat; init_touchpad"
     fi
 
     draw_performance_menu

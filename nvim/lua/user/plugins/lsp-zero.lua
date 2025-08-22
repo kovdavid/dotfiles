@@ -52,7 +52,12 @@ return {
             }
         })
 
-        require("lspconfig").clangd.setup({})
+        require("lspconfig").clangd.setup({
+            cmd = {
+                "clangd",
+                "--query-driver=/usr/bin/arm-none-eabi-g++"
+            }
+        })
         require("lspconfig").gopls.setup({})
         require("lspconfig").rust_analyzer.setup({})
         require("lspconfig").pyright.setup({})
