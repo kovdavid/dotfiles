@@ -31,26 +31,26 @@ return {
             sign_text = true,
         })
 
-        require("lspconfig").eslint.setup({
-            capabilities = require("cmp_nvim_lsp").default_capabilities(),
-            on_attach = function(client)
-                if client.resolved_capabilities then
-                    client.resolved_capabilities.document_formatting = true
-                end
-
-                if filetype == "DiffviewFiles" or filetype == "DiffviewFileHistory" then
-                    return false
-                end
-            end,
-            root_dir = function(...)
-                return require("lspconfig.util").root_pattern(".vimproject", ".git")(...)
-            end,
-            settings = {
-                experimental = {
-                    useFlatConfig = os.getenv("ESLINT_FLAT_CONFIG") == 'true'
-                }
-            }
-        })
+        -- require("lspconfig").eslint.setup({
+        --     capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        --     on_attach = function(client)
+        --         if client.resolved_capabilities then
+        --             client.resolved_capabilities.document_formatting = true
+        --         end
+        --
+        --         if filetype == "DiffviewFiles" or filetype == "DiffviewFileHistory" then
+        --             return false
+        --         end
+        --     end,
+        --     root_dir = function(...)
+        --         return require("lspconfig.util").root_pattern(".vimproject", ".git")(...)
+        --     end,
+        --     settings = {
+        --         experimental = {
+        --             useFlatConfig = os.getenv("ESLINT_FLAT_CONFIG") == 'true'
+        --         }
+        --     }
+        -- })
 
         require("lspconfig").clangd.setup({
             cmd = {
