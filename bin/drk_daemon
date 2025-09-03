@@ -1,0 +1,124 @@
+#!/usr/bin/env python
+
+import re
+from typing import Literal, NoReturn
+import hid
+import os
+import time
+import sys
+from datetime import datetime
+from pprint import pprint
+from collections import defaultdict
+
+layer_change_re: re.Pattern[str] = re.compile(r"L:(\d+)")
+caps_word_change_re: re.Pattern[str] = re.compile(r"CW:(\d+)")
+modifier_change_re: re.Pattern[str] = re.compile(r"M:(.+)")
+
+current_layer: Literal['0', '1'] = "0"
+caps_word: Literal['0', '1'] = "0"
+modifiers: defaultdict[str, Literal['0', '1']] = defaultdict(lambda: "0")
+
+vendor_id = 0xCAFE
+product_id = 0xC0DE
+
+usage_page = 0xFF60
+usage = 0x61
+
+report_length = 32
+
+def notify_bar():
+    os.system("pkill -SIGRTMIN+4 i3status-rs")
+
+
+def loop() -> NoReturn:
+    device_interfaces = hid.enumerate(vendor_id, product_id)
+    raw_hid_interfaces = [i for i in device_interfaces if i['usage_page'] == usage_page and i['usage'] == usage]
+
+    if len(raw_hid_interfaces) == 0:
+        pprint(device_interfaces)
+        raise ValueError("No hid interfaces")
+
+    interface = hid.Device(path=raw_hid_interfaces[0]['path'])
+
+    while True:
+        now: datetime = datetime.now()
+
+        line: str = interface.read(report_length).decode("ascii").rstrip()
+        print(f"{now} Received {line}")
+
+        layer_change_match = layer_change_re.match(line)
+        if layer_change_match:
+            globals()["current_layer"] = layer_change_match.group(1)
+            dump_state()
+
+            continue
+
+        caps_word_change_match = caps_word_change_re.match(line)
+        if caps_word_change_match:
+            globals()["caps_word"] = caps_word_change_match.group(1)
+            dump_state()
+
+            continue
+
+        modifier_change_match = modifier_change_re.match(line)
+        if modifier_change_match:
+            modifiers_str: str = modifier_change_match.group(1)
+            modifiers_bitmask: int = int(modifiers_str, 16)
+
+            modifiers["CTRL"] = extract_modifier(modifiers_bitmask, 0)
+            modifiers["SHIFT"] = extract_modifier(modifiers_bitmask, 1)
+            modifiers["ALT"] = extract_modifier(modifiers_bitmask, 2)
+            modifiers["GUI"] = extract_modifier(modifiers_bitmask, 3)
+
+            dump_state()
+
+            continue
+
+
+def extract_modifier(modifiers, shift) -> Literal['1', '0']:
+    if modifiers & (1 << shift) or modifiers & (1 << shift + 4):
+        return "1"
+    return "0"
+
+
+def dump_state() -> None:
+    with open("/tmp/drk.env", "w") as f:
+        f.writelines([
+            f"CAPS_WORD={caps_word}\n",
+            f"LAYER={current_layer}\n",
+            f"CTRL={modifiers['CTRL']}\n",
+            f"SHIFT={modifiers['SHIFT']}\n",
+            f"ALT={modifiers['ALT']}\n",
+            f"GUI={modifiers['GUI']}\n",
+        ])
+
+    notify_bar()
+
+
+def remove(filePath):
+    if os.path.exists(filePath):
+        os.remove(filePath)
+
+
+def run_loop():
+    while True:
+        try:
+            print("Running loop")
+            loop()
+        except Exception as e:
+            print(e)
+
+        remove("/tmp/drk.env")
+        notify_bar()
+
+        print("Sleeping for 60 seconds")
+        time.sleep(60)
+
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        arg = sys.argv[1]
+        if arg in ["status", "stop", "start", "restart", "mask", "unmask"]:
+            os.system(f"systemctl --user {arg} dalsik_daemon")
+    else:
+        run_loop()
