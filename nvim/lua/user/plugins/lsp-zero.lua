@@ -61,5 +61,11 @@ return {
         require("lspconfig").gopls.setup({})
         require("lspconfig").rust_analyzer.setup({})
         require("lspconfig").pyright.setup({})
+
+        vim.keymap.del("n", "grn")
+        vim.keymap.del("n", "gra")
+        vim.keymap.del("n", "grr")
+        vim.keymap.del("n", "gri")
+        vim.keymap.del("n", "grt")
     end
 }
