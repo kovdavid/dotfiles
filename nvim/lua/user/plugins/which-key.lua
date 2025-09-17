@@ -40,9 +40,17 @@ return {
                 vim.lsp.set_log_level(vim.log.levels.DEBUG)
                 vim.lsp.log.set_format_func(vim.inspect)
             end, desc = "debug" },
-        { "<leader>la", ":TSToolsAddMissingImports<CR>", desc = "TSTools AddMissingImports" },
-        { "<leader>lo", ":TSToolsOrganizeImports<CR>", desc = "TSTools OrganizeImports" },
-        { "<leader>lf", ":TSToolsRenameFile<CR>", desc = "TSTools RenameFile" },
+        { "<leader>la", function()
+            vim.lsp.buf.code_action({
+                apply = true,
+                context = { only = { "source.addMissingImports.ts" }, diagnostics = {} }
+            })
+            vim.lsp.buf.code_action({
+                apply = true,
+                context = { only = { "source.removeUnusedImports.ts" }, diagnostics = {} }
+            })
+            require("conform").format({ async = true })
+            end, desc = "AddMissingImports" },
 
         { "<leader>tr", function() require('telescope.builtin').resume() end, desc = "Telescope resume" },
         { "<leader>tb", function() require('telescope').extensions.before.before() end, desc = "Telescope before" } ,
