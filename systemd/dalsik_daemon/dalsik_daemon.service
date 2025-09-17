@@ -1,12 +1,14 @@
 [Unit]
 Description=dalsik_daemon
-StartLimitIntervalSec=300
-StartLimitBurst=5
+BindsTo=dev-dalsik.device
+After=dev-dalsik.device systemd-user-sessions.service
 
 [Service]
+Type=simple
+Environment=XAUTHORITY=/home/davs/.Xauthority
 Environment=DISPLAY=:0
 Environment=PYTHONUNBUFFERED=1
-ExecStart=%h/bin/dalsik_daemon
+ExecStart=/home/davs/dotfiles/bin/dalsik_daemon
 Restart=on-failure
 RestartSec=5s
 
@@ -14,4 +16,4 @@ StandardOutput=append:/clean_daily/dalsik_daemon.log
 StandardError=append:/clean_daily/dalsik_daemon.log
 
 [Install]
-WantedBy=default.target
+WantedBy=dev-dalsik.device

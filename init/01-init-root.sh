@@ -235,6 +235,12 @@ if [ ! -f /etc/X11/xorg.conf.d/40-libinput.conf ] ; then
     ln -sf /usr/share/X11/xorg.conf.d/40-libinput.conf /etc/X11/xorg.conf.d/40-libinput.conf
 fi
 
+ln -sf /home/davs/dotfiles/udev/98-dalsik-daemon-restart.rules /etc/udev/rules.d
+
+udevadm control --reload-rules
+udevadm trigger
+
+
 SKU_NUMBER=$(dmidecode | grep 'SKU Number' | grep -v 'Not Specified' | sed -e 's/^\s*SKU Number:\s*//')
 
 if [ "$SKU_NUMBER" == "LENOVO_MT_20UE_BU_Think_FM_ThinkPad T14 Gen 1" ] ; then
