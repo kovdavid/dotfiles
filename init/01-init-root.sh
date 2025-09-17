@@ -235,7 +235,7 @@ if [ ! -f /etc/X11/xorg.conf.d/40-libinput.conf ] ; then
     ln -sf /usr/share/X11/xorg.conf.d/40-libinput.conf /etc/X11/xorg.conf.d/40-libinput.conf
 fi
 
-ln -sf /home/davs/dotfiles/udev/98-dalsik-daemon-restart.rules /etc/udev/rules.d
+ln -sf /home/davs/dotfiles/udev/98-keyboard-device-symlink.rules /etc/udev/rules.d
 
 udevadm control --reload-rules
 udevadm trigger

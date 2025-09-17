@@ -1,1 +1,0 @@
-ACTION=="add",SUBSYSTEM=="tty",ATTRS{product}=="Dalsik",TAG+="systemd",SYMLINK+="dalsik", GROUP="davs", MODE="0660"
