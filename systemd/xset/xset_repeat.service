@@ -7,6 +7,7 @@ After=dev-dalsik.device systemd-user-sessions.service
 Type=oneshot
 Environment=XAUTHORITY=/home/davs/.Xauthority
 Environment=DISPLAY=:0
+ExecStartPre=/bin/sleep 5
 ExecStart=/home/davs/dotfiles/bin/keyboard_repeat
 
 [Install]

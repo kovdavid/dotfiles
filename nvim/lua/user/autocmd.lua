@@ -36,6 +36,20 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.cmd("%s/\\s\\+$//e")
     end
 })
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+    group = all_files_group,
+    pattern = "*.mdx",
+    callback = function ()
+        vim.bo.filetype = "markdown.mdx"
+    end
+})
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+    group = all_files_group,
+    pattern = "*.astro",
+    callback = function ()
+        vim.bo.filetype = "astro"
+    end
+})
 vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
     group = all_files_group,
     callback = function ()
