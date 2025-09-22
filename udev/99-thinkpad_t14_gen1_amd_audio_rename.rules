@@ -5,6 +5,7 @@
 # https://www.alsa-project.org/wiki/Changing_card_IDs_with_udev
 
 # udevadm info -q path -n "snd/by-path/pci-0000:07:00.1" | xargs udevadm test 2>&1
+# udevadm info -a ... # attributes
 
 # SUBSYSTEM!="sound", GOTO="alsa_naming_end"
 # ACTION!="add", GOTO="alsa_naming_end"

@@ -251,7 +251,7 @@ options snd_hda_intel enable=1 index=0
 options snd_hda_intel enable=0 index=1
 EOC
 )
-    ensure_file_content "/etc/modprobe.d/sound.conf" "$SOUND"
+    # ensure_file_content "/etc/modprobe.d/sound.conf" "$SOUND"
 
     NOBEEP="blacklist pcspkr"
     ensure_file_content "/etc/modprobe.d/nobeep.conf" "$NOBEEP"

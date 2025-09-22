@@ -1,7 +1,7 @@
 [Unit]
 Description=dalsik_daemon
 BindsTo=dev-dalsik.device
-After=dev-dalsik.device systemd-user-sessions.service
+After=dev-dalsik.device systemd-user-sessions.service multi-user.target
 
 [Service]
 Type=simple
@@ -16,4 +16,4 @@ StandardOutput=append:/clean_daily/dalsik_daemon.log
 StandardError=append:/clean_daily/dalsik_daemon.log
 
 [Install]
-WantedBy=dev-dalsik.device
+WantedBy=multi-user.target
