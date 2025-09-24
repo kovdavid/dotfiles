@@ -1,2 +1,2 @@
-ACTION=="add",SUBSYSTEM=="tty",ATTRS{product}=="Dalsik",TAG+="systemd",SYMLINK+="dalsik", GROUP="davs", MODE="0660"
-ACTION=="add",SUBSYSTEM=="hidraw",ATTRS{product}=="Drk keyboard",TAG+="systemd",SYMLINK+="drk", GROUP="davs", MODE="0660"
+ACTION=="add",SUBSYSTEM=="tty",ATTRS{product}=="Dalsik",TAG+="systemd",SYMLINK+="dalsik", GROUP="uucp", MODE="0660"
+ACTION=="add",SUBSYSTEM=="hidraw",ATTRS{product}=="Drk keyboard",TAG+="systemd",SYMLINK+="drk", GROUP="uucp", MODE="0660"

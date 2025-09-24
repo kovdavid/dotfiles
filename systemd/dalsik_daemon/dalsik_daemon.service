@@ -1,7 +1,7 @@
 [Unit]
 Description=dalsik_daemon
 BindsTo=dev-dalsik.device
-After=dev-dalsik.device systemd-user-sessions.service multi-user.target
+After=dev-dalsik.device
 
 [Service]
 Type=simple

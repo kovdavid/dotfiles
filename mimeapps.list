@@ -24,3 +24,6 @@ x-scheme-handler/ftp=firefox.desktop
 x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 x-scheme-handler/mailto=userapp-Thunderbird-S65IGX.desktop
+
+[Added Associations]
+application/pdf=firefox.desktop;

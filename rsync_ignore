@@ -61,6 +61,7 @@
 /home/davs/.vscode-oss
 /home/davs/.kube
 /home/davs/.java
+/home/davs/.minikube
 
 /home/davs/workspace/rust/**/target
 /home/davs/workspace/ocaml/*/_build
