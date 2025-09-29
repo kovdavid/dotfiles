@@ -24,6 +24,7 @@ x-scheme-handler/ftp=firefox.desktop
 x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 x-scheme-handler/mailto=userapp-Thunderbird-S65IGX.desktop
+application/zip=xarchiver.desktop
 
 [Added Associations]
 application/pdf=zathura.desktop
@@ -51,3 +52,5 @@ x-scheme-handler/ftp=firefox.desktop
 x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 x-scheme-handler/mailto=userapp-Thunderbird-S65IGX.desktop
+application/x-compressed-tar=xarchiver.desktop;
+application/zip=xarchiver.desktop;
