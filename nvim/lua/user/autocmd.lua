@@ -130,3 +130,15 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     -- vim.lsp.buf.code_action({ apply = true, context = { only = { "source.addMissingImports.ts" }, diagnostics = {} } })
   end,
 })
+
+local orgmode_group = vim.api.nvim_create_augroup("orgmode_group", { clear = true })
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    group = orgmode_group,
+    pattern = { "org" },
+    callback = function()
+        vim.bo.expandtab = true
+        vim.bo.tabstop = 2
+        vim.bo.shiftwidth = 2
+        vim.bo.softtabstop = 2
+    end,
+})

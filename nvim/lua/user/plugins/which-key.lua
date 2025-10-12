@@ -122,5 +122,13 @@ return {
         { "<leader>js", ":%!jq --sort-keys --indent 4<CR>", desc = "jq format", mode = { 'v', 'n', } },
         { "<leader>jg", ":%!gron<CR>", desc = "gron format", mode = { 'v', 'n', } },
         { "<leader>ju", ":%!gron -u<CR>", desc = "gron unformat", mode = { 'v', 'n', } },
+
+        {
+            "<leader>oc",
+            function()
+                require('orgmode').capture:open_template_by_shortcut("t")
+            end,
+            desc = "Org capture: Todo"
+        }
     },
 }
