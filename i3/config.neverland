@@ -50,8 +50,9 @@ bindsym $mod+Shift+Q kill
 bindsym $mod+b border toggle
 
 # scratchpad
-bindsym $mod+Shift+m move scratchpad
-bindsym $mod+m scratchpad show
+# bindsym $mod+Shift+m move scratchpad
+# bindsym $mod+m scratchpad show
+bindsym $mod+m exec "org-scratchpad"
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left  focus left
@@ -286,6 +287,7 @@ for_window [class="^jetbrains-.+" window_type="dialog"] focus
 for_window [class="^jetbrains-.+" title="(?i)conflicts"] border pixel 5, move position center
 for_window [class="^jetbrains-.+" title="(?i)merge .+"] border pixel 5, move position center
 for_window [class="(?i)pavucontrol"] floating enable, move position mouse, move down 30, move left 30, sticky enable
+for_window [class="Alacritty" title="^org-mode$"] move scratchpad
 
 # no_focus [class="(?i)xfce4-notifyd"]
 no_focus [window_role="pop-up"]

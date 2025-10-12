@@ -1,0 +1,7 @@
+#!/bin/bash
+
+RESULT=$(i3-msg "scratchpad show" 2>/dev/null | jq -r '.[0].success')
+
+if [ "$RESULT" != "true" ] ; then
+    i3-msg "exec alacritty --title org-mode --working-directory ~/workspace/org-mode -e ~/dotfiles/bin/org-tmux-start"
+fi

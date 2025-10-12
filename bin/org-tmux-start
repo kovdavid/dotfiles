@@ -1,0 +1,12 @@
+#!/bin/bash
+
+tmux has-session -t "org"
+
+if [ $? -eq 0 ] ; then
+    tmux attach-session -t "org"
+else
+    tmux new -d -s "org"
+    tmux send-keys -t "org:1" "ll" C-m
+    tmux send-keys -t "org:1" "vim refile.org"
+    tmux attach-session -t "org"
+fi
