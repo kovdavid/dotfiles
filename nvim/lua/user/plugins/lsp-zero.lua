@@ -20,27 +20,30 @@ return {
 
         local lsp_zero = require('lsp-zero')
 
-        local lsp_attach = function(client, bufnr)
-            lsp_zero.default_keymaps({buffer = bufnr})
-        end
-
         lsp_zero.extend_lspconfig({
             capabilities = require('cmp_nvim_lsp').default_capabilities(),
-            lsp_attach = lsp_attach,
+            lsp_attach = function(client, bufnr)
+                lsp_zero.default_keymaps({buffer = bufnr})
+            end,
             float_border = 'rounded',
             sign_text = true,
         })
 
-        require("lspconfig").eslint.setup({
+        vim.lsp.config("eslint", {
             capabilities = require("cmp_nvim_lsp").default_capabilities(),
-            on_attach = function(client)
-                if client.resolved_capabilities then
-                    client.resolved_capabilities.document_formatting = true
-                end
-            end,
-            root_dir = function(...)
-                return require("lspconfig.util").root_pattern(".vimproject", ".git")(...)
-            end,
+            -- on_attach = function(client)
+            --     if client.resolved_capabilities then
+            --         client.resolved_capabilities.document_formatting = true
+            --     end
+            -- end,
+            root_markers = {
+                ".vimproject",
+                ".git",
+            },
+            -- root_dir = function(fname)
+            --     return vim.lsp.util.root_pattern(".vimproject")(fname)
+            --         or vim.lsp.util.root_pattern(".git")(fname)
+            -- end,
             settings = {
                 experimental = {
                     useFlatConfig = os.getenv("ESLINT_FLAT_CONFIG") == 'true'
@@ -48,15 +51,19 @@ return {
             }
         })
 
-        require("lspconfig").clangd.setup({
+        vim.lsp.config("clangd", {
             cmd = {
                 "clangd",
                 "--query-driver=/usr/bin/arm-none-eabi-g++"
             }
         })
+
         -- require("lspconfig").gopls.setup({})
         -- require("lspconfig").rust_analyzer.setup({})
         -- require("lspconfig").pyright.setup({})
+
+        vim.lsp.enable("eslint")
+        vim.lsp.enable("clangd")
 
         vim.keymap.del("n", "grn")
         vim.keymap.del("n", "gra")
