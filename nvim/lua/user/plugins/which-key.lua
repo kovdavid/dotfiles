@@ -129,6 +129,13 @@ return {
                 require('orgmode').capture:open_template_by_shortcut("t")
             end,
             desc = "Org capture: Todo"
-        }
+        },
+        {
+            "<leader>os",
+            function()
+                require('orgmode').action("org_mappings.todo_next_state")
+            end,
+            desc = "Org state"
+        },
     },
 }
