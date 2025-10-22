@@ -18,6 +18,16 @@ size = 16
 action = "PasteSelection"
 mouse = "Middle"
 
+[[keyboard.bindings]]
+key = "C"
+mods = "Super"
+action = "Copy"
+
+[[keyboard.bindings]]
+key = "V"
+mods = "Super"
+action = "Paste"
+
 [scrolling]
 history = 10000
 
