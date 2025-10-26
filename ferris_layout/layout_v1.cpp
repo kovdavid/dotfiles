@@ -60,47 +60,6 @@
 // define LNUM_RET   DSL(LNUM, KC_ENTER)
 #define LNUM_RET    THDL(LNUM, KC_ENTER)
 
-    /* Combos
-           0        1        2        3        4                            5        6        7        8        9
-       ┌────────┬────────┬────────┬────────┬────────┐                   ┌────────┬────────┬────────┬────────┬────────┐
-     0 │        │        │        │        │        │                   │        │      *CTRL  +   A*       │        │
-       │        │        │        │        │        │                   │        │        │        │        │        │
-       ├────────┼────────┼────────┼────────┼────────┤                   ├────────┼────────┼────────┼────────┼────────┤
-     1 │        │     *GUI*    *SHIFT*     │        │                   │        │      *CTRL*   *ALT*      │        │
-       │        │     *GUI   *  SHIFT*     │        │                   │        │      *CTRL  *  ALT*      │        │
-       ├────────┼────────┼────────┼────────┼────────┤                   ├────────┼────────┼────────┼────────┼────────┤
-     2 │        │        │        │        │        │                   │        │        │        │        │        │
-       │        │        │        │        │        │                   │        │        │        │        │        │
-       └────────┴────────┴────────┼────────┼────────┤                   ├────────┼────────┼────────┴────────┴────────┘
-     3                            │        │        │                   │        │        │
-                                  │        │        │                   │        │        │
-                                  └────────┴────────┘                   └────────┴────────┘
-     */
-
-const KeyCoords combo1[] = { { 1, 1 }, { 1, 2 }           }; // LGUI
-const KeyCoords combo2[] = {           { 1, 2 }, { 1, 3 } }; // LSHIFT
-const KeyCoords combo3[] = { { 1, 1 }, { 1, 2 }, { 1, 3 } }; // LGUI + LSHIFT
-
-const KeyCoords combo4[] = { { 1, 6 }, { 1, 7 }           }; // LCTRL
-const KeyCoords combo5[] = {           { 1, 7 }, { 1, 8 } }; // LALT
-const KeyCoords combo6[] = { { 1, 6 }, { 1, 7 }, { 1, 8 } }; // LCTRL + LALT
-
-// const KeyCoords combo7[] = { { 3, 5 }, { 3, 6 } }; // CAPS_WORD
-const KeyCoords combo8[] = { { 0, 6 }, { 0, 7 }, { 0, 8 } }; // Ctrl+a
-
-Combo combos[] = COMBOS({
-    COMBO(combo1, OSM(MOD_LGUI)),
-    COMBO(combo2, OSM(MOD_LSHIFT)),
-    COMBO(combo3, OSM(MOD_LGUI | MOD_LSHIFT)),
-
-    COMBO(combo4, OSM(MOD_LCTRL)),
-    COMBO(combo5, OSM(MOD_LALT)),
-    COMBO(combo6, OSM(MOD_LCTRL | MOD_LALT)),
-
-    // COMBO(combo7, CAPS_WORD),
-    COMBO(combo8, LCTRL(KC_A))
-});
-
 const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
     /* Layer DEFAULT
        ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
@@ -130,9 +89,12 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        │   6    │   7    │   8    │   9    │   0    │         │        │  Home  │ Insert │  End   │        │
        │        │        │        │        │        │         │        │        │        │        │        │
        └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
-                                  │  CTRL  │ SHIFT  │         │ L SYM  │ L NAV  │
-                                  │ ESCAPE │ SPACE  │         │ RETURN │ BSPACE │
+                                  │  CTRL  │ SHIFT  │         │ L SYM  │*L NAV *│
+                                  │ ESCAPE │ SPACE  │         │ RETURN │*BSPACE*│
                                   └────────┴────────┘         └────────┴────────┘
+
+                                            TODO shift to the right
+                                                 and lsym return to the left, so that I have a layer key on the left hand as well
 
 
      */
@@ -143,16 +105,46 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        │   !    │   @    │   #    │   $    │   ~    │         │        │   [    │   "    │   ]    │        │
        │        │        │        │        │        │         │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │   %    │   ^    │   &    │   *    │   `    │         │        │   (    │   _    │   )    │   <    │
+       │   %    │   ^    │   &    │   *    │   `    │         │        │   (    │   _    │   )    │   >    │
        │        │        │        │        │        │         │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │   \    │   |    │   =    │   -    │   +    │         │        │   {    │   '    │   }    │   >    │
+       │   \    │   |    │   =    │   -    │   +    │         │        │   {    │   '    │   }    │   <    │
        │        │        │        │        │        │         │        │        │        │        │        │
        └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
                                   │  CTRL  │ SHIFT  │         │*L SYM *│ L NAV  │
                                   │ ESCAPE │ SPACE  │         │*RETURN*│ BSPACE │
                                   └────────┴────────┘         └────────┴────────┘
+
      */
+
+
+
+    /* Layer WIN
+     *
+     * This left side should be for vim, things like
+     * cycle tabs, split => this is probably not necessary as the are already comfortable on the default layer
+     * Move split to tab (C+W => T)
+     * split horizontal and vertical
+     * close split
+     * maximize split, cycle splits maximized, equalize splits
+     * todo add tmux - toggle panes, windows, sessions
+       ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
+       │  F11   │  F12   │  Gui+  │  Gui+  │        │         │        │  Gui+  │  Gui+  │        │        │
+       │        │        │   C    │   V    │        │         │        │  Tab   │ S(Tab) │        │        │
+       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
+       │  F01   │  F02   │  F03   │  F04   │  F05   │         │        │  Gui+  │  Gui+  │  Gui+  │        │
+       │        │        │        │        │        │         │        │  F13   │  F14   │   R    │        │
+       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
+       │  F06   │  F07   │  F08   │  F09   │  F10   │         │        │  Gui+  │  Gui+  │  Gui+  │*L WIN *│
+       │        │        │        │        │        │         │        │  F15   │  F16   │   Z    │*  /   *│
+       └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
+                                  │        │        │         │  Gui+  │  Gui+  │
+                                  │        │        │         │ RETURN │   F    │
+                                  └────────┴────────┘         └────────┴────────┘
+     */
+
+
+
 
 
     LAYOUT_4x10(
