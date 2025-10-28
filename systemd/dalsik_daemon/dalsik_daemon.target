@@ -3,4 +3,4 @@ BindsTo=dev-dalsik.device
 After=dev-dalsik.device
 
 [Install]
-WantedBy=dev-dalsik.device
+WantedBy=multi-user.target
