@@ -3,4 +3,21 @@ return {
         local project_root = vim.fs.root(bufnr, { ".vimproject", ".git" }) or vim.fn.getcwd()
         on_dir(project_root)
     end,
+    settings = {
+        typescript = {
+            updateImportsOnFileMove = "always",
+            preferences = {
+                importModuleSpecifier = "project-relative"
+            }
+        },
+        javascript = {
+            updateImportsOnFileMove = "always",
+            preferences = {
+                importModuleSpecifier = "non-relative"
+            }
+        },
+        vtsls = {
+            enableMoveToFileCodeAction = true,
+        },
+    }
 }
