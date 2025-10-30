@@ -16,7 +16,9 @@ return {
     },
     config = function()
         require('mason').setup({})
-        require('mason-lspconfig').setup({})
+        require('mason-lspconfig').setup({
+            automatic_enable = false
+        })
 
         local lsp_zero = require('lsp-zero')
 
