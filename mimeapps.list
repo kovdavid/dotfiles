@@ -54,3 +54,4 @@ x-scheme-handler/https=firefox.desktop
 x-scheme-handler/mailto=userapp-Thunderbird-S65IGX.desktop
 application/x-compressed-tar=xarchiver.desktop;
 application/zip=xarchiver.desktop;
+text/calendar=libreoffice-writer.desktop;nvim.desktop;
