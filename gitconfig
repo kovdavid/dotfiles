@@ -83,8 +83,6 @@
     sort = -committerdate
 [init]
     templatedir = ~/.git-templates
-[includeIf "gitdir:~/workspace/techmates/"]
-    path = ~/workspace/techmates/.gitconfig
 [includeIf "gitdir:~/workspace/1990/"]
     path = ~/workspace/1990/.gitconfig
 
