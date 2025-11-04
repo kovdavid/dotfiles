@@ -91,6 +91,7 @@
 #     sshCommand = ssh -i ~/.ssh/some_key -F /dev/null
 
 # To enable signing with SSH key:
+# https://code.mendhak.com/keepassxc-sign-git-commit-with-ssh/
 #
 # [commit]
 #     gpgsign = true
