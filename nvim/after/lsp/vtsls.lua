@@ -7,7 +7,7 @@ return {
         typescript = {
             updateImportsOnFileMove = "always",
             preferences = {
-                importModuleSpecifier = "project-relative"
+                importModuleSpecifier = "non-relative"
             }
         },
         javascript = {
