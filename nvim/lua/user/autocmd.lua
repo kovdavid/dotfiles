@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local javascript_group = vim.api.nvim_create_augroup("javascript", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "javascript" },
+    pattern = { "javascript", "typescript" },
     group = javascript_group,
     callback = function ()
         local opts = { noremap = true, silent = true }
