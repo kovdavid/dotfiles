@@ -21,45 +21,7 @@
 //          <alt>a - s - cycle pane
 //
 
-#define LDEFAULT 0
-#define LNUM 1
-#define LSYM 2
-#define LNAV 3
-#define LWIN 4
-
-#define OSM_SHFT  OSM(MOD_LSHIFT)
-#define OSM_CTRL  OSM(MOD_LCTRL)
-#define OSM_ALT   OSM(MOD_LALT)
-#define OSM_GUI   OSM(MOD_LGUI)
-
-#define CTRL_ESC  DM(MOD_LCTRL, KC_ESCAPE)
-#define SHIFT_SPC DM(MOD_LSHIFT, KC_SPACE)
-#define SHFT_INS  LSHIFT(KC_INS)
-
-#define M_BTN1 MOUSE_BUTTON(BTN1)
-#define M_BTN2 MOUSE_BUTTON(BTN2)
-#define M_BTN3 MOUSE_BUTTON(BTN3)
-#define M_BTN4 MOUSE_BUTTON(BTN4)
-#define M_BTN5 MOUSE_BUTTON(BTN5)
-
-// i3 navigation
-#define GUI_F13  LGUI(KC_F13)
-#define GUI_F14  LGUI(KC_F14)
-#define GUI_F15  LGUI(KC_F15)
-#define GUI_F16  LGUI(KC_F16)
-#define GUI_PGUP LGUI(KC_PGUP)
-#define GUI_PGDN LGUI(KC_PGDN)
-#define GUI_TAB  LGUI(KC_TAB)
-#define GUI_RET  LGUI(KC_ENTER)
-#define GUI_STAB LGUI(LSHIFT(KC_TAB))
-
-#define LNUM_TAB    DL(LNUM, KC_TAB)
-#define LNAV_BSPC   THDL(LNAV, KC_BSPC)
-#define LSYM_SCOLON DSL(LSYM, KC_SEMICOLON)
-#define LWIN_SLASH  DSL(LWIN, KC_SLASH)
-// define LNUM_RET   DSL(LNUM, KC_ENTER)
-#define LNUM_RET    THDL(LNUM, KC_ENTER)
-
+TODO how to do ctrl+tab & ctrl+shift+tab?
 TODO change Z to a dual layer key - it is pressed very infrequently
 
 const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
@@ -131,15 +93,18 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        │   Q    │   W    │   E    │   R    │   T    │         │   Y    │   U    │   I    │   O    │   P    │
        │        │        │        │        │        │         │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │   A    │   S    │   D    │   F    │   G    │         │   H    │   J    │   K    │   L    │ L NAV  │
+       │   A    │   S    │   D    │   F    │   G    │         │   H    │   J    │   K    │   L    │        │
        │        │        │        │        │        │         │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
        │   Z    │   X    │   C    │   V    │   B    │         │   N    │   M    │   ,    │   .    │ L WIN  │
        │        │        │        │        │        │         │        │        │ SFT(:) │ SFT(;) │   /    │
        └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
-                                  │  CTRL  │ SHIFT  │         │ L SYM  │ L NAV  │
+                                  │  CTRL  │ L SYM  │         │ SHIFT  │ L NAV  │
                                   │ ESCAPE │ SPACE  │         │ RETURN │ BSPACE │
                                   └────────┴────────┘         └────────┴────────┘
+
+                                  what is the source of most shift/space typo? Capital letter after a space..
+                                  "asd S" instead I type "asd  s"..sooo separate shift&space??
 
     */
 
@@ -193,19 +158,22 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
      * close split
      * maximize split, cycle splits maximized, equalize splits
      * todo add tmux - toggle panes, windows, sessions
+     *
+                                                                         WIN L    WIN R
        ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
-       │  F11   │  F12   │  Gui+  │  Gui+  │        │         │        │  Gui+  │  Gui+  │        │        │
-       │        │        │   C    │   V    │        │         │        │  Tab   │ S(Tab) │        │        │
+       │  F11   │  F12   │  Gui+  │  Gui+  │        │         │        │        │        │        │        │
+       │        │        │   C    │   V    │        │         │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │  F01   │  F02   │  F03   │  F04   │  F05   │         │        │  Gui+  │  Gui+  │  Gui+  │        │
-       │        │        │        │        │        │         │        │  F13   │  F14   │   R    │        │
+       │  F01   │  F02   │  F03   │  F04   │  F05   │         │  Gui+  │  Gui+  │  Gui+  │  Gui+  │        │
+       │        │        │        │        │        │         │  Tab   │  F13   │  F14   │   R    │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │  F06   │  F07   │  F08   │  F09   │  F10   │         │        │  Gui+  │  Gui+  │  Gui+  │*L WIN *│
-       │        │        │        │        │        │         │        │  F15   │  F16   │   Z    │*  /   *│
+       │  F06   │  F07   │  F08   │  F09   │  F10   │         │  Gui+  │  Gui+  │  Gui+  │  Gui+  │*L WIN *│
+       │        │        │        │        │        │         │ S(Tab) │  F15   │  F16   │   Z    │*  /   *│
        └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
                                   │        │        │         │  Gui+  │  Gui+  │
                                   │        │        │         │ RETURN │   F    │
                                   └────────┴────────┘         └────────┴────────┘
+                                                                Toggle    Zoom
      */
 
 
