@@ -10,7 +10,7 @@ CURR_SESSION_NAME=$(tmux display-message -p "#{session_name}")
 SESSION_HISTORY_FILE=~/.tmux_session_history
 [[ ! -f $SESSION_HISTORY_FILE ]] && touch "$SESSION_HISTORY_FILE"
 
-if [[ -t 0 ]] ; then
+if [[ -t 0 && -z "$SESSION_NAME" ]] ; then
     SELECTION=$(cat $SESSION_HISTORY_FILE | sort | { printf '\n'; cat; } | fzf)
     if [ -n "$SELECTION" ] ; then
         IFS=, read -r SESSION_NAME CD_DIR <<<"$SELECTION"
@@ -28,18 +28,25 @@ if [ -z "$SESSION_NAME" ] ; then
 fi
 
 if [ -z "$CD_DIR" ]; then
-	echo "CD_DIR missing"
-	exit 1
+    SESSION_HISTORY_ENTRY=$(rg "^$SESSION_NAME," "$SESSION_HISTORY_FILE")
+    IFS=, read -r _UNUSED HISTORY_CD_DIR <<<"$SESSION_HISTORY_ENTRY"
+    if [ -n "$HISTORY_CD_DIR" ] ; then
+        CD_DIR=$HISTORY_CD_DIR
+    else
+        echo "CD_DIR missing"
+        exit 1
+    fi
+
 fi
 
 TMUX_CMD="cd $CD_DIR; bash"
 
 if [ -n "$SESSION_NAME" ]; then
-	tmux new-session -d -s "$SESSION_NAME" -n bash "$TMUX_CMD"
-	tmux new-session -d -t "$SESSION_NAME" -s "G|${SESSION_NAME}"
+    tmux new-session -d -s "$SESSION_NAME" -n bash "$TMUX_CMD"
+    tmux new-session -d -t "$SESSION_NAME" -s "G|${SESSION_NAME}"
 else
-	SESSION_NAME=$(tmux new-session -P -d "$TMUX_CMD" | cut -d":" -f1)
-	tmux new-session -d -t "$SESSION_NAME" -s "G|${SESSION_NAME}"
+    SESSION_NAME=$(tmux new-session -P -d "$TMUX_CMD" | cut -d":" -f1)
+    tmux new-session -d -t "$SESSION_NAME" -s "G|${SESSION_NAME}"
 fi
 
 SESSION_HISTORY=$(rg -vP "^$SESSION_NAME," <"$SESSION_HISTORY_FILE")
@@ -50,7 +57,7 @@ tmux set-option -t "$SESSION_NAME" default-command "$TMUX_CMD"
 tmux set-option -t "G|${SESSION_NAME}" default-command "$TMUX_CMD"
 
 if [[ "$CURR_SESSION_NAME" == G\|* ]]; then
-	tmux switch-client -t "G|$SESSION_NAME"
+    tmux switch-client -t "G|$SESSION_NAME"
 else
-	tmux switch-client -t "$SESSION_NAME"
+    tmux switch-client -t "$SESSION_NAME"
 fi
