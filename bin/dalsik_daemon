@@ -116,5 +116,7 @@ if __name__ == "__main__":
         arg = sys.argv[1]
         if arg in ["status", "stop", "start", "restart", "mask", "unmask"]:
             os.system(f"systemctl --user {arg} dalsik_daemon")
+        elif arg == "trigger_udev_event":
+            os.system("sudo udevadm trigger --action=add /sys/class/tty/ttyACM0")
     else:
         run_loop()

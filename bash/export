@@ -32,8 +32,6 @@ else
     fi
 fi
 
-[[ -d "$HOME/.meteor" ]] && export PATH="$HOME/.meteor:$PATH"
-
 export PATH="$HOME/bin:$JAVA_HOME:$PATH"
 [[ -d /opt/javascript/node ]] && export NODE_PATH="/opt/javascript/node"
 [[ -d /opt/javascript/node/bin ]] && export PATH="/opt/javascript/node/bin:$PATH"
@@ -43,6 +41,7 @@ export PATH="$HOME/bin:$JAVA_HOME:$PATH"
 [[ -d ~/.yarn/bin ]] && export PATH="~/.yarn/bin:$PATH"
 [[ -d ~/.local/bin ]] && export PATH="~/.local/bin:$PATH"
 [[ -d /opt/rust/cargo/bin ]] && export PATH="/opt/rust/cargo/bin:$PATH"
+[[ -d /opt/bin ]] && export PATH="/opt/bin:$PATH"
 [[ -n "$(which rustc 2>/dev/null)" && -d "$(rustc --print sysroot)/lib/rustlib/src/rust/src" ]] && \
     export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export RUST_BACKTRACE=0

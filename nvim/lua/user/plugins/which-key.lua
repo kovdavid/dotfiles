@@ -16,6 +16,7 @@ return {
         { "<leader>do", ":DiffviewOpen", desc = "DiffviewOpen", silent = false },
         { "<leader>df", ":DiffviewFileHistory %<CR>", desc = "DiffviewFileHistory", silent=false },
         { "<leader>dc", ":DiffviewClose<CR>", desc = "DiffviewClose" },
+        { "<leader>dt", ":DiffviewToggleFiles<CR>", desc = "DiffviewToggleFiles" },
 
         { "<leader>hn", function() require("gitsigns").next_hunk() end, desc = "next hunk" },
         { "<leader>hp", function() require("gitsigns").prev_hunk() end, desc = "prev hunk" },
@@ -53,7 +54,6 @@ return {
             end, desc = "AddMissingImports" },
 
         { "<leader>tr", function() require('telescope.builtin').resume() end, desc = "Telescope resume" },
-        { "<leader>tb", function() require('telescope').extensions.before.before() end, desc = "Telescope before" } ,
         { "<leader>tf", function() require('telescope.builtin').buffers({ cwd_only = true, ignore_current_buffer = true, sort_lastused = true }) end, desc = "Telescope buffers" },
         { "<leader>td", function() require('telescope.builtin').find_files({ cwd = vim.fn.expand("%:p:h") }) end, desc = "Telescope directory" },
         { "<leader>tgl", function() require('telescope.builtin').live_grep() end, desc = "Live grep" },
