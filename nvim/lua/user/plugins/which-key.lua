@@ -13,10 +13,6 @@ return {
         { "<leader>dw", ":windo set diffopt+=iwhiteall<CR>", desc = "diff +iwhite" },
         { "<leader>du", ":windo diffupdate<CR>", desc = "diff update" },
         { "<leader>db", ":windo set scrollbind!<CR>", desc = "diff scrollbind!" },
-        { "<leader>do", ":DiffviewOpen", desc = "DiffviewOpen", silent = false },
-        { "<leader>df", ":DiffviewFileHistory %<CR>", desc = "DiffviewFileHistory", silent=false },
-        { "<leader>dc", ":DiffviewClose<CR>", desc = "DiffviewClose" },
-        { "<leader>dt", ":DiffviewToggleFiles<CR>", desc = "DiffviewToggleFiles" },
 
         { "<leader>hn", function() require("gitsigns").next_hunk() end, desc = "next hunk" },
         { "<leader>hp", function() require("gitsigns").prev_hunk() end, desc = "prev hunk" },
