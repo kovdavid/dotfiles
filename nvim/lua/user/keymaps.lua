@@ -98,6 +98,7 @@ keymap("n", ";", ":", { noremap = true })
 keymap("n", "<leader>w", ":w<CR>", opts)                        -- write file
 
 -- keymap("n", "qw", "<C-W><C-W>", opts)                           -- go to next split
+keymap("n", "qw", "<Nop>", opts)                           -- go to next split
 keymap("n", "qW", "<C-W><C-W>:setlocal winwidth=121<CR>", opts) -- go to next split and make it at 121 wide
 keymap("n", "QW", "<C-W><C-W>:setlocal winwidth=121<CR>", opts)
 keymap("n", "qe", ":tabprev<CR>", opts)
