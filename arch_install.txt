@@ -259,3 +259,13 @@ Hidden=true
 Emoji in fonts
 yay -S ttf-twemoji
 # then make the symlink into /etc/fonts/conf.d it wants
+
+# Decrypt luks via USB
+https://gabmus.org/posts/full-disc-encryption-with-usb-unlock/
+
+- mkfs.vfat -F 32 -n ENC /dev/sdX1
+- create key dd if=/dev/urandom of=/mnt/key.lek bs=4096 count=1
+- cryptsetup luksAddKey /dev/sdx2 /mnt/key.lek
+- add 'vfat' to MODULES in /etc/mkinitcpio.conf
+- regenerate initramfs 'mkinitcpio -P'
+- add 'cryptkey=UUID=*PARTITION-UUID*:vfat:/key.lek' to /boot/loader/entries/* . Also add 'rootdelay=3' so that there is no 10 second delay without key
