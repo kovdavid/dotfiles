@@ -1,91 +1,34 @@
 #include "keymap.hpp"
 #include "combo.hpp"
 
-// New experimental keymap. Inspiration from:
-// https://github.com/aleksbrgt/qmk_firmware/blob/corne_combos/keyboards/crkbd/keymaps/5col/keymap.c
+TODO:
+Del
+Tab
 
-// TODO:
-//     =>
-//     <> on the same layer as modifiers
-//     127.0.0.1
-//     25-09 12:00
-//     in vim:
-//          qw - switch split
-//          qe - switch tab
-//     in tmux:
-//          <prefix>c - new window
-//          <prefix>s - new pane below
-//          <prefix>v - new pane right
-//          <alt>1 - 2 - cycle session
-//          <alt>q - w - cycle window
-//          <alt>a - s - cycle pane
-//
-
-TODO how to do ctrl+tab & ctrl+shift+tab?
-TODO change Z to a dual layer key - it is pressed very infrequently
+│  Gui+  │  Gui+  │  Gui+  │  Gui+  │
+│  F01   │  F02   │  F03   │  F04   │
+├────────┼────────┼────────┼────────┼
+│  Gui+  │  Gui+  │  Gui+  │  Gui+  │
+│   1    │   2    │   3    │   4    │
 
 const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
-
-    /*
-       Layer DEFAULT
+    /* Combos
+           0        1        2        3        4                  5        6        7        8        9
        ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
-       │   Q    │   W    │   E    │   R    │   T    │         │   Y    │   U    │   I    │   O    │   P    │
-       │        │        │        │        │        │         │        │        │        │        │        │
+     0 │        │       Tab       │        │        │         │        │      CTRL     CTRL       │        │
+       │        │        │        │        │        │         │        │        A        W        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │   A    │   S    │   D    │   F    │   G    │         │   H    │   J    │   K    │   L    │ L NAV  │
+     1 │        │        │        │        │        │         │        │        │        │        │        │
        │        │        │        │        │        │         │        │        │        │        │        │
-       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │   Z    │   X    │   C    │   V    │   B    │         │   N    │   M    │   ,    │   .    │ L WIN  │
-       │  MUX   │        │        │        │        │         │        │        │ SFT(:) │ SFT(;) │   /    │
+       ├────────┼─ GUI  ─┼─ SHFT ─┼────────┼────────┤         ├────────┼────────┼─ CTRL ─┼─ ALT  ─┼────────┤
+     2 │        │        │        │        │        │         │        │        │        │        │        │
+       │        │        │        │        │        │         │        │        │        │        │        │
        └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
-                                  │  CTRL  │ SHIFT  │         │ L SYM  │ L NAV  │
-                                  │ ESCAPE │ SPACE  │         │ RETURN │ BSPACE │
+     3                            │        │        │         │        │        │
+                                  │        │        │         │        │        │
                                   └────────┴────────┘         └────────┴────────┘
 
-       Layer MUX
-
-            CTRL+A -> tmux prefix
-                alt+a/s - cycle panes
-                alt+q/w - cycle windows
-                alt+1/2 - cycle sessions
-
-       ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
-       │        │        │        │        │        │         │        │  Alt   │  Alt   │        │        │
-       │        │        │        │        │        │         │        │   A    │   S    │        │        │
-       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │        │        │        │        │        │         │        │  Alt   │  Alt   │        │        │
-       │        │        │        │        │        │         │        │   Q    │   W    │        │        │
-       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │*  Z   *│        │        │        │        │         │        │  Alt   │  Alt   │        │        │
-       │* MUX  *│        │        │        │        │         │        │   1    │   2    │        │        │
-       └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
-                                  │  CTRL  │ SHIFT  │         │ CTRL+A │ CTRL+A │
-                                  │ ESCAPE │ SPACE  │         │ RETURN │ BSPACE │
-                                  └────────┴────────┘         └────────┴────────┘
     */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     /* Layer DEFAULT
@@ -97,78 +40,55 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        │        │        │        │        │        │         │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
        │   Z    │   X    │   C    │   V    │   B    │         │   N    │   M    │   ,    │   .    │ L WIN  │
-       │        │        │        │        │        │         │        │        │        │        │   /    │
+       │ L MUX  │        │        │        │        │         │        │        │        │        │   /    │
        └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
-                                  │  CTRL  │ L SYM  │         │ SHIFT  │ L NAV  │
+                                  │  CTRL  │ L NAV  │         │ SHIFT  │ L SYM  │
                                   │ ESCAPE │ SPACE  │         │ RETURN │ BSPACE │
                                   └────────┴────────┘         └────────┴────────┘
-
-                                  what is the source of most shift/space typo? Capital letter after a space..
-                                  "asd S" instead I type "asd  s"..sooo separate shift&space??
-
     */
-
 
     /* Layer SYM
        ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
-       │   !    │   @    │   #    │   $    │   ~    │         │        │   [    │   "    │   ]    │        │
+       │   !    │   @    │   #    │   $    │   ~    │         │        │   [    │   "    │   ]    │   >    │
        │        │        │        │        │        │         │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │   %    │   ^    │   &    │   *    │   `    │         │        │   (    │   _    │   )    │   >    │
+       │   %    │   ^    │   &    │   *    │   `    │         │        │   (    │   _    │   )    │   <    │
        │        │        │        │        │        │         │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │   \    │   |    │   =    │   -    │   +    │         │        │   {    │   '    │   }    │   <    │
+       │   |    │   +    │   =    │   -    │   \    │         │        │   {    │   '    │   }    │   /    │
        │        │        │        │        │        │         │        │        │        │        │        │
        └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
-                                  │  CTRL  │ SHIFT  │         │*L SYM *│ L NAV  │
-                                  │ ESCAPE │ SPACE  │         │*RETURN*│ BSPACE │
+                                  │  CTRL  │ L NAV  │         │ SHIFT  │*L SYM *│
+                                  │ ESCAPE │ SPACE  │         │ RETURN │*BSPACE*│
                                   └────────┴────────┘         └────────┴────────┘
-
-     */
+    */
 
     /* Layer NAV
        ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
-       │   :    │   .    │   =    │   -    │   +    │         │        │  PgUp  │   Up   │  PgDn  │        │
+       │        │  PgDn  │   Up   │  PgUp  │        │         │   +    │   7    │   8    │   9    │   :    │
        │        │        │        │        │        │         │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │   1    │   2    │   3    │   4    │   5    │         │        │  Left  │  Down  │ Right  │        │
+       │ C(Tab) │  Left  │  Down  │ Right  │        │         │   -    │   4    │   5    │   6    │   0    │
        │        │        │        │        │        │         │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │   6    │   7    │   8    │   9    │   0    │         │        │  Home  │ Insert │  End   │        │
+       │ CS Tab │  Home  │ Insert │  End   │        │         │   =    │   1    │   2    │   3    │   .    │
        │        │        │        │        │        │         │        │        │        │        │        │
        └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
-                                  │  CTRL  │ L SYM  │         │ SHIFT  │*L NAV *│
-                                  │ ESCAPE │ SPACE  │         │ RETURN │*BSPACE*│
+                                  │  CTRL  │*L NAV *│         │ SHIFT  │ L SYM  │
+                                  │ ESCAPE │*SPACE *│         │ RETURN │ BSPACE │
                                   └────────┴────────┘         └────────┴────────┘
-
-                                            TODO shift to the right
-                                                 and lsym return to the left, so that I have a layer key on the left hand as well
-
-
-     */
-
-
+    */
 
     /* Layer WIN
-     *
-     * This left side should be for vim, things like
-     * cycle tabs, split => this is probably not necessary as the are already comfortable on the default layer
-     * Move split to tab (C+W => T)
-     * split horizontal and vertical
-     * close split
-     * maximize split, cycle splits maximized, equalize splits
-     * todo add tmux - toggle panes, windows, sessions
-     *
-                                                                         WIN L    WIN R
        ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
-       │  F11   │  F12   │  Gui+  │  Gui+  │        │         │        │        │        │        │        │
-       │        │        │   C    │   V    │        │         │        │        │        │        │        │
+       │  F01   │  F02   │  F03   │  F04   │ Shift+ │         │        │        │        │        │        │
+       │        │        │        │        │ Insert │         │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │  F01   │  F02   │  F03   │  F04   │  F05   │         │  Gui+  │  Gui+  │  Gui+  │  Gui+  │        │
-       │        │        │        │        │        │         │  Tab   │  F13   │  F14   │   R    │        │
+       │  F05   │  F06   │  F07   │  F08   │  Gui+  │         │  Gui+  │  Gui+  │  Gui+  │  Gui+  │        │
+       │        │        │        │        │   C    │         │  Tab   │  F13   │  F14   │   R    │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │  F06   │  F07   │  F08   │  F09   │  F10   │         │  Gui+  │  Gui+  │  Gui+  │  Gui+  │*L WIN *│
-       │        │        │        │        │        │         │ S(Tab) │  F15   │  F16   │   Z    │*  /   *│
+       │  F09   │  F10   │  F11   │  F12   │  Gui+  │         │  Gui+  │  Gui+  │  Gui+  │  Gui+  │*L WIN *│
+       │        │        │        │        │   V    │         │ S(Tab) │  F15   │  F16   │   Z    │*  /   *│
        └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
                                   │        │        │         │  Gui+  │  Gui+  │
                                   │        │        │         │ RETURN │   F    │
@@ -177,8 +97,26 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
      */
 
 
+    /*
+       Layer MUX
+                alt+a/s - cycle panes
+                alt+q/w - cycle windows
+                alt+1/2 - cycle sessions
 
-
+       ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
+       │        │        │        │        │        │         │        │  Alt   │  Alt   │        │ Screen │
+       │        │        │        │        │        │         │        │   A    │   S    │        │ Saver  │
+       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
+       │        │        │        │        │        │         │        │  Alt   │  Alt   │        │        │
+       │        │        │        │        │        │         │        │   Q    │   W    │        │        │
+       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
+       │*  Z   *│ VolUp  │ VolDn  │ VolMut │        │         │        │  Alt   │  Alt   │        │        │
+       │* MUX  *│        │        │        │        │         │        │   1    │   2    │        │        │
+       └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
+                                  │  CTRL  │ L NAV  │         │ SHIFT  │ L SYM  │
+                                  │ ESCAPE │ SPACE  │         │ RETURN │ BSPACE │
+                                  └────────┴────────┘         └────────┴────────┘
+    */
 
     LAYOUT_4x10(
         KC_Q,      KC_W,      KC_E,     KC_R,      KC_T,      KC_Y,      KC_U,       KC_I,     KC_O,     KC_P,
