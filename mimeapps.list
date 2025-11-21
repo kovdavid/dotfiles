@@ -59,3 +59,4 @@ x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 x-scheme-handler/mailto=userapp-Thunderbird-S65IGX.desktop
 video/vnd.avi=smplayer.desktop;smplayer_enqueue.desktop;
+audio/flac=smplayer.desktop;

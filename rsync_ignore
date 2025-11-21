@@ -21,7 +21,9 @@
 /swapfile
 
 # home
+/home/davs/Music
 /home/davs/Downloads
+/home/davs/Documents
 /home/davs/dotfiles/vim/plugged
 /home/davs/.cache
 /home/davs/.arduino15
