@@ -19,6 +19,8 @@ cd $DIR
 touch .envrc
 ENVRC=$(cat .envrc)
 
+source .envrc
+
 sudo find . -type f -mmin +1440 -delete
 
 if [[ $(uname -a) == Darwin* ]] ; then
