@@ -28,6 +28,9 @@ x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 x-scheme-handler/mailto=userapp-Thunderbird-S65IGX.desktop
 video/vnd.avi=smplayer.desktop
+x-scheme-handler/ditec-dlauncher2=/home/davs/.ditec/dlauncher2/sk.ditec.dlauncher2.desktop
+x-scheme-handler/ditec-dlauncher2s=/home/davs/.ditec/dlauncher2/sk.ditec.dlauncher2.desktop
+x-scheme-handler/ditec-dlauncher2f=/home/davs/.ditec/dlauncher2/sk.ditec.dlauncher2.desktop
 
 [Added Associations]
 application/pdf=org.pwmt.zathura-pdf-poppler.desktop;firefox.desktop;zathura.desktop;
