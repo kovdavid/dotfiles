@@ -31,9 +31,9 @@ if [ "$ROFI_INFO" = "" ] ; then
     menu_item "main" "rquickshare" "rquickshare"
     menu_item "main" "gimp" "gimp"
     menu_item "main" "smplayer" "smplayer"
+    menu_item "main" "qbittorrent" "qbittorrent"
     menu_item "main" "libreoffice" "libreoffice-base"
-    menu_item "main" "keyboard repeat" "input-keyboard"
-    menu_item "main" "touchpad" "input-touchpad"
+    menu_item "main" "keyboard" "input-keyboard"
 elif [ "$ROFI_INFO" = "main" ] ; then
     if [ "$ACTION" = "thunar" ] ; then
         run_cmd "thunar"
@@ -49,11 +49,13 @@ elif [ "$ROFI_INFO" = "main" ] ; then
         run_cmd "gimp"
     elif [ "$ACTION" = "smplayer" ] ; then
         run_cmd "smplayer"
+    elif [ "$ACTION" = "qbittorrent" ] ; then
+        run_cmd "qbittorrent"
     elif [ "$ACTION" = "libreoffice" ] ; then
         run_cmd "libreoffice"
-    elif [ "$ACTION" = "keyboard repeat" ] ; then
+    elif [ "$ACTION" = "keyboard" ] ; then
         run_cmd "keyboard_repeat"
-    elif [ "$ACTION" = "touchpad" ] ; then
         run_cmd "init_touchpad"
+        run_cmd "dalsik_daemon restart"
     fi
 fi

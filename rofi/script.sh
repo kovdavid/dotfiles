@@ -210,9 +210,19 @@ elif [ "$ROFI_INFO" = "main performance" ] ; then
     elif [ "$ACTION" = "ryzenadj 75" ] ; then
         run_cmd "$RYZEN75"
     elif [ "$ACTION" = "battery-saver" ] ; then
-        run_cmd "boost off; cpu_powersave; fan quiet; $RYZEN65; keyboard_repeat; init_touchpad"
+        run_cmd "boost off"
+        run_cmd "cpu_powersave"
+        run_cmd "$RYZEN65"
+        run_cmd "keyboard_repeat"
+        run_cmd "init_touchpad"
+        run_cmd "dalsik_daemon restart"
     elif [ "$ACTION" = "normal" ] ; then
-        run_cmd "boost on; cpu_schedutil; fan cool; $RYZEN65; keyboard_repeat; init_touchpad"
+        run_cmd "boost on"
+        run_cmd "cpu_schedutilowersave"
+        run_cmd "$RYZEN65"
+        run_cmd "keyboard_repeat"
+        run_cmd "init_touchpad"
+        run_cmd "dalsik_daemon restart"
     fi
 
     draw_performance_menu
