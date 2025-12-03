@@ -5,7 +5,7 @@
     ap          = add --patch
     st          = -c color.status=false status
     ci          = commit
-    ciamend     = commit --amend
+    ciamend     = commit --amend -n
     cp          = cherry-pick
     br          = branch
     co          = checkout
