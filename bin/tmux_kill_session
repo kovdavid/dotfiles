@@ -1,0 +1,12 @@
+#!/bin/bash
+
+exec > >(tee -a /tmp/$(basename $0)) 2>&1
+
+SESSION=$(tmux display-message -p '#S')
+
+SESSION="${SESSION##G|}"
+
+echo "Killing $SESSION"
+
+tmux kill-session -t "$SESSION"   2>/dev/null
+tmux kill-session -t "G|$SESSION" 2>/dev/null
