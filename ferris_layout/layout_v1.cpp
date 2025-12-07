@@ -4,13 +4,13 @@
 #define LDEFAULT 0
 #define LSYM 1
 #define LNAV 2
+#define LWIN 3
 
-#define LNUM 1
-
-#define CTRL_ESC   DM(MOD_LCTRL, KC_ESCAPE)
-#define LNAV_SPC   THDL(LNAV, KC_SPACE)
-#define SHFT_ENT   DM(MOD_LSHIFT, KC_ENTER)
-#define LSYM_BSPC  THDL(LSYM, KC_BSPC)
+#define CTRL_ESC    DM(MOD_LCTRL, KC_ESCAPE)
+#define LNAV_SPC    THDL(LNAV, KC_SPACE)
+#define SHFT_ENT    DM(MOD_LSHIFT, KC_ENTER)
+#define LSYM_BSPC   THDL(LSYM, KC_BSPC)
+#define LWIN_SLASH  DSL(LWIN, KC_SLASH)
 
 #define CTAB LCTRL(KC_TAB)
 #define CSTAB LCTRL(KC_TAB) | MOD_LSHIFT
@@ -80,7 +80,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
     LAYOUT_4x10(
         KC_Q,      KC_W,      KC_E,     KC_R,      KC_T,            KC_Y,      KC_U,       KC_I,     KC_O,     KC_P,
         KC_A,      KC_S,      KC_D,     KC_F,      KC_G,            KC_H,      KC_J,       KC_K,     KC_L,     KC_SEMICOLON,
-        KC_Z,      KC_X,      KC_C,     KC_V,      KC_B,            KC_N,      KC_M,       KC_COMM,  KC_DOT,   KC_SLASH,
+        KC_Z,      KC_X,      KC_C,     KC_V,      KC_B,            KC_N,      KC_M,       KC_COMM,  KC_DOT,   LWIN_SLASH,
         XXXXXXX,   XXXXXXX,   XXXXXXX,  CTRL_ESC,  LNAV_SPC,        SHFT_ENT,  LSYM_BSPC,  XXXXXXX,  XXXXXXX,  XXXXXXX
     ),
 
@@ -130,6 +130,27 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
         XXXXXXX,  XXXXXXX,  XXXXXXX,  CTRL_ESC,  LNAV_SPC,          SHFT_ENT,  LSYM_BSPC,  XXXXXXX,  XXXXXXX,   XXXXXXX
     ),
 
+
+    /*
+       Layer WIN
+
+       ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
+       │ Shift+ │  Gui+  │  Gui+  │  Gui+  │  Gui+  │         │        │        │        │        │        │
+       │ Insert │   C    │   V    │   R    │   F    │         │        │        │        │        │        │
+       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
+       │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │         │        │        │        │        │        │
+       │   1    │   2    │   3    │   4    │  Ret   │         │        │        │        │        │        │
+       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
+       │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │         │        │        │        │        │*L WIN *│
+       │  F1    │  F2    │  F3    │  F4    │  Tab   │         │        │        │        │        │*  /   *│
+       └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
+                                  │  Gui+  │ SHIFT  │         │        │        │
+                                  │   Z    │        │         │        │        │
+                                  └────────┴────────┘         └────────┴────────┘
+    */
+
+    TODO rework from here
+
     /* Layer WIN
        ┌────────┬────────┬────────┬────────┬────────┐               ┌────────┬────────┬────────┬────────┬────────┐
        │  F01   │  F02   │  F03   │  F04   │ Shift+ │               │        │        │        │        │        │
@@ -166,24 +187,6 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
                                   │  CTRL  │ L NAV  │         │ SHIFT  │ L SYM  │
                                   │ ESCAPE │ SPACE  │         │ RETURN │ BSPACE │
-                                  └────────┴────────┘         └────────┴────────┘
-    */
-
-    /*
-       Layer WM
-
-       ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
-       │        │  Gui+  │  Gui+  │  Gui+  │  Gui+  │         │        │        │        │        │        │
-       │        │   C    │   V    │   R    │   F    │         │        │        │        │        │        │
-       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │         │        │*      *│        │        │        │
-       │   1    │   2    │   3    │   4    │  Ret   │         │        │*      *│        │        │        │
-       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │         │        │        │        │        │        │
-       │  F1    │  F2    │  F3    │  F4    │  Tab   │         │        │        │        │        │        │
-       └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
-                                  │  Gui+  │ SHIFT  │         │*      *│        │
-                                  │   Z    │        │         │*      *│        │
                                   └────────┴────────┘         └────────┴────────┘
     */
 
