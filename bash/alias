@@ -48,6 +48,7 @@ alias goon='git rebase --continue'
 alias grep='grep --exclude-dir=.git'
 alias gst='git status'
 alias gl='git lod .'
+alias gtastic='git -c diff.external=difft diff -w'
 alias la="ls -lha"
 alias less="less -R"
 alias ll="ls -lh"
