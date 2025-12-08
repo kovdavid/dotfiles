@@ -1,0 +1,11 @@
+CompileFlags:
+  CompilationDatabase: "build"
+  Add:
+    - "-I/home/davs/workspace/arm/drk/src"
+    - "-I/usr/arm-none-eabi/include/c++/14.2.0"
+    - "-I/usr/arm-none-eabi/include/c++/14.2.0/arm-none-eabi"
+    - "-I/usr/arm-none-eabi/include/c++/14.2.0/backward"
+    - "-I/usr/lib/gcc/arm-none-eabi/14.2.0/include"
+    - "-I/usr/lib/gcc/arm-none-eabi/14.2.0/include-fixed"
+    - "-I/usr/arm-none-eabi/include"
+    - "--target=arm-none-eabi"
