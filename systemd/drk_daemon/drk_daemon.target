@@ -1,0 +1,6 @@
+[Unit]
+BindsTo=dev-drk.device
+After=dev-drk.device
+
+[Install]
+WantedBy=multi-user.target

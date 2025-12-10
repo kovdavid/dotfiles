@@ -22,11 +22,11 @@ const KeyCoords combo1[] = { { 0, 1 }, { 0, 2 } }; // Tab
 const KeyCoords combo2[] = { { 0, 6 }, { 0, 7 } }; // CTRL+A
 const KeyCoords combo3[] = { { 0, 7 }, { 0, 8 } }; // CTRL+W
 
-const KeyCoords combo4[] = { { 1, 1 }, { 1, 2 } }; // LEFT MODS: GUI
+const KeyCoords combo4[] = { { 1, 1 }, { 2, 1 } }; // LEFT MODS: GUI
 const KeyCoords combo5[] = { { 1, 2 }, { 2, 2 } }; // LEFT MODS: CTRL
 const KeyCoords combo6[] = { { 1, 3 }, { 2, 3 } }; // LEFT MODS: SHFT
 
-const KeyCoords combo7[] = { { 1, 6 }, { 1, 6 } }; // RIGHT MODS: SHFT
+const KeyCoords combo7[] = { { 1, 6 }, { 2, 6 } }; // RIGHT MODS: SHFT
 const KeyCoords combo8[] = { { 1, 7 }, { 2, 7 } }; // RIGHT MODS: CTRL
 const KeyCoords combo9[] = { { 1, 8 }, { 2, 8 } }; // RIGHT MODS: ALT
 

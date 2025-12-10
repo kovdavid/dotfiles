@@ -55,6 +55,12 @@ systemctl enable --user dalsik_daemon.target
 ln -sf ~/dotfiles/systemd/dalsik_daemon/dalsik_daemon.service ~/.config/systemd/user
 systemctl enable --user dalsik_daemon.service
 
+ln -sf ~/dotfiles/systemd/drk_daemon/drk_daemon.target ~/.config/systemd/user
+systemctl enable --user drk_daemon.target
+
+ln -sf ~/dotfiles/systemd/drk_daemon/drk_daemon.service ~/.config/systemd/user
+systemctl enable --user drk_daemon.service
+
 ln -sf ~/dotfiles/systemd/xset/xset_repeat.service ~/.config/systemd/user
 systemctl enable --user xset_repeat.service
 

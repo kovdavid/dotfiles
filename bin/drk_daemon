@@ -12,7 +12,7 @@ from collections import defaultdict
 
 layer_change_re: re.Pattern[str] = re.compile(r"L:(\d+)")
 caps_word_change_re: re.Pattern[str] = re.compile(r"CW:(\d+)")
-modifier_change_re: re.Pattern[str] = re.compile(r"M:(.+)")
+modifier_change_re: re.Pattern[str] = re.compile(r"M:(\d+)")
 
 current_layer: Literal['0', '1'] = "0"
 caps_word: Literal['0', '1'] = "0"
@@ -40,39 +40,54 @@ def loop() -> NoReturn:
 
     interface = hid.Device(path=raw_hid_interfaces[0]['path'])
 
+    buffer = ""
+
     while True:
         now: datetime = datetime.now()
 
-        line: str = interface.read(report_length).decode("ascii").rstrip()
-        print(f"{now} Received {line}")
+        chunk: str = interface.read(report_length).decode("ascii").rstrip('\x00')
+        data_without_report_id = chunk[1:]
+        print(f"{now} Received {data_without_report_id}")
 
-        layer_change_match = layer_change_re.match(line)
-        if layer_change_match:
-            globals()["current_layer"] = layer_change_match.group(1)
-            dump_state()
+        buffer += data_without_report_id
 
-            continue
+        while True:
+            idx = buffer.find("\n")
+            if idx < 0:
+                break
 
-        caps_word_change_match = caps_word_change_re.match(line)
-        if caps_word_change_match:
-            globals()["caps_word"] = caps_word_change_match.group(1)
-            dump_state()
+            line = buffer[:idx]
+            buffer = buffer[idx+1:] or ""
 
-            continue
+            print(f"{now} Line {line}")
 
-        modifier_change_match = modifier_change_re.match(line)
-        if modifier_change_match:
-            modifiers_str: str = modifier_change_match.group(1)
-            modifiers_bitmask: int = int(modifiers_str, 16)
+            layer_change_match = layer_change_re.match(line)
+            if layer_change_match:
+                globals()["current_layer"] = layer_change_match.group(1)
+                dump_state()
 
-            modifiers["CTRL"] = extract_modifier(modifiers_bitmask, 0)
-            modifiers["SHIFT"] = extract_modifier(modifiers_bitmask, 1)
-            modifiers["ALT"] = extract_modifier(modifiers_bitmask, 2)
-            modifiers["GUI"] = extract_modifier(modifiers_bitmask, 3)
+                continue
 
-            dump_state()
+            caps_word_change_match = caps_word_change_re.match(line)
+            if caps_word_change_match:
+                globals()["caps_word"] = caps_word_change_match.group(1)
+                dump_state()
 
-            continue
+                continue
+
+            modifier_change_match = modifier_change_re.match(line)
+            if modifier_change_match:
+                modifiers_str: str = modifier_change_match.group(1)
+                modifiers_bitmask: int = int(modifiers_str, 16)
+
+                modifiers["CTRL"] = extract_modifier(modifiers_bitmask, 0)
+                modifiers["SHIFT"] = extract_modifier(modifiers_bitmask, 1)
+                modifiers["ALT"] = extract_modifier(modifiers_bitmask, 2)
+                modifiers["GUI"] = extract_modifier(modifiers_bitmask, 3)
+
+                dump_state()
+
+                continue
 
 
 def extract_modifier(modifiers, shift) -> Literal['1', '0']:
@@ -119,6 +134,6 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         arg = sys.argv[1]
         if arg in ["status", "stop", "start", "restart", "mask", "unmask"]:
-            os.system(f"systemctl --user {arg} dalsik_daemon")
+            os.system(f"systemctl --user {arg} drk_daemon")
     else:
         run_loop()
