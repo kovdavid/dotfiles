@@ -111,7 +111,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
         KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_TILD,                XXX,     KC_LBRC,  KC_DQUO,  KC_RBRC,   KC_RABK,
         KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_GRV,                 XXX,     KC_LPRN,  KC_UNDS,  KC_RPRN,   KC_LABK,
         KC_PIPE, KC_PLUS, KC_EQL,  KC_MINS, KC_BSLS,                XXX,     KC_LCBR,  KC_QUOT,  KC_RCBR,   KC_SLASH,
-        XXX,     XXX,     XXX,     _______, _______,                _______, _______,  XXX,      XXX,       XXX
+        XXX,     XXX,     XXX,     ___,     ___,                    ___,     ___,      XXX,      XXX,       XXX
     ),
 
     /***** Layer NAV
@@ -134,32 +134,32 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
         XXX,    KC_PGDN, KC_UP,   KC_PGUP,  XXX,                    KC_PLUS, KC_7,    KC_8,    KC_9,    KC_COLON,
         CTAB,   KC_LEFT, KC_DOWN, KC_RIGHT, XXX,                    KC_MINS, KC_4,    KC_5,    KC_6,    KC_0,
         CSTAB,  KC_END,  KC_INS,  KC_HOME,  XXX,                    KC_EQL,  KC_1,    KC_2,    KC_3,    KC_DOT,
-        XXX,    XXX,     XXX,     _______,  _______,                _______, _______, XXX,     XXX,     XXX
+        XXX,    XXX,     XXX,     ___,      ___,                    ___,     ___,     XXX,     XXX,     XXX
     ),
 
 
     /***** Layer WIN
 
-       ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
-       │ Shift+ │  Gui+  │  Gui+  │  Gui+  │        │         │        │        │        │        │        │
-       │ Insert │   C    │   V    │   R    │        │         │        │        │        │        │        │
-       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │         │        │        │        │        │        │
-       │   1    │   2    │   3    │   4    │ RETURN │         │        │        │        │        │        │
-       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │         │        │        │        │ SHIFT  │*L WIN *│
-       │  F1    │  F2    │  F3    │  F4    │  Tab   │         │        │        │        │        │*  /   *│
-       └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
-                                  │  Gui+  │  Gui+  │         │ SHIFT  │ L SYM  │
-                                  │   Z    │   F    │         │ RETURN │ BSPACE │
-                                  └────────┴────────┘         └────────┴────────┘
+       ┌────────┬────────┬────────┬────────┬────────┐                 ┌────────┬────────┬────────┬────────┬────────┐
+       │ Shift+ │  Gui+  │  Gui+  │  Gui+  │        │                 │        │        │        │        │        │
+       │ Insert │   C    │   V    │   R    │        │                 │        │        │        │        │        │
+       ├────────┼────────┼────────┼────────┼────────┤                 ├────────┼────────┼────────┼────────┼────────┤
+       │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │                 │        │        │        │        │        │
+       │   1    │   2    │   3    │   4    │ RETURN │                 │        │        │        │        │        │
+       ├────────┼────────┼────────┼────────┼────────┤                 ├────────┼────────┼────────┼────────┼────────┤
+       │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │                 │        │        │        │ SHIFT  │*L WIN *│
+       │  F1    │  F2    │  F3    │  F4    │  Tab   │                 │        │        │        │        │*  /   *│
+       └────────┴────────┴────────┼────────┼────────┤                 ├────────┼────────┼────────┴────────┴────────┘
+                                  │  Gui+  │  Gui+  │                 │ SHIFT  │ L SYM  │
+                                  │   Z    │   F    │                 │ RETURN │ BSPACE │
+                                  └────────┴────────┘                 └────────┴────────┘
     *****/
 
     LAYOUT_4x10(
         XXX,   LGUI(KC_C),  LGUI(KC_V),  LGUI(KC_R), XXX,              XXX,     XXX,     XXX,  XXX,        XXX,
         CTAB,  LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4), LGUI(KC_RETURN),  XXX,     XXX,     XXX,  XXX,        XXX,
-        CSTAB, LGUI(KC_F2), LGUI(KC_F3), LGUI(KC_F4),LGUI(KC_TAB),     XXX,     XXX,     XXX,  MOD_LSHIFT, _______,
-        XXX,   XXX,         XXX,         LGUI(KC_Z), LGUI(KC_F),       _______, _______, XXX,  XXX,        XXX
+        CSTAB, LGUI(KC_F2), LGUI(KC_F3), LGUI(KC_F4),LGUI(KC_TAB),     XXX,     XXX,     XXX,  MOD_LSHIFT, ___,
+        XXX,   XXX,         XXX,         LGUI(KC_Z), LGUI(KC_F),       ___,     ___,     XXX,  XXX,        XXX
     ),
 
     /*
@@ -186,30 +186,30 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
     LAYOUT_4x10(
         XXX,     XXX,      XXX,      XXX,     XXX,            XXX,     LALT(KC_A), LALT(KC_S), XXX, XXX,
         XXX,     XXX,      XXX,      XXX,     XXX,            XXX,     LALT(KC_Q), LALT(KC_W), XXX, XXX,
-        _______, KC_VOLUP, KC_VOLDN, KC_MUTE, KC_SCR_SVR,     XXX,     LALT(KC_1), LALT(KC_2), XXX, XXX,
-        XXX,     XXX,      XXX,      _______, _______,        _______,  _______,   XXX,        XXX, XXX
+        ___,     KC_VOLUP, KC_VOLDN, KC_MUTE, KC_SCR_SVR,     XXX,     LALT(KC_1), LALT(KC_2), XXX, XXX,
+        XXX,     XXX,      XXX,      ___,     ___,            ___,      ___,       XXX,        XXX, XXX
     ),
 
     /***** Layer Fun
-       ┌────────┬────────┬────────┬────────┬────────┐               ┌────────┬────────┬────────┬────────┬────────┐
-       │  F01   │  F02   │  F03   │  F04   │        │               │        │        │        │        │        │
-       │        │        │        │        │        │               │        │        │        │        │        │
-       ├────────┼────────┼────────┼────────┼────────┤               ├────────┼────────┼────────┼────────┼────────┤
-       │  F05   │  F06   │  F07   │  F08   │        │               │        │*      *│        │        │        │
-       │        │        │        │        │        │               │        │*      *│        │        │        │
-       ├────────┼────────┼────────┼────────┼────────┤               ├────────┼────────┼────────┼────────┼────────┤
-       │  F09   │  F10   │  F11   │  F12   │        │               │        │        │        │        │        │
-       │        │        │        │        │        │               │        │        │        │        │        │
-       └────────┴────────┴────────┼────────┼────────┤               ├────────┼────────┼────────┴────────┴────────┘
-                                  │  CTRL  │ L NAV  │               │*      *│        │
-                                  │ ESCAPE │ SPACE  │               │*      *│        │
-                                  └────────┴────────┘               └────────┴────────┘
+       ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
+       │  F01   │  F02   │  F03   │  F04   │        │         │        │        │        │        │        │
+       │        │        │        │        │        │         │        │        │        │        │        │
+       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
+       │  F05   │  F06   │  F07   │  F08   │        │         │        │*      *│        │        │        │
+       │        │        │        │        │        │         │        │*      *│        │        │        │
+       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
+       │  F09   │  F10   │  F11   │  F12   │        │         │        │        │        │        │        │
+       │        │        │        │        │        │         │        │        │        │        │        │
+       └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
+                                  │  CTRL  │ L NAV  │         │*      *│        │
+                                  │ ESCAPE │ SPACE  │         │*      *│        │
+                                  └────────┴────────┘         └────────┴────────┘
      *****/
 
     LAYOUT_4x10(
-        KC_F1,   KC_F2,   KC_F3,   KC_F4,   XXX,                    XXX,     XXX,     XXX, XXX, XXX,
-        KC_F5,   KC_F6,   KC_F7,   KC_F8,   XXX,                    XXX,     XXX,     XXX, XXX, XXX,
-        KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXX,                    XXX,     XXX,     XXX, XXX, XXX,
-        XXX,     XXX,     XXX,     _______, _______,                _______, _______, XXX, XXX, XXX
+        KC_F1,   KC_F2,   KC_F3,   KC_F4,   XXX,              XXX, XXX, XXX, XXX, XXX,
+        KC_F5,   KC_F6,   KC_F7,   KC_F8,   XXX,              XXX, XXX, XXX, XXX, XXX,
+        KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXX,              XXX, XXX, XXX, XXX, XXX,
+        XXX,     XXX,     XXX,     ___,     ___,              ___, ___, XXX, XXX, XXX
     )
 });
