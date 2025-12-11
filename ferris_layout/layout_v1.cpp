@@ -156,10 +156,10 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
     *****/
 
     LAYOUT_4x10(
-        XXX,   LGUI(KC_C),  LGUI(KC_V),  LGUI(KC_R), XXX,              XXX,     XXX,     XXX,  XXX,        XXX,
-        CTAB,  LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4), LGUI(KC_RETURN),  XXX,     XXX,     XXX,  XXX,        XXX,
-        CSTAB, LGUI(KC_F2), LGUI(KC_F3), LGUI(KC_F4),LGUI(KC_TAB),     XXX,     XXX,     XXX,  MOD_LSHIFT, ___,
-        XXX,   XXX,         XXX,         LGUI(KC_Z), LGUI(KC_F),       ___,     ___,     XXX,  XXX,        XXX
+        LSHIFT(KC_INSERT), LGUI(KC_C),  LGUI(KC_V),  LGUI(KC_R), XXX,              XXX,     XXX,     XXX,  XXX,        XXX,
+        LGUI(KC_1),        LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4), LGUI(KC_RETURN),  XXX,     XXX,     XXX,  XXX,        XXX,
+        LGUI(KC_F1),       LGUI(KC_F2), LGUI(KC_F3), LGUI(KC_F4),LGUI(KC_TAB),     XXX,     XXX,     XXX,  MOD_LSHIFT, ___,
+        XXX,               XXX,         XXX,         LGUI(KC_Z), LGUI(KC_F),       ___,     ___,     XXX,  XXX,        XXX
     ),
 
     /*

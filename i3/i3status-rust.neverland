@@ -18,6 +18,12 @@ hide_when_empty = true
 signal = 4
 
 [[block]]
+block = "custom"
+command = ''' bash ~/dotfiles/i3/drk.sh '''
+hide_when_empty = true
+signal = 4
+
+[[block]]
 block = "disk_space"
 path = "/"
 info_type = "available"

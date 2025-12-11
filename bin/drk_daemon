@@ -42,6 +42,8 @@ def loop() -> NoReturn:
 
     buffer = ""
 
+    dump_state()
+
     while True:
         now: datetime = datetime.now()
 
