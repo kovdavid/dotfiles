@@ -85,13 +85,13 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
     *****/
 
     LAYOUT_4x10(
-        KC_Q,      KC_W,      KC_E,     KC_R,      KC_T,            KC_Y,      KC_U,       KC_I,     KC_O,     KC_P,
-        KC_A,      KC_S,      KC_D,     KC_F,      KC_G,            KC_H,      KC_J,       KC_K,     KC_L,     KC_SEMICOLON,
-        Z_MUX,     KC_X,      KC_C,     KC_V,      KC_B,            KC_N,      KC_M,       KC_COMM,  KC_DOT,   LWIN_SLASH,
-        XXXXXXX,   XXXXXXX,   XXXXXXX,  CTRL_ESC,  LNAV_SPC,        SHFT_ENT,  LSYM_BSPC,  XXXXXXX,  XXXXXXX,  XXXXXXX
+        KC_Q,   KC_W,    KC_E,    KC_R,     KC_T,                   KC_Y,     KC_U,      KC_I,    KC_O,   KC_P,
+        KC_A,   KC_S,    KC_D,    KC_F,     KC_G,                   KC_H,     KC_J,      KC_K,    KC_L,   KC_SEMICOLON,
+        Z_MUX,  KC_X,    KC_C,    KC_V,     KC_B,                   KC_N,     KC_M,      KC_COMM, KC_DOT, LWIN_SLASH,
+        XXX,    XXX,     XXX,     CTRL_ESC, LNAV_SPC,               SHFT_ENT, LSYM_BSPC, XXX,     XXX,    XXX
     ),
 
-    /* Layer SYM
+    /***** Layer SYM
        ┌────────┬────────┬────────┬────────┬────────┐               ┌────────┬────────┬────────┬────────┬────────┐
        │   !    │   @    │   #    │   $    │   ~    │               │        │   [    │   "    │   ]    │   >    │
        │        │        │        │        │        │               │        │        │        │        │        │
@@ -105,16 +105,16 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
                                   │  CTRL  │ L NAV  │               │ SHIFT  │*L SYM *│
                                   │ ESCAPE │ SPACE  │               │ RETURN │*BSPACE*│
                                   └────────┴────────┘               └────────┴────────┘
-    */
+    *****/
 
     LAYOUT_4x10(
-        KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,    KC_TILD,           XXXXXXX,   KC_LBRC,    KC_DQUO,  KC_RBRC,   KC_RABK,
-        KC_PERC,  KC_CIRC,  KC_AMPR,  KC_ASTR,   KC_GRV,            XXXXXXX,   KC_LPRN,    KC_UNDS,  KC_RPRN,   KC_LABK,
-        KC_PIPE,  KC_PLUS,  KC_EQL,   KC_MINS,   KC_BSLS,           XXXXXXX,   KC_LCBR,    KC_QUOT,  KC_RCBR,   KC_SLASH,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  CTRL_ESC,  LNAV_SPC,          SHFT_ENT,  LSYM_BSPC,  XXXXXXX,  XXXXXXX,   XXXXXXX
+        KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_TILD,                XXX,     KC_LBRC,  KC_DQUO,  KC_RBRC,   KC_RABK,
+        KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_GRV,                 XXX,     KC_LPRN,  KC_UNDS,  KC_RPRN,   KC_LABK,
+        KC_PIPE, KC_PLUS, KC_EQL,  KC_MINS, KC_BSLS,                XXX,     KC_LCBR,  KC_QUOT,  KC_RCBR,   KC_SLASH,
+        XXX,     XXX,     XXX,     _______, _______,                _______, _______,  XXX,      XXX,       XXX
     ),
 
-    /* Layer NAV
+    /***** Layer NAV
        ┌────────┬────────┬────────┬────────┬────────┐               ┌────────┬────────┬────────┬────────┬────────┐
        │        │  PgDn  │   Up   │  PgUp  │        │               │   +    │   7    │   8    │   9    │   :    │
        │        │        │        │        │        │               │        │        │        │        │        │
@@ -128,33 +128,39 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
                                   │  CTRL  │*L NAV *│               │ SHIFT  │ L SYM  │
                                   │ ESCAPE │*SPACE *│               │ RETURN │ BSPACE │
                                   └────────┴────────┘               └────────┴────────┘
-    */
+    *****/
 
     LAYOUT_4x10(
-        XXXXXXX,  KC_PGDN,  KC_UP,    KC_PGUP,   XXXXXXX,           KC_PLUS,   KC_7,       KC_8,     KC_9,      KC_COLON,
-        CTAB,     KC_LEFT,  KC_DOWN,  KC_RIGHT,  XXXXXXX,           KC_MINS,   KC_4,       KC_5,     KC_6,      KC_0,
-        CSTAB,    KC_END,   KC_INS,   KC_HOME,   XXXXXXX,           KC_EQL,    KC_1,       KC_2,     KC_3,      KC_DOT,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  CTRL_ESC,  LNAV_SPC,          SHFT_ENT,  LSYM_BSPC,  XXXXXXX,  XXXXXXX,   XXXXXXX
-    )
+        XXX,    KC_PGDN, KC_UP,   KC_PGUP,  XXX,                    KC_PLUS, KC_7,    KC_8,    KC_9,    KC_COLON,
+        CTAB,   KC_LEFT, KC_DOWN, KC_RIGHT, XXX,                    KC_MINS, KC_4,    KC_5,    KC_6,    KC_0,
+        CSTAB,  KC_END,  KC_INS,  KC_HOME,  XXX,                    KC_EQL,  KC_1,    KC_2,    KC_3,    KC_DOT,
+        XXX,    XXX,     XXX,     _______,  _______,                _______, _______, XXX,     XXX,     XXX
+    ),
 
 
-    /*
-       Layer WIN
+    /***** Layer WIN
 
        ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
-       │ Shift+ │  Gui+  │  Gui+  │  Gui+  │  Gui+  │         │        │        │        │        │        │
-       │ Insert │   C    │   V    │   R    │   F    │         │        │        │        │        │        │
+       │ Shift+ │  Gui+  │  Gui+  │  Gui+  │        │         │        │        │        │        │        │
+       │ Insert │   C    │   V    │   R    │        │         │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
        │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │         │        │        │        │        │        │
        │   1    │   2    │   3    │   4    │ RETURN │         │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │         │        │        │        │        │*L WIN *│
+       │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │         │        │        │        │ SHIFT  │*L WIN *│
        │  F1    │  F2    │  F3    │  F4    │  Tab   │         │        │        │        │        │*  /   *│
        └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
-                                  │  Gui+  │ SHIFT  │         │        │        │
-                                  │   Z    │        │         │        │        │
+                                  │  Gui+  │  Gui+  │         │ SHIFT  │ L SYM  │
+                                  │   Z    │   F    │         │ RETURN │ BSPACE │
                                   └────────┴────────┘         └────────┴────────┘
-    */
+    *****/
+
+    LAYOUT_4x10(
+        XXX,   LGUI(KC_C),  LGUI(KC_V),  LGUI(KC_R), XXX,              XXX,     XXX,     XXX,  XXX,        XXX,
+        CTAB,  LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4), LGUI(KC_RETURN),  XXX,     XXX,     XXX,  XXX,        XXX,
+        CSTAB, LGUI(KC_F2), LGUI(KC_F3), LGUI(KC_F4),LGUI(KC_TAB),     XXX,     XXX,     XXX,  MOD_LSHIFT, _______,
+        XXX,   XXX,         XXX,         LGUI(KC_Z), LGUI(KC_F),       _______, _______, XXX,  XXX,        XXX
+    ),
 
     /*
        Layer MUX
@@ -177,7 +183,14 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
                                   └────────┴────────┘         └────────┴────────┘
     */
 
-    /* Layer Fun
+    LAYOUT_4x10(
+        XXX,     XXX,      XXX,      XXX,     XXX,            XXX,     LALT(KC_A), LALT(KC_S), XXX, XXX,
+        XXX,     XXX,      XXX,      XXX,     XXX,            XXX,     LALT(KC_Q), LALT(KC_W), XXX, XXX,
+        _______, KC_VOLUP, KC_VOLDN, KC_MUTE, KC_SCR_SVR,     XXX,     LALT(KC_1), LALT(KC_2), XXX, XXX,
+        XXX,     XXX,      XXX,      _______, _______,        _______,  _______,   XXX,        XXX, XXX
+    ),
+
+    /***** Layer Fun
        ┌────────┬────────┬────────┬────────┬────────┐               ┌────────┬────────┬────────┬────────┬────────┐
        │  F01   │  F02   │  F03   │  F04   │        │               │        │        │        │        │        │
        │        │        │        │        │        │               │        │        │        │        │        │
@@ -191,9 +204,12 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
                                   │  CTRL  │ L NAV  │               │*      *│        │
                                   │ ESCAPE │ SPACE  │               │*      *│        │
                                   └────────┴────────┘               └────────┴────────┘
-     */
+     *****/
 
-
-
-
+    LAYOUT_4x10(
+        KC_F1,   KC_F2,   KC_F3,   KC_F4,   XXX,                    XXX,     XXX,     XXX, XXX, XXX,
+        KC_F5,   KC_F6,   KC_F7,   KC_F8,   XXX,                    XXX,     XXX,     XXX, XXX, XXX,
+        KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXX,                    XXX,     XXX,     XXX, XXX, XXX,
+        XXX,     XXX,     XXX,     _______, _______,                _______, _______, XXX, XXX, XXX
+    )
 });
