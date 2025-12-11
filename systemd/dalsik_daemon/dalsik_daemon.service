@@ -2,11 +2,12 @@
 Description=dalsik_daemon
 BindsTo=dev-dalsik.device
 After=dev-dalsik.device
+Requisite=dev-dalsik.device
 
 [Service]
 Type=simple
-Environment=XAUTHORITY=/home/davs/.Xauthority
-Environment=DISPLAY=:0
+; Environment=XAUTHORITY=/home/davs/.Xauthority
+; Environment=DISPLAY=:0
 Environment=PYTHONUNBUFFERED=1
 ExecStart=/home/davs/dotfiles/bin/dalsik_daemon
 Restart=on-failure
@@ -16,4 +17,4 @@ StandardOutput=append:/clean_daily/dalsik_daemon.log
 StandardError=append:/clean_daily/dalsik_daemon.log
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=dev-dalsik.device
