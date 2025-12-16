@@ -1,5 +1,5 @@
 #!/bin/bash
 
-arecord -f dat -r 48000 -D hw:0,0 -d 2 /tmp/test.wav
+arecord -f dat -r 48000 /tmp/test.wav
 aplay /tmp/test.wav
 rm /tmp/test.wav

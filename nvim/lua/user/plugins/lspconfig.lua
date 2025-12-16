@@ -11,6 +11,7 @@ return {
     config = function()
         vim.lsp.enable("eslint")
         vim.lsp.enable("vtsls")
+        -- vim.lsp.enable("tsgo")
         vim.lsp.enable("clangd")
 
         vim.keymap.del("n", "grn")

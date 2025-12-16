@@ -5,6 +5,25 @@ function remove_and_link_dotfile {
 	ln -s "$HOME/dotfiles/$1" "$HOME/.$1"
 }
 
+function ensure_file_content() {
+    FILE=$1
+    CONTENT=$2
+
+    mkdir -p $(dirname $FILE)
+
+    if [ ! -f $FILE ] ; then
+        echo "Creating $FILE"
+        echo "$CONTENT" > $FILE
+    fi
+    if [ "$(cat $FILE)" != "$CONTENT" ] ; then
+        echo "Replacing $FILE"
+        cat $FILE
+        echo "with"
+        echo -e "$CONTENT"
+        echo "$CONTENT" > $FILE
+    fi
+}
+
 echo "Linking dotfiles"
 
 ln -sf ~/dotfiles/bash/env_settings ~/.bashrc.env_settings
@@ -97,5 +116,24 @@ echo "Name=org.freedesktop.secrets" >>"$KEEPASSXC_FILE"
 echo "Exec=/usr/bin/keepassxc" >>"$KEEPASSXC_FILE"
 
 ~/dotfiles/bin/color_scheme dark
+
+MIC_RENAME=$(cat <<EOC
+monitor.alsa.rules = [
+    {
+        matches = [
+            { node.name = "alsa_input.pci-0000_07_00.6.HiFi__Mic1__source" }
+        ],
+        actions = {
+            update-props = {
+                node.description = "Laptop",
+                device.description = "Laptop",
+            }
+        }
+    }
+]
+EOC
+)
+
+ensure_file_content ~/.config/wireplumber/wireplumber.conf.d/99-rename.lua "$MIC_RENAME"
 
 echo "DONE"
