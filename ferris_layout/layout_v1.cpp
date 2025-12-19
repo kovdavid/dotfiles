@@ -8,9 +8,10 @@
 #define LMUX 4
 #define LFUN 5
 
+
 #define CTRL_ESC    DM(MOD_LCTRL, KC_ESCAPE)
 #define LNAV_SPC    THDL(LNAV, KC_SPACE)
-#define SHFT_ENT    DM(MOD_LSHIFT, KC_ENTER)
+#define SHFT_ENT    THDM(MOD_LSHIFT, KC_ENTER)
 #define LSYM_BSPC   THDL(LSYM, KC_BSPC)
 #define LWIN_SLASH  DSL(LWIN, KC_SLASH)
 #define Z_MUX       DSL(LMUX, KC_Z)
