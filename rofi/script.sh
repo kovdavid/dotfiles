@@ -67,10 +67,10 @@ function draw_redshift_menu {
     fi
 
     menu_item "main redshift" "run" "system-run"
-    menu_item "main redshift" "disable" "system-run"
     menu_item "main redshift" "brightness correct up" "arrow-up"
-    menu_item "main redshift" "brightness correct down" "arrow-down"
     menu_item "main redshift" "temp correct up" "arrow-up"
+    menu_item "main redshift" "disable" "system-run"
+    menu_item "main redshift" "brightness correct down" "arrow-down"
     menu_item "main redshift" "temp correct down" "arrow-down"
 }
 
