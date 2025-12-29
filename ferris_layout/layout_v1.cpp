@@ -32,6 +32,7 @@ const KeyCoords combo8[] = { { 1, 7 }, { 2, 7 } }; // RIGHT MODS: CTRL
 const KeyCoords combo9[] = { { 1, 8 }, { 2, 8 } }; // RIGHT MODS: ALT
 
 const KeyCoords combo10[] = { { 1, 6 }, { 3, 5 } }; // LFUN
+const KeyCoords combo11[] = { { 0, 2 }, { 0, 3 } }; // Del
 
 Combo combos[] = COMBOS({
     COMBO(combo1, KC_TAB),
@@ -46,16 +47,17 @@ Combo combos[] = COMBOS({
     COMBO(combo8, OSM(MOD_RCTRL)),
     COMBO(combo9, OSM(MOD_LALT)),
 
-    COMBO(combo10, LH(LFUN))
+    COMBO(combo10, LH(LFUN)),
+    COMBO(combo11, KC_DELETE)
 });
 
 /***** Combos
 
            0        1        2        3        4                  5        6        7        8        9
        ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
-     0 │        │       Tab       │        │        │         │        │      CTRL     CTRL       │        │
+     0 │        │       Tab      Del       │        │         │        │      CTRL     CTRL       │        │
        │        │        │        │        │        │         │        │        A        W        │        │
-       ├─Delete─┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
+       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
      1 │        │        │        │        │        │         │        │* LFUN *│        │        │        │
        │        │        │        │        │        │         │        │        │        │        │        │
        ├────────┼─ GUI  ─┼─ CTRL ─┼─ SHFT ─┼────────┤         ├────────┼─ SHFT ─┼─ CTRL ─┼─ ALT  ─┼────────┤
