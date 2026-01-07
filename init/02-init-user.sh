@@ -61,6 +61,10 @@ systemctl enable --user xset_repeat.service
 ln -sf ~/dotfiles/systemd/startup_shutdown_log/startup_shutdown_log.service ~/.config/systemd/user
 systemctl enable --user startup_shutdown_log.service
 
+ln -sf ~/dotfiles/systemd/git_autocommit/git-autocommit@.service ~/.config/systemd/user
+ln -sf ~/dotfiles/systemd/git_autocommit/git-autocommit-org.timer ~/.config/systemd/user
+systemctl enable --user git-autocommit-org.timer
+
 for timer_unit in clean_daily redshift_adjust restic_backup_local restic_work_backup_local ; do
     echo "Setting up systemd-timer $timer_unit"
     ln -sf ~/dotfiles/systemd/$timer_unit/$timer_unit.timer ~/.config/systemd/user/

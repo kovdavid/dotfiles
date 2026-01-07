@@ -1,0 +1,12 @@
+[Unit]
+Description=Timer for org files
+
+[Timer]
+; Activate first time 5min after boot
+OnBootSec=5min
+; Activate 1h after previous activation
+OnUnitActiveSec=1h
+Unit=git-autocommit@%h-workspace-org\x2dmode.service
+
+[Install]
+WantedBy=timers.target

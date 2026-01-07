@@ -1,0 +1,6 @@
+[Unit]
+Description=Auto-commit for %I
+
+[Service]
+Type=oneshot
+ExecStart=%h/bin/git_autocommit "%I"

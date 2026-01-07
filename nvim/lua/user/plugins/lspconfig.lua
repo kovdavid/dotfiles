@@ -9,9 +9,9 @@ return {
         {'L3MON4D3/LuaSnip'},
     },
     config = function()
-        vim.lsp.enable("eslint")
-        vim.lsp.enable("vtsls")
-        -- vim.lsp.enable("tsgo")
+        -- vim.lsp.enable("eslint")
+        -- vim.lsp.enable("vtsls")
+        vim.lsp.enable("tsgo")
         vim.lsp.enable("clangd")
 
         vim.keymap.del("n", "grn")

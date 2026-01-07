@@ -1,0 +1,13 @@
+#!/bin/bash
+
+DIR="$1"
+DATE=`date '+%FT%T'`
+
+if [ -d "$DIR" ] ; then
+    cd $DIR
+    git add --all .
+    git commit --no-verify -m "$DATE"
+else
+    echo "$DIR does not exist"
+    exit 1
+fi

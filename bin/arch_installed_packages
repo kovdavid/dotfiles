@@ -1,0 +1,4 @@
+#!/bin/bash
+
+yay -Qqen > ~/.local/share/packagelist.native.txt
+yay -Qqem > ~/.local/share/packagelist.foreign.txt
