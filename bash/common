@@ -22,6 +22,14 @@ bash_include ~/dotfiles/bash/alias
 bash_include ~/dotfiles/tmux/completion.bash
 bash_include ~/dotfiles/bash/local
 
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    command yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
+}
+
 # function parse_git_branch {
 #     echo " $(git rev-parse --abbrev-ref HEAD 2>/dev/null) $(git rev-parse --short HEAD 2> /dev/null)$(test -f "$(git rev-parse --git-path refs/stash 2>/dev/null)" && echo -e '\e[31m S')"
 # }
