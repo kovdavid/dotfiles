@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$1" = "65" ] ; then
+    LIMIT=20000
+    TEMP=65
+else
+    LIMIT=24000
+    TEMP=75
+fi
+
+echo "Using LIMIT:$LIMIT TEMP:$TEMP"
+
+sudo ryzenadj --stapm-limit=$LIMIT --fast-limit=$LIMIT --slow-limit=$LIMIT --tctl-temp=$TEMP

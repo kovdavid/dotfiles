@@ -189,8 +189,8 @@ elif [ "$ROFI_INFO" = "main brightness" ] ; then
     fi
     draw_brightness_menu
 elif [ "$ROFI_INFO" = "main performance" ] ; then
-    RYZEN65="sudo ryzenadj --stapm-limit=18000 --fast-limit=18000 --slow-limit=18000 --tctl-temp=65"
-    RYZEN75="sudo ryzenadj --stapm-limit=24000 --fast-limit=24000 --slow-limit=24000 --tctl-temp=75"
+    RYZEN65="ryzenadj_preset 65"
+    RYZEN75="ryzenadj_preset 75"
     if [ "$ACTION" = "boost off" ] ; then
         run_cmd "boost off"
     elif [ "$ACTION" = "boost on" ] ; then

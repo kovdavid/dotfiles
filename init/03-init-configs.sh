@@ -32,6 +32,7 @@ ln -sf ~/dotfiles/tmux/completion.bash ~/.bashrc.tmux-completion
 ln -sf ~/dotfiles/bash/export ~/.bashrc.export
 ln -sf ~/dotfiles/bash/alias ~/.bashrc.alias
 ln -sf ~/dotfiles/bash/common ~/.bashrc.common
+ln -sf ~/dotfiles/starship.toml ~/.config/starship.toml
 
 if [ ! -f ~/.Xresources.local ]; then
 	if [ "$(hostname)" == "neverland" ]; then
@@ -99,6 +100,9 @@ echo "Linking NVIM"
 rm -rf ~/.config/nvim
 rm -rf ~/.vim
 ln -sf ~/dotfiles/nvim ~/.config/nvim
+
+rm -rf ~/.config/yazi
+ln -sf ~/dotfiles/yazi ~/.config/yazi
 
 ln -sf ~/dotfiles/redshift.conf ~/.config/redshift.conf
 
