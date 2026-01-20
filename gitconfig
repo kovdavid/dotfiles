@@ -85,6 +85,10 @@
     templatedir = ~/.git-templates
 [includeIf "gitdir:~/workspace/1990/"]
     path = ~/workspace/1990/.gitconfig
+[commit]
+    gpgsign = true
+[gpg]
+    format = ssh
 
 # To override SSH key (for example in the includeIf config above), use:
 # [core]
