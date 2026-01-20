@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ $(uname -a) == Darwin* ]] ; then
+    pbcopy
+else
+    xclip -in -filter -selection primary | xclip -in -selection clipboard
+fi
+

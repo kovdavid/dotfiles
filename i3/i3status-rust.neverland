@@ -52,6 +52,10 @@ format_alt = " $icon $utilization $boost $frequency /$max_frequency "
 block = "temperature"
 inputs = ["CPU"]
 format = " $icon $max"
+good = 55
+idle = 65
+info = 75
+warning = 80
 
 [[block]]
 block = "battery"
