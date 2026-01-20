@@ -1,0 +1,16 @@
+#!/bin/bash
+
+sudo modprobe v4l2loopback
+
+scrcpy \
+    --video-source=camera \
+    --camera-facing=front \
+    --max-size=1280 \
+    --camera-ar=4:3 \
+    --camera-fps=30 \
+    --orientation=270 \
+    --video-codec=h265 \
+    --v4l2-sink=/dev/video2 \
+    --no-video-playback \
+    --no-audio
+    # --no-audio-playback
