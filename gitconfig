@@ -77,7 +77,7 @@
 [pull]
     default = current
 [rerere]
-	enabled = true
+    enabled = true
 [branch]
     autosetuprebase = always
     sort = -committerdate
@@ -89,6 +89,8 @@
     gpgsign = true
 [gpg]
     format = ssh
+[gpg "ssh"]
+    allowedSignersFile = ~/.ssh/allowedSignersFile
 
 # To override SSH key (for example in the includeIf config above), use:
 # [core]
