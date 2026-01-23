@@ -9,6 +9,11 @@ on = [ "g", "r" ]
 run = 'shell -- ya emit cd "$(git rev-parse --show-toplevel)"'
 
 [[mgr.prepend_keymap]]
+on = [ "g", "m" ]
+run = 'cd /run/media/davs'
+desc = "Go to mounted drives"
+
+[[mgr.prepend_keymap]]
 on   = "<Enter>"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
