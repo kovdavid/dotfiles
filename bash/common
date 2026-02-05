@@ -8,8 +8,6 @@ set -o vi
 
 export HOSTNAME=$(hostname)
 
-# export PS1='`EXIT=$?;[[ $EXIT -ne 0 ]] && echo "\e[31m\$EXIT\e[0m "`\e[34m`date "+%H:%M"`\e[0m [\u@\h:\w]\e[36m$(parse_git_branch)\e[0m\n$([ \j -gt 0 ] && echo "\j ")\\$ '
-
 shopt -s checkwinsize
 shopt -s histappend
 
@@ -29,9 +27,5 @@ function y() {
     [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
     rm -f -- "$tmp"
 }
-
-# function parse_git_branch {
-#     echo " $(git rev-parse --abbrev-ref HEAD 2>/dev/null) $(git rev-parse --short HEAD 2> /dev/null)$(test -f "$(git rev-parse --git-path refs/stash 2>/dev/null)" && echo -e '\e[31m S')"
-# }
 
 eval $(starship init bash)

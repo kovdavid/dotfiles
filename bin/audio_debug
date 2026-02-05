@@ -1,0 +1,58 @@
+#!/bin/bash
+
+DATE=$(date '+%F')
+TIME=$(date '+%H%M%S')
+
+DIR="/clean_manually/audit_debug/$DATE/$TIME"
+
+mkdir -p "$DIR"
+
+cd "$DIR"
+
+## alsa
+
+echo "cat /proc/asound/cards" >> alsa
+echo "" >> alsa
+cat /proc/asound/cards >> alsa
+
+echo "" >> alsa
+echo "======================" >> alsa
+echo "======================" >> alsa
+echo "======================" >> alsa
+echo "" >> alsa
+
+echo "aplay -l" >> alsa
+echo "" >> alsa
+aplay -l >> alsa
+
+echo "" >> alsa
+echo "======================" >> alsa
+echo "======================" >> alsa
+echo "======================" >> alsa
+echo "" >> alsa
+
+echo "arecord -l" >> alsa
+echo "" >> alsa
+arecord -l >> alsa
+
+## pipewire
+
+echo "pw-cli ls Device" >> pipewire
+echo "" >> pipewire
+pw-cli ls Device >> pipewire
+
+echo "" >> pipewire
+echo "======================" >> pipewire
+echo "======================" >> pipewire
+echo "======================" >> pipewire
+echo "" >> pipewire
+
+echo "pw-cli ls Node" >> pipewire
+echo "" >> pipewire
+pw-cli ls Node >> pipewire
+
+## wpctl
+
+echo "wpctl status" >> wpctl
+echo "" >> wpctl
+wpctl status | sed -n '/^Audio/,/^$/p' >> wpctl

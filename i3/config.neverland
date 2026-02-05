@@ -308,6 +308,7 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id turbo &
 exec --no-startup-id keyboard_repeat &
 exec --no-startup-id arch_installed_packages &
+exec --no-startup-id (sleep 30 && audio_debug) &
 exec (sleep 5 && ~/bin/dalsik_daemon trigger_udev_event) &
 # exec --no-startup-id touchpad_log &
 # exec_always --no-startup-id ~/dotfiles/polybar/launch.sh &

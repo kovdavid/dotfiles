@@ -4,11 +4,14 @@
 # Inserts a blank line between shell prompts
 add_newline = false
 
-format = "$time$username$directory $git_branch$git_commit$cmd_duration$jobs\n$status$character"
+format = "$time${env_var.YAZI_LEVEL}$username$directory $git_branch$git_commit$cmd_duration$jobs\n$status$character"
 
 [status]
 symbol = '🔴 '
 disabled = false
+
+[env_var.YAZI_LEVEL]
+format = '📁 '
 
 [cmd_duration]
 min_time = 500
