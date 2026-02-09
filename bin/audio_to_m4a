@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Usage: ls *.mp3 | audio_to_m4a
+
+parallel -j 8 ffmpeg -i {} -map 0 -c:a aac -b:a 192k -threads 0 -c:v copy {.}.m4a
