@@ -104,6 +104,10 @@ function ensure_tlp_config {
 START_CHARGE_THRESH_BAT0=60
 STOP_CHARGE_THRESH_BAT0=90
 
+#PLATFORM_PROFILE_ON_AC=
+#PLATFORM_PROFILE_ON_BAT=
+#PLATFORM_PROFILE_ON_SAV=
+
 DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
 EOC
 )
@@ -236,6 +240,7 @@ if [ ! -f /etc/X11/xorg.conf.d/40-libinput.conf ] ; then
 fi
 
 ln -sf /home/davs/dotfiles/udev/98-keyboard-device-symlink.rules /etc/udev/rules.d
+ln -sf /home/davs/dotfiles/udev/99-ryzenadj-hook.rules /etc/udev/rules.d
 
 udevadm control --reload-rules
 udevadm trigger

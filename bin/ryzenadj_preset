@@ -1,13 +1,28 @@
 #!/bin/bash
 
+exec > >(tee -a /tmp/$(basename $0)) 2>&1
+
+# Run by udev
+if [ -n "$ACTION" ] ; then
+    echo "Run by udev - sleeping"
+    sleep 2
+fi
+
 if [ "$1" = "65" ] ; then
     LIMIT=20000
+    SLOW_LIMIT=18000
     TEMP=65
 else
     LIMIT=24000
+    SLOW_LIMIT=20000
     TEMP=75
 fi
 
-echo "Using LIMIT:$LIMIT TEMP:$TEMP"
+echo "Using LIMIT:$LIMIT SLOW_LIMIT:$SLOW_LIMIT TEMP:$TEMP"
 
-sudo ryzenadj --stapm-limit=$LIMIT --fast-limit=$LIMIT --slow-limit=$LIMIT --tctl-temp=$TEMP
+# Run by udev
+if [ -n "$ACTION" ] ; then
+    ryzenadj --stapm-limit=$LIMIT --fast-limit=$LIMIT --slow-limit=$SLOW_LIMIT --tctl-temp=$TEMP
+else
+    sudo ryzenadj --stapm-limit=$LIMIT --fast-limit=$LIMIT --slow-limit=$SLOW_LIMIT --tctl-temp=$TEMP
+fi
