@@ -11,7 +11,7 @@
     status_update_interval_ms: 1000,
     select_current_song_on_change: false,
     browser_column_widths: [20, 38, 42],
-    theme: "catppuccin_mocha",
+    theme: "theme",
     album_art: (
         method: Auto,
         max_size_px: (width: 900, height: 900),

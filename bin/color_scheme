@@ -39,3 +39,6 @@ xrdb -merge /home/davs/.Xresources
 
 echo "Linking rofi"
 ln -sf ~/dotfiles/rofi/theme_$SCHEME.rasi ~/.config/rofi/theme.rasi
+
+echo "Linking rmpc"
+ln -sf ~/dotfiles/rmpc/themes/$SCHEME.ron ~/dotfiles/rmpc/themes/theme.ron
