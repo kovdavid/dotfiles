@@ -256,7 +256,7 @@ options snd_hda_intel enable=1 index=0
 options snd_hda_intel enable=0 index=1
 EOC
 )
-    # ensure_file_content "/etc/modprobe.d/sound.conf" "$SOUND"
+    ensure_file_content "/etc/modprobe.d/sound.conf" "$SOUND"
 
     NOBEEP="blacklist pcspkr"
     ensure_file_content "/etc/modprobe.d/nobeep.conf" "$NOBEEP"
@@ -264,7 +264,7 @@ EOC
     THINKPAD_ACPI="options thinkpad_acpi fan_control=1"
     ensure_file_content "/etc/modprobe.d/thinkpad_acpi.conf" "$THINKPAD_ACPI"
 
-    ensure_file_content "/etc/xdg/user-dirs.defaults" "DOWNLOAD=Downloads"
+    ensure_file_content "/etc/xdg/user-dirs.defaults" "DOWNLOAD=Downloads\nMUSIC=Music"
 
     THINKFAN_CONFIG_COOL=$(cat <<EOC
 # There should be hwmonX directories inside the 'hwmon' path
@@ -331,4 +331,56 @@ EOC
     ensure_file_content "/etc/systemd/system/thinkfan.service.d/override.conf" "$THINKFAN_OVERRIDE"
 
     systemctl enable --now thinkfan.service
+
+    DNSMASQCONF=$(cat <<EOC
+# Include another lot of configuration options.
+conf-dir=/etc/dnsmasq.d
+
+# Never forward plain names (without a dot or domain part)
+domain-needed
+# Never forward addresses in the non-routed address spaces.
+bogus-priv
+
+listen-address=127.0.0.1
+bind-interfaces
+
+# If you don't want dnsmasq to read /etc/resolv.conf or any other
+# file, getting its servers from this file instead (see below), then
+# uncomment this.
+no-resolv
+
+# If you don't want dnsmasq to poll /etc/resolv.conf or other resolv
+# files for changes and re-read them then uncomment this.
+no-poll
+
+address=/.devlocal/127.0.0.1
+address=/.docker/127.0.0.1
+EOC
+)
+
+    ensure_file_content "/etc/dnsmasq.conf" "$DNSMASQCONF"
+    systemctl enable --now dnsmasq.service
+
+    RESOLVEDCONF=$(cat <<EOC
+[Resolve]
+DNS=DHCP_DNS 127.0.0.1
+FallbackDNS=127.0.0.1
+#Domains=
+#DNSSEC=no
+#DNSOverTLS=no
+#MulticastDNS=yes
+#LLMNR=yes
+#Cache=yes
+#CacheFromLocalhost=no
+#DNSStubListener=no
+#DNSStubListenerExtra=
+#ReadEtcHosts=yes
+#ResolveUnicastSingleLabel=no
+#StaleRetentionSec=0
+#RefuseRecordTypes=
+EOC
+)
+
+    ensure_file_content "/etc/systemd/resolved.conf" "$RESOLVEDCONF"
+    systemctl enable --now systemd-resolved
 fi
