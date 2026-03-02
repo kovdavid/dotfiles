@@ -19,6 +19,11 @@ run = 'cd /'
 desc = "Go to /"
 
 [[mgr.prepend_keymap]]
+on = [ "g", "d" ]
+run = 'cd /run/media/davs/ext_hdd/data/docs/001-dksoftsro'
+desc = "Go to dksoft"
+
+[[mgr.prepend_keymap]]
 on   = "<Enter>"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
