@@ -10,11 +10,15 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local javascript_group = vim.api.nvim_create_augroup("javascript", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "javascript", "typescript" },
+    pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
     group = javascript_group,
     callback = function ()
         local opts = { noremap = true, silent = true }
         vim.keymap.set("n", "<leader>rr", ":!node %<CR>", opts)
+        vim.keymap.set("n", "<leader>lv", function() vim.cmd("LspStop vtsls") vim.cmd("LspStart vtsls") end, { noremap = true, silent = true, desc = "Restart vtsls" })
+        vim.keymap.set("n", "<leader>lt", function() vim.cmd("LspStop tsgo") vim.cmd("LspStart tsgo") end, { noremap = true, silent = true, desc = "Restart tsgo" })
+
+
     end,
 })
 
