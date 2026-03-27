@@ -383,4 +383,11 @@ EOC
 
     ensure_file_content "/etc/systemd/resolved.conf" "$RESOLVEDCONF"
     systemctl enable --now systemd-resolved
+
+    SYSCTL=$(cat <<EOC
+fs.inotify.max_user_watches=524288
+EOC
+
+    ensure_file_content "/etc/sysctl.d/99-max-user-watches.conf" "$SYSCTL"
+)
 fi
