@@ -26,6 +26,8 @@ return {
         { "<leader>htb", function() require("gitsigns").toggle_current_line_blame() end, desc = "toggle blame current line" },
         { "<leader>htd", function() require("gitsigns").toggle_deleted() end, desc = "toggle deleted" },
 
+        { "<leader>u", function() require("undotree").open() end, desc = "undotree" },
+
         { "<leader>ha", function() require("harpoon"):list():add() end, desc = "harpoon add" },
         { "<leader>hl", function() require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end, desc = "harpoon list" },
         -- { "<C-y>", function() require("harpoon"):list():select(1) end, desc = "harpoon item 1" },
