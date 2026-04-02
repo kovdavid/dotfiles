@@ -4,7 +4,7 @@
 # Inserts a blank line between shell prompts
 add_newline = false
 
-format = "$time${env_var.YAZI_LEVEL}$username$directory $git_branch$git_commit$cmd_duration$jobs\n$status$character"
+format = "$time${env_var.YAZI_LEVEL}$username$directory $git_branch$git_commit$cmd_duration$nodejs$jobs\n$status$character"
 
 [status]
 symbol = '🔴 '
@@ -34,7 +34,7 @@ format = '[\($hash\)]($style) '
 only_detached = false
 
 [nodejs]
-disabled = true
+disabled = false
 
 [username]
 format = '[$user]($style):'
