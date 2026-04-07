@@ -1,4 +1,4 @@
 return {
-    "stevearc/oil.nvim",
-    config = true,
+  "stevearc/oil.nvim",
+  config = true,
 }

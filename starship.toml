@@ -16,7 +16,7 @@ format = '📁 '
 [cmd_duration]
 min_time = 500
 show_milliseconds = true
-format = 'took [$duration](bold yellow)'
+format = 'took [$duration](bold yellow) '
 
 [directory]
 truncation_length = 3

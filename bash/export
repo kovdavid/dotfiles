@@ -42,6 +42,7 @@ export PATH="$HOME/bin:$JAVA_HOME:$PATH"
 [[ -d ~/.local/bin ]] && export PATH="~/.local/bin:$PATH"
 [[ -d /opt/rust/cargo/bin ]] && export PATH="/opt/rust/cargo/bin:$PATH"
 [[ -d /opt/bin ]] && export PATH="/opt/bin:$PATH"
+[[ -d ~/.local/share/bob/nvim-bin ]] && export PATH="~/.local/share/bob/nvim-bin:$PATH"
 [[ -n "$(which rustc 2>/dev/null)" && -d "$(rustc --print sysroot)/lib/rustlib/src/rust/src" ]] && \
     export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export RUST_BACKTRACE=0
