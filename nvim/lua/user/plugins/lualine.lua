@@ -6,7 +6,7 @@ return {
   },
   opts = {
     options = {
-      theme = "auto",
+      theme = "zenburned",
     },
     inactive_sections = {
       lualine_x = {
