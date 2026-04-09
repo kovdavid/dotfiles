@@ -6,7 +6,7 @@ return {
   },
   opts = {
     options = {
-      theme = "gruvbox",
+      theme = "auto",
     },
     inactive_sections = {
       lualine_x = {
