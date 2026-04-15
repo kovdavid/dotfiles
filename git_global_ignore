@@ -1,4 +1,5 @@
 .vimproject
+.claude
 misc/
 tags
 Makefile.old

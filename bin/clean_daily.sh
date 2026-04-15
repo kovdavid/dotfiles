@@ -31,4 +31,4 @@ fi
 
 sudo find . -type d -empty -delete
 
-echo $ENVRC > .envrc
+echo -e "$ENVRC" > .envrc
