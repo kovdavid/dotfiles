@@ -115,6 +115,11 @@ restic forget --keep-last 5 --keep-hourly 12 --keep-daily 14 --keep-weekly 8 --k
 echo "####### $(date '+%F %T') Checking repository"
 restic check
 
+echo "####### $(date '+%F %T') Checking repository (reading data)"
+if [ "$RESTIC_CHECK_READ_DATA" == "true" ] ; then
+    restic check --read-data
+fi
+
 echo "####### $(date '+%F %T') Current snapshots"
 restic snapshots
 
