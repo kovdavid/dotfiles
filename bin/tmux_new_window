@@ -6,6 +6,7 @@ ARG_WINDOW_NAME=$1
 ARG_WINDOW_DIR=$2
 
 echo "New window"
+echo ""
 
 WINDOW_NAME=''
 CD_DIR=${CD_DIR-:''}
