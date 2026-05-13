@@ -42,8 +42,8 @@ fi
 TMUX_CMD="cd $CD_DIR; bash"
 
 if [ -n "$SESSION_NAME" ]; then
-    tmux new-session -d -s "$SESSION_NAME" -n bash "$TMUX_CMD"
-    tmux new-session -d -t "$SESSION_NAME" -s "G|${SESSION_NAME}"
+    tmux new-session -d -s "$SESSION_NAME" -n bash -c "$CD_DIR"
+    tmux new-session -d -t "$SESSION_NAME" -s "G|${SESSION_NAME}" -c "$CD_DIR"
 else
     SESSION_NAME=$(tmux new-session -P -d "$TMUX_CMD" | cut -d":" -f1)
     tmux new-session -d -t "$SESSION_NAME" -s "G|${SESSION_NAME}"
@@ -52,9 +52,6 @@ fi
 SESSION_HISTORY=$(rg -vP "^$SESSION_NAME," <"$SESSION_HISTORY_FILE")
 echo -e "$SESSION_HISTORY" >"$SESSION_HISTORY_FILE"
 echo -e "$SESSION_NAME,$CD_DIR" >>"$SESSION_HISTORY_FILE"
-
-tmux set-option -t "$SESSION_NAME" default-command "$TMUX_CMD"
-tmux set-option -t "G|${SESSION_NAME}" default-command "$TMUX_CMD"
 
 if [[ "$CURR_SESSION_NAME" == G\|* ]]; then
     tmux switch-client -t "G|$SESSION_NAME"

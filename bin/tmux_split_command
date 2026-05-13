@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
 
-SESSION_ID=$(tmux display-message -p '#{session_id}')
-WINDOW_ID=$(tmux display-message -p '#{window_id}')
+exec > >(tee -a /tmp/$(basename $0)) 2>&1
 
-WINDOW_DEFAULT_COMMAND=$(tmux show-options -qv @${WINDOW_ID}_default_command)
-SESSION_DEFAULT_COMMAND=$(tmux show-options -qv -t ${SESSION_ID} default-command)
-
-if [ -n "$WINDOW_DEFAULT_COMMAND" ] ; then
-    echo "Using WINDOW_DEFAULT_COMMAND:$WINDOW_DEFAULT_COMMAND" >> /tmp/$(basename $0)
-    eval "$WINDOW_DEFAULT_COMMAND"
-elif [ -n "$SESSION_DEFAULT_COMMAND" ] ; then
-    echo "Using SESSION_DEFAULT_COMMAND:$SESSION_DEFAULT_COMMAND" >> /tmp/$(basename $0)
-    eval "$SESSION_DEFAULT_COMMAND"
+WINDOW_PATH=$(tmux display-message -p "#{@window_path}")
+if [ -n "$WINDOW_PATH" ]; then
+    echo "$WINDOW_PATH"
 else
-    eval "exec $SHELL"
+    SESSION_PATH=$(tmux display-message -p "#{session_path}")
+    echo "$SESSION_PATH"
 fi

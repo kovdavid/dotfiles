@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# scrcpy --no-video
+scrcpy --no-video --audio-bit-rate=256k

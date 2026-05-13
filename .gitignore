@@ -7,6 +7,7 @@ fontconfig/
 nvim/lua/user/colors.lua
 nvim/plugin/packer_compiled.lua
 rofi/config.rasi
+rofi/theme.rasi
 tmux/color.conf
 tmux/local.conf
 vim/.init.vim-rplugin*
