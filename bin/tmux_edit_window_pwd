@@ -18,4 +18,4 @@ echo "WINDOW_ID:$WINDOW_ID WINDOW:$WINDOW"
 
 CD_DIR=$(readlink -f "$DIR")
 
-tmux set-option -w @window_path "$CD_DIR"
+tmux set-option $WINDOW -w @window_path "$CD_DIR"
