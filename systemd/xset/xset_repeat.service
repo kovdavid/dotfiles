@@ -1,7 +1,7 @@
 [Unit]
 Description=xset keyboard repeat
-BindsTo=dev-dalsik.device
-After=dev-dalsik.device systemd-user-sessions.service
+BindsTo=dev-dalsik.device dev-drk.device
+After=dev-dalsik.device dev-drk.device systemd-user-sessions.service
 
 [Service]
 Type=oneshot
@@ -11,4 +11,4 @@ ExecStartPre=/bin/sleep 5
 ExecStart=/home/davs/dotfiles/bin/keyboard_repeat
 
 [Install]
-WantedBy=dev-dalsik.device
+WantedBy=dev-dalsik.device  dev-drk.device
