@@ -12,7 +12,7 @@ if [ -f $FILE ] ; then
     [[ "$LAYER" -gt "0" ]] && color="#E0AF68" || color="#555555"
     echo -n "<span color='$color'>L[${LAYER:-0}]</span> "
 
-    for mod in GUI SHIFT CTRL ALT; do
+    for mod in GUI CTRL SHIFT ALT; do
         [[ "${!mod}" == "1" ]] && color="#FFFFFF" || color="#555555"
         echo -n "<span color='$color'>$mod</span> "
     done
