@@ -20,7 +20,7 @@
 #define CTAB  LCTRL(KC_TAB)
 #define CSTAB LCTRL(KC_TAB) | MOD_LSHIFT
 
-const KeyCoords combo1[] = { { 0, 1 }, { 0, 2 } }; // Tab
+const KeyCoords combo1[] = { { 1, 2 }, { 1, 3 } }; // Tab
 const KeyCoords combo2[] = { { 0, 6 }, { 0, 7 } }; // CTRL+A
 const KeyCoords combo3[] = { { 0, 7 }, { 0, 8 } }; // CTRL+W
 
@@ -33,7 +33,7 @@ const KeyCoords combo8[] = { { 1, 7 }, { 2, 7 } }; // RIGHT MODS: CTRL
 const KeyCoords combo9[] = { { 1, 8 }, { 2, 8 } }; // RIGHT MODS: ALT
 
 const KeyCoords combo10[] = { { 1, 6 }, { 3, 5 } }; // LFUN
-const KeyCoords combo11[] = { { 0, 2 }, { 0, 3 } }; // Del
+const KeyCoords combo11[] = { { 1, 7 }, { 1, 8 } }; // Del
 
 Combo combos[] = COMBOS({
     COMBO(combo1, KC_TAB),
