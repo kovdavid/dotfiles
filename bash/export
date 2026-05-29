@@ -14,14 +14,14 @@ export MYSQL_PS1="\u@`hostname` [\d]> "
 # export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 export SDKMAN_DIR=/opt/sdkman
 
-if [ -f /opt/javascript/completion-for-pnpm.bash ] ; then
-    source /opt/javascript/completion-for-pnpm.bash
-else
-    if [[ -n "$(which pnpm 2>/dev/null)" && -d /opt/javascript ]] ; then
-        pnpm completion bash > /opt/javascript/completion-for-pnpm.bash
-        source /opt/javascript/completion-for-pnpm.bash
-    fi
-fi
+# if [ -f /opt/javascript/completion-for-pnpm.bash ] ; then
+#     source /opt/javascript/completion-for-pnpm.bash
+# else
+#     if [[ -n "$(which pnpm 2>/dev/null)" && -d /opt/javascript ]] ; then
+#         pnpm completion bash > /opt/javascript/completion-for-pnpm.bash
+#         source /opt/javascript/completion-for-pnpm.bash
+#     fi
+# fi
 
 if [ -f /opt/javascript/completion-for-fnm.bash ] ; then
     source /opt/javascript/completion-for-fnm.bash
@@ -50,6 +50,14 @@ export RUST_BACKTRACE=0
 if [ -d /opt/go ] ; then
     export GOPATH="/opt/go"
     export PATH="$GOPATH/bin:$PATH"
+fi
+
+if [ -d /opt/mise ] ; then
+    mkdir -p /opt/mise/data /opt/mise/cache
+    export MISE_DATA_DIR=/opt/mise/data
+    export MISE_CACHE_DIR=/opt/mise/cache
+
+    [[ -n "$(which mise 2>/dev/null)" ]] && eval "$(mise activate bash)"
 fi
 
 if [ -d /opt/javascript/npm-packages ] ; then
