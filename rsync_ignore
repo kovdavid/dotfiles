@@ -94,6 +94,7 @@ nytprof*
 
 .gradle/
 .next/
+.npm/
 .yarn/
 .meteor/
 .mypy_cache/
