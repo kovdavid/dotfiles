@@ -269,3 +269,8 @@ https://gabmus.org/posts/full-disc-encryption-with-usb-unlock/
 - add 'vfat' to MODULES in /etc/mkinitcpio.conf
 - regenerate initramfs 'mkinitcpio -P'
 - add 'cryptkey=UUID=*PARTITION-UUID*:vfat:/key.lek' to /boot/loader/entries/* . Also add 'rootdelay=3' so that there is no 10 second delay without key
+
+# subuid
+
+sudo usermod --add-subuids 100000-165535 davs
+sudo usermod --add-subgids 100000-165535 davs
