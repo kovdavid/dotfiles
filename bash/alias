@@ -21,6 +21,10 @@ alias dpp='docker ps --format "table{{.Names}}\t{{.Image}}"'
 alias dpa='docker ps -a --format "table{{.Names}}\t{{.Image}}\t{{.Ports}}"'
 alias dr="docker run --add-host=host.docker.internal:host-gateway -it --rm"
 alias de="docker exec -it"
+alias pp='podman ps --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"'
+alias ppa='podman ps -a --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"'
+alias pe="podman exec -it"
+alias pr="podman run -it --rm"
 alias disable_parse_git_branch="function parse_git_branch { echo ' DISABLED'; }"
 alias ga='git add'
 alias gap='git add --patch'
@@ -83,7 +87,7 @@ else
 fi
 #alias xvim="xargs -o nvim"
 alias xvim="xargs -o bob run v0.11.7"
-alias vc='git status --short . | rg "^ ." | awk "{ print \$2 }" | fzf -m --preview "git diff $@ --color=always -- {-1}" | xargs -o nvim'
+alias vc='git status --short . | rg "^.M" | awk "{ print \$2 }" | fzf -m --preview "git diff $@ --color=always -- {-1}" | xargs -o nvim'
 alias vcs='git status --short . | awk "{ print \$2 }" | fzf -m --preview "git diff $@ --color=always -- {-1}" | xargs -o nvim'
 alias vcr='git diff --name-only --diff-filter=U --relative | fzf -m --preview "git diff $@ --color=always -- {-1}" | xargs -o nvim'
 alias fzfvim="vim \$(fzf)"
