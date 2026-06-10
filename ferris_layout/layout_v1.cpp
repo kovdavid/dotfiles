@@ -5,9 +5,10 @@
 #define LDEFAULT 0
 #define LSYM 1
 #define LNAV 2
-#define LWIN 3
-#define LMUX 4
-#define LFUN 5
+#define LNUM 3
+#define LWIN 4
+#define LMUX 5
+#define LFUN 6
 
 #define CTRL_ESC    DM(MOD_LCTRL, KC_ESCAPE)
 #define LNAV_ENT    THDL(LNAV, KC_ENTER)
@@ -61,7 +62,7 @@ Combo combos[] = COMBOS({
 });
 
 /***** Combos
-
+       TODO outdated
            0        1        2        3        4                  5        6        7        8        9
        ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
      0 │        │       Tab      Del       │        │         │        │      CTRL     CTRL       │        │
@@ -91,8 +92,8 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        │   Z    │   X    │   C    │   V    │   B    │               │   N    │   M    │   ,    │   .    │ L WIN  │
        │ L MUX  │        │        │        │        │               │        │        │        │        │   /    │
        └────────┴────────┴────────┼────────┼────────┤               ├────────┼────────┼────────┴────────┴────────┘
-                                  │  CTRL  │ L NAV  │               │ SHIFT  │ L SYM  │
-                                  │ ESCAPE │ RETURN │               │ SPACE  │ BSPACE │
+                                  │  CTRL  │ SHIFT  │               │ L NUM  │ L NAV  │
+                                  │ ESCAPE │ SPACE  │               │ RETURN │ BSPACE │
                                   └────────┴────────┘               └────────┴────────┘
     *****/
 
@@ -114,8 +115,8 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        │   |    │   +    │   =    │   -    │   \    │               │        │   {    │   '    │   }    │        │
        │        │        │        │        │        │               │        │        │        │        │        │
        └────────┴────────┴────────┼────────┼────────┤               ├────────┼────────┼────────┴────────┴────────┘
-                                  │  CTRL  │ L NAV  │               │ SHIFT  │*L SYM *│
-                                  │ ESCAPE │ RETURN │               │ SPACE  │*BSPACE*│
+                                  │  CTRL  │ SHIFT  │               │ L NUM  │ L NAV  │
+                                  │ ESCAPE │ SPACE  │               │ RETURN │ BSPACE │
                                   └────────┴────────┘               └────────┴────────┘
     *****/
 
@@ -128,17 +129,17 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
 
     /***** Layer NAV
        ┌────────┬────────┬────────┬────────┬────────┐               ┌────────┬────────┬────────┬────────┬────────┐
-       │        │  PgDn  │   Up   │  PgUp  │        │               │   +    │   7    │   8    │   9    │   :    │
+       │  F1    │  F2    │  F3    │  F4    │ VolUp  │               │        │  PgUp  │   Up   │  PgDn  │        │
        │        │        │        │        │        │               │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤               ├────────┼────────┼────────┼────────┼────────┤
-       │ C(Tab) │  Left  │  Down  │ Right  │        │               │   -    │   4    │   5    │   6    │   0    │
-       │        │        │        │        │        │               │        │        │        │        │        │
+       │  F5    │  F6    │  F7    │  F8    │ VolDn  │               │ Shift+ │  Left  │  Down  │  Right │ C(Tab) │
+       │        │        │        │        │        │               │ Insert │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤               ├────────┼────────┼────────┼────────┼────────┤
-       │ CS Tab │  End   │ Insert │  Home  │        │               │   =    │   1    │   2    │   3    │   .    │
+       │  F9    │  F10   │  F11   │  F12   │ VolMut │               │        │  Home  │ Insert │  End   │ CS Tab │
        │        │        │        │        │        │               │        │        │        │        │        │
        └────────┴────────┴────────┼────────┼────────┤               ├────────┼────────┼────────┴────────┴────────┘
-                                  │  CTRL  │*L NAV *│               │ SHIFT  │ L SYM  │
-                                  │ ESCAPE │*RETURN*│               │ SPACE  │ BSPACE │
+                                  │  CTRL  │ SHIFT  │               │ L NUM  │*L NAV *│
+                                  │ ESCAPE │ SPACE  │               │ RETURN │*BSPACE*│
                                   └────────┴────────┘               └────────┴────────┘
     *****/
 
@@ -148,6 +149,23 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
         CSTAB,  KC_END,  KC_INS,  KC_HOME,  XXX,                    KC_EQL,  KC_1,    KC_2,    KC_3,    KC_DOT,
         XXX,    XXX,     XXX,     ___,      ___,                    ___,     ___,     XXX,     XXX,     XXX
     ),
+
+
+    /***** Layer NUM
+       ┌────────┬────────┬────────┬────────┬────────┐               ┌────────┬────────┬────────┬────────┬────────┐
+       │        │        │        │        │        │               │   +    │   7    │   8    │   9    │   :    │
+       │        │        │        │        │        │               │        │        │        │        │        │
+       ├────────┼────────┼────────┼────────┼────────┤               ├────────┼────────┼────────┼────────┼────────┤
+       │        │        │        │        │        │               │   -    │   4    │   5    │   6    │   0    │
+       │        │        │        │        │        │               │        │        │        │        │        │
+       ├────────┼────────┼────────┼────────┼────────┤               ├────────┼────────┼────────┼────────┼────────┤
+       │        │        │        │        │        │               │   =    │   1    │   2    │   3    │   .    │
+       │        │        │        │        │        │               │        │        │        │        │        │
+       └────────┴────────┴────────┼────────┼────────┤               ├────────┼────────┼────────┴────────┴────────┘
+                                  │  CTRL  │ SHIFT  │               │*L NUM *│ L NAV  │
+                                  │ ESCAPE │ SPACE  │               │*RETURN*│ BSPACE │
+                                  └────────┴────────┘               └────────┴────────┘
+    *****/
 
 
     /***** Layer WIN
@@ -162,8 +180,8 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │                 │        │        │        │ SHIFT  │*L WIN *│
        │  F1    │  F2    │  F3    │  F4    │ Return │                 │        │        │        │        │*  /   *│
        └────────┴────────┴────────┼────────┼────────┤                 ├────────┼────────┼────────┴────────┴────────┘
-                                  │  Gui+  │  Gui+  │                 │ SHIFT  │ L SYM  │
-                                  │   Z    │   F    │                 │ SPACE  │ BSPACE │
+                                  │  Gui+  │  Gui+  │                 │ L NUM  │ L NAV  │
+                                  │   Z    │   F    │                 │ RETURN │ BSPACE │
                                   └────────┴────────┘                 └────────┴────────┘
     *****/
 
@@ -213,8 +231,8 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        │  F09   │  F10   │  F11   │  F12   │        │         │        │        │        │        │        │
        │        │        │        │        │        │         │        │        │        │        │        │
        └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
-                                  │  CTRL  │ L NAV  │         │*      *│        │
-                                  │ ESCAPE │ RETURN │         │*      *│        │
+                                  │  CTRL  │ SHIFT  │         │*      *│        │
+                                  │ ESCAPE │ SPACE  │         │*      *│        │
                                   └────────┴────────┘         └────────┴────────┘
      *****/
 
