@@ -1,22 +1,21 @@
 #include "keymap.hpp"
 #include "combo.hpp"
 #include "key_definitions.hpp"
+#include "macro.hpp"
 
 #define LDEFAULT 0
 #define LSYM 1
 #define LNAV 2
 #define LNUM 3
 #define LWIN 4
-#define LMUX 5
-#define LFUN 6
 
 #define CTRL_ESC    DM(MOD_LCTRL, KC_ESCAPE)
-#define LNAV_ENT    THDL(LNAV, KC_ENTER)
+#define LNUM_ENT    THDL(LNUM, KC_ENTER)
 #define SHFT_SPC    THDM(MOD_RSHIFT, KC_SPACE)
-#define LSYM_BSPC   THDL(LSYM, KC_BSPC)
+#define LNAV_BSPC   THDL(LNAV, KC_BSPC)
 #define LSYM_SCLN   DSL(LSYM, KC_SEMICOLON)
 #define LWIN_SLASH  DSL(LWIN, KC_SLASH)
-#define Z_MUX       DSL(LMUX, KC_Z)
+#define SHFT_INS    LSHIFT(KC_INSERT)
 
 #define CTAB  LCTRL(KC_TAB)
 #define CSTAB LCTRL(KC_TAB) | MOD_LSHIFT
@@ -33,7 +32,6 @@ const KeyCoords combo7[] = { { 1, 6 }, { 2, 6 } }; // RIGHT MODS: SHFT
 const KeyCoords combo8[] = { { 1, 7 }, { 2, 7 } }; // RIGHT MODS: CTRL
 const KeyCoords combo9[] = { { 1, 8 }, { 2, 8 } }; // RIGHT MODS: ALT
 
-const KeyCoords combo10[] = { { 1, 6 }, { 3, 5 } }; // LFUN
 const KeyCoords combo11[] = { { 1, 7 }, { 1, 8 } }; // Del
 
 const KeyCoords combo12[] = { { 2, 1 }, { 2, 3 } }; // GUI + SHFT
@@ -53,7 +51,6 @@ Combo combos[] = COMBOS({
     COMBO(combo8, OSM(MOD_RCTRL)),
     COMBO(combo9, OSM(MOD_LALT)),
 
-    COMBO(combo10, LH(LFUN)),
     COMBO(combo11, KC_DELETE),
 
     COMBO(combo12, OSM(MOD_LGUI | MOD_LSHIFT)),
@@ -61,26 +58,62 @@ Combo combos[] = COMBOS({
     COMBO(combo14, OSM(MOD_RCTRL | MOD_RSHIFT))
 });
 
-/***** Combos
-       TODO outdated
+MacroStep m1_steps[] = {
+    { MACRO_ACTION_PRESS, LCTRL(KC_A) },
+    { MACRO_ACTION_RELEASE, LCTRL(KC_A) },
+    { MACRO_ACTION_PRESS, KC_MINUS },
+    { MACRO_ACTION_RELEASE, KC_MINUS }
+};
+
+MacroStep m2_steps[] = {
+    { MACRO_ACTION_PRESS, LCTRL(KC_A) },
+    { MACRO_ACTION_RELEASE, LCTRL(KC_A) },
+    { MACRO_ACTION_PRESS, KC_PLUS },
+    { MACRO_ACTION_RELEASE, KC_PLUS }
+};
+
+MacroStep m3_steps[] = {
+    { MACRO_ACTION_PRESS, LCTRL(KC_A) },
+    { MACRO_ACTION_RELEASE, LCTRL(KC_A) },
+    { MACRO_ACTION_PRESS, KC_LABK },
+    { MACRO_ACTION_RELEASE, KC_LABK }
+};
+
+MacroStep m4_steps[] = {
+    { MACRO_ACTION_PRESS, LCTRL(KC_A) },
+    { MACRO_ACTION_RELEASE, LCTRL(KC_A) },
+    { MACRO_ACTION_PRESS, KC_RABK },
+    { MACRO_ACTION_RELEASE, KC_RABK }
+};
+
+Macro macros[] = MACROS({
+    MACRO(m1_steps), // CTRL+A -
+    MACRO(m2_steps), // CTRL+A +
+    MACRO(m3_steps), // CTRL+A <
+    MACRO(m4_steps)  // CTRL+A >
+});
+
+const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
+
+    /***** Combos
+
            0        1        2        3        4                  5        6        7        8        9
        ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
-     0 │        │       Tab      Del       │        │         │        │      CTRL     CTRL       │        │
+     0 │        │        │        │        │        │         │        │      CTRL     CTRL       │        │
        │        │        │        │        │        │         │        │        A        W        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-     1 │        │        │        │        │        │         │        │* LFUN *│        │        │        │
+     1 │        │        │       Tab       │        │         │        │        │       Del       │        │
        │        │        │        │        │        │         │        │        │        │        │        │
        ├────────┼─ GUI  ─┼─ CTRL ─┼─ SHFT ─┼────────┤         ├────────┼─ SHFT ─┼─ CTRL ─┼─ ALT  ─┼────────┤
-     2 │        │        │        │        │        │         │        │        │        │        │        │
-       │        │        │        │        │        │         │        │        │        │        │        │
+     2 │        │        │       C+S       │        │         │        │       C+S       │        │        │
+       │        │* G+S  *│        │* G+S  *│        │         │        │        │        │        │        │
        └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
-     3                            │        │        │         │* LFUN *│        │
+     3                            │        │        │         │        │        │
                                   │        │        │         │        │        │
                                   └────────┴────────┘         └────────┴────────┘
 
-*****/
+    *****/
 
-const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
     /***** Layer DEFAULT
        ┌────────┬────────┬────────┬────────┬────────┐               ┌────────┬────────┬────────┬────────┬────────┐
        │   Q    │   W    │   E    │   R    │   T    │               │   Y    │   U    │   I    │   O    │   P    │
@@ -90,7 +123,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        │        │        │        │        │        │               │        │        │        │        │   :    │
        ├────────┼────────┼────────┼────────┼────────┤               ├────────┼────────┼────────┼────────┼────────┤
        │   Z    │   X    │   C    │   V    │   B    │               │   N    │   M    │   ,    │   .    │ L WIN  │
-       │ L MUX  │        │        │        │        │               │        │        │        │        │   /    │
+       │        │        │        │        │        │               │        │        │        │        │   /    │
        └────────┴────────┴────────┼────────┼────────┤               ├────────┼────────┼────────┴────────┴────────┘
                                   │  CTRL  │ SHIFT  │               │ L NUM  │ L NAV  │
                                   │ ESCAPE │ SPACE  │               │ RETURN │ BSPACE │
@@ -100,8 +133,8 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
     LAYOUT_4x10(
         KC_Q,   KC_W,    KC_E,    KC_R,     KC_T,                   KC_Y,     KC_U,      KC_I,    KC_O,   KC_P,
         KC_A,   KC_S,    KC_D,    KC_F,     KC_G,                   KC_H,     KC_J,      KC_K,    KC_L,   LSYM_SCLN,
-        Z_MUX,  KC_X,    KC_C,    KC_V,     KC_B,                   KC_N,     KC_M,      KC_COMM, KC_DOT, LWIN_SLASH,
-        XXX,    XXX,     XXX,     CTRL_ESC, LNAV_ENT,               SHFT_SPC, LSYM_BSPC, XXX,     XXX,    XXX
+        KC_Z,   KC_X,    KC_C,    KC_V,     KC_B,                   KC_N,     KC_M,      KC_COMM, KC_DOT, LWIN_SLASH,
+        XXX,    XXX,     XXX,     CTRL_ESC, SHFT_SPC,               LNUM_ENT, LNAV_BSPC, XXX,     XXX,    XXX
     ),
 
     /***** Layer SYM
@@ -144,29 +177,34 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
     *****/
 
     LAYOUT_4x10(
-        XXX,    KC_PGDN, KC_UP,   KC_PGUP,  XXX,                    KC_PLUS, KC_7,    KC_8,    KC_9,    KC_COLON,
-        CTAB,   KC_LEFT, KC_DOWN, KC_RIGHT, XXX,                    KC_MINS, KC_4,    KC_5,    KC_6,    KC_0,
-        CSTAB,  KC_END,  KC_INS,  KC_HOME,  XXX,                    KC_EQL,  KC_1,    KC_2,    KC_3,    KC_DOT,
-        XXX,    XXX,     XXX,     ___,      ___,                    ___,     ___,     XXX,     XXX,     XXX
+        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_VOLUP,               XXX,      KC_PGUP, KC_UP,   KC_PGDN,  XXX,
+        KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_VOLDN,               SHFT_INS, KC_LEFT, KC_DOWN, KC_RIGHT, CTAB,
+        KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_MUTE,                XXX,      KC_HOME, KC_INS,  KC_END,   CSTAB,
+        XXX,     XXX,     XXX,     ___,      ___,                   ___,      ___,     XXX,     XXX,      XXX
     ),
-
 
     /***** Layer NUM
        ┌────────┬────────┬────────┬────────┬────────┐               ┌────────┬────────┬────────┬────────┬────────┐
-       │        │        │        │        │        │               │   +    │   7    │   8    │   9    │   :    │
-       │        │        │        │        │        │               │        │        │        │        │        │
+       │ CTRL+A │ CTRL+A │  Alt   │  Alt   │        │               │   +    │   7    │   8    │   9    │   :    │
+       │   -    │   +    │   A    │   S    │        │               │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤               ├────────┼────────┼────────┼────────┼────────┤
-       │        │        │        │        │        │               │   -    │   4    │   5    │   6    │   0    │
-       │        │        │        │        │        │               │        │        │        │        │        │
+       │ CTRL+A │ CTRL+A │  Alt   │  Alt   │        │               │   -    │   4    │   5    │   6    │   0    │
+       │   <    │   >    │   Q    │   W    │        │               │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤               ├────────┼────────┼────────┼────────┼────────┤
-       │        │        │        │        │        │               │   =    │   1    │   2    │   3    │   .    │
-       │        │        │        │        │        │               │        │        │        │        │        │
+       │        │        │  Alt   │  Alt   │        │               │   =    │   1    │   2    │   3    │   .    │
+       │        │        │   1    │   2    │        │               │        │        │        │        │        │
        └────────┴────────┴────────┼────────┼────────┤               ├────────┼────────┼────────┴────────┴────────┘
                                   │  CTRL  │ SHIFT  │               │*L NUM *│ L NAV  │
                                   │ ESCAPE │ SPACE  │               │*RETURN*│ BSPACE │
                                   └────────┴────────┘               └────────┴────────┘
     *****/
 
+    LAYOUT_4x10(
+        KC_MACRO1, KC_MACRO2, LALT(KC_A), LALT(KC_S), XXX,          KC_PLUS, KC_7,    KC_8,    KC_9,    KC_COLON,
+        KC_MACRO3, KC_MACRO4, LALT(KC_Q), LALT(KC_W), XXX,          KC_MINS, KC_4,    KC_5,    KC_6,    KC_0,
+        XXX,       XXX,       LALT(KC_1), LALT(KC_2), XXX,          KC_EQL,  KC_1,    KC_2,    KC_3,    KC_DOT,
+        XXX,       XXX,       XXX,        ___,        ___,          ___,     ___,     XXX,     XXX,     XXX
+    ),
 
     /***** Layer WIN
 
@@ -177,8 +215,8 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │                 │        │        │        │        │        │
        │   1    │   2    │   3    │   4    │  Tab   │                 │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤                 ├────────┼────────┼────────┼────────┼────────┤
-       │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │                 │        │        │        │ SHIFT  │*L WIN *│
-       │  F1    │  F2    │  F3    │  F4    │ Return │                 │        │        │        │        │*  /   *│
+       │  Gui+  │  Gui+  │  Gui+  │  Gui+  │  Gui+  │                 │ Screen │        │        │ SHIFT  │*L WIN *│
+       │  F1    │  F2    │  F3    │  F4    │ Return │                 │ Saver  │        │        │        │*  /   *│
        └────────┴────────┴────────┼────────┼────────┤                 ├────────┼────────┼────────┴────────┴────────┘
                                   │  Gui+  │  Gui+  │                 │ L NUM  │ L NAV  │
                                   │   Z    │   F    │                 │ RETURN │ BSPACE │
@@ -186,60 +224,9 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
     *****/
 
     LAYOUT_4x10(
-        LSHIFT(KC_INSERT), LGUI(KC_C),  LGUI(KC_V),  LGUI(KC_R), LGUI(KC_SPACE),   XXX,     XXX,     XXX,  XXX,        XXX,
-        LGUI(KC_1),        LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4), LGUI(KC_TAB),     XXX,     XXX,     XXX,  XXX,        XXX,
-        LGUI(KC_F1),       LGUI(KC_F2), LGUI(KC_F3), LGUI(KC_F4),LGUI(KC_ENT),     XXX,     XXX,     XXX,  MOD_LSHIFT, ___,
-        XXX,               XXX,         XXX,         LGUI(KC_Z), LGUI(KC_F),       ___,     ___,     XXX,  XXX,        XXX
-    ),
-
-    /*
-       Layer MUX
-                alt+a/s - cycle panes
-                alt+q/w - cycle windows
-                alt+1/2 - cycle sessions
-
-       ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
-       │        │        │        │        │        │         │        │  Alt   │  Alt   │        │        │
-       │        │        │        │        │        │         │        │   A    │   S    │        │        │
-       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │        │        │        │        │        │         │        │  Alt   │  Alt   │        │        │
-       │        │        │        │        │        │         │        │   Q    │   W    │        │        │
-       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │*  Z   *│ VolUp  │ VolDn  │ VolMut │ Screen │         │        │  Alt   │  Alt   │        │        │
-       │* MUX  *│        │        │        │ Saver  │         │        │   1    │   2    │        │        │
-       └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
-                                  │  CTRL  │ L NAV  │         │ SHIFT  │ L SYM  │
-                                  │ ESCAPE │ RETURN │         │ SPACE  │ BSPACE │
-                                  └────────┴────────┘         └────────┴────────┘
-    */
-
-    LAYOUT_4x10(
-        XXX,     XXX,      XXX,      XXX,     XXX,            XXX,     LALT(KC_A), LALT(KC_S), XXX, XXX,
-        XXX,     XXX,      XXX,      XXX,     XXX,            XXX,     LALT(KC_Q), LALT(KC_W), XXX, XXX,
-        ___,     KC_VOLUP, KC_VOLDN, KC_MUTE, KC_SCR_SVR,     XXX,     LALT(KC_1), LALT(KC_2), XXX, XXX,
-        XXX,     XXX,      XXX,      ___,     ___,            ___,      ___,       XXX,        XXX, XXX
-    ),
-
-    /***** Layer Fun
-       ┌────────┬────────┬────────┬────────┬────────┐         ┌────────┬────────┬────────┬────────┬────────┐
-       │  F01   │  F02   │  F03   │  F04   │        │         │        │        │        │        │        │
-       │        │        │        │        │        │         │        │        │        │        │        │
-       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │  F05   │  F06   │  F07   │  F08   │        │         │        │*      *│        │        │        │
-       │        │        │        │        │        │         │        │*      *│        │        │        │
-       ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-       │  F09   │  F10   │  F11   │  F12   │        │         │        │        │        │        │        │
-       │        │        │        │        │        │         │        │        │        │        │        │
-       └────────┴────────┴────────┼────────┼────────┤         ├────────┼────────┼────────┴────────┴────────┘
-                                  │  CTRL  │ SHIFT  │         │*      *│        │
-                                  │ ESCAPE │ SPACE  │         │*      *│        │
-                                  └────────┴────────┘         └────────┴────────┘
-     *****/
-
-    LAYOUT_4x10(
-        KC_F1,   KC_F2,   KC_F3,   KC_F4,   XXX,              XXX, XXX, XXX, XXX, XXX,
-        KC_F5,   KC_F6,   KC_F7,   KC_F8,   XXX,              XXX, XXX, XXX, XXX, XXX,
-        KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXX,              XXX, XXX, XXX, XXX, XXX,
-        XXX,     XXX,     XXX,     ___,     ___,              ___, ___, XXX, XXX, XXX
+        LSHIFT(KC_INSERT), LGUI(KC_C),  LGUI(KC_V),  LGUI(KC_R), LGUI(KC_SPACE),   XXX,        XXX,  XXX,  XXX,        XXX,
+        LGUI(KC_1),        LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4), LGUI(KC_TAB),     XXX,        XXX,  XXX,  XXX,        XXX,
+        LGUI(KC_F1),       LGUI(KC_F2), LGUI(KC_F3), LGUI(KC_F4),LGUI(KC_ENT),     KC_SCR_SVR, XXX,  XXX,  MOD_LSHIFT, ___,
+        XXX,               XXX,         XXX,         LGUI(KC_Z), LGUI(KC_F),       ___,        ___,  XXX,  XXX,        XXX
     )
 });
