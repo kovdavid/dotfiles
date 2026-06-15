@@ -29,10 +29,10 @@ bindsym $mod+space exec rofi -show
 bindsym $mod+XF86Tools   exec i3_cycle_workspace left sequential
 # F14
 bindsym $mod+XF86Launch5 exec i3_cycle_workspace right sequential
-# F15
-bindsym $mod+XF86Launch6 exec i3_cycle_workspace left move_window sequential
-# F16
-bindsym $mod+XF86Launch7 exec i3_cycle_workspace right move_window sequential
+# Shift+F13
+bindsym $mod+Shift+XF86Tools exec i3_cycle_workspace left move_window sequential
+# Shift+F14
+bindsym $mod+Shift+XF86Launch5 exec i3_cycle_workspace right move_window sequential
 
 bindsym XF86AudioMute exec "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 bindsym XF86AudioMicMute exec "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
