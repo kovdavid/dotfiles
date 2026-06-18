@@ -11,8 +11,10 @@
 
 #define CTRL_ESC    DM(MOD_LCTRL, KC_ESCAPE)
 #define CTRL_TAB    DM(MOD_LCTRL, KC_TAB)
+#define CTRL_BSPC   THDM(MOD_LCTRL, KC_BSPC)
 #define LNUM_ENT    THDL(LNUM, KC_ENTER)
-#define SHFT_SPC    THDM(MOD_RSHIFT, KC_SPACE)
+#define LNUM_BSPC   THDL(LNUM, KC_BSPC)
+#define SHFT_SPC    DM(MOD_RSHIFT, KC_SPACE)
 #define LNAV_BSPC   THDL(LNAV, KC_BSPC)
 #define LNAV_TAB    THDL(LNAV, KC_TAB)
 #define LSYM_SCLN   DSL(LSYM, KC_SEMICOLON)
@@ -42,7 +44,7 @@ const KeyCoords combo13[] = { { 2, 2 }, { 2, 3 } }; // CTRL + SHFT
 const KeyCoords combo14[] = { { 2, 6 }, { 2, 7 } }; // CTRL + SHFT
 
 Combo combos[] = COMBOS({
-    COMBO(combo1, KC_BACKSPACE),
+    COMBO(combo1, KC_ENTER),
     COMBO(combo2, LCTRL(KC_A)),
     COMBO(combo3, LCTRL(KC_W)),
 
@@ -135,10 +137,10 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
     *****/
 
     LAYOUT_4x10(
-        KC_Q,   KC_W,    KC_E,    KC_R,     KC_T,                   KC_Y,     KC_U,      KC_I,    KC_O,   KC_P,
-        KC_A,   KC_S,    KC_D,    KC_F,     KC_G,                   KC_H,     KC_J,      KC_K,    KC_L,   LSYM_SCLN,
-        KC_Z,   KC_X,    KC_C,    KC_V,     KC_B,                   KC_N,     KC_M,      KC_COMM, KC_DOT, LWIN_SLASH,
-        XXX,    XXX,     XXX,     CTRL_ESC, SHFT_SPC,               LNUM_ENT, LNAV_TAB,  XXX,     XXX,    XXX
+        KC_Q,   KC_W,    KC_E,    KC_R,     KC_T,                   KC_Y,      KC_U,      KC_I,    KC_O,   KC_P,
+        KC_A,   KC_S,    KC_D,    KC_F,     KC_G,                   KC_H,      KC_J,      KC_K,    KC_L,   LSYM_SCLN,
+        KC_Z,   KC_X,    KC_C,    KC_V,     KC_B,                   KC_N,      KC_M,      KC_COMM, KC_DOT, LWIN_SLASH,
+        XXX,    XXX,     XXX,     CTRL_ESC, SHFT_SPC,               LNUM_BSPC, LNAV_TAB,  XXX,     XXX,    XXX
     ),
 
     /***** Layer SYM
