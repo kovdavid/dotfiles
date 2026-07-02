@@ -24,7 +24,7 @@
 #define CTAB  LCTRL(KC_TAB)
 #define CSTAB LCTRL(KC_TAB) | MOD_LSHIFT
 
-const KeyCoords combo1[] = { { 1, 2 }, { 1, 3 } }; // BackSpace
+const KeyCoords combo1[] = { { 1, 2 }, { 1, 3 } }; // Esc
 const KeyCoords combo2[] = { { 0, 6 }, { 0, 7 } }; // CTRL+A
 const KeyCoords combo3[] = { { 0, 7 }, { 0, 8 } }; // CTRL+W
 
@@ -44,7 +44,7 @@ const KeyCoords combo13[] = { { 2, 2 }, { 2, 3 } }; // CTRL + SHFT
 const KeyCoords combo14[] = { { 2, 6 }, { 2, 7 } }; // CTRL + SHFT
 
 Combo combos[] = COMBOS({
-    COMBO(combo1, KC_ENTER),
+    COMBO(combo1, KC_ESCAPE),
     COMBO(combo2, LCTRL(KC_A)),
     COMBO(combo3, LCTRL(KC_W)),
 
@@ -108,7 +108,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
      0 │        │        │        │        │        │         │        │      CTRL     CTRL       │        │
        │        │        │        │        │        │         │        │        A        W        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-     1 │        │      L NUM  BackSpace    │        │         │        │        │       Del       │        │
+     1 │        │      L NUM     ESC       │        │         │        │        │       Del       │        │
        │        │        │        │        │        │         │        │        │        │        │        │
        ├────────┼─ GUI  ─┼─ CTRL ─┼─ SHFT ─┼────────┤         ├────────┼─ SHFT ─┼─ CTRL ─┼─ ALT  ─┼────────┤
      2 │        │        │       C+S       │        │         │        │       C+S       │        │        │
@@ -132,15 +132,15 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        │        │        │        │        │        │               │        │        │        │        │   /    │
        └────────┴────────┴────────┼────────┼────────┤               ├────────┼────────┼────────┴────────┴────────┘
                                   │  CTRL  │ SHIFT  │               │ L NUM  │ L NAV  │
-                                  │  ESC   │ SPACE  │               │ RETURN │ TAB    │
+                                  │  BCSP  │ SPACE  │               │ RETURN │ TAB    │
                                   └────────┴────────┘               └────────┴────────┘
     *****/
 
     LAYOUT_4x10(
-        KC_Q,   KC_W,    KC_E,    KC_R,     KC_T,                   KC_Y,      KC_U,      KC_I,    KC_O,   KC_P,
-        KC_A,   KC_S,    KC_D,    KC_F,     KC_G,                   KC_H,      KC_J,      KC_K,    KC_L,   LSYM_SCLN,
-        KC_Z,   KC_X,    KC_C,    KC_V,     KC_B,                   KC_N,      KC_M,      KC_COMM, KC_DOT, LWIN_SLASH,
-        XXX,    XXX,     XXX,     CTRL_ESC, SHFT_SPC,               LNUM_BSPC, LNAV_TAB,  XXX,     XXX,    XXX
+        KC_Q,   KC_W,    KC_E,    KC_R,      KC_T,                  KC_Y,      KC_U,      KC_I,    KC_O,   KC_P,
+        KC_A,   KC_S,    KC_D,    KC_F,      KC_G,                  KC_H,      KC_J,      KC_K,    KC_L,   LSYM_SCLN,
+        KC_Z,   KC_X,    KC_C,    KC_V,      KC_B,                  KC_N,      KC_M,      KC_COMM, KC_DOT, LWIN_SLASH,
+        XXX,    XXX,     XXX,     CTRL_BSPC, SHFT_SPC,              LNUM_ENT,  LNAV_TAB,  XXX,     XXX,    XXX
     ),
 
     /***** Layer SYM
@@ -155,7 +155,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        │        │        │        │        │        │               │        │        │        │        │        │
        └────────┴────────┴────────┼────────┼────────┤               ├────────┼────────┼────────┴────────┴────────┘
                                   │  CTRL  │ SHIFT  │               │ L NUM  │ L NAV  │
-                                  │  ESC   │ SPACE  │               │ RETURN │ TAB    │
+                                  │  BCSP  │ SPACE  │               │ RETURN │ TAB    │
                                   └────────┴────────┘               └────────┴────────┘
     *****/
 
@@ -178,7 +178,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        │        │        │        │        │        │               │        │        │        │        │        │
        └────────┴────────┴────────┼────────┼────────┤               ├────────┼────────┼────────┴────────┴────────┘
                                   │  CTRL  │ SHIFT  │               │ L NUM  │*L NAV *│
-                                  │  ESC   │ SPACE  │               │ RETURN │*TAB   *│
+                                  │  BCSP  │ SPACE  │               │ RETURN │*TAB   *│
                                   └────────┴────────┘               └────────┴────────┘
     *****/
 
@@ -201,7 +201,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
        │   <    │   >    │   1    │   2    │        │               │        │        │        │        │        │
        └────────┴────────┴────────┼────────┼────────┤               ├────────┼────────┼────────┴────────┴────────┘
                                   │  CTRL  │ SHIFT  │               │*L NUM *│ L NAV  │
-                                  │  ESC   │ SPACE  │               │*RETURN*│ TAB    │
+                                  │  BCSP  │ SPACE  │               │*RETURN*│ TAB    │
                                   └────────┴────────┘               └────────┴────────┘
     *****/
 
