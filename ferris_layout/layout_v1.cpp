@@ -24,7 +24,8 @@
 #define CTAB  LCTRL(KC_TAB)
 #define CSTAB LCTRL(KC_TAB) | MOD_LSHIFT
 
-const KeyCoords combo1[] = { { 1, 2 }, { 1, 3 } }; // Esc
+// const KeyCoords combo1[] = { { 1, 2 }, { 1, 3 } }; // Esc
+const KeyCoords combo1[] = { { 1, 3 }, { 1, 6 } }; // Esc
 const KeyCoords combo2[] = { { 0, 6 }, { 0, 7 } }; // CTRL+A
 const KeyCoords combo3[] = { { 0, 7 }, { 0, 8 } }; // CTRL+W
 
@@ -42,6 +43,8 @@ const KeyCoords combo11[] = { { 1, 7 }, { 1, 8 } }; // Del
 const KeyCoords combo12[] = { { 2, 1 }, { 2, 3 } }; // GUI + SHFT
 const KeyCoords combo13[] = { { 2, 2 }, { 2, 3 } }; // CTRL + SHFT
 const KeyCoords combo14[] = { { 2, 6 }, { 2, 7 } }; // CTRL + SHFT
+
+const KeyCoords combo15[] = { { 1, 6 }, { 1, 7 } }; // Esc
 
 Combo combos[] = COMBOS({
     COMBO(combo1, KC_ESCAPE),
@@ -61,7 +64,9 @@ Combo combos[] = COMBOS({
 
     COMBO(combo12, OSM(MOD_LGUI | MOD_LSHIFT)),
     COMBO(combo13, OSM(MOD_LCTRL | MOD_LSHIFT)),
-    COMBO(combo14, OSM(MOD_RCTRL | MOD_RSHIFT))
+    COMBO(combo14, OSM(MOD_RCTRL | MOD_RSHIFT)),
+
+    COMBO(combo15, KC_ESCAPE)
 });
 
 MacroStep m1_steps[] = {
@@ -108,7 +113,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
      0 │        │        │        │        │        │         │        │      CTRL     CTRL       │        │
        │        │        │        │        │        │         │        │        A        W        │        │
        ├────────┼────────┼────────┼────────┼────────┤         ├────────┼────────┼────────┼────────┼────────┤
-     1 │        │      L NUM     ESC       │        │         │        │        │       Del       │        │
+     1 │        │        │        │        │        │         │        │       ESC      Del       │        │
        │        │        │        │        │        │         │        │        │        │        │        │
        ├────────┼─ GUI  ─┼─ CTRL ─┼─ SHFT ─┼────────┤         ├────────┼─ SHFT ─┼─ CTRL ─┼─ ALT  ─┼────────┤
      2 │        │        │       C+S       │        │         │        │       C+S       │        │        │
