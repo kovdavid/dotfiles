@@ -37,7 +37,6 @@ const KeyCoords combo7[] = { { 1, 6 }, { 2, 6 } }; // RIGHT MODS: SHFT
 const KeyCoords combo8[] = { { 1, 7 }, { 2, 7 } }; // RIGHT MODS: CTRL
 const KeyCoords combo9[] = { { 1, 8 }, { 2, 8 } }; // RIGHT MODS: ALT
 
-const KeyCoords combo10[] = { { 1, 1 }, { 1, 2 } }; // LNUM
 const KeyCoords combo11[] = { { 1, 7 }, { 1, 8 } }; // Del
 
 const KeyCoords combo12[] = { { 2, 1 }, { 2, 3 } }; // GUI + SHFT
@@ -59,7 +58,6 @@ Combo combos[] = COMBOS({
     COMBO(combo8, OSM(MOD_RCTRL)),
     COMBO(combo9, OSM(MOD_LALT)),
 
-    COMBO(combo10, LH(LNUM)),
     COMBO(combo11, KC_DELETE),
 
     COMBO(combo12, OSM(MOD_LGUI | MOD_LSHIFT)),
@@ -196,25 +194,24 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
 
     /***** Layer NUM
        ┌────────┬────────┬────────┬────────┬────────┐               ┌────────┬────────┬────────┬────────┬────────┐
-       │ CTRL+A │ CTRL+A │  Alt   │  Alt   │        │               │   +    │   7    │   8    │   9    │   :    │
-       │   -    │   +    │   A    │   S    │        │               │        │        │        │        │        │
+       │   :    │   7    │   8    │   9    │   +    │               │        │  Alt   │  Alt   │ CTRL+A │ CTRL+A │
+       │        │        │        │        │        │               │        │   A    │   S    │   -    │   +    │
        ├────────┼────────┼────────┼────────┼────────┤               ├────────┼────────┼────────┼────────┼────────┤
-       │  GUI+  │  GUI+  │  Alt   │  Alt   │        │               │   -    │   4    │   5    │   6    │   0    │
-       │  F13   │  F14   │   Q    │   W    │        │               │        │        │        │        │        │
+       │   0    │   4    │   5    │   6    │   -    │               │        │  Alt   │  Alt   │  GUI+  │  GUI+  │
+       │        │        │        │        │        │               │        │   Q    │   W    │  F13   │  F14   │
        ├────────┼────────┼────────┼────────┼────────┤               ├────────┼────────┼────────┼────────┼────────┤
-       │ CTRL+A │ CTRL+A │  Alt   │  Alt   │        │               │   =    │   1    │   2    │   3    │   .    │
-       │   <    │   >    │   1    │   2    │        │               │        │        │        │        │        │
+       │   .    │   1    │   2    │   3    │   =    │               │        │  Alt   │  Alt   │ CTRL+A │ CTRL+A │
+       │        │        │        │        │        │               │        │   1    │   2    │   <    │   >    │
        └────────┴────────┴────────┼────────┼────────┤               ├────────┼────────┼────────┴────────┴────────┘
                                   │  CTRL  │ SHIFT  │               │*L NUM *│ L NAV  │
                                   │  BCSP  │ SPACE  │               │*RETURN*│ TAB    │
                                   └────────┴────────┘               └────────┴────────┘
     *****/
-
     LAYOUT_4x10(
-        KC_MACRO1,    KC_MACRO2,    LALT(KC_A), LALT(KC_S), XXX,          KC_PLUS, KC_7,    KC_8,    KC_9,    KC_COLON,
-        LGUI(KC_F13), LGUI(KC_F14), LALT(KC_Q), LALT(KC_W), XXX,          KC_MINS, KC_4,    KC_5,    KC_6,    KC_0,
-        KC_MACRO3,    KC_MACRO4,    LALT(KC_1), LALT(KC_2), XXX,          KC_EQL,  KC_1,    KC_2,    KC_3,    KC_DOT,
-        XXX,          XXX,          XXX,        ___,        ___,          ___,     ___,     XXX,     XXX,     XXX
+        KC_COLON, KC_7, KC_8, KC_9, KC_PLUS,                        XXX,  LALT(KC_A), LALT(KC_S),  KC_MACRO1,    KC_MACRO2,
+        KC_0,     KC_4, KC_5, KC_6, KC_MINS,                        XXX,  LALT(KC_Q), LALT(KC_W),  LGUI(KC_F13), LGUI(KC_F14),
+        KC_DOT,   KC_1, KC_2, KC_3, KC_EQL,                         XXX,  LALT(KC_1), LALT(KC_2),  KC_MACRO3,    KC_MACRO4,
+        XXX,      XXX,  XXX,  ___,  ___,                            XXX,  ___,        ___,         XXX,          XXX
     ),
 
     /***** Layer WIN
