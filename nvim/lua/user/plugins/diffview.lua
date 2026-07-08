@@ -25,6 +25,20 @@ return {
     { "<leader>do", ":DiffviewOpen", desc = "DiffviewOpen", silent = false },
     { "<leader>df", ":DiffviewFileHistory %<CR>", desc = "DiffviewFileHistory", silent = false },
     { "<leader>dc", ":DiffviewClose<CR>", desc = "DiffviewClose" },
-    { "<leader>dt", ":DiffviewToggleFiles<CR>", desc = "DiffviewToggleFiles" },
+    {
+      "<leader>dt",
+      function()
+        require("diffview.actions").toggle_files()
+        local windows = vim.api.nvim_tabpage_list_wins(0)
+
+        for _, win in ipairs(windows) do
+          vim.wo[win].number = false
+          vim.wo[win].relativenumber = false
+          vim.wo[win].signcolumn = "no"
+          vim.wo[win].foldcolumn = "0"
+        end
+      end,
+      desc = "DiffviewToggleFiles",
+    },
   },
 }
