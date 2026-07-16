@@ -27,7 +27,7 @@
 // const KeyCoords combo1[] = { { 1, 2 }, { 1, 3 } }; // Esc
 const KeyCoords combo1[] = { { 1, 3 }, { 1, 6 } }; // Esc
 const KeyCoords combo2[] = { { 0, 6 }, { 0, 7 } }; // CTRL+A
-const KeyCoords combo3[] = { { 0, 7 }, { 0, 8 } }; // CTRL+W
+const KeyCoords combo3[] = { { 0, 6 }, { 0, 7 }, { 0, 8 } }; // CTRL+W
 
 const KeyCoords combo4[] = { { 1, 1 }, { 2, 1 } }; // LEFT MODS: GUI
 const KeyCoords combo5[] = { { 1, 2 }, { 2, 2 } }; // LEFT MODS: CTRL
