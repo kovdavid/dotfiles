@@ -14,6 +14,10 @@ TERM = "alacritty"
 [font]
 size = 16
 
+[font.offset]
+x = 0
+y = 2
+
 [[mouse.bindings]]
 action = "PasteSelection"
 mouse = "Middle"
