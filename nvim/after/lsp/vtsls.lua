@@ -1,11 +1,8 @@
 return {
     cmd = { "vtsls", "--stdio", "--max-old-space-size=4096" },
-    root_dir = function(bufnr, on_dir)
-        local project_root = vim.fs.root(bufnr, { ".vimproject", ".git" }) or vim.fn.getcwd()
-        on_dir(project_root)
-    end,
+    root_dir = require("user.lsp_root"),
     on_attach = function(client, bufnr)
-        vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, { buffer = bufnr })
+        vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, { buf = bufnr })
     end,
     settings = {
         typescript = {

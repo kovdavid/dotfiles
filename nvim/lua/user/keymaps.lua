@@ -127,7 +127,7 @@ keymap({ "n", "v" }, "k", "gk", opts)
 keymap("n", "Q", "<NOP>", opts)                                                    -- disable Ex mode
 keymap("x", "Q", ":normal @q <CR>", opts)                                          -- execute '@q' macro
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec2([[
 function! CloseHiddenBuffers()
     let visible_buffers = {}
 
@@ -143,7 +143,7 @@ function! CloseHiddenBuffers()
         endif
     endfor
 endfunction
-]], false)
+]], { output = false })
 
 keymap("n", "<leader>cl", ":call CloseHiddenBuffers()<CR>", opts)
 
@@ -152,3 +152,7 @@ keymap("n", "<space>", "za", opts)
 keymap("n", "<leader>tw", "<cmd>:%s/\\s\\+$//e<CR>", opts)
 
 keymap("i", "<c-l>", "<c-x><c-l>", opts)
+
+-- built-in commenting, kept on the historical <leader>cc chord
+vim.keymap.set("n", "<leader>cc", "gcc", { remap = true, desc = "comment line" })
+vim.keymap.set("x", "<leader>cc", "gc", { remap = true, desc = "comment selection" })

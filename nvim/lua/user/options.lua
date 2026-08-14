@@ -2,7 +2,10 @@ local options = {
     backup = false,                          -- creates a backup file
     clipboard = "unnamedplus,unnamed",       -- override both primary and clipboard
     cmdheight = 1,                           -- more space in the neovim command line for displaying messages
-    completeopt = { "menuone", "noselect" }, -- mostly just for cmp
+    complete = ".^5,w^5,b^5,u^5",            -- mini.completion's <C-n> fallback; no "o", LSP is stage one
+    completeopt = "menuone,noselect,fuzzy,nosort",
+    pumborder = "rounded",
+    pummaxwidth = 60,
     conceallevel = 0,                        -- so that `` is visible in markdown files
     fileencoding = "utf-8",                  -- the encoding written to a file
     hlsearch = true,                         -- highlight all matches on previous search pattern
@@ -54,7 +57,7 @@ local options = {
     cursorbind = false,
     scrollbind = false,
 
-    fillchars = { vert = '│', stlnc = '—'},
+    fillchars = { vert = '│', stlnc = '—', trunc = '…'},
 
     foldmethod = "indent",
     foldlevel = 20,
@@ -64,13 +67,13 @@ local options = {
 }
 
 local undodir = os.getenv("VIM_UNDODIR")
-if vim.fn.isdirectory(undodir) then
+if undodir and vim.fn.isdirectory(undodir) == 1 then
     options["undodir"] = undodir
     options["undofile"] = true
 end
 
 local swapdir = os.getenv("VIM_SWAPDIR")
-if swapdir and vim.fn.isdirectory(swapdir) then
+if swapdir and vim.fn.isdirectory(swapdir) == 1 then
     options["directory"] = swapdir .. "//"
     options["swapfile"] = true
 end
@@ -81,10 +84,6 @@ end
 
 for key, value in pairs(options) do
   vim.opt[key] = value
-end
-
-if vim.fn.has('nvim-0.12') == 1 then
-    vim.cmd("packadd nvim.undotree")
 end
 
 vim.opt.shortmess:append("c")                           -- don't give |ins-completion-menu| messages

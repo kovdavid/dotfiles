@@ -2,10 +2,11 @@ require("user.utils")
 require("user.filetype")
 require("user.globals")
 require("user.options")
+require("user.diagnostics")
 require("user.keymaps")
 require("user.lazy")
 require("user.autocmd")
-require("user.cmp")
+require("user.completion")
 
 require("user.colors")
 

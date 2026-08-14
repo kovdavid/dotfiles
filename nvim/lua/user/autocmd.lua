@@ -15,23 +15,19 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function ()
         local opts = { noremap = true, silent = true }
         vim.keymap.set("n", "<leader>rr", ":!node %<CR>", opts)
-        vim.keymap.set("n", "<leader>lv",
-            function()
-                vim.cmd("LspStop vtsls")
-                vim.cmd("LspStop tsgo")
+        local function switch_ts_server(name)
+            return function()
+                vim.cmd("lsp disable vtsls")
+                vim.cmd("lsp disable tsc")
                 vim.diagnostic.reset()
-                vim.cmd("LspStart vtsls")
-            end,
+                vim.cmd("lsp enable " .. name)
+            end
+        end
+        vim.keymap.set("n", "<leader>lv", switch_ts_server("vtsls"),
             {noremap = true, silent = true, desc = "Restart vtsls"}
         )
-        vim.keymap.set("n", "<leader>lt",
-            function()
-                vim.cmd("LspStop vtsls")
-                vim.cmd("LspStop tsgo")
-                vim.diagnostic.reset()
-                vim.cmd("LspStart tsgo")
-            end,
-            {noremap = true, silent = true, desc = "Restart tsgo"}
+        vim.keymap.set("n", "<leader>lt", switch_ts_server("tsc"),
+            {noremap = true, silent = true, desc = "Restart tsc"}
         )
     end,
 })
@@ -78,7 +74,7 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
           vim.cmd("setlocal relativenumber")
         end
 
-        if vim.api.nvim_win_get_option(0, "diff") then
+        if vim.wo[0].diff then
             vim.cmd("setlocal wrap")
         end
     end
@@ -98,7 +94,7 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
     group = markdown_group,
     pattern = {"todo.md", "TODO.md"},
     callback = function (ev)
-        local keymap_options = { buffer = ev.buf, silent = true, noremap = true }
+        local keymap_options = { buf = ev.buf, silent = true, noremap = true }
         vim.keymap.set("i", "<F5>", "<C-R>=strftime('%F')<CR>", keymap_options)
         vim.keymap.set("i", "<F6>", "<C-R>=strftime('%FT%T')<CR>", keymap_options)
     end

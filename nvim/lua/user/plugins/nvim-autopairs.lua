@@ -1,4 +1,4 @@
 return {
   "windwp/nvim-autopairs",
-  config = true,
+  opts = { map_cr = false },
 }

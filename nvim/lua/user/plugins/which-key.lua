@@ -4,13 +4,21 @@ return {
   init = function()
     vim.o.timeout = true
     vim.o.timeoutlen = 200
-
-    vim.cmd("unmap gc")
-    vim.cmd("unmap gcc")
   end,
   opts = {},
   keys = {
-    { "<leader>dw", ":windo set diffopt+=iwhiteall<CR>", desc = "diff +iwhite" },
+    {
+      "<leader>dw",
+      function()
+        if vim.tbl_contains(vim.opt.diffopt:get(), "iwhiteall") then
+          vim.opt.diffopt:remove("iwhiteall")
+        else
+          vim.opt.diffopt:append("iwhiteall")
+        end
+        vim.cmd("diffupdate")
+      end,
+      desc = "toggle diff iwhiteall",
+    },
     { "<leader>du", ":windo diffupdate<CR>", desc = "diff update" },
     { "<leader>db", ":windo set scrollbind!<CR>", desc = "diff scrollbind!" },
 
@@ -95,7 +103,8 @@ return {
     {
       "<leader>u",
       function()
-        require("undotree").open()
+        vim.cmd.packadd("nvim.undotree")
+        vim.cmd("Undotree")
       end,
       desc = "undotree",
     },
@@ -122,7 +131,7 @@ return {
     {
       "<leader>ld",
       function()
-        vim.lsp.set_log_level(vim.log.levels.DEBUG)
+        vim.lsp.log.set_level(vim.log.levels.DEBUG)
         vim.lsp.log.set_format_func(vim.inspect)
       end,
       desc = "debug",

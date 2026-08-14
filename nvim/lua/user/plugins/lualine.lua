@@ -8,6 +8,9 @@ return {
     options = {
       theme = "zenburned",
     },
+    sections = {
+      lualine_c = { "filename", vim.ui.progress_status },
+    },
     inactive_sections = {
       lualine_x = {
         {

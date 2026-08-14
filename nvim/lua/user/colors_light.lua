@@ -1,3 +1,5 @@
-vim.cmd("colorscheme zenbones")
-vim.cmd("set background=light")
--- vim.cmd("colorscheme kanagawa")
+require("user.colors_common").setup({
+    background = "light",
+    -- colorscheme = "kanagawa",
+    colorscheme = "zenbones",
+})
