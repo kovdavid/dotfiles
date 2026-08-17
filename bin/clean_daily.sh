@@ -16,10 +16,20 @@ fi
 
 cd $DIR
 
-touch .envrc
-ENVRC=$(cat .envrc)
+touch mise.toml
+ENVRC=$(cat mise.toml)
 
-source .envrc
+eval "$(mise env -s bash)"
+
+# mise.toml
+# [tools]
+# node = "22"
+#
+# [hooks]
+# enter = """
+# touch dalsik_daemon.log
+# touch drk_daemon.log
+# """
 
 sudo find . -type f -mmin +1440 -delete
 
@@ -31,4 +41,4 @@ fi
 
 sudo find . -type d -empty -delete
 
-echo -e "$ENVRC" > .envrc
+echo -e "$ENVRC" > mise.toml

@@ -23,14 +23,14 @@ export SDKMAN_DIR=/opt/sdkman
 #     fi
 # fi
 
-if [ -f /opt/javascript/completion-for-fnm.bash ] ; then
-    source /opt/javascript/completion-for-fnm.bash
-else
-    if [[ -n "$(which fnm 2>/dev/null)" && -d /opt/javascript ]] ; then
-        fnm completions --shell bash > /opt/javascript/completion-for-fnm.bash
-        source /opt/javascript/completion-for-fnm.bash
-    fi
-fi
+# if [ -f /opt/javascript/completion-for-fnm.bash ] ; then
+#     source /opt/javascript/completion-for-fnm.bash
+# else
+#     if [[ -n "$(which fnm 2>/dev/null)" && -d /opt/javascript ]] ; then
+#         fnm completions --shell bash > /opt/javascript/completion-for-fnm.bash
+#         source /opt/javascript/completion-for-fnm.bash
+#     fi
+# fi
 
 export PATH="$HOME/bin:$JAVA_HOME:$PATH"
 [[ -d /opt/javascript/node ]] && export NODE_PATH="/opt/javascript/node"
@@ -78,14 +78,14 @@ export GO111MODULE=on
 
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 
-[[ -n "$(which direnv 2>/dev/null)" ]] && eval "$(direnv hook bash)"
+# [[ -n "$(which direnv 2>/dev/null)" ]] && eval "$(direnv hook bash)"
 
-if [ -n "$(which fnm 2>/dev/null)" ] ; then
-    export FNM_DIR=/opt/javascript/fnm
-    export FNM_VERSION_FILE_STRATEGY=recursive
-    export FNM_LOGLEVEL=quiet
-    eval "$(fnm env --use-on-cd --shell bash)"
-fi
+# if [ -n "$(which fnm 2>/dev/null)" ] ; then
+#     export FNM_DIR=/opt/javascript/fnm
+#     export FNM_VERSION_FILE_STRATEGY=recursive
+#     export FNM_LOGLEVEL=quiet
+#     eval "$(fnm env --use-on-cd --shell bash)"
+# fi
 
 [[ -f /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 export BASH_SILENCE_DEPRECATION_WARNING=1

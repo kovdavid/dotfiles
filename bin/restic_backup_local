@@ -24,37 +24,39 @@ echo ""
 
 cd "$RESTIC_DIR" || exit 1
 
-if [ ! -f .envrc ]; then
-	echo "$RESTIC_DIR/.envrc is missing"
+if [ ! -f mise.toml ]; then
+	echo "$RESTIC_DIR/mise.toml is missing"
 	echo "Create it with contents:"
 	echo ""
-	echo "export RESTIC_CACHE_DIR=$RESTIC_DIR/cache/local"
-	echo "export RESTIC_REPOSITORY=$RESTIC_DIR/restic"
-	echo "export RESTIC_PASSWORD_FILE=$RESTIC_DIR/.restic_password"
-	echo "export RESTIC_BACKUP_DIR=\"/home/davs\""
+	echo "[env]"
+	echo "RESTIC_CACHE_DIR='$RESTIC_DIR/cache/local'"
+	echo "RESTIC_REPOSITORY='$RESTIC_DIR/restic'"
+	echo "RESTIC_PASSWORD_FILE='$RESTIC_DIR/.restic_password'"
+	echo "RESTIC_BACKUP_DIR='/home/davs'"
 	exit 1
 fi
 
-# shellcheck disable=1091
-source .envrc
 
 if [ "$UPLOAD_TO_B2" == "b2" ]; then
 	echo "####### $(date '+%F %T') Using BlackBlaze"
 
-	if [ ! -f ".envrc.b2" ]; then
+	if [ ! -f "mise.b2.toml" ]; then
 		echo "$RESTIC_DIR/.envrc.b2 is missing"
 		echo "Create it with contents:"
 		echo ""
-		echo "export B2_ACCOUNT_ID=\"account_key_id\""
-		echo "export B2_ACCOUNT_KEY=\"account_key\""
-		echo "export RESTIC_REPOSITORY=\"b2:bucket-name\""
-		echo "export RESTIC_CACHE_DIR=$RESTIC_DIR/cache/b2"
+		echo "[env]"
+		echo "B2_ACCOUNT_ID=\"account_key_id\""
+		echo "B2_ACCOUNT_KEY=\"account_key\""
+		echo "RESTIC_REPOSITORY=\"b2:bucket-name\""
+		echo "RESTIC_CACHE_DIR=\"$RESTIC_DIR/cache/b2\""
 		exit 1
 	fi
 
-	# shellcheck disable=1091
-	source .envrc.b2
+    export MISE_CONFIG_FILE="$PWD/mise.b2.toml"
 fi
+
+# shellcheck disable=1091
+eval "$(mise env -s bash)"
 
 unset DRY_RUN
 if [ "${BASH_ARGV[0]}" == "dry" ]; then
