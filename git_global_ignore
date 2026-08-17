@@ -16,6 +16,7 @@ local.properties
 .idea
 .eslintcache
 worktree/
+mise.toml
 
 # Devel::PDB
 .*-conf

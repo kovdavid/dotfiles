@@ -1,0 +1,3 @@
+[settings]
+trusted_config_paths = []
+verbose = false

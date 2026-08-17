@@ -110,6 +110,9 @@ ln -sf ~/dotfiles/nvim ~/.config/nvim
 rm -rf ~/.config/yazi
 ln -sf ~/dotfiles/yazi ~/.config/yazi
 
+rm -rf ~/.config/mise
+ln -sf ~/dotfiles/mise ~/.config/mise
+
 ln -sf ~/dotfiles/redshift.conf ~/.config/redshift.conf
 
 echo "Linking mimeapps.list"
