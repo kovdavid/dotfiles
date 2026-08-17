@@ -149,7 +149,7 @@ keymap("n", "<leader>cl", ":call CloseHiddenBuffers()<CR>", opts)
 
 keymap("n", "<TAB>", "%", opts)
 keymap("n", "<space>", "za", opts)
-keymap("n", "<leader>tw", "<cmd>:%s/\\s\\+$//e<CR>", opts)
+keymap("n", "<leader>tw", function() require("mini.trailspace").trim() end, opts)
 
 keymap("i", "<c-l>", "<c-x><c-l>", opts)
 

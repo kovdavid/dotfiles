@@ -44,12 +44,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 local all_files_group = vim.api.nvim_create_augroup("all_files", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePre", {
-    group = all_files_group,
-    callback = function ()
-        vim.cmd("%s/\\s\\+$//e")
-    end
-})
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     group = all_files_group,
     pattern = "*.mdx",
@@ -112,16 +106,6 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
     end,
 })
 
--- Restore cursor position on files
-vim.api.nvim_create_autocmd("BufReadPost", {
-    callback = function(args)
-        local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
-        local line_count = vim.api.nvim_buf_line_count(args.buf)
-        if mark[1] > 0 and mark[1] <= line_count then
-            vim.cmd('normal! g`"zz')
-        end
-    end,
-})
 
 -- Show cursorline only on active windows
 vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
