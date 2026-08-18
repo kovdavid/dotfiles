@@ -48,6 +48,7 @@
 /home/davs/.local/share/containers
 /home/davs/.local/share/mise
 /home/davs/.local/share/nvim
+/home/davs/.local/share/flatpak
 /home/davs/.local/share/virtualenv
 /home/davs/.local/share/Trash
 /home/davs/.local/share/bob
@@ -86,6 +87,7 @@
 /home/davs/workspace/techmates/
 /home/davs/workspace/1990/
 /home/davs/workspace/misc
+/home/davs/.var
 
 /mnt/data/java
 
