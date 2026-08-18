@@ -74,4 +74,9 @@ for timer_unit in clean_daily redshift_adjust restic_backup_local restic_work_ba
     systemctl restart --user $timer_unit.timer
 done
 
+if [ ! -f /opt/bash/complete-alias ] ; then
+    curl https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias \
+        > /opt/bash/complete-alias
+fi
+
 echo "DONE"

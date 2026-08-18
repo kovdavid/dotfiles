@@ -14,11 +14,31 @@ shopt -s histappend
 #free Ctrl-S and Ctrl-Q in terminal
 [[ $- == *i* ]] && stty -ixon
 
-bash_include ~/dotfiles/git-completion.bash
 bash_include ~/dotfiles/bash/export
 bash_include ~/dotfiles/bash/alias
 bash_include ~/dotfiles/tmux/completion.bash
 bash_include ~/dotfiles/bash/local
+
+if [ -f /opt/bash/complete-alias ] ; then
+    . /opt/bash/complete-alias
+
+    complete -F _complete_alias m
+    complete -F _complete_alias mr
+    complete -F _complete_alias nr
+    complete -F _complete_alias d
+    complete -F _complete_alias dcp
+
+    complete -F _complete_alias g
+    complete -F _complete_alias ga
+    complete -F _complete_alias gap
+    complete -F _complete_alias gb
+    complete -F _complete_alias gci
+    complete -F _complete_alias gco
+    complete -F _complete_alias gdth
+    complete -F _complete_alias gdtsh
+    complete -F _complete_alias gpo
+    complete -F _complete_alias gst
+fi
 
 function y() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
