@@ -29,6 +29,7 @@ alias ppa='podman ps -a --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"'
 alias pe="podman exec -it"
 alias pr="podman run -it --rm"
 alias disable_parse_git_branch="function parse_git_branch { echo ' DISABLED'; }"
+alias g='git'
 alias ga='git add'
 alias gap='git add --patch'
 alias gaa='git add --all'
