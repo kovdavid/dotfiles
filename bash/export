@@ -52,14 +52,6 @@ if [ -d /opt/go ] ; then
     export PATH="$GOPATH/bin:$PATH"
 fi
 
-if [ -d /opt/mise ] ; then
-    mkdir -p /opt/mise/data /opt/mise/cache
-    export MISE_DATA_DIR=/opt/mise/data
-    export MISE_CACHE_DIR=/opt/mise/cache
-
-    [[ -n "$(which mise 2>/dev/null)" ]] && eval "$(mise activate bash)"
-fi
-
 if [ -d /opt/javascript/npm-packages ] ; then
     export NPM_PACKAGES="/opt/javascript/npm-packages"
     export PATH="$NPM_PACKAGES/bin:$PATH"
@@ -115,4 +107,12 @@ fi
 
 if [ -d /opt/AndroidSDK/home-folder ] ; then
     export ANDROID_USER_HOME=/opt/AndroidSDK/home-folder
+fi
+
+if [ -d /opt/mise ] ; then
+    mkdir -p /opt/mise/data /opt/mise/cache
+    export MISE_DATA_DIR=/opt/mise/data
+    export MISE_CACHE_DIR=/opt/mise/cache
+
+    [[ -n "$(which mise 2>/dev/null)" ]] && eval "$(mise activate bash)"
 fi
