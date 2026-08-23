@@ -52,7 +52,7 @@ if [ "$UPLOAD_TO_B2" == "b2" ]; then
 		exit 1
 	fi
 
-    export MISE_CONFIG_FILE="$PWD/mise.b2.toml"
+    export MISE_ENV=b2
 fi
 
 # shellcheck disable=1091

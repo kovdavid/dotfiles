@@ -44,6 +44,6 @@ run  = "plugin gvfs -- select-then-unmount --eject"
 desc = "Select device then eject"
 
 [[mgr.prepend_keymap]]
-on   = [ "g", "u"]
+on   = [ "M", "j"]
 run  = "plugin gvfs -- jump-to-device"
 desc = "Select device then jump to its mount point"
