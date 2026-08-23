@@ -15,9 +15,9 @@ floating_modifier $mod
 
 # focus_follows_mouse no
 
-bindsym $mod+Tab exec ~/bin/i3_output jump
-bindsym $mod+Shift+Tab exec ~/bin/i3_output move
-bindsym $mod+Return exec ~/bin/i3_cycle_windows
+bindsym $mod+Tab exec ~/dotfiles/bin/i3_output jump
+bindsym $mod+Shift+Tab exec ~/dotfiles/bin/i3_output move
+bindsym $mod+Return exec ~/dotfiles/bin/i3_cycle_windows
 
 # rofi -show combi -combi-modi "script:custom_rofi_script,run" -modi combi
 # bindsym $mod+x exec rofi -show script -modi "script:custom_rofi_script"
@@ -36,8 +36,8 @@ bindsym $mod+Shift+XF86Launch5 exec i3_cycle_workspace right move_window sequent
 
 bindsym XF86AudioMute exec "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 bindsym XF86AudioMicMute exec "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
-bindsym XF86AudioLowerVolume exec ~/bin/i3_volume_change down
-bindsym XF86AudioRaiseVolume exec ~/bin/i3_volume_change up
+bindsym XF86AudioLowerVolume exec ~/dotfiles/bin/i3_volume_change down
+bindsym XF86AudioRaiseVolume exec ~/dotfiles/bin/i3_volume_change up
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && pkill -SIGRTMIN+5 i3status-rs
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && pkill -SIGRTMIN+5 i3status-rs
 bindsym XF86ScreenSaver exec i3lock_wrapper
@@ -255,7 +255,7 @@ bindsym $mod+Shift+Z mode $monitor_modes
 # finds out, if available)
 bar {
     font pango:DejaVu Sans Mono, pango:FontAwesome6Free, pango:FontAwesome6Brands 14px
-    # status_command i3status -c ~/.config/i3status/config | ~/bin/i3status_wrapper
+    # status_command i3status -c ~/.config/i3status/config | ~/dotfiles/bin/i3status_wrapper
     status_command i3status-rs ~/.config/i3status/config.toml
     tray_output $dp_screen
     tray_output $dp_screen2
@@ -293,9 +293,9 @@ for_window [class="Alacritty" title="^org-mode$"] move scratchpad
 no_focus [window_role="pop-up"]
 
 exec_always --no-startup-id en &
-exec_always --no-startup-id ~/bin/mon left &
-exec_always --no-startup-id ~/bin/init_touchpad &
-exec_always --no-startup-id ~/bin/init_trackpoint &
+exec_always --no-startup-id ~/dotfiles/bin/mon left &
+exec_always --no-startup-id ~/dotfiles/bin/init_touchpad &
+exec_always --no-startup-id ~/dotfiles/bin/init_trackpoint &
 # exec xrdb -merge ~/.Xresources &
 # exec (sleep 1 && nitrogen --restore) &
 exec /usr/bin/sed -i "s/^[^#]/# &/" /home/davs/.ssh/authorized_keys
@@ -309,6 +309,6 @@ exec --no-startup-id turbo &
 exec --no-startup-id keyboard_repeat &
 exec --no-startup-id arch_installed_packages &
 exec --no-startup-id (sleep 30 && audio_debug) &
-exec (sleep 5 && ~/bin/dalsik_daemon trigger_udev_event) &
+# exec (sleep 5 && ~/dotfiles/bin/dalsik_daemon trigger_udev_event) &
 # exec --no-startup-id touchpad_log &
 # exec_always --no-startup-id ~/dotfiles/polybar/launch.sh &

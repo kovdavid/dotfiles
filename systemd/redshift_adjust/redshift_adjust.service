@@ -4,7 +4,7 @@ Description=redshift_adjust
 [Service]
 Type=oneshot
 Environment=DISPLAY=:0
-ExecStart=%h/bin/redshift_adjust.pl
+ExecStart=%h/dotfiles/bin/redshift_adjust.pl
 
 [Install]
 WantedBy=multi-user.target

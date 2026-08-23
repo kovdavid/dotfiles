@@ -3,7 +3,7 @@ Description=clean daily
 
 [Service]
 Type=oneshot
-ExecStart=%h/bin/clean_daily.sh
+ExecStart=%h/dotfiles/bin/clean_daily.sh
 
 [Install]
 WantedBy=multi-user.target

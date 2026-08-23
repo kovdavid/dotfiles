@@ -32,7 +32,7 @@ export SDKMAN_DIR=/opt/sdkman
 #     fi
 # fi
 
-export PATH="$HOME/bin:$JAVA_HOME:$PATH"
+export PATH="$HOME/bin:$HOME/dotfiles/bin:$JAVA_HOME:$PATH"
 [[ -d /opt/javascript/node ]] && export NODE_PATH="/opt/javascript/node"
 [[ -d /opt/javascript/node/bin ]] && export PATH="/opt/javascript/node/bin:$PATH"
 [[ -d /opt/rust/rustup ]] && export RUSTUP_HOME="/opt/rust/rustup"

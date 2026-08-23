@@ -25,12 +25,7 @@ rm -rf ~/.yarn; ln -sf /opt/javascript/yarn ~/.yarn
 rm -rf ~/.config/yarn; ln -sf /opt/javascript/config/yarn ~/.config/yarn
 rm -rf ~/.local/share/fnm; ln -sf /opt/javascript/fnm ~/.local/share/fnm
 
-echo "Linking scripts"
 mkdir -p ~/bin
-
-for script in $(ls ~/dotfiles/bin); do
-    ln -sf ~/dotfiles/bin/$script ~/bin/$script
-done
 
 echo "Linking directories"
 remove_and_link_dir thumbnails
