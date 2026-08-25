@@ -89,4 +89,4 @@ if [ $(which nitrogen) ] ; then
     nitrogen --restore 2> /dev/null
 fi
 
-[ -x ~/bin/keyboard_repeat ] && bash ~/bin/keyboard_repeat
+[ -x ~/dotfiles/bin/keyboard_repeat ] && bash ~/dotfiles/bin/keyboard_repeat

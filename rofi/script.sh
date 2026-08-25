@@ -113,9 +113,9 @@ elif [ "$ROFI_INFO" = "main" ] ; then
     elif [ "$ACTION" = "brightness" ] ; then
         draw_brightness_menu
     elif [ "$ACTION" = "tmux" ] ; then
-        run_cmd "alacritty -e xterm_tmux_session"
+        run_cmd "alacritty -e $HOME/dotfiles/bin/xterm_tmux_session"
     elif [ "$ACTION" = "tmux_join" ] ; then
-        run_cmd "alacritty -e tmux_join"
+        run_cmd "alacritty -e $HOME/dotfiles/bin/tmux_join"
     elif [ "$ACTION" = "terminal" ] ; then
         run_cmd "alacritty"
     elif [ "$ACTION" = "performance" ] ; then

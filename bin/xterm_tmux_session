@@ -1,7 +1,9 @@
 #!/bin/bash
 
+exec > >(tee -a /tmp/$(basename $0)) 2>&1
+
 if tmux list-sessions ; then
-    WS=$(i3_current_workspace_number)
+    WS=$(~/dotfiles/bin/i3_current_workspace_number)
     for i in {1..10}; do
         NAME="WS $WS/$i"
         tmux has -t="$NAME" &>/dev/null

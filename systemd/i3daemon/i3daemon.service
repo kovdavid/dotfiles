@@ -5,7 +5,7 @@ StartLimitBurst=10
 
 [Service]
 Environment=DISPLAY=:0
-ExecStart=%h/dotfiles/bin/i3daemon
+ExecStart=%h/bin/i3daemon
 Restart=on-failure
 RestartSec=5s
 
