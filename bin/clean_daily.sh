@@ -2,11 +2,7 @@
 
 set -e
 
-if [[ $(uname -a) == Darwin* ]] ; then
-    DIR=${1:-/opt/clean_daily}
-else
-    DIR=${1:-/clean_daily}
-fi
+DIR=${1:-/opt/clean_daily}
 
 echo "DIR:$DIR"
 
@@ -17,7 +13,7 @@ fi
 cd $DIR
 
 touch mise.toml
-ENVRC=$(cat mise.toml)
+MISE=$(cat mise.toml)
 
 eval "$(mise env -s bash)"
 
@@ -41,4 +37,4 @@ fi
 
 sudo find . -type d -empty -delete
 
-echo -e "$ENVRC" > mise.toml
+echo -e "$MISE" > mise.toml

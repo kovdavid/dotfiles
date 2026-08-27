@@ -5,8 +5,8 @@ Description=Restic backup local
 Type=oneshot
 ExecStart=%h/dotfiles/bin/restic_backup_local /opt/backup
 
-StandardOutput=append:/clean_daily/restic_backup_local.log
-StandardError=append:/clean_daily/restic_backup_local.log
+StandardOutput=append:/opt/clean_daily/restic_backup_local.log
+StandardError=append:/opt/clean_daily/restic_backup_local.log
 
 [Install]
 WantedBy=multi-user.target

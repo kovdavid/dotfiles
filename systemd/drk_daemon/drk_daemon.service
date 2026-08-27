@@ -13,8 +13,8 @@ ExecStart=/home/davs/dotfiles/bin/drk_daemon
 Restart=on-failure
 RestartSec=5s
 
-StandardOutput=append:/clean_daily/drk_daemon.log
-StandardError=append:/clean_daily/drk_daemon.log
+StandardOutput=append:/opt/clean_daily/drk_daemon.log
+StandardError=append:/opt/clean_daily/drk_daemon.log
 
 [Install]
 WantedBy=dev-drk.device

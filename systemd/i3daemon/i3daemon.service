@@ -9,8 +9,8 @@ ExecStart=%h/bin/i3daemon
 Restart=on-failure
 RestartSec=5s
 
-StandardOutput=append:/clean_daily/i3daemon.log
-StandardError=append:/clean_daily/i3daemon.log
+StandardOutput=append:/opt/clean_daily/i3daemon.log
+StandardError=append:/opt/clean_daily/i3daemon.log
 
 [Install]
 WantedBy=default.target

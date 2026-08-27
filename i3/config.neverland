@@ -93,7 +93,7 @@ mode $layout {
 
 bindsym $mod+l mode $layout
 
-bindsym --release $mod+Shift+s exec "sleep 0.2; scrot -s -e 'mv $f /clean_daily/$f'"
+bindsym --release $mod+Shift+s exec "sleep 0.2; scrot -s -e 'mv $f /opt/clean_daily/$f'"
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen

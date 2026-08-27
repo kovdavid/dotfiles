@@ -124,12 +124,12 @@ elif [ "$ROFI_INFO" = "main" ] ; then
         run_cmd "thunar"
     elif [ "$ACTION" = "flameshot" ] ; then
         FILENAME=$(date '+%FT%T.png')
-        run_cmd "flameshot gui -p /clean_daily/$FILENAME"
+        run_cmd "flameshot gui -p /opt/clean_daily/$FILENAME"
     elif [ "$ACTION" = "keepassxc" ] ; then
         run_cmd "keepassxc"
     elif [ "$ACTION" = "full-screen (5s)" ] ; then
         FILENAME=$(date '+%FT%T.png')
-        run_cmd "flameshot full -d 5000 -p /clean_daily/$FILENAME"
+        run_cmd "flameshot full -d 5000 -p /opt/clean_daily/$FILENAME"
     elif [ "$ACTION" = "firefox" ] ; then
         run_cmd "firefox"
     elif [ "$ACTION" = "calc" ] ; then
