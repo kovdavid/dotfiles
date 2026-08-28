@@ -248,15 +248,15 @@ udevadm trigger
 
 SKU_NUMBER=$(dmidecode | grep 'SKU Number' | grep -v 'Not Specified' | sed -e 's/^\s*SKU Number:\s*//')
 
-if [ "$SKU_NUMBER" == "LENOVO_MT_20UE_BU_Think_FM_ThinkPad T14 Gen 1" ] ; then
+if [ "$SKU_NUMBER" == "LENOVO_MT_20UE_BU_Think_FM_ThinkPad T14 Gen 1" ] || [ "$SKU_NUMBER" == "LENOVO_MT_21S8_BU_Think_FM_ThinkPad L14 Gen 6" ] ; then
     # Issue with the HDMI and Internal sound card interchanging their order randombly
     # This disables sound over HDMI
-    SOUND=$(cat <<EOC
-options snd_hda_intel enable=1 index=0
-options snd_hda_intel enable=0 index=1
-EOC
-)
-    ensure_file_content "/etc/modprobe.d/sound.conf" "$SOUND"
+#     SOUND=$(cat <<EOC
+# options snd_hda_intel enable=1 index=0
+# options snd_hda_intel enable=0 index=1
+# EOC
+# )
+#     ensure_file_content "/etc/modprobe.d/sound.conf" "$SOUND"
 
     NOBEEP="blacklist pcspkr"
     ensure_file_content "/etc/modprobe.d/nobeep.conf" "$NOBEEP"
