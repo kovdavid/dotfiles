@@ -27,6 +27,17 @@ if [ -n "$device" ] ; then
     fi
 fi
 
+L14_TOUCHPAD="SYNA8022:00 06CB:CE67 Touchpad"
+device=$(xinput | grep -w "$L14_TOUCHPAD" | cut -d"=" -f2 | cut -f1)
+if [ -n "$device" ] ; then
+    echo "Setting $L14_TOUCHPAD"
+
+    echo "Using libinput"
+    xinput set-prop $device "libinput Tapping Enabled" 1
+    xinput set-prop $device "libinput Tapping Button Mapping Enabled" 0, 1
+    xinput set-prop $device "libinput Middle Emulation Enabled" 1
+fi
+
 LIBINPUT_TOUCHPAD="PS/2 TouchPad" # TODO specify
 device=$(xinput | grep -w "$LIBINPUT_TOUCHPAD" | cut -d"=" -f2 | cut -f1)
 if [ -n "$device" ] ; then
