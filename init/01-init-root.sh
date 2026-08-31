@@ -118,6 +118,14 @@ EOC
     ensure_file_content "/etc/tlp.d/cpu_boost_on" $'CPU_BOOST_ON_AC=1\nCPU_BOOST_ON_BAT=1'
     ensure_file_content "/etc/tlp.d/cpu_boost_ac" $'CPU_BOOST_ON_AC=1\nCPU_BOOST_ON_BAT=0'
 
+    TLP_OVERRIDE=$(cat <<EOC
+[Service]
+ExecStartPre=/bin/sleep 10
+EOC
+)
+    mkdir -p /etc/systemd/system/tlp.service.d/
+    ensure_file_content "/etc/systemd/system/tlp.service.d/override.conf" "$TLP_OVERRIDE"
+
     if [ ! -f /etc/tlp.d/02-cpu_boost.conf ] ; then
         echo "Linking 02-cpu_boost.conf to cpu_boost_ac."
         ln -sf /etc/tlp.d/cpu_boost_ac /etc/tlp.d/02-cpu_boost.conf
@@ -264,7 +272,7 @@ if [ "$SKU_NUMBER" == "LENOVO_MT_20UE_BU_Think_FM_ThinkPad T14 Gen 1" ] || [ "$S
     THINKPAD_ACPI="options thinkpad_acpi fan_control=1"
     ensure_file_content "/etc/modprobe.d/thinkpad_acpi.conf" "$THINKPAD_ACPI"
 
-    ensure_file_content "/etc/xdg/user-dirs.defaults" "DOWNLOAD=Downloads\nMUSIC=Music"
+    ensure_file_content "/etc/xdg/user-dirs.defaults" "DOWNLOAD=Downloads\nMUSIC=Music\nDOCUMENTS=Documents"
 
     THINKFAN_CONFIG_COOL=$(cat <<EOC
 # There should be hwmonX directories inside the 'hwmon' path

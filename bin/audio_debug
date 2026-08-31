@@ -3,7 +3,7 @@
 DATE=$(date '+%F')
 TIME=$(date '+%H%M%S')
 
-DIR="/clean_manually/audit_debug/$DATE/$TIME"
+DIR="/opt/clean_manually/audit_debug/$DATE/$TIME"
 
 mkdir -p "$DIR"
 
