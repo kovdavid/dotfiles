@@ -109,7 +109,9 @@ if [ -d /opt/AndroidSDK/home-folder ] ; then
     export ANDROID_USER_HOME=/opt/AndroidSDK/home-folder
 fi
 
-export ACONFMGR_CONFIG=~/dotfiles/aconfmgr
+if [ -d /opt/aconfmgr ] ; then
+    export ACONFMGR_CONFIG=/opt/aconfmgr
+fi
 
 if [ -d /opt/mise ] ; then
     mkdir -p /opt/mise/data /opt/mise/cache

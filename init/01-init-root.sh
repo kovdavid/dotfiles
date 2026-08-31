@@ -227,7 +227,7 @@ ensure_polkit_config
 ensure_nginx_pacman_hook
 ensure_systemd_sleep_entry
 
-for dir in "/opt/AndroidSDK/home-folder" "/opt/claude" "/opt/cache" "/opt/javascript/yarn" "/opt/javascript/npm" "/opt/pip" "/opt/flatpak/var" "/opt/gradle" "/opt/clean_daily" "/opt/clean_manually"; do
+for dir in "/opt/AndroidSDK/home-folder" "/opt/claude" "/opt/cache" "/opt/javascript/yarn" "/opt/javascript/npm" "/opt/pip" "/opt/flatpak/var" "/opt/aconfmgr" "/opt/gradle" "/opt/clean_daily" "/opt/clean_manually"; do
     mkdir -p "$dir"
     chown davs:davs "$dir"
 done
