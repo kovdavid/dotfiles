@@ -44,20 +44,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 local all_files_group = vim.api.nvim_create_augroup("all_files", { clear = true })
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-    group = all_files_group,
-    pattern = "*.mdx",
-    callback = function ()
-        vim.bo.filetype = "markdown.mdx"
-    end
-})
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-    group = all_files_group,
-    pattern = "*.astro",
-    callback = function ()
-        vim.bo.filetype = "astro"
-    end
-})
 vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
     group = all_files_group,
     callback = function ()
@@ -106,8 +92,6 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
     end,
 })
 
-
--- Show cursorline only on active windows
 vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
     callback = function()
         if vim.w.auto_cursorline then
@@ -117,32 +101,11 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
     end,
 })
 
-vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
-    callback = function()
-        -- if vim.wo.cursorline then
-            -- vim.w.auto_cursorline = true
-            -- vim.wo.cursorline = false
-        -- end
-    end,
-})
-
 local typescript_group = vim.api.nvim_create_augroup("typescript_group", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = "typescript_group",
   pattern = "*.ts",
   callback = function()
-    -- vim.lsp.buf.code_action({ apply = true, context = { only = { "source.addMissingImports.ts" }, diagnostics = {} } })
+    vim.lsp.buf.code_action({ apply = true, context = { only = { "source.addMissingImports.ts" }, diagnostics = {} } })
   end,
-})
-
-local orgmode_group = vim.api.nvim_create_augroup("orgmode_group", { clear = true })
-vim.api.nvim_create_autocmd({ "FileType" }, {
-    group = orgmode_group,
-    pattern = { "org" },
-    callback = function()
-        vim.bo.expandtab = true
-        vim.bo.tabstop = 2
-        vim.bo.shiftwidth = 2
-        vim.bo.softtabstop = 2
-    end,
 })
