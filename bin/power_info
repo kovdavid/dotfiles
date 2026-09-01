@@ -1,0 +1,23 @@
+#!/bin/bash
+
+F=/sys/firmware/acpi/platform_profile
+echo -n "Platform profile: "
+cat $F
+
+echo -n "CPU boost: "
+readlink -f /etc/tlp.d/02-cpu_boost.conf
+
+F=/sys/devices/system/cpu/cpufreq/policy0/scaling_governor
+echo -n "CPU scaling governor: "
+cat $F
+
+F=/sys/devices/system/cpu/cpufreq/policy0/scaling_driver
+echo -n "CPU scaling driver: "
+cat $F
+
+echo -n "CPU min freq: "
+cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_min_freq
+echo -n "CPU avg freq: "
+cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq
+echo -n "CPU max freq: "
+cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq

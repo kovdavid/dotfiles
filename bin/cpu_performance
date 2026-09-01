@@ -2,3 +2,4 @@
 
 sudo cpupower frequency-set -g performance
 sudo cpupower frequency-set --max 5130MHz
+# echo performance | sudo tee /sys/firmware/acpi/platform_profile
