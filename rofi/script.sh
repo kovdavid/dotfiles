@@ -49,7 +49,7 @@ function draw_performance_menu {
     menu_item "main performance" "powersave" "cpu"
     menu_item "main performance" "fan quiet" "preferences-system"
     menu_item "main performance" "boost on" "cpu"
-    menu_item "main performance" "schedutil" "cpu"
+    menu_item "main performance" "performance" "cpu"
     menu_item "main performance" "fan cool" "preferences-system"
     menu_item "main performance" "ryzenadj 65" "cpu"
     menu_item "main performance" "ryzenadj 75" "cpu"
@@ -197,8 +197,8 @@ elif [ "$ROFI_INFO" = "main performance" ] ; then
         run_cmd "boost on"
     elif [ "$ACTION" = "powersave" ] ; then
         run_cmd "cpu_powersave"
-    elif [ "$ACTION" = "schedutil" ] ; then
-        run_cmd "cpu_schedutil"
+    elif [ "$ACTION" = "performance" ] ; then
+        run_cmd "cpu_performance"
     elif [ "$ACTION" = "fan quiet" ] ; then
         run_cmd "fan quiet"
     elif [ "$ACTION" = "fan cool" ] ; then
@@ -218,7 +218,7 @@ elif [ "$ROFI_INFO" = "main performance" ] ; then
         run_cmd "dalsik_daemon restart"
     elif [ "$ACTION" = "normal" ] ; then
         run_cmd "boost on"
-        run_cmd "cpu_schedutilowersave"
+        run_cmd "cpu_performance"
         run_cmd "$RYZEN65"
         run_cmd "keyboard_repeat"
         run_cmd "init_touchpad"

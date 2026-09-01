@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo cpupower frequency-set -g performance
+sudo cpupower frequency-set --max 5130MHz

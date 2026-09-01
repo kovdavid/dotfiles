@@ -104,9 +104,9 @@ function ensure_tlp_config {
 START_CHARGE_THRESH_BAT0=60
 STOP_CHARGE_THRESH_BAT0=90
 
-PLATFORM_PROFILE_ON_AC=
-PLATFORM_PROFILE_ON_BAT=
-PLATFORM_PROFILE_ON_SAV=
+PLATFORM_PROFILE_ON_AC=performance
+PLATFORM_PROFILE_ON_BAT=powersave
+PLATFORM_PROFILE_ON_SAV=powersave
 
 DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
 EOC
@@ -286,14 +286,23 @@ sensors:
 fans:
   - tpacpi: /proc/acpi/ibm/fan
 
+# - [0, 0, 47]
+# - [1, 45, 50]
+# - [2, 47, 53]
+# - [3, 50, 57]
+# - [4, 55, 60]
+# - [5, 58, 255]
+# - [6, 62, 255]
+
 levels:
-  - [0, 0, 47]
-  - [1, 45, 50]
-  - [2, 47, 53]
-  - [3, 50, 57]
-  - [4, 55, 60]
-  - [5, 58, 255]
-  - [6, 62, 255]
+  - [0, 0, 50]
+  - [1, 47, 55]
+  - [2, 52, 60]
+  - [3, 57, 66]
+  - [4, 63, 72]
+  - [5, 68, 78]
+  - [6, 74, 84]
+  - [7, 80, 32767]
 EOC
 )
 
