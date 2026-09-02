@@ -1,11 +1,13 @@
 #!/bin/bash
 
+set -euo pipefail
+
 function remove_and_link_dir {
-    $(rm -rf ~/.$1)
+    rm -rf ~/.$1
     if [ -d /opt/$1 ] ; then
-        $(ln -s /opt/$1 ~/.$1)
+        ln -s /opt/$1 ~/.$1
     else
-        $(ln -s /tmp ~/.$1)
+        ln -s /tmp ~/.$1
     fi
 }
 
