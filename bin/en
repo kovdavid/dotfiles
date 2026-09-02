@@ -1,3 +1,19 @@
 #!/bin/bash
 
-setxkbmap -layout us,sk -variant ,qwerty -option 'davs:davs'
+if [ "$(basename $0)" = "en" ] ; then
+    echo "en"
+    setxkbmap \
+        -layout 'sk,us' \
+        -variant 'qwerty,qwerty' \
+        -option '' \
+        -symbols 'pc+us+davs(davs)'
+fi
+
+if [ "$(basename $0)" = "sk" ] ; then
+    echo "sk"
+    setxkbmap \
+        -layout 'sk,us' \
+        -variant 'qwerty,qwerty' \
+        -option '' \
+        -symbols 'pc+us+sk(qwerty)+davs(davs)'
+fi
