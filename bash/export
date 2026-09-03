@@ -4,6 +4,8 @@ else
    export TERM=xterm-256color
 fi
 
+export XDG_CURRENT_DESKTOP=i3
+
 [[ -e $XDG_RUNTIME_DIR/gcr/ssh ]] && export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
 
 export WINEARCH=win32
