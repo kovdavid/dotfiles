@@ -79,6 +79,9 @@ rm -rf ~/.config/mpd
 ln -sf ~/dotfiles/rmpc ~/.config
 ln -sf ~/dotfiles/mpd ~/.config
 
+mkdir -p ~/.config/yay
+ln -sf ~/dotfiles/yay/config.json ~/.config/yay/
+
 echo "IRSSI"
 mkdir -p ~/.irssi
 ln -s -f ~/dotfiles/irssi_config ~/.irssi/config
