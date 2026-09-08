@@ -19,6 +19,8 @@
 /var/lib/mongodb/
 /var/lib/pacman
 /var/lib/docker
+/var/lib/containers
+/var/lib/containerd
 /var/lib/systemd
 /var/lib/flatpak
 /swapfile
