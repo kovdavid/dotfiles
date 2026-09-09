@@ -22,12 +22,12 @@
     dic         = diff --cached
     dis         = diff --stat
     lc          = log -1 --format=%cd
-    lo          = log --oneline --reverse -100
-    lod         = log --pretty=format:'%C(yellow)%h %C(red)%ad %C(yellow)%d %Creset%s' --date=format:'%F %T' --reverse -100
-    lomine      = !git log --oneline --reverse -100 --committer=\"$(git config user.name)\"
-    lomd        = !git log --oneline --reverse -100 $(git main-branch)..HEAD
-    lomds       = !git log --oneline --reverse -100 $(git main-branch)..HEAD --stat
-    lomdn       = !git log --oneline --reverse -100 $(git main-branch)..HEAD --name-only
+    lo          = log --oneline -100
+    lod         = log --pretty=format:'%C(yellow)%h %C(red)%ad %C(yellow)%d %Creset%s' --date=format:'%F %T' -100
+    lomine      = !git log --oneline -100 --committer=\"$(git config user.name)\"
+    lomd        = !git log --oneline -100 $(git main-branch)..HEAD
+    lomds       = !git log --oneline -100 $(git main-branch)..HEAD --stat
+    lomdn       = !git log --oneline -100 $(git main-branch)..HEAD --name-only
     dth         = difftool HEAD
     dtsh        = diff --stat HEAD
     lg          = log --oneline --graph --all

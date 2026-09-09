@@ -21,3 +21,11 @@ echo -n "CPU avg freq: "
 cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_avg_freq
 echo -n "CPU max freq: "
 cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq
+
+echo ""
+echo "Wifi power-save"
+iw dev wlp3s0 get power_save
+
+echo ""
+echo -n "thinkfan: "
+readlink -f /etc/thinkfan.yaml
