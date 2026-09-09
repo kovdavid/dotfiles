@@ -3,6 +3,7 @@
 sudo cpupower frequency-set -g powersave
 sudo cpupower frequency-set --max 1700MHz
 # sudo ryzenadj --power-saving
+echo balanced | sudo tee /sys/firmware/acpi/platform_profile
 
-boost off
-fan quiet
+# boost off
+# fan quiet
