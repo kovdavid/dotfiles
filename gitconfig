@@ -22,7 +22,7 @@
     dic         = diff --cached
     dis         = diff --stat
     lc          = log -1 --format=%cd
-    lo          = log --oneline -100
+    lo          = log --oneline -30
     lod         = log --pretty=format:'%C(yellow)%h %C(red)%ad %C(yellow)%d %Creset%s' --date=format:'%F %T' -100
     lomine      = !git log --oneline -100 --committer=\"$(git config user.name)\"
     lomd        = !git log --oneline -100 $(git main-branch)..HEAD
