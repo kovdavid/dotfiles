@@ -6,7 +6,7 @@ if [ "$(basename $0)" = "en" ] ; then
         -layout 'sk,us' \
         -variant 'qwerty,qwerty' \
         -option '' \
-        -symbols 'pc+us+davs(davs)'
+        -symbols 'pc+us+inet(evdev)+davs(davs)'
 fi
 
 if [ "$(basename $0)" = "sk" ] ; then
@@ -15,5 +15,5 @@ if [ "$(basename $0)" = "sk" ] ; then
         -layout 'sk,us' \
         -variant 'qwerty,qwerty' \
         -option '' \
-        -symbols 'pc+us+sk(qwerty)+davs(davs)'
+        -symbols 'pc+us+sk(qwerty)+inet(evdev)+davs(davs)'
 fi
