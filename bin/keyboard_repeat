@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# sudo udevadm trigger --subsystem-match=input
+
+# sleep 2
+
 echo "Before"
 xset q | grep repeat
 

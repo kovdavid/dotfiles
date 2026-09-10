@@ -295,5 +295,44 @@ return {
       end,
       desc = "Org state",
     },
+    {
+      "<leader>yc",
+      function()
+        local file_path = vim.fn.expand("%:p")
+        if file_path == "" then
+          vim.notify("No file name for current buffer", vim.log.levels.WARN)
+          return
+        end
+
+        -- Check mode: 'v', 'V', or '\22' (Ctrl-V / Visual Block)
+        local mode = vim.api.nvim_get_mode().mode
+        local result = ""
+
+        if mode:match("[vV\22]") then
+          -- Visual mode: get selection line range
+          local line_start = vim.fn.line("v")
+          local line_end = vim.fn.line(".")
+
+          -- Ensure line_start is smaller than line_end regardless of selection direction
+          if line_start > line_end then
+            line_start, line_end = line_end, line_start
+          end
+
+          result = string.format("%s:%d-%d", file_path, line_start, line_end)
+        else
+          -- Normal mode: get current cursor line
+          local line_num = vim.api.nvim_win_get_cursor(0)[1]
+          result = string.format("%s:%d", file_path, line_num)
+        end
+
+        -- Copy to system clipboard ("+") and default register ("")
+        vim.fn.setreg("+", result)
+        vim.fn.setreg('"', result)
+
+        vim.notify("Copied: " .. result, vim.log.levels.INFO)
+      end,
+      desc = "Copy path with line number",
+      mode = { "v", "n" }
+    },
   },
 }
