@@ -65,7 +65,7 @@ Combo combos[] = COMBOS({
     COMBO(combo13, OSM(MOD_LCTRL | MOD_LSHIFT)),
     COMBO(combo14, OSM(MOD_RCTRL | MOD_RSHIFT)),
 
-    COMBO(combo15, KC_ESCAPE),
+    COMBO_CFG(combo15, KC_ESCAPE, 50, 100),
     COMBO(combo16, KC_TAB)
 });
 
