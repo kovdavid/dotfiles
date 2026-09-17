@@ -44,7 +44,8 @@ const KeyCoords combo13[] = { { 2, 2 }, { 2, 3 } }; // CTRL + SHFT
 const KeyCoords combo14[] = { { 2, 6 }, { 2, 7 } }; // CTRL + SHFT
 
 const KeyCoords combo15[] = { { 1, 6 }, { 1, 7 } }; // Esc
-const KeyCoords combo16[] = { { 0, 0 }, { 0, 1 } }; // Tab
+const KeyCoords combo16[] = { { 0, 0 }, { 0, 1 } }; // Enter
+const KeyCoords combo17[] = { { 0, 0 }, { 0, 1 }, { 0, 2 } }; // Tab
 
 Combo combos[] = COMBOS({
     COMBO(combo1, KC_ESCAPE),
@@ -66,7 +67,8 @@ Combo combos[] = COMBOS({
     COMBO(combo14, OSM(MOD_RCTRL | MOD_RSHIFT)),
 
     COMBO_CFG(combo15, KC_ESCAPE, 50, 100),
-    COMBO(combo16, KC_TAB)
+    COMBO(combo16, KC_ENTER),
+    COMBO(combo17, KC_TAB)
 });
 
 MacroStep m1_steps[] = {

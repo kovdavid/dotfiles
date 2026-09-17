@@ -27,6 +27,8 @@ if [ -f /opt/bash/complete-alias ] ; then
     complete -F _complete_alias nr
     complete -F _complete_alias d
     complete -F _complete_alias dc
+    complete -F _complete_alias dr
+    complete -F _complete_alias de
 
     complete -F _complete_alias g
     complete -F _complete_alias ga
