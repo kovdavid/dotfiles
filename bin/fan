@@ -16,6 +16,10 @@ else
         echo "Thinkfan quiet"
         sudo ln -sf /etc/thinkfan.quiet.yaml /etc/thinkfan.yaml
         sudo systemctl restart thinkfan
+    elif [ "$1" == "performance" ] || [ "$1" == "p" ] ; then
+        echo "Thinkfan performance"
+        sudo ln -sf /etc/thinkfan.performance.yaml /etc/thinkfan.yaml
+        sudo systemctl restart thinkfan
     elif [ "$1" == "auto" ] ; then
         echo "Setting level auto"
         sudo su -c "echo level auto > /proc/acpi/ibm/fan"
