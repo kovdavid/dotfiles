@@ -7,8 +7,6 @@ function remove_and_link_dotfile {
 
 echo "Linking dotfiles"
 
-ln -sf ~/dotfiles/bash/env_settings ~/.bashrc.env_settings
-ln -sf ~/dotfiles/git-completion.bash ~/.bashrc.git-completion
 ln -sf ~/dotfiles/tmux/completion.bash ~/.bashrc.tmux-completion
 ln -sf ~/dotfiles/bash/export ~/.bashrc.export
 ln -sf ~/dotfiles/bash/alias ~/.bashrc.alias
