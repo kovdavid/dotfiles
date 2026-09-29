@@ -8,6 +8,8 @@ smart_gaps on
 smart_borders no_gaps
 gaps inner 10
 
+include ~/dotfiles/i3/config.color.neverland
+
 font pango:DejaVu Sans Mono 15px
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -262,16 +264,16 @@ bar {
     tray_output $laptop_screen
     tray_output $hdmi_screen
 
-    colors {
-        inactive_workspace #5f676a #222222 #888888
-    }
+    # colors {
+    #     inactive_workspace #5f676a #222222 #888888
+    # }
 }
 
 # use xprop ;)
 # for_window [class="(?i)xfce4-notifyd"] floating enable, focus mode_toggle
 for_window [class="(?i)xfce4-notifyd"] floating enable
 for_window [class="(?i)galculator"] floating enable
-for_window [class="(?i)google-chrome"] bordesnone
+for_window [class="(?i)google-chrome"] borde none
 for_window [class="(?i)chodba3"] floating enable
 for_window [class="(?i)pidgin"] floating enable
 for_window [class="(?i)floating"] floating enable
