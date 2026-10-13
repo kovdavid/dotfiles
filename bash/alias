@@ -94,6 +94,6 @@ alias xvim="xargs -o nvim"
 alias vc='git status --short . | rg "^.(A|M|U)" | awk "{ print \$2 }" | fzf -m --preview "git diff $@ --color=always -- {-1}" | xargs -o nvim'
 alias vcs='git status --short . | awk "{ print \$2 }" | fzf -m --preview "git diff $@ --color=always -- {-1}" | xargs -o nvim'
 alias vcr='git diff --name-only --diff-filter=U --relative | fzf -m --preview "git diff $@ --color=always -- {-1}" | xargs -o nvim'
-alias fzfvim="vim \$(fzf)"
+alias fzfvim="vim \$(fd --type f | fzf)"
 alias fv="vim \$(fzf)"
 alias rgtree="rg --files | tree --fromfile"

@@ -107,6 +107,7 @@ nytprof*
 **/_build/
 **/deps/
 **/.gradle/
+**/worktree/
 .gradle/
 .next/
 .npm/
