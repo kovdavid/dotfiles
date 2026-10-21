@@ -4,7 +4,7 @@ CURRENT_DIR=$(pwd)
 NEW_DIR="/"
 
 while [[ "$PWD" != "/" ]] ; do
-    if [ -f .vimproject ] || [ -d .git ] ; then
+    if [ -f .vimproject ] || [ -d .git ] || [ -f .git ] ; then
         NEW_DIR=$PWD
         break
     fi

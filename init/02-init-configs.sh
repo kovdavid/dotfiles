@@ -77,6 +77,9 @@ rm -rf ~/.config/mpd
 ln -sf ~/dotfiles/rmpc ~/.config
 ln -sf ~/dotfiles/mpd ~/.config
 
+mkdir -p ~/.config/dunst
+ln -sf ~/dotfiles/dunstrc ~/.config/dunst/dunstrc
+
 mkdir -p ~/.config/yay
 ln -sf ~/dotfiles/yay/config.json ~/.config/yay/
 

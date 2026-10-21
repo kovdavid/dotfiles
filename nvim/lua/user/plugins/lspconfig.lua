@@ -14,6 +14,11 @@ return {
     -- vim.lsp.enable("tsc")
     vim.lsp.enable("clangd")
 
+    local oxlint_config = vim.env.NVIM_OXLINT_CONFIG
+    if oxlint_config and oxlint_config ~= '' then
+      vim.lsp.enable('oxlint')
+    end
+
     for _, lhs in ipairs({ "grn", "gra", "grr", "gri", "grt", "grx" }) do
       pcall(vim.keymap.del, "n", lhs)
     end

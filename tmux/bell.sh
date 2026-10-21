@@ -1,0 +1,28 @@
+#!/bin/bash
+
+WINDOW_ID=$1
+LOCKFILE="/tmp/.tmux_notify_lock_$WINDOW_ID"
+
+# Open file descriptor 200 and point it to the lock file
+exec 200> "$LOCKFILE"
+
+if ! flock -n 200; then
+    exit 0
+fi
+
+PANE_TITLE=$(tmux display-message -p -t $WINDOW_ID "#{q:pane_title}")
+SESSION=$(tmux display-message -p -t $WINDOW_ID "#{session_name}:#{window_index} #{window_name}")
+
+if [[ "$PANE_TITLE" != Claude* ]]; then
+    exit 0
+fi
+
+notify-send \
+    -a "tmux" \
+    -u normal \
+    -t 3000 \
+    -i "/usr/share/icons/oxygen/base/64x64/actions/autocorrection.png" \
+    -h string:category:tmux \
+    "$PANE_TITLE" "<span foreground='#89b4fa' weight='bold'>SESSION</span>  <span foreground='#cdd6f4'>$SESSION</span>"
+
+sleep 3
