@@ -17,10 +17,10 @@ if [[ "$PANE_TITLE" != Claude* ]]; then
     exit 0
 fi
 
+# -t 3000 \
 notify-send \
     -a "tmux" \
     -u normal \
-    -t 3000 \
     -i "/usr/share/icons/oxygen/base/64x64/actions/autocorrection.png" \
     -h string:category:tmux \
     "$PANE_TITLE" "<span foreground='#89b4fa' weight='bold'>SESSION</span>  <span foreground='#cdd6f4'>$SESSION</span>"

@@ -175,7 +175,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
 
     /***** Layer NAV
        ┌────────┬────────┬────────┬────────┬────────┐               ┌────────┬────────┬────────┬────────┬────────┐
-       │  F1    │  F2    │  F3    │  F4    │ VolUp  │               │        │  PgUp  │   Up   │  PgDn  │        │
+       │  F1    │  F2    │  F3    │  F4    │ VolUp  │               │        │  PgUp  │   Up   │  PgDn  │ C(^)   │
        │        │        │        │        │        │               │        │        │        │        │        │
        ├────────┼────────┼────────┼────────┼────────┤               ├────────┼────────┼────────┼────────┼────────┤
        │  F5    │  F6    │  F7    │  F8    │ VolDn  │               │ Shift+ │  Left  │  Down  │  Right │ C(Tab) │
@@ -190,7 +190,7 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
     *****/
 
     LAYOUT_4x10(
-        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_VOLUP,               XXX,      KC_PGUP, KC_UP,   KC_PGDN,  XXX,
+        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_VOLUP,               XXX,      KC_PGUP, KC_UP,   KC_PGDN,  LCTRL(KC_CIRC),
         KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_VOLDN,               SHFT_INS, KC_LEFT, KC_DOWN, KC_RIGHT, CTAB,
         KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_MUTE,                XXX,      KC_HOME, KC_INS,  KC_END,   CSTAB,
         XXX,     XXX,     XXX,     ___,      ___,                   ___,      ___,     XXX,     XXX,      XXX
