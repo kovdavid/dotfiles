@@ -18,6 +18,7 @@ local.properties
 worktree/
 mise.toml
 .scratch/
+GLOSSARY.md
 
 # Devel::PDB
 .*-conf

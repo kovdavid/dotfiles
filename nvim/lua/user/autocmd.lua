@@ -1,104 +1,133 @@
 local bash_group = vim.api.nvim_create_augroup("bash", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "sh" },
-    group = bash_group,
-    callback = function ()
-        local opts = { noremap = true, silent = true }
-        vim.keymap.set("n", "<leader>rr", ":!bash %<CR>", opts)
-    end,
+  pattern = { "sh" },
+  group = bash_group,
+  callback = function()
+    local opts = { noremap = true, silent = true }
+    vim.keymap.set("n", "<leader>rr", ":!bash %<CR>", opts)
+  end,
 })
 
 local javascript_group = vim.api.nvim_create_augroup("javascript", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
-    group = javascript_group,
-    callback = function ()
-        local opts = { noremap = true, silent = true }
-        vim.keymap.set("n", "<leader>rr", ":!node %<CR>", opts)
-        local function switch_ts_server(name)
-            return function()
-                vim.cmd("lsp disable vtsls")
-                vim.cmd("lsp disable tsc")
-                vim.diagnostic.reset()
-                vim.cmd("lsp enable " .. name)
-            end
-        end
-        vim.keymap.set("n", "<leader>lv", switch_ts_server("vtsls"),
-            {noremap = true, silent = true, desc = "Restart vtsls"}
-        )
-        vim.keymap.set("n", "<leader>lt", switch_ts_server("tsc"),
-            {noremap = true, silent = true, desc = "Restart tsc"}
-        )
-    end,
+  pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+  group = javascript_group,
+  callback = function()
+    local opts = { noremap = true, silent = true }
+    vim.keymap.set("n", "<leader>rr", ":!node %<CR>", opts)
+    local function switch_ts_server(name)
+      return function()
+        vim.cmd("lsp disable vtsls")
+        vim.cmd("lsp disable tsc")
+        vim.diagnostic.reset()
+        vim.cmd("lsp enable " .. name)
+      end
+    end
+    vim.keymap.set(
+      "n",
+      "<leader>lv",
+      switch_ts_server("vtsls"),
+      { noremap = true, silent = true, desc = "Restart vtsls" }
+    )
+    vim.keymap.set("n", "<leader>lt", switch_ts_server("tsc"), { noremap = true, silent = true, desc = "Restart tsc" })
+    vim.keymap.set(
+      "n",
+      "<leader>yjr",
+      function()
+        local test = vim.fn.expand("%p")
+        local pwd = vim.fn.getcwd()
+
+        local result = string.format("cd %s; npx jest --silent false %s", pwd, test)
+        -- Copy to system clipboard ("+") and default register ("")
+        vim.fn.setreg("+", result)
+        vim.fn.setreg('"', result)
+      end,
+      { noremap = true, silent = true, desc = "Copy jest run command" }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>yjw",
+      function()
+        local test = vim.fn.expand("%p")
+        local pwd = vim.fn.getcwd()
+
+        local result = string.format("cd %s; npx jest --silent false --watch %s", pwd, test)
+        -- Copy to system clipboard ("+") and default register ("")
+        vim.fn.setreg("+", result)
+        vim.fn.setreg('"', result)
+      end,
+      { noremap = true, silent = true, desc = "Copy jest watch command" }
+    )
+  end,
 })
 
 local hurl_group = vim.api.nvim_create_augroup("hurl", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "hurl" },
-    group = hurl_group,
-    callback = function ()
-        local opts = { noremap = true, silent = true }
-        vim.keymap.set("n", "<leader>rr", ":!hurl %<CR>", opts)
-        vim.keymap.set("n", "<leader>rv", ":!hurl --verbose %<CR>", opts)
-    end,
+  pattern = { "hurl" },
+  group = hurl_group,
+  callback = function()
+    local opts = { noremap = true, silent = true }
+    vim.keymap.set("n", "<leader>rr", ":!hurl %<CR>", opts)
+    vim.keymap.set("n", "<leader>rv", ":!hurl --verbose %<CR>", opts)
+  end,
 })
 
 local all_files_group = vim.api.nvim_create_augroup("all_files", { clear = true })
 vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
-    group = all_files_group,
-    callback = function ()
-        vim.cmd("setlocal winwidth=1")
-        -- vim.cmd("setlocal number")
+  group = all_files_group,
+  callback = function()
+    vim.cmd("setlocal winwidth=1")
+    -- vim.cmd("setlocal number")
 
-        if vim.opt_local.number:get() then
-          vim.cmd("setlocal relativenumber")
-        end
-
-        if vim.wo[0].diff then
-            vim.cmd("setlocal wrap")
-        end
+    if vim.opt_local.number:get() then
+      vim.cmd("setlocal relativenumber")
     end
+
+    if vim.wo[0].diff then
+      vim.cmd("setlocal wrap")
+    end
+  end,
 })
 vim.api.nvim_create_autocmd({ "WinLeave", "FocusLost", "BufLeave" }, {
-    group = all_files_group,
-    callback = function ()
-        if vim.opt_local.number:get() then
-          vim.cmd("setlocal norelativenumber")
-        end
-        -- vim.cmd("setlocal number")
+  group = all_files_group,
+  callback = function()
+    if vim.opt_local.number:get() then
+      vim.cmd("setlocal norelativenumber")
     end
+    -- vim.cmd("setlocal number")
+  end,
 })
 
 local markdown_group = vim.api.nvim_create_augroup("markdown_group", { clear = true })
 vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
-    group = markdown_group,
-    pattern = {"todo.md", "TODO.md"},
-    callback = function (ev)
-        local keymap_options = { buf = ev.buf, silent = true, noremap = true }
-        vim.keymap.set("i", "<F5>", "<C-R>=strftime('%F')<CR>", keymap_options)
-        vim.keymap.set("i", "<F6>", "<C-R>=strftime('%FT%T')<CR>", keymap_options)
-    end
+  group = markdown_group,
+  pattern = { "todo.md", "TODO.md" },
+  callback = function(ev)
+    local keymap_options = { buf = ev.buf, silent = true, noremap = true }
+    vim.keymap.set("i", "<F5>", "<C-R>=strftime('%F')<CR>", keymap_options)
+    vim.keymap.set("i", "<F6>", "<C-R>=strftime('%FT%T')<CR>", keymap_options)
+  end,
 })
 
 local make_group = vim.api.nvim_create_augroup("make_group", { clear = true })
 vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
-    group = make_group,
-    pattern = { "Makefile" },
-    callback = function()
-        vim.bo.expandtab = false
-        vim.bo.tabstop = 4
-        vim.bo.shiftwidth = 4
-        vim.bo.softtabstop = 4
-    end,
+  group = make_group,
+  pattern = { "Makefile" },
+  callback = function()
+    vim.bo.expandtab = false
+    vim.bo.tabstop = 4
+    vim.bo.shiftwidth = 4
+    vim.bo.softtabstop = 4
+  end,
 })
 
 vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
-    callback = function()
-        if vim.w.auto_cursorline then
-            vim.wo.cursorline = true
-            vim.w.auto_cursorline = false
-        end
-    end,
+  callback = function()
+    if vim.w.auto_cursorline then
+      vim.wo.cursorline = true
+      vim.w.auto_cursorline = false
+    end
+  end,
 })
 
 local typescript_group = vim.api.nvim_create_augroup("typescript_group", { clear = true })

@@ -318,11 +318,11 @@ return {
             line_start, line_end = line_end, line_start
           end
 
-          result = string.format("%s:%d-%d", file_path, line_start, line_end)
+          result = string.format("@%s:%d-%d", file_path, line_start, line_end)
         else
           -- Normal mode: get current cursor line
           local line_num = vim.api.nvim_win_get_cursor(0)[1]
-          result = string.format("%s:%d", file_path, line_num)
+          result = string.format("@%s:%d", file_path, line_num)
         end
 
         -- Copy to system clipboard ("+") and default register ("")
