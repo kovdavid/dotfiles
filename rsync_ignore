@@ -23,6 +23,7 @@
 /var/lib/containerd
 /var/lib/systemd
 /var/lib/flatpak
+/var/lib/incus
 /swapfile
 
 # home
