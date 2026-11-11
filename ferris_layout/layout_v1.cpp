@@ -212,10 +212,10 @@ const uint32_t keymap[][KEYBOARD_ROWS][2*KEYBOARD_COLS] = KEYMAP({
                                   └────────┴────────┘               └────────┴────────┘
     *****/
     LAYOUT_4x10(
-        KC_COLON, KC_7, KC_8, KC_9, KC_PLUS,                        XXX,  LALT(KC_A), LALT(KC_S),  KC_MACRO1,    KC_MACRO2,
-        KC_0,     KC_4, KC_5, KC_6, KC_MINS,                        XXX,  LALT(KC_Q), LALT(KC_W),  LGUI(KC_F13), LGUI(KC_F14),
-        KC_DOT,   KC_1, KC_2, KC_3, KC_EQL,                         XXX,  LALT(KC_1), LALT(KC_2),  KC_MACRO3,    KC_MACRO4,
-        XXX,      XXX,  XXX,  ___,  ___,                            XXX,  ___,        ___,         XXX,          XXX
+        KC_COLON, KC_7, KC_8, KC_9, KC_PLUS,                        LCTRL(KC_EQL),   LALT(KC_A), LALT(KC_S),  KC_MACRO1,    KC_MACRO2,
+        KC_0,     KC_4, KC_5, KC_6, KC_MINS,                        LCTRL(KC_MINS),  LALT(KC_Q), LALT(KC_W),  LGUI(KC_F13), LGUI(KC_F14),
+        KC_DOT,   KC_1, KC_2, KC_3, KC_EQL,                         LCTRL(KC_0),     LALT(KC_1), LALT(KC_2),  KC_MACRO3,    KC_MACRO4,
+        XXX,      XXX,  XXX,  ___,  ___,                            XXX,             ___,        ___,         XXX,          XXX
     ),
 
     /***** Layer WIN

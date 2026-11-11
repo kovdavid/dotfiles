@@ -113,6 +113,8 @@ nytprof*
 .next/
 .npm/
 .yarn/
+test-results
+**playwright**
 .meteor/
 .mypy_cache/
 dist/
