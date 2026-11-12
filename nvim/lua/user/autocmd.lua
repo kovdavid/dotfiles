@@ -30,34 +30,24 @@ vim.api.nvim_create_autocmd("FileType", {
       { noremap = true, silent = true, desc = "Restart vtsls" }
     )
     vim.keymap.set("n", "<leader>lt", switch_ts_server("tsc"), { noremap = true, silent = true, desc = "Restart tsc" })
-    vim.keymap.set(
-      "n",
-      "<leader>yjr",
-      function()
-        local test = vim.fn.expand("%p")
-        local pwd = vim.fn.getcwd()
+    vim.keymap.set("n", "<leader>yjr", function()
+      local test = vim.fn.expand("%p")
+      local pwd = vim.fn.getcwd()
 
-        local result = string.format("cd %s; npx jest --silent false %s", pwd, test)
-        -- Copy to system clipboard ("+") and default register ("")
-        vim.fn.setreg("+", result)
-        vim.fn.setreg('"', result)
-      end,
-      { noremap = true, silent = true, desc = "Copy jest run command" }
-    )
-    vim.keymap.set(
-      "n",
-      "<leader>yjw",
-      function()
-        local test = vim.fn.expand("%p")
-        local pwd = vim.fn.getcwd()
+      local result = string.format("cd %s; npx jest --silent false %s", pwd, test)
+      -- Copy to system clipboard ("+") and default register ("")
+      vim.fn.setreg("+", result)
+      vim.fn.setreg('"', result)
+    end, { noremap = true, silent = true, desc = "Copy jest run command" })
+    vim.keymap.set("n", "<leader>yjw", function()
+      local test = vim.fn.expand("%p")
+      local pwd = vim.fn.getcwd()
 
-        local result = string.format("cd %s; npx jest --silent false --watch %s", pwd, test)
-        -- Copy to system clipboard ("+") and default register ("")
-        vim.fn.setreg("+", result)
-        vim.fn.setreg('"', result)
-      end,
-      { noremap = true, silent = true, desc = "Copy jest watch command" }
-    )
+      local result = string.format("cd %s; npx jest --silent false --watch %s", pwd, test)
+      -- Copy to system clipboard ("+") and default register ("")
+      vim.fn.setreg("+", result)
+      vim.fn.setreg('"', result)
+    end, { noremap = true, silent = true, desc = "Copy jest watch command" })
   end,
 })
 
@@ -133,8 +123,34 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
 local typescript_group = vim.api.nvim_create_augroup("typescript_group", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = "typescript_group",
-  pattern = "*.ts",
-  callback = function()
-    vim.lsp.buf.code_action({ apply = true, context = { only = { "source.addMissingImports.ts" }, diagnostics = {} } })
+  pattern = { "*.ts", "*.tsx" },
+  callback = function(ev)
+    local bufnr = ev.buf
+
+    -- Add missing imports using vtsls
+    vim.lsp.buf.code_action({
+      bufnr = bufnr,
+      apply = true,
+      context = {
+        only = { "source.addMissingImports.ts" },
+        diagnostics = {},
+      },
+    })
+
+    -- Apply Oxlint fixes to the current file only
+    local clients = vim.lsp.get_clients({
+      bufnr = bufnr,
+      name = "oxlint",
+    })
+
+    for _, client in ipairs(clients) do
+      client:exec_cmd({
+        title = "Oxlint Fix All",
+        command = "oxc.fixAll",
+        arguments = {
+          { uri = vim.uri_from_bufnr(bufnr) },
+        },
+      })
+    end
   end,
 })
