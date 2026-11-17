@@ -74,6 +74,12 @@ function draw_redshift_menu {
     menu_item "main redshift" "temp correct down" "arrow-down"
 }
 
+function draw_keyboard_menu {
+    menu_item "main keyboard" "en" "system-run"
+    menu_item "main keyboard" "sk" "system-run"
+    menu_item "main keyboard" "reset" "system-run"
+}
+
 if [ "$ACTION" = "quit" ] ; then
     exit 0
 fi
@@ -81,7 +87,7 @@ fi
 if [ "$ROFI_INFO" = "" ] ; then
     menu_item "main" "tmux" "utilities-terminal"
     menu_item "main" "tmux_join" "utilities-terminal"
-    menu_item "main" "terminal" "utilities-terminal"
+    # menu_item "main" "terminal" "utilities-terminal"
     menu_item "main" "firefox" "firefox"
     menu_item "main" "firefox work" "firefox"
     menu_item "main" "thunar" "system-file-manager"
@@ -98,7 +104,7 @@ if [ "$ROFI_INFO" = "" ] ; then
     menu_item "main" "power" "preferences-system-power-management"
     menu_item "main" "monitor" "preferences-desktop-display"
     menu_item "main" "redshift" "redshift"
-    menu_item "main" "brightness" "video-display"
+    # menu_item "main" "brightness" "video-display"
     menu_item "main" "keyboard" "input-keyboard"
     menu_item "main" "work session" "preferences-system"
 elif [ "$ROFI_INFO" = "main" ] ; then
@@ -119,6 +125,8 @@ elif [ "$ROFI_INFO" = "main" ] ; then
         draw_redshift_menu
     elif [ "$ACTION" = "brightness" ] ; then
         draw_brightness_menu
+    elif [ "$ACTION" = "keyboard" ] ; then
+        draw_keyboard_menu
     elif [ "$ACTION" = "work session" ] ; then
         run_cmd "work_session"
     elif [ "$ACTION" = "tmux" ] ; then
@@ -211,6 +219,17 @@ elif [ "$ROFI_INFO" = "main brightness" ] ; then
         brightnessctl --quiet set 5%-
     fi
     draw_brightness_menu
+elif [ "$ROFI_INFO" = "main keyboard" ] ; then
+    if [ "$ACTION" = "sk" ] ; then
+        run_cmd "sk"
+    elif [ "$ACTION" = "en" ] ; then
+        run_cmd "en"
+    elif [ "$ACTION" = "reset" ] ; then
+        run_cmd "keyboard_repeat"
+        run_cmd "init_touchpad"
+        run_cmd "drk_daemon restart"
+    fi
+    draw_keyboard_menu
 elif [ "$ROFI_INFO" = "main performance" ] ; then
     RYZEN65="ryzenadj_preset 65"
     RYZEN75="ryzenadj_preset 75"

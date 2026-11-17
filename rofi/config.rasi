@@ -1,0 +1,55 @@
+configuration {
+    modi: "script1:~/dotfiles/rofi/script.sh,run";
+    show: "script1";
+    combi-modi: "run";
+    sidebar-mode: true;
+    case-sensitive: false;
+    font: "DejaVu Sans Mono 14";
+    icon-theme: "oxygen";
+    show-icons: true;
+    display-run: "⚙️";
+    display-script1: "💻";
+    display-script2: "📁";
+    fixed-num-lines: false;
+    terminal: "alacritty";
+    kb-element-next: "";
+    kb-mode-next: "Tab";
+}
+
+@import "~/dotfiles/rofi/theme.rasi"
+
+window {
+    background-color: #2e3440;
+    border: 1;
+    padding: 5;
+}
+mainbox {
+    children: [inputbar, listview];
+}
+inputbar {
+    children: [prompt, textbox-prompt-colon, entry];
+}
+textbox-prompt-colon {
+    str: " ";
+    expand: false;
+    width: 20;
+}
+listview {
+    scrollbar: false;
+    fixed-height: true;
+    dynamic: true;
+    layout: vertical;
+    flow: horizontal;
+    lines: 4;
+    columns: 5;
+}
+element {
+    orientation: vertical;
+    padding: 16px;
+}
+element-icon {
+    size: 48;
+}
+element-text {
+    horizontal-align: 0.5;
+}
