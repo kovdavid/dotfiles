@@ -83,9 +83,14 @@ if [ "$ROFI_INFO" = "" ] ; then
     menu_item "main" "tmux_join" "utilities-terminal"
     menu_item "main" "terminal" "utilities-terminal"
     menu_item "main" "firefox" "firefox"
+    menu_item "main" "firefox work" "firefox"
     menu_item "main" "thunar" "system-file-manager"
     menu_item "main" "calc" "accessories-calculator"
     menu_item "main" "keepassxc" "keepassxc"
+    menu_item "main" "libreoffice" "libreoffice-base"
+    menu_item "main" "beekeeper" "beekeeper-studio"
+    menu_item "main" "rquickshare" "rquickshare"
+    menu_item "main" "gimp" "gimp"
     menu_item "main" "flameshot" "flameshot"
     menu_item "main" "full-screen (5s)" "flameshot"
     menu_item "main" "performance" "preferences-system-performance"
@@ -94,6 +99,8 @@ if [ "$ROFI_INFO" = "" ] ; then
     menu_item "main" "monitor" "preferences-desktop-display"
     menu_item "main" "redshift" "redshift"
     menu_item "main" "brightness" "video-display"
+    menu_item "main" "keyboard" "input-keyboard"
+    menu_item "main" "work session" "preferences-system"
 elif [ "$ROFI_INFO" = "main" ] ; then
     if [ "$ACTION" = "power" ] ; then
         menu_item "main power" "screensaver" "system-suspend"
@@ -112,6 +119,8 @@ elif [ "$ROFI_INFO" = "main" ] ; then
         draw_redshift_menu
     elif [ "$ACTION" = "brightness" ] ; then
         draw_brightness_menu
+    elif [ "$ACTION" = "work session" ] ; then
+        run_cmd "work_session"
     elif [ "$ACTION" = "tmux" ] ; then
         run_cmd "alacritty -e $HOME/dotfiles/bin/xterm_tmux_session"
     elif [ "$ACTION" = "tmux_join" ] ; then
@@ -127,13 +136,27 @@ elif [ "$ROFI_INFO" = "main" ] ; then
         run_cmd "flameshot gui -p /opt/clean_daily/$FILENAME"
     elif [ "$ACTION" = "keepassxc" ] ; then
         run_cmd "keepassxc"
+    elif [ "$ACTION" = "libreoffice" ] ; then
+        run_cmd "libreoffice"
+    elif [ "$ACTION" = "beekeeper" ] ; then
+        run_cmd "beekeeper-studio"
+    elif [ "$ACTION" = "rquickshare" ] ; then
+        run_cmd "rquickshare"
+    elif [ "$ACTION" = "gimp" ] ; then
+        run_cmd "gimp"
     elif [ "$ACTION" = "full-screen (5s)" ] ; then
         FILENAME=$(date '+%FT%T.png')
         run_cmd "flameshot full -d 5000 -p /opt/clean_daily/$FILENAME"
     elif [ "$ACTION" = "firefox" ] ; then
         run_cmd "firefox"
+    elif [ "$ACTION" = "firefox work" ] ; then
+        run_cmd "firefox_work"
     elif [ "$ACTION" = "calc" ] ; then
         run_cmd "calc"
+    elif [ "$ACTION" = "keyboard" ] ; then
+        run_cmd "keyboard_repeat"
+        run_cmd "init_touchpad"
+        run_cmd "drk_daemon restart"
     elif [ "$ACTION" = "Toggle color scheme" ] ; then
         run_cmd "color_scheme"
     fi

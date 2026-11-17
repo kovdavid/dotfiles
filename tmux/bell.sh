@@ -29,6 +29,6 @@ notify-send \
     -u normal \
     -i "/usr/share/icons/oxygen/base/64x64/actions/autocorrection.png" \
     -h string:category:tmux \
-    "$PANE_TITLE" "<span foreground='#89b4fa' weight='bold'>SESSION</span>  <span foreground='#cdd6f4'>$SESSION</span>"
+    "$PANE_TITLE" "<span foreground='#89b4fa' weight='bold'>SESSION</span><br /><span foreground='#cdd6f4'>$SESSION</span>"
 
 sleep 3
