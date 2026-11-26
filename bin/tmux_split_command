@@ -1,11 +1,23 @@
 #!/usr/bin/env bash
 
-exec > >(tee -a /tmp/$(basename $0)) 2>&1
+LOG="/tmp/$(basename $0)"
+
+exec > >(tee -a $LOG) 2>&1
 
 WINDOW_PATH=$(tmux display-message -p "#{@window_path}")
+SESSION_PATH=$(tmux display-message -p "#{session_path}")
+PANE_PATH=$(tmux display-message -p '#{pane_current_path}')
+
+echo "WINDOW_PATH:$WINDOW_PATH" >> $LOG
+echo "SESSION_PATH:$SESSION_PATH" >> $LOG
+echo "PANE_PATH:$PANE_PATH" >> $LOG
+
 if [ -n "$WINDOW_PATH" ]; then
     echo "$WINDOW_PATH"
 else
-    SESSION_PATH=$(tmux display-message -p "#{session_path}")
-    echo "$SESSION_PATH"
+    if [ "$1" = "pane" ]; then
+        echo "$PANE_PATH"
+    else
+        echo "$SESSION_PATH"
+    fi
 fi

@@ -4,7 +4,7 @@
 # Inserts a blank line between shell prompts
 add_newline = false
 
-format = "$time${env_var.YAZI_LEVEL}$username$directory $git_branch$git_commit$cmd_duration$nodejs$jobs\n$status$character"
+format = "$time${env_var.YAZI_LEVEL}$username${custom.worktree}$directory $git_branch$git_commit$cmd_duration$nodejs$jobs\n$status$character"
 
 [status]
 symbol = '🔴 '
@@ -20,9 +20,12 @@ format = 'took [$duration](bold yellow) '
 
 [directory]
 truncation_length = 3
-fish_style_pwd_dir_length = 1
 format = '[$path]($style)'
 truncate_to_repo = true
+
+[custom.worktree]
+when = '[ "$(git rev-parse --git-dir 2>/dev/null)" != "$(git rev-parse --git-common-dir 2>/dev/null)" ]'
+format = '🌳 '
 
 [git_branch]
 format = '[$symbol$branch]($style) '

@@ -118,6 +118,7 @@ test-results
 .meteor/
 .mypy_cache/
 dist/
+dist-sourcemaps/
 build/
 __pycache__/
 node_modules/

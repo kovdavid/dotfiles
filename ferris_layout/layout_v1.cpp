@@ -47,6 +47,8 @@ const KeyCoords combo15[] = { { 1, 6 }, { 1, 7 } }; // Esc
 const KeyCoords combo16[] = { { 0, 0 }, { 0, 1 } }; // Enter
 const KeyCoords combo17[] = { { 0, 0 }, { 0, 1 }, { 0, 2 } }; // Tab
 
+const KeyCoords combo18[] = { { 0, 7 }, { 0, 8 }, { 0, 9 } }; // Alt+P
+
 Combo combos[] = COMBOS({
     COMBO(combo1, KC_ESCAPE),
     COMBO(combo2, LCTRL(KC_A)),
@@ -68,7 +70,9 @@ Combo combos[] = COMBOS({
 
     COMBO_CFG(combo15, KC_ESCAPE, 50, 100),
     COMBO(combo16, KC_ENTER),
-    COMBO(combo17, KC_TAB)
+    COMBO(combo17, KC_TAB),
+
+    COMBO(combo18, LALT(KC_P))
 });
 
 MacroStep m1_steps[] = {
